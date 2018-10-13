@@ -1,4 +1,8 @@
+<img src="./Doc/logo.png" width=256 height=256 />  
+
 # PlatEMO  
+[![](https://img.shields.io/badge/version-v1.6-green.svg)](https://github.com/BIMK/PlatEMO/releases/tag/PlatEMO_v1.6)
+[![](https://img.shields.io/badge/Matlab-%3E%3D%202014a%20-blue.svg)](#PlatEMO)  
 Evolutionary multi-objective optimization platform
 
 * 50+ open source evolutionary algorithms
