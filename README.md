@@ -12,8 +12,7 @@ Evolutionary multi-objective optimization platform
 * State-of-the-art algorithms will be included continuously
 
 ## Copyright
-> The Copyright of the PlatEMO belongs to the BIMK group. You are free to [use the PlatEMO](https://github.com/BIMK/PlatEMO/releases) for **research purposes**. All publications which use this platform or any code in the platform should **acknowledge the use of "PlatEMO" and reference** _"Ye Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform for Evolutionary Multi-Objective Optimization_  
-[Educational Forum], IEEE Computational Intelligence Magazine, 2017, 12(4): 73-87".  
+> The Copyright of the PlatEMO belongs to the BIMK group. You are free to [use the PlatEMO](https://github.com/BIMK/PlatEMO/releases) for **research purposes**. All publications which use this platform or any code in the platform should **acknowledge the use of "PlatEMO" and reference** _"Ye Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform for Evolutionary Multi-Objective Optimization_[Educational Forum], IEEE Computational Intelligence Magazine, 2017, 12(4): 73-87".  
 
 ```
 @article{PlatEMO,
