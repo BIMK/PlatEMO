@@ -39,7 +39,7 @@ function F = CalHV(points,bounds,k,nSample)
         pvec  = 1:size(points,1);
         alpha = zeros(1,k);
         for i = 1 : k 
-            j = 1:i-1; 
+            j = 1 : i-1; 
             alpha(i) = prod((k-j)./(N-j))./i;
         end
         F = hypesub(N,points,M,bounds,pvec,alpha,k);
