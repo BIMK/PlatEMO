@@ -26,7 +26,7 @@ function PopDec = EvolALG(Global,PCheby,Dec,model,IFEs)
             s         = sqrt(mse);
             EI(i)     = -(Gbest-y)*normcdf((Gbest-y/s))-s*normpdf((Gbest-y)/s);
         end
-        [~,index] = sort(EI,'descend');
+        [~,index] = sort(EI,'ascend');
         if EI(index(1)) < E0
             Best = Off(index(1),:); 
             E0   = EI(index(1));
