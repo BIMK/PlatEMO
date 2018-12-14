@@ -1,7 +1,6 @@
 function WOFSMPSO(Global)
-% <algorithm> <O-Z> 
-% A Framework for Large-scale Multi-objective Optimization based on Problem
-% Transformation
+% <algorithm> <W> 
+% Weighted optimization framework enhanced SMPSO
 % gamma    --- 4    --- Number of groups
 % groups   --- 1    --- Grouping method, 1 = linear, 2 = ordered, 3 = random 
 % psi      --- 3    --- Transformation function, 1 = Multiplication, 2 = P-Value, 3 = Interval
@@ -9,7 +8,12 @@ function WOFSMPSO(Global)
 % t2       --- 500  --- Number of evaluations for transformed problem
 % q        ---      --- The number of chosen solutions to do weight optimisation. If no value is specified, the default value is M+1
 % delta    --- 0.5  --- The fraction of function evaluations to use for the alternating weight-optimisation phase
-% operator --- EAreal
+
+%------------------------------- Reference --------------------------------
+% H. Zille, H. Ishibuchi, S. Mostaghim, and Y. Nojima, A framework for
+% large-scale multiobjective optimization based on problem transformation,
+% IEEE Transactions on Evolutionary Computation, 2018, 22(2): 260-275.
+%--------------------------------------------------------------------------
 
 % ----------------------------------------------------------------------- 
 %  WOFSMPSO.m 

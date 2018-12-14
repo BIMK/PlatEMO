@@ -1,15 +1,18 @@
 function dMOPSO(Global)
-% <algorithm> <A-G>
-% A Multi-objective Particle Swarm Optimizer Based on Decomposition
+% <algorithm> <D>
+% MOPSO based on decomposition
 % Ta --- 2 --- Age threshold
-% operator --- dMOPSO_operator
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% S. Z. Martinez and C. A. Coello Coello, A multi-objective particle swarm
+% optimizer based on decomposition, Proceedings of the 13th Annual
+% Conference on Genetic and Evolutionary Computation, 2011, 69-76.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -29,7 +32,7 @@ function dMOPSO(Global)
     %% Optimization
     while Global.NotTermination(Gbest)
         % Generate offsprings
-        Population(Age<Ta) = Global.Variation([Population(Age<Ta),Pbest(Age<Ta),Gbest(Age<Ta)],inf,@dMOPSO_operator);
+        Population(Age<Ta) = Operator(Population(Age<Ta),Pbest(Age<Ta),Gbest(Age<Ta));
         for i = find(Age>=Ta)
             temp          = randn(1,Global.D);
             Population(i) = INDIVIDUAL((Gbest(i).dec-Pbest(i).dec)/2+temp.*abs(Gbest(i).dec-Pbest(i).dec));

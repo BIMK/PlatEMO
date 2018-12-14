@@ -1,43 +1,42 @@
-function varargout = ZDT4(Operation,Global,input)
+classdef ZDT4 < PROBLEM
 % <problem> <ZDT>
-% Comparison of Multiobjective Evolutionary Algorithms: Empirical Results
-% operator --- EAreal
+% Benchmark MOP proposed by Zitzler, Deb, and Thiele
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% E. Zitzler, K. Deb, and L. Thiele, Comparison of multiobjective
+% evolutionary algorithms: Empirical results, Evolutionary computation,
+% 2000, 8(2): 173-195.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    switch Operation
-        case 'init'
-            Global.M        = 2;
-            Global.M        = 2;
-            Global.D        = 10;
-            Global.lower    = [0,zeros(1,Global.D-1)-5];
-            Global.upper    = [1,zeros(1,Global.D-1)+5];
-            Global.operator = @EAreal;
-            
-
-            PopDec    = rand(input,Global.D).*repmat(Global.upper-Global.lower,input,1) + repmat(Global.lower,input,1);
-            varargout = {PopDec};
-        case 'value'
-            PopDec = input;
-            
+    methods
+        %% Initialization
+        function obj = ZDT4()
+            obj.Global.M = 2;
+            if isempty(obj.Global.D)
+                obj.Global.D = 10;
+            end
+            obj.Global.lower    = [0,zeros(1,obj.Global.D-1)-5];
+            obj.Global.upper    = [1,zeros(1,obj.Global.D-1)+5];
+            obj.Global.encoding = 'real';
+        end
+        %% Calculate objective values
+        function PopObj = CalObj(obj,PopDec)
             PopObj(:,1) = PopDec(:,1);
-            g = 1+10*(size(PopDec,2)-1)+sum(PopDec(:,2:end).^2-10*cos(4*pi*PopDec(:,2:end)),2);
-            h = 1-(PopObj(:,1)./g).^0.5;
+            g = 1 + 10*(size(PopDec,2)-1) + sum(PopDec(:,2:end).^2-10*cos(4*pi*PopDec(:,2:end)),2);
+            h = 1 - (PopObj(:,1)./g).^0.5;
             PopObj(:,2) = g.*h;
-            
-            PopCon = [];
-            
-            varargout = {input,PopObj,PopCon};
-        case 'PF'
-            f(:,1)    = (0:1/(input-1):1)';
-            f(:,2)    = 1-f(:,1).^0.5;
-            varargout = {f};
+        end
+        %% Sample reference points on Pareto front
+        function P = PF(obj,N)
+            P(:,1) = (0:1/(N-1):1)';
+            P(:,2) = 1 - P(:,1).^0.5;
+        end
     end
 end

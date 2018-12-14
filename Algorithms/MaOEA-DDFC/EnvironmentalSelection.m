@@ -1,12 +1,12 @@
 function Population = EnvironmentalSelection(Population,Zmin,N,K,L)
 % The environmental selection of MaOEA-DDFC
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -71,10 +71,7 @@ function Choose = LastSelection(P,F,Zmin,Total,K,L)
         Remain   = find(~Choose);
         R        = Remain(rank(1:min(L,end)));
         % Convergence-based roulette-wheel selection
-        Fitness   = cumsum(1./FC(R));
-        Fitness   = Fitness/max(Fitness);
-        r         = R(find(rand<=Fitness,1));
-        Choose(r) = true;
+        Choose(R(RouletteWheelSelection(1,FC(R)))) = true;
     end
     Choose = Choose(size(P,1)+1:end);
 end

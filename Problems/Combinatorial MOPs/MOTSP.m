@@ -1,59 +1,72 @@
-function varargout = MOTSP(Operation,Global,input)
+classdef MOTSP < PROBLEM
 % <problem> <Combinatorial MOP>
-% Multi-objective traveling salesman problem
-% c ---  0 --- Correlation parameter
-% operator --- EApermutation
+% The multi-objective traveling salesman problem
+% c --- 0 --- Correlation parameter
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% D. Corne and J. Knowles, Techniques for highly multiobjective
+% optimisation: some nondominated points are better than others,
+% Proceedings of the 9th Annual Conference on Genetic and Evolutionary
+% Computation, 2007, 773-780.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-persistent C;
-
-    c = Global.ParameterSet(0);
-    switch Operation
-        case 'init'
-            Global.M        = 2;
-            Global.D        = 30;
-            Global.operator = @EApermutation;
-            
-            C = cell(1,Global.M);
-            C{1} = rand(Global.D);
-            for i = 2 : Global.M
-                C{i} = c*C{i-1} + (1-c)*rand(Global.D);
+    properties(Access = private)
+        C;  % Adjacency matrix of each map
+    end
+    methods
+        %% Initialization
+        function obj = MOTSP()
+            % Parameter setting
+            c = obj.Global.ParameterSet(0);
+            if isempty(obj.Global.M)
+                obj.Global.M = 2;
             end
-            for i = 1 : Global.M
-                C{i} = tril(C{i},-1) + triu(C{i}',1);
+            if isempty(obj.Global.D)
+                obj.Global.D = 30;
             end
-            C = Global.ParameterFile(sprintf('MOTSP-M%d-D%d-c%.4f',Global.M,Global.D,c),C);
-            
-            [~,PopDec] = sort(rand(input,Global.D),2);
-            varargout  = {PopDec};
-        case 'value'
-            PopDec = input;
+            obj.Global.encoding = 'permutation';
+            % Randomly generate the adjacency matrices
+            file = sprintf('MOTSP-M%d-D%d-c%.4f.mat',obj.Global.M,obj.Global.D,c);
+            file = fullfile(fileparts(mfilename('fullpath')),file);
+            if exist(file,'file') == 2
+                load(file,'C');
+            else
+                C = cell(1,obj.Global.M);
+                C{1} = rand(obj.Global.D);
+                for i = 2 : obj.Global.M
+                    C{i} = c*C{i-1} + (1-c)*rand(obj.Global.D);
+                end
+                for i = 1 : obj.Global.M
+                    C{i} = tril(C{i},-1) + triu(C{i}',1);
+                end
+                save(file,'C');
+            end
+            obj.C = C;
+        end
+        %% Calculate objective values
+        function PopObj = CalObj(obj,PopDec)
             [N,D]  = size(PopDec);
-            M      = Global.M;
-            
+            M      = obj.Global.M;
             PopObj = zeros(N,M);
             for i = 1 : M
                 for j = 1 : N
                     for k = 1 : D-1
-                        PopObj(j,i) = PopObj(j,i) + C{i}(PopDec(j,k),PopDec(j,k+1));
+                        PopObj(j,i) = PopObj(j,i) + obj.C{i}(PopDec(j,k),PopDec(j,k+1));
                     end
-                    PopObj(j,i) = PopObj(j,i) + C{i}(PopDec(j,D),PopDec(j,1));
+                    PopObj(j,i) = PopObj(j,i) + obj.C{i}(PopDec(j,D),PopDec(j,1));
                 end
             end
-            
-            PopCon = [];
-            
-            varargout = {input,PopObj,PopCon};
-        case 'PF'
-            RefPoint  = zeros(1,Global.M) + Global.D;
-            varargout = {RefPoint};
+        end
+        %% A reference point for hypervolume calculation
+        function P = PF(obj,N)
+            P = zeros(1,obj.Global.M) + obj.Global.D;
+        end
     end
 end

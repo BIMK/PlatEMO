@@ -1,35 +1,38 @@
-function varargout = MaF12(Operation,Global,input)
+classdef MaF12 < PROBLEM
 % <problem> <MaF>
-% A benchmark test suite for evolutionary many-objective optimization
-% operator --- EAreal
+% WFG9
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% R. Cheng, M. Li, Y. Tian, X. Zhang, S. Yang, Y. Jin, and X. Yao, A
+% benchmark test suite for evolutionary many-objective optimization,
+% Complex & Intelligent Systems, 2017, 3(1): 67-81.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    % This problem is WFG9 with K=M-1
-    K = Global.M - 1;
-    switch Operation
-        case 'init'
-            Global.M          = 3;
-            Global.D          = Global.M + 9;
-            Global.lower      = zeros(1,Global.D);
-            Global.upper      = 2 : 2 : 2*Global.D;
-            Global.operator   = @EAreal;
-            Global.evaluation = max(1e5,1e4*Global.D);
-            
-            PopDec    = rand(input,Global.D).*repmat(2:2:2*Global.D,input,1);
-            varargout = {PopDec};
-        case 'value'
-            PopDec = input;
-            [N,D]  = size(PopDec);
-            M      = Global.M;
-            
+    methods
+        %% Initialization
+        function obj = MaF12()
+            if isempty(obj.Global.M)
+                obj.Global.M = 3;
+            end
+            if isempty(obj.Global.D)
+                obj.Global.D = obj.Global.M + 9;
+            end
+            obj.Global.lower    = zeros(1,obj.Global.D);
+            obj.Global.upper    = 2 : 2 : 2*obj.Global.D;
+            obj.Global.encoding = 'real';
+        end
+        %% Calculate objective values
+        function PopObj = CalObj(obj,PopDec)
+            [N,D] = size(PopDec);
+            M = obj.Global.M;
+            K = M - 1;
             L = D - K;
             D = 1;
             S = 2 : 2 : 2*M;
@@ -70,15 +73,13 @@ function varargout = MaF12(Operation,Global,input)
 
             h = concave(x);
             PopObj = repmat(D*x(:,M),1,M) + repmat(S,N,1).*h;
-
-            PopCon = [];
-            
-            varargout = {input,PopObj,PopCon};
-        case 'PF'
-            h = UniformPoint(input,Global.M);
-            h = h./repmat(sqrt(sum(h.^2,2)),1,Global.M);
-            h = repmat(2:2:2*Global.M,size(h,1),1).*h;
-            varargout = {h};
+        end
+        %% Sample reference points on Pareto front
+        function P = PF(obj,N)
+            P = UniformPoint(N,obj.Global.M);
+            P = P./repmat(sqrt(sum(P.^2,2)),1,obj.Global.M);
+            P = repmat(2:2:2*obj.Global.M,size(P,1),1).*P;
+        end
     end
 end
 

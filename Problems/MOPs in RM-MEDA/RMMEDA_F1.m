@@ -1,43 +1,41 @@
-function varargout = RMMEDA_F1(Operation,Global,input)
+classdef RMMEDA_F1 < PROBLEM
 % <problem> <RMMEDA>
-% RM-MEDA: A Regularity Model-Based Multiobjective Estimation of
-% Distribution Algorithm
-% operator --- EAreal
+% Benchmark MOP for RM-MEDA
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% Q. Zhang, A. Zhou, and Y. Jin, RM-MEDA: A regularity model-based
+% multiobjective estimation of distribution algorithm, IEEE Transactions on
+% Evolutionary Computation, 2008, 12(1): 41-63.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    switch Operation
-        case 'init'
-            Global.M        = 2;
-            Global.M        = 2;
-            Global.D        = 30;
-            Global.lower    = zeros(1,Global.D);
-            Global.upper    = ones(1,Global.D);
-            Global.operator = @EAreal;
-            
-            PopDec    = rand(input,Global.D);
-            varargout = {PopDec};
-        case 'value'
-            X = input;
-            D = size(X,2);
-            
-            g = 1 + 9*mean((X(:,2:end)-repmat(X(:,1),1,D-1)).^2,2);
+    methods
+        %% Initialization
+        function obj = RMMEDA_F1()
+            obj.Global.M = 2;
+            if isempty(obj.Global.D)
+                obj.Global.D = 30;
+            end
+            obj.Global.lower    = zeros(1,obj.Global.D);
+            obj.Global.upper    = ones(1,obj.Global.D);
+            obj.Global.encoding = 'real';
+        end
+        %% Calculate objective values
+        function PopObj = CalObj(obj,X)
+            g = 1 + 9*mean((X(:,2:end)-repmat(X(:,1),1,size(X,2)-1)).^2,2);
             PopObj(:,1) = X(:,1);
             PopObj(:,2) = g.*(1-sqrt(PopObj(:,1)./g));
-            
-            PopCon = [];
-            
-            varargout = {input,PopObj,PopCon};
-        case 'PF'
-            f(:,1)    = (0:1/(input-1):1)';
-            f(:,2)    = 1 - sqrt(f(:,1));
-            varargout = {f};
+        end
+        %% Sample reference points on Pareto front
+        function P = PF(obj,N)
+            P(:,1) = (0:1/(N-1):1)';
+            P(:,2) = 1 - sqrt(P(:,1));
+        end
     end
 end

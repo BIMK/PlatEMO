@@ -1,17 +1,21 @@
 function KRVEA(Global)
-% <algorithm> <H-N>
-% A Surrogate-assisted Reference Vector Guided Evolutionary Algorithm for
-% Computationally Expensive Many-objective Optimization
+% <algorithm> <K>
+% Surrogate-assisted RVEA
 % alpha ---  2 --- The parameter controlling the rate of change of penalty
 % wmax  --- 20 --- Number of generations before updating Kriging models
 % mu    ---  5 --- Number of re-evaluated solutions at each generation
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% T. Chugh, Y. Jin, K. Miettinen, J. Hakanen, and K. Sindhya, A surrogate-
+% assisted reference vector guided evolutionary algorithm for
+% computationally expensive many-objective optimization, IEEE Transactions
+% on Evolutionary Computation, 2018, 22(1): 129-142.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -48,8 +52,8 @@ function KRVEA(Global)
         w      = 1;
         while w <= wmax
             drawnow();
-            OffspringDec = Global.VariationDec(PopDec);
-            PopDec = [PopDec;OffspringDec];
+            OffDec = GA(PopDec);
+            PopDec = [PopDec;OffDec];
             [N,~]  = size(PopDec);
             PopObj = zeros(N,Global.M);
             MSE    = zeros(N,Global.M);

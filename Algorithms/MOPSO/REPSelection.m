@@ -2,12 +2,12 @@ function REP = REPSelection(PopObj,N,div)
 % Select one of the particles in REP as the global best position for each
 % particle
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -29,16 +29,12 @@ function REP = REPSelection(PopObj,N,div)
     %% Calculate the crowd degree of each grid
     CrowdG = hist(Site,1:max(Site));
     
-    %% Calculate the cumulative sum fitnesses of the grids
-    Fitness = cumsum(10./CrowdG);
-    Fitness = Fitness/max(Fitness);
-    
     %% Roulette-wheel selection
-    REP = zeros(1,N);
+    TheGrid = RouletteWheelSelection(N,CrowdG);
+    REP     = zeros(1,N);
     for i = 1 : length(REP)
-        TheGrid = find(rand<=Fitness,1);
-        InGrid  = find(Site==TheGrid);
-        Temp    = randi(length(InGrid));
-        REP(i)  = InGrid(Temp);
+        InGrid = find(Site==TheGrid(i));
+        Temp   = randi(length(InGrid));
+        REP(i) = InGrid(Temp);
     end
 end

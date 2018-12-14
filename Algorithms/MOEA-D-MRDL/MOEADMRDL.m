@@ -1,17 +1,20 @@
 function MOEADMRDL(Global)
-% <algorithm> <H-N>
-% Online Diversity Assessment in Evolutionary Multiobjective Optimization:
-% A Geometrical Perspective
+% <algorithm> <M>
+% MOEA/D with maximum relative diversity loss
 % gamma --- 20 --- Maximum allowable maximum relative diversity loss
 % nmov  --- 10 --- Size of moving average
-% operator     --- MOEADMRDL_operator
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% S. B. Gee, K. C. Tan, V. A. Shim, and N. R. Pal, Online diversity
+% assessment in evolutionary multiobjective optimization: A geometrical
+% perspective, IEEE Transactions on Evolutionary Computation, 2015, 19(4):
+% 542-559.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -39,7 +42,9 @@ function MOEADMRDL(Global)
         % Select parents
         MatingPool = [B(randi(T,1,Global.N)+(0:Global.N-1)*T),B(randi(T,1,Global.N)+(0:Global.N-1)*T)];
         % Generate offsprings
-        Offspring  = Global.Variation(Population(MatingPool),Global.N,@MOEADMRDL_operator,{1,disC,1,20,Pn});
+        OffDec    = GAhalf(Population(MatingPool).decs,{1,disC,1,20});
+        OffDec    = OffDec + randn(size(OffDec))*Pn;
+        Offspring = INDIVIDUAL(OffDec);
         % Update the ideal point
         Z          = min([Z;Offspring.objs],[],1);
         % Environmental selection

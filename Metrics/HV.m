@@ -1,22 +1,32 @@
-function Score = HV(PopObj,PF)
+function [Score,PopObj] = HV(PopObj,PF)
 % <metric> <max>
 % Hypervolume
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% E. Zitzler and L. Thiele, Multiobjective evolutionary algorithms: A
+% comparative case study and the strength Pareto approach, IEEE
+% Transactions on Evolutionary Computation, 1999, 3(4): 257-271.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    [N,M]    = size(PopObj);
-    RefPoint = max(PF,[],1)*1.1;
-    PopObj(any(PopObj>repmat(RefPoint,N,1),2),:) = [];
+    % Normalize the population according to the reference point set
+    [N,M]  = size(PopObj);
+    fmin   = min(min(PopObj,[],1),zeros(1,M));
+    fmax   = max(PF,[],1)*1.1;
+    PopObj = (PopObj-repmat(fmin,N,1))./repmat(fmax-fmin,N,1);
+    PopObj(any(PopObj>1,2),:) = [];
+    % The reference point is set to (1,1,...)
+    RefPoint = ones(1,M);
     if isempty(PopObj)
         Score = 0;
-    elseif M < 5
+    elseif M < 4
+        % Calculate the exact HV value
         pl = sortrows(PopObj);
         S  = {1,pl};
         for k = 1 : M-1
@@ -37,16 +47,26 @@ function Score = HV(PopObj,PF)
             Score = Score + cell2mat(S(i,1))*abs(p(M)-RefPoint(M));
         end
     else
+        % Estimate the HV value by Monte Carlo estimation
         SampleNum = 1000000;
         MaxValue  = RefPoint;
         MinValue  = min(PopObj,[],1);
-        Samples   = repmat(MinValue,SampleNum,1) + rand(SampleNum,M).*repmat((MaxValue-MinValue),SampleNum,1);
-        Domi      = false(1,SampleNum);
-        for i = 1 : size(PopObj,1)
-            drawnow();
-            Domi(all(repmat(PopObj(i,:),SampleNum,1)<=Samples,2)) = true;
+        Samples   = unifrnd(repmat(MinValue,SampleNum,1),repmat(MaxValue,SampleNum,1));
+        if gpuDeviceCount > 0
+            % GPU acceleration
+            Samples = gpuArray(single(Samples));
+            PopObj  = gpuArray(single(PopObj));
         end
-        Score = prod(MaxValue-MinValue)*sum(Domi)/SampleNum;
+        for i = 1 : size(PopObj,1)
+            domi = true(size(Samples,1),1);
+            m    = 1;
+            while m <= M && any(domi)
+                domi = domi & PopObj(i,m) <= Samples(:,m);
+                m    = m + 1;
+            end
+            Samples(domi,:) = [];
+        end
+        Score = prod(MaxValue-MinValue)*(1-size(Samples,1)/SampleNum);
     end
 end
 

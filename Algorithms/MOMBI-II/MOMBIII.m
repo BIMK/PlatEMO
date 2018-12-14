@@ -1,17 +1,20 @@
 function MOMBIII(Global)
-% <algorithm> <H-N>
-% Improved Metaheuristic Based on the R2 Indicator for Many-Objective
-% Optimization
+% <algorithm> <M>
+% Many objective metaheuristic based on the R2 indicator II
 % alpha   ---   0.5 --- Threshold of variances
 % epsilon --- 0.001 --- Tolerance threshold
 % record  ---     5 --- The record size of nadir vectors
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% R. Hernandez Gomez and C. A. Coello Coello, Improved metaheuristic based
+% on the R2 indicator for many-objective optimization, Proceedings of the
+% Annual Conference on Genetic and Evolutionary Computation, 2015, 679-686.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -35,7 +38,7 @@ function MOMBIII(Global)
     %% Optimization
     while Global.NotTermination(Population)
         MatingPool  = TournamentSelection(2,Global.N,Rank,Norm);
-        Offspring   = Global.Variation(Population(MatingPool));
+        Offspring   = GA(Population(MatingPool));
         Population  = [Population,Offspring];
         [Rank,Norm] = R2Ranking(Population.objs,W,zmin,zmax);
         [~,rank]    = sortrows([Rank,Norm]);

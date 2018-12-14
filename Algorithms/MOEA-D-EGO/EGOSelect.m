@@ -2,12 +2,12 @@ function PopDec = EGOSelect(Global,Population,L1,L2,Ke,delta,nr)
 % Selecting Points for Function Evaluation with the assistance of the
 % Gaussian models
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ function PopDec = EGOSelect(Global,Population,L1,L2,Ke,delta,nr)
            else
                P = randperm(N);
            end
-           OffDec = Global.VariationDec([PopDec(P(1:2),:);PopDec(i,:)],inf,@DE);
+           OffDec = DE(PopDec(i,:),PopDec(P(1),:),PopDec(P(2),:));
            OffObj = evaluate(Global,OffDec,model,centers);
            Z = min(Z,OffObj);
            g_old = max(abs(PopObj(P,:) - repmat(Z,length(P),1)).*W(P,:),[],2);

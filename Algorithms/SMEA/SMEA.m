@@ -1,17 +1,20 @@
 function SMEA(Global)
-% <algorithm> <O-Z>
-% A Self-Organizing Multiobjective Evolutionary Algorithm
+% <algorithm> <S>
+% Self-organizing multiobjective evolutionary algorithm
 % D    ---     --- Number of neurons in each dimension of the latent space
 % tau0 --- 0.7 --- Initial learning rate
 % H    ---   5 --- Size of neighborhood mating pools
-% operator     --- DE
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% H. Zhang, A. Zhou, S. Song, Q. Zhang, X. Gao, and J. Zhang, A self-
+% organizing multiobjective evolutionary algorithm, IEEE Transactions on
+% Evolutionary Computation, 2016, 20(5): 792-806.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -71,7 +74,8 @@ function SMEA(Global)
             else
                 Q = 1 : Global.N;
             end
-            y = Global.Variation(Population([u,Q(randperm(length(Q),2))]),1,@DE);
+            Q = Q(randperm(end,2));
+            y = DE(Population(u),Population(Q(1)),Population(Q(2)));
             [Population,FrontNo] = Select(Population,FrontNo,y);
         end
         

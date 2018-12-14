@@ -1,41 +1,49 @@
-function varargout = WFG2(Operation,Global,input)
+classdef WFG2 < PROBLEM
 % <problem> <WFG>
-% A Review of Multi-objective Test Problems and a Scalable Test Problem
-% Toolkit
-% K ---    --- The position parameter, which should be a multiple of M-1
-% operator --- EAreal
+% Benchmark MOP proposed by Walking Fish Group
+% K --- --- The position parameter, which should be a multiple of M-1
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% S. Huband, P. Hingston, L. Barone, and L. While, A review of
+% multiobjective test problems and a scalable test problem toolkit, IEEE
+% Transactions on Evolutionary Computation, 2006, 10(5): 477-506.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    K = Global.ParameterSet(Global.M-1);
-    switch Operation
-        case 'init'
-            Global.M        = 3;
-            Global.D        = Global.M + 9;
-            Global.D        = ceil((Global.D-Global.M+1)/2)*2 + Global.M - 1;
-            Global.lower    = zeros(1,Global.D);
-            Global.upper    = 2 : 2 : 2*Global.D;
-            Global.operator = @EAreal;
-            
-            PopDec    = rand(input,Global.D).*repmat(2:2:2*Global.D,input,1);
-            varargout = {PopDec};
-        case 'value'
-            PopDec = input;
-            [N,D]  = size(PopDec);
-            M      = Global.M;
-            
+    properties(Access = private)
+        K;  % Position parameter
+    end
+    methods
+        %% Initialization
+        function obj = WFG2()
+            if isempty(obj.Global.M)
+                obj.Global.M = 3;
+            end
+            if isempty(obj.Global.D)
+                obj.Global.D = obj.Global.M + 9;
+            end
+            obj.K = obj.Global.ParameterSet(obj.Global.M-1);
+            obj.Global.D        = ceil((obj.Global.D-obj.Global.M+1)/2)*2 + obj.Global.M - 1;
+            obj.Global.lower    = zeros(1,obj.Global.D);
+            obj.Global.upper    = 2 : 2 : 2*obj.Global.D;
+            obj.Global.encoding = 'real';
+        end
+        %% Calculate objective values
+        function PopObj = CalObj(obj,PopDec)
+            [N,D] = size(PopDec);
+            M = obj.Global.M;
+            K = obj.K;
             L = D - K;
             D = 1;
             S = 2 : 2 : 2*M;
             A = ones(1,M-1);
-            
+
             z01 = PopDec./repmat(2:2:size(PopDec,2)*2,N,1);
             
             t1 = zeros(N,K+L);
@@ -63,33 +71,31 @@ function varargout = WFG2(Operation,Global,input)
             h      = convex(x);
             h(:,M) = disc(x);
             PopObj = repmat(D*x(:,M),1,M) + repmat(S,N,1).*h;
-            
-            PopCon = [];
-            
-            varargout = {input,PopObj,PopCon};
-        case 'PF'
-            M = Global.M;
-            h = UniformPoint(input,M);
-            c = ones(size(h,1),M);
-            for i = 1 : size(h,1) 
+        end
+        %% Sample reference points on Pareto front
+        function P = PF(obj,N)
+            M = obj.Global.M;
+            P = UniformPoint(N,M);
+            c = ones(size(P,1),M);
+            for i = 1 : size(P,1) 
                 for j = 2 : M
-                    temp = h(i,j)/h(i,1)*prod(1-c(i,M-j+2:M-1));
+                    temp = P(i,j)/P(i,1)*prod(1-c(i,M-j+2:M-1));
                     c(i,M-j+1) = (temp^2-temp+sqrt(2*temp))/(temp^2+1);
                 end
             end
             x = acos(c)*2/pi;
-            temp = (1-sin(pi/2*x(:,2))).*h(:,M)./h(:,M-1);
+            temp = (1-sin(pi/2*x(:,2))).*P(:,M)./P(:,M-1);
             a = 0 : 0.0001 : 1;
             E = abs(temp*(1-cos(pi/2*a))-1+repmat(a.*cos(5*pi*a).^2,size(x,1),1));
             [~,rank] = sort(E,2);
             for i = 1 : size(x,1)
                 x(i,1) = a(min(rank(i,1:10)));
             end
-            h      = convex(x);
-            h(:,M) = disc(x);
-            h      = h(NDSort(h,1)==1,:);
-            h      = repmat(2:2:2*M,size(h,1),1).*h;
-            varargout = {h};
+            P      = convex(x);
+            P(:,M) = disc(x);
+            P      = P(NDSort(P,1)==1,:);
+            P      = repmat(2:2:2*M,size(P,1),1).*P;
+        end
     end
 end
 

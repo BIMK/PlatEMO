@@ -1,14 +1,17 @@
 function SPEAR(Global)
-% <algorithm> <O-Z>
-% A Strength Pareto Evolutionary Algorithm Based on Reference Direction for
-% Multi-objective and Many-objective Optimization
+% <algorithm> <S>
+% Strength Pareto evolutionary algorithm based on reference direction
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% S. Jiang and S. Yang, A strength Pareto evolutionary algorithm based on
+% reference direction for multiobjective and many-objective optimization,
+% IEEE Transactions on Evolutionary Computation, 2017, 21(3): 329-346.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -25,7 +28,7 @@ function SPEAR(Global)
     %% Optimization
     while Global.NotTermination(Population)
         MatingPool = MatingSelection(Population.objs,20);
-        Offspring  = Global.Variation(Population([1:Global.N,MatingPool]),Global.N);
+        Offspring  = GAhalf(Population([1:Global.N,MatingPool]));
         QObj       = ObjectiveNormalization([Population,Offspring]);
         [Ei,Angle] = Associate(QObj,W);
         FV         = FitnessAssignment(Ei,QObj,Angle,theta);

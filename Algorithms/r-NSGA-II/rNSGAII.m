@@ -1,17 +1,20 @@
 function rNSGAII(Global)
-% <algorithm> <O-Z>
-% The r-Dominance: A New Dominance Relation for Interactive Evolutionary
-% Multicriteria Decision Making
+% <algorithm> <R>
+% r-dominance based NSGA-II
 % Points ---     --- Set of preferred points
 % W      ---     --- Set of weight vector for each preferred point
 % delta  --- 0.1 --- Non-r-dominance threshold
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% L. B. Said, S. Bechikh, and K. Ghedira, The r-dominance: A new dominance
+% relation for interactive evolutionary multicriteria decision making, IEEE
+% Transactions on Evolutionary Computation, 2010, 14(5): 801-818.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -26,7 +29,7 @@ function rNSGAII(Global)
     %% Optimization
     while Global.NotTermination(Population)
         MatingPool = TournamentSelection(2,Global.N,FrontNo,-CrowdDis);
-        Offspring  = Global.Variation(Population(MatingPool));
+        Offspring  = GA(Population(MatingPool));
         [Population,FrontNo,CrowdDis] = EnvironmentalSelection([Population,Offspring],Global.N,Points,W,1-(1-delta)*Global.gen/Global.maxgen);
     end
 end

@@ -1,12 +1,12 @@
 function fit = Contribution(nleft,PopObj,ypot)
 % Calculate the fitness of each solution
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -82,12 +82,11 @@ end
 function Score = CalHV(PopObj,RefPoint)
 % Calculate the estimated HV value
 
-    [N,M] = size(PopObj);
-    PopObj(any(PopObj>repmat(RefPoint,N,1),2),:) = [];
+    PopObj(any(PopObj>repmat(RefPoint,size(PopObj,1),1),2),:) = [];
     SampleNum = 10000;
     MaxValue  = RefPoint;
     MinValue  = min(PopObj,[],1);
-    Samples   = repmat(MinValue,SampleNum,1) + rand(SampleNum,M).*repmat((MaxValue-MinValue),SampleNum,1);
+    Samples   = unifrnd(repmat(MinValue,SampleNum,1),repmat(MaxValue,SampleNum,1));
     Domi      = false(1,SampleNum);
     for i = 1 : size(PopObj,1)
         Domi(all(repmat(PopObj(i,:),SampleNum,1)<=Samples,2)) = true;

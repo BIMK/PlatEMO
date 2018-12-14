@@ -1,16 +1,18 @@
 function ParEGO(Global)
-% <algorithm> <O-Z>
-% ParEGO: A Hybrid Algorithm With On-Line Landscape Approximation for
-% Expensive Multiobjective Optimization Problems
+% <algorithm> <P>
+% Efficient global optimization for Pareto optimization
 % IFEs --- 10000 --- Internal GA evals per iteration
-% operator       --- EAreal
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% J. Knowles, ParEGO: A hybrid algorithm with on-line landscape
+% approximation for expensive multiobjective optimization problems, IEEE
+% Transactions on Evolutionary Computation, 2006, 10(1): 50-66.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -53,7 +55,7 @@ function ParEGO(Global)
         % Surrogate-assisted prediction
         dmodel     = dacefit(PDec,PCheby,'regpoly1','corrgauss',theta,1e-5.*ones(1,D),20.*ones(1,D));
         theta      = dmodel.theta;
-        PopDec     = EvolALG(Global,PCheby,Population.decs,dmodel,IFEs);
+        PopDec     = EvolALG(PCheby,Population.decs,dmodel,IFEs);
         Population = [Population,INDIVIDUAL(PopDec)];
     end
 end

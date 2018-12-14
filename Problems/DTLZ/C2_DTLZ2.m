@@ -1,46 +1,62 @@
-function varargout = C2_DTLZ2(Operation,Global,input)
-% <problem> <DTLZ special>
-% An Evolutionary Many-Objective Optimization Algorithm Using
-% Reference-Point Based Nondominated Sorting Approach, Part II: Handling
-% Constraints and Extending to an Adaptive Approach
-% operator --- EAreal
+classdef C2_DTLZ2 < PROBLEM
+% <problem> <DTLZ variant>
+% Constrained DTLZ2
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% H. Jain and K. Deb, An evolutionary many-objective optimization algorithm
+% using reference-point based non-dominated sorting approach, part II:
+% Handling constraints and extending to an adaptive approach, IEEE
+% Transactions on Evolutionary Computation, 2014, 18(4): 602-622.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    switch Operation
-        case 'init'
-            Global.M        = 3;
-            Global.D        = Global.M + 9;
-            Global.lower    = zeros(1,Global.D);
-            Global.upper    = ones(1,Global.D);
-            Global.operator = @EAreal;
-
-            PopDec    = rand(input,Global.D);
-            varargout = {PopDec};
-        case 'value'
-            PopDec = input;
-            M      = Global.M;
-
+    methods
+        %% Initialization
+        function obj = C2_DTLZ2()
+            if isempty(obj.Global.M)
+                obj.Global.M = 3;
+            end
+            if isempty(obj.Global.D)
+                obj.Global.D = obj.Global.M + 9;
+            end
+            obj.Global.lower    = zeros(1,obj.Global.D);
+            obj.Global.upper    = ones(1,obj.Global.D);
+            obj.Global.encoding = 'real';
+        end
+        %% Calculate objective values
+        function PopObj = CalObj(obj,PopDec)
+            M      = obj.Global.M;
             g      = sum((PopDec(:,M:end)-0.5).^2,2);
             PopObj = repmat(1+g,1,M).*fliplr(cumprod([ones(size(g,1),1),cos(PopDec(:,1:M-1)*pi/2)],2)).*[ones(size(g,1),1),sin(PopDec(:,M-1:-1:1)*pi/2)];
-            
-            if M == 3; r = 0.4; else r = 0.5; end
+        end
+        %% Calculate constraint violations
+        function PopCon = CalCon(obj,PopDec)
+            M      = obj.Global.M;
+            PopObj = obj.CalObj(PopDec);
+            if M == 3
+                r = 0.4;
+            else
+                r = 0.5;
+            end
             PopCon = min(min((PopObj-1).^2+repmat(sum(PopObj.^2,2),1,M)-PopObj.^2-r^2,[],2),sum((PopObj-1/sqrt(M)).^2,2)-r^2);
-            
-            varargout = {input,PopObj,PopCon};
-        case 'PF'
-            M = Global.M;
-            f = UniformPoint(input,M);
-            f = f./repmat(sqrt(sum(f.^2,2)),1,M);
-            if M == 3; r = 0.4; else r = 0.5; end
-            f(min(min((f-1).^2+repmat(sum(f.^2,2),1,M)-f.^2-r^2,[],2),sum((f-1/sqrt(M)).^2,2)-r^2)>0,:) = [];
-            varargout = {f};
+        end
+        %% Sample reference points on Pareto front
+        function P = PF(obj,N)
+            M = obj.Global.M;
+            P = UniformPoint(N,M);
+            P = P./repmat(sqrt(sum(P.^2,2)),1,M);
+            if M == 3
+                r = 0.4;
+            else
+                r = 0.5;
+            end
+            P(min(min((P-1).^2+repmat(sum(P.^2,2),1,M)-P.^2-r^2,[],2),sum((P-1/sqrt(M)).^2,2)-r^2)>0,:) = [];
+        end
     end
 end

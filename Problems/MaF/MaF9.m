@@ -1,73 +1,76 @@
-function varargout = MaF9(Operation,Global,input)
+classdef MaF9 < PROBLEM
 % <problem> <MaF>
-% A benchmark test suite for evolutionary many-objective optimization
-% operator --- EAreal
+% ML-DMP
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% R. Cheng, M. Li, Y. Tian, X. Zhang, S. Yang, Y. Jin, and X. Yao, A
+% benchmark test suite for evolutionary many-objective optimization,
+% Complex & Intelligent Systems, 2017, 3(1): 67-81.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-persistent Points Polygons;
-
-    % This problem is multi-line distance minimization problem
-    switch Operation
-        case 'init'
-            if isempty(Global.lower)
-                Global.M          = 10;
-                Global.D          = 2;
-                Global.D          = 2;
-                Global.lower      = [-10000,-10000];
-                Global.upper      = [10000,10000];
-                Global.operator   = @EAreal;
-                Global.evaluation = max(1e5,1e4*Global.D);
-                % Feasible polygon
-                Points = [];
-                [thera,rho] = cart2pol(0,1);
-                [Points(:,1),Points(:,2)] = pol2cart(thera-(1:Global.M)*2*pi/Global.M,rho);
-                % Infeasible polygons
-                head     = repmat((1:Global.M)',ceil(Global.M/2-2),1);
-                tail     = repmat(1:ceil(Global.M/2-2),Global.M,1);
-                tail     = head + tail(:);
-                Polygons = cell(1,length(head));
-                for i = 1 : length(Polygons)
-                    Polygons{i} = Points(mod((head(i):tail(i))-1,Global.M)+1,:);
-                    Polygons{i} = [Polygons{i};repmat(2*Intersection(Points(mod([head(i)-1,head(i),tail(i),tail(i)+1]-1,Global.M)+1,:)),size(Polygons{i},1),1)-Polygons{i}];
-                end
+    properties(Access = private)
+        Points;     % Vertexes
+        Polygons;   % Infeasible polygons
+    end
+    methods
+        %% Initialization
+        function obj = MaF9()
+            % Parameter setting
+            if isempty(obj.Global.M)
+                obj.Global.M = 10;
             end
-            
-            PopDec    = rand(input,Global.D).*repmat(Global.upper-Global.lower,input,1) + repmat(Global.lower,input,1);
-            PopDec    = MaF9('value',Global,PopDec);
-            varargout = {PopDec};
-        case 'value'
-            PopDec     = input;
-            Infeasible = getInfeasible(PopDec,Polygons,Points);
+            obj.Global.D        = 2;
+            obj.Global.lower    = [-10000,-10000];
+            obj.Global.upper    = [10000,10000];
+            obj.Global.encoding = 'real';
+            % Generate vertexes
+            obj.Points = [];
+            [thera,rho] = cart2pol(0,1);
+            [obj.Points(:,1),obj.Points(:,2)] = pol2cart(thera-(1:obj.Global.M)*2*pi/obj.Global.M,rho);
+            % Generate infeasible polygons
+            head = repmat((1:obj.Global.M)',ceil(obj.Global.M/2-2),1);
+            tail = repmat(1:ceil(obj.Global.M/2-2),obj.Global.M,1);
+            tail = head + tail(:);
+            obj.Polygons = cell(1,length(head));
+            for i = 1 : length(obj.Polygons)
+                obj.Polygons{i} = obj.Points(mod((head(i):tail(i))-1,obj.Global.M)+1,:);
+                obj.Polygons{i} = [obj.Polygons{i};repmat(2*Intersection(obj.Points(mod([head(i)-1,head(i),tail(i),tail(i)+1]-1,obj.Global.M)+1,:)),size(obj.Polygons{i},1),1)-obj.Polygons{i}];
+            end
+        end
+        %% Repair infeasible solutions
+        function PopDec = CalDec(obj,PopDec)
+            Infeasible = getInfeasible(PopDec,obj.Polygons,obj.Points);
             while any(Infeasible)
-                PopDec(Infeasible,:) = rand(sum(Infeasible),Global.D).*repmat(Global.upper-Global.lower,sum(Infeasible),1) + repmat(Global.lower,sum(Infeasible),1);
-                Infeasible           = getInfeasible(PopDec,Polygons,Points);
+                PopDec(Infeasible,:) = unifrnd(repmat(obj.Global.lower,sum(Infeasible),1),repmat(obj.Global.upper,sum(Infeasible),1));
+                Infeasible           = getInfeasible(PopDec,obj.Polygons,obj.Points);
             end
-            
-            PopObj = zeros(size(PopDec,1),size(Points,1));
-            for m = 1 : size(Points,1)
-                PopObj(:,m) = Point2Line(PopDec,Points(mod(m-1:m,size(Points,1))+1,:));
+        end
+        %% Calculate objective values
+        function PopObj = CalObj(obj,PopDec)
+            PopObj = zeros(size(PopDec,1),size(obj.Points,1));
+            for m = 1 : size(obj.Points,1)
+                PopObj(:,m) = Point2Line(PopDec,obj.Points(mod(m-1:m,size(obj.Points,1))+1,:));
             end
-            
-            PopCon = [];
-            
-            varargout = {PopDec,PopObj,PopCon};
-        case 'PF'
-            [X,Y]      = ndgrid(linspace(-1,1,ceil(sqrt(input))));
-            ND         = inpolygon(X(:),Y(:),Points(:,1),Points(:,2));
-            [~,PopObj] = MaF9('value',Global,[X(ND),Y(ND)]);
-            varargout  = {PopObj};
-        case 'draw'
-            cla; Draw(input);
-            plot(Points([1:end,1],1),Points([1:end,1],2),'-k','LineWidth',1.5);
+        end
+        %% Sample reference points on Pareto front
+        function P = PF(obj,N)
+            [X,Y] = ndgrid(linspace(-1,1,ceil(sqrt(N))));
+            ND    = inpolygon(X(:),Y(:),obj.Points(:,1),obj.Points(:,2));
+            P     = obj.CalObj([X(ND),Y(ND)]);
+        end
+        %% Draw special figure
+        function Draw(obj,PopDec)
+            cla; Draw(PopDec);
+            plot(obj.Points([1:end,1],1),obj.Points([1:end,1],2),'-k','LineWidth',1.5);
             xlabel('\itx\rm_1'); ylabel('\itx\rm_2');
+        end    
     end
 end
 
