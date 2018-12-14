@@ -1,14 +1,18 @@
 function eMOEA(Global)
-% <algorithm> <A-G>
-% Towards a Quick Computation of Well-Spread Pareto-Optimal Solutions
+% <algorithm> <E>
+% ¦Å multi-objective evolutionary algorithm
 % epsilon --- 0.06 --- The parameter in grid location calculation
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% K. Deb, M. Mohan, and S. Mishra, Towards a quick computation of
+% well-spread Pareto-optimal solutions, Proceedings of the International
+% Conference on Evolutionary Multi-Criterion Optimization, 2003, 222-236.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -28,7 +32,7 @@ function eMOEA(Global)
             Domi = any(Population(k(1)).obj<Population(k(2)).obj) - any(Population(k(1)).obj>Population(k(2)).obj);
             p    = k((Domi==-1)+1);
             q    = randi(length(Archive));
-            Offspring  = Global.Variation([Population(p),Archive(q)],1);
+            Offspring  = GAhalf([Population(p),Archive(q)]);
             Population = UpdatePopulation(Population,Offspring);
             Archive    = UpdateArchive(Archive,Offspring,epsilon);
         end

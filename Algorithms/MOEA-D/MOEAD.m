@@ -1,19 +1,23 @@
 function MOEAD(Global)
-% <algorithm> <H-N>
-% MOEA/D: A Multiobjective Evolutionary Algorithm Based on Decomposition
-% kind --- 1 --- The type of aggregation function
+% <algorithm> <M>
+% Multiobjective evolutionary algorithm based on decomposition
+% type --- 1 --- The type of aggregation function
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% Q. Zhang and H. Li, MOEA/D: A multiobjective evolutionary algorithm based
+% on decomposition, IEEE Transactions on Evolutionary Computation, 2007,
+% 11(6): 712-731.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
     %% Parameter setting
-    kind = Global.ParameterSet(1);
+    type = Global.ParameterSet(1);
 
     %% Generate the weight vectors
     [W,Global.N] = UniformPoint(Global.N,Global.M);
@@ -36,13 +40,13 @@ function MOEAD(Global)
             P = B(i,randperm(size(B,2)));
 
             % Generate an offspring
-            Offspring = Global.Variation(Population(P(1:2)),1);
+            Offspring = GAhalf(Population(P(1:2)));
 
             % Update the ideal point
             Z = min(Z,Offspring.obj);
 
             % Update the neighbours
-            switch kind
+            switch type
                 case 1
                     % PBI approach
                     normW   = sqrt(sum(W(P,:).^2,2));

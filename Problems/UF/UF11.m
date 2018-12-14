@@ -1,41 +1,43 @@
-function varargout = UF11(Operation,Global,input)
+classdef UF11 < PROBLEM
 % <problem> <UF>
-% Multiobjective optimization Test Instances for the CEC 2009 Special
-% Session and Competition
-% operator --- EAreal
+% Extended rotated DTLZ2
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% Q. Zhang, A. Zhou, S. Zhao, P. N. Suganthan, W. Liu, and S. Tiwari,
+% Multiobjective optimization test instances for the CEC 2009 special
+% session and competition, School of CS & EE, University of Essex, Working
+% Report CES-487, 2009.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-persistent Bound Lamda M;
-
-    % This problem is R2_DTLZ2_M5, the numbers of objectives and decision
-    % variables are fixed to 5 and 30, respectively
-    switch Operation
-        case 'init'
+    properties(Access = private)
+        Bound;
+        Lamda;
+        M;
+    end
+    methods
+        %% Initialization
+        function obj = UF11()
             load('UF11_parameter','Bound','Lamda','M');
-            
-            Global.M        = 5;
-            Global.M        = 5;
-            Global.D        = 30;
-            Global.D        = 30;
-            Global.lower    = Bound(1,:);
-            Global.upper    = Bound(2,:);
-            Global.operator = @EAreal;
-
-            PopDec    = rand(input,size(Bound,2)).*repmat(Global.upper-Global.lower,input,1) + repmat(Global.lower,input,1);
-            varargout = {PopDec};
-        case 'value'
-            PopDec = input;
-            
-            lamda = repmat(Lamda,size(PopDec,1),1);
-            z     = PopDec*M';
+            obj.Bound = Bound;
+            obj.Lamda = Lamda;
+            obj.M     = M;
+            obj.Global.M        = 5;
+        	obj.Global.D        = 30;
+            obj.Global.lower    = obj.Bound(1,:);
+            obj.Global.upper    = obj.Bound(2,:);
+            obj.Global.encoding = 'real';
+        end
+        %% Calculate objective values
+        function PopObj = CalObj(obj,PopDec)
+            lamda = repmat(obj.Lamda,size(PopDec,1),1);
+            z     = PopDec*obj.M';
             p     = zeros(size(z));
             temp1 = z < 0;
             temp2 = z > 1;
@@ -49,13 +51,11 @@ persistent Bound Lamda M;
             end
             g      = sum((z(:,5:end)-0.5).^2,2);
             PopObj = 2./(1+exp(-psum)).*(1+repmat(1+g,1,5).*fliplr(cumprod([ones(size(g,1),1),cos(z(:,1:5-1)*pi/2)],2)).*[ones(size(g,1),1),sin(z(:,5-1:-1:1)*pi/2)]);
-
-            PopCon = [];
-            
-            varargout = {input,PopObj,PopCon};
-        case 'PF'
-            f = UniformPoint(input,5);
-            f = f./repmat(sqrt(sum(f.^2,2)),1,5) + 1;
-            varargout = {f};
+        end
+        %% Sample reference points on Pareto front
+        function P = PF(obj,N)
+            P = UniformPoint(N,5);
+            P = P./repmat(sqrt(sum(P.^2,2)),1,5) + 1;
+        end
     end
 end

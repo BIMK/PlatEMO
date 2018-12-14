@@ -1,14 +1,18 @@
 function GrEA(Global)
-% <algorithm> <A-G>
-% A Grid-Based Evolutionary Algorithm for Many-Objective Optimization
+% <algorithm> <G>
+% Grid-based evolutionary algorithm
 % div --- --- The number of divisions in each objective
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% S. Yang, M. Li, X. Liu, and J. Zheng, A grid-based evolutionary algorithm
+% for many-objective optimization, IEEE Transactions on Evolutionary
+% Computation, 2013, 17(5): 721-736.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -22,7 +26,7 @@ function GrEA(Global)
     %% Optimization
     while Global.NotTermination(Population)
         MatingPool = MatingSelection(Population.objs,div);
-        Offspring  = Global.Variation(Population(MatingPool));    
+        Offspring  = GA(Population(MatingPool));    
         Population = EnvironmentalSelection([Population,Offspring],Global.N,div);
     end
 end

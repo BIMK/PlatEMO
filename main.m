@@ -1,7 +1,7 @@
 function main(varargin)
-%main - The interface of PlatEMO
+%main - The interface of PlatEMO.
 %
-%   main() runs the GUI of PlatEMO.
+%   main() displays the GUI of PlatEMO.
 %
 %   main('-Name',Value,'-Name',Value,...) runs one algorithm on a problem
 %   with the specified parameter setting.
@@ -10,25 +10,39 @@ function main(varargin)
 %   '-N'            <positive integer>  population size
 %   '-M'            <positive integer>  number of objectives
 %   '-D'            <positive integer>  number of variables
-%	'-evaluation'   <positive integer>  maximum number of evaluations
 %	'-algorithm'    <function handle>   algorithm function
 %	'-problem'      <function handle>   problem function
-%	'-operator'     <function handle>   operator function
-%   '-mode'         <positive integer>  run mode (1.show result 2.save result 3.run outputFcn)
-%   '-run'          <positive integer>  run No.
-%   '-outputFcn'	<function handle>   function invoked after each generation when mode = 3
-%	'-X_parameter'  <cell>              the parameter values of function X
+%	'-evaluation'   <positive integer>  maximum number of evaluations
+%   '-run'          <positive integer>  run number
+%   '-record'       <integer>           number of recorded populations
+%   '-outputFcn'	<function handle>   function invoked after each generation
 %
 %   Example:
 %       main()
-%       main('-algorithm',@NSGAII,'-problem',@DTLZ2,'-N',100,'-M',2)
+%
+%   displays the GUI of PlatEMO.
+%
+%       main('-algorithm',@ARMOEA,'-problem',@DTLZ2,'-N',200,'-M',10)
+%
+%   runs AR-MOEA on 10-objective DTLZ2 with a population size of 200.
+%
+%       main('-algorithm',{@KnEA,0.4},'-problem',{@WFG4,6})
+%
+%   runs KnEA on WFG4, and sets the parameters in KnEA and WFG4.
+%
+%       for i = 1 : 10
+%           main('-algorithm',@RVEA,'-problem',@LSMOP1,'-run',i,'-record',5)
+%       end
+%
+%   runs RVEA on LSMOP1 for 10 times, and each time saves 5 populations to
+%   a file in PlatEMO/Data/RVEA.
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 

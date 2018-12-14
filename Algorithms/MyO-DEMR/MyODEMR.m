@@ -1,16 +1,19 @@
 function MyODEMR(Global)
-% <algorithm> <H-N>
-% Many-Objective Optimization using Differential Evolution with
-% Variable-Wise Mutation Restriction
+% <algorithm> <M>
+% Many-objective differential evolution with mutation restriction
 % nP --- 500 --- Number of reference points for IGD calculation
-% operator   --- DEMR
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% R. Denysiuk, L. Costa, and I. E. Santo, Many-objective optimization using
+% differential evolution with variable-wise mutation restriction,
+% Proceedings of the 15th Annual Conference on Genetic and Evolutionary
+% Computation, 2013, 591-598.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -27,9 +30,7 @@ function MyODEMR(Global)
 
     %% Optimization
     while Global.NotTermination(Population)
-        % Perform variation
-        Offspring = Global.Variation(Population([1:Global.N,randi(Global.N,1,2*Global.N)]),Global.N,@DEMR);
-        % Form new population
-        [Population] = EnvironmentalSelection([Population,Offspring],Global.N,P);
+        Offspring  = Operator(Population(1:Global.N),Population(randi(Global.N,1,Global.N)),Population(randi(Global.N,1,Global.N)));
+        Population = EnvironmentalSelection([Population,Offspring],Global.N,P);
     end
 end

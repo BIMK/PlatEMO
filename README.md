@@ -2,7 +2,7 @@
 
 # PlatEMO
 [![](https://img.shields.io/badge/Version-Latest-yellow.svg)](https://github.com/BIMK/PlatEMO/archive/master.zip) 
-[![](https://img.shields.io/badge/Version-v1.6.1-green.svg)](https://github.com/BIMK/PlatEMO/releases/tag/PlatEMO_v1.6.1)
+[![](https://img.shields.io/badge/Version-v2.0.0-green.svg)](https://github.com/BIMK/PlatEMO/releases/tag/PlatEMO_v1.6.1)
 [![](https://img.shields.io/badge/Matlab-%3E%3D%202014a%20-blue.svg)](#PlatEMO)  
 Evolutionary multi-objective optimization platform
 

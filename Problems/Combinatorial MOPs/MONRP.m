@@ -1,49 +1,64 @@
-function varargout = MONRP(Operation,Global,input)
+classdef MONRP < PROBLEM
 % <problem> <Combinatorial MOP>
-% Multi-objective Next Release Problem
+% The multi-objective next release problem
 % m --- 100 --- Number of customers
-% operator  --- EAbinary
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% Y. Zhang, M. Harman, and S. A. Mansouri, The multi-objective next release
+% problem, Proceedings of the 9th Annual Conference on Genetic and
+% Evolutionary Computation, 2007, 1129-1137.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-persistent cost value;
-
-    m = Global.ParameterSet(100);
-    switch Operation
-        case 'init'
-            Global.M        = 2;
-            Global.M        = 2;
-            Global.D        = 100;
-            Global.operator = @EAbinary;
-            
-            n            = Global.D;
-            [cost,value] = Global.ParameterFile(sprintf('MONRP-n%d-m%d',n,m),randi(9,1,n),randi([0 5],n,m));
-            
-            PopDec    = randi([0,1],input,n);
-            varargout = {PopDec};
-        case 'value'
-            PopDec = input;
-            
-            PopObj(:,1) = sum(repmat(cost,size(PopDec,1),1).*PopDec,2);
-            PopObj(:,2) = sum(value(:)) - sum(PopDec*value,2);
-            
-            PopCon = [];
-            
-            varargout = {input,PopObj,PopCon};
-        case 'PF'
-            RefPoint  = [sum(cost),sum(value(:))];
-            varargout = {RefPoint};
-        case 'draw'
-            PopObj(:,1) = sum(repmat(cost,size(input,1),1).*input,2);
-            PopObj(:,2) = sum(input*value,2);
+    properties(Access = private)
+        Cost;   % Cost of each requirement
+        Value;  % Value of each customer on each requirement
+    end
+    methods
+        %% Initialization
+        function obj = MONRP()
+            % Parameter setting
+            m = obj.Global.ParameterSet(100);
+            obj.Global.M = 2;
+            if isempty(obj.Global.D)
+                obj.Global.D = 100;
+            end
+            obj.Global.encoding = 'binary';
+            % Randomly generate costs and values
+            n    = obj.Global.D;
+            file = sprintf('MONRP-n%d-m%d.mat',n,m);
+            file = fullfile(fileparts(mfilename('fullpath')),file);
+            if exist(file,'file') == 2
+                load(file,'Cost','Value');
+            else
+                Cost  = randi(9,1,n);
+                Value = randi([0 5],n,m);
+                save(file,'Cost','Value');
+            end
+            obj.Cost  = Cost;
+            obj.Value = Value;
+        end
+        %% Calculate objective values
+        function PopObj = CalObj(obj,PopDec)
+            PopObj(:,1) = sum(repmat(obj.Cost,size(PopDec,1),1).*PopDec,2);
+            PopObj(:,2) = sum(obj.Value(:)) - sum(PopDec*obj.Value,2);
+        end
+        %% A reference point for hypervolume calculation
+        function P = PF(obj,N)
+            P = [sum(obj.Cost),sum(obj.Value(:))];
+        end
+        %% Draw special figure
+        function Draw(obj,PopDec)
+            PopObj(:,1) = sum(repmat(obj.Cost,size(PopDec,1),1).*PopDec,2);
+            PopObj(:,2) = sum(PopDec*obj.Value,2);
             cla; Draw(PopObj);
             xlabel('Cost'); ylabel('Satisfaction Score');
+        end
     end
 end

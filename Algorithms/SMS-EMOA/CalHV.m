@@ -1,12 +1,12 @@
 function F = CalHV(points,bounds,k,nSample)
 % Calculate the hypervolume-based fitness value of each solution
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ function F = CalHV(points,bounds,k,nSample)
             alpha(i) = prod((k-[1:i-1])./(N-[1:i-1]))./i; 
         end
         Fmin = min(points,[],1);
-        S    = rand(nSample,M).*repmat(bounds-Fmin,nSample,1) + repmat(Fmin,nSample,1);
+        S    = unifrnd(repmat(Fmin,nSample,1),repmat(bounds,nSample,1));
         PdS  = false(N,nSample);
         dS   = zeros(1,nSample);
         for i = 1 : N

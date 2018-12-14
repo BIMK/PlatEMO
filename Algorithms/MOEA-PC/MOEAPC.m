@@ -1,16 +1,20 @@
 function MOEAPC(Global)
-% <algorithm> <H-N>
-% MOEA/PC: Multiobjective Evolutionary Algorithm Based on Polar Coordinates
+% <algorithm> <M>
+% Multiobjective evolutionary algorithm based on polar coordinates
 % delta --- 0.8 --- The probability of choosing parents locally
 % T     ---  20 --- Neighborhood size 
-% operator      --- DE
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% R. Denysiuk, L. Costa, I. E. Santo, and J. C. Matos, MOEA/PC:
+% Multiobjective evolutionary algorithm based on polar coordinates,
+% Proceedings of the International Conference on Evolutionary
+% Multi-Criterion Optimization, 2015, 141-155.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -40,14 +44,13 @@ function MOEAPC(Global)
         
         % Choose the parents
         if rand < delta
-            P = B(i,randperm(size(B,2)));
+            P = B(i,randperm(size(B,2),3));
         else
-            P = randperm(nGrids);
-        end
-        parents = P(1:3);   
+            P = randperm(nGrids,3);
+        end  
         
         % Generate an offspring
-        Offspring = Global.Variation(Population(parents),1,@DE);
+        Offspring = DE(Population(P(1)),Population(P(2)),Population(P(3)));
         
         % Update the ideal point
         Z = min(Z,Offspring.obj);

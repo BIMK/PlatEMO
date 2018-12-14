@@ -1,15 +1,18 @@
 function MOEADCMA(Global)
-% <algorithm> <H-N>
-% Biased Multiobjective Optimization and Decomposition Algorithm
-% K ---  5 --- Number of groups
-% operator --- DE
+% <algorithm> <M>
+% MOEA/D with covariance matrix adaptation evolution strategy
+% K --- 5 --- Number of groups
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% H. Li, Q. Zhang, and J. Deng, Biased multiobjective optimization and
+% decomposition algorithm, IEEE Transactions on Cybernetics, 2017, 47(1):
+% 52-66.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -64,7 +67,7 @@ function MOEADCMA(Global)
                 else
                     P = randperm(Global.N);
                 end
-                Offspring = Global.Variation(Population([s,P(1:2)]),1,@DE);
+                Offspring = DE(Population(s),Population(P(1)),Population(P(2)));
             end
             for x = 1 : length(Offspring)
                 % Update the ideal point

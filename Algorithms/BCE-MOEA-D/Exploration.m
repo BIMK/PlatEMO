@@ -1,12 +1,12 @@
-function Offspring = Exploration(Global,PC,NPC,nND)
+function Offspring = Exploration(PC,NPC,nND,N)
 % Individual exploration in BCE
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ function Offspring = Exploration(Global,PC,NPC,nND)
     d(logical(eye(length(d)))) = inf;
     d  = sort(d,2);
     r0 = mean(d(:,min(3,size(d,2))));
-    r  = nND/Global.N*r0;
+    r  = nND/N*r0;
     
     %% Detect the solutions in PC to be explored
     d = pdist2(PCObj,NPCObj);
@@ -33,7 +33,7 @@ function Offspring = Exploration(Global,PC,NPC,nND)
     %% Generate new solutions
     if ~isempty(S)
         MatingPool = randi(length(PC),1,length(S));
-        Offspring  = Global.Variation(PC([S',MatingPool]),length(S));
+        Offspring  = GAhalf(PC([S',MatingPool]));
     else
         Offspring = [];
     end

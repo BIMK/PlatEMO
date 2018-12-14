@@ -1,15 +1,17 @@
 function MMOPSO(Global)
-% <algorithm> <H-N>
-% A novel multi-objective particle swarm optimization with multiple search 
-% strategies
-% operator --- MMOPSO_operator
+% <algorithm> <M>
+% MOPSO with multiple search strategies
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% Q. Lin, J. Li, Z. Du, J. Chen, and Z. Ming, A novel multi-objective
+% particle swarm optimization with multiple search strategies, European
+% Journal of Operational Research, 2015, 247(3): 732-744.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -21,15 +23,15 @@ function MMOPSO(Global)
     Population = Global.Initialization();
     Z          = min(Population.objs,[],1);
     Population = Classification(Global,Population,W,Z);
-    Archive    = UpdateArchive(Population,Global.N); 
+    Archive    = UpdateArchive(Population,Global.N);
     
     %% Optimization
     while Global.NotTermination(Archive)
         [Pbest,Gbest] = GetBest(Archive,W,Z);
-        Population    = Global.Variation([Population,Pbest,Gbest],inf,@MMOPSO_operator);
+        Population    = Operator(Population,Pbest,Gbest);
         Z             = min([Z;Population.objs],[],1);
         Archive       = UpdateArchive([Archive,Population],Global.N); 
-        S             = Global.Variation(Archive([1:length(Archive),randi(ceil(length(Archive)/2),1,length(Archive))]),length(Archive),@EAreal);
+        S             = GAhalf(Archive([1:length(Archive),randi(ceil(length(Archive)/2),1,length(Archive))]));
         Z             = min([Z;S.objs],[],1);
         Archive       = UpdateArchive([Archive,S],Global.N);
     end

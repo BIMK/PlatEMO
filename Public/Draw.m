@@ -1,5 +1,5 @@
 function Draw(Data,varargin)
-%Draw - Display the specified data
+%Draw - Display data.
 %
 %   Draw(P) displays all the points in matrix P, where each row of P
 %   indicates one point, and each column of P indicates one dimension.
@@ -7,21 +7,21 @@ function Draw(Data,varargin)
 %   Draw(P,Name,Value,...) displays the points with the specified style.
 %
 %   If each point contains 2 or 3 dimensions, the points will be displayed
-%   on 2-D or 3-D space. If the number of dimensions of each point is more
-%   than 3, display the points on a 2-D figure, where each value of
-%   abscissa indicates one dimension, and each value of ordinate indicates
-%   the value of the corresponding dimension.
+%   in 2-D or 3-D space. And if the number of dimensions of each point is
+%   more than 3, display the points by parallel coordinates, where each
+%   value of abscissa indicates one dimension, and each value of ordinate
+%   indicates the value of the corresponding dimension.
 %
 %   Example:
 %       Draw(rand(100,3),'sk')
 %       Draw(rand(100,10))
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 

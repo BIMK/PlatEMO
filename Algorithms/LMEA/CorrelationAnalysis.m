@@ -1,12 +1,12 @@
 function DVSet = CorrelationAnalysis(Global,Population,DV,nCor)
 % Detect the group of each distance variable
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
     
@@ -19,8 +19,8 @@ function DVSet = CorrelationAnalysis(Global,Population,DV,nCor)
                 sign = false;
                 for i = 1 : nCor
                     p    = Population(randi(length(Population)));
-                    a2   = rand*(Global.upper(v)-Global.lower(v)) + Global.lower(v);
-                    b2   = rand*(Global.upper(u)-Global.lower(u)) + Global.lower(u);
+                    a2   = unifrnd(Global.lower(v),Global.upper(v));
+                    b2   = unifrnd(Global.lower(u),Global.upper(u));
                     decs = repmat(p.dec,3,1);
                     decs(1,v)     = a2;
                     decs(2,u)     = b2;

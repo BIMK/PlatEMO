@@ -1,68 +1,71 @@
-function varargout = MaF15(Operation,Global,input)
+classdef MaF15 < PROBLEM
 % <problem> <MaF>
-% A benchmark test suite for evolutionary many-objective optimization
-% operator --- EAreal
+% Inverted LSMOP8
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% R. Cheng, M. Li, Y. Tian, X. Zhang, S. Yang, Y. Jin, and X. Yao, A
+% benchmark test suite for evolutionary many-objective optimization,
+% Complex & Intelligent Systems, 2017, 3(1): 67-81.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-persistent sublen len;
-
-    % This problem is inverted LSMOP8 with nk=2
-    nk = 2;
-    switch Operation
-        case 'init'
-            if isempty(Global.lower)
-                Global.M = 3;
-                Global.D = 20*Global.M;
-                c = 3.8*0.1*(1-0.1);
-                for i = 1 : Global.M-1
-                    c = [c,3.8.*c(end).*(1-c(end))];
-                end
-                sublen = ceil(round(c./sum(c).*Global.D)/nk);
-                len    = [0,cumsum(sublen*nk)];
-                Global.D          = Global.M - 1 + len(end);
-                Global.lower      = zeros(1,Global.D);
-                Global.upper      = [ones(1,Global.M-1),10.*ones(1,len(end))];
-                Global.operator   = @EAreal;
-                Global.evaluation = max(1e5,1e4*Global.D);
-            end            
-
-            PopDec    = rand(input,Global.D).*repmat(Global.upper-Global.lower,input,1) + repmat(Global.lower,input,1);
-            varargout = {PopDec};
-        case 'value'
-            PopDec = input;
-            [N,D]  = size(PopDec);
-            M      = Global.M;
-            
+    properties(Access = private)
+        sublen;	% Number of variables in each subcomponent
+        len;    % Cumulative sum of lengths of variable groups
+    end
+    methods
+        %% Initialization
+        function obj = MaF15()
+            % Parameter setting
+            if isempty(obj.Global.M)
+                obj.Global.M = 3;
+            end
+            if isempty(obj.Global.D)
+                obj.Global.D = 20*obj.Global.M;
+            end
+            obj.Global.lower    = zeros(1,obj.Global.D);
+            obj.Global.upper    = [ones(1,obj.Global.M-1),10.*ones(1,obj.Global.D-obj.Global.M+1)];
+            obj.Global.encoding = 'real';
+            % Calculate the number of variables in each subcomponent
+            nk = 2;
+            c  = 3.8*0.1*(1-0.1);
+            for i = 1 : obj.Global.M-1
+                c = [c,3.8.*c(end).*(1-c(end))];
+            end
+            obj.sublen = floor(c./sum(c).*obj.Global.D/nk);
+            obj.len    = [0,cumsum(obj.sublen*nk)];
+        end
+        %% Calculate objective values
+        function PopObj = CalObj(obj,PopDec)
+            [N,D] = size(PopDec);
+            M     = obj.Global.M;
+            nk    = 2;
             PopDec(:,M:D) = (1+repmat(cos((M:D)./D*pi/2),N,1)).*PopDec(:,M:D) - repmat(PopDec(:,1)*10,1,D-M+1);
             G = zeros(N,M);
             for i = 1 : 2 : M
                 for j = 1 : nk
-                    G(:,i) = G(:,i) + Griewank(PopDec(:,len(i)+M-1+(j-1)*sublen(i)+1:len(i)+M-1+j*sublen(i)));
+                    G(:,i) = G(:,i) + Griewank(PopDec(:,obj.len(i)+M-1+(j-1)*obj.sublen(i)+1:obj.len(i)+M-1+j*obj.sublen(i)));
                 end
             end
             for i = 2 : 2 : M
                 for j = 1 : nk
-                    G(:,i) = G(:,i) + Sphere(PopDec(:,len(i)+M-1+(j-1)*sublen(i)+1:len(i)+M-1+j*sublen(i)));
+                    G(:,i) = G(:,i) + Sphere(PopDec(:,obj.len(i)+M-1+(j-1)*obj.sublen(i)+1:obj.len(i)+M-1+j*obj.sublen(i)));
                 end
             end
-            G      = G./repmat(sublen,N,1)./nk;
+            G      = G./repmat(obj.sublen,N,1)./nk;
             PopObj = (1+G+[G(:,2:end),zeros(N,1)]).*(1-fliplr(cumprod([ones(N,1),cos(PopDec(:,1:M-1)*pi/2)],2)).*[ones(N,1),sin(PopDec(:,M-1:-1:1)*pi/2)]);
-            
-            PopCon = [];
-            
-            varargout = {input,PopObj,PopCon};
-        case 'PF'
-            f = UniformPoint(input,Global.M);
-            f = f./repmat(sqrt(sum(f.^2,2)),1,Global.M);
-            varargout = {1-f};
+        end
+        %% Sample reference points on Pareto front
+        function P = PF(obj,N)
+            P = UniformPoint(N,obj.Global.M);
+            P = 1 - P./repmat(sqrt(sum(P.^2,2)),1,obj.Global.M);
+        end
     end
 end
 

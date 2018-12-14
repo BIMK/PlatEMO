@@ -1,17 +1,20 @@
 function WVMOEAP(Global)
-% <algorithm> <O-Z>
-% A Weight Vector Based Multi-Objective Optimization Algorithm with
-% Preference (Chinese)
+% <algorithm> <W>
+% Weight vector based multi-objective optimization algorithm with
+% preference
 % Points ---      --- Set of preferred points
 % b      --- 0.05 --- Extent of preferred region
-% operator        --- DE
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% X. Zhang, X. Jiang, and L. Zhang, A weight vector based multi-objective
+% optimization algorithm with preference, Acta Electronica Sinica
+% (Chinese), 2016, 44(11): 2639-2645.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -54,7 +57,7 @@ function WVMOEAP(Global)
                     P(j,:) = Current(randperm(length(Current),2));
                 end
             end
-            Offspring = Global.Variation(Population([Current,P(:)']),inf,@DE);
+            Offspring = DE(Population(Current),Population(P(:,1)),Population(P(:,2)));
             % Environmental selection
             Z = min(Z,min(Offspring.objs,[],1));
             Population(Current) = STM([Population(Current),Offspring],W(Current,:),Z,Z+ones(1,Global.M));

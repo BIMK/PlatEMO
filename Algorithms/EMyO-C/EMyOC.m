@@ -1,14 +1,19 @@
 function EMyOC(Global)
-% <algorithm> <A-G>
-% Clustering-Based Selection for Evolutionary Many-Objective Optimization
-% operator --- DEMR
+% <algorithm> <E>
+% Evolutionary many-objective optimization algorithm with clustering-based
+% selection
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% R. Denysiuk, L. Costa, and I. E. Santo, Clustering-based selection for
+% evolutionary many-objective optimization, Proceedings of the
+% International Conference on Parallel Problem Solving from Nature, 2014,
+% 538-547.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -22,11 +27,8 @@ function EMyOC(Global)
 
     %% Optimization
     while Global.NotTermination(Population)
-        % Perform variation
-        Offspring = Global.Variation(Population([1:Global.N,randi(Global.N,1,2*Global.N)]),Global.N,@DEMR);
-        % Update the ideal point
-        Z = min(Z,min(Offspring.objs,[],1));
-        % Form new population
+        Offspring  = Operator(Population,Population(randi(Global.N,1,Global.N)),Population(randi(Global.N,1,Global.N)));
+        Z          = min(Z,min(Offspring.objs,[],1));
         Population = EnvironmentalSelection([Population,Offspring],Global.N,Z);
     end
 end

@@ -1,14 +1,18 @@
 function ARMOEA(Global)
-% <algorithm> <A-G>
-% An Indicator Based Multi-Objective Evolutionary Algorithm with Reference
-% Point Adaptation for Better Versatility
+% <algorithm> <A>
+% Adaptive reference points based multi-objective evolutionary algorithm
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% Y. Tian, R. Cheng, X. Zhang, and Y. Jin, An indicator-based
+% multiobjective evolutionary algorithm with reference point adaptation for
+% better versatility, IEEE Transactions on Evolutionary Computation, 2018,
+% 22(4): 609-622.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -20,7 +24,7 @@ function ARMOEA(Global)
     %% Start the interations
     while Global.NotTermination(Population)
         MatingPool = MatingSelection(Population,RefPoint,Range);
-        Offspring  = Global.Variation(Population(MatingPool));
+        Offspring  = GA(Population(MatingPool));
         [Archive,RefPoint,Range] = UpdateRefPoint([Archive;Offspring(all(Offspring.cons<=0,2)).objs],W,Range);
         [Population,Range]       = EnvironmentalSelection([Population,Offspring],RefPoint,Range,Global.N);
     end

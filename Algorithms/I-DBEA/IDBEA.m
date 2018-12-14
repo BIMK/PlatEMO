@@ -1,14 +1,17 @@
 function IDBEA(Global)
-% <algorithm> <H-N>
-% A Decomposition Based Evolutionary Algorithm for Many Objective
-% Optimization
+% <algorithm> <I>
+% Improved decomposition-based evolutionary algorithm
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% M. Asafuddoula, T. Ray, and R. Sarker, A decomposition-based evolutionary
+% algorithm for many objective optimization, IEEE Transactions on
+% Evolutionary Computation, 2015, 19(3): 445-460.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
     
@@ -26,7 +29,7 @@ function IDBEA(Global)
         % For each solution
         for i = 1 : Global.N
             % Generate an offspring
-            Offspring = Global.Variation(Population([i,randi(Global.N)]),1);
+            Offspring = GAhalf(Population([i,randi(Global.N)]));
             
             % Update the population
             Feasible = all(Population.cons<=0,2);

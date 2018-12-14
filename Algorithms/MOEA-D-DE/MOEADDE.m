@@ -1,17 +1,19 @@
 function MOEADDE(Global)
-% <algorithm> <H-N>
-% Multiobjective Optimization Problems With Complicated Pareto Sets, MOEA/D
-% and NSGA-II
+% <algorithm> <M>
+% MOEA/D based on differential evolution
 % delta --- 0.9 --- The probability of choosing parents locally
 % nr    ---   2 --- Maximum number of solutions replaced by each offspring
-% operator      --- DE
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% H. Li and Q. Zhang, Multiobjective optimization problems with complicated
+% Pareto sets, MOEA/D and NSGA-II, IEEE Transactions on Evolutionary
+% Computation, 2009, 13(2): 284-302.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -43,7 +45,7 @@ function MOEADDE(Global)
             end
 
             % Generate an offspring
-            Offspring = Global.Variation(Population([i,P(1:2)]),1,@DE);
+            Offspring = DE(Population(i),Population(P(1)),Population(P(2)));
 
             % Update the ideal point
             Z = min(Z,Offspring.obj);

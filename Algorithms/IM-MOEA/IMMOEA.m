@@ -1,16 +1,18 @@
 function IMMOEA(Global)
-% <algorithm> <H-N>
-% A Multiobjective Evolutionary Algorithm using Gaussian Process based
-% Inverse Modeling
+% <algorithm> <I>
+% Inverse modeling based multiobjective evolutionary algorithm
 % K --- 10 --- Number of reference vectors
-% operator --- IMMOEA_operator
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% R. Cheng, Y. Jin, K. Narukawa, and B. Sendhoff, A multiobjective
+% evolutionary algorithm using Gaussian process-based inverse modeling,
+% IEEE Transactions on Evolutionary Computation, 2015, 19(6): 838-856.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -28,7 +30,7 @@ function IMMOEA(Global)
     while Global.NotTermination(Population)
         % Modeling and reproduction
         for k = unique(partition)'
-            Population = [Population,Global.Variation(Population(partition==k),inf,@IMMOEA_operator)];
+            Population = [Population,Operator(Population(partition==k))];
         end
         % Environmental selection
         [~,partition] = max(1-pdist2(Population.objs,W,'cosine'),[],2);

@@ -1,16 +1,18 @@
 function MOEADM2M(Global)
-% <algorithm> <H-N>
-% Decomposition of a Multiobjective Optimization Problem into a Number of
-% Simple Multiobjective Subproblems
+% <algorithm> <M>
+% MOEA/D based on MOP to MOP
 % K --- 10 --- Number of reference vectors
-% operator --- MOEADM2M_operator
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% H. Liu, F. Gu, and Q. Zhang, Decomposition of a multiobjective
+% optimization problem into a number of simple multiobjective subproblems,
+% IEEE Transactions on Evolutionary Computation, 2014, 18(3): 450-455.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -30,7 +32,7 @@ function MOEADM2M(Global)
         MatingPoolGlobal     = randi(Global.N,1,Global.N);
         rnd                  = rand(S,K) < 0.7;
         MatingPoolLocal(rnd) = MatingPoolGlobal(rnd);
-        Offspring  = Global.Variation(Population([1:Global.N,MatingPoolLocal(:)']),Global.N,@MOEADM2M_operator);
+        Offspring  = Operator(Population,Population(MatingPoolLocal(:)));
         Population = Associate([Population,Offspring],W,S);
     end
 end

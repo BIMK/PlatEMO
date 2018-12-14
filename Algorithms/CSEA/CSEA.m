@@ -1,16 +1,20 @@
 function CSEA(Global)
-% <algorithm> <A-G>
-% A Classification Based Surrogate-Assisted Evolutionary Algorithm for
-% Expensive Many-Objective Optimization
+% <algorithm> <C>
+% Classification based surrogate-assisted evolutionary algorithm
 % k    ---    6 --- Number of reference solutions
 % gmax --- 3000 --- Number of solutions evaluated by surrogate model
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% L. Pan, C. He, Y. Tian, H. Wang, X. Zhang, and Y. Jin, A classification
+% based surrogate-assisted evolutionary algorithm for expensive
+% many-objective optimization, IEEE Transactions on Evolutionary
+% Computation, 2018.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -36,7 +40,7 @@ function CSEA(Global)
         [TrainIn,TrainOut,TestIn,TestOut] = DataProcess(Input,Output);
         
         % Construct and update the FNN
-        net = NN(ceil(Global.D*2),800);
+        net = FNN(ceil(Global.D*2),800);
         net.train(TrainIn,TrainOut);
         
         % Error rates calculation
@@ -46,7 +50,7 @@ function CSEA(Global)
         p1 = sum(abs((TestOut(~IndexGood)-TestPre(~IndexGood))))/sum(~IndexGood);
         
         % Surrogate-assisted selection and update the population
-        Next = SurrogateAssistedSelection(Global,net,p0,p1,Ref,Population.decs,gmax,tr);
+        Next = SurrogateAssistedSelection(net,p0,p1,Ref,Population.decs,gmax,tr);
         if ~isempty(Next)
             Arc = [Arc,INDIVIDUAL(Next)];
         end

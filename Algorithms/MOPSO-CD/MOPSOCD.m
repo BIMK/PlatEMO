@@ -1,15 +1,17 @@
 function MOPSOCD(Global)
-% <algorithm> <H-N>
-% An Effective Use of Crowding Distance in Multiobjective Particle Swarm
-% Optimization
-% operator --- MOPSOCD_operator
+% <algorithm> <M>
+% MOPSO with crowding distance
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% C. R. Raquel and P. C. Naval Jr, An effective use of crowding distance in
+% multiobjective particle swarm optimization, Proceedings of the 7th Annual
+% Conference on Genetic and Evolutionary Computation, 2005, 257-264.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
     
@@ -21,7 +23,7 @@ function MOPSOCD(Global)
     %% Optimization
     while Global.NotTermination(Archive)
         Gbest      = Archive(randi(ceil(length(Archive)*0.1),1,Global.N));
-        Population = Global.Variation([Population,Pbest,Gbest],Global.N,@MOPSOCD_operator);
+        Population = Operator(Population,Pbest,Gbest);
         Archive    = UpdateArchive([Archive,Population],Global.N);
         Pbest      = UpdatePbest(Pbest,Population);
     end

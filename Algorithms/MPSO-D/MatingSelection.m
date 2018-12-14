@@ -1,12 +1,12 @@
-function MatingPool = MatingSelection(PopObj,B,W,Z)
+function [Parent,Pbest,Gbest] = MatingSelection(PopObj,B,W,Z)
 % Mating selection of MPSO/D
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -29,7 +29,6 @@ function MatingPool = MatingSelection(PopObj,B,W,Z)
         [~,best] = max(PopObj(P,:)*mean(W(P,:),1)'./sum(PopObj(P,:).^2,2).^0.6);
         Gbest(i) = P(best);
     end
-    MatingPool = [Parent,Pbest,Gbest];
 end
 
 function CrowdDis = CrowdingDistance(PopObj)

@@ -1,16 +1,19 @@
 function CPSMOEA(Global)
-% <algorithm> <A-G>
-% A Classification and Pareto Domination based Multiobjective Evolutionary
-% Algorithm
-% M ---  3 --- Number of generated offsprings for each solution
-% operator --- DE
+% <algorithm> <C>
+% Classification and Pareto domination based multi-objective evolutionary
+% algorithm
+% M --- 3 --- Number of generated offsprings for each solution
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Reference --------------------------------
+% J. Zhang, A. Zhou, and G. Zhang, A classification and Pareto domination
+% based multiobjective evolutionary algorithm, Proceedings of the IEEE
+% Congress on Evolutionary Computation, 2015, 2883-2890.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -24,7 +27,7 @@ function CPSMOEA(Global)
     %% Optimization
     while Global.NotTermination(Population)
         KNN(Pgood.decs,Pbad.decs);
-        Offspring  = GenerateOffsprings(Global,Population,M);
+        Offspring  = Operator(Population,M);
         Population = NDS([Population,Offspring],Global.N);
         FrontNo    = NDSort(Offspring.objs,1);
         Pgood      = NDS([Pgood,Offspring(FrontNo==1)],floor(Global.N/2));

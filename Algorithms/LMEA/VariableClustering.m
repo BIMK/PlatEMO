@@ -1,12 +1,12 @@
 function [PV,DV] = VariableClustering(Global,Population,nSel,nPer)
 % Detect the kind of each decision variable
 
-%--------------------------------------------------------------------------
-% Copyright (c) 2016-2017 BIMK Group. You are free to use the PlatEMO for
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
-% for Evolutionary Multi-Objective Optimization [Educational Forum], IEEE
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ function [PV,DV] = VariableClustering(Global,Population,nSel,nPer)
         drawnow();
         % Generate several random solutions by perturbing the i-th dimension
         Decs      = repmat(Population(Sample).decs,nPer,1);
-        Decs(:,i) = rand(size(Decs,1),1)*(Global.upper(i)-Global.lower(i)) + Global.lower(i);
+        Decs(:,i) = unifrnd(Global.lower(i),Global.upper(i),size(Decs,1),1);
         newPopu   = INDIVIDUAL(Decs);
         for j = 1 : nSel
             % Normalize the objective values of the current perturbed solutions
