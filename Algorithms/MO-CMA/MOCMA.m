@@ -46,6 +46,9 @@ function MOCMA(Global)
             a1(k) = updateCovariance(a1(k),(a1(k).x-a(k).x)/a(k).sigma);
         end
         
+        % Update Q
+        Q = [a,a1];
+
         % Individuals for next generation
         a = Q(rank(1:Global.N));
     end
