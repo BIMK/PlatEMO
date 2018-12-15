@@ -333,7 +333,7 @@ classdef GLOBAL < handle
                     uimenu(top,'Label','Result (Special)','CallBack',{@(hObject,~,obj,P)eval('obj.problem.Draw(P.decs);GLOBAL.cb_menu(hObject);'),obj,Population});
                     uimenu(top,'Label','True PF',         'CallBack',{@(hObject,~,obj)eval('cla;Draw(obj.PF);GLOBAL.cb_menu(hObject);'),obj},'Separator','on');
                     uimenu(top,'Label','IGD',             'CallBack',{@GLOBAL.cb_metric,obj,@IGD},'Separator','on');
-                    uimenu(top,'Label','Hypervolume',     'CallBack',{@GLOBAL.cb_metric,obj,@HV});
+                    uimenu(top,'Label','HV',              'CallBack',{@GLOBAL.cb_metric,obj,@HV});
                     uimenu(top,'Label','GD',              'CallBack',{@GLOBAL.cb_metric,obj,@GD});
                     uimenu(top,'Label','Spacing',         'CallBack',{@GLOBAL.cb_metric,obj,@Spacing});
                 else

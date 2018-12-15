@@ -47,6 +47,7 @@ function MOCMA(Global)
         end
         
         % Individuals for next generation
+        Q = [a,a1];
         a = Q(rank(1:Global.N));
     end
 end

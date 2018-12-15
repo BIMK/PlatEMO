@@ -58,6 +58,7 @@ function [Score,PopObj] = HV(PopObj,PF)
             PopObj  = gpuArray(single(PopObj));
         end
         for i = 1 : size(PopObj,1)
+            drawnow();
             domi = true(size(Samples,1),1);
             m    = 1;
             while m <= M && any(domi)

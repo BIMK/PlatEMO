@@ -16,7 +16,6 @@ function Score = DM(PopObj,PF)
 
     fmax  = max(PF,[],1);
     fmin  = min(PF,[],1);
-    Draw(PopObj(:,1:end-1));
     H     = calGrid(PF(:,1:end-1),fmax(1:end-1),fmin(1:end-1),size(PopObj,1));
     h     = H & calGrid(PopObj(:,1:end-1),fmax(1:end-1),fmin(1:end-1),size(PopObj,1));
     Score = calM(h,H)./calM(H,H);

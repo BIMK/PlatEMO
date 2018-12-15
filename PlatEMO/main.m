@@ -14,7 +14,7 @@ function main(varargin)
 %	'-problem'      <function handle>   problem function
 %	'-evaluation'   <positive integer>  maximum number of evaluations
 %   '-run'          <positive integer>  run number
-%   '-record'       <integer>           number of recorded populations
+%   '-save'         <integer>           number of saved populations
 %   '-outputFcn'	<function handle>   function invoked after each generation
 %
 %   Example:
@@ -31,7 +31,7 @@ function main(varargin)
 %   runs KnEA on WFG4, and sets the parameters in KnEA and WFG4.
 %
 %       for i = 1 : 10
-%           main('-algorithm',@RVEA,'-problem',@LSMOP1,'-run',i,'-record',5)
+%           main('-algorithm',@RVEA,'-problem',@LSMOP1,'-run',i,'-save',5)
 %       end
 %
 %   runs RVEA on LSMOP1 for 10 times, and each time saves 5 populations to
