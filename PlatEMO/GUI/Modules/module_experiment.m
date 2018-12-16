@@ -162,7 +162,7 @@ classdef module_experiment < module
                         obj.control.runtimeEdit.handle.String = Environment{2};
                         obj.control.folderEdit.handle.String  = filename;
                     catch
-                        errordlg(sprintf('Fail to load the experimental settings from %s',filename),get(gcf,'Name'),'modal'); beep;
+                        errordlg(sprintf('Fail to load experimental settings from %s, since the file does not contain any experimental setting information.',filename),get(gcf,'Name'),'modal'); beep;
                         success = false;
                         return;
                     end
@@ -185,14 +185,18 @@ classdef module_experiment < module
                     filename = fullfile('Data','Setting.mat');
                 end
                 try
-                    folder = fileparts(filename);
+                    [folder,file] = fileparts(filename);
+                    if isempty(file)
+                        file = 'Setting';
+                    end
+                    filename = fullfile(folder,[file,'.mat']);
                     if exist(folder,'dir') ~= 7
                         [~,~] = mkdir(folder);
                     end
                     save(filename,'Setting','Environment','-mat');
                     obj.control.folderEdit.handle.String = filename;
                 catch
-                    errordlg('The file path is illegal, cannot save the experimental settings',get(gcf,'Name'),'modal'); beep;
+                    errordlg('The file path is illegal, cannot save the experimental settings.',get(gcf,'Name'),'modal'); beep;
                     success = false;
                     return;
                 end
@@ -229,7 +233,7 @@ classdef module_experiment < module
                 if ~isempty(Parameter{i})
                     Parameter{i} = str2num(Parameter{i});
                     if isempty(Parameter{i})
-                        errordlg(sprintf('The value of parameter <%s> is illegal',ParaName{i}),get(gcf,'Name'),'modal'); beep;
+                        errordlg(sprintf('The value of parameter <%s> is illegal.',ParaName{i}),get(gcf,'Name'),'modal'); beep;
                         return;
                     end
                 end
@@ -251,7 +255,7 @@ classdef module_experiment < module
             for i = 1 : size(pro,1)
                 len = cellfun('length',pro{i,2});
                 if any(len~=0&len~=1&len~=max(len))
-                    errordlg(sprintf('The number of the parameters for <%s> is illegal (should be 0, 1 or %d)',pro{i,1},max(len)),get(gcf,'Name'),'modal'); beep;
+                    errordlg(sprintf('The number of the parameters for <%s> is illegal (should be 0, 1 or %d).',pro{i,1},max(len)),get(gcf,'Name'),'modal'); beep;
                     return;
                 else
                     subpro      = cell(max(1,max(len)),2);
@@ -267,13 +271,13 @@ classdef module_experiment < module
             % Generate the setting of number of results
             pops = str2num(obj.control.numpopEdit.handle.String);
             if ~isa(pops,'double') || ~isreal(pops) || ~isscalar(pops) || pops~=fix(pops) || pops < 1
-                errordlg('The number of results is illegal',get(gcf,'Name'),'modal'); beep;
+                errordlg('The number of results is illegal.',get(gcf,'Name'),'modal'); beep;
                 return;
             end
             % Generate the setting of number of runs
             runtimes = str2num(obj.control.runtimeEdit.handle.String);
             if ~isa(runtimes,'double') || ~isreal(runtimes) || ~isscalar(runtimes) || runtimes~=fix(runtimes) || runtimes < 1
-                errordlg('The number of runs is illegal',get(gcf,'Name'),'modal'); beep;
+                errordlg('The number of runs is illegal.',get(gcf,'Name'),'modal'); beep;
                 return;
             end
             % Save the current experimental settings
@@ -646,7 +650,7 @@ classdef module_experiment < module
                     end
                 catch err
                     obj.GUI.figure.busy = false;
-                    errordlg('Failed to save the table',get(gcf,'Name'),'modal');
+                    errordlg('Fail to save the table due to unknown reasons.',get(gcf,'Name'),'modal');
                     rethrow(err);
                 end
             end
@@ -751,7 +755,7 @@ classdef module_experiment < module
             mainData = regexprep(mainData,'+$','$+$');
             mainData = regexprep(mainData,'-$','$-$');
             mainData = regexprep(mainData,'=$','$\\approx$');
-            temp     = contains(mainData,'\hl{');
+            temp     = ~cellfun('isempty',strfind(mainData,'\hl{'));
             mainData(temp)            = strcat(mainData(temp),'}');
             Data(2:nP+1,end-nA+1:end) = mainData;
             Data(end,1)          = regexprep(Data(end,1),'^\+/\-/=$',['\\multicolumn{',num2str(size(Data,2)-nA),'}{c}{$+/-/\\approx$}']);

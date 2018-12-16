@@ -129,7 +129,7 @@ classdef module_test < module
                 if ~isempty(Parameter{i})
                     Parameter{i} = str2num(Parameter{i});
                     if isempty(Parameter{i})
-                        errordlg(sprintf('The value of parameter <%s> is illegal',ParaName{i}),get(gcf,'Name'),'modal'); beep;
+                        errordlg(sprintf('The value of parameter <%s> is illegal.',ParaName{i}),get(gcf,'Name'),'modal'); beep;
                         return;
                     end
                 end
