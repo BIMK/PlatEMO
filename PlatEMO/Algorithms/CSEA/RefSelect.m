@@ -12,14 +12,13 @@ function Ref = RefSelect(Population,k)
 
 % This function is written by Cheng He
 
-	[FrontNO,MaxFNO] = NDSort(Population.objs,k);
-    Next   = find(FrontNO<=MaxFNO);
-    Pmin   = min(Population.objs,[],1);
-    Pmax   = max(Population.objs,[],1);
-    [N,~]  = size(Population.objs);
-    PopObj = Population.objs; 
-    if all(Pmax-Pmin~=0)
-        PopObj = (Population.objs-repmat(Pmin,N,1))./repmat(Pmax-Pmin,N,1);
+    PopObj = Population.objs;
+	[FrontNO,MaxFNO] = NDSort(PopObj,k);
+    Next = find(FrontNO<=MaxFNO);
+    Pmin = min(PopObj,[],1) + 1e-6;
+    Pmax = max(PopObj,[],1);
+    if Pmax > Pmin
+        PopObj = (PopObj-repmat(Pmin,size(PopObj,1),1))./repmat(Pmax-Pmin,size(PopObj,1),1);
     end
     
     %% Environmental selection
@@ -32,7 +31,7 @@ function Choose = LastSelection(PopObj,Choose,div,k)
     
     %% Identify the extreme solutions
 	[~,Extreme] = min(sqrt(sum(PopObj.^2,2)).*sqrt(1-(1-pdist2(PopObj,ones(1,size(PopObj,2)),'cosine')).^2),[],1); %Calculate the extreme points based on PBI
-    Choose     = Choose | ismember(1:size(PopObj,1),Extreme);
+    Choose      = Choose | ismember(1:size(PopObj,1),Extreme);
 
     %% Calculate the convergence of each solution
 	Con = sum(PopObj.^1,2).^1;
