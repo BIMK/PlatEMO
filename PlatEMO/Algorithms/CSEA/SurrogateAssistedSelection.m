@@ -38,6 +38,6 @@ function Next = SurrogateAssistedSelection(net,p0,p1,Ref,Input,wmax,tr)
         end
         Next = Next(Label<0.1,:);
     else
-        Next = [];
+        Next = Next(randi(end),:);
     end
 end

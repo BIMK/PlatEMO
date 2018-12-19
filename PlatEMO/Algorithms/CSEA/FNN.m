@@ -35,14 +35,11 @@ classdef FNN < handle
                 % Calculate the predictive output
                 [Z,Y] = obj.predict(X);
                 MSE   = mse(Z-T);
-%                 MSE 	= -T'*log(Z)-(1-T)'*log(1-Z);
                 % Calculate the Jacobian matrix
                 J = zeros(size(X,1),numel(obj.WA)+numel(obj.WB));
                 for i = 1 : size(X,1)
                     P      = Z(i,:).*(1-Z(i,:));
-%                     P      = -log(Z(i,:)) + log(1-Z(i,:));
                     Q      = P*obj.WB(2:end,:)'.*Y(i,:).*(1-Y(i,:));
-%                     Q      = P*obj.WB(2:end,:)'.*(-log(Y(i,:)) + log(1-Y(i,:)));
                     DB     = [1,Y(i,:)]'*P;
                     DA     = [1,X(i,:)]'*Q;
                     J(i,:) = [DA(:);DB(:)];
@@ -55,10 +52,10 @@ classdef FNN < handle
                     newWB = obj.WB + reshape(Delta(numel(obj.WA)+1:end),size(obj.WB));
                     newY  = 1./(1+exp(-[ones(size(X,1),1),X]*newWA));
                     newZ  = 1./(1+exp(-[ones(size(Y,1),1),newY]*newWB));
-                    if MSE<1e-4
+                    if MSE < 1e-4
                         return;
                     end
-                    if mse(newZ-T) < MSE  %-T'*log(1-newZ)-(1-T)'*log(1-newZ)
+                    if mse(newZ-T) < MSE
                         obj.WA = newWA;
                         obj.WB = newWB;
                         miu    = miu/k;
