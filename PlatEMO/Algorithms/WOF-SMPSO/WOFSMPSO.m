@@ -13,9 +13,7 @@ function WOFSMPSO(Global)
 % H. Zille, H. Ishibuchi, S. Mostaghim, and Y. Nojima, A framework for
 % large-scale multiobjective optimization based on problem transformation,
 % IEEE Transactions on Evolutionary Computation, 2018, 22(2): 260-275.
-%--------------------------------------------------------------------------
-
-% ----------------------------------------------------------------------- 
+%------------------------------- Copyright --------------------------------
 %  WOFSMPSO.m 
 %  Copyright (C) 2018 Heiner Zille
 % 
@@ -54,7 +52,7 @@ function WOFSMPSO(Global)
 %
 %  Date of publication: 12.10.2018 
 %  Last Update: 12.10.2018
-% -----------------------------------------------------------------------
+%--------------------------------------------------------------------------
 
     %% Set the default parameters
     [gamma,groups,psi,t1,t2,q,delta] = Global.ParameterSet(4,1,3,1000,500,Global.M+1,0.5);
@@ -168,9 +166,9 @@ function Population = fillPopulation(input, Global)
         amountToFill    = Global.N-theCurrentPopulationSize;
         FrontNo         = NDSort(input.objs,inf);
         CrowdDis        = CrowdingDistance(input.objs,FrontNo);
-        MatingPool      = TournamentSelection(2,amountToFill,FrontNo,-CrowdDis);
-        Offspring       = Global.Variation(input(MatingPool),amountToFill);
-        Population      = [Population,Offspring];
+        MatingPool      = TournamentSelection(2,amountToFill+1,FrontNo,-CrowdDis);
+        Offspring       = GA(input(MatingPool));
+        Population      = [Population,Offspring(1:amountToFill)];
     end
 end
 
