@@ -521,8 +521,7 @@ classdef module_experiment < module
             if isempty(obj.data)
                 return;
             end
-            nP = size(obj.data.Result,1);
-            nA = size(obj.data.Result,2);
+            [nP,nA,nR] = size(obj.data.Result);
             % Lock the window
             if nargin < 2
                 problemindex = 1 : nP;
@@ -541,7 +540,7 @@ classdef module_experiment < module
                     for p = problemindex
                         % Calculate the run times of each algorithm on each
                         % test instance
-                        data  = sum(~squeeze(cellfun('isempty',obj.data.Result(p,:,:))),2)';
+                        data  = sum(reshape(~cellfun('isempty',obj.data.Result(p,:,:)),nA,nR),2)';
                         valid = find(data>0);
                         for a = valid
                             obj.control.table.handle.Data{p,end-nA+a} = sprintf('%d',data(a));
@@ -553,7 +552,7 @@ classdef module_experiment < module
                     basic = find([obj.control.ranksumMenu.items.value],1);
                     for p = problemindex
                         % Ignore the data sets having no population
-                        data  = sum(~squeeze(cellfun('isempty',obj.data.Result(p,:,:))),2)';
+                        data  = sum(reshape(~cellfun('isempty',obj.data.Result(p,:,:)),nA,nR),2)';
                         valid = find(data>0);
                         % Calculate the metric values of all the results
                         % in this row
