@@ -6,7 +6,7 @@
 [![](https://img.shields.io/badge/Matlab-%3E%3D%202014a%20-blue.svg)](#PlatEMO)  
 [![](https://img.shields.io/badge/Windows-Pass-brightgreen.svg)](#PlatEMO)
 [![](https://img.shields.io/badge/Linux-Validating-red.svg)](#PlatEMO)
-[![](https://img.shields.io/badge/MacOS-Bugs-lightred.svg)](#PlatEMO)  
+[![](https://img.shields.io/badge/MacOS-Validating-lightred.svg)](#PlatEMO)  
 Evolutionary multi-objective optimization platform
 * 90+ open source evolutionary algorithms
 * 120+ open source multi-objective test problems
