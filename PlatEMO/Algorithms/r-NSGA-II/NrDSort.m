@@ -1,5 +1,5 @@
 function [FrontNo,MaxFNo] = NrDSort(PopObj,nSort,Points,W,delta)
-% Do non-r-dominated sorting by efficient non-dominated sort (ENS)
+% Do non-r-dominated sorting
 
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
@@ -29,7 +29,7 @@ function FrontNo = nrdsort(PopObj,g,w,delta)
     % cannot r-dominate the solutions having smaller Dist values than it
     [Dist,rank] = sort(Dist);
     PopObj      = PopObj(rank,:);
-    % Non-r-dominated sorting by ENS
+    % Non-r-dominated sorting
     [N,M]   = size(PopObj);
     FrontNo = inf(1,N);
     MaxFNo  = 0;
@@ -38,21 +38,31 @@ function FrontNo = nrdsort(PopObj,g,w,delta)
         for i = 1 : N
             if FrontNo(i) == inf
                 Dominated = false;
-                for j = i-1 : -1 : 1
-                    if FrontNo(j) == MaxFNo
+                for j = 1 : N
+                    if FrontNo(j) >= MaxFNo&&j ~= i
                         m = 1;
+                        % First check the Pareto dominance relationship
                         while m <= M && PopObj(i,m) >= PopObj(j,m)
                             m = m + 1;
                         end
-                        Dominated = m > M;
-                        if ~Dominated
-                            Dominated = (Dist(j)-Dist(i))./DistExtent < -delta;
-                        end
+                        Dominated = m > M;                       
                         if Dominated
-                            break;
+                           break;
                         end
                     end
                 end
+                % If the current solution is non-dominated one, then check the r-dominance relationship
+                if ~Dominated
+                    for j = i-1 : -1 : 1
+                        if FrontNo(j) == MaxFNo
+                            Dominated = (Dist(j)-Dist(i))./DistExtent < -delta;
+                            if Dominated
+                                break;
+                            end
+                        end
+                    end
+                end
+                
                 if ~Dominated
                     FrontNo(i) = MaxFNo;
                 end
