@@ -64,11 +64,10 @@ end
 
 function [FrontNo,MaxFNo] = ENS_SS(PopObj,nSort)
     [PopObj,~,Loc] = unique(PopObj,'rows');
-    Table          = hist(Loc,1:max(Loc));
-    [N,M]          = size(PopObj);
-    [PopObj,rank]  = sortrows(PopObj);
-    FrontNo        = inf(1,N);
-    MaxFNo         = 0;
+    Table   = hist(Loc,1:max(Loc));
+    [N,M]   = size(PopObj);
+    FrontNo = inf(1,N);
+    MaxFNo  = 0;
     while sum(Table(FrontNo<inf)) < min(nSort,length(Loc))
         MaxFNo = MaxFNo + 1;
         for i = 1 : N
@@ -92,17 +91,15 @@ function [FrontNo,MaxFNo] = ENS_SS(PopObj,nSort)
             end
         end
     end
-    FrontNo(rank) = FrontNo;
     FrontNo = FrontNo(:,Loc);
 end
 
 function [FrontNo,MaxFNo] = T_ENS(PopObj,nSort)
     [PopObj,~,Loc] = unique(PopObj,'rows');
-    Table          = hist(Loc,1:max(Loc));
-	[N,M]          = size(PopObj);
-    [PopObj,rank]  = sortrows(PopObj);
-    FrontNo        = inf(1,N);
-    MaxFNo         = 0;
+    Table     = hist(Loc,1:max(Loc));
+	[N,M]     = size(PopObj);
+    FrontNo   = inf(1,N);
+    MaxFNo    = 0;
     Forest    = zeros(1,N);
     Children  = zeros(N,M-1);
     LeftChild = zeros(1,N) + M;
@@ -165,6 +162,5 @@ function [FrontNo,MaxFNo] = T_ENS(PopObj,nSort)
             end
         end
     end
-    FrontNo(rank) = FrontNo;
     FrontNo = FrontNo(:,Loc);
 end

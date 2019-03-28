@@ -12,6 +12,7 @@ function Ref = RefSelect(Population,k)
 
 % This function is written by Cheng He
 
+    k      = min(k,length(Population));
     PopObj = Population.objs;
 	[FrontNO,MaxFNO] = NDSort(PopObj,k);
     Next = find(FrontNO<=MaxFNO);

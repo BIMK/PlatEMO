@@ -1,5 +1,5 @@
 function Data = UDall(N,M)
-% Generate N M-dimensional points by the uniformly design
+% Generate N M-dimensional points by the uniform design
 
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for

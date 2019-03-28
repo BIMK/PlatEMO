@@ -62,7 +62,6 @@ function FrontNo = nrdsort(PopObj,g,w,delta)
                         end
                     end
                 end
-                
                 if ~Dominated
                     FrontNo(i) = MaxFNo;
                 end
