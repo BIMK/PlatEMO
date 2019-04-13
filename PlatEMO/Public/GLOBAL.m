@@ -129,7 +129,13 @@ classdef GLOBAL < handle
                 if isempty(obj.result)
                     obj.result = {obj.evaluated,INDIVIDUAL()};
                 end
-            	obj.outputFcn(obj);
+                
+                % Call output fucntion with parameters
+                if isfield(obj.parameter, "output_args")
+                    obj.outputFcn(obj, obj.parameter.output_args{:});
+                else
+                    obj.outputFcn(obj);
+                end
             end
         end
         %% Randomly generate an initial population
@@ -179,7 +185,12 @@ classdef GLOBAL < handle
             obj.result(index,:) = {obj.evaluated,Population};
             % Invoke obj.outputFcn
             drawnow();
-            obj.outputFcn(obj);
+            if isfield(obj.parameter, "output_args")
+                obj.outputFcn(obj, obj.parameter.output_args{:});
+            else
+                obj.outputFcn(obj);
+            end
+            
             % Detect whether the number of evaluations has exceeded
             notermination = obj.evaluated < obj.evaluation;
             assert(notermination,'GLOBAL:Termination','Algorithm has terminated');
@@ -246,6 +257,19 @@ classdef GLOBAL < handle
                 obj.problem = value;
             end
         end
+        function set.outputFcn(obj,value)
+            if iscell(value)
+                if ~isempty(value{1})
+                    obj.Validation(value{1},'function','output function', '-outputFcn');
+                    obj.outputFcn = value{1};
+                else
+                    obj.outputFcn = @GLOBAL.Output;
+                end
+                obj.parameter.output_args = value(2:end);
+            else
+                obj.outputFcn = value;
+            end
+        end
         function set.evaluation(obj,value)
             obj.Validation(value,'int','number of evaluations ''-evaluation''',1);
             obj.evaluation = value;
@@ -303,7 +327,7 @@ classdef GLOBAL < handle
     end
     methods(Access = private, Static)
         %% Display or save the result after the algorithm is terminated
-        function Output(obj)
+        function Output(obj, path)
             clc; fprintf('%s on %s, %d objectives %d variables, run %d (%6.2f%%), %.2fs passed...\n',...
                          func2str(obj.algorithm),class(obj.problem),obj.M,obj.D,obj.run,obj.evaluated/obj.evaluation*100,obj.runtime);
             if obj.evaluated >= obj.evaluation
@@ -317,7 +341,7 @@ classdef GLOBAL < handle
                     if length(Population) > size(obj.PF,1)
                         Metrics = {@HV};
                     else
-                        Metrics = {@IGD};
+                        Metrics = {@IGD};e
                     end
                     Score     = cellfun(@(S)GLOBAL.Metric(S,Population,obj.PF),Metrics,'UniformOutput',false);
                     MetricStr = cellfun(@(S)[func2str(S),' : %.4e  '],Metrics,'UniformOutput',false);
@@ -337,7 +361,12 @@ classdef GLOBAL < handle
                     uimenu(top,'Label','GD',              'CallBack',{@GLOBAL.cb_metric,obj,@GD});
                     uimenu(top,'Label','Spacing',         'CallBack',{@GLOBAL.cb_metric,obj,@Spacing});
                 else
-                    folder = fullfile('Data',func2str(obj.algorithm));
+                    if nargin < 2
+                        folder = fullfile('Data',func2str(obj.algorithm));
+                    else
+                        % if path is specified, use it instead
+                        folder = path;
+                    end
                     [~,~]  = mkdir(folder);
                     result         = obj.result;
                     metric.runtime = obj.runtime;
