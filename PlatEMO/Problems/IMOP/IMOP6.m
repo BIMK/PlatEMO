@@ -5,6 +5,10 @@ classdef IMOP6 < PROBLEM
 % a2 ---   10 --- Parameter a2
 % K  ---    5 --- Parameter K
 
+%------------------------------- Reference --------------------------------
+% Y. Tian, R. Cheng, X. Zhang, M. Li, and Y. Jin, Diversity assessment of
+% multi-objective evolutionary algorithms: Performance metric and benchmark
+% problems, IEEE Computational Intelligence Magazine, 2019.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
