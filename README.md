@@ -5,10 +5,10 @@
 [![](https://img.shields.io/github/release/BIMK/PlatEMO.svg)](https://github.com/BIMK/PlatEMO/releases/)
 [![](https://img.shields.io/badge/Matlab-%3E%3D%202014a%20-blue.svg)](#PlatEMO)  
 [![](https://img.shields.io/badge/Windows-Pass-brightgreen.svg)](#PlatEMO)
-[![](https://img.shields.io/badge/Linux-Validating-red.svg)](#PlatEMO)
-[![](https://img.shields.io/badge/MacOS-Validating-lightred.svg)](#PlatEMO)  
+[![](https://img.shields.io/badge/Linux-Pass-brightgreen.svg)](#PlatEMO)
+[![](https://img.shields.io/badge/MacOS-Validating-red.svg)](#PlatEMO)  
 Evolutionary multi-objective optimization platform
-* 90+ open source evolutionary algorithms
+* 100+ open source evolutionary algorithms
 * 120+ open source multi-objective test problems
 * Powerful GUI for performing experiments in parallel
 * Generating results in the format of Excel or LaTeX table by one-click operation
