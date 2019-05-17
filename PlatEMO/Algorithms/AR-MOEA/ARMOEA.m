@@ -21,7 +21,7 @@ function ARMOEA(Global)
     W          = UniformPoint(Global.N,Global.M);
     [Archive,RefPoint,Range] = UpdateRefPoint(Population(all(Population.cons<=0,2)).objs,W,[]);
     
-    %% Start the interations
+    %% Optimization
     while Global.NotTermination(Population)
         MatingPool = MatingSelection(Population,RefPoint,Range);
         Offspring  = GA(Population(MatingPool));
