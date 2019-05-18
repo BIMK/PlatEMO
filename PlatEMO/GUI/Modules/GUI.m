@@ -28,7 +28,7 @@ classdef GUI < handle
             % Read the function lists
             obj.readList();
             % Create the figure
-            obj.figure = newFigure([0 0 1200 650],'PlatEMO v2.0');
+            obj.figure = newFigure([0 0 1200 650],'PlatEMO v2.1');
             % Create the menu
             obj.menu = newTab(obj.figure,[0 551 1202 100,1 1 0 1],{'Modules','Help'});
             obj.figure.busy = false;

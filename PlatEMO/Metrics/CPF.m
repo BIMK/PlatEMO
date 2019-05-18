@@ -1,6 +1,6 @@
 function Score = CPF(PopObj,PF)
 % <metric> <max>
-% Coverage of Pareto front
+% Coverage over Pareto front
 
 %------------------------------- Reference --------------------------------
 % Y. Tian, R. Cheng, X. Zhang, M. Li, and Y. Jin, Diversity assessment of

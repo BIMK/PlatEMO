@@ -46,7 +46,7 @@ function MOEADDRA(Global)
             for i = I
                 % Choose the parents
                 if rand < 0.9
-                    P = B(i,randperm(size(B,2)));
+                    P = B(i,randperm(end));
                 else
                     P = randperm(Global.N);
                 end

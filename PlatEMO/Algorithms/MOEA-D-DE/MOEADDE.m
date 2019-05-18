@@ -39,7 +39,7 @@ function MOEADDE(Global)
         for i = 1 : Global.N
             % Choose the parents
             if rand < delta
-                P = B(i,randperm(size(B,2)));
+                P = B(i,randperm(end));
             else
                 P = randperm(Global.N);
             end

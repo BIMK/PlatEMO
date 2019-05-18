@@ -72,10 +72,10 @@ classdef newAxes < newGUI
             if ~obj.viewFix
                 if M == 2
                     view(0,90);
-                    xlabel('\itf\rm_1'); ylabel('\itf\rm_2');
+                    xlabel('\it f\rm_1'); ylabel('\it f\rm_2');
                 elseif M == 3
                     view(135,30);
-                    xlabel('\itf\rm_1'); ylabel('\itf\rm_2'); zlabel('\itf\rm_3');
+                    xlabel('\it f\rm_1'); ylabel('\it f\rm_2'); zlabel('\it f\rm_3');
                 elseif M > 3
                     view(0,90);
                     xlabel('Dimension No.'); ylabel('Value');

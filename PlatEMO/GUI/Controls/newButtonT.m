@@ -37,7 +37,7 @@ classdef newButtonT < newButton
             end
             obj@newButton(parent,pos,str,varargin{:});
             obj.icon = icon;
-            tiplabel = uicontrol('Parent',obj.figure.handle,'Style','text','Units','pixels','Position',[0 0 1 1],'FontSize',10,'String',tip,'BackgroundColor',[1 1 .9]);
+            tiplabel = uicontrol('Parent',obj.figure.handle,'Style','text','Units','pixels','Position',[0 0 1 1],'FontSize',9,'String',tip,'BackgroundColor',[1 1 .9]);
             obj.tip  = uipanel('Parent',obj.figure.handle,'Units','pixels','Position',[tiplabel.Extent(1:3),16],'HighlightColor',[.5 .5 .5],'BorderType','line','Visible','off');
             set(tiplabel,'Parent',obj.tip,'Position',[0 3 tiplabel.Extent(3) 13]);
             obj.updateCData();

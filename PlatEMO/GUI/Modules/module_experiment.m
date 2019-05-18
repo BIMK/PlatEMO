@@ -67,7 +67,7 @@ classdef module_experiment < module
             obj.control.showButton     = newPopmenu3(obj.control.tableToolBar,[681 1 105 25,0 1 1 0],[{obj.GUI.icons.runTimes,[],obj.GUI.icons.runtime,[]},cell(1,length(obj.GUI.metList{1,2})+length(obj.GUI.metList{2,2}))],...
                                                      [{'Run times','','runtime',''},obj.GUI.metList{2,2}',obj.GUI.metList{1,2}'],'callback',@(~,~)obj.flushTable);
             obj.control.table          = newTable(panel,[24 90 788 390,1 1 1 1],'Fontname','Times New Roman','Fontsize',9,'ButtonDownFcn',@obj.cb_table);
-            obj.control.tableMenu      = newMenu(panel,[1 1 245 20]);
+            obj.control.tableMenu      = newMenu(panel,[1 1 250 20]);
             obj.control.tableMenu.add(obj.GUI.icons.showPF,'PF with median metric value','callback',@(~,~)obj.cb_tableMenu(1));
             obj.control.tableMenu.add([],'PF with best metric value','callback',@(~,~)obj.cb_tableMenu(2));
             obj.control.tableMenu.add([],'');

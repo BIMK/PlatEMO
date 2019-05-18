@@ -50,7 +50,7 @@ classdef module_test < module
             obj.control.figureMenu = newMenu(panel,[1 1 155 20]);
             obj.control.figureMenu.add([],'Show in new figure','callback',@obj.cb_figureMenu);
             newTip(obj.control.axesToolBar,[1 1 12 25,1 0 1 0],x,'callback',@obj.cb_figureMenuButton);
-            obj.control.showButton  = newPopmenu3(obj.control.axesToolBar,[453 1 105 25,0 1 1 0],[{obj.GUI.icons.showPF,obj.GUI.icons.showPS,[],obj.GUI.icons.showTPF,[]},cell(1,length(obj.GUI.metList{1,2})+length(obj.GUI.metList{2,2}))],...
+            obj.control.showButton  = newPopmenu3(obj.control.axesToolBar,[443 1 115 25,0 1 1 0],[{obj.GUI.icons.showPF,obj.GUI.icons.showPS,[],obj.GUI.icons.showTPF,[]},cell(1,length(obj.GUI.metList{1,2})+length(obj.GUI.metList{2,2}))],...
                                                   [{'Pareto Front','Pareto Set','','True PF',''},obj.GUI.metList{2,2}',obj.GUI.metList{1,2}'],'callback',@obj.cb_showbutton);
             obj.control.axes        = newAxes(panel,[82 108 452 360,1 1 1 1]);
             obj.control.playbar     = newPlay(panel,[20 32 570 27,1 1 1 0],'callback',@obj.cb_playbar);

@@ -50,12 +50,12 @@ function Draw(Data,varargin)
     set(gca,'NextPlot','add','Box','on','Fontname','Times New Roman','FontSize',Size(4));
     if M == 2
         plot(Data(:,1),Data(:,2),varargin{:});
-        xlabel('\itf\rm_1'); ylabel('\itf\rm_2');
+        xlabel('\it f\rm_1'); ylabel('\it f\rm_2');
         set(gca,'XTickMode','auto','YTickMode','auto','View',[0 90]);
         axis tight;
     elseif M == 3
         plot3(Data(:,1),Data(:,2),Data(:,3),varargin{:});
-        xlabel('\itf\rm_1'); ylabel('\itf\rm_2'); zlabel('\itf\rm_3');
+        xlabel('\it f\rm_1'); ylabel('\it f\rm_2'); zlabel('\it f\rm_3');
         set(gca,'XTickMode','auto','YTickMode','auto','ZTickMode','auto','View',[135 30]);
         axis tight;
     elseif M > 3
