@@ -335,7 +335,7 @@ classdef GLOBAL < handle
                     uimenu(top,'Label','IGD',             'CallBack',{@GLOBAL.cb_metric,obj,@IGD},'Separator','on');
                     uimenu(top,'Label','HV',              'CallBack',{@GLOBAL.cb_metric,obj,@HV});
                     uimenu(top,'Label','GD',              'CallBack',{@GLOBAL.cb_metric,obj,@GD});
-                    uimenu(top,'Label','Spacing',         'CallBack',{@GLOBAL.cb_metric,obj,@Spacing});
+                    uimenu(top,'Label','CPF',             'CallBack',{@GLOBAL.cb_metric,obj,@CPF});
                 else
                     folder = fullfile('Data',func2str(obj.algorithm));
                     [~,~]  = mkdir(folder);
