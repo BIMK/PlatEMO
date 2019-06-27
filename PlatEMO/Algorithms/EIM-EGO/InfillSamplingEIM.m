@@ -37,22 +37,24 @@ function PopDec = InfillSamplingEIM(Global,KrigingModel,PopObjScaled,InfillCrite
             [u(:, i),mse(:, i)] = predictor(Offspring, KrigingModel{i});
         end
         s = sqrt(max(0,mse));
-        % the EI matrix (three dimensional matrix)
-        f_matrix  =  f .* ones(1,1,GAPopulationSize);
-        u_matrix = reshape(u', 1, M, GAPopulationSize).* ones(p,1);
-        s_matrix =  reshape(s', 1, M, GAPopulationSize).* ones(p,1);
-        EI_matrix=(f_matrix-u_matrix).*Gaussian_CDF((f_matrix-u_matrix)./s_matrix)+s_matrix.*Gaussian_PDF((f_matrix-u_matrix)./s_matrix);
-        switch InfillCriterionIndex
-            case 1
-                %  the Euclidean distance-based EI matrix criterion
-                EIM = -reshape(min(sqrt(sum(EI_matrix.^2,2)), [], 1), GAPopulationSize, 1, 1);
-            case 2
-                %  the Maximin distance-based EI matrix criterion
-                EIM = -reshape(min(max(EI_matrix, [], 2), [], 1), GAPopulationSize, 1, 1);
-            case 3
-                %  the Hypervolume-based EI matrix criterion
-                EIM = -reshape(min(prod(1.1*ones(1,M)-f+EI_matrix,2)-prod(1.1*ones(1,M)-f,2), [], 1), GAPopulationSize, 1, 1);
-        end
+        % the EI matrix 
+        EIM = zeros(GAPopulationSize,1);
+        for ii = 1 : GAPopulationSize
+            u_matrix = repmat(u(ii,:),p,1);
+            s_matrix = repmat(s(ii,:),p,1);
+            EI_matrix = (f - u_matrix).*Gaussian_CDF((f - u_matrix)./s_matrix) + s_matrix.*Gaussian_PDF((f - u_matrix)./s_matrix);
+            switch InfillCriterionIndex
+                case 1
+                    %  the Euclidean distance-based EI matrix criterion
+                    EIM(ii) = -min(sqrt(sum(EI_matrix.^2,2)));
+                case 2
+                    %  the Maximin distance-based EI matrix criterion
+                    EIM(ii) = -min(max(EI_matrix,[],2));
+                case 3
+                    %  the Hypervolume-based EI matrix criterion
+                    EIM(ii) = -min(prod(r_matrix - f + EI_matrix,2) - prod(r_matrix - f,2));
+            end
+        end  
         [~,index] = sort(EIM,'ascend');
         if EIM(index(1)) < EIM_max
             Best = Offspring(index(1),:);
