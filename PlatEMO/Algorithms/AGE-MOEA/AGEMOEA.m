@@ -1,5 +1,8 @@
 function AGEMOEA(Global)
-% <algorithm> <H-N>
+% <algorithm> <A>
+% Adaptive Geometry Estimation-based Many-Objective Evolutionary Algorithms
+
+%------------------------------- Reference --------------------------------
 % author: A. Panichella
 % title: An Adaptive Evolutionary Algorithm based on Non-Euclidean Geometry for Many-objective Optimization
 % venue: GECCO 2019
