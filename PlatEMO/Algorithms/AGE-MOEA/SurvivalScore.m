@@ -1,3 +1,7 @@
+% author: A. Panichella
+% title: An Adaptive Evolutionary Algorithm based on Non-Euclidean Geometry for Many-objective Optimization
+% venue: GECCO 2019
+
 function [CrowdDis, p, normalization] = SurvivalScore(front, IdealPoint)
     [m,n] = size(front);
     CrowdDis = zeros(1,m) ;

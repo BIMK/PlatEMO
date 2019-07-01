@@ -1,3 +1,7 @@
+% author: A. Panichella
+% title: An Adaptive Evolutionary Algorithm based on Non-Euclidean Geometry for Many-objective Optimization
+% venue: GECCO 2019
+
 function [indexes] = FindCornerSolutions(front)
 [m,n] = size(front);
 
