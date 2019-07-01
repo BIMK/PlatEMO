@@ -37,7 +37,7 @@ function [CrowdDis, p, normalization] = SurvivalScore(front, IdealPoint)
     end
     
     nn = vecnorm(front, p, 2);
-    distances = pdist2(front, front, 'minkowski', 2);
+    distances = pdist2(front, front, 'minkowski', p);
     distances = distances ./ repmat(nn, 1, m);
  
     neighbors = 2;
