@@ -28,8 +28,8 @@ function [CrowdDis, p, normalization] = SurvivalScore(front, IdealPoint)
     d = Point2LineDistance(front, zeros(1,n), ones(1,n));
     d(Extreme) = Inf;
     [~, index] = min(d);
-    selected(index) = true;
-    CrowdDis(index) = Inf;
+    %selected(index) = true;
+    %CrowdDis(index) = Inf;
     p = log(n) / log(1 / mean(front(index,:)));
     
     if(isnan(p) || p<=0.1)
