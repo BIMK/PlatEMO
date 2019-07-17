@@ -20,51 +20,48 @@ classdef Sparse_NN < PROBLEM
 % The datasets are taken from the UCI machine learning repository in
 % http://archive.ics.uci.edu/ml/index.php
 % No.   Name                              Samples Features Classes
-% 1     Wine                                178      13       3
-% 2     Statlog_Australian                  690      14       2
-% 3     Climate                             540      18       2
-% 4     Parkinsons                          195      22       2
-% 5     Statlog_German                     1000      24       2
-% 6     Breast_cancer_Wisconsin_Diagnostic  569      30       2
-% 7     Ionosphere                          351      34       2
-% 8     SPECTF_Heart                        267      44       2
-% 9     Lung_cancer                          32      56       3
-% 10    Connectionist_bench_Sonar           208      60       2
-% 11    Libras_movement                     360      90      15
-% 12    Hill_Valley                         606     100       2
-% 13    MUSK1                               476     166       2
-% 14    Semeion_handwritten_digit          1593     256      10
-% 15    LSVT_voice_rehabilitation           126     310       2
-% 16    Madelon                            2600     500       2
-% 17    ISOLET                             1557     617      26
-% 18    Multiple_features                  2000     649      10
-% 19    CNAE9                              1080     857       9
+% 1     Statlog_Australian                  690      14       2
+% 2     Climate                             540      18       2
+% 3     Statlog_German                     1000      24       2
+% 4     Connectionist_bench_Sonar           208      60       2
 
     properties(Access = private)
         TrainIn;    % Input of training set
         TrainOut;   % Output of training set
-        TestIn;   	% Input of validation set
-        TestOut;  	% Output of validation set
+        TrainLabel; % Output labels of training set
+        TestIn;   	% Input of test set
+        TestOut;  	% Output of test set
+        TestLabel;  % Output labels of test set
         nHidden;    % Size of hidden layer
     end
     methods
         function obj = Sparse_NN()
             % Load data
             [dataNo,obj.nHidden] = obj.Global.ParameterSet(1,20);
-            str    = {'Wine','Statlog_Australian','Climate','Parkinsons','Statlog_German','Breast_cancer_Wisconsin_Diagnostic',...
-                      'Ionosphere','SPECTF_Heart','Lung_cancer','Connectionist_bench_Sonar','Libras_movement','Hill_Valley',...
-                      'MUSK1','Semeion_handwritten_digit','LSVT_voice_rehabilitation','Madelon','ISOLET','Multiple_features','CNAE9'};
+            str    = {'Statlog_Australian','Climate','Statlog_German','Connectionist_bench_Sonar'};
             CallStack = dbstack('-completenames');
-            load(fullfile(fileparts(CallStack(1).file),'Dataset_FS_NN.mat'),'Dataset');
-            Data = Dataset.(str{dataNo});
-            Mean = mean(Data(:,1:end-1),1);
-            Std  = std(Data(:,1:end-1),[],1);
-            Data(:,1:end-1) = (Data(:,1:end-1)-repmat(Mean,size(Data,1),1))./repmat(Std,size(Data,1),1);
-            Data(:,end)     = Data(:,end) == Data(1,end);	% Only for bi-category classification
-            obj.TrainIn     = Data(1:ceil(end*0.8),1:end-1);
-            obj.TrainOut    = Data(1:ceil(end*0.8),end);
-            obj.TestIn      = Data(ceil(end*0.8)+1:end,1:end-1);
-            obj.TestOut     = Data(ceil(end*0.8)+1:end,end);
+            load(fullfile(fileparts(CallStack(1).file),'Dataset_NN.mat'),'Dataset');
+            Data  = Dataset.(str{dataNo});
+            Mean  = mean(Data(:,1:end-1),1);
+            Std   = std(Data(:,1:end-1),[],1);
+            Input = (Data(:,1:end-1)-repmat(Mean,size(Data,1),1))./repmat(Std,size(Data,1),1);
+            Category = unique(Data(:,end));
+            if length(Category) <= 2
+                Output = Data(:,end) == Category(1);
+            else
+                Output = repmat(Data(:,end),1,length(Category)) == repmat(1:length(Category),size(Data,1),1);
+            end
+            obj.TrainIn  = Input(1:ceil(end*0.8),:);
+            obj.TrainOut = Output(1:ceil(end*0.8),:);
+            obj.TestIn   = Input(ceil(end*0.8)+1:end,:);
+            obj.TestOut  = Output(ceil(end*0.8)+1:end,:);
+            if length(Category) <= 2
+                obj.TrainLabel = obj.TrainOut;
+                obj.TestLabel  = obj.TestOut;
+            else
+                [~,obj.TrainLabel] = max(obj.TrainOut,[],2);
+                [~,obj.TestLabel]  = max(obj.TestOut,[],2);
+            end
             % Parameter setting
             obj.Global.M        = 2;
             obj.Global.D        = (size(obj.TrainIn,2)+1)*obj.nHidden + (obj.nHidden+1)*size(obj.TrainOut,2);
@@ -93,7 +90,12 @@ classdef Sparse_NN < PROBLEM
                 W2 = reshape(PopDec(i,(size(obj.TrainIn,2)+1)*obj.nHidden+1:end),obj.nHidden+1,size(obj.TrainOut,2));
                 Z  = Predict(obj.TrainIn,W1,W2);
                 PopObj(i,1) = mean(PopDec(i,:)~=0);
-                PopObj(i,2) = mean(round(Z)~=obj.TrainOut);
+                if size(Z,2) == 1
+                    Z = round(Z);
+                else
+                    [~,Z] = max(Z,[],2);
+                end
+                PopObj(i,2) = mean(Z~=obj.TrainLabel);
             end
         end
         %% Draw special figure
@@ -104,7 +106,12 @@ classdef Sparse_NN < PROBLEM
                 W2 = reshape(PopDec(i,(size(obj.TestIn,2)+1)*obj.nHidden+1:end),obj.nHidden+1,size(obj.TestOut,2));
                 Z  = Predict(obj.TestIn,W1,W2);
                 PopObj(i,1) = mean(PopDec(i,:)~=0);
-                PopObj(i,2) = mean(round(Z)~=obj.TestOut);
+                if size(Z,2) == 1
+                    Z = round(Z);
+                else
+                    [~,Z] = max(Z,[],2);
+                end
+                PopObj(i,2) = mean(Z~=obj.TestLabel);
             end
             cla; Draw(PopObj);
             xlabel('Complexity'); ylabel('Test error');
