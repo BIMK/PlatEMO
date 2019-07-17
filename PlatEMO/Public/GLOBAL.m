@@ -314,7 +314,7 @@ classdef GLOBAL < handle
                     NonDominated = NDSort(obj.result{end}(Feasible).objs,1) == 1;
                     Population   = obj.result{end}(Feasible(NonDominated));
                     % Calculate the metric values
-                    if length(Population) > size(obj.PF,1)
+                    if length(Population) >= size(obj.PF,1)
                         Metrics = {@HV};
                     else
                         Metrics = {@IGD};
