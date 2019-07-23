@@ -127,8 +127,8 @@ function [W1,W2] = Train(X,T,W1,W2,nEpoch)
         D1    = 0;
         D2    = 0;
         for i = 1 : size(X,1)
-            D2 = D2 + [0,Y(i,:)]'*P(i,:);
-            D1 = D1 + [0,X(i,:)]'*Q(i,:);
+            D2 = D2 + [1,Y(i,:)]'*P(i,:);
+            D1 = D1 + [1,X(i,:)]'*Q(i,:);
         end
         W1 = W1 - D1/size(X,1);
         W2 = W2 - D2/size(X,1);
@@ -136,6 +136,6 @@ function [W1,W2] = Train(X,T,W1,W2,nEpoch)
 end
 
 function [Z,Y] = Predict(X,W1,W2)
-    Y = 1 - 2./(1+exp(2*[zeros(size(X,1),1),X]*W1));
-    Z = 1./(1+exp(-[zeros(size(Y,1),1),Y]*W2));
+    Y = 1 - 2./(1+exp(2*[ones(size(X,1),1),X]*W1));
+    Z = 1./(1+exp(-[ones(size(Y,1),1),Y]*W2));
 end
