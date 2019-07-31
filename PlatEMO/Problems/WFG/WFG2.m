@@ -29,7 +29,7 @@ classdef WFG2 < PROBLEM
                 obj.Global.D = obj.Global.M + 9;
             end
             obj.K = obj.Global.ParameterSet(obj.Global.M-1);
-            obj.Global.D        = ceil((obj.Global.D-obj.Global.M+1)/2)*2 + obj.Global.M - 1;
+            obj.Global.D        = ceil((obj.Global.D-obj.K)/2)*2 + obj.K;
             obj.Global.lower    = zeros(1,obj.Global.D);
             obj.Global.upper    = 2 : 2 : 2*obj.Global.D;
             obj.Global.encoding = 'real';
