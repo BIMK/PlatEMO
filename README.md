@@ -9,7 +9,7 @@
 [![](https://img.shields.io/badge/MacOS-Validating-red.svg)](#PlatEMO)  
 Evolutionary multi-objective optimization platform
 * 100+ open source evolutionary algorithms
-* 120+ open source multi-objective test problems
+* 200+ open source multi-objective test problems
 * Powerful GUI for performing experiments in parallel
 * Generating results in the format of Excel or LaTeX table by one-click operation
 * State-of-the-art algorithms will be included continuously
@@ -40,11 +40,8 @@ following literature:
 [Release Note can be found here](./Doc/releasenote.md)
 
 * Add four algorithms: C-TAEA, ToP, MOEA/D-URAW, and MultiObjectiveEGO. There are currently 108 algorithms in the platform.
-* 
 * Add the constrained benchmark problems DOC1-9 and MW1-14. There are currently 201 problems in the platform.
-* 
 * Update the Pareto front sampling methods of DAS-CMOP1-9 and LIR-CMOP1-14: Dynamically sample points on Pareto fronts instead of loading points from files.
-* 
 * Update the table in experiment module: Ignore NaN values when calculating the mean and standard deviation in each cell of the table.
 
 

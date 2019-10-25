@@ -1,6 +1,5 @@
 # Release Highlights of PlatEMO 2.3
 * Add four algorithms: C-TAEA, ToP, MOEA/D-URAW, and MultiObjectiveEGO. There are currently 108 algorithms in the platform.
-* 
 * Add the constrained benchmark problems DOC1-9 and MW1-14. There are currently 201 problems in the platform.
 * 
 * Update the Pareto front sampling methods of DAS-CMOP1-9 and LIR-CMOP1-14: Dynamically sample points on Pareto fronts instead of loading points from files.
