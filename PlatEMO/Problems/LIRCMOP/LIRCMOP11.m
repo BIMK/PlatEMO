@@ -61,9 +61,8 @@ classdef LIRCMOP11 < PROBLEM
         end
         %% Sample reference points on Pareto front
         function P = PF(obj,N)
-            CallStack = dbstack('-completenames');
-            load(fullfile(fileparts(CallStack(1).file),'LIRCMOP_PF.mat'),'PF');
-            P = PF{11};
+            P = [1.3965,0.1591;1.0430,0.5127;0.6894,0.8662;
+                 0.3359,1.2198;0.0106,1.6016;0,2.1910;1.8730,0];
         end 
     end
 end

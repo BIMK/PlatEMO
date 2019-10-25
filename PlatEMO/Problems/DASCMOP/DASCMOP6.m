@@ -81,9 +81,9 @@ classdef DASCMOP6 < PROBLEM
         end
         %% Sample reference points on Pareto front
         function P = PF(obj,N)
-            CallStack = dbstack('-completenames');
-            load(fullfile(fileparts(CallStack(1).file),'DASCMOP_PF.mat'),'PF');
-            P = PF{6};
+            P = [0.5000,1.5000;0.5010,1.4762;0.5020,1.4710;0.5030,1.4688;0.5040,1.4681;0.6502,1.4652;0.7002,1.0541;
+                 0.9044,0.8986;1.1066,0.7729;1.3008,0.6114;1.5000,0.5000;0.9069,0.8951;1.1126,0.7727;0.9129,0.8950;
+                 1.1151,0.7690;0.9153,0.8914;1.1175,0.7653;1.1200,0.7616;0.9213,0.8913;1.1260,0.7613;1.1285,0.7576];
         end 
     end
 end

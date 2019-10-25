@@ -62,9 +62,19 @@ classdef LIRCMOP8 < PROBLEM
         end
         %% Sample reference points on Pareto front
         function P = PF(obj,N)
-            CallStack = dbstack('-completenames');
-            load(fullfile(fileparts(CallStack(1).file),'LIRCMOP_PF.mat'),'PF');
-            P = PF{8};
+            P(:,1) = (0:1/(N-1):1)';
+            P(:,2) = 1 - sqrt(P(:,1));
+            P      = P + 0.7057;
+            theta  = -0.25*pi;
+            c1     = 0.1 - ((P(:,1)-1.2)*cos(theta)-(P(:,2)-1.2)*sin(theta)).^2/(2^2) -...
+                     ((P(:,1)-1.2)*sin(theta)+(P(:,2)-1.2)*cos(theta)).^2/(6^2);
+            invalid = c1>0;
+            while any(invalid)
+                P(invalid,:) = (P(invalid,:)-0.7057).*1.001 + 0.7057;
+                c1 = 0.1 - ((P(:,1)-1.2)*cos(theta)-(P(:,2)-1.2)*sin(theta)).^2/(2^2) -...
+                     ((P(:,1)-1.2)*sin(theta)+(P(:,2)-1.2)*cos(theta)).^2/(6^2);
+                invalid = c1>0;
+            end
         end 
     end
 end

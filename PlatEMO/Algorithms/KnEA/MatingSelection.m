@@ -13,7 +13,7 @@ function MatingPool = MatingSelection(PopObj,FrontNo,KneePoints)
     %% Calculate the weighted distance of each solution
     Dis   = pdist2(PopObj,PopObj);
     Dis(logical(eye(length(Dis)))) = inf;
-    Dis   = sort(Dis,2);
+    Dis   = sort(Dis,1);
 	Crowd = sum(Dis(1:3,:).*repmat((3:-1:1)',1,size(PopObj,1)));
 
     %% Binary tournament selection

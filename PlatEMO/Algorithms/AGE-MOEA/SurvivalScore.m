@@ -84,4 +84,3 @@ end
 % Normalization
 front = front./repmat(normalization',m,1);
 end
-

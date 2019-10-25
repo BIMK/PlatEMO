@@ -430,7 +430,8 @@ classdef module_experiment < module
                         return;
                     otherwise
                         data(:,1) = [obj.data.Result{p,a,existing(1)}.result{:,1}]';
-                        data(:,2) = mean(obj.data.metricValue(p,a,@obj.Metric,metric,1),1)';
+                        datanew   = obj.data.metricValue(p,a,@obj.Metric,metric,1);
+                        data(:,2) = mean(datanew(all(~isnan(datanew),2),:),1)';
                 end
                 figure; Draw(data,'-k.','LineWidth',1.5,'MarkerSize',10);
                 title(sprintf('%s on %s',obj.data.Algorithms{a},obj.data.Problems{p}));
@@ -564,8 +565,9 @@ classdef module_experiment < module
                                 drawnow();
                             end
                             data{a}      = obj.data.metricValue(p,a,@obj.Metric,metric,0);
-                            meanvalue(a) = mean(data{a});
-                            stdvalue(a)  = std(data{a});
+                            datanew      = data{a}(~isnan(data{a}));
+                            meanvalue(a) = mean(datanew);
+                            stdvalue(a)  = std(datanew);
                             if obj.control.tableButton(6).value
                                 str = sprintf('%.4e (%.2e)',meanvalue(a),stdvalue(a));
                             else

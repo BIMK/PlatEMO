@@ -82,9 +82,14 @@ classdef DASCMOP9 < PROBLEM
         end
         %% Sample reference points on Pareto front
         function P = PF(obj,N)
-            CallStack = dbstack('-completenames');
-            load(fullfile(fileparts(CallStack(1).file),'DASCMOP_PF.mat'),'PF');
-            P = PF{9};
+            P = UniformPoint(N,3);
+            P = P./repmat(sqrt(sum(P.^2,2)),1,3);
+            X(:,2) = atan(P(:,2)./P(:,1))/0.5/pi;
+            X(:,1) = acos(P(:,1)./cos(0.5*pi*X(:,2)))/0.5/pi;
+            C(:,1) = -sin(20*pi*X(:,1));
+            C(:,2) = -cos(20*pi*X(:,2));
+            P(any(C>1e-2,2),:) = [];
+            P = P + 0.5;
         end 
     end
 end

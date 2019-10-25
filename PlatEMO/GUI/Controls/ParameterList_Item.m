@@ -48,11 +48,11 @@ classdef ParameterList_Item < newPanel
                     str    = fgetl(f);
                 end
                 % Read the reference
-                while ischar(str) && isempty(strfind(str,'--- Reference ---'))
+                while ischar(str) && isempty(regexp(str,'---\s*Reference\s*---','once'))
                     str = fgetl(f);
                 end
                 str = fgetl(f);
-                while ischar(str) && isempty(strfind(str,'--- Copyright ---'))
+                while ischar(str) && isempty(regexp(str,'^\s*%\s*---','once'))
                     obj.ref = [obj.ref,' ',regexprep(str,'^\s*%\s*','','once')];
                     str     = fgetl(f);
                 end

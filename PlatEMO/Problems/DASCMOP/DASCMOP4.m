@@ -81,9 +81,14 @@ classdef DASCMOP4 < PROBLEM
         end
         %% Sample reference points on Pareto front
         function P = PF(obj,N)
-            CallStack = dbstack('-completenames');
-            load(fullfile(fileparts(CallStack(1).file),'DASCMOP_PF.mat'),'PF');
-            P = PF{4};
+            P(:,1) = (0:1/(N-1):1)';
+            P(:,2) = 1 - P(:,1).^2;
+            P      = P + 0.5;
+            P(sin(20*pi*P(:,1))<-1e-10,:) = [];
+            theta_k  = -0.25 * pi;
+            C        = 0.25 - ((P(:,1) - 1) * cos(theta_k) - (P(:,2) - 1.5) * sin(theta_k)).^2 ./ 0.3 -...
+                       ((P(:,1) - 1) * sin(theta_k) + (P(:,2) - 1.5) * cos(theta_k)).^2 ./ 1.2;
+            P(C>0,:) = [];
         end 
     end
 end

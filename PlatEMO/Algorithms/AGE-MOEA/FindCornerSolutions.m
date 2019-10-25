@@ -1,4 +1,3 @@
-
 function [indexes] = FindCornerSolutions(front)
 
 %------------------------------- Copyright --------------------------------
