@@ -36,14 +36,10 @@ following literature:
   year={2017},
 }
 ```  
-# Release Highlights of PlatEMO 2.3  
+
+# Release Highlights of PlatEMO 2.4  
 [Release Note can be found here](./Doc/releasenote.md)
-
-* Add four algorithms: C-TAEA, ToP, MOEA/D-URAW, and MultiObjectiveEGO. There are currently 108 algorithms in the platform.
-* Add the constrained benchmark problems DOC1-9 and MW1-14. There are currently 201 problems in the platform.
-* Update the Pareto front sampling methods of DAS-CMOP1-9 and LIR-CMOP1-14: Dynamically sample points on Pareto fronts instead of loading points from files.
-* Update the table in experiment module: Ignore NaN values when calculating the mean and standard deviation in each cell of the table.
-
+* Add two algorithms: MSEA and OSP-NSDE. There are currently 110 algorithms in the platform.
 
 # Features of PlatEMO
 *  Totally Developed in MATLAB  
