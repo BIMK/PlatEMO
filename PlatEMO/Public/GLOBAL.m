@@ -192,12 +192,11 @@ classdef GLOBAL < handle
         %   [p1,p2,...] = obj.ParameterSet(v1,v2,...) returns the values of
         %   p1, p2, ..., where v1, v2, ... are their default values. The
         %   values are specified by the user with the following form:
-        %   MOEA(...,'-X_parameter',{p1,p2,...},...), where X is the
-        %   function name of the caller.
+        %   MOEA(...,{@X,p1,p2,...},...), where X is the function name of
+        %   the caller.
         %
-        %   MOEA(...,'-X_parameter',{[],p2,...},...) indicates that p1 is
-        %   not specified by the user, and p1 equals to its default value
-        %   v1.
+        %   MOEA(...,{@X,[],p2,...},...) indicates that p1 is not specified
+        %   by the user, and p1 equals to its default value v1.
         %
         %   Example:
         %       [p1,p2,p3] = obj.ParameterSet(1,2,3)
@@ -207,7 +206,7 @@ classdef GLOBAL < handle
             caller    = caller(1:end-2);
             varargout = varargin;
             if isfield(obj.parameter,caller)
-                specified = cellfun(@(S)~isempty(S),obj.parameter.(caller));
+                specified = ~cellfun(@isempty,obj.parameter.(caller));
                 varargout(specified) = obj.parameter.(caller)(specified);
             end
         end

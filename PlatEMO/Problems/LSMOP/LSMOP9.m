@@ -40,7 +40,7 @@ classdef LSMOP9 < PROBLEM
             for i = 1 : obj.Global.M-1
                 c = [c,3.8.*c(end).*(1-c(end))];
             end
-            obj.sublen = floor(c./sum(c).*obj.Global.D/obj.nk);
+            obj.sublen = floor(c./sum(c).*(obj.Global.D-obj.Global.M+1)/obj.nk);
             obj.len    = [0,cumsum(obj.sublen*obj.nk)];
         end
         %% Calculate objective values

@@ -1,5 +1,5 @@
 function Offspring = Operator(Parent1,Parent2,Parent3,Parameter)
-% Differental evolution with variable-wise mutation restriction
+% Differential evolution with variable-wise mutation restriction
 
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for

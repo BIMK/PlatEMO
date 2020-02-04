@@ -44,7 +44,7 @@ function FrontNo = SCDASSort(PopObj)
     PopObj = PopObj - min(PopObj,[],1);
     
     %% Create the landmark vectors
-    % It should be added but not subtracted a tiny constant value for
+    % It should be added but not subtracted by a tiny constant value for
     % minimization problem, to avoid the extreme solutions being dominated
     L = diag(max(PopObj,[],1)+1e-2);
     

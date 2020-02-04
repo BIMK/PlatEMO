@@ -3,6 +3,10 @@ classdef Sparse_FS < PROBLEM
 % The feature selection problem
 % dataNo --- 1 --- Number of dataset
 
+%------------------------------- Reference --------------------------------
+% Y. Tian, X. Zhang, C. Wang, and Y. Jin, An evolutionary algorithm for
+% large-scale sparse multi-objective optimization problems, IEEE
+% Transactions on Evolutionary Computation, 2019.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

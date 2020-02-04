@@ -37,9 +37,10 @@ following literature:
 }
 ```  
 
-# Release Highlights of PlatEMO 2.4  
+# Release Highlights of PlatEMO 2.5  
 [Release Note can be found here](./Doc/releasenote.md)
-* Add two algorithms: MSEA and OSP-NSDE. There are currently 110 algorithms in the platform.
+* Add the time-varying ratio error estimation (TREE) test suite, which contains six constrained large-scale problems from real-world applications.
+* Fix some minor bugs in algorithms and problems.
 
 # Features of PlatEMO
 *  Totally Developed in MATLAB  
