@@ -38,7 +38,7 @@ classdef MaF14 < PROBLEM
             for i = 1 : obj.Global.M-1
                 c = [c,3.8.*c(end).*(1-c(end))];
             end
-            obj.sublen = floor(c./sum(c).*obj.Global.D/nk);
+            obj.sublen = floor(c./sum(c).*(obj.Global.D-obj.Global.M+1)/nk);
             obj.len    = [0,cumsum(obj.sublen*nk)];
         end
         %% Calculate objective values

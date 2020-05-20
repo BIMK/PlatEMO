@@ -34,7 +34,7 @@ function MatingPool = MatingSelection(PopObj,Zmin)
         else
             p = p(2);
         end
-        if rand < 1.0002+ASFRank(p)/N
+        if rand < 1.0002-ASFRank(p)/N
             MatingPool(i) = p;
         else
             MatingPool(i) = randi(N);

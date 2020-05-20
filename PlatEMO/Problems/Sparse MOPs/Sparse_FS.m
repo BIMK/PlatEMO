@@ -3,6 +3,10 @@ classdef Sparse_FS < PROBLEM
 % The feature selection problem
 % dataNo --- 1 --- Number of dataset
 
+%------------------------------- Reference --------------------------------
+% Y. Tian, X. Zhang, C. Wang, and Y. Jin, An evolutionary algorithm for
+% large-scale sparse multi-objective optimization problems, IEEE
+% Transactions on Evolutionary Computation, 2019.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -51,8 +55,8 @@ classdef Sparse_FS < PROBLEM
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)
-            PopDec   = logical(PopDec);
-            PopObj   = zeros(size(PopDec,1),2);
+            PopDec = logical(PopDec);
+            PopObj = zeros(size(PopDec,1),2);
             for i = 1 : size(PopObj,1)
                 [~,Rank] = sort(pdist2(obj.ValidIn(:,PopDec(i,:)),obj.TrainIn(:,PopDec(i,:))),2);
                 [~,Out]  = max(hist(obj.TrainOut(Rank(:,1:3))',obj.Category),[],1);

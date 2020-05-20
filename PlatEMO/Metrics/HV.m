@@ -18,8 +18,8 @@ function [Score,PopObj] = HV(PopObj,PF)
     % Normalize the population according to the reference point set
     [N,M]  = size(PopObj);
     fmin   = min(min(PopObj,[],1),zeros(1,M));
-    fmax   = max(PF,[],1)*1.1;
-    PopObj = (PopObj-repmat(fmin,N,1))./repmat(fmax-fmin,N,1);
+    fmax   = max(PF,[],1);
+    PopObj = (PopObj-repmat(fmin,N,1))./repmat((fmax-fmin)*1.1,N,1);
     PopObj(any(PopObj>1,2),:) = [];
     % The reference point is set to (1,1,...)
     RefPoint = ones(1,M);

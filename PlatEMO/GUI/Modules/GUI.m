@@ -28,7 +28,7 @@ classdef GUI < handle
             % Read the function lists
             obj.readList();
             % Create the figure
-            obj.figure = newFigure([0 0 1200 650],'PlatEMO v2.3');
+            obj.figure = newFigure([0 0 1200 650],'PlatEMO v2.7');
             % Create the menu
             obj.menu = newTab(obj.figure,[0 551 1202 100,1 1 0 1],{'Modules','Help'});
             obj.figure.busy = false;
@@ -62,14 +62,17 @@ classdef GUI < handle
                 for j = 1 : length(Files)
                     f = fopen(Files{j});
                     fgetl(f);
-                    str = regexprep(fgetl(f),'^\s*%\s*','','once');
+                    str = fgetl(f);
                     fclose(f);
-                    labels = regexp(str,'(?<=<).*?(?=>)','match');
-                    if ~isempty(labels) && strcmp(labels{1},class)
-                        if length(labels) == 1
-                            labels{2} = '';
+                    if ischar(str)
+                        str    = regexprep(str,'^\s*%\s*','','once');
+                        labels = regexp(str,'(?<=<).*?(?=>)','match');
+                        if ~isempty(labels) && strcmp(labels{1},class)
+                            if length(labels) == 1
+                                labels{2} = '';
+                            end
+                            FuncList = [FuncList;labels(2),Files(j)];
                         end
-                        FuncList = [FuncList;labels(2),Files(j)];
                     end
                 end
             end

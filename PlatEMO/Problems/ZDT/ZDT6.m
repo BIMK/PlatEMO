@@ -29,7 +29,7 @@ classdef ZDT6 < PROBLEM
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)
             PopObj(:,1) = 1 - exp(-4*PopDec(:,1)).*sin(6*pi*PopDec(:,1)).^6;
-            g = 1 + 9*sum(PopDec(:,2:end),2).^0.25;
+            g = 1 + 9*mean(PopDec(:,2:end),2).^0.25;
             h = 1 - (PopObj(:,1)./g).^2;
             PopObj(:,2) = g.*h;
         end
