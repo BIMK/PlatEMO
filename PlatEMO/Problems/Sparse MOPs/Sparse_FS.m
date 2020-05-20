@@ -55,8 +55,8 @@ classdef Sparse_FS < PROBLEM
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)
-            PopDec   = logical(PopDec);
-            PopObj   = zeros(size(PopDec,1),2);
+            PopDec = logical(PopDec);
+            PopObj = zeros(size(PopDec,1),2);
             for i = 1 : size(PopObj,1)
                 [~,Rank] = sort(pdist2(obj.ValidIn(:,PopDec(i,:)),obj.TrainIn(:,PopDec(i,:))),2);
                 [~,Out]  = max(hist(obj.TrainOut(Rank(:,1:3))',obj.Category),[],1);

@@ -6,7 +6,7 @@
 [![](https://img.shields.io/badge/Matlab-%3E%3D%202014a%20-blue.svg)](#PlatEMO)  
 [![](https://img.shields.io/badge/Windows-Pass-brightgreen.svg)](#PlatEMO)
 [![](https://img.shields.io/badge/Linux-Pass-brightgreen.svg)](#PlatEMO)
-[![](https://img.shields.io/badge/MacOS-Validating-red.svg)](#PlatEMO)  
+[![](https://img.shields.io/badge/MacOS-Pass-red.svg)](#PlatEMO)  
 Evolutionary multi-objective optimization platform
 * 100+ open source evolutionary algorithms
 * 200+ open source multi-objective test problems
@@ -37,9 +37,13 @@ following literature:
 }
 ```  
 
-# Release Highlights of PlatEMO 2.6  
+# Release Highlights of PlatEMO 2.7  
 [Release Note can be found here](./Doc/releasenote.md)
-* Add two algorithms: MOEA/PSL and DWU. There are currently 112 algorithms in the platform.
+* Add two algorithms for large-scale optimization, i.e.,  GLMO and LCSA. There are currently 114 algorithms in the platform.
+
+* Add four sparse multi-objective optimization problems, i.e., community detection, instance selection, portfolio optimization, and sparse signal reconstruction.
+
+* Add six constrained DTLZ problems, i.e., DC-DTLZ. There are currently 217 problems in the platform.
 
 # Features of PlatEMO
 *  Totally Developed in MATLAB  

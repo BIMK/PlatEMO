@@ -3,6 +3,10 @@ function LCSA(Global)
 % Linear Combination-based Search Algorithm
 % optimiser         --- 3    --- The optimisation method. 1 = SMPSO, 2 = NSGA-II, 3 = NSGA-III. Default = NSGA-III
 
+%------------------------------- Reference --------------------------------
+% H. Zille, Large-scale Multi-objective Optimisation: New Approaches and a
+% Classification of the State-of-the-Art, PhD Thesis, Otto von Guericke
+% University Magdeburg, 2019.
 % ----------------------------------------------------------------------- 
 %  Copyright (C) 2020 Heiner Zille
 %

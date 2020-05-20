@@ -1,3 +1,6 @@
+# Release Highlights of PlatEMO 2.6  
+* Add two algorithms: MOEA/PSL and DWU. There are currently 112 algorithms in the platform.
+
 # Release Highlights of PlatEMO 2.5  
 * Add the time-varying ratio error estimation (TREE) test suite, which contains six constrained large-scale problems from real-world applications.
 * Fix some minor bugs in algorithms and problems.
