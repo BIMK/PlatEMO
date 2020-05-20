@@ -190,9 +190,7 @@ classdef module_experiment < module
                         file = 'Setting';
                     end
                     filename = fullfile(folder,[file,'.mat']);
-                    if exist(folder,'dir') ~= 7
-                        [~,~] = mkdir(folder);
-                    end
+                    [~,~] = mkdir(folder);
                     save(filename,'Setting','Environment','-mat');
                     obj.control.folderEdit.handle.String = filename;
                 catch
