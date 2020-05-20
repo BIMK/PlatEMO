@@ -1,15 +1,15 @@
+# Release Highlights of PlatEMO 2.5  
+* Add the time-varying ratio error estimation (TREE) test suite, which contains six constrained large-scale problems from real-world applications.
+* Fix some minor bugs in algorithms and problems.
+
+
+# Release Highlights of PlatEMO 2.4  
+* Add two algorithms: MSEA and OSP-NSDE. There are currently 110 algorithms in the platform.
+
 # Release Highlights of PlatEMO 2.3  
 * Add four algorithms: C-TAEA, ToP, MOEA/D-URAW, and MultiObjectiveEGO. There are currently 108 algorithms in the platform.
 * Add the constrained benchmark problems DOC1-9 and MW1-14. There are currently 201 problems in the platform.
 * Update the Pareto front sampling methods of DAS-CMOP1-9 and LIR-CMOP1-14: Dynamically sample points on Pareto fronts instead of loading points from files.
-* Update the table in experiment module: Ignore NaN values when calculating the mean and standard deviation in each cell of the table.
-
-# Release Highlights of PlatEMO 2.3
-* Add four algorithms: C-TAEA, ToP, MOEA/D-URAW, and MultiObjectiveEGO. There are currently 108 algorithms in the platform.
-* Add the constrained benchmark problems DOC1-9 and MW1-14. There are currently 201 problems in the platform.
-* 
-* Update the Pareto front sampling methods of DAS-CMOP1-9 and LIR-CMOP1-14: Dynamically sample points on Pareto fronts instead of loading points from files.
-* 
 * Update the table in experiment module: Ignore NaN values when calculating the mean and standard deviation in each cell of the table.
 
 # Release Highlights of PlatEMO 2.2  

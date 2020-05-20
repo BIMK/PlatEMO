@@ -37,9 +37,9 @@ following literature:
 }
 ```  
 
-# Release Highlights of PlatEMO 2.4  
+# Release Highlights of PlatEMO 2.6  
 [Release Note can be found here](./Doc/releasenote.md)
-* Add two algorithms: MSEA and OSP-NSDE. There are currently 110 algorithms in the platform.
+* Add two algorithms: MOEA/PSL and DWU. There are currently 112 algorithms in the platform.
 
 # Features of PlatEMO
 *  Totally Developed in MATLAB  
