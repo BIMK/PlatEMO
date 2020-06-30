@@ -1,4 +1,10 @@
 # Release Highlights of PlatEMO 2.6  
+
+* Add three algorithms for constrained optimization (i.e., CCMO, MOEA/D-DAE, and TiGE-2) and an algorithm for many-objective optimization (i.e., PREA). There are currently 118 algorithms in the platform.
+* Fix some minor bugs in the Pareto front sampling methods in LIR-CMOP and MW problems.
+
+# Release Highlights of PlatEMO 2.6  
+
 * Add two algorithms: MOEA/PSL and DWU. There are currently 112 algorithms in the platform.
 
 # Release Highlights of PlatEMO 2.5  
