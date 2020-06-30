@@ -40,7 +40,7 @@ classdef MW9 < PROBLEM
             T1     = (1-0.64*PopObj(:,1).^2-PopObj(:,2)).*(1-0.36*PopObj(:,1).^2-PopObj(:,2));
             T2     = 1.35.^2 - (PopObj(:,1)+0.35).^2 - PopObj(:,2);
             T3     = 1.15.^2 - (PopObj(:,1)+0.15).^2 - PopObj(:,2);
-            PopCon = min(min(T1,T2),T3);
+            PopCon = min(T1,T2.*T3);
         end
         %% Sample reference points on Pareto front
         function P = PF(obj,N)
@@ -49,13 +49,13 @@ classdef MW9 < PROBLEM
             T1      = (1-0.64*P(:,1).^2-P(:,2)).*(1-0.36*P(:,1).^2-P(:,2));
             T2      = 1.35.^2 - (P(:,1)+0.35).^2 - P(:,2);
             T3      = 1.15.^2 - (P(:,1)+0.15).^2 - P(:,2);
-            invalid = min(min(T1,T2),T3) > 0;
+            invalid = min(T1,T2.*T3) > 0;
             while any(invalid)
                 P(invalid,:) = P(invalid,:).*1.001;
                 T1      = (1-0.64*P(:,1).^2-P(:,2)).*(1-0.36*P(:,1).^2-P(:,2));
                 T2      = 1.35.^2 - (P(:,1)+0.35).^2 - P(:,2);
                 T3      = 1.15.^2 - (P(:,1)+0.15).^2 - P(:,2);
-                invalid = min(min(T1,T2),T3) > 0;
+                invalid = min(T1,T2.*T3) > 0;
             end
             P = P(NDSort(P,1)==1,:);
         end
