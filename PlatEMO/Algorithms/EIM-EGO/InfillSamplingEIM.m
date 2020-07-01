@@ -38,10 +38,10 @@ function PopDec = InfillSamplingEIM(Global,KrigingModel,PopObjScaled,InfillCrite
         end
         s = sqrt(max(0,mse));
         % the EI matrix (three dimensional matrix)
-        f_matrix  =  f .* ones(1,1,GAPopulationSize);
-        u_matrix = reshape(u', 1, M, GAPopulationSize).* ones(p,1);
-        s_matrix =  reshape(s', 1, M, GAPopulationSize).* ones(p,1);
-        EI_matrix=(f_matrix-u_matrix).*Gaussian_CDF((f_matrix-u_matrix)./s_matrix)+s_matrix.*Gaussian_PDF((f_matrix-u_matrix)./s_matrix);
+        f_matrix  = f .* ones(1,1,GAPopulationSize);
+        u_matrix  = reshape(u', 1, M, GAPopulationSize).* ones(p,1);
+        s_matrix  = reshape(s', 1, M, GAPopulationSize).* ones(p,1);
+        EI_matrix = (f_matrix-u_matrix).*Gaussian_CDF((f_matrix-u_matrix)./s_matrix)+s_matrix.*Gaussian_PDF((f_matrix-u_matrix)./s_matrix);
         switch InfillCriterionIndex
             case 1
                 %  the Euclidean distance-based EI matrix criterion

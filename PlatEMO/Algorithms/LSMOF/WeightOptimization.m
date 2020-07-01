@@ -14,14 +14,14 @@ function Arc= WeightOptimization(Global,G2,Population,wD,N)
 % This function is written by Cheng He
 
 	%% Choose NF solutions as the reference solutions
-	Reference   = max(Population.objs,[],1);
+	Reference    = max(Population.objs,[],1);
     [RefPop,~,~] = EnvironmentalSelection(Population,wD);
     
     %% Calculate the reference directions
-	lower       = Global.lower;upper = Global.upper;
-	Direction   = [sum((RefPop.decs-repmat(lower,wD,1)).^2,2).^(0.5);sum((repmat(upper,wD,1)-RefPop.decs).^2,2).^(0.5)];
-	Direct      = [(RefPop.decs-repmat(lower,wD,1));(repmat(upper,wD,1)-RefPop.decs)]./repmat(Direction,1,Global.D);
-	wmax        = sum((upper-lower).^2)^(0.5)*0.5;
+	lower     = Global.lower;upper = Global.upper;
+	Direction = [sum((RefPop.decs-repmat(lower,wD,1)).^2,2).^(0.5);sum((repmat(upper,wD,1)-RefPop.decs).^2,2).^(0.5)];
+	Direct    = [(RefPop.decs-repmat(lower,wD,1));(repmat(upper,wD,1)-RefPop.decs)]./repmat(Direction,1,Global.D);
+	wmax      = sum((upper-lower).^2)^(0.5)*0.5;
     
     %% Optimize the weight variables by DE
 	w0 = rand(N,2*wD).*wmax;                                % Initialize the population
@@ -85,7 +85,7 @@ function [Obj,OffSpring] = fitfunc(w0,direct,Global,Reference)
         PopDec  = [repmat(w0(i,1:WD)',1,Global.D).*direct(1:WD,:)+repmat(Global.lower,WD,1);
                       repmat(Global.upper,WD,1) - repmat(w0(i,WD+1:end)',1,Global.D).*direct(WD+1:end,:)];
         OffWPop = INDIVIDUAL(PopDec);
-        OffSpring  = [OffSpring,OffWPop];
+        OffSpring = [OffSpring,OffWPop];
         Obj(i)  = -HV(OffWPop.objs,Reference);
     end
 end

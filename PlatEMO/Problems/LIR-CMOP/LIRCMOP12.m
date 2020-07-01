@@ -61,7 +61,7 @@ classdef LIRCMOP12 < PROBLEM
         end
         %% Sample reference points on Pareto front
         function P = PF(obj,N)
-           P = [1.6794,0.4419;1.3258,0.7955;0.9723,1.1490;
+           P = [1.6794,0.4419;1.3258,0.7955;0.9723,1.1490;2.0320,0.0990;
                 0.6187,1.5026;0.2652,1.8562;0,2.2580;2.5690,0];
         end 
     end
