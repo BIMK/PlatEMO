@@ -1,4 +1,4 @@
-<img src="https://github.com/BIMK/PlatEMO/raw/master/Doc/logo.png" width=180>
+![PlatEMO](https://github.com/BIMK/PlatEMO/raw/master/Doc/logo.png)
 
 # PlatEMO
 [![](https://img.shields.io/badge/Download-Latest-yellow.svg)](https://github.com/BIMK/PlatEMO/archive/master.zip) 
