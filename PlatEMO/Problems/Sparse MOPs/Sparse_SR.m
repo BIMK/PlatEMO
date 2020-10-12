@@ -2,7 +2,7 @@ classdef Sparse_SR < PROBLEM
 % <problem> <Sparse MOP>
 % The sparse signal reconstruction problem
 % lenSig   --- 1024 --- Length of signal 
-% lenObs   ---  480 --- Number of observations 
+% lenObs   ---  480 --- Number of observations
 % sparsity ---  260 --- Sparsity  
 % sigma    ---    0 --- Noise level
 
