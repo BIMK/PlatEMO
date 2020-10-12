@@ -1,5 +1,5 @@
 function MESMO(Global)
-% <algorithm> <M>
+% <algorithm> <GA> <expensive!>
 % Max-value Entropy Search for Multi-Objective Bayesian Optimization
 % nK             --- 10 --- Number of samples to approximate the MES
 % learn_interval ---  5 --- Iterations to update hyperparameters 
