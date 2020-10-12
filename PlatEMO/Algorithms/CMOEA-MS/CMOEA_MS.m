@@ -1,5 +1,5 @@
 function CMOEA_MS(Global)
-% <algorithm> <C>
+% <algorithm> <GA> <DE> <constraint!>
 % Constrained multiobjective evolutionary algorithm with multiple stages
 % type   ---   1 --- Type of operator (1. GA 2. DE)
 % lambda --- 0.5 --- Parameter for determining the current stage
