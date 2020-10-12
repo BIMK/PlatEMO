@@ -1,5 +1,5 @@
 function [Population,Dec,Mask,FrontNo,CrowdDis,sRatio] = EnvironmentalSelection(Population,Dec,Mask,N,len,num)
-% The environmental selection of MOEADSR
+% The environmental selection of MOEA/PSL
 
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
@@ -37,7 +37,8 @@ function [Population,Dec,Mask,FrontNo,CrowdDis,sRatio] = EnvironmentalSelection(
     success(uni(Next)) = true;
     s1     = sum(success(len+1:len+num));
     s2     = sum(success(len+num+1:end));
-    sRatio = (s1+1)./(s1+s2+1);
+    sRatio = (s1+1e-6)./(s1+s2+1e-6);
+    sRatio = min(max(sRatio,0.1),0.9);
     
     %% Population for next generation
     Population = Population(Next);

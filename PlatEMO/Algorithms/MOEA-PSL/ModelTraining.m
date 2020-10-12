@@ -14,7 +14,7 @@ function [rbm,dae,allZero,allOne] = ModelTraining(Mask,Dec,REAL)
     allZero = all(~Mask,1);
     allOne  = all(Mask,1);
     other   = ~allZero & ~allOne;
-    K       = sum(mean(abs(Mask(:,other).*Dec(:,other))>1e-6,1)>rand());
+    K       = sum(mean(abs(Mask(:,other).*Dec(:,other))>1e-6,1)>rand(1,sum(other)));
     K       = min(max(K,1),size(Mask,1));
     
     %% Train RBM and DAE
