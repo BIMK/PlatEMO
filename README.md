@@ -37,11 +37,9 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 2.8  
+# Release Highlights of PlatEMO 2.9  
 [Release Note can be found here](./Doc/releasenote.md)
-* Add three algorithms for constrained optimization (i.e., CCMO, MOEA/D-DAE, and TiGE-2) and an algorithm for many-objective optimization (i.e., PREA). There are currently 118 algorithms in the platform.
-
-* Fix some minor bugs in the Pareto front sampling methods in LIR-CMOP and MW problems.
+* Add one algorithm for constrained optimization (i.e., CMOEA-MS), one algorithm for large-scale optimization (i.e., DGEA), one algorithm for expensive optimization (i.e., MESMO), and one algorithm for feature selection (i.e., DAEA). There are currently 122 algorithms in the platform.
 
 
 # Features of PlatEMO
