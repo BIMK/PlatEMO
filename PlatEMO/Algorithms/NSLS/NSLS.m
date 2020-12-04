@@ -21,7 +21,7 @@ function NSLS(Global)
 
     %% Optimization
     while Global.NotTermination(Population)
-        Offspring  = Operator(Population,{5555,5555});
+        Offspring  = Operator(Population);
         Population = EnvironmentalSelection([Population,Offspring],Global.N);
     end
 end
