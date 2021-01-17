@@ -23,10 +23,10 @@ function KRVEA(Global)
 
     %% Parameter setting
     [alpha,wmax,mu] = Global.ParameterSet(2,20,5);
-
+    
     %% Generate the reference points and population
     [V0,Global.N] = UniformPoint(Global.N,Global.M);
-	V     = V0;
+    V     = V0;
     NI    = 11*Global.D-1;
     P     = lhsamp(NI,Global.D);
     A2    = INDIVIDUAL(repmat(Global.upper-Global.lower,NI,1).*P+repmat(Global.lower,NI,1));
@@ -65,6 +65,8 @@ function KRVEA(Global)
             index  = KEnvironmentalSelection(PopObj,V,(w/wmax)^alpha);
             PopDec = PopDec(index,:);
             PopObj = PopObj(index,:);
+            % update the values of MSE
+            MSE = MSE(index,:);
             % Adapt referece vectors
             if ~mod(w,ceil(wmax*0.1))
                 V(1:Global.N,:) = V0.*repmat(max(PopObj,[],1)-min(PopObj,[],1),size(V0,1),1);
