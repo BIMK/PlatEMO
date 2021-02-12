@@ -8,8 +8,8 @@
 [![](https://img.shields.io/badge/Linux-Pass-brightgreen.svg)](#PlatEMO)
 [![](https://img.shields.io/badge/MacOS-Pass-red.svg)](#PlatEMO)  
 Evolutionary multi-objective optimization platform
-* 100+ open source evolutionary algorithms
-* 200+ open source multi-objective test problems
+* 150+ open source evolutionary algorithms
+* 300+ open source multi-objective test problems
 * Powerful GUI for performing experiments in parallel
 * Generating results in the format of Excel or LaTeX table by one-click operation
 * State-of-the-art algorithms will be included continuously
@@ -37,9 +37,17 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 2.9  
+# Release Highlights of PlatEMO 3.0
 [Release Note can be found here](./Doc/releasenote.md)
-* Add one algorithm for constrained optimization (i.e., CMOEA-MS), one algorithm for large-scale optimization (i.e., DGEA), one algorithm for expensive optimization (i.e., MESMO), and one algorithm for feature selection (i.e., DAEA). There are currently 122 algorithms in the platform.
+* 20+ algorithms and 100+ problems for single-objective optimization. There are currently 150 algorithms and 339 problems in the platform, including single-objective optimization, multi-objective optimization, many-objective optimization, combinatorial optimization, large-scale optimization, constrained optimization, multimodal optimization, expensive optimization, sparse optimization, and preference optimization.
+
+* A totally new GUI with more powerful functions, which contains a test module, an application module, and an experiment module.
+
+* A novel filter system based on hybrid labels, which facilitates the selection of suitable algorithms for solving different types of problems.
+
+* More convenient interfaces for solving user-defined problems, where no file needs to be written by users.
+
+* A better visualization of populations, where the true Pareto fronts and feasible regions can be shown in the plots.
 
 
 # Features of PlatEMO
