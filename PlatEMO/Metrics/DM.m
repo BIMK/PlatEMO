@@ -1,12 +1,12 @@
-function Score = DM(PopObj,PF)
-% <metric> <max>
+function score = DM(Population,optimum)
+% <max>
 % Metric for diversity
 
 %------------------------------- Reference --------------------------------
 % K. Deb and S. Jain, Running performance metrics for evolutionary
 % multi-objective optimization, KanGAL Report 2002004, 2002.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -14,11 +14,16 @@ function Score = DM(PopObj,PF)
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    fmax  = max(PF,[],1);
-    fmin  = min(PF,[],1);
-    H     = calGrid(PF(:,1:end-1),fmax(1:end-1),fmin(1:end-1),size(PopObj,1));
-    h     = H & calGrid(PopObj(:,1:end-1),fmax(1:end-1),fmin(1:end-1),size(PopObj,1));
-    Score = calM(h,H)./calM(H,H);
+    PopObj = Population.best.objs;
+    if size(PopObj,2) ~= size(optimum,2)
+        score = nan;
+    else
+        fmax  = max(optimum,[],1);
+        fmin  = min(optimum,[],1);
+        H     = calGrid(optimum(:,1:end-1),fmax(1:end-1),fmin(1:end-1),size(PopObj,1));
+        h     = H & calGrid(PopObj(:,1:end-1),fmax(1:end-1),fmin(1:end-1),size(PopObj,1));
+        score = calM(h,H)./calM(H,H);
+    end
 end
 
 function h = calGrid(P,fmax,fmin,div)

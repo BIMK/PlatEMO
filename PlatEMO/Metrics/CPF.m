@@ -1,13 +1,13 @@
-function Score = CPF(PopObj,PF)
-% <metric> <max>
+function score = CPF(Population,optimum)
+% <max>
 % Coverage over Pareto front
 
 %------------------------------- Reference --------------------------------
 % Y. Tian, R. Cheng, X. Zhang, M. Li, and Y. Jin, Diversity assessment of
 % multi-objective evolutionary algorithms: Performance metric and benchmark
-% problems, IEEE Computational Intelligence Magazine, 2019.
+% problems, IEEE Computational Intelligence Magazine, 2019, 14(3): 61-74.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -15,26 +15,27 @@ function Score = CPF(PopObj,PF)
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    if size(PF,1) > 1
-        %% Normalization
-        fmin   = min(PF,[],1);
-        fmax   = max(PF,[],1);
-        PopObj = (PopObj-repmat(fmin,size(PopObj,1),1))./repmat(fmax-fmin,size(PopObj,1),1);
-        PF     = (PF-repmat(fmin,size(PF,1),1))./repmat(fmax-fmin,size(PF,1),1);
-
-        %% Map to the Pareto front
-        [~,Close] = min(pdist2(PopObj,PF),[],2);
-        PopObj    = PF(Close,:);
-
-        %% Calculate the indicator value
-        VPF = Coverage(map(PF,PF),inf);
-        V   = Coverage(map(PopObj,PF),VPF/size(PopObj,1));
-        Score = V./VPF;
+    PopObj = Population.best.objs;
+    if size(PopObj,2) ~= size(optimum,2)
+        score = nan;
+    elseif size(optimum,1) > 1
+        % Normalization
+        fmin    = min(optimum,[],1);
+        fmax    = max(optimum,[],1);
+        PopObj  = (PopObj-repmat(fmin,size(PopObj,1),1))./repmat(fmax-fmin,size(PopObj,1),1);
+        optimum = (optimum-repmat(fmin,size(optimum,1),1))./repmat(fmax-fmin,size(optimum,1),1);
+        % Map to the Pareto front
+        [~,Close] = min(pdist2(PopObj,optimum),[],2);
+        PopObj    = optimum(Close,:);
+        % Calculate the indicator value
+        VPF   = Coverage(map(optimum,optimum),inf);
+        V     = Coverage(map(PopObj,optimum),VPF/size(PopObj,1));
+        score = V./VPF;
     else
         fmin   = min(PopObj,[],1);
         fmax   = max(PopObj,[],1);
         PopObj = (PopObj-repmat(fmin,size(PopObj,1),1))./repmat(fmax-fmin,size(PopObj,1),1);
-        Score  = Coverage(map(PopObj,PopObj),1/size(PopObj,1));
+        score  = Coverage(map(PopObj,PopObj),1/size(PopObj,1));
     end
 end
 
