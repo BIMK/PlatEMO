@@ -8,8 +8,8 @@
 [![](https://img.shields.io/badge/Linux-Pass-brightgreen.svg)](#PlatEMO)
 [![](https://img.shields.io/badge/MacOS-Pass-red.svg)](#PlatEMO)  
 Evolutionary multi-objective optimization platform
-* 100+ open source evolutionary algorithms
-* 200+ open source multi-objective test problems
+* 150+ open source evolutionary algorithms
+* 300+ open source multi-objective test problems
 * Powerful GUI for performing experiments in parallel
 * Generating results in the format of Excel or LaTeX table by one-click operation
 * State-of-the-art algorithms will be included continuously
