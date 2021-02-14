@@ -1,6 +1,6 @@
 classdef IMMOEA_F6 < PROBLEM
 % <multi> <real> <large/none>
-% Benchmark MOP for IM-MOEA
+% Benchmark MOP for testing IM-MOEA
 
 %------------------------------- Reference --------------------------------
 % R. Cheng, Y. Jin, K. Narukawa, and B. Sendhoff, A multiobjective

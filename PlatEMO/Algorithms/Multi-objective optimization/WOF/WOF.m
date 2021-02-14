@@ -1,6 +1,6 @@
 classdef WOF < ALGORITHM
 % <multi> <real> <large/none>
-% Weighted Optimization Framework (WOF) with various internal optimisers and a randomised optimisation mode. 
+% Weighted optimization framework
 % gamma         --- 4    --- Number of groups. Default = 4 
 % groups        --- 2    --- Grouping method, 1 = linear, 2 = ordered, 3 = random. Default = ordered 
 % psi           --- 3    --- Transformation function, 1 = Multiplication, 2 = P-Value, 3 = Interval. Default = Interval

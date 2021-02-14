@@ -1,6 +1,6 @@
 classdef SACCEAMII < ALGORITHM
 % <single> <real> <expensive>
-% SACC with RDG2 for expensive optimization
+% Surrogate-assisted cooperative co-evolutionary algorithm of Minamo
 % s --- 50 --- Number of subcomponents of separable variables
 
 %------------------------------- Reference --------------------------------

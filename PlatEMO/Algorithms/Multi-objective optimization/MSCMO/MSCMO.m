@@ -1,12 +1,12 @@
 classdef MSCMO < ALGORITHM
 % <multi> <real/binary/permutation> <constrained>
-% MSCMO
+% Multi-stage constrained multi-objective evolutionary algorithm
 % type --- 1 --- Type of operator (1. GA 2. DE)
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, T. Zhang, J. Xiao, X. Zhang, and Y. Jin, A coevolutionary
-% framework for constrained multi-objective optimization problems, IEEE
-% Transactions on Evolutionary Computation, 2020.
+% H. Ma, H. Wei, Y. Tian, R. Cheng, and X. Zhang, A multi-stage
+% evolutionary algorithm for multi-objective optimization with complex
+% constraints, Information Sciences, 2021.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

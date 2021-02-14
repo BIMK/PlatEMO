@@ -1,6 +1,6 @@
 classdef KP < PROBLEM
 % <single> <binary> <large/none> <constrained>
-% Knapsack problem
+% The knapsack problem
 
 %------------------------------- Reference --------------------------------
 % E. Zitzler and L. Thiele, Multiobjective evolutionary algorithms: A

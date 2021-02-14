@@ -1,6 +1,6 @@
 classdef SACOSO < ALGORITHM
 % <single> <real> <large/none> <expensive>
-% Surrogate-assisted Cooperative Swarm Optimization
+% Surrogate-assisted cooperative swarm optimization
 % NFES ---  30 --- Population size of FES-assisted PSO
 % NRBF --- 200 --- Population size of RBFNN-assisted PSO
 

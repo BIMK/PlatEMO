@@ -1,6 +1,6 @@
 classdef RMMEDA_F8 < PROBLEM
 % <multi> <real> <large/none>
-% Benchmark MOP for RM-MEDA
+% Benchmark MOP for testing RM-MEDA
 
 %------------------------------- Reference --------------------------------
 % Q. Zhang, A. Zhou, and Y. Jin, RM-MEDA: A regularity model-based

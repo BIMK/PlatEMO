@@ -1,6 +1,6 @@
 classdef MOEADDE_F5 < PROBLEM
 % <multi> <real> <large/none>
-% Benchmark MOP for MOEA/D-DE
+% Benchmark MOP for testing MOEA/D-DE
 
 %------------------------------- Reference --------------------------------
 % H. Li and Q. Zhang, Multiobjective optimization problems with complicated
