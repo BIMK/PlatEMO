@@ -1,6 +1,6 @@
 classdef TSP < PROBLEM
 % <single> <permutation> <large/none>
-% Traveling salesman problem
+% The traveling salesman problem
 
 %------------------------------- Reference --------------------------------
 % D. Corne and J. Knowles, Techniques for highly multiobjective

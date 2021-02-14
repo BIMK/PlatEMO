@@ -1,6 +1,6 @@
 classdef DCNSGAIII < ALGORITHM
 % <multi/many> <real/binary/permutation> <constrained>
-% DCNSGA-III
+% Dynamic constrained NSGA-III
 % cp --- 5 --- Decrease trend of the dynamic constraint boundary
 
 %------------------------------- Reference --------------------------------

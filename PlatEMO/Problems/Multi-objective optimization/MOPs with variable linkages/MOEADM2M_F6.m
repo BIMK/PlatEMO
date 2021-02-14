@@ -1,6 +1,6 @@
 classdef MOEADM2M_F6 < PROBLEM
 % <multi> <real> <large/none>
-% Benchmark MOP for MOEA/D-M2M
+% Benchmark MOP for testing MOEA/D-M2M
 
 %------------------------------- Reference --------------------------------
 % H. Liu, F. Gu, and Q. Zhang, Decomposition of a multiobjective

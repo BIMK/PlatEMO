@@ -1,6 +1,6 @@
 classdef Sparse_NN < PROBLEM
 % <multi> <real> <large/none> <expensive/none> <sparse/none>
-% The neural network training problem (only for bi-category classification)
+% The neural network training problem
 % dataNo  ---  1 --- Number of dataset
 % nHidden --- 20 --- Size of hidden layer
 
