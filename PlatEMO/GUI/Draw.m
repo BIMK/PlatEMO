@@ -34,7 +34,7 @@ function currentAxes = Draw(Data,varargin)
         ax = Data;
         cla(ax);
     elseif ~isempty(Data)
-        if isempty(ax)
+        if isempty(ax) || ~isgraphics(ax)
             ax = gca;
         end
         if size(Data,2) == 1
