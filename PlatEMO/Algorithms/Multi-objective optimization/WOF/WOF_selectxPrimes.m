@@ -59,6 +59,8 @@ function weightIndList = WOF_selectxPrimes(input,amount, method)
 %  Last Update of this code: 06.04.2020
 %  A newer version of this algorithm may be available. Please contact the author 
 %  or see http://www.ci.ovgu.de/Research/Codes.html. 
+%
+% The files may have been modified in Feb 2021 by the authors of the Platemo framework to work with the Platemo 3.0 release. 
 % ----------------------------------------------------------------------- 
 
     
@@ -85,7 +87,7 @@ function weightIndList = WOF_selectxPrimes(input,amount, method)
             end
         case 2 %tournament selection by front and CD
             FrontNo    = NDSort(input.objs,inf);
-            CrowdDis   = WOF_CrowdingDistance(input.objs,FrontNo);
+            CrowdDis   = CrowdingDistance(input.objs,FrontNo);
             weightIndList = input(TournamentSelection(2,amount,FrontNo,-CrowdDis));
         case 3 % first m+1 by reference lines + fill with random
             objValues = input.objs;

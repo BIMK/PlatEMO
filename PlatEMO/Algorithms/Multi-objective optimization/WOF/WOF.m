@@ -9,7 +9,7 @@ classdef WOF < ALGORITHM
 % q             ---      --- The number of chosen solutions to do weight optimisation. If no value is specified, the default value is M+1
 % delta         --- 0.5  --- The fraction of function evaluations to use for the alternating weight-optimisation phase. Default = 0.5
 % optimiser     --- 1    --- Internal optimisation algorithm. 1 = SMPSO, 2 = MOEAD, 3 = NSGAII, 4 = NSGAIII. Default = SMPSO. Only used if the randomOptimisers parameter is set to 0.
-% randomOptimisers --- 1 --- 1 = use random optimisers () in first phase (defined by delta), and NSGAIII in second phase. 0 = use only specified optimiser. Default = 1 
+% randomOptimisers --- 1 --- 1 = use random optimisers (SMPSO,MOEAD,NSGAII,NSGAIII) in first phase (defined by delta), and NSGAIII in second phase. 0 = use only specified optimiser. Default = 1 
 
 %------------------------------- Reference --------------------------------
 % H. Zille, H. Ishibuchi, S. Mostaghim, and Y. Nojima, A framework for
@@ -66,6 +66,8 @@ classdef WOF < ALGORITHM
 %  Last Update of this code: 06.04.2020
 %  A newer version of this algorithm may be available. Please contact the author 
 %  or see http://www.ci.ovgu.de/Research/Codes.html. 
+%
+% The files may have been modified in Feb 2021 by the authors of the Platemo framework to work with the Platemo 3.0 release. 
 % ----------------------------------------------------------------------- 
 
     methods
@@ -255,7 +257,7 @@ function Population = WOFfillPopulation(input, Global)
     if theCurrentPopulationSize < Global.N
         amountToFill    = Global.N-theCurrentPopulationSize;
         FrontNo         = NDSort(input.objs,inf);
-        CrowdDis        = WOF_CrowdingDistance(input.objs,FrontNo);
+        CrowdDis        = CrowdingDistance(input.objs,FrontNo);
         MatingPool      = TournamentSelection(2,amountToFill+1,FrontNo,-CrowdDis);
         Offspring       = OperatorGA(input(MatingPool));
         Population      = [Population,Offspring(1:amountToFill)];
