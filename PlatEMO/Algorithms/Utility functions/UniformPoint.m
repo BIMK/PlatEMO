@@ -7,11 +7,17 @@ function [W,N] = UniformPoint(N,M,method)
 %   points L may be slightly smaller than the predefined size N due to the
 %   need for uniformity.
 %
+%   [W,L] = UniformPoint(N,M,'ILD') returns approximately N uniformly
+%   distributed points with M objectives on the unit hyperplane via the
+%   incremental lattice design. Note that the number of sampled points L
+%   may be slightly larger than the predefined size N due to the need for
+%   uniformity.
+%
 %   W = UniformPoint(N,M,'MUD') returns exactly N uniformly distributed
 %   points with M objectives on the unit hyperplane via the mixture uniform
 %   design method.
 %
-%   W = UniformPoint(N,M,'grid') returns approximately N uniformly
+%   [W,L] = UniformPoint(N,M,'grid') returns approximately N uniformly
 %   distributed points with M objectives in the unit hypercube via the grid
 %   sampling. Note that the number of sampled points L may be slighly
 %   larger than the predefined size N due to the need for uniformity.
@@ -22,15 +28,19 @@ function [W,N] = UniformPoint(N,M,method)
 %
 %   Example:
 %       [W,N] = UniformPoint(275,10)
+%       [W,N] = UniformPoint(286,10,'ILD')
 %       [W,N] = UniformPoint(102,10,'MUD')
 %       [W,N] = UniformPoint(1000,3,'grid')
 %       [W,N] = UniformPoint(103,10,'Latin')
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, X. Xiang, X. Zhang, R. Cheng, and Y. Jin, Sampling reference
+% [1] Y. Tian, X. Xiang, X. Zhang, R. Cheng, and Y. Jin, Sampling reference
 % points on the Pareto fronts of benchmark multi-objective optimization
 % problems, Proceedings of the 2018 IEEE Congress on Evolutionary
 % Computation, 2018.
+% [2] T. Takagi, K. Takadama, and H. Sato, Incremental lattice design of
+% weight vector set, Proceedings of the 2020 Genetic and Evolutionary
+% Computation Conference Companion, 2020, 1486-1494.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -64,6 +74,21 @@ function [W,N] = NBI(N,M)
             W  = [W;W2/2+1/(2*M)];
         end
     end
+    W = max(W,1e-6);
+    N = size(W,1);
+end
+
+function [W,N] = ILD(N,M)
+    I = M * eye(M);
+    W = zeros(1,M);
+    edgeW = W;
+    while size(W) < N
+        edgeW = repmat(edgeW,M,1) + repelem(I,size(edgeW,1),1);
+        edgeW = unique(edgeW,'rows');
+        edgeW(min(edgeW,[],2)~=0,:) = [];
+        W = [W+1;edgeW];
+    end
+    W = W./sum(W,2);
     W = max(W,1e-6);
     N = size(W,1);
 end
