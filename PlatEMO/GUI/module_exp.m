@@ -202,8 +202,9 @@ classdef module_exp < handle
             else
                 try
                     % Check the validity of settings
-                    ALG  = [];
-                    PRO  = [];
+                    isParallel = obj.app.checkC.Value;
+                    ALG = [];
+                    PRO = [];
                     assert(~isempty(obj.app.listB.items),'No algorithm is selected.');
                     type = [obj.app.listB.items.type];
                     assert(any(type>0),'No algorithm is selected.');
@@ -213,7 +214,6 @@ classdef module_exp < handle
                     SorM     = [allLabel(2),allLabel(3)||allLabel(4)];
                     assert(SorM(1)~=SorM(2),'Cannot perform single- and multi-objective optimization simultaneously.');
                     % Generate the ALGORITHM and PROBLEM object
-                    folder = fileparts(obj.app.editA(3).Value);
                     for i = 1 : length(type)
                         item = obj.app.listB.items(i);
                         para = cell(1,length(item.edit));
@@ -224,10 +224,10 @@ classdef module_exp < handle
                             end
                         end
                         if type(i) > 0
-                            if ~obj.app.checkC.Value
+                            if ~isParallel
                                 ALG = [ALG,feval(item.title.Text,'parameter',para,'save',obj.app.editA(2).Value,'outputFcn',@obj.outputFcn)];
                             else
-                                ALG = [ALG,feval(item.title.Text,'parameter',para,'save',obj.app.editA(2).Value,'outputFcn',@(a,p)outputFcn2(folder,a,p))];
+                                ALG = [ALG,feval(item.title.Text,'parameter',para,'save',obj.app.editA(2).Value,'outputFcn',@(~,~)[])];
                             end
                         else
                             len = cellfun(@length,para);
@@ -270,76 +270,59 @@ classdef module_exp < handle
                 obj.app.dropC(1+SorM(1)).Visible = 'on';
                 obj.app.dropC(2-SorM(1)).Visible = 'off';
                 drawnow();
-                % Execute the algorithm
+                % Perform the experiment
                 for p = 1 : length(PRO)
                     for a = 1 : length(ALG)
-                        fileExist = false(1,size(obj.data.result,3));
-                        Future    = [];
-                        while ~all(fileExist)
-                            for r = find(~fileExist)    % Load existing results
-                                filename = fullfile(obj.data.folder,class(ALG(a)),sprintf('%s_%s_M%d_D%d_%d.mat',class(ALG(a)),class(PRO(p)),PRO(p).M,PRO(p).D,r));
-                                if isfile(filename)
-                                    success = false;
-                                    for nTry = 1 : 10
-                                        try
-                                            filedata = load(filename,'-mat','result','metric');
-                                            assert(all(isfield(filedata,{'result','metric'}))&&iscell(filedata.result)&&isa(filedata.result{end},'SOLUTION'));
-                                            success = true;
-                                            break;
-                                        catch
-                                        end
-                                    end
-                                    if success
-                                        obj.data.result{p,a,r} = filedata.result;
-                                        obj.data.metric{p,a,r} = filedata.metric;
-                                        fileExist(r) = true;
-                                    else
-                                        delete(filename); 
+                        % Load existing results
+                        arrayfun(@(r)obj.ResultLoad(p,a,r),1:size(obj.data.result,3));
+                        obj.TableUpdate([],[],p);
+                        runIndex = find(reshape(cellfun(@isempty,obj.data.result(p,a,:)),1,[]));
+                        % Run algorithms in sequence
+                        if ~isempty(runIndex) && ~isParallel
+                            try
+                                for r = runIndex
+                                    ALG(a).Solve(PRO(p));
+                                    obj.ResultSave(p,a,r,ALG(a).result,ALG(a).metric);
+                                    obj.ResultLoad(p,a,r);
+                                    obj.TableUpdate([],[],p);
+                                    if strcmp(obj.app.buttonC(2).Enable,'off')
+                                        return;
                                     end
                                 end
+                            catch err
+                                uialert(obj.GUI.app.figure,'The algorithm terminates unexpectedly, please refer to the command window for details.','Error');
+                                obj.cb_stop();
+                                rethrow(err);
                             end
-                            obj.TableUpdate([],[],p);
-                            if ~all(fileExist)
-                                if ~obj.app.checkC.Value    % Execute algorithms in sequence
-                                    try
-                                        ALG(a).Solve(PRO(p));
-                                        if strcmp(obj.app.buttonC(2).Enable,'off')
-                                            return;
-                                        end
-                                    catch err
-                                        uialert(obj.GUI.app.figure,'The algorithm terminates unexpectedly, please refer to the command window for details.','Error');
-                                        obj.cb_stop();
-                                        rethrow(err);
-                                    end
-                                else                        % Execute algorithms in parallel
-                                    try
-                                        Future = [Future,arrayfun(@(s)parfeval(@(A,P)A.Solve(P),0,ALG(a),PRO(p)),1:sum(~fileExist)-length(Future))];
-                                        while true
-                                            drawnow();
-                                            if strcmp(obj.app.buttonC(2).Enable,'off')
-                                                cancel(Future);
-                                                return;
-                                            end
-                                            if strcmp(obj.app.buttonC(1).Text,'Continue')
-                                                waitfor(obj.app.buttonC(1),'Text');
-                                            end
-                                            if strcmp(obj.app.buttonC(2).Enable,'off')
-                                                cancel(Future);
-                                                return;
-                                            end
-                                            index = fetchNext(Future,0.1);
-                                            if ~isempty(index)
-                                                Future(index) = [];
-                                                break;
-                                            end
-                                        end
-                                    catch err
+                        % Run algorithms in parallel
+                        elseif ~isempty(runIndex)
+                            try
+                                Future = arrayfun(@(s)parfeval(@parallelFcn,2,ALG(a),PRO(p)),runIndex);
+                                while ~all([Future.Read])
+                                    drawnow();
+                                    if strcmp(obj.app.buttonC(2).Enable,'off')
                                         cancel(Future);
-                                        uialert(obj.GUI.app.figure,'The algorithm terminates unexpectedly, please refer to the command window for details.','Error');
-                                        obj.cb_stop();
-                                        rethrow(err);
+                                        return;
+                                    end
+                                    if strcmp(obj.app.buttonC(1).Text,'Continue')
+                                        waitfor(obj.app.buttonC(1),'Text');
+                                    end
+                                    if strcmp(obj.app.buttonC(2).Enable,'off')
+                                        cancel(Future);
+                                        return;
+                                    end
+                                    [r,result,metric] = fetchNext(Future,0.01);
+                                    if ~isempty(r)
+                                        obj.ResultSave(p,a,runIndex(r),result,metric);
+                                        obj.ResultLoad(p,a,runIndex(r));
+                                        obj.TableUpdate([],[],p);
                                     end
                                 end
+                            catch err
+                                cancel(Future);
+                                uialert(obj.GUI.app.figure,'The algorithm terminates unexpectedly, please refer to the command window for details.','Error');
+                                obj.cb_stop();
+                                rethrow(err);
                             end
                         end
                     end
@@ -366,7 +349,6 @@ classdef module_exp < handle
                 waitfor(obj.app.buttonC(1),'Text');
             end
             assert(strcmp(obj.app.buttonC(2).Enable,'on'),'PlatEMO:Termination','');
-            outputFcn2(obj.data.folder,Algorithm,Problem);
         end
         %% Show the specified columns
         function TableUpdateColumn(obj,~,~)
@@ -519,6 +501,23 @@ classdef module_exp < handle
                 end
             end
         end
+        %% Load the result file
+        function ResultLoad(obj,p,a,r)
+            try
+                filename = fullfile(obj.data.folder,class(obj.data.ALG(a)),sprintf('%s_%s_M%d_D%d_%d.mat',class(obj.data.ALG(a)),class(obj.data.PRO(p)),obj.data.PRO(p).M,obj.data.PRO(p).D,r));
+                load(filename,'-mat','result','metric');
+                obj.data.result{p,a,r} = result;
+                obj.data.metric{p,a,r} = metric;
+            catch
+            end
+        end
+        %% Save the result file
+        function ResultSave(obj,p,a,r,result,metric)
+            folder   = fullfile(obj.data.folder,class(obj.data.ALG(a)));
+            [~,~]    = mkdir(folder);
+            filename = fullfile(folder,sprintf('%s_%s_M%d_D%d_%d.mat',class(obj.data.ALG(a)),class(obj.data.PRO(p)),obj.data.PRO(p).M,obj.data.PRO(p).D,r));
+            save(filename,'result','metric');
+        end
         %% Get the metric value 
         function score = GetMetricValue(obj,p,a,metricName,showAll)
             metricName = strrep(metricName,' ','');
@@ -637,20 +636,11 @@ function score = Feasiblerate(Population,~)
     score = mean(all(Population.cons<=0,2));
 end
 
-%% Output function for parallelization
-function outputFcn2(folder,Algorithm,Problem)
-    if Problem.FE >= Problem.maxFE
-        folder = fullfile(folder,class(Algorithm));
-        [~,~]  = mkdir(folder);
-        file   = fullfile(folder,sprintf('%s_%s_M%d_D%d_',class(Algorithm),class(Problem),Problem.M,Problem.D));
-        runNo  = 1;
-        while exist([file,num2str(runNo),'.mat'],'file') == 2
-            runNo = runNo + 1;
-        end
-        result = Algorithm.result;
-        metric = Algorithm.metric;
-        save([file,num2str(runNo),'.mat'],'result','metric');
-    end
+%% Function for parallelization
+function [result,metric] = parallelFcn(Algorithm,Problem)
+    Algorithm.Solve(Problem);
+    result = Algorithm.result;
+    metric = Algorithm.metric;
 end
 
 %% Save the table to Excel
