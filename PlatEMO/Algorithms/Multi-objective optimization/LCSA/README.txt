@@ -68,7 +68,7 @@
 	- LCSA/LCSA_nsga2/LCSA_NSGAIICrowdingDistance.m
 	- LCSA/LCSA_nsga2/LCSA_NSGAII.m
 
-
+The files may have been modified in Feb 2021 by the authors of the Platemo framework to work with the Platemo 3.0 release.   
   
   
   

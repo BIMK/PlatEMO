@@ -42,6 +42,8 @@ function Pbest = LCSA_SMPSOUpdatePbest(Pbest,Population)
 %  Last Update of this code: 06.04.2020
 %  A newer version of this algorithm may be available. Please contact the author 
 %  or see http://www.ci.ovgu.de/Research/Codes.html. 
+%
+% The files may have been modified in Feb 2021 by the authors of the Platemo framework to work with the Platemo 3.0 release. 
 % ----------------------------------------------------------------------- 
 % This file is derived from its original version containied in the PlatEMO 
 % framework. The original copyright disclaimer can be found below. 

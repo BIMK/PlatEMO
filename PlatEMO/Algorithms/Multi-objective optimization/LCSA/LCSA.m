@@ -1,5 +1,5 @@
 classdef LCSA < ALGORITHM
-% <multi> <real> <large/none>
+% <multi/many> <real> <large/none>
 % Linear combination-based search algorithm
 % optimiser --- 3 --- The optimisation method. 1 = SMPSO, 2 = NSGA-II, 3 = NSGA-III. Default = NSGA-III
 
@@ -50,6 +50,8 @@ classdef LCSA < ALGORITHM
 %  Last Update of this code: 06.04.2020
 %  A newer version of this algorithm may be available. Please contact the author 
 %  or see http://www.ci.ovgu.de/Research/Codes.html. 
+%
+% The files may have been modified in Feb 2021 by the authors of the Platemo framework to work with the Platemo 3.0 release. 
 % ----------------------------------------------------------------------- 
 
     methods

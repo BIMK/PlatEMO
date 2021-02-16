@@ -42,6 +42,8 @@ function iterations = LCSA_getNumberOfGenerationsForCoefficientOptimisation(maxE
 %  Last Update of this code: 06.04.2020
 %  A newer version of this algorithm may be available. Please contact the author 
 %  or see http://www.ci.ovgu.de/Research/Codes.html. 
+%
+% The files may have been modified in Feb 2021 by the authors of the Platemo framework to work with the Platemo 3.0 release. 
 % ----------------------------------------------------------------------- 
 
     iterations = 30;
