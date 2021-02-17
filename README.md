@@ -1,13 +1,20 @@
-<img src="https://wx1.sinaimg.cn/mw690/00752cx4ly1giwaot2hg8j30u00uzmya.jpg" width=256 height=256>
+<div><img src="https://wx1.sinaimg.cn/mw690/00752cx4ly1giwaot2hg8j30u00uzmya.jpg" width=256></div>
 
-# PlatEMO
+#
 [![](https://img.shields.io/badge/Download-Latest-yellow.svg)](https://github.com/BIMK/PlatEMO/archive/master.zip) 
 [![](https://img.shields.io/github/release/BIMK/PlatEMO.svg)](https://github.com/BIMK/PlatEMO/releases/)
 [![](https://img.shields.io/badge/Matlab-%3E%3D%202014a%20-blue.svg)](#PlatEMO)  
 [![](https://img.shields.io/badge/Windows-Pass-brightgreen.svg)](#PlatEMO)
 [![](https://img.shields.io/badge/Linux-Pass-brightgreen.svg)](#PlatEMO)
 [![](https://img.shields.io/badge/MacOS-Pass-red.svg)](#PlatEMO)  
-Evolutionary multi-objective optimization platform
+<b>Evolutionary multi-objective optimization platform</b>
+
+Developed by BIMK(Institute of Bioinspired Intelligence and Mining Knowledge) of Anhui University and NICE(Nature Inspired Computing and Engineering Group) Group of University of Surrey
+<div>
+<img src="https://wx2.sinaimg.cn/mw690/00752cx4ly1gnpnfh0i4yj30m80m83zx.jpg" width=160>
+<img src="https://wx2.sinaimg.cn/mw690/00752cx4ly1gnpnfgz0ulj30px08n74t.jpg" height=140>
+</div>
+
 * 150+ open source evolutionary algorithms
 * 300+ open source multi-objective test problems
 * Powerful GUI for performing experiments in parallel
