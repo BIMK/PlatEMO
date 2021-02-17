@@ -6,17 +6,16 @@
 [![](https://img.shields.io/badge/Matlab-%3E%3D%202014a%20-blue.svg)](#PlatEMO)  
 [![](https://img.shields.io/badge/Windows-Pass-brightgreen.svg)](#PlatEMO)
 [![](https://img.shields.io/badge/Linux-Pass-brightgreen.svg)](#PlatEMO)
-[![](https://img.shields.io/badge/MacOS-Pass-red.svg)](#PlatEMO)  
-<b>Evolutionary multi-objective optimization platform</b>
-
-Developed by BIMK(Institute of Bioinspired Intelligence and Mining Knowledge) of Anhui University and NICE(Nature Inspired Computing and Engineering Group) Group of University of Surrey
+[![](https://img.shields.io/badge/MacOS-Pass-red.svg)](#PlatEMO)
+<h3>Evolutionary multi-objective optimization platform</h3>
+Developed by BIMK (Institute of Bioinspired Intelligence and Mining Knowledge) of Anhui University and NICE (Nature Inspired Computing and Engineering Group) of University of Surrey
 <div>
 <img src="https://wx2.sinaimg.cn/mw690/00752cx4ly1gnpnfh0i4yj30m80m83zx.jpg" width=160>
 <img src="https://wx2.sinaimg.cn/mw690/00752cx4ly1gnpnfgz0ulj30px08n74t.jpg" height=140>
 </div>
 
 * 150+ open source evolutionary algorithms
-* 300+ open source multi-objective test problems
+* 300+ open source benchmark problems
 * Powerful GUI for performing experiments in parallel
 * Generating results in the format of Excel or LaTeX table by one-click operation
 * State-of-the-art algorithms will be included continuously
