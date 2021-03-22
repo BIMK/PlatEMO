@@ -5,8 +5,8 @@ classdef dMOPSO < ALGORITHM
 
 %------------------------------- Reference --------------------------------
 % S. Z. Martinez and C. A. Coello Coello, A multi-objective particle swarm
-% optimizer based on decomposition, Proceedings of the 13th Annual
-% Conference on Genetic and Evolutionary Computation, 2011, 69-76.
+% optimizer based on decomposition, Proceedings of the Annual Conference on
+% Genetic and Evolutionary Computation, 2011, 69-76.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

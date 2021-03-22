@@ -6,7 +6,7 @@ classdef MOTSP < PROBLEM
 %------------------------------- Reference --------------------------------
 % D. Corne and J. Knowles, Techniques for highly multiobjective
 % optimisation: some nondominated points are better than others,
-% Proceedings of the 9th Annual Conference on Genetic and Evolutionary
+% Proceedings of the Annual Conference on Genetic and Evolutionary
 % Computation, 2007, 773-780.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for

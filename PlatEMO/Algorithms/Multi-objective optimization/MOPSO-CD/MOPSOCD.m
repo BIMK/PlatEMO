@@ -4,7 +4,7 @@ classdef MOPSOCD < ALGORITHM
 
 %------------------------------- Reference --------------------------------
 % C. R. Raquel and P. C. Naval Jr, An effective use of crowding distance in
-% multiobjective particle swarm optimization, Proceedings of the 7th Annual
+% multiobjective particle swarm optimization, Proceedings of the Annual
 % Conference on Genetic and Evolutionary Computation, 2005, 257-264.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for

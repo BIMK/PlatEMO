@@ -32,30 +32,11 @@ classdef CEC2013_F3 < PROBLEM
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)
-            PopObj = Ackley(Tdiag(Tasy(Tosz(PopDec-repmat(obj.Xopt,size(PopDec,1),1)),0.2),10));
+            PopObj = Ackley(PopDec-repmat(obj.Xopt,size(PopDec,1),1));
         end
     end
 end
 
 function F = Ackley(X)
     F = -20.*exp(-0.2.*sqrt(mean(X.^2,2))) - exp(mean(cos(2*pi*X),2)) + 20 + exp(1);
-end
-
-function Z = Tosz(X)
-    X1 = zeros(size(X));
-    X1(X~=0) = log(abs(X(X~=0)));
-    C1 = zeros(size(X)) + 5.5;
-    C1(X>0) = 10;
-    C2 = zeros(size(X)) + 3.1;
-    C2(X>0) = 7.9;
-    Z = sign(X).*exp(X1+0.049*(sin(C1.*X1)+sin(C2.*X1)));
-end
-
-function Z = Tasy(X,beta)
-    Z = X.^(1+repmat(beta*linspace(0,1,size(X,2)),size(X,1),1).*sqrt(X));
-    Z(X<=0) = X(X<=0);
-end
-
-function Z = Tdiag(X,alpha)
-    Z = X.*repmat(sqrt(alpha).^linspace(0,1,size(X,2)),size(X,1),1);
 end

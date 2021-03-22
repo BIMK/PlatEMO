@@ -7,8 +7,8 @@ classdef IMODE < ALGORITHM
 %------------------------------- Reference --------------------------------
 % K. M. Sallam, S. M. Elsayed, R. K. Chakrabortty, and M. J. Ryan, Improved
 % multi-operator differential evolution algorithm for solving unconstrained
-% problems, Proceedings of the 2020 IEEE Congress on Evolutionary
-% Computation, 2020.
+% problems, Proceedings of the IEEE Congress on Evolutionary Computation,
+% 2020.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

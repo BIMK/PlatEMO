@@ -6,7 +6,7 @@ classdef MyODEMR < ALGORITHM
 %------------------------------- Reference --------------------------------
 % R. Denysiuk, L. Costa, and I. E. Santo, Many-objective optimization using
 % differential evolution with variable-wise mutation restriction,
-% Proceedings of the 15th Annual Conference on Genetic and Evolutionary
+% Proceedings of the Annual Conference on Genetic and Evolutionary
 % Computation, 2013, 591-598.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for

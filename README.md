@@ -3,7 +3,7 @@
 #
 [![](https://img.shields.io/badge/Download-Latest-yellow.svg)](https://github.com/BIMK/PlatEMO/archive/master.zip) 
 [![](https://img.shields.io/github/release/BIMK/PlatEMO.svg)](https://github.com/BIMK/PlatEMO/releases/)
-[![](https://img.shields.io/badge/Matlab-%3E%3D%202014a%20-blue.svg)](#PlatEMO)  
+[![](https://img.shields.io/badge/Matlab-%3E%3D%202018a%20-blue.svg)](#PlatEMO)  
 [![](https://img.shields.io/badge/Windows-Pass-brightgreen.svg)](#PlatEMO)
 [![](https://img.shields.io/badge/Linux-Pass-brightgreen.svg)](#PlatEMO)
 [![](https://img.shields.io/badge/MacOS-Pass-red.svg)](#PlatEMO)
@@ -43,17 +43,11 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 3.0
+# Release Highlights of PlatEMO 3.1
 [Release Note can be found here](./Doc/releasenote.md)
-* 20+ algorithms and 100+ problems for single-objective optimization. There are currently 150 algorithms and 339 problems in the platform, including single-objective optimization, multi-objective optimization, many-objective optimization, combinatorial optimization, large-scale optimization, constrained optimization, multimodal optimization, expensive optimization, sparse optimization, and preference optimization.
+* Add two multi-objective optimization algorithms CCGDE3 and NSGA-II+ARSBX and one single-objective optimization algorithm OFA. There are currently 153 algorithms in the platform.
 
-* A totally new GUI with more powerful functions, which contains a test module, an application module, and an experiment module.
-
-* A novel filter system based on hybrid labels, which facilitates the selection of suitable algorithms for solving different types of problems.
-
-* More convenient interfaces for solving user-defined problems, where no file needs to be written by users.
-
-* A better visualization of populations, where the true Pareto fronts and feasible regions can be shown in the plots.
+* Fix some minor bugs in algorithms and the GUI.
 
 
 # Features of PlatEMO

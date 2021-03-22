@@ -5,7 +5,7 @@ classdef PSO < ALGORITHM
 
 %------------------------------- Reference --------------------------------
 % R. Eberhart and J. Kennedy, A new optimizer using particle swarm theory,
-% Proceedings of the 6th International Symposium on Micro Machine and Human
+% Proceedings of the International Symposium on Micro Machine and Human
 % Science, 1995, 39-43.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for

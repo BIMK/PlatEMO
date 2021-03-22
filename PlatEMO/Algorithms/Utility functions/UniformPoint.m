@@ -36,10 +36,10 @@ function [W,N] = UniformPoint(N,M,method)
 %------------------------------- Reference --------------------------------
 % [1] Y. Tian, X. Xiang, X. Zhang, R. Cheng, and Y. Jin, Sampling reference
 % points on the Pareto fronts of benchmark multi-objective optimization
-% problems, Proceedings of the 2018 IEEE Congress on Evolutionary
-% Computation, 2018.
-% [2] T. Takagi, K. Takadama, and H. Sato, Incremental lattice design of
-% weight vector set, Proceedings of the 2020 Genetic and Evolutionary
+% problems, Proceedings of the IEEE Congress on Evolutionary Computation,
+% 2018.
+% [2] T. Takagi, K. Takadama, and H. Sato, Incremental lattice design
+% of weight vector set, Proceedings of the Genetic and Evolutionary
 % Computation Conference Companion, 2020, 1486-1494.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for

@@ -5,7 +5,7 @@ classdef AGEII < ALGORITHM
 
 %------------------------------- Reference --------------------------------
 % M. Wagner and F. Neumann, A fast approximation-guided evolutionary
-% multi-objective algorithm, Proceedings of the 15th Annual Conference on
+% multi-objective algorithm, Proceedings of the Annual Conference on
 % Genetic and Evolutionary Computation, 2013, 687-694.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for

@@ -31,11 +31,11 @@ classdef module_app < handle
             
             % The first panel
             obj.app.grid(1)    = GUI.APP(2,1,uigridlayout(obj.app.maingrid,'RowHeight',{'1x'},'ColumnWidth',{'1x','1x','1.1x','1.1x','1x'},'Padding',[5 5 5 5],'RowSpacing',5,'ColumnSpacing',5,'BackgroundColor',[.95 .95 1]));
-            obj.app.buttonA(1) = GUI.APP(1,1,uibutton(obj.app.grid(1),'Text','+ objective','BackgroundColor','w','Tooltip','Increase the number of objectives','ButtonpushedFcn',{@obj.cb_updateProblem,1}));
-            obj.app.buttonA(2) = GUI.APP(1,2,uibutton(obj.app.grid(1),'Text','- objective','BackgroundColor','w','Tooltip','Decrease the number of objectives','Enable','off','ButtonpushedFcn',{@obj.cb_updateProblem,2}));
-            obj.app.buttonA(3) = GUI.APP(1,3,uibutton(obj.app.grid(1),'Text','+ constraint','BackgroundColor','w','Tooltip','Increase the number of constraints','ButtonpushedFcn',{@obj.cb_updateProblem,3}));
-            obj.app.buttonA(4) = GUI.APP(1,4,uibutton(obj.app.grid(1),'Text','- constraint','BackgroundColor','w','Tooltip','Decrease the number of constraints','ButtonpushedFcn',{@obj.cb_updateProblem,4}));
-            obj.app.buttonA(5) = GUI.APP(1,5,uibutton(obj.app.grid(1),'Text','Validation','BackgroundColor',[.95 .95 1],'Tooltip','Check the validity of the problem','ButtonpushedFcn',@obj.cb_validation));
+            obj.app.buttonA(1) = GUI.APP(1,1,uibutton(obj.app.grid(1),'Text','+ objective','BackgroundColor','w','Tooltip','Increase the number of objectives','Interruptible','off','BusyAction','cancel','ButtonpushedFcn',{@obj.cb_updateProblem,1}));
+            obj.app.buttonA(2) = GUI.APP(1,2,uibutton(obj.app.grid(1),'Text','- objective','BackgroundColor','w','Tooltip','Decrease the number of objectives','Interruptible','off','BusyAction','cancel','Enable','off','ButtonpushedFcn',{@obj.cb_updateProblem,2}));
+            obj.app.buttonA(3) = GUI.APP(1,3,uibutton(obj.app.grid(1),'Text','+ constraint','BackgroundColor','w','Tooltip','Increase the number of constraints','Interruptible','off','BusyAction','cancel','ButtonpushedFcn',{@obj.cb_updateProblem,3}));
+            obj.app.buttonA(4) = GUI.APP(1,4,uibutton(obj.app.grid(1),'Text','- constraint','BackgroundColor','w','Tooltip','Decrease the number of constraints','Interruptible','off','BusyAction','cancel','ButtonpushedFcn',{@obj.cb_updateProblem,4}));
+            obj.app.buttonA(5) = GUI.APP(1,5,uibutton(obj.app.grid(1),'Text','Validation','BackgroundColor',[.95 .95 1],'Tooltip','Check the validity of the problem','Interruptible','off','BusyAction','cancel','ButtonpushedFcn',@obj.cb_validation));
             
             % The second panel
             obj.app.grid(2)    = GUI.APP(3,1,uigridlayout(obj.app.maingrid,'RowHeight',repmat({22},1,15),'ColumnWidth',{75,'1x',25,20},'Padding',[5 10 5 5],'RowSpacing',5,'ColumnSpacing',5,'Scrollable','on','BackgroundColor','w'));
@@ -177,6 +177,7 @@ classdef module_app < handle
         end
         %% Update the objective and constraint functions
         function cb_updateProblem(obj,~,~,index)
+            k = 0;
             switch index
                 case 1
                     item.label  = GUI.APP(length(obj.pro)+13,1,uilabel(obj.app.grid(2),'Text',sprintf('f%d(x,data) =',length(obj.pro)+1),'HorizontalAlignment','right'));
@@ -185,26 +186,30 @@ classdef module_app < handle
                     obj.pro     = [obj.pro,item];
                     k = 1;
                 case 2
-                    delete(obj.pro(end).label);
-                    delete(obj.pro(end).edit);
-                    delete(obj.pro(end).button);
-                    obj.pro(end) = [];
-                    k = -1;
+                    if length(obj.pro) > 1
+                        delete(obj.pro(end).label);
+                        delete(obj.pro(end).edit);
+                        delete(obj.pro(end).button);
+                        obj.pro(end) = [];
+                        k = -1;
+                    end
                 case 3
                     item.labelA = GUI.APP(length(obj.pro)+14+length(obj.con),1,uilabel(obj.app.grid(2),'Text',sprintf('g%d(x,data) =',length(obj.con)+1),'HorizontalAlignment','right'));
                     item.edit   = GUI.APP(length(obj.pro)+14+length(obj.con),2,uieditfield(obj.app.grid(2),'Value','mean(x)','Tooltip','Constraint function to be satisfied'));
                     item.labelB = GUI.APP(length(obj.pro)+14+length(obj.con),3,uilabel(obj.app.grid(2),'Text','<= 0'));
                     item.button = GUI.APP(length(obj.pro)+14+length(obj.con),4,uibutton(obj.app.grid(2),'Text','...','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,item.edit,'*.m'}));
                     obj.con     = [obj.con,item];
-                    k = 0;
                 case 4
-                    delete(obj.con(end).labelA);
-                    delete(obj.con(end).edit);
-                    delete(obj.con(end).labelB);
-                    delete(obj.con(end).button);
-                    obj.con(end) = [];
-                    k = 0;
+                    if ~isempty(obj.con)
+                        delete(obj.con(end).labelA);
+                        delete(obj.con(end).edit);
+                        delete(obj.con(end).labelB);
+                        delete(obj.con(end).button);
+                        obj.con(end) = [];
+                    end
             end
+            obj.app.buttonA(2).Enable = length(obj.pro) > 1;
+            obj.app.buttonA(4).Enable = ~isempty(obj.con);
             if k ~= 0
                 obj.app.titleB(7).Layout.Row = obj.app.titleB(7).Layout.Row + k;
                 for i = 1 : length(obj.con)
@@ -215,8 +220,6 @@ classdef module_app < handle
                 end
             end
             obj.app.grid(2).RowHeight = repmat({22},1,13+length(obj.pro)+length(obj.con));
-            obj.app.buttonA(2).Enable = length(obj.pro) > 1;
-            obj.app.buttonA(4).Enable = ~isempty(obj.con);
             if isempty(obj.con)
                 obj.app.titleB(7).Text = 'No constraint';
             else
