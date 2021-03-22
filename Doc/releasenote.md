@@ -1,3 +1,9 @@
+# Release Highlights of PlatEMO 3.1
+
+* Add two multi-objective optimization algorithms CCGDE3 and NSGA-II+ARSBX and one single-objective optimization algorithm OFA. There are currently 153 algorithms in the platform.
+
+* Fix some minor bugs in algorithms and the GUI.
+
 # Release Highlights of PlatEMO 3.0
 
 * 20+ algorithms and 100+ problems for single-objective optimization. There are currently 150 algorithms and 339 problems in the platform, including single-objective optimization, multi-objective optimization, many-objective optimization, combinatorial optimization, large-scale optimization, constrained optimization, multimodal optimization, expensive optimization, sparse optimization, and preference optimization.
