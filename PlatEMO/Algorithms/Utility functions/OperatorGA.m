@@ -24,7 +24,7 @@ function Offspring = OperatorGA(Parent,Parameter)
 
 %------------------------------- Reference --------------------------------
 % [1] K. Deb, K. Sindhya, and T. Okabe, Self-adaptive simulated binary
-% crossover for real-parameter optimization, Proceedings of the 9th Annual
+% crossover for real-parameter optimization, Proceedings of the Annual
 % Conference on Genetic and Evolutionary Computation, 2007, 1187-1194.
 % [2] K. Deb and M. Goyal, A combined genetic adaptive search (GeneAS) for
 % engineering design, Computer Science and informatics, 1996, 26: 30-45.

@@ -4,7 +4,7 @@ classdef ACO < ALGORITHM
 
 %------------------------------- Reference --------------------------------
 % M. Dorigo and G. D. Caro, Ant colony optimization: a new meta-heuristic,
-% Proceedings of the 1999 IEEE Congress on Evolutionary Computation, 1999.
+% Proceedings of the IEEE Congress on Evolutionary Computation, 1999.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

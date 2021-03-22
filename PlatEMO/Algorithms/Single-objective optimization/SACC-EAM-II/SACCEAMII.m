@@ -6,8 +6,8 @@ classdef SACCEAMII < ALGORITHM
 %------------------------------- Reference --------------------------------
 % J. Blanchard, C. Beauthier, T. Carletti, A surrogate-assisted cooperative
 % co-evolutionary algorithm using recursive differential grouping as
-% decomposition strategy, Proceedings of the 2019 IEEE Congress on
-% Evolutionary Computation, 2019: 689-696.
+% decomposition strategy, Proceedings of the IEEE Congress on Evolutionary
+% Computation, 2019: 689-696.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

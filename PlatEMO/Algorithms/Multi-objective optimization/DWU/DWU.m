@@ -4,7 +4,7 @@ classdef DWU < ALGORITHM
 
 %------------------------------- Reference --------------------------------
 % G. Moreira and L. Paquete, Guiding under uniformity measure in the
-% decision space, Proceedings of the 2019 IEEE Latin American Conference on
+% decision space, Proceedings of the IEEE Latin American Conference on
 % Computational Intelligence, 2019.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for

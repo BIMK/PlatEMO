@@ -144,11 +144,11 @@ classdef ALGORITHM < handle & matlab.mixin.Heterogeneous
                         figure('NumberTitle','off','Name',sprintf('%s : %.4e  Runtime : %.2fs',name,value(end),Algorithm.Metric('runtime')));
                         title(sprintf('%s on %s',class(Algorithm),class(Problem)),'Interpreter','none');
                         top = uimenu(gcf,'Label','Data source');
-                        g = uimenu(top,'Label','Population (obj.)','CallBack',{@(h,~,Pro,P)eval('Draw(gca);Pro.DrawObj(P);ALGORITHM.cb_menu(h);'),Problem,Population});
+                        g   = uimenu(top,'Label','Population (obj.)','CallBack',{@(h,~,Pro,P)eval('Draw(gca);Pro.DrawObj(P);ALGORITHM.cb_menu(h);'),Problem,Population});
                         uimenu(top,'Label','Population (dec.)','CallBack',{@(h,~,Pro,P)eval('Draw(gca);Pro.DrawDec(P);ALGORITHM.cb_menu(h);'),Problem,Population});
                         uimenu(top,'Label','True Pareto front','CallBack',{@(h,~,P)eval('Draw(gca);Draw(P,{''\it f\rm_1'',''\it f\rm_2'',''\it f\rm_3''});ALGORITHM.cb_menu(h);'),Problem.optimum});
-                        h = cellfun(@(s)uimenu(top,'Label',s,'CallBack',{@(h,~,A)eval('Draw(gca);Draw(A.Metric(h.Text),''-k.'',''LineWidth'',1.5,''MarkerSize'',10,{''Number of function evaluations'',h.Text,[]});ALGORITHM.cb_menu(h);'),Algorithm}),{'IGD','HV','GD','Feasible rate'});
-                        set(h(1),'Separator','on');
+                        cellfun(@(s)uimenu(top,'Label',s,'CallBack',{@(h,~,A)eval('Draw(gca);Draw(A.Metric(h.Label),''-k.'',''LineWidth'',1.5,''MarkerSize'',10,{''Number of function evaluations'',h.Label,[]});ALGORITHM.cb_menu(h);'),Algorithm}),{'IGD','HV','GD','Feasible rate'});
+                        set(top.Children(4),'Separator','on');
                         g.Callback{1}(g,[],Problem,Population);
                     else
                         best = Algorithm.Metric('Minimum value');
@@ -157,9 +157,9 @@ classdef ALGORITHM < handle & matlab.mixin.Heterogeneous
                         title(sprintf('%s on %s',class(Algorithm),class(Problem)),'Interpreter','none');
                         top = uimenu(gcf,'Label','Data source');
                         uimenu(top,'Label','Population (dec.)','CallBack',{@(h,~,Pro,P)eval('Draw(gca);Pro.DrawDec(P);ALGORITHM.cb_menu(h);'),Problem,Algorithm.result{end}});
-                        h = cellfun(@(s)uimenu(top,'Label',s,'CallBack',{@(h,~,A)eval('Draw(gca);Draw(A.Metric(h.Text),''-k.'',''LineWidth'',1.5,''MarkerSize'',10,{''Number of function evaluations'',h.Text,[]});ALGORITHM.cb_menu(h);'),Algorithm}),{'Minimum value','Feasible rate'});
-                        set(h(1),'Separator','on');
-                        h(1).Callback{1}(h(1),[],Algorithm);
+                        cellfun(@(s)uimenu(top,'Label',s,'CallBack',{@(h,~,A)eval('Draw(gca);Draw(A.Metric(h.Label),''-k.'',''LineWidth'',1.5,''MarkerSize'',10,{''Number of function evaluations'',h.Label,[]});ALGORITHM.cb_menu(h);'),Algorithm}),{'Minimum value','Feasible rate'});
+                        set(top.Children(2),'Separator','on');
+                        top.Children(2).Callback{1}(top.Children(2),[],Algorithm);
                     end
                 elseif Algorithm.save > 0
                     folder = fullfile('Data',class(Algorithm));

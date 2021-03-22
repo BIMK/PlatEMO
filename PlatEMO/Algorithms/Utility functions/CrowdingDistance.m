@@ -15,7 +15,7 @@ function CrowdDis = CrowdingDistance(PopObj,FrontNo)
 %------------------------------- Reference --------------------------------
 % S. Kukkonen and K. Deb, Improved pruning of non-dominated solutions based
 % on crowding distance for bi-objective optimization problems, Proceedings
-% of the 2006 IEEE Congress on Evolutionary Computation, 2006, 1179-1186.
+% of the IEEE Congress on Evolutionary Computation, 2006, 1179-1186.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

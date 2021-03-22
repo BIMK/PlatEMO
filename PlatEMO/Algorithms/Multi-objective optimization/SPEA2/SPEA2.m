@@ -4,7 +4,7 @@ classdef SPEA2 < ALGORITHM
 
 %------------------------------- Reference --------------------------------
 % E. Zitzler, M. Laumanns, and L. Thiele, SPEA2: Improving the strength
-% Pareto evolutionary algorithm, Proceedings of the Fifth Conference on
+% Pareto evolutionary algorithm, Proceedings of the Conference on
 % Evolutionary Methods for Design, Optimization and Control with
 % Applications to Industrial Problems, 2001, 95-100.
 %------------------------------- Copyright --------------------------------

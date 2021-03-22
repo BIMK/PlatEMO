@@ -18,16 +18,17 @@ function Offspring = Operator(Loser,Winner)
     OffDec = LoserDec + OffVel + r1.*(OffVel-LoserVel);
     
 	%% Add the winners
-     OffDec = [OffDec;WinnerDec];
-     OffVel = [OffVel;WinnerVel];
-    N = size(OffDec,1);
+	OffDec = [OffDec;WinnerDec];
+	OffVel = [OffVel;WinnerVel];
+	N = size(OffDec,1);
+    
     %% Polynomial mutation
-    Lower  = repmat(Problem.lower,N,1);
-    Upper  = repmat(Problem.upper,N,1);
-    disM   = 20;
-    Site   = rand(N,D) < 1/D;
-    mu     = rand(N,D);
-    temp   = Site & mu<=0.5;
+    Lower = repmat(Problem.lower,N,1);
+    Upper = repmat(Problem.upper,N,1);
+    disM  = 20;
+    Site  = rand(N,D) < 1/D;
+    mu    = rand(N,D);
+    temp  = Site & mu<=0.5;
     OffDec       = max(min(OffDec,Upper),Lower);
     OffDec(temp) = OffDec(temp)+(Upper(temp)-Lower(temp)).*((2.*mu(temp)+(1-2.*mu(temp)).*...
                    (1-(OffDec(temp)-Lower(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1))-1);

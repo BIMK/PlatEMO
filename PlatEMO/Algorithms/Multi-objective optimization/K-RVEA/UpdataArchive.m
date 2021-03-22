@@ -48,18 +48,18 @@ function  A1 = UpdataArchive(A1,New,V,mu,NI)
             % Cluster solutions based on objective vectors when the number
             % of active reference vectors is smaller than NI-mu
             [IDX,~] = kmeans(Total.objs,NI-mu);
-                for i   = unique(IDX)'
-                    current = find(IDX==i);
-                    if length(current)>1
-                        best = randi(length(current),1);
-                    else
-                        best = 1;
-                    end
-                    Next(i)  = current(best);
+            for i   = unique(IDX)'
+                current = find(IDX==i);
+                if length(current)>1
+                    best = randi(length(current),1);
+                else
+                    best = 1;
                 end
-            A1 = [Total(Next),New];
+                Next(i)  = current(best);
+            end
         end
-   else 
-       A1 = Total;
-   end
+        A1 = [Total(Next),New];
+    else 
+        A1 = Total;
+    end
 end       

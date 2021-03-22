@@ -31,6 +31,13 @@ classdef DTLZ6 < PROBLEM
             PopDec(:,2:obj.M-1) = (1+2*Temp.*PopDec(:,2:obj.M-1))./(2+2*Temp);
             PopObj = repmat(1+g,1,obj.M).*fliplr(cumprod([ones(size(g,1),1),cos(PopDec(:,1:obj.M-1)*pi/2)],2)).*[ones(size(g,1),1),sin(PopDec(:,obj.M-1:-1:1)*pi/2)];
         end
+        %% Generate points on the Pareto front
+        function R = GetOptimum(obj,N)
+            R = [0:1/(N-1):1;1:-1/(N-1):0]';
+            R = R./repmat(sqrt(sum(R.^2,2)),1,size(R,2));
+            R = [R(:,ones(1,obj.M-2)),R];
+            R = R./sqrt(2).^repmat([obj.M-2,obj.M-2:-1:0],size(R,1),1);
+        end
         %% Generate the image of Pareto front
         function R = GetPF(obj)
             if obj.M < 4

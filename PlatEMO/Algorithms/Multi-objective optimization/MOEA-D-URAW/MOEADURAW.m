@@ -7,8 +7,8 @@ classdef MOEADURAW < ALGORITHM
 %------------------------------- Reference --------------------------------
 % L. R. C. Farias and A. F. R. Araujo, Many-objective evolutionary
 % algorithm based on decomposition with random and adaptive weights. In
-% Proceedings of the 2019 IEEE International Conference on Systems, Mans
-% and Cybernetics.
+% Proceedings of the IEEE International Conference on Systems, Mans and
+% Cybernetics, 2019.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

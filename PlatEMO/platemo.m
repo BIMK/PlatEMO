@@ -67,8 +67,8 @@ function varargout = platemo(varargin)
             GUI();
         end
     else
-        if verLessThan('matlab','7.14')
-            error('Fail to use PlatEMO since the version for MATLAB is lower than R2012a. Please update your MATLAB software.');
+        if verLessThan('matlab','9.4')
+            error('Fail to use PlatEMO since the version for MATLAB is lower than R2018a. Please update your MATLAB software.');
         else
             [PRO,input] = getSetting(varargin);
             Problem     = PRO(input{:});

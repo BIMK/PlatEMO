@@ -5,8 +5,8 @@ classdef MONRP < PROBLEM
 
 %------------------------------- Reference --------------------------------
 % Y. Zhang, M. Harman, and S. A. Mansouri, The multi-objective next release
-% problem, Proceedings of the 9th Annual Conference on Genetic and
-% Evolutionary Computation, 2007, 1129-1137.
+% problem, Proceedings of the Annual Conference on Genetic and Evolutionary
+% Computation, 2007, 1129-1137.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

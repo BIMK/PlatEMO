@@ -7,8 +7,8 @@ classdef MOEAPC < ALGORITHM
 %------------------------------- Reference --------------------------------
 % R. Denysiuk, L. Costa, I. E. Santo, and J. C. Matos, MOEA/PC:
 % Multiobjective evolutionary algorithm based on polar coordinates,
-% Proceedings of the International Conference on Evolutionary
-% Multi-Criterion Optimization, 2015, 141-155.
+% Proceedings of the International Conference on Evolutionary Multi-
+% Criterion Optimization, 2015, 141-155.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

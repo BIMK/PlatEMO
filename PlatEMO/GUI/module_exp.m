@@ -13,7 +13,7 @@ classdef module_exp < handle
     properties(SetAccess = private)
         GUI;                % The GUI object
         app  = struct();	% All the components
-        data = {};          % All the results
+        data = [];          % All the results
     end
     methods(Access = ?GUI)
         %% Constructor
@@ -74,11 +74,11 @@ classdef module_exp < handle
             obj.app.toolC(4)   = GUI.APP([1 3],4,uibutton(tempGrid,'state','Text','M','BackgroundColor',[.95 .95 1],'Value',1,'Tooltip','Show the number of objectives','ValueChangedFcn',@obj.TableUpdateColumn));
             obj.app.toolC(5)   = GUI.APP([1 3],5,uibutton(tempGrid,'state','Text','D','BackgroundColor',[.95 .95 1],'Value',1,'Tooltip','Show the number of decision variables','ValueChangedFcn',@obj.TableUpdateColumn));
             obj.app.toolC(6)   = GUI.APP([1 3],6,uibutton(tempGrid,'state','Text','FE','BackgroundColor',[.95 .95 1],'Tooltip','Show the maximum number of function evaluations','ValueChangedFcn',@obj.TableUpdateColumn));
-            obj.app.dropC(1)   = GUI.APP([1 3],7,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Show the specific metric values','Items',['Number of runs';'runtime';obj.GUI.metList(:,2);'Feasible rate'],'Interruptible','off','ValueChangedFcn',@obj.TableUpdate));
-            obj.app.dropC(2)   = GUI.APP([1 3],7,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Show the specific metric values','Items',{'Number of runs';'runtime';'Minimum value';'Feasible rate'},'Interruptible','off','ValueChangedFcn',@obj.TableUpdate,'Visible','off'));
-            obj.app.dropC(3)   = GUI.APP([1 3],8,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Show the mean value','Items',{'Mean','Mean (STD)','Median','Median (IQR)'},'ItemsData',1:4,'Value',2,'Interruptible','off','ValueChangedFcn',@obj.TableUpdate));
-            obj.app.dropC(4)   = GUI.APP([1 3],9,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Perform the Wilcoxon rank sum test','Items',{'none','Signed rank test','Rank sum test','Friedman test'},'ItemsData',1:4,'Value',3,'Interruptible','off','ValueChangedFcn',@obj.TableUpdate));
-            obj.app.dropC(5)   = GUI.APP([1 3],10,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Highlight the best result','Items',{'none','Highlight the best','Highlight all the bests'},'ItemsData',1:3,'Value',2,'Interruptible','off','ValueChangedFcn',@obj.TableUpdate));
+            obj.app.dropC(1)   = GUI.APP([1 3],7,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Show the specific metric values','Items',['Number of runs';'runtime';obj.GUI.metList(:,2);'Feasible rate'],'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
+            obj.app.dropC(2)   = GUI.APP([1 3],7,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Show the specific metric values','Items',{'Number of runs';'runtime';'Minimum value';'Feasible rate'},'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate,'Visible','off'));
+            obj.app.dropC(3)   = GUI.APP([1 3],8,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Show the mean value and standard deviation','Items',{'Mean','Mean (STD)','Median','Median (IQR)'},'ItemsData',1:4,'Value',2,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
+            obj.app.dropC(4)   = GUI.APP([1 3],9,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Perform the Wilcoxon rank sum test','Items',{'none','Signed rank test','Rank sum test','Friedman test'},'ItemsData',1:4,'Value',3,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
+            obj.app.dropC(5)   = GUI.APP([1 3],10,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Highlight the best result','Items',{'none','Highlight the best','Highlight all the bests'},'ItemsData',1:3,'Value',2,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
             obj.app.table      = GUI.APP(2,[1 4],uitable(obj.app.grid(3),'CellSelectionCallback',@obj.cb_tableSelect));
             obj.app.checkC     = GUI.APP(3,1,uicheckbox(obj.app.grid(3),'Text','Parallel execution','Tooltip','Perform the experiment with multiple CPUs','Value',1));
             obj.app.buttonC(1) = GUI.APP(3,2,uibutton(obj.app.grid(3),'push','Text','Start','FontSize',16,'ButtonpushedFcn',@obj.cb_start));
@@ -569,12 +569,14 @@ classdef module_exp < handle
         end
         %% Select the cells of table
         function cb_tableSelect(obj,~,event)
-            grids = [event.Indices(:,1),event.Indices(:,2)-size(obj.app.table.Data,2)+size(obj.data.result,2)];
-            grids(grids(:,1)>size(obj.data.result,1)|grids(:,2)<1,:) = [];
-            if ~isempty(grids) && ~ismember(obj.app.dropC((obj.data.PRO(1).M<=1)+1).Value,{'Number of runs','runtime'})
-                obj.app.table.UserData = [min(grids,[],1),max(grids,[],1)];
-            else
-                obj.app.table.UserData = [];
+            if ~isempty(obj.data)
+                grids = [event.Indices(:,1),event.Indices(:,2)-size(obj.app.table.Data,2)+size(obj.data.result,2)];
+                grids(grids(:,1)>size(obj.data.result,1)|grids(:,2)<1,:) = [];
+                if ~isempty(grids) && ~ismember(obj.app.dropC((obj.data.PRO(1).M<=1)+1).Value,{'Number of runs','runtime'})
+                    obj.app.table.UserData = [min(grids,[],1),max(grids,[],1)];
+                else
+                    obj.app.table.UserData = [];
+                end
             end
         end
         %% Show the menu of result display

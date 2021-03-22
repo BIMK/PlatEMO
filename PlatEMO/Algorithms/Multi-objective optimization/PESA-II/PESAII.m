@@ -6,7 +6,7 @@ classdef PESAII < ALGORITHM
 %------------------------------- Reference --------------------------------
 % D. W. Corne, N. R. Jerram, J. D. Knowles, and M. J. Oates, PESA-II:
 % Region-based selection in evolutionary multiobjective optimization,
-% Proceedings of the 3rd Annual Conference on Genetic and Evolutionary
+% Proceedings of the Annual Conference on Genetic and Evolutionary
 % Computation, 2001, 283-290.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for

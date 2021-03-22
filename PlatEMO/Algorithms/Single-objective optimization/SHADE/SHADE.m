@@ -4,8 +4,8 @@ classdef SHADE < ALGORITHM
 
 %------------------------------- Reference --------------------------------
 % R. Tanabe and A. Fukunaga, Success-history based parameter adaptation for
-% differential evolution, Proceedings of the 2013 IEEE Congress on
-% Evolutionary Computation, 2013.
+% differential evolution, Proceedings of the IEEE Congress on Evolutionary
+% Computation, 2013.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
