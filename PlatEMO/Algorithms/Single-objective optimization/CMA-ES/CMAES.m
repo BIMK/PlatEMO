@@ -39,7 +39,7 @@ classdef CMAES < ALGORITHM
             pc    = zeros(1,Problem.D);
             C     = eye(Problem.D);
             sigma = 0.1*(Problem.upper-Problem.lower);
-            Population = [];
+            Population = Problem.Initialization(1);
             
             %% Optimization
             while Algorithm.NotTerminated(Population)

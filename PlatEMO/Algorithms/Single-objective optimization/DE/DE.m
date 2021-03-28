@@ -1,11 +1,11 @@
 classdef DE < ALGORITHM
 % <single> <real> <large/none> <constrained/none>
 % Differential evolution
-% CR ---   1 --- Crossover constant
+% CR --- 0.9 --- Crossover constant
 % F  --- 0.5 --- Mutation factor
 
 %------------------------------- Reference --------------------------------
-% R. Storn and K. Price, Differential evolution¡ªa simple and efficient
+% R. Storn and K. Price, Differential evolution-a simple and efficient
 % heuristic for global optimization over continuous spaces, Journal of
 % Global Optimization, 1997, 11(4): 341-359.
 %------------------------------- Copyright --------------------------------
@@ -20,7 +20,7 @@ classdef DE < ALGORITHM
     methods
         function main(Algorithm,Problem)
             %% Parameter setting
-            [CR,F] = Algorithm.ParameterSet(1,0.5);
+            [CR,F] = Algorithm.ParameterSet(0.9,0.5);
             
             %% Generate random population
             Population = Problem.Initialization();
