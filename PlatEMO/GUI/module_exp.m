@@ -80,7 +80,7 @@ classdef module_exp < handle
             obj.app.dropC(4)   = GUI.APP([1 3],9,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Perform the Wilcoxon rank sum test','Items',{'none','Signed rank test','Rank sum test','Friedman test'},'ItemsData',1:4,'Value',3,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
             obj.app.dropC(5)   = GUI.APP([1 3],10,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Highlight the best result','Items',{'none','Highlight the best','Highlight all the bests'},'ItemsData',1:3,'Value',2,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
             obj.app.table      = GUI.APP(2,[1 4],uitable(obj.app.grid(3),'CellSelectionCallback',@obj.cb_tableSelect));
-            obj.app.checkC     = GUI.APP(3,1,uicheckbox(obj.app.grid(3),'Text','Parallel execution','Tooltip','Perform the experiment with multiple CPUs','Value',1));
+            obj.app.checkC     = GUI.APP(3,1,uicheckbox(obj.app.grid(3),'Text','Parallel execution','Tooltip','Perform the experiment with multiple CPUs','Value',~isempty(ver('parallel')),'Enable',~isempty(ver('parallel'))));
             obj.app.buttonC(1) = GUI.APP(3,2,uibutton(obj.app.grid(3),'push','Text','Start','FontSize',16,'ButtonpushedFcn',@obj.cb_start));
             obj.app.buttonC(2) = GUI.APP(3,3,uibutton(obj.app.grid(3),'push','Text','Stop','FontSize',16,'Enable','off','ButtonpushedFcn',@obj.cb_stop));
             obj.app.labelC     = GUI.APP(3,4,uilabel(obj.app.grid(3),'Text','','HorizontalAlignment','right','VerticalAlignment','center'));
@@ -92,10 +92,6 @@ classdef module_exp < handle
             
             % Initialization
             obj.cb_filter([],[],2);
-            if isempty(ver('parallel'))
-                obj.app.checkC.Value  = 0;
-                obj.app.checkC.Enable = false;
-            end
         end
     end
     methods(Access = private)
