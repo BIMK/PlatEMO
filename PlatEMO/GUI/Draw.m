@@ -78,6 +78,8 @@ function currentAxes = Draw(Data,varargin)
             plot(ax,reshape(Label',[],1),reshape(Data',[],1),varargin{:});
         end
         axis(ax,'tight');
+        set(ax.Toolbar,'Visible','off');
+        set(ax.Toolbar,'Visible','on');
     end
     currentAxes = ax;
 end
