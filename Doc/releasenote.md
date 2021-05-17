@@ -1,3 +1,7 @@
+# Release Highlights of PlatEMO 3.2
+
+* Add four surrogate-assisted multi-objective evolutionary algorithms AB-SAEA, EDN-ARMOEA, HeE-MOEA, KTA2, and a constrained multi-objective evolutionary algorithm c-DPEA. There are currently 158 algorithms in the platform.
+
 # Release Highlights of PlatEMO 3.1
 
 * Add two multi-objective optimization algorithms CCGDE3 and NSGA-II+ARSBX and one single-objective optimization algorithm OFA. There are currently 153 algorithms in the platform.
