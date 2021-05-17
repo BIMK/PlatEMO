@@ -22,7 +22,7 @@ classdef GUI < handle
         function obj = GUI()
             % Create the window
             obj.iconFolder   = fullfile(fileparts(mfilename('fullpath')),'icons');
-            obj.app.figure   = uifigure('Name','PlatEMO v3.1','Position',[0 0 1200 650],'Interruptible','off','icon',fullfile(obj.iconFolder,'logo1.png'),'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
+            obj.app.figure   = uifigure('Name','PlatEMO v3.2','Position',[0 0 1200 650],'Interruptible','off','icon',fullfile(obj.iconFolder,'logo1.png'),'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
             obj.app.maingrid = uigridlayout(obj.app.figure,'RowHeight',{25,80,'1x'},'ColumnWidth',{'1x'},'Padding',[0 0 0 0],'RowSpacing',0);
             
             % Create the tab buttons
