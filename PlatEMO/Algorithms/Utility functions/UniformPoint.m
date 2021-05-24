@@ -95,6 +95,7 @@ end
 
 function [W,N] = MUD(N,M)
     X = GoodLatticePoint(N,M-1).^(1./repmat(M-1:-1:1,N,1));
+    X = max(X,1e-6);
     W = zeros(N,M);
     W(:,1:end-1) = (1-X).*cumprod(X,2)./X;
     W(:,end)     = prod(X,2);
