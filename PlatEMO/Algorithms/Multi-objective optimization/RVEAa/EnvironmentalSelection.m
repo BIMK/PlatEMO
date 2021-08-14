@@ -23,7 +23,7 @@ function Population = EnvironmentalSelection(Population,V,theta)
     CV = sum(max(0,Population.cons),2);
     
     %% Calculate the smallest angle value between each vector and others
-    cosine = pdist2(V,V,'cosine');
+    cosine = 1 - pdist2(V,V,'cosine');
     cosine(logical(eye(length(cosine)))) = 0;
     gamma  = min(acos(cosine),[],2);
 

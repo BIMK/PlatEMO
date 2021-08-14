@@ -87,7 +87,7 @@ function EI = EICal(Obj,Z,lamda,MSE,Gbest)
 
     M = size(Obj,2);
     u = lamda.*(Obj - Z);
-    sigma2 = lamda.^2.*MSE;
+    sigma2 = MSE;
     lamda0 = lamda(1:2); mu0 = u(1:2); sig20 = sigma2(1:2);
 	[y,x] = GPcal(lamda0,mu0,abs(sig20));
     if M >= 3
@@ -96,17 +96,16 @@ function EI = EICal(Obj,Z,lamda,MSE,Gbest)
             [y,x] = GPcal(lamda0,mu0,abs(sig20));
         end
     end
-    EI = (Gbest-y)*normcdf((Gbest-y/sqrt(x))) + sqrt(x)*normpdf((Gbest-y)/sqrt(x));
+    EI = (Gbest-y)*normcdf((Gbest-y)/sqrt(x)) + sqrt(x)*normpdf((Gbest-y)/sqrt(x));
 end
 
 function [y,x] = GPcal(lamda,mu,sig2)
 % Calculate the mu (x) and sigma^2 (y) of the aggregation function
 
-    tao = sqrt(lamda(1)^2*sig2(1) + lamda(2)^2*sig2(2));
+    tao   = sqrt(lamda(1)^2*sig2(1)+lamda(2)^2*sig2(2));
     alpha = (mu(1)-mu(2))/tao;
-    y = mu(1)*normcdf(alpha) + mu(2)*normcdf(-alpha) + tao*normpdf(alpha);
-    x = (lamda(1)^2 + sig2(1))*normcdf(alpha) + ...
-        (lamda(2)^2 + sig2(2))*normcdf(-alpha) + sum(lamda)*normpdf(alpha);
+    y     = mu(1)*normcdf(alpha) + mu(2)*normcdf(-alpha) + tao*normpdf(alpha);
+    x     = (mu(1)^2+lamda(1)^2*sig2(1))*normcdf(alpha) + (mu(2)^2+lamda(2)^2*sig2(2))*normcdf(-alpha) + sum(mu)*normpdf(alpha) - y.^2;
 end
 
 function [PopObj,MSE] = Evaluate(Problem,PopDec,model,centers)
