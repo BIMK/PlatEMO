@@ -461,7 +461,7 @@ classdef module_exp < handle
                                     end
                                 end
                                 for a = 1 : length(diff1)
-                                    if ~diff1(a)
+                                    if ~diff1(a) || mdata(valid(a))==mdata(nA)
                                         obj.app.table.Data{p,end-nA+valid(a)} = [obj.app.table.Data{p,end-nA+valid(a)},' ='];
                                     elseif mdata(valid(a))<mdata(nA)&&minMet || mdata(valid(a))>mdata(nA)&&~minMet
                                         obj.app.table.Data{p,end-nA+valid(a)} = [obj.app.table.Data{p,end-nA+valid(a)},' +'];

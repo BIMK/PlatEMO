@@ -23,7 +23,7 @@ function PopDec = EvolALG(PCheby,Dec,model,IFEs)
         for i = 1 : N
             [y,~,mse] = predictor(Off(i,:),model);
             s         = sqrt(mse);
-            EI(i)     = -(Gbest-y)*normcdf((Gbest-y/s))-s*normpdf((Gbest-y)/s);
+            EI(i)     = -(Gbest-y)*normcdf((Gbest-y)/s)-s*normpdf((Gbest-y)/s);
         end
         [~,index] = sort(EI);
         if EI(index(1)) < E0

@@ -20,10 +20,11 @@ function index = TournamentSelection(K,N,varargin)
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    varargin = cellfun(@(S)reshape(S,[],1),varargin,'UniformOutput',false);
-    [~,rank] = sortrows([varargin{:}]);
-    [~,rank] = sort(rank);
-    Parents  = randi(length(varargin{1}),K,N);
-    [~,best] = min(rank(Parents),[],1);
-    index    = Parents(best+(0:N-1)*K);
+    varargin    = cellfun(@(S)reshape(S,[],1),varargin,'UniformOutput',false);
+    [Fit,~,Loc] = unique([varargin{:}],'rows');
+    [~,rank]    = sortrows(Fit);
+    [~,rank]    = sort(rank);
+    Parents     = randi(length(varargin{1}),K,N);
+    [~,best]    = min(rank(Loc(Parents)),[],1);
+    index       = Parents(best+(0:N-1)*K);
 end

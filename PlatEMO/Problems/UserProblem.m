@@ -27,7 +27,7 @@ classdef UserProblem < PROBLEM
         initFcn;                % function for initializing a population
         decFcn;                 % function for repairing invalid solution
         objFcn = @(x,d)sum(x);	% objective functions
-        conFcn = @(x,d)0;    	% constraint functions
+        conFcn = @(x,d)0;      	% constraint functions
     end
     methods
         %% Constructor
@@ -47,7 +47,11 @@ classdef UserProblem < PROBLEM
                 N = obj.N;
             end
             if ~isempty(obj.initFcn)
-                PopDec = obj.initFcn(N,obj.parameter);
+                if isempty(obj.parameter)
+                    PopDec = obj.initFcn(N);
+                else
+                    PopDec = obj.initFcn(N,obj.parameter);
+                end
             elseif strcmp(obj.encoding,'binary')
                 PopDec = rand(N,obj.D) < 0.5;
             elseif strcmp(obj.encoding,'permutation')
@@ -62,7 +66,11 @@ classdef UserProblem < PROBLEM
         function PopDec = CalDec(obj,PopDec)
             if ~isempty(obj.decFcn)
                 for i = 1 : size(PopDec,1)
-                    PopDec(i,:) = obj.decFcn(PopDec(i,:),obj.parameter);
+                    if isempty(obj.parameter)
+                        PopDec(i,:) = obj.decFcn(PopDec(i,:));
+                    else
+                        PopDec(i,:) = obj.decFcn(PopDec(i,:),obj.parameter);
+                    end
                 end
             elseif strcmp(obj.encoding,'binary')
                 PopDec = round(PopDec);
@@ -77,8 +85,10 @@ classdef UserProblem < PROBLEM
         function PopObj = CalObj(obj,PopDec)
             PopObj = zeros(size(PopDec,1),length(obj.objFcn));
             for i = 1 : size(PopDec,1)
-                for j = 1 : length(obj.objFcn)
-                    PopObj(i,j) = obj.objFcn{j}(PopDec(i,:),obj.parameter);
+                if isempty(obj.parameter)
+                    PopObj(i,:) = cellfun(@(func)func(PopDec(i,:)),obj.objFcn);
+                else
+                    PopObj(i,:) = cellfun(@(func)func(PopDec(i,:),obj.parameter),obj.objFcn);
                 end
             end
         end
@@ -86,8 +96,10 @@ classdef UserProblem < PROBLEM
         function PopCon = CalCon(obj,PopDec)
             PopCon = zeros(size(PopDec,1),length(obj.conFcn));
             for i = 1 : size(PopDec,1)
-                for j = 1 : length(obj.conFcn)
-                    PopCon(i,j) = obj.conFcn{j}(PopDec(i,:),obj.parameter);
+                if isempty(obj.parameter)
+                    PopCon(i,:) = cellfun(@(func)func(PopDec(i,:)),obj.conFcn);
+                else
+                    PopCon(i,:) = cellfun(@(func)func(PopDec(i,:),obj.parameter),obj.conFcn);
                 end
             end
         end

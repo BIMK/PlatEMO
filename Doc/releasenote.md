@@ -1,3 +1,11 @@
+# Release Highlights of PlatEMO 3.3
+
+* Add four multi-objective evolutionary algorithms DEA-GNG, ICMA, PeEA, and RVEA-iGNG. There are currently 162 algorithms in the platform.
+
+* Add five constrained multi-objective optimization problems FCP1-FCP5 and a sparse multi-objective optimization problem Sparse_KP. There are currently 345 problems in the platform.
+
+* Add five constrained multi-objective optimization problems FCP1-FCP5 and a sparse multi-objective optimization problem Sparse_KP. There are currently 345 problems in the platform.
+
 # Release Highlights of PlatEMO 3.2
 
 * Add four surrogate-assisted multi-objective evolutionary algorithms AB-SAEA, EDN-ARMOEA, HeE-MOEA, KTA2, and a constrained multi-objective evolutionary algorithm c-DPEA. There are currently 158 algorithms in the platform.
