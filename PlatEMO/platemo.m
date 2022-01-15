@@ -13,7 +13,6 @@ function varargout = platemo(varargin)
 %   'M'             <positive integer>  number of objectives
 %   'D'             <positive integer>  number of variables
 %	'maxFE'         <positive integer>  maximum number of function evaluations
-%   'run'           <positive integer>  run number
 %   'save'       	<integer>           number of saved populations
 %   'outputFcn'     <function handle>   function called after each iteration
 %   'encoding'      <string>            encoding scheme of variables
@@ -50,7 +49,7 @@ function varargout = platemo(varargin)
 %   CalObj() and constraint violations are calculated by CalCon().
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -64,7 +63,12 @@ function varargout = platemo(varargin)
         if verLessThan('matlab','9.9')
             errordlg('Fail to create the GUI of PlatEMO since the version for MATLAB is lower than R2020b. You can use PlatEMO without GUI by calling platemo() with parameters.','Error','modal');
         else
-            GUI();
+            try
+                GUI();
+            catch err
+                errordlg('Fail to create the GUI, please make sure all the folders of PlatEMO have been added to search path.','Error','modal');
+                rethrow(err);
+            end
         end
     else
         if verLessThan('matlab','9.4')
@@ -106,7 +110,7 @@ function [name,input] = getSetting(setting,Pro)
         index = isStr(find(strcmp(setting(isStr),'problem'),1)) + 1;
         if isempty(index)
             name = @UserProblem;
-            keys = {'N','maxFE','encoding','lower','upper','initFcn','decFcn','objFcn','conFcn','parameter'};
+            keys = {'N','D','maxFE','encoding','lower','upper','initFcn','decFcn','objFcn','conFcn','parameter'};
         elseif iscell(setting{index})
             name  = setting{index}{1};
             input = {'parameter',setting{index}(2:end)};

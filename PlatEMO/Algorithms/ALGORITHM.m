@@ -20,7 +20,7 @@ classdef ALGORITHM < handle & matlab.mixin.Heterogeneous
 %   ParameterSet	<protected>	obtain the parameters of the algorithm
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -29,12 +29,12 @@ classdef ALGORITHM < handle & matlab.mixin.Heterogeneous
 %--------------------------------------------------------------------------
 
     properties(SetAccess = private)
-        parameter = {};                 % parameters of the algorithm
-        save      = 0;                  % number of populations saved in an execution
-        outputFcn = @ALGORITHM.Output;	% function called after each generation
-        pro;                            % problem solved in current execution
-        result;                         % populations saved in current execution
-        metric;                         % metric values of current populations
+        parameter = {};                 % Parameters of the algorithm
+        save      = 0;                  % Number of populations saved in an execution
+        outputFcn = @ALGORITHM.Output;	% Function called after each generation
+        pro;                            % Problem solved in current execution
+        result;                         % Populations saved in current execution
+        metric;                         % Metric values of current populations
     end
     methods(Access = protected)
         function obj = ALGORITHM(varargin)

@@ -1,3 +1,9 @@
+# Release Highlights of PlatEMO 3.4
+
+* Remake the application module, a more powerful and friendly interface enables users to define problems more easily. The defined problems can also be saved into files and solved in other modules.
+
+* Add two multi-objective evolutionary algorithms MOEA/D-DYTS and MOEA/D-UR, two surrogate-assisted multi-objective evolutionary algorithms PB-NSGA-III and PB-RVEA, a constrained multi-objective evolutionary algorithm DSPCMDE, three large-scale multi-objective evolutionary algorithms FDV, IM-MOEA/D, and LMOEA-DS, two sparse multi-objective evolutionary algorithm SLMEA and SparseEA2, and four single-objective mathematical programming methods Adam, Nelder-Mead, RMSProp, and SD. There are currently 176 algorithms in the platform.
+
 # Release Highlights of PlatEMO 3.3
 
 * Add four multi-objective evolutionary algorithms DEA-GNG, ICMA, PeEA, and RVEA-iGNG. There are currently 162 algorithms in the platform.

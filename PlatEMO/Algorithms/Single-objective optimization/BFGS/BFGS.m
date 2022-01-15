@@ -1,14 +1,14 @@
 classdef BFGS < ALGORITHM
 % <single> <real> <large/none>
 % A quasi-Newton method proposed by Broyden, Fletcher, Goldfarb, and Shanno
-% beta  --- 0.6 --- A parameter within [0,1]
-% sigma --- 0.4 --- A parameter within [0 0.5]
+% beta  --- 0.6 --- A parameter within [0,1] for line search
+% sigma --- 0.4 --- A parameter within [0 0.5] for line search
 
 %------------------------------- Reference --------------------------------
 % D. F. Shanno, Conditioning of quasi-Newton methods for function
 % minimization, Mathematics of Computation, 1970, 24: 647-656.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

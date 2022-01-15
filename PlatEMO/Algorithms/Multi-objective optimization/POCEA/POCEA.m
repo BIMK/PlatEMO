@@ -5,7 +5,8 @@ classdef POCEA < ALGORITHM
 %------------------------------- Reference --------------------------------
 % C. He, R. Cheng, Y. Tian, X. Zhang, K. C. Tan, and Y. Jin, Paired
 % offspring generation for constrained large-scale multiobjective
-% optimization, IEEE Transactions on Evolutionary Computation, 2020.
+% optimization, IEEE Transactions on Evolutionary Computation, 2021, 25(3):
+% 448-462.
 %--------------------------------------------------------------------------
 
 % Copyright (c) 2020-2021 Cheng He

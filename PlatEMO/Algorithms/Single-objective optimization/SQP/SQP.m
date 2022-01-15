@@ -6,7 +6,7 @@ classdef SQP < ALGORITHM
 % P. T. Boggs and J. W. Tolle, Sequential quadratic programming, Acta
 % Numerica, 1995, 4(1): 1-51.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -27,7 +27,7 @@ classdef SQP < ALGORITHM
             
             %% Optimization
             while Algorithm.NotTerminated(X)
-                [~,dk,mu,~] = qpsubp(dfk,Bk,[],[],Ai,-X.con');
+                [~,dk,mu,~] = qpsubp(dfk,Bk,[],[],-Ai',-X.con');
                 tau = max(norm(mu,inf),norm(lam,inf));
                 if sigma*(tau+0.05) >= 1
                     sigma = 1/(tau+2*0.05);
@@ -41,11 +41,9 @@ classdef SQP < ALGORITHM
                 end
                 [dfk0,Ai0] = deal(dfk,Ai);
                 [dfk,Ai]   = FiniteDifference(X1);
-                Ak   = Ai;
-                lamu = pinv(Ak)'*dfk;
-                lam  = lamu;
-                sk   = (X1.dec-X.dec)';
-                yk   = dlax(dfk,Ai,lam) - dlax(dfk0,Ai0,lam);
+                lam = pinv(-Ai)*dfk;
+                sk  = (X1.dec-X.dec)';
+                yk  = dlax(dfk,-Ai',lam) - dlax(dfk0,-Ai0',lam);
                 if sk'*yk>0.2*sk'*Bk*sk
                     omega = 1;
                 else

@@ -2,7 +2,7 @@ classdef module_exp < handle
 %module_exp - Experimental module.
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -60,16 +60,16 @@ classdef module_exp < handle
             obj.app.editA(3)   = GUI.APP(1,3,uieditfield(tempGrid,'Value',fullfile(cd,'Data','Setting.mat'),'HorizontalAlignment','right','Tooltip','File path for saving experimental settings'));
             
             % The second panel
-            obj.app.listB   = uilist(obj.app.maingrid,obj.GUI.app.figure,obj.GUI.iconFolder);
+            obj.app.listB   = uilist(obj.app.maingrid,obj.GUI.app.figure,obj.GUI.icon);
             obj.app.grid(2) = GUI.APP(2,3,obj.app.listB.grid);
 
             % The third panel
             obj.app.grid(3)    = GUI.APP(2,5,uigridlayout(obj.app.maingrid,'RowHeight',{30,'1x',30},'ColumnWidth',{230,'1x','1x',230},'Padding',[20 10 20 0],'ColumnSpacing',20,'BackgroundColor','w'));
             tempGrid           = GUI.APP(1,[1 4],uigridlayout(obj.app.grid(3),'RowHeight',{1,'1x',1},'ColumnWidth',{18,24,24,24,24,24,'1x','1x','1x','1.2x'},'Padding',[5 5 5 5],'RowSpacing',0,'ColumnSpacing',8,'BackgroundColor',[.95 .95 1]));
             tempPanel          = GUI.APP(2,1,uipanel(tempGrid,'BorderType','none','BackgroundColor',[.95 .95 1]));
-            obj.app.toolC(1)   = uibutton(tempPanel,'Position',[-2.5 -2.5 24 24],'Text','','Icon',fullfile(obj.GUI.iconFolder,'save.png'),'BackgroundColor',[.95 .95 1],'Tooltip','Save the table','ButtonpushedFcn',@obj.cb_save);
+            obj.app.toolC(1)   = uibutton(tempPanel,'Position',[-2.5 -2.5 24 24],'Text','','Icon',obj.GUI.icon.savetable,'BackgroundColor',[.95 .95 1],'Tooltip','Save the table','ButtonpushedFcn',@obj.cb_save);
             tempPanel          = GUI.APP(2,2,uipanel(tempGrid,'BorderType','none','BackgroundColor',[.95 .95 1]));
-            obj.app.toolC(2)   = uibutton(tempPanel,'Position',[-2.5 -2.5 31 24],'Text','','Icon',fullfile(obj.GUI.iconFolder,'figure.png'),'BackgroundColor',[.95 .95 1],'Tooltip','Display the results','ButtonpushedFcn',@obj.cb_tableDisplay);
+            obj.app.toolC(2)   = uibutton(tempPanel,'Position',[-2.5 -2.5 31 24],'Text','','Icon',obj.GUI.icon.figure,'BackgroundColor',[.95 .95 1],'Tooltip','Display the results','ButtonpushedFcn',@obj.cb_tableDisplay);
             obj.app.toolC(3)   = GUI.APP([1 3],3,uibutton(tempGrid,'state','Text','N','BackgroundColor',[.95 .95 1],'Tooltip','Show the population size','ValueChangedFcn',@obj.TableUpdateColumn));
             obj.app.toolC(4)   = GUI.APP([1 3],4,uibutton(tempGrid,'state','Text','M','BackgroundColor',[.95 .95 1],'Value',1,'Tooltip','Show the number of objectives','ValueChangedFcn',@obj.TableUpdateColumn));
             obj.app.toolC(5)   = GUI.APP([1 3],5,uibutton(tempGrid,'state','Text','D','BackgroundColor',[.95 .95 1],'Value',1,'Tooltip','Show the number of decision variables','ValueChangedFcn',@obj.TableUpdateColumn));
@@ -151,7 +151,7 @@ classdef module_exp < handle
             success = false;
             if nargin < 4   % Load experimental settings
                 [file,folder] = uigetfile('*.mat','',fileparts(obj.app.editA(3).Value));
-                if file ~= 0
+                if ischar(file)
                     try
                         filename = fullfile(folder,file);
                         load(filename,'Setting','Environment','-mat');
@@ -767,7 +767,6 @@ end
 function table2txt(filename,Data)
     fid = fopen(filename,'wt');
     for i = 1 : size(Data,1)
-        clc,Data(i,:)
         fprintf(fid,'%s\n',strjoin(Data(i,:),'\t'));
     end
     fclose(fid);
