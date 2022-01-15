@@ -7,9 +7,9 @@ classdef S3CMAES < ALGORITHM
 % H. Chen, R. Cheng, J. Wen, H. Li, and J. Weng, Solving large-scale
 % many-objective optimization problems by covariance matrix adaptation
 % evolution strategy with scalable small subpopulations, Information
-% Sciences, 2018.
+% Sciences, 2020, 509: 457-469.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

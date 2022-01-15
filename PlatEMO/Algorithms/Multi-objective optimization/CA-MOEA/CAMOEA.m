@@ -5,9 +5,9 @@ classdef CAMOEA < ALGORITHM
 %------------------------------- Reference --------------------------------
 % Y. Hua, Y. Jin, K. Hao, A clustering-based adaptive evolutionary
 % algorithm for multiobjective optimization with irregular Pareto fronts,
-% IEEE Transactions on Cybernetics, 2018.
+% IEEE Transactions on Cybernetics, 2019, 49(7): 2758-2770.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -1,14 +1,14 @@
 classdef FRCG < ALGORITHM
 % <single> <real> <large/none>
 % Fletcher-Reeves conjugate gradient
-% beta  --- 0.6 --- A parameter within [0,1]
-% sigma --- 0.4 --- A parameter within [0 0.5]
+% beta  --- 0.6 --- A parameter within [0,1] for line search
+% sigma --- 0.4 --- A parameter within [0 0.5] for line search
 
 %------------------------------- Reference --------------------------------
 % R. Fletcher and C. M. Reeves, Function minimization by conjugate
 % gradients, The Computer Journal, 1964, 7(2): 149-154.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -27,15 +27,13 @@ classdef FRCG < ALGORITHM
             %% Optimization
             k = 0;
             while Algorithm.NotTerminated(X)
-                gk    = FiniteDifference(X);
-                itern = k - (Problem.D+1)*floor(k/(Problem.D+1)) + 1;
-                if itern <= 1
+                gk = FiniteDifference(X);
+                if mod(k,Problem.D) == 0
                     dk = -gk;
                 else
                     betak = (gk'*gk)/(g0'*g0);
                     dk    = -gk + betak*d0;
-                    gd    = gk'*dk;
-                    if gd >= 0
+                    if gk'*dk >= 0
                         dk = -gk;
                     end
                 end

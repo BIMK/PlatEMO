@@ -2,7 +2,7 @@ classdef module_test < handle
 %module_test - Test module.
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -54,7 +54,7 @@ classdef module_test < handle
             obj.app.listA(2)   = GUI.APP(11,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.9 .5 .2],'ValueChangedFcn',{@obj.cb_updateList,-1}));
 
             % The second panel
-            obj.app.listB   = uilist(obj.app.maingrid,obj.GUI.app.figure,obj.GUI.iconFolder);
+            obj.app.listB   = uilist(obj.app.maingrid,obj.GUI.app.figure,obj.GUI.icon);
             obj.app.grid(2) = GUI.APP(2,3,obj.app.listB.grid);
 
             % The third panel
@@ -76,9 +76,9 @@ classdef module_test < handle
             obj.app.menu(2).add('Feasible rate',false);
             obj.app.menu(2).flush();
             tempTb = axtoolbar(obj.app.axes(1),{'rotate','pan','zoomin','zoomout'});
-            obj.app.toolC(1)   = axtoolbarbtn(tempTb,'push','Icon',fullfile(obj.GUI.iconFolder,'gif.png'),'Tooltip','Save the evolutionary process to gif','ButtonPushedFcn',@obj.cb_toolbutton1);
-            obj.app.toolC(2)   = axtoolbarbtn(tempTb,'push','Icon',fullfile(obj.GUI.iconFolder,'newfigure.png'),'Tooltip','Open in new figure and save to workspace','ButtonPushedFcn',@obj.cb_toolbutton2);
-            obj.app.toolC(3)   = axtoolbarbtn(tempTb,'push','Icon',fullfile(obj.GUI.iconFolder,'datasource.png'),'Tooltip','Data source','ButtonPushedFcn',@obj.cb_toolbutton3);
+            obj.app.toolC(1)   = axtoolbarbtn(tempTb,'push','Icon',obj.GUI.icon.gif,'Tooltip','Save the evolutionary process to gif','ButtonPushedFcn',@obj.cb_toolbutton1);
+            obj.app.toolC(2)   = axtoolbarbtn(tempTb,'push','Icon',obj.GUI.icon.newfigure,'Tooltip','Open in new figure and save to workspace','ButtonPushedFcn',@obj.cb_toolbutton2);
+            obj.app.toolC(3)   = axtoolbarbtn(tempTb,'push','Icon',obj.GUI.icon.datasource,'Tooltip','Data source','ButtonPushedFcn',@obj.cb_toolbutton3);
             obj.app.slider     = GUI.APP(2,[1 6],uislider(obj.app.grid(3),'Limits',[0 1],'MajorTicks',0:0.25:1,'MajorTickLabels',{'0%','25%','50%','75%','100%'},'MinorTicks',0:0.01:1,'ValueChangedFcn',@obj.cb_slider));
             obj.app.labelC     = GUI.APP(3,[5 6],uilabel(obj.app.grid(3),'Text','','HorizontalAlignment','right'));
             obj.app.buttonC(1) = GUI.APP(3,3,uibutton(obj.app.grid(3),'push','Text','Start','FontSize',16,'ButtonpushedFcn',@obj.cb_start));

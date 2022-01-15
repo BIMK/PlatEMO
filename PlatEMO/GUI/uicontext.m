@@ -2,7 +2,7 @@ classdef uicontext < handle
 %uicontext - Context menu with push buttons.
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -24,8 +24,8 @@ classdef uicontext < handle
             obj.panel = uipanel(obj.fig,'Position',[0 0 110 0],'Visible',false);
         end
         %% Add a new item
-        function add(obj,str,iconstr,cb)
-        	obj.items = [obj.items,uibutton(obj.panel,'Position',[-2 0 115 25],'Text',str,'HorizontalAlignment','left','BackgroundColor',[.94 .94 .94],'Icon',iconstr,'ButtonPushedFcn',cb)];
+        function add(obj,str,icon,cb)
+        	obj.items = [obj.items,uibutton(obj.panel,'Position',[-2 0 115 25],'Text',str,'HorizontalAlignment','left','BackgroundColor',[.94 .94 .94],'Icon',icon,'ButtonPushedFcn',cb)];
             obj.gaps  = [obj.gaps,uipanel(obj.panel,'Position',[-2 0 115 3],'BorderType','none')];
             obj.panel.Children = obj.panel.Children([1,3:end,2]);
         end

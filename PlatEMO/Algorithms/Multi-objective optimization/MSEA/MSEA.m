@@ -6,9 +6,9 @@ classdef MSEA < ALGORITHM
 % Y. Tian, C. He, R. Cheng, and X. Zhang, A multi-stage evolutionary
 % algorithm for better diversity preservation in multi-objective
 % optimization, IEEE Transactions on Systems, Man, and Cybernetics:
-% Systems, 2019.
+% Systems, 2021, 51(9): 5880-5894.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

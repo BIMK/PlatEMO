@@ -6,9 +6,9 @@ classdef DCNSGAIII < ALGORITHM
 %------------------------------- Reference --------------------------------
 % R. Jiao, S. Zeng, C. Li, S. Yang, and Y. S. Ong, Handling constrained 
 % many-objective optimization problems via problem transformation, IEEE 
-% Transactions on Cybernetics, 2020.
+% Transactions on Cybernetics, 2021, 51(10): 4834-4847.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

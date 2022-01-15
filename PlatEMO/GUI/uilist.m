@@ -2,7 +2,7 @@ classdef uilist < handle
 %uilist - Panel of parameter setting.
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -21,20 +21,20 @@ classdef uilist < handle
     end
     methods
         %% Constructor
-        function obj = uilist(parent,fig,folder)
+        function obj = uilist(parent,fig,icon)
             obj.grid  = uigridlayout(parent,'RowHeight',{20},'ColumnWidth',{20,'1x','1x',20},'Padding',[5 0 5 0],'RowSpacing',5,'ColumnSpacing',0,'Scrollable','on','BackgroundColor','w');
             obj.menus = uicontext(fig);
-            obj.menus.add('Open file',fullfile(folder,'file.png'),@obj.cb_openfile);
-            obj.menus.add('Open folder',fullfile(folder,'folder.png'),@obj.cb_openfolder);
-            obj.menus.add('Search online',fullfile(folder,'scholar.png'),@obj.cb_search);
+            obj.menus.add('Open file',icon.file,@obj.cb_openfile);
+            obj.menus.add('Open folder',icon.folder,@obj.cb_openfolder);
+            obj.menus.add('Search online',icon.scholar,@obj.cb_search);
             obj.menus.flush();
             obj.menus(2) = uicontext(fig);
-            obj.menus(2).add('Move up',fullfile(folder,'moveup.png'),@obj.cb_moveup);
-            obj.menus(2).add('Move down',fullfile(folder,'movedown.png'),@obj.cb_movedown);
-            obj.menus(2).add('Delete',fullfile(folder,'delete.png'),@obj.cb_delete);
-            obj.menus(2).add('Open file',fullfile(folder,'file.png'),@obj.cb_openfile);
-            obj.menus(2).add('Open folder',fullfile(folder,'folder.png'),@obj.cb_openfolder);
-            obj.menus(2).add('Search online',fullfile(folder,'scholar.png'),@obj.cb_search);
+            obj.menus(2).add('Move up',icon.moveup,@obj.cb_moveup);
+            obj.menus(2).add('Move down',icon.movedown,@obj.cb_movedown);
+            obj.menus(2).add('Delete',icon.delete,@obj.cb_delete);
+            obj.menus(2).add('Open file',icon.file,@obj.cb_openfile);
+            obj.menus(2).add('Open folder',icon.folder,@obj.cb_openfolder);
+            obj.menus(2).add('Search online',icon.scholar,@obj.cb_search);
             obj.menus(2).gaps(3).Visible = false;
             obj.menus(2).flush();
         end
