@@ -1,5 +1,5 @@
-function Score = GD(PopObj,PF)
-% <metric> <min>
+function score = GD(Population,optimum)
+% <min>
 % Generational distance
 
 %------------------------------- Reference --------------------------------
@@ -8,7 +8,7 @@ function Score = GD(PopObj,PF)
 % of Electrical and Computer Engineering, Graduate School of Engineering,
 % Air Force Institute of Technology, Wright Patterson Air Force Base, 1999.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2018-2019 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -16,6 +16,11 @@ function Score = GD(PopObj,PF)
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    Distance = min(pdist2(PopObj,PF),[],2);
-    Score    = norm(Distance) / length(Distance);
+    PopObj = Population.best.objs;
+    if size(PopObj,2) ~= size(optimum,2)
+        score = nan;
+    else
+        Distance = min(pdist2(PopObj,optimum),[],2);
+        score    = norm(Distance)/length(Distance);
+    end
 end
