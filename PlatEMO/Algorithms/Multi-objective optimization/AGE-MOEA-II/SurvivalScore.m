@@ -1,4 +1,15 @@
 function [CrowdDis, p] = SurvivalScore(front)
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% research purposes. All publications which use this platform or any code
+% in the platform should acknowledge the use of "PlatEMO" and reference "Ye
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
+% Computational Intelligence Magazine, 2017, 12(4): 73-87".
+%--------------------------------------------------------------------------
+
+% This function is written by Annibale Panichella
+
     [m,n] = size(front);
     CrowdDis = zeros(1,m) ;
     selected = false(1,m);
@@ -20,23 +31,8 @@ function [CrowdDis, p] = SurvivalScore(front)
         t = 1 / sum(front(i,:).^p).^(1/p);
         projection(i,:) = front(i,:) * t;
     end
-
-    distances = zeros(m,m);
-    for i=1:m-1
-        for j=i+1:m
-            % mid point
-            mid_point1 = 0.5 * projection(i,:) + projection(j,:) * 0.5;
-            t = 1 / sum(mid_point1.^p).^(1/p);
-            projected_midpoint1 = mid_point1 * t;
-
-            % Geodesic distance
-            distances(i,j) = sum((projection(i,:) - projected_midpoint1).^2)^0.5 + ...
-                sum((projection(j,:) - projected_midpoint1).^2)^0.5;
-
-            distances(j, i) = distances(i, j);
-        end
-    end
-
+    
+    distances = geodesic_distances(projection, p);
     distances = distances ./ repmat(nn, 1, m);
  
     neighbors = 2;
@@ -49,6 +45,25 @@ function [CrowdDis, p] = SurvivalScore(front)
         remaining(index) = [];
         selected(best)=true;
         CrowdDis(1,best) = d;
+    end
+end
+
+function distances = geodesic_distances(front, p)
+[m,~] = size(front);
+distances = zeros(m,m);
+    for i=1:m-1
+        for j=i+1:m
+            % mid point
+            mid_point1 = 0.5 * front(i,:) + front(j,:) * 0.5;
+            t = 1 / sum(mid_point1.^p).^(1/p);
+            projected_midpoint1 = mid_point1 * t;
+
+            % Geodesic distance
+            distances(i,j) = sum((front(i,:) - projected_midpoint1).^2)^0.5 + ...
+                sum((front(j,:) - projected_midpoint1).^2)^0.5;
+
+            distances(j, i) = distances(i, j);
+        end
     end
 end
 
