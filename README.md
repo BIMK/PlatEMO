@@ -6,7 +6,7 @@
 [![](https://img.shields.io/badge/Matlab-%3E%3D%202018a%20-blue.svg)](#PlatEMO)  
 [![](https://img.shields.io/badge/Windows-Pass-brightgreen.svg)](#PlatEMO)
 [![](https://img.shields.io/badge/Linux-Pass-brightgreen.svg)](#PlatEMO)
-[![](https://img.shields.io/badge/MacOS-Pass-red.svg)](#PlatEMO)
+[![](https://img.shields.io/badge/MacOS-Pass-brightgreen.svg)](#PlatEMO)
 <h3>Evolutionary multi-objective optimization platform</h3>
 Developed by BIMK (Institute of Bioinspired Intelligence and Mining Knowledge) of Anhui University and NICE (Nature Inspired Computing and Engineering Group) of University of Surrey
 <div>
