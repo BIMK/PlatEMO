@@ -3,9 +3,10 @@ classdef Sparse_KP < PROBLEM
 % The sparse multi-objective knapsack problem
 
 %------------------------------- Reference --------------------------------
-% E. Zitzler and L. Thiele, Multiobjective evolutionary algorithms: A
-% comparative case study and the strength Pareto approach, IEEE
-% Transactions on Evolutionary Computation, 1999, 3(4): 257-271.
+% Y. Su, Z. Jin, Y. Tian, X. Zhang, and K. C. Tan, Comparing the
+% performance of evolutionary algorithms for sparse multi-objective
+% optimization via a comprehensive indicator, IEEE Computational
+% Intelligence Magazine, 2022.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

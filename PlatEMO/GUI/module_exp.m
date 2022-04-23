@@ -125,7 +125,7 @@ classdef module_exp < handle
                 tip = 'PROBLEM';
             end
             if contains(filename,'Open File')
-                [file,path] = uigetfile('*.m');
+                [file,path] = uigetfile({'*.m','MATLAB class'},'');
                 if file ~= 0
                     try
                         filename = fullfile(path,file);
@@ -133,6 +133,7 @@ classdef module_exp < handle
                         str = fgetl(f);
                         fclose(f);
                         assert(contains(str,['< ',tip]));
+                        addpath(path);
                     catch
                         uialert(obj.GUI.app.figure,sprintf('The selected file is not a subclass of %s.',tip),'Error');
                         return;
@@ -150,7 +151,7 @@ classdef module_exp < handle
         function success = cb_filepath(obj,~,~,filename)
             success = false;
             if nargin < 4   % Load experimental settings
-                [file,folder] = uigetfile('*.mat','',fileparts(obj.app.editA(3).Value));
+                [file,folder] = uigetfile({'*.mat','MAT file'},'',fileparts(obj.app.editA(3).Value));
                 if ischar(file)
                     try
                         filename = fullfile(folder,file);
@@ -315,7 +316,10 @@ classdef module_exp < handle
                                     end
                                 end
                             catch err
-                                cancel(Future);
+                                try
+                                    cancel(Future);
+                                catch
+                                end
                                 uialert(obj.GUI.app.figure,'The algorithm terminates unexpectedly, please refer to the command window for details.','Error');
                                 obj.cb_stop();
                                 rethrow(err);

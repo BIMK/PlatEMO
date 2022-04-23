@@ -58,9 +58,9 @@ classdef module_test < handle
             obj.app.grid(2) = GUI.APP(2,3,obj.app.listB.grid);
 
             % The third panel
-            obj.app.grid(3) = GUI.APP(2,5,uigridlayout(obj.app.maingrid,'RowHeight',{'1x',40,30},'ColumnWidth',{20,150,'1x','1x',150,20},'Padding',[15 10 15 0],'RowSpacing',5,'BackgroundColor','w'));
-            obj.app.axes    = GUI.APP(1,[2 5],uiaxes(obj.app.grid(3),'BackgroundColor','w','Box','on'));
-            obj.app.waittip = GUI.APP(1,[2 5],uilabel(obj.app.grid(3),'HorizontalAlignment','center','Text','                 Please wait ... ...','Visible','off'));
+            obj.app.grid(3) = GUI.APP(2,5,uigridlayout(obj.app.maingrid,'RowHeight',{'1x',40,30},'ColumnWidth',{20,150,'1x','1x',120,30,20},'Padding',[15 10 15 0],'RowSpacing',5,'BackgroundColor','w'));
+            obj.app.axes    = GUI.APP(1,[2 6],uiaxes(obj.app.grid(3),'BackgroundColor','w','Box','on'));
+            obj.app.waittip = GUI.APP(1,[2 6],uilabel(obj.app.grid(3),'HorizontalAlignment','center','Text','                 Please wait ... ...','Visible','off'));
             obj.app.menu(1) = uicontext2(obj.GUI.app.figure,@obj.cb_slider);
             obj.app.menu(1).add('Population (obj.)',false);
             obj.app.menu(1).add('Population (dec.)',false);
@@ -79,10 +79,11 @@ classdef module_test < handle
             obj.app.toolC(1)   = axtoolbarbtn(tempTb,'push','Icon',obj.GUI.icon.gif,'Tooltip','Save the evolutionary process to gif','ButtonPushedFcn',@obj.cb_toolbutton1);
             obj.app.toolC(2)   = axtoolbarbtn(tempTb,'push','Icon',obj.GUI.icon.newfigure,'Tooltip','Open in new figure and save to workspace','ButtonPushedFcn',@obj.cb_toolbutton2);
             obj.app.toolC(3)   = axtoolbarbtn(tempTb,'push','Icon',obj.GUI.icon.datasource,'Tooltip','Data source','ButtonPushedFcn',@obj.cb_toolbutton3);
-            obj.app.slider     = GUI.APP(2,[1 6],uislider(obj.app.grid(3),'Limits',[0 1],'MajorTicks',0:0.25:1,'MajorTickLabels',{'0%','25%','50%','75%','100%'},'MinorTicks',0:0.01:1,'ValueChangedFcn',@obj.cb_slider));
-            obj.app.labelC     = GUI.APP(3,[5 6],uilabel(obj.app.grid(3),'Text','','HorizontalAlignment','right'));
+            obj.app.slider     = GUI.APP(2,[1 7],uislider(obj.app.grid(3),'Limits',[0 1],'MajorTicks',0:0.25:1,'MajorTickLabels',{'0%','25%','50%','75%','100%'},'MinorTicks',0:0.01:1,'ValueChangedFcn',@obj.cb_slider));
+            obj.app.labelC     = GUI.APP(3,[1 2],uilabel(obj.app.grid(3),'Text','','HorizontalAlignment','left'));
             obj.app.buttonC(1) = GUI.APP(3,3,uibutton(obj.app.grid(3),'push','Text','Start','FontSize',16,'ButtonpushedFcn',@obj.cb_start));
             obj.app.buttonC(2) = GUI.APP(3,4,uibutton(obj.app.grid(3),'push','Text','Stop','FontSize',16,'Enable','off','ButtonpushedFcn',@obj.cb_stop));
+            obj.app.buttonC(3) = GUI.APP(3,[6 7],uibutton(obj.app.grid(3),'push','Text','Save','FontSize',16,'Enable','off','ButtonpushedFcn',@obj.cb_save));
             
             % The fourth panel
             obj.app.grid(4)  = GUI.APP(2,7,uigridlayout(obj.app.maingrid,'RowHeight',{22,22,'1x'},'ColumnWidth',{'1x','1x'},'Padding',[12 10 12 0],'RowSpacing',15,'BackgroundColor','w'));
@@ -131,7 +132,7 @@ classdef module_test < handle
                 tip = 'PROBLEM';
             end
             if contains(filename,'Open File')
-                [file,path] = uigetfile('*.m','');
+                [file,path] = uigetfile({'*.m','MATLAB class'},'');
                 if file ~= 0
                     try
                         filename = fullfile(path,file);
@@ -139,6 +140,7 @@ classdef module_test < handle
                         str = fgetl(f);
                         fclose(f);
                         assert(contains(str,['< ',tip]));
+                        addpath(path);
                     catch
                         uialert(obj.GUI.app.figure,sprintf('The selected file is not a subclass of %s.',tip),'Error');
                         return;
@@ -200,6 +202,7 @@ classdef module_test < handle
                 obj.app.listB.Enable         = 'off';
                 obj.app.buttonC(1).Text      = 'Pause';
                 obj.app.buttonC(2).Enable    = 'on';
+                obj.app.buttonC(3).Enable    = 'on';
                 obj.app.menu((PRO.M<=1)+1).value = 1;
                 [obj.app.menu(1).items(3:end).Enable] = deal('off');
                 [obj.app.menu(2).items(2:end).Enable] = deal('off');
@@ -235,6 +238,32 @@ classdef module_test < handle
                 obj.app.dropD(1).Items(end) = [];
             end
             obj.cb_dropdown1();
+        end
+        %% Save the result
+        function cb_save(obj,~,~)
+            ALG   = obj.data{obj.app.dropD(1).Value,1};
+            PRO   = obj.data{obj.app.dropD(1).Value,2};
+            rate  = PRO.FE/max(PRO.FE,PRO.maxFE);
+            index = max(1,round(obj.app.slider.Value/rate*size(ALG.result,1)));
+            Pop   = ALG.result{index,2};
+            if ~isempty(Pop)
+                Data = [Pop.decs,Pop.objs,Pop.cons];
+                try
+                    [Name,Path] = uiputfile({'*.txt','Text file';'*.dat','Text file';'*.csv','Text file';'*.mat','MAT file';'*.xlsx','Excel table'},'','data');
+                    if ischar(Name)
+                        [~,~,Type] = fileparts(Name);
+                        switch Type
+                            case '.mat'
+                                save(fullfile(Path,Name),'Data','-mat');
+                            otherwise
+                                writematrix(Data,fullfile(Path,Name));
+                        end
+                    end
+                catch err
+                    uialert(obj.GUI.app.figure,'Fail to save the result, please refer to the command window for details.','Error');
+                    rethrow(err);
+                end
+            end
         end
         %% Output function
         function outputFcn(obj,Algorithm,Problem)
@@ -308,7 +337,7 @@ classdef module_test < handle
         %% Create the gif
         function cb_toolbutton1(obj,~,~)
             if ~isempty(obj.app.dropD(1).Items)
-                [file,folder] = uiputfile('*.gif','');
+                [file,folder] = uiputfile({'*.gif','GIF image'},'');
                 if file ~= 0
                     try
                         filename = fullfile(folder,file);
