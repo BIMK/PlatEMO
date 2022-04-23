@@ -1,3 +1,9 @@
+# Release Highlights of PlatEMO 3.5
+
+* Enhance the application module, where users can define problems and save results more easily.
+
+* Add three decomposition based multi-objective evolutionary algorithms MOEA/D-DCWV, MOEA/D-PFE, and MOEA/D-VOV and a surrogate-assisted multi-objective evolutionary algorithm MCEA/D. There are currently 180 algorithms in the platform.
+
 # Release Highlights of PlatEMO 3.4
 
 * Remake the application module, a more powerful and friendly interface enables users to define problems more easily. The defined problems can also be saved into files and solved in other modules.
@@ -7,8 +13,6 @@
 # Release Highlights of PlatEMO 3.3
 
 * Add four multi-objective evolutionary algorithms DEA-GNG, ICMA, PeEA, and RVEA-iGNG. There are currently 162 algorithms in the platform.
-
-* Add five constrained multi-objective optimization problems FCP1-FCP5 and a sparse multi-objective optimization problem Sparse_KP. There are currently 345 problems in the platform.
 
 * Add five constrained multi-objective optimization problems FCP1-FCP5 and a sparse multi-objective optimization problem Sparse_KP. There are currently 345 problems in the platform.
 
