@@ -41,7 +41,7 @@ classdef GUI < handle
             tempPanel2         = uipanel(tempPanel,'Position',[43 4 18 18],'BorderType','none','BackgroundColor',[.549 .6627 .7529]);
             obj.app.buttonT(4) = uibutton(tempPanel2,'Position',[-2 -2 24 24],'Text','','Icon',obj.icon.github,'BackgroundColor',[.549 .6627 .7529],'Tooltip','GitHub','ButtonpushedFcn',@(~,~)web('https://github.com/BIMK/PlatEMO','-browser'));
             tempPanel2         = uipanel(tempPanel,'Position',[73 4 18 18],'BorderType','none','BackgroundColor',[.549 .6627 .7529]);
-            obj.app.buttonT(5) = uibutton(tempPanel2,'Position',[-2 -2 24 24],'Text','','Icon',obj.icon.qq,'BackgroundColor',[.549 .6627 .7529],'Tooltip','QQ','ButtonpushedFcn',@(~,~)web('https://jq.qq.com/?_wv=1027&k=oVDyc9cr','-browser'));
+            obj.app.buttonT(5) = uibutton(tempPanel2,'Position',[-2 -2 24 24],'Text','','Icon',obj.icon.qq,'BackgroundColor',[.549 .6627 .7529],'Tooltip','QQ','ButtonpushedFcn',@(~,~)web('https://jq.qq.com/?_wv=1027&k=cA5nUOl4','-browser'));
             
             % Create the menu
             obj.app.grid(2)   = GUI.APP(2,1,uigridlayout(obj.app.maingrid,'RowHeight',{'1x',13,1},'ColumnWidth',{1,75,75,75,'1x',13,1},'Padding',[0 0 0 5],'RowSpacing',5));
@@ -157,7 +157,7 @@ classdef GUI < handle
             uiimage(f,'Position',[145 40 150 150],'ImageSource',obj.icon.logo2);
             uilabel(f,'Position',[10 160 170 30],'Text',obj.app.figure.Name,'HorizontalAlignment','left','FontSize',18);
             uilabel(f,'Position',[10 130 160 40],'Text',{'Evolutionary Multi-Objective','Optimization Platform'},'HorizontalAlignment','left','FontSize',12,'FontAngle','italic','FontColor',[.4 .4 .4]);
-            uilabel(f,'Position',[10 80 150 40],'Text',{'Copyright (c) 2021','BIMK Group'},'HorizontalAlignment','left','FontSize',12);
+            uilabel(f,'Position',[10 80 150 40],'Text',{'Copyright (c) 2022','BIMK Group'},'HorizontalAlignment','left','FontSize',12);
             uilabel(f,'Position',[10 20 150 50],'Text',{'<Contact>','field910921@gmail.com','bimk.ahu.edu.cn'},'HorizontalAlignment','left','FontSize',12);
             uibutton(f,'Position',[210 10 70 22],'Text','OK','ButtonpushedFcn',@(~,~)delete(f));
         end
