@@ -111,7 +111,7 @@ classdef ALGORITHM < handle & matlab.mixin.Heterogeneous
             if obj.save <= 0; num = 10; else; num = obj.save; end
             index = max(1,min(min(num,size(obj.result,1)+1),ceil(num*obj.pro.FE/obj.pro.maxFE)));
             obj.result(index,:) = {obj.pro.FE,Population};
-            drawnow(); obj.outputFcn(obj,obj.pro);
+            drawnow limitrate; obj.outputFcn(obj,obj.pro);
             nofinish = obj.pro.FE < obj.pro.maxFE;
             assert(nofinish,'PlatEMO:Termination',''); tic;
         end
