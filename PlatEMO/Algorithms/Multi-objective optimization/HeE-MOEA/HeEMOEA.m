@@ -1,5 +1,5 @@
 classdef HeEMOEA < ALGORITHM
-% <multi> <real> <expensive>
+% <multi> <real/integer> <expensive>
 % Multiobjective evolutionary algorithm with heterogeneous ensemble based
 % infill criterion
 % Ke --- 5 --- Number of the solutions to be revaluated
@@ -25,7 +25,7 @@ classdef HeEMOEA < ALGORITHM
             Ke = Algorithm.ParameterSet(5);
             NI = 11*Problem.D-1;
             P  = UniformPoint(NI,Problem.D,'Latin');
-            A  = SOLUTION(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
+            A  = Problem.Evaluation(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
             
             %% Settings of the Ensemble Model
             L    = 11*Problem.D-1+25;
@@ -51,7 +51,7 @@ classdef HeEMOEA < ALGORITHM
                 if Numdata <=L
                     % fprintf('No training data decrease\n');                    
                 else
-                    [FrontNo,~] = NDSort(AObj,Numdata);
+                    FrontNo   = NDSort(AObj,Numdata);
                     [~,index] = sort(FrontNo);
                     ADec1 = ADec(index(1:floor(L/2)), :);
                     AObj1 = AObj(index(1:floor(L/2)), :);
@@ -66,9 +66,9 @@ classdef HeEMOEA < ALGORITHM
                 Models = TrainModel(ADec,AObj,Selection,str,Problem.M,Problem.D);
               
                 % Optimization
-                New = NSGA2ESelection(ADec,AObj,Models,str,Problem,Ke);
-                PopNew = SOLUTION(New);
-                A = [A PopNew];
+                New    = NSGA2ESelection(ADec,AObj,Models,str,Problem,Ke);
+                PopNew = Problem.Evaluation(New);
+                A      = [A PopNew];
             end
         end
     end

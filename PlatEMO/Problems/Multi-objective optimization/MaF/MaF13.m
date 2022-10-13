@@ -23,7 +23,7 @@ classdef MaF13 < PROBLEM
             obj.M        = max(obj.M,3);
             obj.lower    = [zeros(1,2),zeros(1,obj.D-2)-2];
             obj.upper    = [ones(1,2),zeros(1,obj.D-2)+2];
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,X)

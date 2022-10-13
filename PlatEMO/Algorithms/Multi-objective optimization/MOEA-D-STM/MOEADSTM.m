@@ -1,5 +1,5 @@
 classdef MOEADSTM < ALGORITHM
-% <multi/many> <real>
+% <multi/many> <real/integer>
 % MOEA/D with stable matching
 
 %------------------------------- Reference --------------------------------
@@ -51,7 +51,7 @@ classdef MOEADSTM < ALGORITHM
                             P(i,:) = randperm(Problem.N,3);
                         end
                     end
-                    Offspring = OperatorDE(Population(P(:,1)),Population(P(:,2)),Population(P(:,3)));
+                    Offspring = OperatorDE(Problem,Population(P(:,1)),Population(P(:,2)),Population(P(:,3)));
                     z         = min([z;Offspring.objs],[],1);
 
                     % STM selection

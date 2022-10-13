@@ -1,5 +1,5 @@
 classdef SPEA2 < ALGORITHM
-% <multi> <real/binary/permutation>
+% <multi> <real/integer/label/binary/permutation>
 % Strength Pareto evolutionary algorithm 2
 
 %------------------------------- Reference --------------------------------
@@ -25,7 +25,7 @@ classdef SPEA2 < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,Fitness);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,Fitness] = EnvironmentalSelection([Population,Offspring],Problem.N);
             end
         end

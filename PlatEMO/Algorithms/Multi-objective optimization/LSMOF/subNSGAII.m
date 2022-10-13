@@ -1,4 +1,4 @@
-function Population = subNSGAII(Population,Operator,N)
+function Population = subNSGAII(Problem,Population,Operator,N)
 % Sub-optimizer in LSMOF (NSGA-II)
 
 %------------------------------- Copyright --------------------------------
@@ -16,12 +16,12 @@ function Population = subNSGAII(Population,Operator,N)
     CrowdDis = CrowdingDistance(Population.objs,FrontNo);
     if Operator == 1
         MatingPool = TournamentSelection(2,N,FrontNo,-CrowdDis);
-        Offspring  = OperatorGA(Population(MatingPool));
+        Offspring  = OperatorGA(Problem,Population(MatingPool));
     else
         MatingPool1 = TournamentSelection(2,N,FrontNo,-CrowdDis);
         MatingPool2 = TournamentSelection(2,N,FrontNo,-CrowdDis);
         MatingPool3 = TournamentSelection(2,N,FrontNo,-CrowdDis);
-        Offspring   = OperatorDE(Population(MatingPool1),Population(MatingPool2),Population(MatingPool3));
+        Offspring   = OperatorDE(Problem,Population(MatingPool1),Population(MatingPool2),Population(MatingPool3));
     end
     Population = EnvironmentalSelection([Population,Offspring],N);
 end

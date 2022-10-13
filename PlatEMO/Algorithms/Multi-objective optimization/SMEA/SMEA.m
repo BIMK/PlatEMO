@@ -1,5 +1,5 @@
 classdef SMEA < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % Self-organizing multiobjective evolutionary algorithm
 % D    ---     --- Number of neurons in each dimension of the latent space
 % tau0 --- 0.7 --- Initial learning rate
@@ -70,14 +70,14 @@ classdef SMEA < ALGORITHM
                 % Evolution
                 A = Population.decs;
                 for u = 1 : Problem.N
-                    drawnow();
+                    drawnow('limitrate');
                     if rand < 0.9
                         Q = XU(B(u,:));
                     else
                         Q = 1 : Problem.N;
                     end
                     Q = Q(randperm(end,2));
-                    y = OperatorDE(Population(u),Population(Q(1)),Population(Q(2)));
+                    y = OperatorDE(Problem,Population(u),Population(Q(1)),Population(Q(2)));
                     [Population,FrontNo] = Select(Population,FrontNo,y);
                 end
 

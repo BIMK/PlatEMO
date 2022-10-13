@@ -1,12 +1,12 @@
 classdef DSPCMDE < ALGORITHM
-% <multi> <real/binary/permutation> <constrained>
-% Dynamic selection preference-assisted constrained multiobjective
-% differential evolution
+% <multi> <real/integer> <constrained>
+% Dynamic selection preference-assisted constrained multiobjective differential evolution
 
 %------------------------------- Reference --------------------------------
 % K. Yu, J. Liang, B. Qu, Y. Luo, and C. Yue, Dynamic selection
 % preference-assisted constrained multiobjective differential evolution,
-% IEEE Transactions on Systems, Man, and Cybernetics: Systems, 2021.
+% IEEE Transactions on Systems, Man, and Cybernetics: Systems, 2022, 52(5):
+% 2954-2965.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -23,11 +23,9 @@ classdef DSPCMDE < ALGORITHM
             
             %% Optimization
             while Algorithm.NotTerminated(Population)               
-                Offspring        = DEgenerator2(Population,Problem);
-                t                = Problem.FE/Problem.N;
-                MaxGen           = Problem.maxFE/Problem.N;
-                a                = 0.5*(1-cos((1-t/MaxGen)*pi));                
-                [Population,~,~] = EnvironmentalSelection([Population,Offspring],Problem.N,a);
+                Offspring  = DEgenerator2(Problem,Population);
+                a          = 0.5*(1-cos((1-Problem.FE/Problem.maxFE)*pi));                
+                Population = EnvironmentalSelection([Population,Offspring],Problem.N,a);
             end
         end
     end

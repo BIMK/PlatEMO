@@ -1,5 +1,5 @@
 classdef NSLS < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % Multiobjective optimization framework based on nondominated sorting and
 % local search
 
@@ -23,7 +23,7 @@ classdef NSLS < ALGORITHM
 
             %% Optimization
             while Algorithm.NotTerminated(Population)
-                Offspring  = Operator(Population);
+                Offspring  = Operator(Problem,Population);
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N);
             end
         end

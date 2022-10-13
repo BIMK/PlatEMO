@@ -1,5 +1,5 @@
 classdef hpaEA < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Hyperplane assisted evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -35,7 +35,7 @@ classdef hpaEA < ALGORITHM
                 MatingPool = randi(numel(Population), 1, Problem.N-domNum);
                 MatingPool = [MatingPool, PSI];
                 MatingPool(randperm(size(MatingPool, 2))) = MatingPool(1: end);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 CombinePop = [Population, Offspring];
                 % Remove some solutions that cannot dominate the worst point
                 fitness = max(CombinePop.objs - repmat(maxObj, numel(CombinePop), 1), [], 2);

@@ -1,4 +1,4 @@
-function Offspring = Exploration(PC,NPC,nND,N)
+function Offspring = Exploration(Problem,PC,NPC,nND,N)
 % Individual exploration in BCE
 
 %------------------------------- Copyright --------------------------------
@@ -33,7 +33,7 @@ function Offspring = Exploration(PC,NPC,nND,N)
     %% Generate new solutions
     if ~isempty(S)
         MatingPool = randi(length(PC),1,length(S));
-        Offspring  = OperatorGAhalf(PC([S',MatingPool]));
+        Offspring  = OperatorGAhalf(Problem,PC([S',MatingPool]));
     else
         Offspring = [];
     end

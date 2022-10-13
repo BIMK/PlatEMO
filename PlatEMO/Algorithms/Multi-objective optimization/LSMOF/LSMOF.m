@@ -1,5 +1,5 @@
 classdef LSMOF < ALGORITHM
-% <multi> <real> <large/none>
+% <multi> <real/integer> <large/none>
 % Large-scale multi-objective optimization framework with NSGA-II
 % wD       --- 10 --- The generation of weight optimization with DE
 % SubN     --- 30 --- The population size of the transferred problem
@@ -26,7 +26,7 @@ classdef LSMOF < ALGORITHM
             %% Parameter settings
             [wD,SubN,Operator] = Algorithm.ParameterSet(10,30,2);
             Population         = Problem.Initialization();
-            G = floor(Problem.maxFE*0.05/(SubN*2*wD));
+            G = ceil(Problem.maxFE*0.05/(SubN*2*wD));
 
             %% Optimization
             while Algorithm.NotTerminated(Population)
@@ -34,7 +34,7 @@ classdef LSMOF < ALGORITHM
                     Archive    = WeightOptimization(Problem,G,Population,wD,SubN);
                     Population = EnvironmentalSelection([Population,Archive],Problem.N);
                 else
-                    Population = subNSGAII(Population,Operator,Problem.N);
+                    Population = subNSGAII(Problem,Population,Operator,Problem.N);
                 end
             end
         end

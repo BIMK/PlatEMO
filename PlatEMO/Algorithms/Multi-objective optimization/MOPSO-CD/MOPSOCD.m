@@ -1,5 +1,5 @@
 classdef MOPSOCD < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % MOPSO with crowding distance
 
 %------------------------------- Reference --------------------------------
@@ -25,7 +25,7 @@ classdef MOPSOCD < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Archive)
                 Gbest      = Archive(randi(ceil(length(Archive)*0.1),1,Problem.N));
-                Population = Operator(Population,Pbest,Gbest);
+                Population = Operator(Problem,Population,Pbest,Gbest);
                 Archive    = UpdateArchive([Archive,Population],Problem.N);
                 Pbest      = UpdatePbest(Pbest,Population);
             end

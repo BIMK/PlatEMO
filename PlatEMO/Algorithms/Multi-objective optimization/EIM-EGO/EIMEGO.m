@@ -1,5 +1,5 @@
 classdef EIMEGO < ALGORITHM
-% <multi> <real> <expensive>
+% <multi> <real/integer> <expensive>
 % Expected improvement matrix based efficient global optimization
 % InfillCriterionIndex --- 1 --- infill criterion index number
 
@@ -36,7 +36,7 @@ classdef EIMEGO < ALGORITHM
             % generate initial design points using Latin Hypercube sampling
             PopDec = repmat(Problem.upper-Problem.lower,N,1).*UniformPoint(N,D,'Latin')+repmat(Problem.lower,N,1);
             % calculate initial design points
-            Population   = SOLUTION(PopDec);
+            Population   = Problem.Evaluation(PopDec);
 
             %% Optimization
             while Algorithm.NotTerminated(Population)
@@ -52,7 +52,7 @@ classdef EIMEGO < ALGORITHM
                 end       
                 % select one candidate with the maximum EIM value using GA
                 PopDec     = InfillSamplingEIM(Problem,KrigingModel,PopObjScaled,InfillCriterionIndex);
-                Population = [Population,SOLUTION(PopDec)];
+                Population = [Population,Problem.Evaluation(PopDec)];
             end
         end
     end

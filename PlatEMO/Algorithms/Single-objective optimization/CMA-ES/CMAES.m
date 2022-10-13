@@ -1,5 +1,5 @@
 classdef CMAES < ALGORITHM
-% <single> <real> <large/none> <constrained/none>
+% <single> <real/integer> <large/none> <constrained/none>
 % Covariance matrix adaptation evolution strategy
 
 %------------------------------- Reference --------------------------------
@@ -48,7 +48,7 @@ classdef CMAES < ALGORITHM
                     Pstep(i,:) = mvnrnd(zeros(1,Problem.D),C);
                 end
                 Pdec       = Mdec + sigma.*Pstep;
-                Population = SOLUTION(Pdec);
+                Population = Problem.Evaluation(Pdec);
                 % Update mean
                 [~,rank] = sort(FitnessSingle(Population));
                 Pstep    = Pstep(rank,:);

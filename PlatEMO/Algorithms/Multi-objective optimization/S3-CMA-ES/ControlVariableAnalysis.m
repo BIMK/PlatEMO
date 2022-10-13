@@ -19,7 +19,7 @@ function [PV,DV] = ControlVariableAnalysis(Problem,NCA)
         inter   = (0.95-0.05)/(NCA-1);
         tempA   = 0.05:inter:0.96;
         S(:, i) = tempA'*(Problem.upper(i)-Problem.lower(i)) + Problem.lower(i);
-        S          = SOLUTION(S);
+        S          = Problem.Evaluation(S);
         [~,MaxFNo] = NDSort(S.objs,inf);
         Fno(i) = MaxFNo;      
     end

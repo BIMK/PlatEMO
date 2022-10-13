@@ -50,7 +50,7 @@ classdef Sparse_CD < PROBLEM
             obj.D = size(obj.Adj,2);
             obj.lower    = zeros(1, obj.D);
             obj.upper    = ones(1, obj.D);
-            obj.encoding = 'binary';
+            obj.encoding = 4 + zeros(1,obj.D);
             % Maximum and minimum objective values for normalization
             C = Decoding([1,zeros(1,obj.D-1)],obj.ACT,obj.D);
             obj.MaxKKM = KKM(obj.Adj,C);
@@ -77,7 +77,7 @@ classdef Sparse_CD < PROBLEM
             Q = zeros(1,length(Population));
             for i = 1 : length(Population)
                 C{i} = Decoding(Population(i).dec,obj.ACT,obj.D);
-                Q(i) = modularity(obj.Adj,C{i});
+                Q(i) = Modularity(obj.Adj,C{i});
             end
             [~,best] = max(Q);
             h = plot(Draw([]),obj.G,'MarkerSize',6,'EdgeColor',[.3 .3 .3]);
@@ -198,7 +198,7 @@ function cs = RC(Adj,C)
     end
 end
 
-function Q = modularity(Adj,C)
+function Q = Modularity(Adj,C)
 % Calculate the modularity
 
     Q = 0;

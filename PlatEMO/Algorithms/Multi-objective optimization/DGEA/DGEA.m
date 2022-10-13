@@ -1,5 +1,5 @@
 classdef DGEA < ALGORITHM
-% <multi/many> <real> <large/none>
+% <multi/many> <real/integer> <large/none>
 % Direction guided evolutionary algorithm
 % operation ---   1 --- Operation of the environmental selection
 % RefNo     ---  10 --- Number of reference vectors for offspring generation
@@ -7,7 +7,7 @@ classdef DGEA < ALGORITHM
 %------------------------------- Reference --------------------------------
 % C. He, R. Cheng, and D. Yazdani, Adaptive offspring generation for
 % evolutionary large-scale multiobjective optimization, IEEE Transactions
-% on System, Man, and Cybernetics: Systems, 2020.
+% on System, Man, and Cybernetics: Systems, 2022, 52(2): 786-798.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -33,8 +33,6 @@ classdef DGEA < ALGORITHM
                 [Population,FrontNo] = PreSelection([Population,Offspring],V,(Problem.FE/Problem.maxFE)^2,RefNo);
                 Offspring = DirectionReproduction(Problem,Population,FrontNo,RefNo);
                 switch operation
-                    case 0
-                        Arc = [Population,Offspring]; % Without selection
                     case 1 
                         Arc = subRVEA([Arc,Offspring],V,(Problem.FE/Problem.maxFE)^2);
                     case 2
@@ -43,6 +41,8 @@ classdef DGEA < ALGORITHM
                         Arc = subIBEA([Arc,Offspring],Problem.N,0.05);
                     case 4 
                         Arc = subSPEA2([Arc,Offspring],Problem.N);
+                    otherwise
+                        Arc = [Population,Offspring];	% Without selection
                 end
             end
         end

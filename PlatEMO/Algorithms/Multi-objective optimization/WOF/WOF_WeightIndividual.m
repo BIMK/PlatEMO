@@ -85,9 +85,9 @@ classdef WOF_WeightIndividual < handle
                 x = WOF_transformationFunctionMatrixForm(xPrimeVars,variables(GlobalDummy.G),GlobalDummy.xPrimeupper,GlobalDummy.xPrimelower, GlobalDummy.psi);
 
 
-                
+                Problem = WOF_WeightIndividual.Current();
                 obj.dec = variables;
-                obj.ind = SOLUTION(x);
+                obj.ind = Problem.Evaluation(x);
                 obj.obj = obj.ind.obj;
                 obj.con = obj.ind.con;
             
@@ -148,6 +148,19 @@ classdef WOF_WeightIndividual < handle
                     obj(i).add.(Field) = addValue(i,:);
                 end
                 value(i,:) = obj(i).add.(Field);
+            end
+        end
+    end
+    methods(Static, Sealed)
+        function obj = Current(obj)
+        %Current - Get or set the current PROBLEM object.
+        
+            persistent Problem;
+            if nargin > 0
+                Problem = obj;
+            end
+            if nargout > 0
+                obj = Problem;
             end
         end
     end

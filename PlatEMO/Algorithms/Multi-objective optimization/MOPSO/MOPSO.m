@@ -1,5 +1,5 @@
 classdef MOPSO < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % Multi-objective particle swarm optimization
 % div --- 10 --- The number of divisions in each objective
 
@@ -29,7 +29,7 @@ classdef MOPSO < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Archive)
                 REP        = REPSelection(Archive.objs,Problem.N,div);
-                Population = OperatorPSO(Population,Pbest,Archive(REP));
+                Population = OperatorPSO(Problem,Population,Pbest,Archive(REP));
                 Archive    = UpdateArchive([Archive,Population],Problem.N,div);
                 Pbest      = UpdatePbest(Pbest,Population);
             end

@@ -27,7 +27,7 @@ classdef MONRP < PROBLEM
             m = obj.ParameterSet(100);
             obj.M = 2;
             if isempty(obj.D); obj.D = 100; end
-            obj.encoding = 'binary';
+            obj.encoding = 4 + zeros(1,obj.D);
             % Randomly generate costs and values
             n    = obj.D;
             file = sprintf('MONRP-n%d-m%d.mat',n,m);

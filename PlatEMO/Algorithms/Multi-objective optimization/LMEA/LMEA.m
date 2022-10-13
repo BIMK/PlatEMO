@@ -1,5 +1,5 @@
 classdef LMEA < ALGORITHM
-% <multi/many> <real> <large>
+% <multi/many> <real/integer> <large>
 % Evolutionary algorithm for large-scale many-objective optimization
 % nSel ---  5 --- Number of selected solutions for decision variable clustering
 % nPer --- 50 --- Number of perturbations on each solution for decision variable clustering
@@ -35,20 +35,20 @@ classdef LMEA < ALGORITHM
             while Algorithm.NotTerminated(Population)
                 % Convergence optimization
                 for i = 1 : 10
-                    drawnow();
-                    Population = ConvergenceOptimization(Population,DVSet,type);
+                    drawnow('limitrate');
+                    Population = ConvergenceOptimization(Problem,Population,DVSet,type);
                 end
                 % Distribution optimization
                 for i = 1 : Problem.M
                     drawnow();
-                    Population = DistributionOptimization(Population,PV);
+                    Population = DistributionOptimization(Problem,Population,PV);
                 end
             end
         end
     end
 end
 
-function Population = ConvergenceOptimization(Population,DVSet,type)
+function Population = ConvergenceOptimization(Problem,Population,DVSet,type)
     [N,D] = size(Population.decs);
     Con   = calCon(Population.objs);
     for i = 1 : length(DVSet)
@@ -58,12 +58,12 @@ function Population = ConvergenceOptimization(Population,DVSet,type)
             % Generate offsprings
             OffDec = Population.decs;
             if type == 1
-                NewDec = OperatorGAhalf(Population(MatingPool).decs,{1,20,D/length(DVSet{i})/2,20});
+                NewDec = OperatorGAhalf(Problem,Population(MatingPool).decs,{1,20,D/length(DVSet{i})/2,20});
             elseif type == 2
-                NewDec = OperatorDE(Population.decs,Population(MatingPool(1:end/2)).decs,Population(MatingPool(end/2+1:end)).decs,{1,0.5,D/length(DVSet{i})/2,20});
+                NewDec = OperatorDE(Problem,Population.decs,Population(MatingPool(1:end/2)).decs,Population(MatingPool(end/2+1:end)).decs,{1,0.5,D/length(DVSet{i})/2,20});
             end
             OffDec(:,DVSet{i}) = NewDec(:,DVSet{i});
-            Offspring          = SOLUTION(OffDec);
+            Offspring          = Problem.Evaluation(OffDec);
             % Update each solution
             allCon  = calCon([Population.objs;Offspring.objs]);
             Con     = allCon(1:N);
@@ -75,21 +75,21 @@ function Population = ConvergenceOptimization(Population,DVSet,type)
     end
 end
 
-function Population = DistributionOptimization(Population,PV)
+function Population = DistributionOptimization(Problem,Population,PV)
 % Distribution optimization
 
     N            = length(Population);
     OffDec       = Population(TournamentSelection(2,N,calCon(Population.objs))).decs;
-    NewDec       = OperatorGA(Population(randi(N,1,N)).decs);
+    NewDec       = OperatorGA(Problem,Population(randi(N,1,N)).decs);
     OffDec(:,PV) = NewDec(:,PV);
-    Offspring    = SOLUTION(OffDec);
+    Offspring    = Problem.Evaluation(OffDec);
     Population   = EnvironmentalSelection([Population,Offspring],N);
 end
 
-function Con = calCon(PopuObj)
+function Con = calCon(PopObj)
 % Calculate the convergence of each solution
 
-    FrontNo = NDSort(PopuObj,inf);
-    Con     = sum(PopuObj,2);
+    FrontNo = NDSort(PopObj,inf);
+    Con     = sum(PopObj,2);
     Con     = FrontNo'*(max(Con)-min(Con)) + Con;
 end

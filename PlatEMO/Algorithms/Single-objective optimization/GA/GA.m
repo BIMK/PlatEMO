@@ -1,5 +1,5 @@
 classdef GA < ALGORITHM
-% <single> <real/binary/permutation> <large/none> <constrained/none>
+% <single> <real/integer/label/binary/permutation> <large/none> <constrained/none>
 % Genetic algorithm
 % proC ---  1 --- Probability of crossover
 % disC --- 20 --- Distribution index of simulated binary crossover
@@ -29,7 +29,7 @@ classdef GA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,FitnessSingle(Population));
-                Offspring  = OperatorGA(Population(MatingPool),{proC,disC,proM,disM});
+                Offspring  = OperatorGA(Problem,Population(MatingPool),{proC,disC,proM,disM});
                 Population = [Population,Offspring];
                 [~,rank]   = sort(FitnessSingle(Population));
                 Population = Population(rank(1:Problem.N));

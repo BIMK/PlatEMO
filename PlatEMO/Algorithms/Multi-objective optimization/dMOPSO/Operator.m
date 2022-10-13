@@ -1,4 +1,4 @@
-function Offspring = Operator(Particle,Pbest,Gbest,W)
+function Offspring = Operator(Problem,Particle,Pbest,Gbest,W)
 % The particle swarm optimization in dMOPSO
 
 %------------------------------- Copyright --------------------------------
@@ -11,7 +11,7 @@ function Offspring = Operator(Particle,Pbest,Gbest,W)
 %--------------------------------------------------------------------------
 
     %% Parameter setting
-    if nargin < 4
+    if nargin < 5
         W = 0.4;
     end
     ParticleDec = Particle.decs;
@@ -19,7 +19,6 @@ function Offspring = Operator(Particle,Pbest,Gbest,W)
     GbestDec    = Gbest.decs;
     [N,D]       = size(ParticleDec);
     ParticleVel = Particle.adds(zeros(N,D));
-    Problem     = PROBLEM.Current();
 
     %% Particle swarm optimization
     r1     = repmat(rand(N,1),1,D);
@@ -30,5 +29,5 @@ function Offspring = Operator(Particle,Pbest,Gbest,W)
     %% Deterministic back
     repair = OffDec < repmat(Problem.lower,N,1) | OffDec > repmat(Problem.upper,N,1);
     OffVel(repair) = -OffVel(repair);
-    Offspring = SOLUTION(OffDec,OffVel);
+    Offspring = Problem.Evaluation(OffDec,OffVel);
 end

@@ -1,5 +1,5 @@
 classdef KTA2 < ALGORITHM
-% <multi/many> <real> <expensive>
+% <multi/many> <real/integer> <expensive>
 % Kriging-assisted Two_Arch2
 % tau  --- 0.75 --- Proportion of one type noninfluential points in training data
 % phi  ---  0.1 --- Number of randomly selected individuals
@@ -32,7 +32,7 @@ classdef KTA2 < ALGORITHM
             CAsize = Problem.N;
             N = Problem.N;
             P = UniformPoint(N, Problem.D, 'Latin');
-            Population = SOLUTION(repmat(Problem.upper-Problem.lower,N,1).*P+repmat(Problem.lower,N,1));
+            Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,N,1).*P+repmat(Problem.lower,N,1));
             All_Population = Population;
             Ho_Population = All_Population;
             CA = UpdateCA([],Population,CAsize);
@@ -54,7 +54,7 @@ classdef KTA2 < ALGORITHM
                 end
                 % build insensitive models 
                 Centers = zeros(Problem.M,2);
-                for i = 1:Problem.M
+                for i = 1 : Problem.M
                     [~,N1] = sort(Obj(:,i));
                     num = ceil(length(All_Population).*tau);
                     mean_index{1} = N1(1:num);
@@ -62,7 +62,7 @@ classdef KTA2 < ALGORITHM
                     for j = 1:2
                         Centers(i,j) = mean(Obj(mean_index{j},i));  % lambda and miu
                     end
-                    for j = 1:2
+                    for j = 1 : 2
                         train_X = Dec(mean_index{j},:);
                         train_Y = Obj(mean_index{j},i);
                         dmodel  = dacefit(train_X,train_Y,'regpoly0','corrgauss',THETA_IS(j,i,:),1e-5.*ones(1,Problem.D),100.*ones(1,Problem.D));
@@ -76,7 +76,7 @@ classdef KTA2 < ALGORITHM
                 w = 1;
                 while w <= wmax   % this part is same as Two_Arch2 
                     [~,ParentCdec,~,ParentMdec] = MatingSelection_KTA2(CAobj,CAdec,DAobj,DAdec,Problem.N);
-                    OffspringDec = [OperatorGA(ParentCdec,{1,20,0,0});OperatorGA(ParentMdec,{0,0,1,20})];
+                    OffspringDec = [OperatorGA(Problem,ParentCdec,{1,20,0,0});OperatorGA(Problem,ParentMdec,{0,0,1,20})];
                     PopDec = [DAdec;CAdec;OffspringDec];
                     N      = size(PopDec,1);
                     PopObj = zeros(N,Problem.M);
@@ -111,7 +111,7 @@ classdef KTA2 < ALGORITHM
                     end
                 end
                 if ~isempty(Offspring02)
-                    Offspring = SOLUTION(Offspring02);
+                    Offspring = Problem.Evaluation(Offspring02);
 
                     temp =  All_Population.decs;
                     for i = 1:size(Offspring,2)

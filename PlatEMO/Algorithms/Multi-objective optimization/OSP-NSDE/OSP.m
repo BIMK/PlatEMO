@@ -146,9 +146,9 @@ function XF = fun_Otimiz(indiv_Max,apt_Max,yF,Problem)
         x0 = indiv_Max(i,:);
         f_x0 = apt_Max(i,:);
 
-        fun = @(x) pdist2(SOLUTION(x).obj,yF(i,:));
+        fun = @(x)pdist2(Problem.Evaluation(x).obj,yF(i,:));
 
-        XF_temp = SOLUTION(x0);
+        XF_temp  = Problem.Evaluation(x0);
         dist_apt = pdist2(f_x0,yF(i,:));
 
         % Intermedial optimization using sequential quadratic programming method (SQP)
@@ -157,7 +157,7 @@ function XF = fun_Otimiz(indiv_Max,apt_Max,yF,Problem)
             Problem.lower,Problem.upper,[],options);
 
         if dist_aptx < dist_apt
-            XF_temp = SOLUTION(x);
+            XF_temp = Problem.Evaluation(x);
         end
 
         XF(i) = XF_temp; % "leading individuals"
@@ -185,7 +185,7 @@ function Y_LS = fun_GMMOV(indiv, Problem, ksol)
     end
 
     % Evaluate new individuals
-    Y_LS = SOLUTION(Y);
+    Y_LS = Problem.Evaluation(Y);
 
 end
 

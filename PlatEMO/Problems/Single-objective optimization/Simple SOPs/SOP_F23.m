@@ -21,7 +21,7 @@ classdef SOP_F23 < PROBLEM
             obj.D = 4;
             obj.lower    = zeros(1,obj.D);
             obj.upper    = zeros(1,obj.D) + 10;
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

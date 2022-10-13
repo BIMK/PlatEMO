@@ -1,4 +1,4 @@
-function Offspring = Operator(Particle,Pbest,Gbest)
+function Offspring = Operator(Problem,Particle,Pbest,Gbest)
 % <operator> <real>
 % Particle swarm optimization in NMPSO
 
@@ -28,5 +28,5 @@ function Offspring = Operator(Particle,Pbest,Gbest)
     C3 = repmat(unifrnd(1.5,2.5,N,1),1,D);
     OffVel    = W.*ParticleVel + C1.*r1.*(PbestDec-ParticleDec) + C2.*r2.*(GbestDec-ParticleDec) + C3.*r3.*(GbestDec-PbestDec);
     OffDec    = ParticleDec + OffVel;
-    Offspring = SOLUTION(OffDec,OffVel);
+    Offspring = Problem.Evaluation(OffDec,OffVel);
 end

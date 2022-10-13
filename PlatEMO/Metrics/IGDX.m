@@ -1,5 +1,5 @@
-function score = IGDX(Population,optimum)
-% <min>
+function score = IGDX(Population,POS)
+% <min> <multi/many> <real/integer/label/binary/permutation> <large/none> <constrained/none> <expensive/none> <sparse/none> <multimodal> <dynamic/none>
 % Inverted generational distance in the decision space
 
 %------------------------------- Reference --------------------------------
@@ -17,9 +17,9 @@ function score = IGDX(Population,optimum)
 %--------------------------------------------------------------------------
 
     PopDec = Population.decs;
-    if size(PopDec,2) ~= size(optimum,2)
+    if size(PopDec,2) ~= size(POS,2)
         score = nan;
     else
-        score = mean(min(pdist2(optimum,PopDec),[],2));
+        score = mean(min(pdist2(POS,PopDec),[],2));
     end
 end

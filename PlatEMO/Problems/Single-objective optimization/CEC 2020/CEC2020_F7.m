@@ -56,7 +56,7 @@ classdef CEC2020_F7 < PROBLEM
             obj.S = arrayfun(@(i)obj.S(p(i)+1:p(i+1)),1:length(p)-1,'UniformOutput',false);
             obj.lower    = zeros(1,obj.D) - 100;
             obj.upper    = zeros(1,obj.D) + 100;
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

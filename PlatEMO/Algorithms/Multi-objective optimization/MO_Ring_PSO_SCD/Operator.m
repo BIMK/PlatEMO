@@ -1,4 +1,4 @@
-function Offspring = Operator(Particle,PBA,NBA)
+function Offspring = Operator(Problem,Particle,PBA,NBA)
 % Particle swarm optimization in MO_Ring_PSO_SCD
 
 %------------------------------- Copyright --------------------------------
@@ -20,7 +20,6 @@ function Offspring = Operator(Particle,PBA,NBA)
         NbestDec(i,:) = NBA{i}(1).dec;        
     end
     ParticleVel = Particle.adds(zeros(N,D));
-    Problem     = PROBLEM.Current();
 
     %% Particle swarm optimization
     W  = repmat(0.7298,N,D);
@@ -38,5 +37,5 @@ function Offspring = Operator(Particle,PBA,NBA)
     OffDec(temp) = Lower(temp)+0.25*(Upper(temp)-Lower(temp)).*rand(size(OffDec(temp)));
     temp = OffDec>Upper;
     OffDec(temp) = Upper(temp)-0.25*(Upper(temp)-Lower(temp)).*rand(size(OffDec(temp))); 
-    Offspring = SOLUTION(OffDec,OffVel);
+    Offspring = Problem.Evaluation(OffDec,OffVel);
 end

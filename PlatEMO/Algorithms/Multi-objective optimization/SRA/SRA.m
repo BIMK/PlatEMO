@@ -1,5 +1,5 @@
 classdef SRA < ALGORITHM
-% <many> <real/binary/permutation>
+% <many> <real/integer/label/binary/permutation>
 % Stochastic ranking algorithm
 
 %------------------------------- Reference --------------------------------
@@ -23,7 +23,7 @@ classdef SRA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = randi(Problem.N,1,2*Problem.N);
-                Offspring  = OperatorGAhalf(Population(MatingPool));
+                Offspring  = OperatorGAhalf(Problem,Population(MatingPool));
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N,unifrnd(0.4,0.6));
             end
         end

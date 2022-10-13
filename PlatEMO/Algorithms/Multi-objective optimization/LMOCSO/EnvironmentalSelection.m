@@ -10,6 +10,7 @@ function Population = EnvironmentalSelection(Population,V,theta)
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
+    Population = Population(NDSort(Population.objs,1)==1);
     PopObj = Population.objs;
     [N,M]  = size(PopObj);
     NV     = size(V,1);

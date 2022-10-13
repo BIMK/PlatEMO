@@ -1,4 +1,4 @@
-function [OffDec,OffMask,long,numGroup] = Operator(ParentDec,ParentMask,REAL,Fitness,Mix,P,T,Zero,One,Upper,Lower,dt,numGroup,useGPU,GlobalGen)
+function [OffDec,OffMask,long,numGroup] = Operator(Problem,ParentDec,ParentMask,Fitness,Mix,P,T,Zero,One,Upper,Lower,dt,numGroup,useGPU,GlobalGen)
 % The operator of SLMEA
 
 %------------------------------- Copyright --------------------------------
@@ -51,15 +51,15 @@ function [OffDec,OffMask,long,numGroup] = Operator(ParentDec,ParentMask,REAL,Fit
        else
           Index = gpuArray.zeros(1,length(Lower)); 
        end
-       if ~isempty(Zero)&&~isempty(One) % Grouping all 1 & all 0
+       if ~isempty(Zero)&&~isempty(One)     % Grouping all 1 & all 0
            Index(Zero) = MAX+1;
            Index(One)  = MAX+2;
            MAX = MAX+2;
-       elseif isempty(Zero)&&~isempty(One)
-           Index(One) = MAX+1;% only Grouping all 1
+       elseif isempty(Zero)&&~isempty(One)  % Only Grouping all 1
+           Index(One) = MAX+1;
            MAX = MAX+1;
-       elseif isempty(One)&&~isempty(Zero)
-           Index(Zero) = MAX+1;% only Grouping all 0
+       elseif isempty(One)&&~isempty(Zero)  % Only Grouping all 0
+           Index(Zero) = MAX+1;
            MAX = MAX+1;
        end
        Index(Mix) = index;
@@ -99,20 +99,21 @@ function [OffDec,OffMask,long,numGroup] = Operator(ParentDec,ParentMask,REAL,Fit
     end
     OrOffMask = SLMEA_GAhalf([Parent21Mask;Parent22Mask],Lower,Upper,'binary',useGPU);
     OffMask   = [ClOffMask;OrOffMask];
-    if REAL
+    if any(Problem.encoding~=4)
         if ~isempty(find(location>0, 1))&&GlobalGen>=T 
             ClOffDec = SLMEA_GAhalf([Parent11Dec;Parent12Dec],lower,upper,'real',useGPU);
             ClOffDec = DecodeDec(ClOffDec,Index);
             ClOffDec = ClOffDec.*repmat((Upper-Lower),length(find(location==1)),1)+repmat(Lower,length(find(location==1)),1);
         end
-            OrOffDec = SLMEA_GAhalf([Parent21Dec;Parent22Dec],Lower,Upper,'real',useGPU);
-            OffDec   = [ClOffDec;OrOffDec];
-            OffDec   = min(max(OffDec,repmat(Lower,N/2,1)),repmat(Upper,N/2,1));
+        OrOffDec = SLMEA_GAhalf([Parent21Dec;Parent22Dec],Lower,Upper,'real',useGPU);
+        OffDec   = [ClOffDec;OrOffDec];
+        OffDec   = min(max(OffDec,repmat(Lower,N/2,1)),repmat(Upper,N/2,1));
+        OffDec(:,Problem.encoding==4) = 1;
     else
         if ~useGPU
-           OffDec = ones(N/2,D); 
+        	OffDec = ones(N/2,D); 
         else
-           OffDec = gpuArray.ones(N/2,D); 
+        	OffDec = gpuArray.ones(N/2,D); 
         end
     end
 end

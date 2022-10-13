@@ -31,7 +31,7 @@ classdef MLDMP < PROBLEM
             obj.D        = 2;
             obj.lower    = zeros(1,2) + lower;
             obj.upper    = zeros(1,2) + upper;
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
             % Generate vertexes
             if mod(obj.M,2) == 0
                 Angle = (2.*(1:obj.M)-3).*pi./obj.M;

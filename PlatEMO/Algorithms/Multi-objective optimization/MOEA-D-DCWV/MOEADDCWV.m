@@ -1,5 +1,5 @@
 classdef MOEADDCWV < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % MOEA/D with distribution control of weight vector set
 % p --- -1 --- The intermediate objective value
 
@@ -52,7 +52,7 @@ classdef MOEADDCWV < ALGORITHM
                     P = B(i,randperm(size(B,2)));
 
                     % Generate an offspring
-                    Offspring = OperatorGAhalf(Population(P(1:2)));
+                    Offspring = OperatorGAhalf(Problem,Population(P(1:2)));
 
                     % Update the ideal and nadir point
                     Z = min(Z,Offspring.obj);

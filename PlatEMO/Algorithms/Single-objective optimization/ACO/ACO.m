@@ -32,7 +32,7 @@ classdef ACO < ALGORITHM
                         PopDec(i,j+1) = Remain(next);
                     end
                 end
-                Population = SOLUTION(PopDec);
+                Population = Problem.Evaluation(PopDec);
                 % Update the pheromone matrix
                 dTau = zeros(Problem.D) + 1e-6;
                 for i = 1 : Problem.N

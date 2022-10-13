@@ -1,5 +1,5 @@
 classdef DCNSGAIII < ALGORITHM
-% <multi/many> <real/binary/permutation> <constrained>
+% <multi/many> <real/integer/label/binary/permutation> <constrained>
 % Dynamic constrained NSGA-III
 % cp --- 5 --- Decrease trend of the dynamic constraint boundary
 
@@ -37,7 +37,7 @@ classdef DCNSGAIII < ALGORITHM
                 epsn       = ReduceBoundary(initialE, ceil(Problem.FE/Problem.N), ceil(Problem.maxFE/Problem.N)-1, cp);
                 % Mating selection which prefers to select epsilon-feasible solutions
                 MatingPool = TournamentSelection(2, Problem.N,sum(max(0, Population.cons-epsn), 2));
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 % Update the reference points only consider the epsilon-feasible solution set
                 Zmin       = min([Population(sum(max(0, Population.cons)<=epsn, 2)==size(Population.cons, 2)).objs; Offspring(sum(max(0,Offspring.cons)<=epsn, 2)==size(Offspring.cons, 2)).objs], [], 1);
                 % Environment selection

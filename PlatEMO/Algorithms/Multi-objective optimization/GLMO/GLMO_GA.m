@@ -1,4 +1,4 @@
-function Offspring = GLMO_GA(Parent, numberOfGroups, typeOfGroups)
+function Offspring = GLMO_GA(Problem, Parent, numberOfGroups, typeOfGroups)
 % ----------------------------------------------------------------------- 
 %  Copyright (C) 2020 Heiner Zille
 %
@@ -50,16 +50,14 @@ function Offspring = GLMO_GA(Parent, numberOfGroups, typeOfGroups)
     [proC,disC,proM,disM] = deal(1,20,1,20);
     
     if isa(Parent(1),'SOLUTION')
-        calObj = true;
-        Parent = Parent.decs;
+        evaluated = true;
+        Parent    = Parent.decs;
     else
-        calObj = false;
+        evaluated = false;
     end
     Parent1 = Parent(1:floor(end/2),:);
     Parent2 = Parent(floor(end/2)+1:floor(end/2)*2,:);
     [N,D]   = size(Parent1);
-    Problem = PROBLEM.Current();
- 
 
     %% Genetic operators for real encoding
     % Simulated binary crossover
@@ -90,7 +88,7 @@ function Offspring = GLMO_GA(Parent, numberOfGroups, typeOfGroups)
     temp = Site & mu>0.5; 
     Offspring(temp) = Offspring(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                       (1-(Upper(temp)-Offspring(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
-    if calObj
-        Offspring = SOLUTION(Offspring);
+    if evaluated
+        Offspring = Problem.Evaluation(Offspring);
     end
 end

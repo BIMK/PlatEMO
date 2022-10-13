@@ -1,5 +1,5 @@
 classdef MaOEACSS < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Many-objective evolutionary algorithms based on coordinated selection
 % strategy
 % t --- 0 --- Threshold value in environmental selection
@@ -29,7 +29,7 @@ classdef MaOEACSS < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = MatingSelection(Population.objs,Zmin);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Zmin       = min([Zmin;Offspring.objs],[],1);
                 Population = EnvironmentalSelection([Population,Offspring],Zmin,t,Problem.N);
             end

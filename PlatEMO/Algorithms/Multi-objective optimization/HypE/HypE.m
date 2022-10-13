@@ -1,5 +1,5 @@
 classdef HypE < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Hypervolume estimation algorithm
 % nSample --- 10000 --- Number of sampled points for HV estimation
 
@@ -29,7 +29,7 @@ classdef HypE < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,-CalHV(Population.objs,RefPoint,Problem.N,nSample));
-                Offspring  = OperatorGA(Population(MatingPool));    
+                Offspring  = OperatorGA(Problem,Population(MatingPool));    
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N,RefPoint,nSample);
             end
         end

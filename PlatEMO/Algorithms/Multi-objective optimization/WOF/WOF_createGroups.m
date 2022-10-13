@@ -1,4 +1,4 @@
-function [outIndexList,numberOfGroups] = WOF_createGroups(numberOfGroups,xPrime,numberOfVariables, method)
+function [outIndexList,numberOfGroups] = WOF_createGroups(Problem,numberOfGroups,xPrime,method)
 % Creates groups of the varibales. Three diffeent methods can be
 % chosen. The first one uses linear groups, the second orders variables
 % by absolute values, the third is a random grouping. For more
@@ -61,37 +61,37 @@ function [outIndexList,numberOfGroups] = WOF_createGroups(numberOfGroups,xPrime,
     
     switch method
         case 1 %linear grouping
-            varsPerGroup = floor(numberOfVariables/numberOfGroups);
+            varsPerGroup = floor(Problem.D/numberOfGroups);
             outIndexList = [];
             for i = 1:numberOfGroups-1
                outIndexList = [outIndexList, ones(1,varsPerGroup).*i];
             end
-            outIndexList = [outIndexList, ones(1,numberOfVariables-size(outIndexList,2)).*numberOfGroups];
+            outIndexList = [outIndexList, ones(1,Problem.D-size(outIndexList,2)).*numberOfGroups];
         case 2 %orderByValueGrouping
-            varsPerGroup = floor(numberOfVariables/numberOfGroups);
+            varsPerGroup = floor(Problem.D/numberOfGroups);
             vars = xPrime.dec;
             [~,I] = sort(vars);
-            outIndexList = ones(1,numberOfVariables);
+            outIndexList = ones(1,Problem.D);
             for i = 1:numberOfGroups-1
                outIndexList(I(((i-1)*varsPerGroup)+1:i*varsPerGroup)) = i;
             end
             outIndexList(I(((numberOfGroups-1)*varsPerGroup)+1:end)) = numberOfGroups;
         case 3 %random Grouping
-            varsPerGroup = floor(numberOfVariables/numberOfGroups);
+            varsPerGroup = floor(Problem.D/numberOfGroups);
             outIndexList = [];
             for i = 1:numberOfGroups-1
                outIndexList = [outIndexList, ones(1,varsPerGroup).*i];
             end
-            outIndexList = [outIndexList, ones(1,numberOfVariables-size(outIndexList,2)).*numberOfGroups];
+            outIndexList = [outIndexList, ones(1,Problem.D-size(outIndexList,2)).*numberOfGroups];
             outIndexList = outIndexList(randperm(length(outIndexList)));
         case 4 %up or down groups
-            outIndexList = ones(1,numberOfVariables);
+            outIndexList = ones(1,Problem.D);
             xPrimeVars = xPrime.decs;
             xPrimeObjs = xPrime.objs;
-            for i = 1:numberOfVariables
+            for i = 1 : Problem.D
                 newSolVars = xPrime.decs;
                 newSolVars(i) = xPrimeVars(i)*1.05;
-                newSol = SOLUTION(newSolVars);
+                newSol = Problem.Evaluation(newSolVars);
                 newSolObjs = newSol.objs;
                 if newSolObjs(1) < xPrimeObjs(1)
                     outIndexList(i) = 2;

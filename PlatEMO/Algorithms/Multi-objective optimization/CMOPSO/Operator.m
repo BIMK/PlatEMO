@@ -1,4 +1,4 @@
-function Offspring = Operator(Population,Parameter)
+function Offspring = Operator(Problem,Population,Parameter)
 % The particle swarm optimization in CMOPSO
 
 %------------------------------- Copyright --------------------------------
@@ -11,18 +11,17 @@ function Offspring = Operator(Population,Parameter)
 %--------------------------------------------------------------------------
 
     %% Parameter setting
-    if nargin > 1
+    if nargin > 2
         [proM,disM] = deal(Parameter{:});
     else
         [proM,disM] = deal(1,20);
     end
-    P_Dec   = Population.decs;     
-    [N,D]   = size(P_Dec); 
-    P_Obj   = Population.objs;
-    V       = Population.adds(zeros(N,D));
-    Off_P   = zeros(N,D);
-    Off_V   = zeros(N,D);  
-    Problem = PROBLEM.Current();
+    P_Dec = Population.decs;     
+    [N,D] = size(P_Dec); 
+    P_Obj = Population.objs;
+    V     = Population.adds(zeros(N,D));
+    Off_P = zeros(N,D);
+    Off_V = zeros(N,D);  
     
     %% Get leaders  
     Front     = NDSort(P_Obj,inf);    
@@ -58,5 +57,5 @@ function Offspring = Operator(Population,Parameter)
     temp = Site & mu>0.5; 
     Off_P(temp) = Off_P(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                   (1-(Upper(temp)-Off_P(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
-	Offspring = SOLUTION(Off_P,Off_V);
+	Offspring = Problem.Evaluation(Off_P,Off_V);
 end

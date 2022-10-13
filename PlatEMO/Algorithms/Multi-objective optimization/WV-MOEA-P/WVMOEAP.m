@@ -1,7 +1,6 @@
 classdef WVMOEAP < ALGORITHM
-% <multi> <real> <preference>
-% Weight vector based multi-objective optimization algorithm with
-% preference
+% <multi> <real/integer>
+% Weight vector based multi-objective optimization algorithm with preference
 % Points ---      --- Set of preferred points
 % b      --- 0.05 --- Range of preferred region
 
@@ -59,7 +58,7 @@ classdef WVMOEAP < ALGORITHM
                             P(j,:) = Current(randperm(length(Current),2));
                         end
                     end
-                    Offspring = OperatorDE(Population(Current),Population(P(:,1)),Population(P(:,2)));
+                    Offspring = OperatorDE(Problem,Population(Current),Population(P(:,1)),Population(P(:,2)));
                     % Environmental selection
                     Z = min(Z,min(Offspring.objs,[],1));
                     Population(Current) = STM([Population(Current),Offspring],W(Current,:),Z,Z+ones(1,Problem.M));

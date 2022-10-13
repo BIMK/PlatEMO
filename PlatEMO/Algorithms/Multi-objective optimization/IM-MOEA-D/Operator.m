@@ -1,4 +1,4 @@
-function Offspring = Operator(Population,L)
+function Offspring = Operator(Problem,Population,L)
 % The Gaussian process based reproduction
 
 %------------------------------- Copyright --------------------------------
@@ -14,13 +14,12 @@ function Offspring = Operator(Population,L)
 % http://www.soft-computing.de/jin-pub_year.html
 
     %% Parameter setting
-    if nargin < 2
+    if nargin < 3
         L = 3;
     end
-    PopDec  = Population.decs;
-	PopObj  = Population.objs;
-    [N,D]   = size(PopDec);
-    Problem = PROBLEM.Current();
+    PopDec = Population.decs;
+	PopObj = Population.objs;
+    [N,D]  = size(PopDec);
     
     %% Gaussian process based reproduction
     if length(Population) < 2*Problem.M
@@ -67,5 +66,5 @@ function Offspring = Operator(Population,L)
     temp = Site & mu>0.5; 
     OffDec(temp) = OffDec(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                    (1-(Upper(temp)-OffDec(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
-    Offspring = SOLUTION(OffDec);
+    Offspring = Problem.Evaluation(OffDec);
 end

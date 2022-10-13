@@ -1,4 +1,4 @@
-function Offspring = Operator(Particle,Pbest,Gbest)
+function Offspring = Operator(Problem,Particle,Pbest,Gbest)
 % Particle swarm optimization in MMOPSO
 
 %------------------------------- Copyright --------------------------------
@@ -28,5 +28,5 @@ function Offspring = Operator(Particle,Pbest,Gbest)
     OffVel(temp)  = OffVel(temp) + C1(temp).*r1(temp).*(PbestDec(temp)-ParticleDec(temp));
     OffVel(~temp) = OffVel(~temp) + C2(~temp).*r2(~temp).*(GbestDec(~temp)-ParticleDec(~temp));
     OffDec        = ParticleDec + OffVel;
-    Offspring     = SOLUTION(OffDec,OffVel);
+    Offspring     = Problem.Evaluation(OffDec,OffVel);
 end

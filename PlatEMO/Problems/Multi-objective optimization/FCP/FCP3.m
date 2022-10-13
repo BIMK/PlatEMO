@@ -5,7 +5,7 @@ classdef FCP3 < PROBLEM
 %------------------------------- Reference --------------------------------
 % J. Yuan, H. Liu, Y. Ong, and Z. He, Indicator-based evolutionary
 % algorithm for solving constrained multi-objective optimization problems,
-% IEEE Transactions on Evolutionary Computation, 2021.
+% IEEE Transactions on Evolutionary Computation, 2022, 26(2): 379-391.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -26,7 +26,7 @@ classdef FCP3 < PROBLEM
             end
             obj.lower    = zeros(1,obj.D);
             obj.upper    = ones(1,obj.D);
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

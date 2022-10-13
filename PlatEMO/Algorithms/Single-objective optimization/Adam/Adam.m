@@ -30,10 +30,10 @@ classdef Adam < ALGORITHM
             %% Optimization
             k = 1;
             while Algorithm.NotTerminated(X)
-                gk = FiniteDifference(X)';
+                gk = Problem.CalObjGrad(X.dec);
                 m  = beta1*m0 + (1-beta1)*gk;
                 v  = beta2*v0 + (1-beta2)*gk.^2;
-                X  = SOLUTION(X.dec-alpha*(m/(1-beta1.^k))./(sqrt(v/(1-beta2.^k))+1e-8));
+                X  = Problem.Evaluation(X.dec-alpha*(m/(1-beta1.^k))./(sqrt(v/(1-beta2.^k))+1e-8));
                 k  = k + 1;
             end
         end

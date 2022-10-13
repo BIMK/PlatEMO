@@ -1,5 +1,5 @@
 classdef CPSMOEA < ALGORITHM
-% <multi> <real> <expensive>
+% <multi> <real/integer> <expensive>
 % Classification and Pareto domination based multi-objective evolutionary
 % algorithm
 % M --- 3 --- Number of generated offsprings for each solution
@@ -29,7 +29,7 @@ classdef CPSMOEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 KNN(Pgood.decs,Pbad.decs);
-                Offspring  = Operator(Population,M);
+                Offspring  = Operator(Problem,Population,M);
                 Population = NDS([Population,Offspring],Problem.N);
                 FrontNo    = NDSort(Offspring.objs,1);
                 Pgood      = NDS([Pgood,Offspring(FrontNo==1)],floor(Problem.N/2));

@@ -1,5 +1,5 @@
 classdef ENSMOEAD < ALGORITHM
-% <multi/many> <real>
+% <multi/many> <real/integer>
 % Ensemble of different neighborhood sizes based MOEA/D
 % NS --- 25:25:100 --- Set of neighborhood sizes
 % LP ---        50 --- Learning period
@@ -63,7 +63,7 @@ classdef ENSMOEAD < ALGORITHM
                         end
 
                         % Generate an offspring
-                        Offspring = OperatorDE(Population(i),Population(P(1)),Population(P(2)));
+                        Offspring = OperatorDE(Problem,Population(i),Population(P(1)),Population(P(2)));
 
                         % Update the ideal point
                         Z = min(Z,Offspring.obj);

@@ -1,5 +1,5 @@
 classdef MOEAPC < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % Multiobjective evolutionary algorithm based on polar coordinates
 % delta --- 0.8 --- The probability of choosing parents locally
 % T     ---  20 --- Neighborhood size 
@@ -51,7 +51,7 @@ classdef MOEAPC < ALGORITHM
                 end  
 
                 % Generate an offspring
-                Offspring = OperatorDE(Population(P(1)),Population(P(2)),Population(P(3)));
+                Offspring = OperatorDE(Problem,Population(P(1)),Population(P(2)),Population(P(3)));
 
                 % Update the ideal point
                 Z = min(Z,Offspring.obj);

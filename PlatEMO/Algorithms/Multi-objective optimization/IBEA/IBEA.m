@@ -1,5 +1,5 @@
 classdef IBEA < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Indicator-based evolutionary algorithm
 % kappa --- 0.05 --- Fitness scaling factor
 
@@ -27,7 +27,7 @@ classdef IBEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,-CalFitness(Population.objs,kappa));
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N,kappa);
             end
         end

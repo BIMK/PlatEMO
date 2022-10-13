@@ -1,5 +1,5 @@
 classdef SMSEGO < ALGORITHM
-% <multi> <real> <expensive>
+% <multi> <real/integer> <expensive>
 % S-metric-selection-based efficient global optimization
 % wmax --- 10000 --- The maximum number of internal evluation
 
@@ -27,7 +27,7 @@ classdef SMSEGO < ALGORITHM
             %% Generate initial population based on Latin hypercube sampling
             N          = 11*Problem.D-1;
             P          = UniformPoint(N,Problem.D,'Latin');
-            Population = SOLUTION(repmat(Problem.upper-Problem.lower,N,1).*P+repmat(Problem.lower,N,1));
+            Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,N,1).*P+repmat(Problem.lower,N,1));
             THETA      = 5.*ones(Problem.M,Problem.D);
             Model      = cell(1,Problem.M);
             % Lower confident bound parameter
@@ -49,8 +49,8 @@ classdef SMSEGO < ALGORITHM
                 end
                 w = 0;
                 while w < wmax
-                    drawnow();
-                    OffDec = OperatorGA(PopDec);
+                    drawnow('limitrate');
+                    OffDec = OperatorGA(Problem,PopDec);
                     PopDec = [PopDec;OffDec]; 
                     [N,~]  = size(PopDec);
                     OffObj = zeros(N,Problem.M);
@@ -68,7 +68,7 @@ classdef SMSEGO < ALGORITHM
                     w = w + floor(N/2);
                 end
                 [~,INDEX]  = min(fit);
-                PopNew     = SOLUTION(PopDec(INDEX,:));
+                PopNew     = Problem.Evaluation(PopDec(INDEX,:));
                 Population = [Population,PopNew];
             end
         end

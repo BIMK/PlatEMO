@@ -1,5 +1,5 @@
 classdef IMMOEAD < ALGORITHM
-% <multi> <real> <large/none>
+% <multi> <real/integer> <large/none>
 % Inverse modeling multiobjective evolutionary algorithm based on
 % decomposition
 % K --- 10 --- Number of reference vectors
@@ -44,7 +44,7 @@ classdef IMMOEAD < ALGORITHM
 				Offsprings=[];
 				% Modeling and reproduction
 				for k = unique(partition)'
-					Offspring = Operator(Population(partition==k));
+					Offspring  = Operator(Problem,Population(partition==k));
 					Offsprings = [Offsprings,Offspring];
 				end
 				

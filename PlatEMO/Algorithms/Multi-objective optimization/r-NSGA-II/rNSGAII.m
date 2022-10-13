@@ -1,5 +1,5 @@
 classdef rNSGAII < ALGORITHM
-% <multi> <real/binary/permutation> <preference>
+% <multi> <real/integer/label/binary/permutation>
 % r-dominance based NSGA-II
 % Points ---     --- Set of preferred points
 % W      ---     --- Set of weight vectors for preferred points
@@ -31,7 +31,7 @@ classdef rNSGAII < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,FrontNo,CrowdDis] = EnvironmentalSelection([Population,Offspring],Problem.N,Points,W,1-(1-delta)*Problem.FE/Problem.maxFE);
             end
         end

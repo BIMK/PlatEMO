@@ -1,5 +1,5 @@
 classdef SPEA2SDE < ALGORITHM
-% <many> <real/binary/permutation>
+% <many> <real/integer/label/binary/permutation>
 % SPEA2 with shift-based density estimation
 
 %------------------------------- Reference --------------------------------
@@ -24,7 +24,7 @@ classdef SPEA2SDE < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,Fitness);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,Fitness] = EnvironmentalSelection([Population,Offspring],Problem.N);
             end
         end

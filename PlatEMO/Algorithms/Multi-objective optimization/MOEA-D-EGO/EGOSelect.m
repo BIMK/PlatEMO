@@ -38,7 +38,7 @@ function PopDec = EGOSelect(Problem,Population,L1,L2,Ke,delta,nr)
            else
                P = randperm(N);
            end
-           OffDec = OperatorDE(PopDec(i,:),PopDec(P(1),:),PopDec(P(2),:));
+           OffDec = OperatorDE(Problem,PopDec(i,:),PopDec(P(1),:),PopDec(P(2),:));
            OffObj = Evaluate(Problem,OffDec,model,centers);
            Z = min(Z,OffObj);
            g_old = max(abs(PopObj(P,:) - repmat(Z,length(P),1)).*W(P,:),[],2);

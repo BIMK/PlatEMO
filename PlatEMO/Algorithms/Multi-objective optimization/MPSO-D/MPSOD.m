@@ -1,5 +1,5 @@
 classdef MPSOD < ALGORITHM
-% <multi/many> <real>
+% <multi/many> <real/integer>
 % Multi-objective particle swarm optimization algorithm based on
 % decomposition
 
@@ -36,7 +36,7 @@ classdef MPSOD < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 [Parent,Pbest,Gbest] = MatingSelection(Population.objs,B,W,Z);
-                Offspring  = Operator(Population(Parent),Population(Pbest),Population(Gbest));
+                Offspring  = Operator(Problem,Population(Parent),Population(Pbest),Population(Gbest));
                 Z          = min([Z;Offspring.objs],[],1);
                 Population = Classification(Problem,[Population,Offspring],W,Z);
             end

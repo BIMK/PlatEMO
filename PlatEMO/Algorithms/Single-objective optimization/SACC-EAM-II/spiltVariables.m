@@ -1,4 +1,4 @@
-function [Population,Groups,K] = spiltVariables(BU,BD,s)
+function [Population,Groups,K] = spiltVariables(Problem,BU,BD,s)
 % Decision variable grouping with RDG2 in SACCEAMII
 
 %------------------------------- Copyright --------------------------------
@@ -19,7 +19,7 @@ function [Population,Groups,K] = spiltVariables(BU,BD,s)
     
     %% Recursive Decomposition Grouping Methods
     xLL  = BD;
-    xNew = SOLUTION(xLL);
+    xNew = Problem.Evaluation(xLL);
     yLL  = xNew.objs;
     Population = [Population,xNew];
     X1   = 1;
@@ -27,7 +27,7 @@ function [Population,Groups,K] = spiltVariables(BU,BD,s)
     % Process
     while ~isempty(X2)
         % Interaction detection
-        [sub1,Population] = INTERACT(Population,X1,X2,xLL,yLL,BU,BD);
+        [sub1,Population] = INTERACT(Problem,Population,X1,X2,xLL,yLL,BU,BD);
         if numel(sub1) == numel(X1) % isequal(sub1,X1)
             if numel(X1) == 1
                 Separable = [Separable,X1];
@@ -76,7 +76,7 @@ function [Population,Groups,K] = spiltVariables(BU,BD,s)
      end
 end
 
-function [X1,Population] = INTERACT(Population,X1,X2,xLL,yLL,BU,BD)
+function [X1,Population] = INTERACT(Problem,Population,X1,X2,xLL,yLL,BU,BD)
     % Determine gamma
     muM   = eps/2;
     gamma = @(n)(n.*muM)./(1-n.*muM);
@@ -85,8 +85,8 @@ function [X1,Population] = INTERACT(Population,X1,X2,xLL,yLL,BU,BD)
     xUL(X1) = BU(X1);
     
     % Calculate delta1
-    tNew   = SOLUTION(xUL);
-    delta1 = yLL - tNew.objs;
+    tNew       = Problem.Evaluation(xUL);
+    delta1     = yLL - tNew.objs;
     Population = [Population,tNew];
     
     % Calculate delta2
@@ -94,8 +94,8 @@ function [X1,Population] = INTERACT(Population,X1,X2,xLL,yLL,BU,BD)
     xLM(X2) = (BU(X2)+BD(X2))/2;
     xUM     = xUL;
     xUM(X2) = (BU(X2)+BD(X2))/2;
-    tNew1   = SOLUTION(xLM);
-    tNew2   = SOLUTION(xUM);
+    tNew1   = Problem.Evaluation(xLM);
+    tNew2   = Problem.Evaluation(xUM);
     delta2  = tNew1.objs - tNew2.objs;
     Population = [Population,tNew1,tNew2];
     % Update
@@ -109,8 +109,8 @@ function [X1,Population] = INTERACT(Population,X1,X2,xLL,yLL,BU,BD)
             mid = floor(length(X2)/2);
             G1  = X2(1:mid);
             G2  = X2(mid+1:end);
-            [subX1,Population] = INTERACT(Population,X1,G1,xLL,yLL,BU,BD);
-            [subX2,Population] = INTERACT(Population,X1,G2,xLL,yLL,BU,BD);
+            [subX1,Population] = INTERACT(Problem,Population,X1,G1,xLL,yLL,BU,BD);
+            [subX2,Population] = INTERACT(Problem,Population,X1,G2,xLL,yLL,BU,BD);
             X1  = union(subX1,subX2);
         end
     end

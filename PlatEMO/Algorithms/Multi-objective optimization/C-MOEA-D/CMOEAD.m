@@ -1,5 +1,5 @@
 classdef CMOEAD < ALGORITHM
-% <multi/many> <real/binary/permutation> <constrained/none>
+% <multi/many> <real/integer/label/binary/permutation> <constrained/none>
 % Constraint-MOEA/D
 
 %------------------------------- Reference --------------------------------
@@ -44,7 +44,7 @@ classdef CMOEAD < ALGORITHM
                     end
 
                     % Generate an offspring
-                    Offspring = OperatorGAhalf(Population(P(1:2)));
+                    Offspring = OperatorGAhalf(Problem,Population(P(1:2)));
 
                     % Update the ideal point
                     Z = min(Z,Offspring.obj);

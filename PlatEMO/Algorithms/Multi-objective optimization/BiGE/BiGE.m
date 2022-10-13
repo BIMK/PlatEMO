@@ -1,5 +1,5 @@
 classdef BiGE < ALGORITHM
-% <many> <real/binary/permutation>
+% <many> <real/integer/label/binary/permutation>
 % Bi-goal evolution
 
 %------------------------------- Reference --------------------------------
@@ -22,7 +22,7 @@ classdef BiGE < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = MatingSelection(Estimation(Population.objs,1/Problem.N^(1/Problem.M)));
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N);
             end
         end

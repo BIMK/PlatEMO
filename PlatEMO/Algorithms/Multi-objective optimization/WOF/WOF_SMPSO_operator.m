@@ -107,7 +107,7 @@ function NewParticles = WOF_SMPSO_operator(Problem,Particles,isDummy)
             NewParticles = [NewParticles, WOF_WeightIndividual(NewDec(i,:),Problem,NewSpeed(i,:))];
         end
     else
-        NewParticles = SOLUTION(NewDec,NewSpeed);
+        NewParticles = Problem.Evaluation(NewDec,NewSpeed);
     end
     
 end

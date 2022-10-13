@@ -24,13 +24,13 @@ classdef BSPGA < ALGORITHM
             [proC,proM,lambda] = Algorithm.ParameterSet(0.5,1,0.05);
             
             %% Generate random population
-            [Population,T,best] = BSPTreeConstruction(randi([0,1],Problem.N,Problem.D),[],[]);
+            [Population,T,best] = BSPTreeConstruction(Problem,randi([0,1],Problem.N,Problem.D),[],[]);
             
             %% Optimization
             while Algorithm.NotTerminated(Population)
-                OffDec = OperatorGA(Population.decs,{proC,0,proM,0});
+                OffDec = OperatorGA(Problem,Population.decs,{proC,0,proM,0});
                 OffDec = BSPTreeLearning(OffDec,best,lambda);
-                [Offspring,T,best] = BSPTreeConstruction(OffDec,T,best);
+                [Offspring,T,best] = BSPTreeConstruction(Problem,OffDec,T,best);
                 Population = [Population,Offspring];
                 [~,rank]   = sort(FitnessSingle(Population));
                 Population = Population(rank(1:Problem.N));

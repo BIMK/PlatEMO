@@ -23,21 +23,21 @@ classdef CF3 < PROBLEM
             if isempty(obj.D); obj.D = 10; end
             obj.lower    = [0,zeros(1,obj.D-1)-2];
             obj.upper    = [1,zeros(1,obj.D-1)+2];
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
-        %% Calculate objective values
-        function PopObj = CalObj(obj,X)
+        %% Calculate objective values and constraint violations
+        function Population = Evaluation(obj,varargin)
+            X  = varargin{1};
+            X  = max(min(X,repmat(obj.upper,size(X,1),1)),repmat(obj.lower,size(X,1),1));
             D  = size(X,2);
             J1 = 3 : 2 : D;
             J2 = 2 : 2 : D;
             Y  = X - sin(6*pi*repmat(X(:,1),1,D)+repmat(1:D,size(X,1),1)*pi/D);
             PopObj(:,1) = X(:,1)      + 2/length(J1)*(4*sum(Y(:,J1).^2,2)-2*prod(cos(20*Y(:,J1)*pi./sqrt(repmat(J1,size(X,1),1))),2)+2);
             PopObj(:,2) = 1-X(:,1).^2 + 2/length(J2)*(4*sum(Y(:,J2).^2,2)-2*prod(cos(20*Y(:,J2)*pi./sqrt(repmat(J2,size(X,1),1))),2)+2);
-        end
-        %% Calculate constraint violations
-        function PopCon = CalCon(obj,X)
-            PopObj = obj.CalObj(X);
-            PopCon = 1 - PopObj(:,2) - PopObj(:,1).^2 + sin(2*pi*(PopObj(:,1).^2-PopObj(:,2)+1));
+            PopCon      = 1 - PopObj(:,2) - PopObj(:,1).^2 + sin(2*pi*(PopObj(:,1).^2-PopObj(:,2)+1));
+            Population  = SOLUTION(X,PopObj,PopCon,varargin{2:end});
+            obj.FE      = obj.FE + length(Population);
         end
         %% Generate points on the Pareto front
         function R = GetOptimum(obj,N)

@@ -1,5 +1,5 @@
 classdef MOEADD < ALGORITHM
-% <multi/many> <real/binary/permutation> <constrained/none>
+% <multi/many> <real/integer/label/binary/permutation> <constrained/none>
 % Many-objective evolutionary algorithm based on dominance and
 % decomposition
 % delta --- 0.9 --- The probability of choosing parents locally
@@ -50,7 +50,7 @@ classdef MOEADD < ALGORITHM
                     end
 
                     % Generate an offspring
-                    Offspring = OperatorGAhalf(Population(P));
+                    Offspring = OperatorGAhalf(Problem,Population(P));
                     [~,offRegion] = max(1-pdist2(Offspring.obj,W,'cosine'));
 
                     % Add the offspring to the population

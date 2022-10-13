@@ -1,5 +1,5 @@
 classdef TiGE2 < ALGORITHM
-% <many> <real/binary/permutation> <constrained/none>
+% <many> <real/integer/label/binary/permutation> <constrained/none>
 % Tri-Goal Evolution Framework for CMaOPs
 
 %------------------------------- Reference --------------------------------
@@ -22,31 +22,31 @@ classdef TiGE2 < ALGORITHM
             
             %% Generate random population
             Population = Problem.Initialization();
-            [fpr,fcd] = Estimation(Population.objs,1/Problem.N^(1/Problem.M));
-            fcv = Calculate_fcv(Population); 
-            Epsilon = Epsilon0;
-            PopObj_1 = [fpr,fcd]; 
-            [fm,~] = NDSort(PopObj_1,Problem.N);
-            PopObj = [fm' + Epsilon * fcv,fcv];
-            [frank,~] = NDSort(PopObj,Problem.N);
-            fitness = frank' + fcv./(fcv+1);
+            [fpr,fcd]  = Estimation(Population.objs,1/Problem.N^(1/Problem.M));
+            fcv        = Calculate_fcv(Population); 
+            Epsilon    = Epsilon0;
+            PopObj_1   = [fpr,fcd]; 
+            [fm,~]     = NDSort(PopObj_1,Problem.N);
+            PopObj     = [fm' + Epsilon * fcv,fcv];
+            [frank,~]  = NDSort(PopObj,Problem.N);
+            fitness    = frank' + fcv./(fcv+1);
             
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,fitness);
-                Offspring  = OperatorGA(Population(MatingPool));
-                [fpr,fcd] = Estimation(Offspring.objs,1/Problem.N^(1/Problem.M));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
+                [fpr,fcd]  = Estimation(Offspring.objs,1/Problem.N^(1/Problem.M));
                 fcv = Calculate_fcv(Offspring); 
-                OffObj_1 = [fpr,fcd]; 
+                OffObj_1   = [fpr,fcd]; 
                 [fm,~] = NDSort(OffObj_1,Problem.N);
                 OffObj = [fm' + Epsilon * fcv,fcv];
                 [Population,fitness] = EnvironmentalSelection([Population,Offspring],PopObj,OffObj,Problem.N);
                 [fpr,fcd] = Estimation(Population.objs,1/Problem.N^(1/Problem.M));
                 fcv = Calculate_fcv(Population);
                 PopObj_1 = [fpr,fcd]; 
-                [fm,~] = NDSort(PopObj_1,Problem.N);
-                PopObj = [fm' + Epsilon * fcv,fcv];
-                Epsilon = row * Epsilon;
+                [fm,~]   = NDSort(PopObj_1,Problem.N);
+                PopObj   = [fm' + Epsilon * fcv,fcv];
+                Epsilon  = row * Epsilon;
             end
         end
     end

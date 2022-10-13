@@ -1,5 +1,5 @@
 classdef NSGAIIARSBX < ALGORITHM
-% <multi> <real> <constrained/none>
+% <multi> <real/integer> <constrained/none>
 % NSGA-II with adaptive rotation based simulated binary crossover
 
 %------------------------------- Reference --------------------------------
@@ -27,7 +27,7 @@ classdef NSGAIIARSBX < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
-                Offspring  = ARSBX(Population(MatingPool),{B,m,ps});
+                Offspring  = ARSBX(Problem,Population(MatingPool),{B,m,ps});
                 [Population,FrontNo,CrowdDis] = EnvironmentalSelection([Population,Offspring],Problem.N);
                 [B,m,ps,Population] = UpdateParameter(Problem,Population);
             end

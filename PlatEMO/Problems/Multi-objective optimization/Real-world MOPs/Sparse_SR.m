@@ -48,7 +48,7 @@ classdef Sparse_SR < PROBLEM
             x = obj.x_true(obj.x_true~=0);           
             obj.lower    = floor(repmat(mean(x)-3*std(x),1,obj.D));
             obj.upper    = ceil(ones(1,obj.D)*(mean(x)+3*std(x)));
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
 
             x = zeros(1, N);
             obj.Total = norm(obj.A*x'-obj.b);
@@ -68,7 +68,7 @@ classdef Sparse_SR < PROBLEM
                 SS = SS./norm(SS);
                 PopDec(i,sparse_support) = SS;	% initialize sparse signal
             end
-            Population = SOLUTION(PopDec);
+            Population = obj.Evaluation(PopDec);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

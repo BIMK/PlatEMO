@@ -1,4 +1,4 @@
-function Population = Mutation(Population,Lower,Upper)
+function Population = Mutation(Problem,Population)
 % Mutation strategy of FROFI
 
 %------------------------------- Copyright --------------------------------
@@ -13,8 +13,8 @@ function Population = Mutation(Population,Lower,Upper)
     if ~any(all(Population.cons<=0,2))
         OffDec    = Population(randi(end)).dec;
         k         = randi(length(OffDec));
-        OffDec(k) = unifrnd(Lower(k),Upper(k));
-        Offspring = SOLUTION(OffDec);
+        OffDec(k) = unifrnd(Problem.lower(k),Problem.upper(k));
+        Offspring = Problem.Evaluation(OffDec);
         [~,worst] = max(sum(max(0,Population.cons),2));
         if Population(worst).obj > Offspring.obj
             Population(worst) = Offspring;

@@ -1,5 +1,5 @@
 classdef SIBEA < ALGORITHM
-% <multi> <real/binary/permutation>
+% <multi> <real/integer/label/binary/permutation>
 % Simple indicator-based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -26,7 +26,7 @@ classdef SIBEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = randi(length(Population),1,Problem.N);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N);
             end
         end

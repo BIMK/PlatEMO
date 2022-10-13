@@ -24,11 +24,11 @@ function [PV,DV] = VariableClustering(Problem,Population,nSel,nPer)
     RMSE   = zeros(D,nSel);
     Sample = randi(N,1,nSel);
     for i = 1 : D
-        drawnow();
+        drawnow('limitrate');
         % Generate several random solutions by perturbing the i-th dimension
         Decs      = repmat(Population(Sample).decs,nPer,1);
         Decs(:,i) = unifrnd(Problem.lower(i),Problem.upper(i),size(Decs,1),1);
-        newPopu   = SOLUTION(Decs);
+        newPopu   = Problem.Evaluation(Decs);
         for j = 1 : nSel
             % Normalize the objective values of the current perturbed solutions
             Points = newPopu(j:nSel:end).objs;

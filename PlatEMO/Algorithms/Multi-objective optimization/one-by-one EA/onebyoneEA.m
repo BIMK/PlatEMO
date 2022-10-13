@@ -1,5 +1,5 @@
 classdef onebyoneEA < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Many-objective evolutionary algorithm using a one-by-one selection
 % strategy
 
@@ -30,7 +30,7 @@ classdef onebyoneEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = MatingSelection(Population.objs,Rank);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,Rank,zeta,zmin] = EnvironmentalSelection([Population,Offspring],zeta,zmin,Problem.N);
             end
         end

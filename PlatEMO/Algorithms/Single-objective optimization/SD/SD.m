@@ -26,11 +26,11 @@ classdef SD < ALGORITHM
 
             %% Optimization
             while Algorithm.NotTerminated(X)
-                gk = FiniteDifference(X);
+                gk = Problem.CalObjGrad(X.dec);
                 dk = -gk;
                 for m = 0 : 20
-                    X1 = SOLUTION(X.dec+beta^m*dk');
-                    if X1.obj <= X.obj + sigma*beta^m*gk'*dk
+                    X1 = Problem.Evaluation(X.dec+beta^m*dk);
+                    if X1.obj <= X.obj + sigma*beta^m*gk*dk'
                         break;
                     end
                 end

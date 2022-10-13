@@ -1,5 +1,5 @@
 classdef dMOPSO < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % MOPSO based on decomposition
 % Ta --- 2 --- Age threshold
 
@@ -34,10 +34,10 @@ classdef dMOPSO < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Gbest)
                 % Generate offsprings
-                Population(Age<Ta) = Operator(Population(Age<Ta),Pbest(Age<Ta),Gbest(Age<Ta));
+                Population(Age<Ta) = Operator(Problem,Population(Age<Ta),Pbest(Age<Ta),Gbest(Age<Ta));
                 for i = find(Age>=Ta)
                     temp          = randn(1,Problem.D);
-                    Population(i) = SOLUTION((Gbest(i).dec-Pbest(i).dec)/2+temp.*abs(Gbest(i).dec-Pbest(i).dec));
+                    Population(i) = Problem.Evaluation((Gbest(i).dec-Pbest(i).dec)/2+temp.*abs(Gbest(i).dec-Pbest(i).dec));
                     Age(i)        = 0;
                 end
 

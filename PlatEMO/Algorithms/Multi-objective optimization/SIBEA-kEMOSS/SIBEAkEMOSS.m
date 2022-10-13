@@ -1,5 +1,5 @@
 classdef SIBEAkEMOSS < ALGORITHM
-% <many> <real/binary/permutation>
+% <many> <real/integer/label/binary/permutation>
 % SIBEA with minimum objective subset of size k with minimum error
 % G --- 5 --- Reduction frequency generations
 % k --- 2 --- Size of reduced objective set
@@ -36,7 +36,7 @@ classdef SIBEAkEMOSS < ALGORITHM
                 end
                 iteration_num = iteration_num + 1;
                 MatingPool    = randi(length(Population),1,Problem.N);
-                Offspring     = OperatorGA(Population(MatingPool));
+                Offspring     = OperatorGA(Problem,Population(MatingPool));
                 Population    = EnvironmentalSelection([Population,Offspring],Problem.N,objective_set);
             end
         end

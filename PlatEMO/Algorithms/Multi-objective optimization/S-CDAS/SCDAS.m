@@ -1,5 +1,5 @@
 classdef SCDAS < ALGORITHM
-% <many> <real/binary/permutation>
+% <many> <real/integer/label/binary/permutation>
 % Self-controlling dominance area of solutions
 
 %------------------------------- Reference --------------------------------
@@ -25,7 +25,7 @@ classdef SCDAS < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,FrontNo,CrowdDis] = EnvironmentalSelection([Population,Offspring],Problem.N);
             end
         end

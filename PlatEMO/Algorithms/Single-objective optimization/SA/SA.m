@@ -1,5 +1,5 @@
 classdef SA < ALGORITHM
-% <single> <real> <large/none> <constrained/none>
+% <single> <real/integer> <large/none> <constrained/none>
 % Simulated annealing
 
 %------------------------------- Reference --------------------------------
@@ -27,7 +27,7 @@ classdef SA < ALGORITHM
                     mu       = rand(1,Problem.D) < 0.5;
                     Ydec     = X.dec;
                     Ydec(mu) = Ydec(mu) + sigma(mu).*randn(1,sum(mu));
-                    Y = SOLUTION(Ydec);
+                    Y        = Problem.Evaluation(Ydec);
                     if rand < exp(-(FitnessSingle(Y)-FitnessSingle(X))/(abs(FitnessSingle(X))+1e-6)/T)
                         X = Y;
                     end

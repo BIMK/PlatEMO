@@ -1,5 +1,5 @@
 classdef MOEADCMA < ALGORITHM
-% <multi/many> <real>
+% <multi/many> <real/integer>
 % MOEA/D with covariance matrix adaptation evolution strategy
 % K --- 5 --- Number of groups
 
@@ -51,7 +51,7 @@ classdef MOEADCMA < ALGORITHM
                     if ~isempty(k)
                         P = B(s,randperm(size(B,2)));
                         % Generate offsprings by CMA
-                        Offspring = SOLUTION(mvnrnd(Sigma(k).x,Sigma(k).sigma^2*Sigma(k).C,4+floor(3*log(Problem.D))));
+                        Offspring = Problem.Evaluation(mvnrnd(Sigma(k).x,Sigma(k).sigma^2*Sigma(k).C,4+floor(3*log(Problem.D))));
                         % Sort the parent and offsprings
                         Combine   = [Offspring,Population(s)];
                         [~,rank]  = sort(max(abs(Combine.objs-repmat(Z,length(Combine),1)).*repmat(W(s,:),length(Combine),1),[],2));
@@ -69,7 +69,7 @@ classdef MOEADCMA < ALGORITHM
                         else
                             P = randperm(Problem.N);
                         end
-                        Offspring = OperatorDE(Population(s),Population(P(1)),Population(P(2)));
+                        Offspring = OperatorDE(Problem,Population(s),Population(P(1)),Population(P(2)));
                     end
                     for x = 1 : length(Offspring)
                         % Update the ideal point

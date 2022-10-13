@@ -22,7 +22,7 @@ classdef MaF10 < PROBLEM
             if isempty(obj.D); obj.D = obj.M + 9; end
             obj.lower    = zeros(1,obj.D);
             obj.upper    = 2 : 2 : 2*obj.D;
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

@@ -1,23 +1,23 @@
-function Offspring = OperatorDE(Parent1,Parent2,Parent3,Parameter)
+function Offspring = OperatorDE(Problem,Parent1,Parent2,Parent3,Parameter)
 %OperatorDE - The operator of differential evolution.
 %
-%   Off = OperatorDE(P1,P2,P3) uses the operator of differential evolution
-%   to generate offsprings based on the parents P1, P2, and P3. If P1, P2,
-%   and P3 are arrays of SOLUTION objects, then Off is also an array of
-%   SOLUTION objects; while if P1, P2, and P3 are matrices of decision
-%   variables, then Off is also a matrix of decision variables, i.e., the
-%   offsprings are not evaluated. Each object or row of P1, P2, and P3 is
-%   used to generate one offspring by P1 + 0.5*(P2-P3) and polynomial
-%   mutation.
+%   Off = OperatorDE(Pro,P1,P2,P3) uses the operator of differential
+%   evolution to generate offsprings for problem Pro based on parents P1,
+%   P2, and P3. If P1, P2, and P3 are arrays of SOLUTION objects, then Off
+%   is also an array of SOLUTION objects; while if P1, P2, and P3 are
+%   matrices of decision variables, then Off is also a matrix of decision
+%   variables, i.e., the offsprings are not evaluated. Each object or row
+%   of P1, P2, and P3 is used to generate one offspring by P1 + 0.5*(P2-P3)
+%   and polynomial mutation.
 %
-%	Off = OperatorDE(P1,P2,P3,{CR,F,proM,disM}) specifies the parameters of
-%	operators, where CR and F are the parameters in differental evolution,
-%	proM is the expectation of the number of mutated variables, and disM is
-%	the distribution index of polynomial mutation.
+%	Off = OperatorDE(Pro,P1,P2,P3,{CR,F,proM,disM}) specifies the
+%	parameters of operators, where CR and F are the parameters in
+%	differental evolution, proM is the expectation of the number of mutated
+%	variables, and disM is the distribution index of polynomial mutation.
 %
 %   Example:
-%       Off = OperatorDE(Parent1,Parent2,Parent3)
-%       Off = OperatorDE(Parent1.decs,Parent2.decs,Parent3.decs,{1,0.5,1,20})
+%       Off = OperatorDE(Problem,Parent1,Parent2,Parent3)
+%       Off = OperatorDE(Problem,Parent1.decs,Parent2.decs,Parent3.decs,{1,0.5,1,20})
 
 %------------------------------- Reference --------------------------------
 % H. Li and Q. Zhang, Multiobjective optimization problems with complicated
@@ -33,21 +33,20 @@ function Offspring = OperatorDE(Parent1,Parent2,Parent3,Parameter)
 %--------------------------------------------------------------------------
 
     %% Parameter setting
-    if nargin > 3
+    if nargin > 4
         [CR,F,proM,disM] = deal(Parameter{:});
     else
         [CR,F,proM,disM] = deal(1,0.5,1,20);
     end
     if isa(Parent1(1),'SOLUTION')
-        calObj  = true;
-        Parent1 = Parent1.decs;
-        Parent2 = Parent2.decs;
-        Parent3 = Parent3.decs;
+        evaluated = true;
+        Parent1   = Parent1.decs;
+        Parent2   = Parent2.decs;
+        Parent3   = Parent3.decs;
     else
-        calObj = false;
+        evaluated = false;
     end
-    [N,D]   = size(Parent1);
-    Problem = PROBLEM.Current();
+    [N,D] = size(Parent1);
 
     %% Differental evolution
     Site = rand(N,D) < CR;
@@ -66,7 +65,7 @@ function Offspring = OperatorDE(Parent1,Parent2,Parent3,Parameter)
     temp = Site & mu>0.5; 
     Offspring(temp) = Offspring(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                       (1-(Upper(temp)-Offspring(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
-    if calObj
-        Offspring = SOLUTION(Offspring);
+    if evaluated
+        Offspring = Problem.Evaluation(Offspring);
     end
 end

@@ -1,4 +1,4 @@
-function Offspring  = Operator(Population,M)
+function Offspring  = Operator(Problem,Population,M)
 % Generate offsprings by DE and KNN based surrogate model
 
 %------------------------------- Copyright --------------------------------
@@ -13,11 +13,11 @@ function Offspring  = Operator(Population,M)
     N = length(Population);
     
     %% Generate all candidate offsprings
-    CandidateDec = OperatorDE(Population(repmat(1:N,1,M)).decs,Population(randi(N,1,N*M)).decs,Population(randi(N,1,N*M)).decs);
+    CandidateDec = OperatorDE(Problem,Population(repmat(1:N,1,M)).decs,Population(randi(N,1,N*M)).decs,Population(randi(N,1,N*M)).decs);
     
     %% Classification based preselection (CPS)
     Labels       = reshape(KNN(CandidateDec),N,M) + rand(N,M);
     [~,best]     = max(Labels,[],2);
     OffspringDec = CandidateDec((best-1)*N+(1:N)',:);
-    Offspring    = SOLUTION(OffspringDec);
+    Offspring    = Problem.Evaluation(OffspringDec);
 end

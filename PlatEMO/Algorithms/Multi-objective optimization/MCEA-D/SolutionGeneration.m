@@ -1,11 +1,11 @@
-function y_i = SolutionGeneration(Population, P, c_i, R_max, i)
+function y_i = SolutionGeneration(Problem, Population, P, c_i, R_max, i)
 % Solution-generation in MCEA/D
 
 % This function is written by Masaya Nakata
 
     for r = 1 : R_max 
         % Generate candidate solution
-        candidate           = OperatorDE(Population(i).dec, Population(P(1)).dec, Population(P(2)).dec);
+        candidate           = OperatorDE(Problem, Population(i).dec, Population(P(1)).dec, Population(P(2)).dec);
         
         % Shuffle the parents
         rnd                 = randperm(length(P));

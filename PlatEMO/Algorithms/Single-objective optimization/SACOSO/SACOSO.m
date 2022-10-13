@@ -1,5 +1,5 @@
 classdef SACOSO < ALGORITHM
-% <single> <real> <large/none> <expensive>
+% <single> <real/integer> <large/none> <expensive>
 % Surrogate-assisted cooperative swarm optimization
 % NFES ---  30 --- Population size of FES-assisted PSO
 % NRBF --- 200 --- Population size of RBFNN-assisted PSO
@@ -27,7 +27,7 @@ classdef SACOSO < ALGORITHM
             %% Generate the random population
             N          = NFES + NRBF;
             PopDec     = UniformPoint(N,Problem.D,'Latin');
-            Population = SOLUTION(repmat(Problem.upper-Problem.lower,N,1).*PopDec+repmat(Problem.lower,N,1));
+            Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,N,1).*PopDec+repmat(Problem.lower,N,1));
             MaxNode    = 8;
             NDB        = MaxNode*Problem.D+10;
             BU         = Problem.upper;
@@ -63,7 +63,7 @@ classdef SACOSO < ALGORITHM
                 if GbestFES(:,end) < GbestRBF(:,end)
                     Gbest = GbestFES;
                 else
-                    Gbest = GbestFES;
+                    Gbest = GbestRBF;
                 end
 
                 % Paramaters of RBFNN
@@ -83,7 +83,7 @@ classdef SACOSO < ALGORITHM
                 Demons = [SwarmRBF;Population(Select).decs,Population(Select).objs];
                 % RBF-assisted SL-PSO
                 [SwarmRBF,DeltaRBF] = RBFOperator(net,Demons,SwarmRBF,DeltaRBF,Gbest,Problem);
-                [tArchive,GbestRBF] = UpdateRBF(tArchive,SwarmRBF,GbestRBF);
+                [tArchive,GbestRBF] = UpdateRBF(Problem,tArchive,SwarmRBF,GbestRBF);
                 
                 % Updating archive DB
                 Population = [Population,tArchive];

@@ -1,4 +1,4 @@
-function Population = Operator(Population,Parameter)
+function Population = Operator(Problem,Population,Parameter)
 % <operator> <real>
 % The local search operator in NSLS
 % mu    --- 0.5 --- The mean value of the Gaussian distribution
@@ -14,7 +14,7 @@ function Population = Operator(Population,Parameter)
 %--------------------------------------------------------------------------
 
     %% Parameter setting
-    if nargin > 1
+    if nargin > 2
         [mu,delta] = deal(Parameter{:});
     else
         [mu,delta] = deal(0.5,0.1);
@@ -29,7 +29,7 @@ function Population = Operator(Population,Parameter)
             w = repmat(Population(i).dec,2,1);
             w(1,d) = w(1,d) + c*(Population(k(1)).dec(d) - Population(k(2)).dec(d));
             w(2,d) = w(2,d) - c*(Population(k(1)).dec(d) - Population(k(2)).dec(d));
-            w = SOLUTION(w);
+            w = Problem.Evaluation(w);
            	for j = 1 : 2
                 k(j) = any(w(j).obj<Population(i).obj) - any(w(j).obj>Population(i).obj);
             end

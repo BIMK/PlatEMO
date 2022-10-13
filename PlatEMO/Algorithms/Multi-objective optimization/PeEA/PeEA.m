@@ -1,5 +1,5 @@
 classdef PeEA < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Pareto front shape estimation based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -25,7 +25,7 @@ classdef PeEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = MatingSelection(Population.objs);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N); 
             end
         end

@@ -1,5 +1,5 @@
 classdef SPEAR < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Strength Pareto evolutionary algorithm based on reference direction
 
 %------------------------------- Reference --------------------------------
@@ -30,7 +30,7 @@ classdef SPEAR < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = MatingSelection(Population.objs,20);
-                Offspring  = OperatorGAhalf(Population([1:Problem.N,MatingPool]));
+                Offspring  = OperatorGAhalf(Problem,Population([1:Problem.N,MatingPool]));
                 QObj       = ObjectiveNormalization([Population,Offspring]);
                 [Ei,Angle] = Associate(QObj,W);
                 FV         = FitnessAssignment(Ei,QObj,Angle,theta);

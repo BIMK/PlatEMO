@@ -23,8 +23,8 @@ for gen = 1 :  GAGeneration
         obj_max   = obj_Offspring(index(1));
     end
     Parent    = Offspring(index(1:ceil(GAPopulationSize/2)),:);
-    Offspring = [OperatorGA(Parent(TournamentSelection(2,size(Parent,1), ...
-        obj_Offspring(index(1:ceil(GAPopulationSize/2)))),:));OperatorGA(Parent,{0.9,2,1/D,20})];
+    Offspring = [OperatorGA(Problem,Parent(TournamentSelection(2,size(Parent,1), ...
+        obj_Offspring(index(1:ceil(GAPopulationSize/2)))),:));OperatorGA(Problem,Parent,{0.9,2,1/D,20})];
 end
 PopDec = Best;
 end

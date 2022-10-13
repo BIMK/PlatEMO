@@ -1,5 +1,5 @@
 classdef KRVEA < ALGORITHM
-% <multi/many> <real> <expensive>
+% <multi/many> <real/integer> <expensive>
 % Surrogate-assisted RVEA
 % alpha ---  2 --- The parameter controlling the rate of change of penalty
 % wmax  --- 20 --- Number of generations before updating Kriging models
@@ -31,7 +31,7 @@ classdef KRVEA < ALGORITHM
             V     = V0;
             NI    = 11*Problem.D-1;
             P     = UniformPoint(NI,Problem.D,'Latin');
-            A2    = SOLUTION(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
+            A2    = Problem.Evaluation(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
             A1    = A2;  
             THETA = 5.*ones(Problem.M,Problem.D);
             Model = cell(1,Problem.M);
@@ -53,8 +53,8 @@ classdef KRVEA < ALGORITHM
                 PopDec = A1Dec;
                 w      = 1;
                 while w <= wmax
-                    drawnow();
-                    OffDec = OperatorGA(PopDec);
+                    drawnow('limitrate');
+                    OffDec = OperatorGA(Problem,PopDec);
                     PopDec = [PopDec;OffDec];
                     [N,~]  = size(PopDec);
                     PopObj = zeros(N,Problem.M);
@@ -77,7 +77,7 @@ classdef KRVEA < ALGORITHM
                 % Select mu solutions for re-evaluation
                 [NumVf,~] = NoActive(A1Obj,V0);
                 PopNew    = KrigingSelect(PopDec,PopObj,MSE(index,:),V,V0,NumVf,0.05*Problem.N,mu,(w/wmax)^alpha); 
-                New       = SOLUTION(PopNew);
+                New       = Problem.Evaluation(PopNew);
                 A2        = [A2,New];
                 A1        = UpdataArchive(A1,New,V,mu,NI); 
             end

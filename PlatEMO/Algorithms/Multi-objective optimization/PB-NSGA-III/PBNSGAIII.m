@@ -1,12 +1,12 @@
 classdef PBNSGAIII < ALGORITHM
-% <multi/many> <real> <expensive>
+% <multi/many> <real/integer> <expensive>
 % NSGA-III based on Pareto based bi-indicator infill sampling criterion
 % wmax --- 15 --- Number of generations before updating Kriging models
 
 %------------------------------- Reference --------------------------------
 % Z. Song, H. Wang, and H. Xu, A framework for expensive many-objective
 % optimization with Pareto-based bi-indicator infill sampling criterion.
-% Memetic Computing, 2021.
+% Memetic Computing, 2022, 14: 179-191.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -28,7 +28,7 @@ classdef PBNSGAIII < ALGORITHM
             
             NI            = Problem.N;
             P             = UniformPoint(NI,Problem.D,'Latin');
-            Population    = SOLUTION(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
+            Population    = Problem.Evaluation(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
             [W,~] = UniformPoint(Problem.N,Problem.M);
             Zmin  = min(Population.objs,[],1); 
             A             = Population;
@@ -42,8 +42,8 @@ classdef PBNSGAIII < ALGORITHM
                 train_X = A.decs;
                 train_Y = A.objs;
                 [~,distinct] = unique(round(train_X*1e6)/1e6,'rows');  
-                train_X    = train_X(distinct,:);
-                train_Y   = train_Y(distinct,:);
+                train_X      = train_X(distinct,:);
+                train_Y      = train_Y(distinct,:);
                 for i = 1:Problem.M % train surrogates
                     dmodel     = dacefit(train_X,train_Y(:,i),'regpoly0','corrgauss',THETA(i,:),1e-5.*ones(1,Problem.D),100.*ones(1,Problem.D));
                     Model{i}   = dmodel;
@@ -56,7 +56,7 @@ classdef PBNSGAIII < ALGORITHM
                 w = 1;
                 while w <= wmax
                     w = w + 1;
-                    OffspringDec = OperatorGA(Dec(randi(end,1,NI),:));
+                    OffspringDec = OperatorGA(Problem,Dec(randi(end,1,NI),:));
                     N = size(OffspringDec,1);
                     OffspringObj = zeros(N,Problem.M);
                     for i = 1:N
@@ -79,8 +79,8 @@ classdef PBNSGAIII < ALGORITHM
                 end
                 
                %% Pareto-based bi-indicator infill sampling criterion 
-                DAdec =     Dec;
-                DA    =     Population;
+                DAdec = Dec;
+                DA    = Population;
                 % Normalization
                 DA_Nor = (DA.objs - repmat(min([Obj;DA.objs],[],1),length(DA),1))...  
                     ./repmat(max([Obj;DA.objs],[],1) - min([Obj;DA.objs],[],1),length(DA),1);
@@ -91,8 +91,8 @@ classdef PBNSGAIII < ALGORITHM
                 dist_D = zeros(size(DA_Nor_pre,1),size(DA_Nor,1));
                 
                  % Calculate the distance between candidate solutions and parents
-                for i = 1:size(DA_Nor_pre,1)    
-                    for j = 1:size(DA_Nor,1)
+                for i = 1 : size(DA_Nor_pre,1)    
+                    for j = 1 : size(DA_Nor,1)
                         dist_D(i,j) = norm(DA_Nor_pre(i,:)-DA_Nor(j,:),2);
                     end
                 end
@@ -104,15 +104,15 @@ classdef PBNSGAIII < ALGORITHM
                 dist_C = pdist2(DA_Nor_pre,repmat(Zmin,size(DA_Nor_pre,1),1));
                 
                 % Convergence Indicator
-                CI = dist_C(:,1);
-                newObj= [DI,CI];
-                ND1 = NDSort(newObj,1);
+                CI      = dist_C(:,1);
+                newObj  = [DI,CI];
+                ND1     = NDSort(newObj,1);
                 PnewDec = DAdec((ND1==1),:);  % find solutions in the first front
                 PnewDec = unique(PnewDec,'rows');
                 
-                New = SOLUTION(PnewDec); 
-                A = [A,New];
-                A2 = [Population,New];
+                New  = Problem.Evaluation(PnewDec); 
+                A    = [A,New];
+                A2   = [Population,New];
                 Zmin = min(A2.objs,[],1);
                 Population = EnvironmentalSelection([Population,New],Problem.N,W,Zmin);
             end

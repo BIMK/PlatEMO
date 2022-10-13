@@ -1,4 +1,4 @@
-function newDec = GenerateNew(Population,Lammda,Mu,CR)
+function newDec = GenerateNew(Problem,Population,Lammda,Mu,CR)
 % Generate offspring in SADE-Sammon
 
 %------------------------------- Copyright --------------------------------
@@ -29,5 +29,5 @@ function newDec = GenerateNew(Population,Lammda,Mu,CR)
     Parent1 = repmat(bestDec,Lammda,1);
     Parent2 = Decs(parentIdx2,:);
     Parent3 = Decs(parentIdx3,:);
-    newDec  =  OperatorDE(Parent1,Parent2,Parent3,{CR,Mu,1,20});
+    newDec  = OperatorDE(Problem,Parent1,Parent2,Parent3,{CR,Mu,1,20});
 end

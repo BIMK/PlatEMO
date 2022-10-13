@@ -5,14 +5,17 @@ classdef UserProblem < PROBLEM
 %   by the inputs of the constructor.
 %
 % All the acceptable properties:
-%   encoding  	<string>            encoding scheme of decision variables
-%   lower    	<vector>            lower bound of decision variables
-%   upper      	<vector>            upper bound of decision variables
-%   initFcn     <function handle>   function for initializing a population
-%   decFcn      <function handle>   function for repairing invalid solution
+%   encoding  	<string>            encoding scheme of each decision variable (1.real 2.integer 3.label 4.binary 5.permutation)
+%   lower    	<vector>            lower bound of each decision variable
+%   upper      	<vector>            upper bound of each decision variable
+%   initFcn     <function handle>   function for initializing solutions
+%   evalFcn     <function handle>   function for evaluating solutions
+%   decFcn      <function handle>   function for repairing invalid solutions
 %   objFcn     	<function handle>   objective functions
 %   conFcn     	<function handle>   constraint functions
-%   parameter   <any>               dataset of the problem
+%   objGradFcn  <function handle>   function for calculating the gradients of objectives
+%   objConFcn   <function handle>   function for calculating the gradients of constraints
+%   data        <any>               data of the problem
 
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
@@ -24,54 +27,70 @@ classdef UserProblem < PROBLEM
 %--------------------------------------------------------------------------
 
     properties(SetAccess = protected)
-        initFcn = {};   	% Function for initializing a population
-        decFcn  = {};    	% Function for repairing invalid solution
-        objFcn  = {};     	% Objective functions
-        conFcn  = {};     	% Constraint functions
+        initFcn    = {};        % Function for initializing solutions
+        evalFcn    = {};        % Function for evaluating solutions
+        decFcn     = {};    	% Function for repairing invalid solutions
+        objFcn     = {};     	% Objective functions
+        conFcn     = {};     	% Constraint functions
+        objGradFcn = {};        % Function for calculating the gradients of objectives
+        conGradFcn = {};        % Function for calculating the gradients of constraints
+        data       = {};        % Data of the problem
     end
     methods
         %% Constructor
         function obj = UserProblem(varargin)
             isStr = find(cellfun(@ischar,varargin(1:end-1))&~cellfun(@isempty,varargin(2:end)));
-            for i = isStr(ismember(varargin(isStr),{'N','D','maxFE','encoding','lower','upper','initFcn','decFcn','objFcn','conFcn','parameter'}))
+            for i = isStr(ismember(varargin(isStr),{'N','M','D','maxFE','maxRuntime','encoding','lower','upper','initFcn','evalFcn','decFcn','objFcn','conFcn','objGradFcn','conGradFcn','data'}))
                 obj.(varargin{i}) = varargin{i+1};
             end
-            useData   = ~isempty(obj.parameter);
-            obj.lower = Str2Fcn(obj.lower,1,useData,'lower bound');
-            obj.upper = Str2Fcn(obj.upper,1,useData,'upper bound');
-            if isempty(obj.D); obj.D = length(obj.lower); end
-            assert(~strcmp(obj.encoding,'real')||ismatrix(obj.lower)&&all(size(obj.lower)==[1,obj.D]),'the lower bound should be a 1*%d vector.',obj.D);
-            assert(~strcmp(obj.encoding,'real')||ismatrix(obj.upper)&&all(size(obj.upper)==[1,obj.D]),'the upper bound should be a 1*%d vector.',obj.D);
-            obj.parameter = Str2Fcn(obj.parameter,1,useData,'dataset');
-            obj.initFcn   = Str2Fcn(obj.initFcn,2,useData,'initialization function');
-            obj.decFcn    = Str2Fcn(obj.decFcn,3,useData,'repair function');
-            if ~iscell(obj.objFcn); obj.objFcn = {obj.objFcn}; end
-            obj.objFcn(cellfun(@isempty,obj.objFcn)) = [];
-            for i = 1 : length(obj.objFcn)
-                obj.objFcn{i} = Str2Fcn(obj.objFcn{i},3,useData,sprintf('objective function f%d',i));
+            if isempty(obj.D)
+                obj.encoding = Str2Fcn(obj.encoding,1,[],'encoding scheme');
+                obj.D = length(obj.encoding);
+            else
+                obj.encoding = Str2Fcn(obj.encoding,1,[],'encoding scheme',obj.D);
             end
-            if ~iscell(obj.conFcn); obj.conFcn = {obj.conFcn}; end
-            obj.conFcn(cellfun(@isempty,obj.conFcn)) = [];
-            for i = 1 : length(obj.conFcn)
-                obj.conFcn{i} = Str2Fcn(obj.conFcn{i},3,useData,sprintf('constraint function g%d',i));
-            end
-            obj.M = length(obj.objFcn);
+            obj.lower      = Str2Fcn(obj.lower,1,[],'lower bound',obj.D);
+            obj.upper      = Str2Fcn(obj.upper,1,[],'upper bound',obj.D);
+            obj.data       = Str2Fcn(obj.data,1,[],'dataset');
+            obj.initFcn    = Str2Fcn(obj.initFcn,2,~isempty(obj.data),'initialization function');
+            obj.evalFcn    = Str2Fcn(obj.evalFcn,3,~isempty(obj.data),'evaluation function');
+            obj.decFcn     = Str2Fcn(obj.decFcn,3,~isempty(obj.data),'repair function');
+            obj.objFcn     = Strs2Fcns(obj.objFcn,3,~isempty(obj.data),'objective function f');
+            obj.conFcn     = Strs2Fcns(obj.conFcn,3,~isempty(obj.data),'constraint function g');
+            obj.objGradFcn = Strs2Fcns(obj.objGradFcn,3,~isempty(obj.data),'gradient of objective fg');
+            obj.conGradFcn = Strs2Fcns(obj.conGradFcn,3,~isempty(obj.data),'gradient of constraint gg');
+            Pop   = obj.Initialization(1);
+            obj.M = length(Pop.objs);
         end
         %% Generate initial solutions
         function Population = Initialization(obj,N)
-            if nargin < 2; N = obj.N; end
+            if nargin < 2
+                N = obj.N;
+            end
             if ~isempty(obj.initFcn)
-                Population = SOLUTION(CallFcn(obj.initFcn,N,obj.parameter,'initialization function',[N obj.D]));
+                Population = obj.Evaluation(CallFcn(obj.initFcn,N,obj.data,'initialization function',[N obj.D]));
             else
                 Population = Initialization@PROBLEM(obj,N);
             end
             obj.optimum = max(Population.objs,[],1);
         end
+        %% Evaluate multiple solutions
+        function Population = Evaluation(obj,varargin)
+            if ~isempty(obj.evalFcn)
+                for i = 1 : size(varargin{1},1)
+                    [PopDec(i,:),PopObj(i,:),PopCon(i,:)] = CallFcn(obj.evalFcn,varargin{1}(i,:),obj.data,'evaluation function',[1 obj.D]);
+                end
+                Population = SOLUTION(PopDec,PopObj,PopCon,varargin{2:end});
+                obj.FE     = obj.FE + length(Population);
+            else
+                Population = Evaluation@PROBLEM(obj,varargin{:});
+            end
+        end
         %% Repair invalid solutions
         function PopDec = CalDec(obj,PopDec)
             if ~isempty(obj.decFcn)
                 for i = 1 : size(PopDec,1)
-                    PopDec(i,:) = CallFcn(obj.decFcn,PopDec(i,:),obj.parameter,'repair function',[1 obj.D]);
+                    PopDec(i,:) = CallFcn(obj.decFcn,PopDec(i,:),obj.data,'repair function',[1 obj.D]);
                 end
             else
                 PopDec = CalDec@PROBLEM(obj,PopDec);
@@ -83,7 +102,7 @@ classdef UserProblem < PROBLEM
                 PopObj = zeros(size(PopDec,1),length(obj.objFcn));
                 for i = 1 : size(PopDec,1)
                     for j = 1 : length(obj.objFcn)
-                        PopObj(i,j) = CallFcn(obj.objFcn{j},PopDec(i,:),obj.parameter,sprintf('objective function f%d',j),[1 1]);
+                        PopObj(i,j) = CallFcn(obj.objFcn{j},PopDec(i,:),obj.data,sprintf('objective function f%d',j),[1 1]);
                     end
                 end
             else
@@ -96,43 +115,67 @@ classdef UserProblem < PROBLEM
                 PopCon = zeros(size(PopDec,1),length(obj.conFcn));
                 for i = 1 : size(PopDec,1)
                     for j = 1 : length(obj.conFcn)
-                        PopCon(i,j) = CallFcn(obj.conFcn{j},PopDec(i,:),obj.parameter,sprintf('constraint function g%d',j),[1 1]);
+                        PopCon(i,j) = CallFcn(obj.conFcn{j},PopDec(i,:),obj.data,sprintf('constraint function g%d',j),[1 1]);
                     end
                 end
             else
                 PopCon = CalCon@PROBLEM(obj,PopDec);
             end
         end
+        %% Calculate the gradients of objectives
+        function ObjGrad = CalObjGrad(obj,Dec)
+            if ~isempty(obj.objGradFcn)
+                ObjGrad = zeros(length(obj.objGradFcn),obj.D);
+                for i = 1 : length(obj.objGradFcn)
+                    ObjGrad(i,:) = CallFcn(obj.objGradFcn{i},Dec,obj.data,sprintf('gradient of objective fg%d',i),[1 obj.D]);
+                end
+            else
+                ObjGrad = CalObjGrad@PROBLEM(obj,Dec);
+            end
+        end
+        %% Calculate the gradients of constraints
+        function ConGrad = CalConGrad(obj,Dec)
+            if ~isempty(obj.conGradFcn)
+                ConGrad = zeros(length(obj.conGradFcn),obj.D);
+                for i = 1 : length(obj.conGradFcn)
+                    ConGrad(i,:) = CallFcn(obj.conGradFcn{i},Dec,obj.data,sprintf('gradient of constraint gg%d',i),[1 obj.D]);
+                end
+            else
+                ConGrad = CalConGrad@PROBLEM(obj,Dec);
+            end
+        end
     end
 end
 
-function f = Str2Fcn(f,type1,type2,name)
-    if ischar(f)
+function var = Str2Fcn(var,type,useData,name,D)
+% Convert a string into a variable or function and check its validity
+
+    if ischar(var)
         try
-            if ~isempty(regexp(f,'^<.+>$','once'))
-                switch type1
+            if ~isempty(regexp(var,'^<.+>$','once'))
+                switch type
                     case 1
-                        f = load(f(2:end-1));
+                        var = load(var(2:end-1));
                     otherwise
-                        [folder,file] = fileparts(f(2:end-1));
+                        [folder,file] = fileparts(var(2:end-1));
                         addpath(folder);
-                        f = str2func(file);
+                        var = str2func(file);
                 end
             else
-                switch type1
+                switch type
                     case 1
-                        f = str2num(f);
+                        var = str2num(var);
                     case 2
-                        if type2
-                            f = str2func(['@(N,data)',f]);
+                        if useData
+                            var = str2func(['@(N,data)',var]);
                         else
-                            f = str2func(['@(N)',f]);
+                            var = str2func(['@(N)',var]);
                         end
                     case 3
-                        if type2
-                            f = str2func(['@(x,data)',f]);
+                        if useData
+                            var = str2func(['@(x,data)',var]);
                         else
-                            f = str2func(['@(x)',f]);
+                            var = str2func(['@(x)',var]);
                         end
                 end
             end
@@ -141,16 +184,39 @@ function f = Str2Fcn(f,type1,type2,name)
             rethrow(err);
         end
     end
+    if type == 1 && nargin > 4
+        if isscalar(var)
+            var = repmat(var,1,D);
+        else
+            assert(ismatrix(var)&&all(size(var)==[1,D]),'the %s should be a scalar or a 1*%d vector, while its current size is %d*%d.',name,D,size(var,1),size(var,2));
+        end
+    end
 end
 
-function output = CallFcn(func,input,parameter,name,presize)
+function Var = Strs2Fcns(Var,type,useData,name)
+% Convert multiple strings into functions
+
+    if ~iscell(Var)
+        Var = {Var};
+    end
+    Var(cellfun(@isempty,Var)) = [];
+    for i = 1 : length(Var)
+        Var{i} = Str2Fcn(Var{i},type,useData,[name,num2str(i)]);
+    end
+end
+
+function varargout = CallFcn(func,input,data,name,varargin)
+% Call a function and check the validity of its output
+
     try
-        if isempty(parameter)
-            output = func(input);
+        if isempty(data)
+            [varargout{1:nargout}] = func(input);
         else
-            output = func(input,parameter);
+            [varargout{1:nargout}] = func(input,data);
         end
-        assert(ismatrix(output)&&all(size(output)==presize),'the size of its output should be %d*%d.',presize(1),presize(2));
+        for i = 1 : min(length(varargout),length(varargin))
+            assert(ismatrix(varargout{i})&&all(size(varargout{i})==varargin{i}),'the size of its output #%d should be %d*%d, while its current size is %d*%d.',i,varargin{i}(1),varargin{i}(2),size(varargout{i},1),size(varargout{i},2));
+        end
     catch err
         err = addCause(err,MException('','The %s is invalid',name));
         rethrow(err);

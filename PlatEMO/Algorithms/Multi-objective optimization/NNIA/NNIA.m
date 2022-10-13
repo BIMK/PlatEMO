@@ -1,5 +1,5 @@
 classdef NNIA < ALGORITHM
-% <multi> <real/binary/permutation>
+% <multi> <real/integer/label/binary/permutation>
 % Nondominated neighbor immune algorithm
 % nA ---  20 --- Size of active population
 % nC --- 100 --- Size of clone population
@@ -30,7 +30,7 @@ classdef NNIA < ALGORITHM
             while Algorithm.NotTerminated(D)
                 A  = D(1:min(nA,length(D)));            % Active population
                 C  = Cloning(A,nC);                     % Clone population
-                C1 = OperatorGAhalf([C,A(randi(length(A),1,length(C)))]);
+                C1 = OperatorGAhalf(Problem,[C,A(randi(length(A),1,length(C)))]);
                 D  = UpdateDominantPopulation([D,C1],Problem.N);
             end
         end

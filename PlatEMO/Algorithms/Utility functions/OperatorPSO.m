@@ -1,18 +1,18 @@
-function Offspring = OperatorPSO(Particle,Pbest,Gbest,W)
+function Offspring = OperatorPSO(Problem,Particle,Pbest,Gbest,W)
 %OperatorPSO - The operator of particle swarm optimization.
 %
-%   Off = OperatorPSO(P,Pbest,Gbest) uses the operator of particle swarm
-%   optimization to generate offsprings based on particles P, personal best
-%   particles Pbest, and global best particles Gbest. P, Pbest, and Gbest
-%   should be arrays of SOLUTION objects, and Off is also an array of
-%   SOLUTION objects. Each object of P, Pbest, and Gbest is used to
-%   generate one offspring.
+%   Off = OperatorPSO(Pro,P,Pbest,Gbest) uses the operator of particle
+%   swarm optimization to generate offsprings for problem Pro based on
+%   particles P, personal best particles Pbest, and global best particles
+%   Gbest. P, Pbest, and Gbest should be arrays of SOLUTION objects, and
+%   Off is also an array of SOLUTION objects. Each object of P, Pbest, and
+%   Gbest is used to generate one offspring.
 %
-%   Off = OperatorPSO(P,Pbest,Gbest,W) specifies the parameter of the
+%   Off = OperatorPSO(Pro,P,Pbest,Gbest,W) specifies the parameter of the
 %   operator, where W is the inertia weight.
 %
 %   Example:
-%       Off = OperatorPSO(Population,Pbest,Gbest)
+%       Off = OperatorPSO(Problem,Population,Pbest,Gbest)
 
 %------------------------------- Reference --------------------------------
 % C. A. Coello Coello and M. S. Lechuga, MOPSO: A proposal for multiple
@@ -28,7 +28,7 @@ function Offspring = OperatorPSO(Particle,Pbest,Gbest,W)
 %--------------------------------------------------------------------------
 
     %% Parameter setting
-    if nargin < 4
+    if nargin < 5
         W = 0.4;
     end
     ParticleDec = Particle.decs;
@@ -38,9 +38,9 @@ function Offspring = OperatorPSO(Particle,Pbest,Gbest,W)
     ParticleVel = Particle.adds(zeros(N,D));
 
     %% Particle swarm optimization
-    r1        = repmat(rand(N,1),1,D);
-    r2        = repmat(rand(N,1),1,D);
+    r1        = rand(N,D);
+    r2        = rand(N,D);
     OffVel    = W.*ParticleVel + r1.*(PbestDec-ParticleDec) + r2.*(GbestDec-ParticleDec);
     OffDec    = ParticleDec + OffVel;
-    Offspring = SOLUTION(OffDec,OffVel);
+    Offspring = Problem.Evaluation(OffDec);
 end

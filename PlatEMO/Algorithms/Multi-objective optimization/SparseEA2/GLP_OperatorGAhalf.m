@@ -1,4 +1,4 @@
-function [Offspring,outIndexList,chosengroups] = GLP_OperatorGAhalf(Parent1,Parent2, numberOfGroups)
+function [Offspring,outIndexList,chosengroups] = GLP_OperatorGAhalf(Problem,Parent1,Parent2,numberOfGroups)
 % Parent1 and Parent2 are the matrix of decision variables, not solutions
 
 %------------------------------- Copyright --------------------------------
@@ -12,8 +12,7 @@ function [Offspring,outIndexList,chosengroups] = GLP_OperatorGAhalf(Parent1,Pare
 
     %% Parameter setting
     [proC,disC,~,disM] = deal(1,20,1,20);
-    [N,D]   = size(Parent1);
-    Problem = PROBLEM.Current();
+    [N,D] = size(Parent1);
     
     %% Genetic operators for real encoding
     beta = zeros(N,D);
@@ -29,15 +28,15 @@ function [Offspring,outIndexList,chosengroups] = GLP_OperatorGAhalf(Parent1,Pare
     [outIndexList,~] = CreateGroups(numberOfGroups,Offspring,D); 
     chosengroups = randi(numberOfGroups,size(outIndexList,1),1);
     Site = outIndexList == chosengroups;
-    mu    = rand(N,1);
-    mu    = repmat(mu,1,D);
-    temp  = Site & mu<=0.5;
+    mu   = rand(N,1);
+    mu   = repmat(mu,1,D);
+    temp = Site & mu<=0.5;
     Offspring       = min(max(Offspring,Lower),Upper);
     Offspring(temp) = Offspring(temp)+(Upper(temp)-Lower(temp)).*((2.*mu(temp)+(1-2.*mu(temp)).*...
-        (1-(Offspring(temp)-Lower(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1))-1);
+                      (1-(Offspring(temp)-Lower(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1))-1);
     temp = Site & mu>0.5;
     Offspring(temp) = Offspring(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
-        (1-(Upper(temp)-Offspring(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));    
+                      (1-(Upper(temp)-Offspring(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));    
 end
 
 

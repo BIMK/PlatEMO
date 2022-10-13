@@ -1,4 +1,4 @@
-function [c,G] = PAES(c,G,H,N,l_fails,l_opt,div)
+function [c,G] = PAES(Problem,c,G,H,N,l_fails,l_opt,div)
 % PAES local search
 
 %------------------------------- Copyright --------------------------------
@@ -13,7 +13,7 @@ function [c,G] = PAES(c,G,H,N,l_fails,l_opt,div)
     fails = 0;
     moves = 0;
     while fails < l_fails && moves < l_opt
-        m = OperatorFEP(c);
+        m = OperatorFEP(Problem,c);
         if all(c.obj<=m.obj)
             fails = fails + 1;
         else

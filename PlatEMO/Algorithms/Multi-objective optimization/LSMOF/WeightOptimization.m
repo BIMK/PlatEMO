@@ -23,8 +23,8 @@ function Arc = WeightOptimization(Problem,G2,Population,wD,N)
 	wmax      = sum((Problem.upper-Problem.lower).^2)^(0.5)*0.5;
     
     %% Optimize the weight variables by DE
-	w0 = rand(N,2*wD).*wmax;                                % Initialize the population
-    [fitness,PopNew] = fitfunc(w0,Direct,Problem,Reference);	% Calculate the fitness and store the solutions
+	w0 = rand(N,2*wD).*wmax;                                    % Initialize the population
+    [fitness,PopNew] = fitfunc(Problem,w0,Direct,Reference);	% Calculate the fitness and store the solutions
 	Arc = PopNew(NDSort(PopNew.objs,1)==1);
 	pCR = 0.2;
     beta_min=0.2;   % Lower Bound of Scaling Factor
@@ -58,7 +58,7 @@ function Arc = WeightOptimization(Problem,G2,Population,wD,N)
                 end
             end
             NewSol.Position = z;
-            [fit,PopNew] = fitfunc(z,Direct,Problem,Reference);
+            [fit,PopNew] = fitfunc(Problem,z,Direct,Reference);
             temp = [temp,PopNew];
             temp = temp(NDSort(temp.objs,1)==1);
             NewSol.Cost = fit;
@@ -75,15 +75,15 @@ function Arc = WeightOptimization(Problem,G2,Population,wD,N)
     end
 end
 
-function [Obj,OffSpring] = fitfunc(w0,direct,Problem,Reference)
+function [Obj,OffSpring] = fitfunc(Problem,w0,direct,Reference)
     [SubN,WD] = size(w0); 
     WD        = WD/2;
     Obj   	  = zeros(SubN,1);
     OffSpring = [];
     for i = 1 : SubN 
-        PopDec  = [repmat(w0(i,1:WD)',1,Problem.D).*direct(1:WD,:)+repmat(Problem.lower,WD,1);
-                      repmat(Problem.upper,WD,1) - repmat(w0(i,WD+1:end)',1,Problem.D).*direct(WD+1:end,:)];
-        OffWPop   = SOLUTION(PopDec);
+        PopDec    = [repmat(w0(i,1:WD)',1,Problem.D).*direct(1:WD,:)+repmat(Problem.lower,WD,1);
+                     repmat(Problem.upper,WD,1) - repmat(w0(i,WD+1:end)',1,Problem.D).*direct(WD+1:end,:)];
+        OffWPop   = Problem.Evaluation(PopDec);
         OffSpring = [OffSpring,OffWPop];
         Obj(i)    = -HV(OffWPop,Reference);
     end

@@ -1,4 +1,4 @@
-function Offspring = ARSBX(Parent,Parameter)
+function Offspring = ARSBX(Problem,Parent,Parameter)
 % Rotation based simulated binary crossover and polynomial mutation
 
 %------------------------------- Copyright --------------------------------
@@ -13,7 +13,6 @@ function Offspring = ARSBX(Parent,Parameter)
     %% Parameter setting
     [B,Centroid,pc]       = deal(Parameter{:});
     [proC,disC,proM,disM] = deal(1,2,1,20);
-    Problem = PROBLEM.Current();
 
     %% Simulated binary crossover
     ParentDec = Parent.decs;
@@ -65,5 +64,5 @@ function Offspring = ARSBX(Parent,Parameter)
     temp = Site & mu>0.5; 
     OffspringDec(temp) = OffspringDec(temp)+(Upper(temp)-Lower(temp)).*(1-nthroot(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                         (1-(Upper(temp)-OffspringDec(temp))./(Upper(temp)-Lower(temp))).^(disM+1),disM+1));
-    Offspring = SOLUTION(OffspringDec,Flag);
+    Offspring = Problem.Evaluation(OffspringDec,Flag);
 end

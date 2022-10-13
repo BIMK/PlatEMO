@@ -13,14 +13,19 @@ function varargout = platemo(varargin)
 %   'M'             <positive integer>  number of objectives
 %   'D'             <positive integer>  number of variables
 %	'maxFE'         <positive integer>  maximum number of function evaluations
+%   'maxRuntime'    <positive integer>  maximum runtime (in second)
 %   'save'       	<integer>           number of saved populations
 %   'outputFcn'     <function handle>   function called after each iteration
-%   'encoding'      <string>            encoding scheme of variables
-%   'lower'         <vector>            lower bounds of variables
-%   'upper'         <vector>            upper bounds of variables
-%   'decFcn'        <function handle>   function of variable repair
-%   'objFcn'        <function handle>   function of objective calculation
-%   'conFcn'        <function handle>   function of constraint calculation
+%   'encoding'      <string>            encoding scheme of each decision variable (1.real 2.integer 3.label 4.binary 5.permutation)
+%   'lower'         <vector>            lower bound of each decision variable
+%   'upper'         <vector>            upper bound of each decision variable
+%   'initFcn'       <function handle>   function for initializing solutions
+%   'evalFcn'       <function handle>   function for evaluating solutions
+%   'decFcn'        <function handle>   function for repairing invalid solutions
+%   'objFcn'        <function handle>   objective functions
+%   'conFcn'        <function handle>   constraint functions
+%   'objGradFcn'    <function handle>   function for calculating the gradients of objectives
+%   'conGradFcn'    <function handle>   function for calculating the gradients of constraints
 %
 %   Example:
 %
@@ -28,25 +33,34 @@ function varargout = platemo(varargin)
 %
 %   displays the GUI of PlatEMO.
 %
-%       platemo('algorithm',@GA,'problem',@SOP_F1,'-N',50)
+%       platemo('algorithm',@GA,'problem',@SOP_F1,'N',50,'maxFE',20000)
 %
-%   runs GA with a population size of 50 on SOP_F1.
+%   runs GA with a population size of 50 on SOP_F1 for 20000 evaluations.
 %
-%       platemo('algorithm',{@KnEA,0.4},'problem',{@WFG4,6})
+%       platemo('algorithm',@PSO,'problem',@SOP_F1,'N',100,'maxRuntime',3)
 %
-%   runs KnEA on WFG4 and sets the parameters in KnEA and WFG4.
+%   runs PSO with a population size of 100 on SOP_F1 for 3 seconds.
+%
+%       platemo('algorithm',{@KnEA,0.4},'problem',{@WFG4,6},'M',5)
+%
+%   runs KnEA on 5-objective WFG4 and sets the parameters in KnEA and WFG4.
 %
 %       for i = 1 : 10
 %           platemo('algorithm',@MOEAD,'problem',@ZDT1,'save',5)
 %       end
 %
 %   runs MOEA/D on ZDT1 for 10 times, where 5 populations are saved to a
-%   file in PlatEMO/Data/MOEAD in each time.
+%   distinct file in PlatEMO/Data/MOEAD each time.
 %
 %       platemo('algorithm',@CCMO,'objFcn',@CalObj,'conFcn',@CalCon)
 %
 %   runs CCMO on a problem whose objective values are calculated by
 %   CalObj() and constraint violations are calculated by CalCon().
+%
+%       platemo('algorithm',@SparseEA,'evalFcn',@Evaluation)
+%
+%   runs SparseEA on a problem whose objective values and constraint
+%   violations are all calculated by Evaluation().
 
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
@@ -78,7 +92,7 @@ function varargout = platemo(varargin)
             Problem     = PRO(input{:});
             [ALG,input] = getSetting(varargin,Problem);
             if nargout > 0
-                Algorithm = ALG(input{:},'save',-1);
+                Algorithm = ALG(input{:},'save',0);
             else
                 Algorithm = ALG(input{:});
             end
@@ -91,35 +105,28 @@ function varargout = platemo(varargin)
     end
 end
 
-function [name,input] = getSetting(setting,Pro)
-    isStr = find(cellfun(@ischar,setting(1:end-1))&~cellfun(@isempty,setting(2:end)));
-    input = {};
+function [name,Setting] = getSetting(Setting,Pro)
+    isStr = find(cellfun(@ischar,Setting(1:end-1))&~cellfun(@isempty,Setting(2:end)));
     if nargin > 1
-        index = isStr(find(strcmp(setting(isStr),'algorithm'),1)) + 1;
+        index = isStr(find(strcmp(Setting(isStr),'algorithm'),1)) + 1;
         if isempty(index)
             names = {@BSPGA,@GA,@SACOSO,@GA;@PMMOEA,@NSGAIII,@KRVEA,@NSGAIII;@RVEA,@RVEA,@CSEA,@RVEA};
-            name  = names{find([Pro.M<2,Pro.M<4,1],1),find([ismember({'binary','permutation'},Pro.encoding),Pro.maxFE<=1000&Pro.D<=10,1],1)};
-        elseif iscell(setting{index})
-            name  = setting{index}{1};
-            input = {'parameter',setting{index}(2:end)};
+            name  = names{find([Pro.M<2,Pro.M<4,1],1),find([all(Pro.encoding==4),any(Pro.encoding>2),Pro.maxFE<=1000&Pro.D<=10,1],1)};
+        elseif iscell(Setting{index})
+            name    = Setting{index}{1};
+            Setting = [Setting,{'parameter'},{Setting{index}(2:end)}];
         else
-            name = setting{index};
+            name = Setting{index};
         end
-        keys = {'save','outputFcn'};
     else
-        index = isStr(find(strcmp(setting(isStr),'problem'),1)) + 1;
+        index = isStr(find(strcmp(Setting(isStr),'problem'),1)) + 1;
         if isempty(index)
             name = @UserProblem;
-            keys = {'N','D','maxFE','encoding','lower','upper','initFcn','decFcn','objFcn','conFcn','parameter'};
-        elseif iscell(setting{index})
-            name  = setting{index}{1};
-            input = {'parameter',setting{index}(2:end)};
-            keys  = {'N','M','D','maxFE'};
+        elseif iscell(Setting{index})
+            name    = Setting{index}{1};
+            Setting = [Setting,{'parameter'},{Setting{index}(2:end)}];
         else
-            name = setting{index};
-            keys = {'N','M','D','maxFE'};
+            name = Setting{index};
         end
     end
-    index = isStr(ismember(setting(isStr),keys));
-    input = [input,setting(reshape([index;index+1],1,[]))];
 end

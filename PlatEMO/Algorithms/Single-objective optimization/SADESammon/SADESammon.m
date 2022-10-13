@@ -1,5 +1,5 @@
 classdef SADESammon < ALGORITHM
-% <single> <real> <expensive>
+% <single> <real/integer> <expensive>
 % Sammon mapping assisted differential evolution
 
 %------------------------------- Reference --------------------------------
@@ -24,13 +24,13 @@ classdef SADESammon < ALGORITHM
             %% Generate the random population
             N          = 2*Problem.D;
             PopDec     = UniformPoint(N,Problem.D,'Latin');
-            Population = SOLUTION(repmat(Problem.upper-Problem.lower,N,1).*PopDec+repmat(Problem.lower,N,1));
+            Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,N,1).*PopDec+repmat(Problem.lower,N,1));
             
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 % Generate Lammda new solution with DE
                 Lammda = min(Lammda,length(Population));
-                newDec = GenerateNew(Population,Lammda,Mu,CR);
+                newDec = GenerateNew(Problem,Population,Lammda,Mu,CR);
                 
                 % Map data to low dimension using Sammon mapping
                 trainDec = Population(end-N+1:end).decs;
@@ -50,7 +50,7 @@ classdef SADESammon < ALGORITHM
                 
                 % Evaluate
                 [~,best] = min(LCB);
-                Population = [Population,SOLUTION(newDec(best,:))];
+                Population = [Population,Problem.Evaluation(newDec(best,:))];
             end
         end
     end

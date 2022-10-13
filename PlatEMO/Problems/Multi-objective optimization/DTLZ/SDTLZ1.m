@@ -28,7 +28,7 @@ classdef SDTLZ1 < PROBLEM
             if isempty(obj.D); obj.D = obj.M+4; end
             obj.lower    = zeros(1,obj.D);
             obj.upper    = ones(1,obj.D);
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

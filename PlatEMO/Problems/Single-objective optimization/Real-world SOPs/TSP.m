@@ -26,7 +26,7 @@ classdef TSP < PROBLEM
             % Parameter setting
             obj.M = 1;
             if isempty(obj.D); obj.D = 30; end
-            obj.encoding = 'permutation';
+            obj.encoding = 5 + zeros(1,obj.D);
             % Randomly generate the adjacency matrix
             file = sprintf('TSP-D%d.mat',obj.D);
             file = fullfile(fileparts(mfilename('fullpath')),file);

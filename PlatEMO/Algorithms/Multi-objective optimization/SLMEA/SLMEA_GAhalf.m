@@ -16,12 +16,6 @@ function Offspring = SLMEA_GAhalf(Parent,Lower,Upper,Encoding,useGPU,Parameter)
     else
         [proC,disC,proM,disM] = deal(1,20,1,20);
     end
-    if isa(Parent(1),'SOLUTION')
-        calObj = true;
-        Parent = Parent.decs;
-    else
-        calObj = false;
-    end
     Parent1 = Parent(1:floor(end/2),:);
     Parent2 = Parent(floor(end/2)+1:floor(end/2)*2,:);
     [N,D]   = size(Parent1);
@@ -77,8 +71,5 @@ function Offspring = SLMEA_GAhalf(Parent,Lower,Upper,Encoding,useGPU,Parameter)
             Offspring(temp) = Offspring(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                               (1-(Upper(temp)-Offspring(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
             Offspring       = min(max(Offspring,Lower),Upper);              
-    end
-    if calObj
-        Offspring = SOLUTION(Offspring);
     end
 end

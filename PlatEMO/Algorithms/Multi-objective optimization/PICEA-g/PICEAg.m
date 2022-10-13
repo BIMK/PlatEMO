@@ -1,5 +1,5 @@
 classdef PICEAg < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Preference-inspired coevolutionary algorithm with goals
 % NGoal --- --- Number of goals
 
@@ -29,7 +29,7 @@ classdef PICEAg < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Archive)
                 MatingPool = randi(Problem.N,1,Problem.N);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Archive    = UpdateArchive([Archive,Offspring],Problem.N);
                 newGoal    = GeneGoal([Population.objs;Offspring.objs],NGoal);
                 [Population,Goal] = EnvironmentSelection([Population,Offspring],[Goal;newGoal],Problem.N);

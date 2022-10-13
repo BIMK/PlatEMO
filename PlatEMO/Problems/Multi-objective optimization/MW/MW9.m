@@ -22,21 +22,21 @@ classdef MW9 < PROBLEM
             if isempty(obj.D); obj.D = 15; end
             obj.lower    = zeros(1,obj.D);
             obj.upper    = ones(1,obj.D);
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
-        %% Calculate objective values
-        function PopObj = CalObj(obj,X)
+        %% Calculate objective values and constraint violations
+        function Population = Evaluation(obj,varargin)
+            X = varargin{1};
+            X = max(min(X,repmat(obj.upper,size(X,1),1)),repmat(obj.lower,size(X,1),1));
             g = 1 + sum(1 - exp(-10*((X(:,obj.M:end).^(obj.D-obj.M)) - 0.5 - (repmat(obj.M:obj.D,size(X,1),1) - 1)/(2*obj.D)).^2),2);
             PopObj(:,1) = g.*X(:,1);
             PopObj(:,2) = g.*(1 - (PopObj(:,1)./g).^0.6);
-        end
-        %% Calculate constraint violations
-        function PopCon = CalCon(obj,X)
-            PopObj = obj.CalObj(X);
-            T1     = (1-0.64*PopObj(:,1).^2-PopObj(:,2)).*(1-0.36*PopObj(:,1).^2-PopObj(:,2));
-            T2     = 1.35.^2 - (PopObj(:,1)+0.35).^2 - PopObj(:,2);
-            T3     = 1.15.^2 - (PopObj(:,1)+0.15).^2 - PopObj(:,2);
-            PopCon = min(T1,T2.*T3);
+            T1          = (1-0.64*PopObj(:,1).^2-PopObj(:,2)).*(1-0.36*PopObj(:,1).^2-PopObj(:,2));
+            T2          = 1.35.^2 - (PopObj(:,1)+0.35).^2 - PopObj(:,2);
+            T3          = 1.15.^2 - (PopObj(:,1)+0.15).^2 - PopObj(:,2);
+            PopCon      = min(T1,T2.*T3);
+            Population  = SOLUTION(X,PopObj,PopCon,varargin{2:end});
+            obj.FE      = obj.FE + length(Population);
         end
         %% Generate points on the Pareto front
         function R = GetOptimum(obj,N)

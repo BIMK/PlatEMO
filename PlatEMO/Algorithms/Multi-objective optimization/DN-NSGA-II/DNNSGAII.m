@@ -1,5 +1,5 @@
 classdef DNNSGAII < ALGORITHM
-% <multi> <real> <multimodal>
+% <multi> <real/integer> <multimodal>
 % Decision space based niching NSGA-II
 
 %------------------------------- Reference --------------------------------
@@ -24,7 +24,7 @@ classdef DNNSGAII < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection_Mod(round(Problem.N/2),round(Problem.N/2),Population.decs,FrontNo,-CrowdDis);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,FrontNo,CrowdDis] = EnvironmentalSelection([Population,Offspring],Problem.N);
             end
         end

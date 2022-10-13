@@ -1,5 +1,5 @@
 classdef MOEADDE < ALGORITHM
-% <multi/many> <real>
+% <multi/many> <real/integer>
 % MOEA/D based on differential evolution
 % delta --- 0.9 --- The probability of choosing parents locally
 % nr    ---   2 --- Maximum number of solutions replaced by each offspring
@@ -47,7 +47,7 @@ classdef MOEADDE < ALGORITHM
                     end
 
                     % Generate an offspring
-                    Offspring = OperatorDE(Population(i),Population(P(1)),Population(P(2)));
+                    Offspring = OperatorDE(Problem,Population(i),Population(P(1)),Population(P(2)));
 
                     % Update the ideal point
                     Z = min(Z,Offspring.obj);

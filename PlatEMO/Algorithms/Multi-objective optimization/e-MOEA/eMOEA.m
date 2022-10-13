@@ -1,5 +1,5 @@
 classdef eMOEA < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Epsilon multi-objective evolutionary algorithm
 % epsilon --- 0.06 --- The parameter in grid location calculation
 
@@ -34,7 +34,7 @@ classdef eMOEA < ALGORITHM
                     Domi = any(Population(k(1)).obj<Population(k(2)).obj) - any(Population(k(1)).obj>Population(k(2)).obj);
                     p    = k((Domi==-1)+1);
                     q    = randi(length(Archive));
-                    Offspring  = OperatorGAhalf([Population(p),Archive(q)]);
+                    Offspring  = OperatorGAhalf(Problem,[Population(p),Archive(q)]);
                     Population = UpdatePopulation(Population,Offspring);
                     Archive    = UpdateArchive(Archive,Offspring,epsilon);
                 end

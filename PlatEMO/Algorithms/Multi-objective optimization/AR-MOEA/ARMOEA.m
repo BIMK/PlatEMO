@@ -1,5 +1,5 @@
 classdef ARMOEA < ALGORITHM
-% <multi/many> <real/binary/permutation> <constrained/none>
+% <multi/many> <real/integer/label/binary/permutation> <constrained/none>
 % Adaptive reference points based multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -26,7 +26,7 @@ classdef ARMOEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = MatingSelection(Population,RefPoint,Range);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Archive,RefPoint,Range] = UpdateRefPoint([Archive;Offspring(all(Offspring.cons<=0,2)).objs],W,Range);
                 [Population,Range]       = EnvironmentalSelection([Population,Offspring],RefPoint,Range,Problem.N);
             end

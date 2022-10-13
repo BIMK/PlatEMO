@@ -1,5 +1,5 @@
 classdef SMPSO < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % Speed-constrained multi-objective particle swarm optimization
 
 %------------------------------- Reference --------------------------------
@@ -26,7 +26,7 @@ classdef SMPSO < ALGORITHM
 
             %% Optimization
             while Algorithm.NotTerminated(Gbest)
-                Population       = Operator(Population,Pbest,Gbest(TournamentSelection(2,Problem.N,-CrowdDis)));
+                Population       = Operator(Problem,Population,Pbest,Gbest(TournamentSelection(2,Problem.N,-CrowdDis)));
                 [Gbest,CrowdDis] = UpdateGbest([Gbest,Population],Problem.N);
                 Pbest            = UpdatePbest(Pbest,Population);
             end

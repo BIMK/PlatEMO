@@ -1,5 +1,5 @@
 classdef NSGAIIconflict < ALGORITHM
-% <many> <real/binary/permutation>
+% <many> <real/integer/label/binary/permutation>
 % NSGA-II with conflict-based partitioning strategy
 % NS     ---  2 --- Number of subspaces
 % cycles --- 10 --- Number of cycles
@@ -32,7 +32,7 @@ classdef NSGAIIconflict < ALGORITHM
             phase = true;
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,FrontNo,CrowdDis] = EnvironmentalSelection([Population,Offspring],Problem.N,Psi);
                 if ~phase && mod(ceil(Problem.FE/Problem.N),Gc)/Gc < 0.3
                     % Change to the approximation phase

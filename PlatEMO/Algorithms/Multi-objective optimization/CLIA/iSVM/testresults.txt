@@ -1,0 +1,49 @@
+> load nonlindata100
+> svmtrain(X,y,10,5,2);
+Beginning training.
+Learned 50 examples.
+Learned 100 examples.
+Training complete!
+
+Margin vectors:		13
+Error vectors:		31
+Reserve vectors:	56
+Kernel evaluations:	17645
+
+> svmloo
+Beginning LOO error rate estimation.
+Unlearned and tested 44 examples.
+Process complete!
+
+
+ans =
+
+    18
+
+> plot2dkm
+> perturbc(50);
+p = 0.00
+p = 0.23
+p = 0.44
+p = 0.66
+p = 0.84
+p = 1.00
+Perturbation complete!
+
+Margin vectors:		18
+Error vectors:		25
+Reserve vectors:	57
+Kernel evaluations:	4312
+
+> plot2dkm
+> perturbk(4);
+Number of unlearned vectors: 40
+Perturbation complete!
+
+Margin vectors:		12
+Error vectors:		30
+Reserve vectors:	58
+Kernel evaluations:	10436
+
+> plot2dkm
+> diary off

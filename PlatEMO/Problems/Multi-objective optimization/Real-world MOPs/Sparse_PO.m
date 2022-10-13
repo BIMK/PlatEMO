@@ -42,7 +42,7 @@ classdef Sparse_PO < PROBLEM
             obj.D = size(obj.Yield,1);
             obj.lower    = zeros(1,obj.D) - 1;
             obj.upper    = zeros(1,obj.D) + 1;
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

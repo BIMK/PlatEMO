@@ -1,5 +1,5 @@
 classdef IMODE < ALGORITHM
-% <single> <real> <large/none> <constrained/none>
+% <single> <real/integer> <large/none> <constrained/none>
 % Improved multi-operator differential evolution
 % minN  ---   4 --- Minimum population size
 % aRate --- 2.6 --- Ratio of archive size to population size
@@ -72,7 +72,7 @@ classdef IMODE < ALGORITHM
                         OffDec(i,Site) = PopDec(i,Site);
                     end
                 end
-                Offspring = SOLUTION(OffDec);
+                Offspring = Problem.Evaluation(OffDec);
                 % Update the population and archive
                 delta   = FitnessSingle(Population) - FitnessSingle(Offspring);
                 replace = delta > 0;

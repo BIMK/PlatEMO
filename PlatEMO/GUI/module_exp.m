@@ -28,34 +28,39 @@ classdef module_exp < handle
             GUI.APP([1 2],4,uipanel(obj.app.maingrid,'BackgroundColor',[.8 .8 .8]));
 
             % The first panel
-            obj.app.grid(1)    = GUI.APP(2,1,uigridlayout(obj.app.maingrid,'RowHeight',{16,20,16,20,16,20,20,20,'1x',20,'1x',22,22,22},'ColumnWidth',{'1x','1x','1x'},'Padding',[8 5 8 0],'RowSpacing',5,'ColumnSpacing',5,'BackgroundColor','w'));
+            obj.app.grid(1)    = GUI.APP(2,1,uigridlayout(obj.app.maingrid,'RowHeight',{16,19,16,19,19,16,19,19,19,20,'1x',20,'1x',21,21,21},'ColumnWidth',{'1x','1x','1x'},'Padding',[8 5 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
             obj.app.labelA(1)  = GUI.APP(1,[1 3],uilabel(obj.app.grid(1),'Text','Number of objectives','VerticalAlignment','bottom','FontSize',12,'FontColor',[.15 .6 .2],'FontWeight','bold'));
             obj.app.stateA(1)  = GUI.APP(2,1,uibutton(obj.app.grid(1),'state','Text','single','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has a single objective','ValueChangedFcn',{@obj.cb_filter,1}));
             obj.app.stateA(2)  = GUI.APP(2,2,uibutton(obj.app.grid(1),'state','Text','multi','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',1,'Tooltip','The problem has 2 or 3 objectives','ValueChangedFcn',{@obj.cb_filter,2}));
             obj.app.stateA(3)  = GUI.APP(2,3,uibutton(obj.app.grid(1),'state','Text','many','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has more than 3 objectives','ValueChangedFcn',{@obj.cb_filter,3}));
             obj.app.labelA(2)  = GUI.APP(3,[1 3],uilabel(obj.app.grid(1),'Text','Encoding scheme','VerticalAlignment','bottom','FontSize',12,'FontColor',[.15 .6 .2],'FontWeight','bold'));
-            obj.app.stateA(4)  = GUI.APP(4,1,uibutton(obj.app.grid(1),'state','Text','real','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',1,'Tooltip','The decision variables are real values','ValueChangedFcn',{@obj.cb_filter,4}));
-            obj.app.stateA(5)  = GUI.APP(4,2,uibutton(obj.app.grid(1),'state','Text','binary','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision variables are binary values','ValueChangedFcn',{@obj.cb_filter,5}));
-            obj.app.stateA(6)  = GUI.APP(4,3,uibutton(obj.app.grid(1),'state','Text','permutation','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision vector is a permutation','ValueChangedFcn',{@obj.cb_filter,6}));
-            obj.app.labelA(3)  = GUI.APP(5,[1 3],uilabel(obj.app.grid(1),'Text','Special difficulties','VerticalAlignment','bottom','FontSize',12,'FontColor',[.15 .6 .2],'FontWeight','bold'));
-            obj.app.stateA(7)  = GUI.APP(6,1,uibutton(obj.app.grid(1),'state','Text','large','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has more than 100 decision variables','ValueChangedFcn',{@obj.cb_filter,7}));
-            obj.app.stateA(8)  = GUI.APP(6,2,uibutton(obj.app.grid(1),'state','Text','constrained','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has constraints','ValueChangedFcn',{@obj.cb_filter,8}));
-            obj.app.stateA(9)  = GUI.APP(6,3,uibutton(obj.app.grid(1),'state','Text','expensive','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The objectives are computationally time-consuming','ValueChangedFcn',{@obj.cb_filter,9}));
-            obj.app.stateA(10) = GUI.APP(7,1,uibutton(obj.app.grid(1),'state','Text','multimodal','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The objectives are multimodal','ValueChangedFcn',{@obj.cb_filter,10}));
-            obj.app.stateA(11) = GUI.APP(7,2,uibutton(obj.app.grid(1),'state','Text','sparse','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','Most decision variables of the optimal solutions are zero','ValueChangedFcn',{@obj.cb_filter,11}));
-            obj.app.stateA(12) = GUI.APP(7,3,uibutton(obj.app.grid(1),'state','Text','preference','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','Only searching for preferred regions of the Pareto front','ValueChangedFcn',{@obj.cb_filter,12}));
-            obj.app.labelA(4)  = GUI.APP(8,[1 2],uilabel(obj.app.grid(1),'Text','Algorithms','VerticalAlignment','bottom','FontSize',15,'FontColor',[.2 .4 .7],'FontWeight','bold'));
-            obj.app.labelA(5)  = GUI.APP(8,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.2 .4 .7]));
-            obj.app.listA(1)   = GUI.APP(9,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.2 .4 .7],'ValueChangedFcn',{@obj.cb_updateList,2}));
-            obj.app.labelA(6)  = GUI.APP(10,[1 2],uilabel(obj.app.grid(1),'Text','Problems','VerticalAlignment','bottom','FontSize',15,'FontColor',[.9 .5 .2],'FontWeight','bold'));
-            obj.app.labelA(7)  = GUI.APP(10,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.9 .5 .2]));
-            obj.app.listA(2)   = GUI.APP(11,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.9 .5 .2],'ValueChangedFcn',{@obj.cb_updateList,-2}));
-            obj.app.labelA(8)  = GUI.APP(12,[1 2],uilabel(obj.app.grid(1),'Text','Number of runs','FontColor',[.15 .6 .2],'FontWeight','bold'));
-            obj.app.editA(1)   = GUI.APP(12,3,uieditfield(obj.app.grid(1),'numeric','Value',30,'limits',[1 inf],'RoundFractionalValues','on','Tooltip','Number of runs for each algorithm on each problem'));
-            obj.app.labelA(9)  = GUI.APP(13,[1 2],uilabel(obj.app.grid(1),'Text','Number of results','FontColor',[.15 .6 .2],'FontWeight','bold'));
-            obj.app.editA(2)   = GUI.APP(13,3,uieditfield(obj.app.grid(1),'numeric','Value',1,'limits',[1 inf],'RoundFractionalValues','on','Tooltip','Number of populations saved in each run'));
-            tempGrid           = GUI.APP(14,[1 3],uigridlayout(obj.app.grid(1),'RowHeight',{'1x'},'ColumnWidth',{'0.5x',20,'1x'},'Padding',[0 0 0 0],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
-            obj.app.labelA(10) = GUI.APP(1,1,uilabel(tempGrid,'Text','File path','FontColor',[.15 .6 .2],'FontWeight','bold'));
+            obj.app.stateA(4)  = GUI.APP(4,1,uibutton(obj.app.grid(1),'state','Text','real','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',1,'Tooltip','The decision variables are real numbers','ValueChangedFcn',{@obj.cb_filter,4}));
+            obj.app.stateA(5)  = GUI.APP(4,2,uibutton(obj.app.grid(1),'state','Text','integer','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision variables are integers','ValueChangedFcn',{@obj.cb_filter,5}));
+            obj.app.stateA(6)  = GUI.APP(4,3,uibutton(obj.app.grid(1),'state','Text','label','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision variables are labels','ValueChangedFcn',{@obj.cb_filter,6}));
+            obj.app.stateA(7)  = GUI.APP(5,1,uibutton(obj.app.grid(1),'state','Text','binarys','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision variables are binary numbers','ValueChangedFcn',{@obj.cb_filter,7}));
+            obj.app.stateA(8)  = GUI.APP(5,2,uibutton(obj.app.grid(1),'state','Text','permutation','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision vector is a permutation','ValueChangedFcn',{@obj.cb_filter,8}));
+            obj.app.labelA(3)  = GUI.APP(6,[1 3],uilabel(obj.app.grid(1),'Text','Special difficulties','VerticalAlignment','bottom','FontSize',12,'FontColor',[.15 .6 .2],'FontWeight','bold'));
+            obj.app.stateA(9)  = GUI.APP(7,1,uibutton(obj.app.grid(1),'state','Text','large','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has more than 100 decision variables','ValueChangedFcn',{@obj.cb_filter,9}));
+            obj.app.stateA(10) = GUI.APP(7,2,uibutton(obj.app.grid(1),'state','Text','constrained','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has constraints','ValueChangedFcn',{@obj.cb_filter,10}));
+            obj.app.stateA(11) = GUI.APP(7,3,uibutton(obj.app.grid(1),'state','Text','expensive','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The objectives are computationally time-consuming','ValueChangedFcn',{@obj.cb_filter,11}));
+            obj.app.stateA(12) = GUI.APP(8,1,uibutton(obj.app.grid(1),'state','Text','multimodal','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The objectives are multimodal','ValueChangedFcn',{@obj.cb_filter,12}));
+            obj.app.stateA(13) = GUI.APP(8,2,uibutton(obj.app.grid(1),'state','Text','sparse','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','Most decision variables of the optimal solutions are zero','ValueChangedFcn',{@obj.cb_filter,13}));
+            obj.app.stateA(14) = GUI.APP(8,3,uibutton(obj.app.grid(1),'state','Text','dynamic','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The objectives vary periodically','ValueChangedFcn',{@obj.cb_filter,14}));
+            obj.app.stateA(15) = GUI.APP(9,1,uibutton(obj.app.grid(1),'state','Text','multitask','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has multiple tasks to be solved simultaneously','ValueChangedFcn',{@obj.cb_filter,15}));
+            obj.app.stateA(16) = GUI.APP(9,2,uibutton(obj.app.grid(1),'state','Text','bilevel','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has two nested objectives','ValueChangedFcn',{@obj.cb_filter,16}));
+            obj.app.stateA(17) = GUI.APP(9,3,uibutton(obj.app.grid(1),'state','Text','robust','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The objectives are influenced by uncertain factors','ValueChangedFcn',{@obj.cb_filter,17}));
+            obj.app.labelA(4)  = GUI.APP(10,[1 2],uilabel(obj.app.grid(1),'Text','Algorithms','VerticalAlignment','bottom','FontSize',13,'FontColor',[.2 .4 .7],'FontWeight','bold'));
+            obj.app.labelA(5)  = GUI.APP(10,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.2 .4 .7]));
+            obj.app.listA(1)   = GUI.APP(11,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.2 .4 .7],'ValueChangedFcn',{@obj.cb_updateList,2}));
+            obj.app.labelA(6)  = GUI.APP(12,[1 2],uilabel(obj.app.grid(1),'Text','Problems','VerticalAlignment','bottom','FontSize',13,'FontColor',[.9 .5 .2],'FontWeight','bold'));
+            obj.app.labelA(7)  = GUI.APP(12,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.9 .5 .2]));
+            obj.app.listA(2)   = GUI.APP(13,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.9 .5 .2],'ValueChangedFcn',{@obj.cb_updateList,-2}));
+            obj.app.labelA(8)  = GUI.APP(14,[1 2],uilabel(obj.app.grid(1),'Text','Number of runs','FontColor',[.15 .6 .2],'FontWeight','bold','Tooltip','Number of runs for each algorithm on each problem'));
+            obj.app.editA(1)   = GUI.APP(14,3,uieditfield(obj.app.grid(1),'numeric','Value',30,'limits',[1 inf],'RoundFractionalValues','on','Tooltip','Number of runs for each algorithm on each problem'));
+            obj.app.labelA(9)  = GUI.APP(15,[1 2],uilabel(obj.app.grid(1),'Text','Number of results','FontColor',[.15 .6 .2],'FontWeight','bold','Tooltip','Number of populations saved in each run'));
+            obj.app.editA(2)   = GUI.APP(15,3,uieditfield(obj.app.grid(1),'numeric','Value',1,'limits',[1 inf],'RoundFractionalValues','on','Tooltip','Number of populations saved in each run'));
+            tempGrid           = GUI.APP(16,[1 3],uigridlayout(obj.app.grid(1),'RowHeight',{'1x'},'ColumnWidth',{'0.5x',20,'1x'},'Padding',[0 0 0 0],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
+            obj.app.labelA(10) = GUI.APP(1,1,uilabel(tempGrid,'Text','File path','FontColor',[.15 .6 .2],'FontWeight','bold','Tooltip','File path for saving experimental settings'));
             obj.app.buttonA    = GUI.APP(1,2,uibutton(tempGrid,'Text','...','BackgroundColor','w','ButtonpushedFcn',@obj.cb_filepath));
             obj.app.editA(3)   = GUI.APP(1,3,uieditfield(tempGrid,'Value',fullfile(cd,'Data','Setting.mat'),'HorizontalAlignment','right','Tooltip','File path for saving experimental settings'));
             
@@ -74,17 +79,16 @@ classdef module_exp < handle
             obj.app.toolC(4)   = GUI.APP([1 3],4,uibutton(tempGrid,'state','Text','M','BackgroundColor',[.95 .95 1],'Value',1,'Tooltip','Show the number of objectives','ValueChangedFcn',@obj.TableUpdateColumn));
             obj.app.toolC(5)   = GUI.APP([1 3],5,uibutton(tempGrid,'state','Text','D','BackgroundColor',[.95 .95 1],'Value',1,'Tooltip','Show the number of decision variables','ValueChangedFcn',@obj.TableUpdateColumn));
             obj.app.toolC(6)   = GUI.APP([1 3],6,uibutton(tempGrid,'state','Text','FE','BackgroundColor',[.95 .95 1],'Tooltip','Show the maximum number of function evaluations','ValueChangedFcn',@obj.TableUpdateColumn));
-            obj.app.dropC(1)   = GUI.APP([1 3],7,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Show the specific metric values','Items',['Number of runs';'runtime';obj.GUI.metList(:,2);'Feasible rate'],'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
-            obj.app.dropC(2)   = GUI.APP([1 3],7,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Show the specific metric values','Items',{'Number of runs';'runtime';'Minimum value';'Feasible rate'},'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate,'Visible','off'));
-            obj.app.dropC(3)   = GUI.APP([1 3],8,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Show the mean value and standard deviation','Items',{'Mean','Mean (STD)','Median','Median (IQR)'},'ItemsData',1:4,'Value',2,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
-            obj.app.dropC(4)   = GUI.APP([1 3],9,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Perform the Wilcoxon rank sum test','Items',{'none','Signed rank test','Rank sum test','Friedman test'},'ItemsData',1:4,'Value',3,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
-            obj.app.dropC(5)   = GUI.APP([1 3],10,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Highlight the best result','Items',{'none','Highlight the best','Highlight all the bests'},'ItemsData',1:3,'Value',2,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
+            obj.app.dropC(1)   = GUI.APP([1 3],7,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Show the specific metric values','Items',{},'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
+            obj.app.dropC(2)   = GUI.APP([1 3],8,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Show the mean value and standard deviation','Items',{'Mean','Mean (STD)','Median','Median (IQR)'},'ItemsData',1:4,'Value',2,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
+            obj.app.dropC(3)   = GUI.APP([1 3],9,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Perform the Wilcoxon rank sum test','Items',{'none','Signed rank test','Rank sum test','Friedman test'},'ItemsData',1:4,'Value',3,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
+            obj.app.dropC(4)   = GUI.APP([1 3],10,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Highlight the best result','Items',{'none','Highlight the best','Highlight all the bests'},'ItemsData',1:3,'Value',2,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
             obj.app.table      = GUI.APP(2,[1 4],uitable(obj.app.grid(3),'CellSelectionCallback',@obj.cb_tableSelect));
-            obj.app.checkC     = GUI.APP(3,1,uicheckbox(obj.app.grid(3),'Text','Parallel execution','Tooltip','Perform the experiment with multiple CPUs','Value',~isempty(ver('parallel')),'Enable',~isempty(ver('parallel'))));
+            obj.app.checkC     = GUI.APP(3,1,uicheckbox(obj.app.grid(3),'Text','Parallel execution','Tooltip','Perform the experiment with multiple CPUs','Value',0,'Enable',~isempty(ver('parallel'))));
             obj.app.buttonC(1) = GUI.APP(3,2,uibutton(obj.app.grid(3),'push','Text','Start','FontSize',16,'ButtonpushedFcn',@obj.cb_start));
             obj.app.buttonC(2) = GUI.APP(3,3,uibutton(obj.app.grid(3),'push','Text','Stop','FontSize',16,'Enable','off','ButtonpushedFcn',@obj.cb_stop));
             obj.app.labelC     = GUI.APP(3,4,uilabel(obj.app.grid(3),'Text','','HorizontalAlignment','right','VerticalAlignment','center'));
-            obj.app.tablemenu  = uicontext(obj.GUI.app.figure);
+            obj.app.tablemenu  = uicontext(obj.GUI.app.figure,110);
             obj.app.tablemenu.add('  Populations (obj.)','',{@obj.cb_tableShow,1});
             obj.app.tablemenu.add('  Populations (dec.)','',{@obj.cb_tableShow,2});
             obj.app.tablemenu.add('  Metric values','',{@obj.cb_tableShow,3});
@@ -106,14 +110,20 @@ classdef module_exp < handle
             end
             filter = [obj.app.stateA.Value];
             func   = @(s)all(any(repmat([true,filter],size(s,1),1)&s,2)) && all((any(s(:,2:end),1)&filter)==filter);
+            % Update the list of algorithms
             show   = cellfun(func,obj.GUI.algList(:,1));
             obj.app.listA(1).Items = ['(Open File)';obj.GUI.algList(show,2)];
             obj.app.listA(1).Value = {};
             obj.app.labelA(5).Text = sprintf('%d / %d',sum(show),length(show));
+            % Update the list of problems
             show   = cellfun(func,obj.GUI.proList(:,1));
             obj.app.listA(2).Items = ['(Open File)';obj.GUI.proList(show,2)];
             obj.app.listA(2).Value = {};
             obj.app.labelA(7).Text = sprintf('%d / %d',sum(show),length(show));
+            % Update the lists of metrics
+            show   = cellfun(@(s)func(s(2:end,1:end-2)),obj.GUI.metList(:,1));
+            obj.app.dropC(1).Items = ['Number of runs';'runtime';obj.GUI.metList(show,2)];
+            obj.TableUpdate();
         end
         %% Update the parameter list
         function cb_updateList(obj,~,~,type)
@@ -227,11 +237,11 @@ classdef module_exp < handle
                                 ALG = [ALG,feval(item.title.Text,'parameter',para,'save',obj.app.editA(2).Value,'outputFcn',@(~,~)[])];
                             end
                         else
-                            len = cellfun(@length,para);
+                            len = cellfun(@length,para(1:4));
                             for j = 1 : max(1,max(len))
                                 paraSub        = para;
                                 paraSub(len>1) = cellfun(@(s)s(min(end,j)),para(len>1),'UniformOutput',false);
-                                PRO            = [PRO,feval(item.title.Text,'N',paraSub{1},'M',paraSub{2},'D',paraSub{3},'maxFE',paraSub{4},'parameter',paraSub(5:end))];
+                                PRO            = [PRO,feval(item.title.Text,'N',paraSub{1},'M',paraSub{2},'D',paraSub{3},item.label(4).Text,paraSub{4},'parameter',paraSub(5:end))];
                             end
                         end
                     end
@@ -264,9 +274,7 @@ classdef module_exp < handle
                 obj.app.listB.Enable        = deal('off');
                 obj.app.buttonC(1).Text     = 'Pause';
                 obj.app.buttonC(2).Enable   = 'on';
-                obj.app.dropC(1+SorM(1)).Visible = 'on';
-                obj.app.dropC(2-SorM(1)).Visible = 'off';
-                drawnow();
+                drawnow('limitrate');
                 % Perform the experiment
                 for p = 1 : length(PRO)
                     for a = 1 : length(ALG)
@@ -296,7 +304,7 @@ classdef module_exp < handle
                             try
                                 Future = arrayfun(@(s)parfeval(@parallelFcn,2,ALG(a),PRO(p)),runIndex);
                                 while ~all([Future.Read])
-                                    drawnow();
+                                    drawnow('limitrate');
                                     if strcmp(obj.app.buttonC(2).Enable,'off')
                                         cancel(Future);
                                         return;
@@ -374,11 +382,11 @@ classdef module_exp < handle
         function TableUpdate(obj,~,~,proindex)
             % Change the tooltips of drop-down components
             str = {'Show the mean value','Show the mean value and standard deviation','Show the median value','Show the median value and interquartile range'};
-            obj.app.dropC(3).Tooltip = str(obj.app.dropC(3).Value);
+            obj.app.dropC(2).Tooltip = str(obj.app.dropC(2).Value);
             str = {'','Perform the Wilcoxon signed rank test','Perform the Wilcoxon rank sum test','Perform the Friedman''s test'};
-            obj.app.dropC(4).Tooltip = str(obj.app.dropC(4).Value);
+            obj.app.dropC(3).Tooltip = str(obj.app.dropC(3).Value);
             str = {'','Highlight the best result','Highlight the best and statistically similar results'};
-            obj.app.dropC(5).Tooltip = str(obj.app.dropC(5).Value);
+            obj.app.dropC(4).Tooltip = str(obj.app.dropC(4).Value);
             if ~isempty(obj.data)
                 [nP,nA,nR] = size(obj.data.result);
                 if nargin < 4
@@ -392,9 +400,9 @@ classdef module_exp < handle
                 end
                 obj.app.table.removeStyle();
                 % Identify the metric
-                metric = obj.app.dropC((obj.data.PRO(1).M<=1)+1).Value;
-                allMet = [obj.GUI.metList;{[0 1]},'Number of runs';{[1 0]},'runtime';{[1 0]},'Minimum value';{[0 1]},'Feasible rate'];
-                minMet = ~allMet{find(ismember(allMet(:,2),metric),1),1}(2);
+                metric = obj.app.dropC(1).Value;
+                allMet = [obj.GUI.metList;{[0 1]},'Number of runs';{[1 0]},'runtime'];
+                minMet = allMet{find(ismember(allMet(:,2),metric),1),1}(1,end-1);
                 if strcmp(metric,'Number of runs')
                     for p = proindex
                         % Show the number of runs
@@ -413,18 +421,18 @@ classdef module_exp < handle
                         sdata = zeros(1,nA);    % STD or IQR value
                         for a = valid
                             if nargin < 4
-                                drawnow();
+                                drawnow('limitrate');
                             end
                             cdata{a} = obj.GetMetricValue(p,a,metric,false);
                             datapure = cdata{a}(~isnan(cdata{a}));
-                            if obj.app.dropC(3).Value < 3
+                            if obj.app.dropC(2).Value < 3
                                 mdata(a) = mean(datapure);
                                 sdata(a) = std(datapure);
                             else
                                 mdata(a) = median(datapure);
                                 sdata(a) = iqr(datapure);
                             end
-                            if ismember(obj.app.dropC(3).Value,[1 3])
+                            if ismember(obj.app.dropC(2).Value,[1 3])
                                 str = sprintf('%.4e',mdata(a));
                             else
                                 str = sprintf('%.4e (%.2e)',mdata(a),sdata(a));
@@ -433,7 +441,7 @@ classdef module_exp < handle
                         end
                         % Highlight the best metric value
                         valid(arrayfun(@(s)isnan(s),mdata(valid))) = [];
-                        if ~isempty(valid) && obj.app.dropC(5).Value > 1
+                        if ~isempty(valid) && obj.app.dropC(4).Value > 1
                             if minMet
                                 [~,best] = min(mdata(valid));
                             else
@@ -442,25 +450,25 @@ classdef module_exp < handle
                             styleLoc = [styleLoc;p,size(obj.app.table.Data,2)-nA+valid(best)];
                         end
                         % Calculate the statistical test results
-                        if obj.app.dropC(4).Value > 1 && length(valid) > 1 && ismember(nA,valid)
+                        if obj.app.dropC(3).Value > 1 && length(valid) > 1 && ismember(nA,valid)
                             minlen = min(cellfun(@length,cdata(valid)));
                             if minlen > 1
                                 vdata = cellfun(@(s)s(1:minlen),cdata(valid),'UniformOutput',false);
-                                if obj.app.dropC(4).Value == 4
+                                if obj.app.dropC(3).Value == 4
                                     [~,~,stats] = friedman(cell2mat(vdata),1,'off');
                                     c     = multcompare(stats,'Display','off');
                                     diff1 = c(any(c==length(vdata),2),end) < 0.05;
-                                    if obj.app.dropC(5).Value == 3
+                                    if obj.app.dropC(4).Value == 3
                                         diff2 = c(any(c==best,2),end) < 0.05;
                                     end
-                                elseif obj.app.dropC(4).Value == 3
+                                elseif obj.app.dropC(3).Value == 3
                                     diff1 = cellfun(@(s)ranksum(s,vdata{end})<0.05,vdata(:,1:end-1));
-                                    if obj.app.dropC(5).Value == 3
+                                    if obj.app.dropC(4).Value == 3
                                         diff2 = cellfun(@(s)ranksum(s,vdata{best})<0.05,vdata(:,[1:best-1,best+1:end]));
                                     end
-                                elseif obj.app.dropC(4).Value == 2
+                                elseif obj.app.dropC(3).Value == 2
                                     diff1 = cellfun(@(s)signrank(s,vdata{end})<0.05,vdata(:,1:end-1));
-                                    if obj.app.dropC(5).Value == 3
+                                    if obj.app.dropC(4).Value == 3
                                         diff2 = cellfun(@(s)signrank(s,vdata{best})<0.05,vdata(:,[1:best-1,best+1:end]));
                                     end
                                 end
@@ -472,7 +480,7 @@ classdef module_exp < handle
                                     else
                                         obj.app.table.Data{p,end-nA+valid(a)} = [obj.app.table.Data{p,end-nA+valid(a)},' -'];
                                     end
-                                    if obj.app.dropC(5).Value == 3 && ~diff2(a)
+                                    if obj.app.dropC(4).Value == 3 && ~diff2(a)
                                         styleLoc = [styleLoc;p,size(obj.app.table.Data,2)-nA+valid(a)+(a>=best)];
                                     end
                                 end
@@ -483,7 +491,7 @@ classdef module_exp < handle
                         obj.app.table.addStyle(uistyle('FontWeight','bold'),'cell',styleLoc);
                     end
                     % Count the statistical test results
-                    if obj.app.dropC(4).Value > 1
+                    if obj.app.dropC(3).Value > 1
                         if length(obj.app.table.RowName) == nP
                             obj.app.table.RowName = [obj.app.table.RowName;'+/-/='];
                             obj.app.table.Data    = [obj.app.table.Data;repmat({''},1,size(obj.app.table.Data,2))];
@@ -519,22 +527,22 @@ classdef module_exp < handle
             save(filename,'result','metric');
         end
         %% Get the metric value 
-        function score = GetMetricValue(obj,p,a,metricName,showAll)
-            metricName = strrep(metricName,' ','');
-            score      = [];
-            fes        = [];
+        function score = GetMetricValue(obj,p,a,metName,showAll)
+            metName = strrep(metName,' ','');
+            score   = [];
+            fes     = [];
             for r = find(reshape(~cellfun(@isempty,obj.data.result(p,a,:)),1,[]))
-                if ~isfield(obj.data.metric{p,a,r},metricName)
-                    obj.data.metric{p,a,r}.(metricName) = cellfun(@(S)feval(metricName,S,obj.data.PRO(p).optimum),obj.data.result{p,a,r}(:,2));
+                if ~isfield(obj.data.metric{p,a,r},metName)
+                    obj.data.metric{p,a,r}.(metName) = cellfun(@(S)obj.data.PRO(p).CalMetric(metName,S),obj.data.result{p,a,r}(:,2));
                     metric = obj.data.metric{p,a,r};
                     save(fullfile(obj.data.folder,class(obj.data.ALG(a)),sprintf('%s_%s_M%d_D%d_%d.mat',class(obj.data.ALG(a)),class(obj.data.PRO(p)),obj.data.PRO(p).M,obj.data.PRO(p).D,r)),'metric','-append');
                 end
                 try
                     if showAll  % Mean convergence profile of the metric
-                        score = [score,obj.data.metric{p,a,r}.(metricName)];
+                        score = [score,obj.data.metric{p,a,r}.(metName)];
                         fes   = [fes,cell2mat(obj.data.result{p,a,r}(:,1))];
                     else        % All metric values of the last populations
-                        score = [score;obj.data.metric{p,a,r}.(metricName)(end)];
+                        score = [score;obj.data.metric{p,a,r}.(metName)(end)];
                     end
                 catch
                 end
@@ -552,13 +560,13 @@ classdef module_exp < handle
                         [~,~,Type] = fileparts(Name);
                         switch Type
                             case '.xlsx'
-                                table2excel(fullfile(Path,Name),obj.app.dropC((obj.data.PRO(1).M<=1)+1).Value,[{'Problem'},obj.app.table.ColumnName';obj.app.table.RowName,obj.app.table.Data],cat(1,obj.app.table.StyleConfigurations.TargetIndex{:}),size(obj.data.result,2));
+                                table2excel(fullfile(Path,Name),obj.app.dropC(1).Value,[{'Problem'},obj.app.table.ColumnName';obj.app.table.RowName,obj.app.table.Data],cat(1,obj.app.table.StyleConfigurations.TargetIndex{:}),size(obj.data.result,2));
                             case '.tex'
                                 table2tex(fullfile(Path,Name),[{'Problem'},obj.app.table.ColumnName';obj.app.table.RowName,obj.app.table.Data],cat(1,obj.app.table.StyleConfigurations.TargetIndex{:}),size(obj.data.result,1),size(obj.data.result,2));
                             case '.txt'
                                 table2txt(fullfile(Path,Name),[{'Problem'},obj.app.table.ColumnName';obj.app.table.RowName,obj.app.table.Data]);
                         	case '.mat'
-                                table2mat(fullfile(Path,Name),obj.data.metric,obj.app.dropC((obj.data.PRO(1).M<=1)+1).Value);
+                                table2mat(fullfile(Path,Name),obj.data.metric,obj.app.dropC(1).Value);
                         end
                     end
                 catch err
@@ -572,7 +580,7 @@ classdef module_exp < handle
             if ~isempty(obj.data)
                 grids = [event.Indices(:,1),event.Indices(:,2)-size(obj.app.table.Data,2)+size(obj.data.result,2)];
                 grids(grids(:,1)>size(obj.data.result,1)|grids(:,2)<1,:) = [];
-                if ~isempty(grids) && ~ismember(obj.app.dropC((obj.data.PRO(1).M<=1)+1).Value,{'Number of runs','runtime'})
+                if ~isempty(grids) && ~ismember(obj.app.dropC(1).Value,{'Number of runs','runtime'})
                     obj.app.table.UserData = [min(grids,[],1),max(grids,[],1)];
                 else
                     obj.app.table.UserData = [];
@@ -588,7 +596,7 @@ classdef module_exp < handle
         %% Show the results in new figure
         function cb_tableShow(obj,ui,~,type)
             ui.Parent.Visible = false;
-            metric = obj.app.dropC((obj.data.PRO(1).M<=1)+1).Value;
+            metric = obj.app.dropC(1).Value;
             loc    = obj.app.table.UserData;
             nRow   = loc(3) - loc(1) + 1;
             nCol   = loc(4) - loc(2) + 1;
@@ -596,13 +604,15 @@ classdef module_exp < handle
                 movegui(figure('NumberTitle','off','Name','','Position',[0 0 240*nCol 220*nRow]),'center');
                 for r = 1 : nRow
                     for c = 1 : nCol
-                        ax       = Draw(axes('Unit','pixels','Position',[(c-1)*240+35 (nRow-r)*220+35 200 170]));
-                        valid    = find(reshape(~cellfun(@isempty,obj.data.result(r+loc(1)-1,c+loc(2)-1,:)),1,[]));
-                        [~,rank] = sort(obj.GetMetricValue(r+loc(1)-1,c+loc(2)-1,metric,false));
-                        if type == 1
-                            obj.data.PRO(r+loc(1)-1).DrawObj(obj.data.result{r+loc(1)-1,c+loc(2)-1,valid(rank(ceil(end/2)))}{end});
-                        elseif type == 2
-                            obj.data.PRO(r+loc(1)-1).DrawDec(obj.data.result{r+loc(1)-1,c+loc(2)-1,valid(rank(ceil(end/2)))}{end});
+                        ax    = Draw(axes('Unit','pixels','Position',[(c-1)*240+35 (nRow-r)*220+35 200 170]));
+                        valid = find(reshape(~cellfun(@isempty,obj.data.result(r+loc(1)-1,c+loc(2)-1,:)),1,[]));
+                        if ~isempty(valid)
+                            [~,rank] = sort(obj.GetMetricValue(r+loc(1)-1,c+loc(2)-1,metric,false));
+                            if type == 1
+                                obj.data.PRO(r+loc(1)-1).DrawObj(obj.data.result{r+loc(1)-1,c+loc(2)-1,valid(rank(ceil(end/2)))}{end});
+                            elseif type == 2
+                                obj.data.PRO(r+loc(1)-1).DrawDec(obj.data.result{r+loc(1)-1,c+loc(2)-1,valid(rank(ceil(end/2)))}{end});
+                            end
                         end
                         set(ax,'FontSize',8);
                         set(ax.Children,{'MarkerSize','LineWidth'},{4,0.6});
@@ -620,22 +630,11 @@ classdef module_exp < handle
                     end
                     legend(ax,arrayfun(@(s)class(s),obj.data.ALG(loc(2):loc(4)),'UniformOutput',false),'Location','best');
                     set(ax,'FontSize',10);
-                    [ax.XLabel.String,ax.YLabel.String,ax.Title.String,ax.Title.Interpreter] = deal('Number of function evaluations',metric,class(obj.data.PRO(r+loc(1)-1)),'none');
+                    [ax.XLabel.String,ax.YLabel.String,ax.Title.String,ax.Title.Interpreter] = deal('Number of function evaluations',strrep(metric,'_',' '),class(obj.data.PRO(r+loc(1)-1)),'none');
                 end
             end
         end
     end
-end
-
-%% Metric function of minimum value
-function score = Minimumvalue(Population,~)
-    score = Population.best.objs;
-    if isempty(score); score = nan; end
-end
-
-%% Metric function of feasible rate
-function score = Feasiblerate(Population,~)
-    score = mean(all(Population.cons<=0,2));
 end
 
 %% Function for parallelization

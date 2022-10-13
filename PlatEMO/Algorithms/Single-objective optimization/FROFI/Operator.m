@@ -1,4 +1,4 @@
-function Offspring = Operator(Population)
+function Offspring = Operator(Problem,Population)
 % Differential evolution in FROFI
 
 %------------------------------- Copyright --------------------------------
@@ -33,5 +33,5 @@ function Offspring = Operator(Population)
     OffDec = PopDec;
     OffDec(k1) = PopDec(k1) + Rand(k1).*(P1(k1)-PopDec(k1)) + F(k1).*(P2(k1)-P3(k1));
     OffDec(k2) = P1(k2) + Rand(k2).*(PB(k2)-P1(k2)) + F(k2).*(P2(k2)-P3(k2));
-    Offspring  = SOLUTION(OffDec);
+    Offspring  = Problem.Evaluation(OffDec);
 end

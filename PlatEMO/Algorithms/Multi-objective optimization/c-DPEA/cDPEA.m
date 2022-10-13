@@ -1,5 +1,5 @@
 classdef cDPEA < ALGORITHM
-% <multi> <real/binary/permutation> <constrained>
+% <multi> <real/integer/label/binary/permutation> <constrained>
 % Constrained dual-population evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -39,7 +39,7 @@ classdef cDPEA < ALGORITHM
                 Population_all   = [Population1,Population2];
                 RankSolution_all = [FrontNo1,FrontNo2];
                 MatingPool = TournamentSelection(2,2*Problem.N,RankSolution_all);
-                Offspring  = OperatorGAhalf(Population_all(MatingPool));
+                Offspring  = OperatorGAhalf(Problem,Population_all(MatingPool));
 
                 % Environmental Selection
                 alpha = 2./(1+exp(1).^(-Problem.FE*10/Problem.maxFE)) - 1; 

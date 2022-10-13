@@ -1,5 +1,5 @@
 classdef MCEAD < ALGORITHM
-% <multi/many> <real> <expensive>
+% <multi/many> <real/integer> <expensive>
 % Multiple classifiers-assisted evolutionary algorithm based on decomposition
 % delta  --- 0.9 --- The probability of choosing parents locally
 % nr     ---   2 --- Maximum number of solutions replaced by each offspring
@@ -28,9 +28,8 @@ classdef MCEAD < ALGORITHM
             B      = B(:, 1 : T);
         
             %% Initialize population
-            % PopDec     = UniformPoint(Problem.N, Problem.D, 'Latin'); % Latin Hypercube Sampling in PlatEMO ver3
-            PopDec     = lhsamp(Problem.N, Problem.D); % Latin Hypercube Sampling in our experimental environment (PlatEMO ver2) 
-            Population = SOLUTION(repmat(Problem.upper - Problem.lower, Problem.N, 1) .* PopDec + repmat(Problem.lower, Problem.N, 1));
+            PopDec     = UniformPoint(Problem.N, Problem.D, 'Latin');
+            Population = Problem.Evaluation(repmat(Problem.upper - Problem.lower, Problem.N, 1) .* PopDec + repmat(Problem.lower, Problem.N, 1));
             A          = Population;
             Z          = min(Population.objs, [], 1);
          
@@ -52,10 +51,10 @@ classdef MCEAD < ALGORITHM
                     end
         
                     %% Solution-generation
-                    y_i = SolutionGeneration(Population, P, svm_list(i), R_max, i);
+                    y_i = SolutionGeneration(Problem, Population, P, svm_list(i), R_max, i);
         
                     %% Evaluate offspring
-                    y_i = SOLUTION(y_i);
+                    y_i = Problem.Evaluation(y_i);
         
                     %% Update the reference point
                     Z = min(Z, y_i.obj);

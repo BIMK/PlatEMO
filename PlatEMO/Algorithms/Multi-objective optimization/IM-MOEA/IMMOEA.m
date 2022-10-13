@@ -1,5 +1,5 @@
 classdef IMMOEA < ALGORITHM
-% <multi> <real> <large/none>
+% <multi> <real/integer> <large/none>
 % Inverse modeling based multiobjective evolutionary algorithm
 % K --- 10 --- Number of reference vectors
 
@@ -32,7 +32,7 @@ classdef IMMOEA < ALGORITHM
             while Algorithm.NotTerminated(Population)
                 % Modeling and reproduction
                 for k = unique(partition)'
-                    Population = [Population,Operator(Population(partition==k))];
+                    Population = [Population,Operator(Problem,Population(partition==k))];
                 end
                 % Environmental selection
                 [~,partition] = max(1-pdist2(Population.objs,W,'cosine'),[],2);

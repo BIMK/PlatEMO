@@ -1,11 +1,11 @@
-function [Off_P,Off_V] = Operator_CMOPSO(Population,Parameter)
+function [Off_P,Off_V] = Operator_CMOPSO(Problem,Population,Parameter)
 % The particle swarm optimization in CMOPSO
 
 %  Copyright (C) 2021 Xu Yang
 %  Xu Yang <xuyang.busyxu@qq.com> or <xuyang369369@gmail.com>
 
     %% Parameter setting
-    if nargin > 1
+    if nargin > 2
         [proM,disM] = deal(Parameter{:});
     else
         [proM,disM] = deal(1,20);
@@ -16,7 +16,6 @@ function [Off_P,Off_V] = Operator_CMOPSO(Population,Parameter)
     V      = Population.adds(zeros(N,D));
     Off_P  = zeros(N,D);
     Off_V  = zeros(N,D);
-    Problem = PROBLEM.Current();
     
     %% Get leaders  
     Front     = NDSort(P_Obj,inf);    

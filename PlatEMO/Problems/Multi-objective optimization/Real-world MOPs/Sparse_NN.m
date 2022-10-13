@@ -68,7 +68,7 @@ classdef Sparse_NN < PROBLEM
             obj.D        = (size(obj.TrainIn,2)+1)*obj.nHidden + (obj.nHidden+1)*size(obj.TrainOut,2);
             obj.lower    = zeros(1,obj.D) - 1;
             obj.upper    = zeros(1,obj.D) + 1;
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Generate initial solutions
         function Population = Initialization(obj,N)
@@ -76,7 +76,7 @@ classdef Sparse_NN < PROBLEM
                 N = obj.N;
             end
             PopDec     = (rand(N,obj.D)-0.5)*2.*randi([0 1],N,obj.D);
-            Population = SOLUTION(PopDec);
+            Population = obj.Evaluation(PopDec);
         end
         %% Fine-tune solutions
         function PopDec = CalDec(obj,PopDec)

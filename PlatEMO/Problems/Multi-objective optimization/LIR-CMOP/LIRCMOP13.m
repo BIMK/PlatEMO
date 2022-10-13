@@ -25,26 +25,25 @@ classdef LIRCMOP13 < PROBLEM
             if isempty(obj.D); obj.D = 30; end
             obj.lower    = zeros(1,obj.D);
             obj.upper    = ones(1,obj.D);
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
-        %% Calculate objective values
-        function PopObj = CalObj(obj,X)
-            variable_length = size(X,2);
-            popsize         = size(X,1);
-            sum1            = zeros(popsize,1);
+        %% Calculate objective values and constraint violations
+        function Population = Evaluation(obj,varargin)
+            X = varargin{1};
+            X = max(min(X,repmat(obj.upper,size(X,1),1)),repmat(obj.lower,size(X,1),1));
+            [popsize,variable_length] = size(X);
+            sum1 = zeros(popsize,1);
             for j = 3 : variable_length
                 sum1 = sum1+10*(X(:,j)-0.5).^2;
             end
             PopObj(:,1) = (1.7057+sum1).*cos(0.5*pi*X(:,1)).*cos(0.5*pi*X(:,2));
             PopObj(:,2) = (1.7057+sum1).*cos(0.5*pi*X(:,1)).*sin(0.5*pi*X(:,2));
             PopObj(:,3) = (1.7057+sum1).*sin(0.5*pi*X(:,1));
-        end
-        %% Calculate constraint violations
-        function PopCon = CalCon(obj,X)
-            PopObj      = obj.CalObj(X);
             gx          =  PopObj(:,1).^2+PopObj(:,2).^2+PopObj(:,3).^2;
             PopCon(:,1) = (gx-9).*(4-gx);
             PopCon(:,2) = (gx-3.61).*(3.24-gx);
+            Population  = SOLUTION(X,PopObj,PopCon,varargin{2:end});
+            obj.FE      = obj.FE + length(Population);
         end
         %% Generate points on the Pareto front
         function R = GetOptimum(obj,N)

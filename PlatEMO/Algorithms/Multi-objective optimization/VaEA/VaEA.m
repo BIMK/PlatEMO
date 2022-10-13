@@ -1,5 +1,5 @@
 classdef VaEA < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Vector angle based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -23,7 +23,7 @@ classdef VaEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = randi(Problem.N,1,Problem.N);
-                Offspring  = OperatorGA(Population(MatingPool));    
+                Offspring  = OperatorGA(Problem,Population(MatingPool));    
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N);
             end
         end

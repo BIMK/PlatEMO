@@ -1,5 +1,5 @@
 classdef RPDNSGAII < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Reference point dominance-based NSGA-II
 
 %------------------------------- Reference --------------------------------
@@ -26,7 +26,7 @@ classdef RPDNSGAII < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population) 
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,d2);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,FrontNo,d2] = EnvironmentalSelection([Population,Offspring],RPSet,Problem.N);
             end
         end

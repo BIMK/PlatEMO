@@ -1,4 +1,4 @@
-function Population = SubcomponentOptimizer(Population,Neighbour,indices)
+function Population = SubcomponentOptimizer(Problem,Population,Neighbour,indices)
 % Subcomponent optimizer
 
 %------------------------------- Copyright --------------------------------
@@ -17,9 +17,9 @@ function Population = SubcomponentOptimizer(Population,Neighbour,indices)
             P = randperm(length(Population),2);
         end
         OffDec          = Population(i).dec;
-        NewDec          = OperatorDE(OffDec,Population(P(1)).dec,Population(P(2)).dec,{1,0.5,length(OffDec)/length(indices)/2,20});
+        NewDec          = OperatorDE(Problem,OffDec,Population(P(1)).dec,Population(P(2)).dec,{1,0.5,length(OffDec)/length(indices)/2,20});
         OffDec(indices) = NewDec(indices);
-        Offspring       = SOLUTION(OffDec);
+        Offspring       = Problem.Evaluation(OffDec);
         if sum(Offspring.obj) < sum(Population(i).obj)
             Population(i) = Offspring;
         end

@@ -1,5 +1,5 @@
 classdef MyODEMR < ALGORITHM
-% <multi/many> <real>
+% <multi/many> <real/integer>
 % Many-objective differential evolution with mutation restriction
 % nP --- 500 --- Number of reference points for IGD calculation
 
@@ -32,7 +32,7 @@ classdef MyODEMR < ALGORITHM
 
             %% Optimization
             while Algorithm.NotTerminated(Population)
-                Offspring  = Operator(Population(1:Problem.N),Population(randi(Problem.N,1,Problem.N)),Population(randi(Problem.N,1,Problem.N)));
+                Offspring  = Operator(Problem,Population(1:Problem.N),Population(randi(Problem.N,1,Problem.N)),Population(randi(Problem.N,1,Problem.N)));
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N,P);
             end
         end

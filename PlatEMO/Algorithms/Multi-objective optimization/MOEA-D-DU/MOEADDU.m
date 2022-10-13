@@ -1,5 +1,5 @@
 classdef MOEADDU < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % MOEA/D with a distance based updating strategy
 % delta --- 0.9 --- The probability of choosing parents locally
 % K     ---   5 --- Number of nearest weight vectors
@@ -51,7 +51,7 @@ classdef MOEADDU < ALGORITHM
                     end
 
                     % Generate an offspring
-                    Offspring = OperatorGAhalf(Population([i,P]));
+                    Offspring = OperatorGAhalf(Problem,Population([i,P]));
 
                     % Find the K nearest weight vectors of the offspring
                     [~,rank] = sort(1-pdist2(Offspring.obj,W,'cosine'),'descend');

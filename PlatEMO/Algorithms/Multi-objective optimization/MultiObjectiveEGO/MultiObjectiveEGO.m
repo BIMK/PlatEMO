@@ -1,5 +1,5 @@
 classdef MultiObjectiveEGO < ALGORITHM
-% <multi> <real> <constrained/none> <expensive>
+% <multi> <real/integer> <constrained/none> <expensive>
 % Multi-objective efficient global optimization
 % alpha --- 0.7 --- portion of samples for Kriging construction
 % num_k ---   5 --- number of infill points per iteration
@@ -28,7 +28,7 @@ classdef MultiObjectiveEGO < ALGORITHM
             PopDec = repmat(Problem.upper-Problem.lower,N,1).*UniformPoint(N,D,'Latin') ...
                 +repmat(Problem.lower,N,1);
             %% step1-2: evaluate initial design points
-            Population = SOLUTION(PopDec);
+            Population = Problem.Evaluation(PopDec);
 
             %% step 2: Generate the reference direction set
             [R,N_R] = UniformPoint(H,Problem.M);
@@ -89,7 +89,7 @@ classdef MultiObjectiveEGO < ALGORITHM
                         if min(sqrt(sum((PopDecT-best_x).^2,2)))<1E-8
                             best_x = rGA(@(x)Infill_Maximal_Distance(x, PopDecT),Problem);
                         end
-                        Population = [Population,SOLUTION(best_x)];
+                        Population = [Population,Problem.Evaluation(best_x)];
                     end   
                 end  
             end

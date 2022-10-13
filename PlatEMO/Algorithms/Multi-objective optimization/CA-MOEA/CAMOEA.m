@@ -1,5 +1,5 @@
 classdef CAMOEA < ALGORITHM
-% <multi> <real/binary/permutation>
+% <multi> <real/integer/label/binary/permutation>
 % Clustering based adaptive multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -26,7 +26,7 @@ classdef CAMOEA < ALGORITHM
             while Algorithm.NotTerminated(Population)
                 % Generate offspring randomly
                 MatingPool = randperm(Problem.N);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
 
                 % Elitism strategy
                 UniPop = [Population,Offspring];
@@ -37,10 +37,10 @@ classdef CAMOEA < ALGORITHM
                 % non-dominated front
                 K = Problem.N - sum(FrontNo<MaxFNo);
 
-                if K~= 0
+                if K ~= 0
                     % Normalization
                     pareto_population = find(FrontNo<MaxFNo);
-                    last_population = find(FrontNo == MaxFNo);
+                    last_population   = find(FrontNo == MaxFNo);
                     Zmin = min(PopObj(FrontNo == MaxFNo,:));
                     Zmax = max(PopObj(FrontNo == MaxFNo,:));
                     S = sum(FrontNo == MaxFNo);
@@ -52,7 +52,7 @@ classdef CAMOEA < ALGORITHM
                     % Clustering-based environmental selection
                     [reference_population] = Reference_Point_Selection(MaxFnorm,last_population,Ref,K,Problem.M);
                 else
-                    pareto_population = find(FrontNo<=MaxFNo);
+                    pareto_population    = find(FrontNo<=MaxFNo);
                     reference_population = [];
                 end
                 Population = UniPop([pareto_population,reference_population]);

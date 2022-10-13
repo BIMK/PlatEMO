@@ -1,5 +1,5 @@
 classdef KnEA < ALGORITHM
-% <many> <real/binary/permutation> <constrained/none>
+% <many> <real/integer/label/binary/permutation> <constrained/none>
 % Knee point driven evolutionary algorithm
 % rate --- 0.5 --- Rate of knee points in the population
 
@@ -31,7 +31,7 @@ classdef KnEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = MatingSelection(Population.objs,FrontNo,KneePoints);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Population = [Population,Offspring];
                 [FrontNo,MaxFNo]                = NDSort(Population.objs,Population.cons,Problem.N);
                 [KneePoints,Distance,r,t]       = FindKneePoints(Population.objs,FrontNo,MaxFNo,r,t,rate);

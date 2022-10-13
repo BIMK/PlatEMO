@@ -1,4 +1,4 @@
-function Offspring = Operator(Parent1,Parent2)
+function Offspring = Operator(Problem,Parent1,Parent2)
 % Crossover and mutation used in MOEA/D-M2M
 % proM --- 1 --- The expectation of number of bits doing mutation 
 
@@ -15,7 +15,6 @@ function Offspring = Operator(Parent1,Parent2)
     Parent1 = Parent1.decs;
     Parent2 = Parent2.decs;
     [N,D]   = size(Parent1);
-    Problem = PROBLEM.Current();
 
     %% Crossover
     rc = (2*rand(N,1)-1).*(1-rand(N,1).^(-(1-Problem.FE/Problem.maxFE).^0.7));
@@ -34,5 +33,5 @@ function Offspring = Operator(Parent1,Parent2)
     rnd   = rand(N,D);
     OffDec(temp1) = Lower(temp1) + 0.5*rnd(temp1).*(Parent1(temp1)-Lower(temp1));
     OffDec(temp2) = Upper(temp2) - 0.5*rnd(temp2).*(Upper(temp2)-Parent1(temp2));
-    Offspring     = SOLUTION(OffDec);
+    Offspring     = Problem.Evaluation(OffDec);
 end

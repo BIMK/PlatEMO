@@ -22,21 +22,17 @@ classdef DOC7 < PROBLEM
             obj.D = 11;
             obj.lower    = [0 zeros(1, 10)];
             obj.upper    = [ 1 10 * ones(1, 10)];
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
-        %% Calculate objective values
-        function PopObj = CalObj(~,X)
-            [popsize,~] = size(X);
-            % basic multi-objective problem
+        %% Calculate objective values and constraint violations
+        function Population = Evaluation(obj,varargin)
+            X  = varargin{1};
+            X  = max(min(X,repmat(obj.upper,size(X,1),1)),repmat(obj.lower,size(X,1),1));
             c1 = [-6.089 -17.164 -34.054 -5.914 -24.721 -14.986 -24.1 -10.708 -26.662 -22.179];
-            g_temp = sum(X(:,2:11).* (repmat(c1, popsize, 1) + log(1E-30 + X(:,2:11)./repmat(1E-30 + sum(X(:,2:11), 2), 1, 10))), 2);
+            g_temp = sum(X(:,2:11).* (repmat(c1, size(X,1), 1) + log(1E-30 + X(:,2:11)./repmat(1E-30 + sum(X(:,2:11), 2), 1, 10))), 2);
             g = g_temp +47.7648884595 +1;
             PopObj(:,1) = X(:,1);
             PopObj(:,2) = g.*(1-sqrt(PopObj(:,1))./g);
-        end
-        %% Calculate constraint violations
-        function PopCon = CalCon(obj,X)
-            PopObj = obj.CalObj(X);
             % Constraints in objective space
             c(:,1) = max( -(PopObj(:,1) + PopObj(:,2)-1), 0);
             c(:,2) = max(-(PopObj(:,1) - 0.5).*( PopObj(:,1)+ PopObj(:,2) - 1 - abs(sin(10*pi*(PopObj(:,1) - PopObj(:,2) + 1) ))  ), 0);
@@ -45,7 +41,8 @@ classdef DOC7 < PROBLEM
             c(:,4) = abs(X(:, 2) + 2 * X(:, 3) + 2 * X(:, 4) + X(:, 7) + X(:, 11) - 2) - 0.0001;
             c(:,5) = abs(X(:, 5) + 2 * X(:, 6) + X(:, 7) + X(:, 8) - 1) - 0.0001;
             c(:,6) = abs(X(:, 4) + X(:, 8) + X(:, 9) + 2 * X(:, 10) + X(:, 11) - 1) - 0.0001;
-            PopCon = c;  
+            Population  = SOLUTION(X,PopObj,c,varargin{2:end});
+            obj.FE      = obj.FE + length(Population);
         end
         %% Generate points on the Pareto front
         function R = GetOptimum(obj,N)

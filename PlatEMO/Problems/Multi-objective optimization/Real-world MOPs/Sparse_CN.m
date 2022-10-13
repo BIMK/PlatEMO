@@ -41,7 +41,7 @@ classdef Sparse_CN < PROBLEM
             % Parameter setting
             obj.M        = 2;
             obj.D        = length(obj.A);
-            obj.encoding = 'binary';
+            obj.encoding = 4 + zeros(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

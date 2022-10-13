@@ -1,4 +1,4 @@
-function Offspring = Operator(Particle,Pbest,Gbest,Parameter)
+function Offspring = Operator(Problem,Particle,Pbest,Gbest,Parameter)
 % Particle swarm optimization in MPSO/D
 % c1   ---   2 --- Parameter in updating particle's velocity
 % c2   ---   2 --- Parameter in updating particle's velocity
@@ -17,7 +17,7 @@ function Offspring = Operator(Particle,Pbest,Gbest,Parameter)
 %--------------------------------------------------------------------------
 
     %% Parameter setting
-    if nargin > 3
+    if nargin > 4
         [c1,c2,CR,F,proM,disM] = deal(Parameter{:});
     else
         [c1,c2,CR,F,proM,disM] = deal(2,2,0.5,0.5,1,20);
@@ -27,7 +27,6 @@ function Offspring = Operator(Particle,Pbest,Gbest,Parameter)
     GbestDec    = Gbest.decs;
     [N,D]       = size(ParticleDec);
     ParticleVel = Particle.adds(zeros(N,D));
-    Problem     = PROBLEM.Current();   
     
     %% Particle swarm optimization
     Lower = repmat(Problem.lower,N,1);
@@ -59,5 +58,5 @@ function Offspring = Operator(Particle,Pbest,Gbest,Parameter)
     temp = Site & mu>0.5; 
     OffDec(temp) = OffDec(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                    (1-(Upper(temp)-OffDec(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
-    Offspring = SOLUTION(OffDec,OffVel);
+    Offspring = Problem.Evaluation(OffDec,OffVel);
 end

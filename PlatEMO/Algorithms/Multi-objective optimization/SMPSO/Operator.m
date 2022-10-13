@@ -1,4 +1,4 @@
-function Offspring = Operator(Particle,Pbest,Gbest)
+function Offspring = Operator(Problem,Particle,Pbest,Gbest)
 % Particle swarm optimization in SMPSO
 
 %------------------------------- Copyright --------------------------------
@@ -16,7 +16,6 @@ function Offspring = Operator(Particle,Pbest,Gbest)
     GbestDec    = Gbest.decs;
     [N,D]       = size(ParticleDec);
     ParticleVel = Particle.adds(zeros(N,D));
-    Problem     = PROBLEM.Current();
 
     %% Particle swarm optimization
     W  = repmat(unifrnd(0.1,0.5,N,1),1,D);
@@ -49,5 +48,5 @@ function Offspring = Operator(Particle,Pbest,Gbest)
     temp  = Site1 & Site2 & mu>0.5; 
     OffDec(temp) = OffDec(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                    (1-(Upper(temp)-OffDec(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
-    Offspring = SOLUTION(OffDec,OffVel);
+    Offspring = Problem.Evaluation(OffDec,OffVel);
 end

@@ -1,5 +1,5 @@
 classdef POCEA < ALGORITHM
-% <multi> <real> <large/none> <constrained>
+% <multi> <real/integer> <large/none> <constrained>
 % Paired offspring generation based constrained evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -46,7 +46,7 @@ classdef POCEA < ALGORITHM
                         [~,rank]= sort(rand(k,length(SubPop)),2);
                     end
                     [winner,loser] = CHP(SubPop(rank(1)),SubPop(rank(2)),epsilon);
-                    Offspring      = [Offspring,Operator(loser,winner)];
+                    Offspring      = [Offspring,Operator(Problem,loser,winner)];
                 end 
                 Population = RVEASelection([Population,Offspring],V,Problem.N,(Problem.FE/Problem.maxFE)^2);
                 if ~mod(ceil(Problem.FE/Problem.N),ceil(0.1*Problem.maxFE/Problem.N))

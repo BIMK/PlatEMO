@@ -22,10 +22,13 @@ classdef DOC2 < PROBLEM
             obj.D = 16;
             obj.lower    = [0 zeros(1, 15)];
             obj.upper    = [1 10 * ones(1, 15)];
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
-        %% Calculate objective values
-        function PopObj = CalObj(~,X)
+        %% Calculate objective values and constraint violations
+        function Population = Evaluation(obj,varargin)
+            X = varargin{1};
+            X = max(min(X,repmat(obj.upper,size(X,1),1)),repmat(obj.lower,size(X,1),1));
+            
             [popsize,~] = size(X);
 
             b  = [-40 -2 -0.25 -4 -4 -1 -40 -60 5 1];
@@ -44,11 +47,6 @@ classdef DOC2 < PROBLEM
 
             PopObj(:,1) = X(:,1);
             PopObj(:,2) = g.*(1- (PopObj(:,1)).^(1/3)./g);
-        end
-        %% Calculate constraint violations
-        function PopCon = CalCon(obj,X)
-            PopObj  = obj.CalObj(X);
-            popsize = size(X,1);
             % Constraints in objective space
             PopCon(:,1) = max( -(sqrt(PopObj(:,1)) + PopObj(:,2)-1), 0);
             d1(:,1) = max(((PopObj(:,1)-1/8).^2 + (PopObj(:,2) -1+sqrt(1/8) ).^2 - 0.15*0.15),0);
@@ -75,11 +73,13 @@ classdef DOC2 < PROBLEM
             d = [4 8 10 6 2];
             e = [-15 -27 -36 -18 -12];
             % Constraints in decision space
-            PopCon(:, 3) = -2 * sum(repmat(c1(1:5, 1)', popsize, 1).* X(:, 12:16), 2) - 3 * d(1).* X(:, 12).^2 - e(1) + sum(repmat(a(1:10, 1)', popsize, 1).* X(:, 2:11), 2);
-            PopCon(:, 4) = -2 * sum(repmat(c1(1:5, 2)', popsize, 1).* X(:, 12:16), 2) - 3 * d(2).* X(:, 13).^2 - e(2) + sum(repmat(a(1:10, 2)', popsize, 1).* X(:, 2:11), 2);
-            PopCon(:, 5) = -2 * sum(repmat(c1(1:5, 3)', popsize, 1).* X(:, 12:16), 2) - 3 * d(3).* X(:, 14).^2 - e(3) + sum(repmat(a(1:10, 3)', popsize, 1).* X(:, 2:11), 2);
-            PopCon(:, 6) = -2 * sum(repmat(c1(1:5, 4)', popsize, 1).* X(:, 12:16), 2) - 3 * d(4).* X(:, 15).^2 - e(4) + sum(repmat(a(1:10, 4)', popsize, 1).* X(:, 2:11), 2);
-            PopCon(:, 7) = -2 * sum(repmat(c1(1:5, 5)', popsize, 1).* X(:, 12:16), 2) - 3 * d(5).* X(:, 16).^2 - e(5) + sum(repmat(a(1:10, 5)', popsize, 1).* X(:, 2:11), 2);
+            PopCon(:,3) = -2 * sum(repmat(c1(1:5, 1)', popsize, 1).* X(:, 12:16), 2) - 3 * d(1).* X(:, 12).^2 - e(1) + sum(repmat(a(1:10, 1)', popsize, 1).* X(:, 2:11), 2);
+            PopCon(:,4) = -2 * sum(repmat(c1(1:5, 2)', popsize, 1).* X(:, 12:16), 2) - 3 * d(2).* X(:, 13).^2 - e(2) + sum(repmat(a(1:10, 2)', popsize, 1).* X(:, 2:11), 2);
+            PopCon(:,5) = -2 * sum(repmat(c1(1:5, 3)', popsize, 1).* X(:, 12:16), 2) - 3 * d(3).* X(:, 14).^2 - e(3) + sum(repmat(a(1:10, 3)', popsize, 1).* X(:, 2:11), 2);
+            PopCon(:,6) = -2 * sum(repmat(c1(1:5, 4)', popsize, 1).* X(:, 12:16), 2) - 3 * d(4).* X(:, 15).^2 - e(4) + sum(repmat(a(1:10, 4)', popsize, 1).* X(:, 2:11), 2);
+            PopCon(:,7) = -2 * sum(repmat(c1(1:5, 5)', popsize, 1).* X(:, 12:16), 2) - 3 * d(5).* X(:, 16).^2 - e(5) + sum(repmat(a(1:10, 5)', popsize, 1).* X(:, 2:11), 2);
+            Population  = SOLUTION(X,PopObj,PopCon,varargin{2:end});
+            obj.FE      = obj.FE + length(Population);
         end
         %% Generate points on the Pareto front
         function R = GetOptimum(obj,N)

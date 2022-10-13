@@ -1,11 +1,12 @@
 classdef PMMOEA < ALGORITHM
-% <multi> <real/binary> <large/none> <constrained/none> <sparse>
+% <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
 % Pattern mining based multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
 % Y. Tian, C. Lu, X. Zhang, F. Cheng, and Y. Jin, A pattern mining based
 % evolutionary algorithm for large-scale sparse multi-objective
-% optimization problems, IEEE Transactions on Cybernetics, 2020.
+% optimization problems, IEEE Transactions on Cybernetics, 2022, 52(7):
+% 6784-6797.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -18,16 +19,13 @@ classdef PMMOEA < ALGORITHM
     methods
         function main(Algorithm,Problem)
             %% Population initialization
-            if strcmp(Problem.encoding,'binary')
-                Dec = ones(Problem.N,Problem.D);
-            else
-                Dec = unifrnd(repmat(Problem.lower,Problem.N,1),repmat(Problem.upper,Problem.N,1));
-            end
+            Dec = unifrnd(repmat(Problem.lower,Problem.N,1),repmat(Problem.upper,Problem.N,1));
+            Dec(:,Problem.encoding==4) = 1;
             Mask = false(size(Dec));
             for i = 1 : Problem.N
                 Mask(i,randperm(end,ceil(rand.^2*end))) = true;
             end
-            Population = SOLUTION(Dec.*Mask);
+            Population = Problem.Evaluation(Dec.*Mask);
             [Population,Dec,Mask,FrontNo] = EnvironmentalSelection(Population,Dec,Mask,Problem.N);
 
             %% Optimization
@@ -36,9 +34,9 @@ classdef PMMOEA < ALGORITHM
             while Algorithm.NotTerminated(Population)
                 [MaxP,MinP,Nonzero] = POSMining(logical(Population(FrontNo==1).decs),MaxP,MinP,20);
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo);
-                [OffDec,OffMask] = Operator(Dec(MatingPool,:),Mask(MatingPool,:),MaxP(:,Nonzero),MinP(:,Nonzero),Nonzero,Population.decs);
+                [OffDec,OffMask] = Operator(Problem,Dec(MatingPool,:),Mask(MatingPool,:),MaxP(:,Nonzero),MinP(:,Nonzero),Nonzero,Population.decs);
                 if ~isempty(OffDec)
-                    [Population,Dec,Mask,FrontNo] = EnvironmentalSelection([Population,SOLUTION(OffDec.*OffMask)],[Dec;OffDec],[Mask;OffMask],Problem.N);
+                    [Population,Dec,Mask,FrontNo] = EnvironmentalSelection([Population,Problem.Evaluation(OffDec.*OffMask)],[Dec;OffDec],[Mask;OffMask],Problem.N);
                 end
             end
         end

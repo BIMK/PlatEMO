@@ -1,5 +1,5 @@
 classdef DE < ALGORITHM
-% <single> <real> <large/none> <constrained/none>
+% <single> <real/integer> <large/none> <constrained/none>
 % Differential evolution
 % CR --- 0.9 --- Crossover constant
 % F  --- 0.5 --- Mutation factor
@@ -28,7 +28,7 @@ classdef DE < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,2*Problem.N,FitnessSingle(Population));
-                Offspring  = OperatorDE(Population,Population(MatingPool(1:end/2)),Population(MatingPool(end/2+1:end)),{CR,F,0,0});
+                Offspring  = OperatorDE(Problem,Population,Population(MatingPool(1:end/2)),Population(MatingPool(end/2+1:end)),{CR,F,0,0});
                 replace             = FitnessSingle(Population) > FitnessSingle(Offspring);
                 Population(replace) = Offspring(replace);
             end

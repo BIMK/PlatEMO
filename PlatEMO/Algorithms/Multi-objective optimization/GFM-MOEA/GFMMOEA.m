@@ -1,5 +1,5 @@
 classdef GFMMOEA < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Generic front modeling based multi-objective evolutionary algorithm
 % theta --- 0.2 --- Penalty parameter
 % fPFE  --- 0.1 --- Frequency of employing generic front modeling
@@ -35,7 +35,7 @@ classdef GFMMOEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,-theta*App-(1-theta)*Crowd);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 zmin       = min([zmin;Offspring.objs],[],1);
                 if ~mod(ceil(Problem.FE/Problem.N),ceil(fPFE*ceil(Problem.maxFE/Problem.N))) || fPFE == 0
                     [P,A] = GFM(Population(FrontNo==1).objs-repmat(zmin,sum(FrontNo==1),1));

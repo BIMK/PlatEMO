@@ -1,5 +1,5 @@
 classdef PESAII < ALGORITHM
-% <multi> <real/binary/permutation>
+% <multi> <real/integer/label/binary/permutation>
 % Pareto envelope-based selection algorithm II
 % div --- 10 --- The number of divisions in each objective
 
@@ -28,7 +28,7 @@ classdef PESAII < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = MatingSelection(Population.objs,Problem.N,div);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N,div);
             end
         end

@@ -1,5 +1,5 @@
 classdef RVEAiGNG < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % RVEA based on improved growing neural gas
 % alpha --- 2 --- The parameter controlling the rate of change of penalty
 
@@ -7,7 +7,7 @@ classdef RVEAiGNG < ALGORITHM
 % Q. Liu, Y. Jin, M. Heiderich, T. Rodemann, and G. Yu, An adaptive
 % reference vector-guided evolutionary algorithm using growing neural gas
 % for many-objective optimization of irregular problems, IEEE Transactions
-% on Cybernetics, 2020.
+% on Cybernetics, 2022, 52(5): 2698-2711.
 %--------------------------------------------------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -43,7 +43,7 @@ classdef RVEAiGNG < ALGORITHM
 
             while Algorithm.NotTerminated(Population)
                 MatingPool = randi(length(Population),1,Problem.N);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 zmin       = min([zmin;Offspring.objs],[],1); 
                 [Population,net,V,Archive,scale,genFlag] = EnvironmentalSelection([Population,Offspring],V,(Problem.FE/Problem.maxFE)^alpha,net,params,Archive,Problem,scale,zmin,genFlag);
             end

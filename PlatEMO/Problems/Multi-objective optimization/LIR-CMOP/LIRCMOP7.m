@@ -25,14 +25,15 @@ classdef LIRCMOP7 < PROBLEM
             if isempty(obj.D); obj.D = 30; end
             obj.lower    = zeros(1,obj.D);
             obj.upper    = ones(1,obj.D);
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
-        %% Calculate objective values
-        function PopObj = CalObj(obj,X)
-            variable_length = size(X,2);
-            popsize         = size(X,1);
-            sum1            = zeros(popsize,1);
-            sum2            = zeros(popsize,1);
+        %% Calculate objective values and constraint violations
+        function Population = Evaluation(obj,varargin)
+            X = varargin{1};
+            X = max(min(X,repmat(obj.upper,size(X,1),1)),repmat(obj.lower,size(X,1),1));
+            [popsize,variable_length] = size(X);
+            sum1 = zeros(popsize,1);
+            sum2 = zeros(popsize,1);
             for j = 2 : variable_length
                 if mod(j,2) == 1
                     sum1 = sum1+(X(:,j)-sin((0.5*j/variable_length*pi)*X(:,1))).^2;
@@ -43,10 +44,8 @@ classdef LIRCMOP7 < PROBLEM
             gx          = 0.7057;
             PopObj(:,1) = X(:,1)+10*sum1+gx;
             PopObj(:,2) = 1-X(:,1).^0.5+10.*sum2+gx;
-        end
-        %% Calculate constraint violations
-        function PopCon = CalCon(obj,X)
-           PopCon = Constraint(obj.CalObj(X));
+            Population  = SOLUTION(X,PopObj,Constraint(PopObj),varargin{2:end});
+            obj.FE      = obj.FE + length(Population);
         end
         %% Generate points on the Pareto front
         function R = GetOptimum(obj,N)

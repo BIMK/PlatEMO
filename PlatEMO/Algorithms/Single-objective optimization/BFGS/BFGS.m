@@ -24,22 +24,22 @@ classdef BFGS < ALGORITHM
             %% Generate random solution
             X  = Problem.Initialization(1);
             Bk = eye(Problem.D);
-            gk = FiniteDifference(X);
+            gk = Problem.CalObjGrad(X.dec);
             
             %% Optimization
             while Algorithm.NotTerminated(X)
-                dk = -Bk\gk;
+                dk = -Bk\gk';
                 for m = 0 : 20
-                    X1 = SOLUTION(X.dec+beta^m*dk');
-                    if X1.obj <= X.obj + sigma*beta^m*gk'*dk
+                    X1 = Problem.Evaluation(X.dec+beta^m*dk');
+                    if X1.obj <= X.obj + sigma*beta^m*gk*dk
                         break;
                     end
                 end
-                gk1 = FiniteDifference(X1);
+                gk1 = Problem.CalObjGrad(X1.dec);
                 sk  = (X1.dec-X.dec)';
                 yk  = gk1 - gk;
-                if yk'*sk > 0
-                    Bk = Bk - (Bk*sk*sk'*Bk)/(sk'*Bk*sk) + (yk*yk')/(yk'*sk);
+                if yk*sk > 0
+                    Bk = Bk - (Bk*sk*sk'*Bk)/(sk'*Bk*sk) + (yk'*yk)/(yk*sk);
                 end
                 X  = X1;
                 gk = gk1;

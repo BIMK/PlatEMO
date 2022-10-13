@@ -1,5 +1,5 @@
 classdef SAMSO < ALGORITHM
-% <single> <real> <large/none> <expensive>
+% <single> <real/integer> <large/none> <expensive>
 % Multiswarm-assisted expensive optimization
 
 %------------------------------- Reference --------------------------------
@@ -32,7 +32,7 @@ classdef SAMSO < ALGORITHM
                 K = N;
             end
             PopDec = UniformPoint(K,Problem.D,'Latin');
-            Population = SOLUTION(repmat(Problem.upper-Problem.lower,K,1).*PopDec+repmat(Problem.lower,K,1));
+            Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,K,1).*PopDec+repmat(Problem.lower,K,1));
             
             %% Initialize swarm
             % Determine position
@@ -60,7 +60,7 @@ classdef SAMSO < ALGORITHM
                 dist  = pdist2(Population.decs,srgtMin);
                 dxRBF = min(dist);
                 if dxRBF > eta
-                    optSrgt    = SOLUTION(srgtMin);
+                    optSrgt    = Problem.Evaluation(srgtMin);
                     Population = [Population,optSrgt];
                     if optSrgt.objs < Gbest(:,end)
                         [model,~] = rbf_build(Population.decs,Population.objs);
@@ -68,7 +68,7 @@ classdef SAMSO < ALGORITHM
                     end
                 end
                 currFES = Problem.FE - K;
-                [Population,Position,Velocity,Gbest,Pbest] = UpdatePosition(Population,Position,Velocity,Pbest,Gbest,currFES,maxFES,Wnc,Pr,model,eta);
+                [Population,Position,Velocity,Gbest,Pbest] = UpdatePosition(Problem,Population,Position,Velocity,Pbest,Gbest,currFES,maxFES,Wnc,Pr,model,eta);
             end
         end
     end

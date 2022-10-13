@@ -1,5 +1,5 @@
 classdef MSEA < ALGORITHM
-% <multi> <real/binary/permutation>
+% <multi> <real/integer/label/binary/permutation>
 % Multi-stage multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -58,7 +58,7 @@ classdef MSEA < ALGORITHM
                             MatingPool(1) = TournamentSelection(2,1,sum(PopObj,2));
                             MatingPool(2) = TournamentSelection(2,1,-Div);
                     end
-                    Offspring = OperatorGAhalf(Population(MatingPool));
+                    Offspring = OperatorGAhalf(Problem,Population(MatingPool));
                     OffObj    = (Offspring.obj-fmin)./(fmax-fmin);
 
                     % Non-dominated sorting

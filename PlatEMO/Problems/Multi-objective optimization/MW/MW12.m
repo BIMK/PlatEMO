@@ -22,19 +22,19 @@ classdef MW12 < PROBLEM
             if isempty(obj.D); obj.D = 15; end
             obj.lower    = zeros(1,obj.D);
             obj.upper    = ones(1,obj.D);
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
-        %% Calculate objective values
-        function PopObj = CalObj(obj,X)
+        %% Calculate objective values and constraint violations
+        function Population = Evaluation(obj,varargin)
+            X = varargin{1};
+            X = max(min(X,repmat(obj.upper,size(X,1),1)),repmat(obj.lower,size(X,1),1));
             g = 1 + sum(1 - exp(-10*((X(:,obj.M:end).^(obj.D-obj.M)) - 0.5 - (repmat(obj.M:obj.D,size(X,1),1) - 1)/(2*obj.D)).^2),2);
             PopObj(:,1) = g.*X(:,1);
             PopObj(:,2) = g.*(0.85 - 0.8*(PopObj(:,1)./g) - 0.08*abs(sin(3.2*pi*(PopObj(:,1)./g))));
-        end
-        %% Calculate constraint violations
-        function PopCon = CalCon(obj,X)
-            PopObj = obj.CalObj(X);
             PopCon(:,1) = (1 - 0.8*PopObj(:,1) - PopObj(:,2) + 0.08*sin(2*pi*(PopObj(:,2) - PopObj(:,1)/1.5))).*(1.8 - 1.125*PopObj(:,1) - PopObj(:,2) + 0.08*sin(2*pi*(PopObj(:,2)/1.8 - PopObj(:,1)/1.6)));
             PopCon(:,2) = -(1 - 0.625*PopObj(:,1) - PopObj(:,2) + 0.08*sin(2*pi*(PopObj(:,2) - PopObj(:,1)/1.6))).*(1.4 - 0.875*PopObj(:,1) - PopObj(:,2) + 0.08*sin(2*pi*(PopObj(:,2)/1.4 - PopObj(:,1)/1.6)));
+            Population  = SOLUTION(X,PopObj,PopCon,varargin{2:end});
+            obj.FE      = obj.FE + length(Population);
         end
         %% Generate points on the Pareto front
         function R = GetOptimum(obj,N)

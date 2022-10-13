@@ -1,5 +1,5 @@
 classdef MOEADEGO < ALGORITHM
-% <multi> <real> <expensive>
+% <multi> <real/integer> <expensive>
 % MOEA/D with efficient global optimization
 % Ke    ---   5 --- The number of function evaluations at each generation
 % delta --- 0.9 --- The probability of choosing parents locally
@@ -30,13 +30,13 @@ classdef MOEADEGO < ALGORITHM
             %% Generate random population
             NI = 11*Problem.D-1;
             P  = UniformPoint(NI,Problem.D,'Latin');
-            Population = SOLUTION(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
+            Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
             L1 = min(L1,length(Population));
 
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 PopDec     = EGOSelect(Problem,Population,L1,L2,Ke,delta,nr);
-                Offspring  = SOLUTION(PopDec);
+                Offspring  = Problem.Evaluation(PopDec);
                 Population = [Population,Offspring];
             end
         end

@@ -1,5 +1,5 @@
 classdef MTS < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % Multiple trajectory search
 % popsize           --- 40 --- Size of the population
 % ofLocalSearchTest ---  5 --- Number of iterations for determining the best local search
@@ -30,7 +30,7 @@ classdef MTS < ALGORITHM
             % Map the SOA to the decision space
             Decs = SOA./popsize.*repmat(Problem.upper-Problem.lower,popsize,1) + repmat(Problem.lower,popsize,1);
             % Generate the initial solutions
-            Population  = SOLUTION(Decs);
+            Population  = Problem.Evaluation(Decs);
             AppSet      = Population;
             Enable      = true(1,popsize);
             Improve     = true(1,popsize);

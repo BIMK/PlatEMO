@@ -70,7 +70,7 @@ function Population = WOF_optimiseByNSGAII(GlobalDummy, Population, evaluations,
                 Offspring   = [Offspring, WOF_WeightIndividual(NewDec,GlobalDummy)];
             end
         else
-            Offspring   = OperatorGA(Population(MatingPool));
+            Offspring   = OperatorGA(GlobalDummy, Population(MatingPool));
         end
         [Population,FrontNo,CrowdDis] = WOF_NSGAIIEnvironmentalSelection([Population,Offspring],GlobalDummy.N);
 

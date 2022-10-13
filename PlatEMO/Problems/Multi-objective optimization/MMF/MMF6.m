@@ -15,6 +15,9 @@ classdef MMF6 < PROBLEM
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
+    properties
+        POS;    % Pareto optimal set for IGDX calculation
+    end
     methods
         %% Default settings of the problem
         function Setting(obj)
@@ -22,7 +25,7 @@ classdef MMF6 < PROBLEM
             obj.D = 2;
             obj.lower    = [1,-1];
             obj.upper    = [3,2];
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,X)
@@ -35,9 +38,27 @@ classdef MMF6 < PROBLEM
         end
         %% Generate Pareto optimal solutions
         function R = GetOptimum(obj,N)
-            R(:,1) = linspace(1,3,N/2)';
-            R(:,2) = sin(6*pi*abs(R(:,1)-2)+pi);
-            R = [R;R(:,1),R(:,2)+1];
+            % Generate points in Pareto optimal set
+            obj.POS(:,1) = linspace(1,3,N/2)';
+            obj.POS(:,2) = sin(6*pi*abs(obj.POS(:,1)-2)+pi);
+            obj.POS = [obj.POS;obj.POS(:,1),obj.POS(:,2)+1];
+            % Generate points on Pareto front
+            R(:,1) = linspace(0,1,N)';
+            R(:,2) = 1 - sqrt(R(:,1));
+        end
+        %% Generate the image of Pareto front
+        function R = GetPF(obj)
+            R(:,1) = linspace(0,1,100)';
+            R(:,2) = 1 - sqrt(R(:,1));
+        end
+        %% Calculate the metric value
+        function score = CalMetric(obj,metName,Population)
+            switch metName
+                case 'IGDX'
+                    score = feval(metName,Population,obj.POS);
+                otherwise
+                    score = feval(metName,Population,obj.optimum);
+            end
         end
         %% Display a population in the objective space
         function DrawObj(obj,Population)
@@ -48,11 +69,10 @@ classdef MMF6 < PROBLEM
             Draw(Population(temp1&~temp2).objs+0.05,'o','MarkerSize',6,'Marker','o','Markerfacecolor',[.5 .5 1],'Markeredgecolor',[.2 .2 1]);
             Draw(Population(~temp1&temp2).objs+0.1,'o','MarkerSize',6,'Marker','o','Markerfacecolor',[.5 1 .5],'Markeredgecolor',[.2 1 .2]);
             Draw(Population(~temp1&~temp2).objs+0.15,'o','MarkerSize',6,'Marker','o','Markerfacecolor',[1 .5 1],'Markeredgecolor',[1 .2 1]);
-            L  = [0:0.01:1;1-sqrt(0:0.01:1)]';
-            Draw(L,'-','LineWidth',1,'Color',[1 .2 .2]);
-            Draw(L+0.05,'-','LineWidth',1,'Color',[.2 .2 1]);
-            Draw(L+0.1,'-','LineWidth',1,'Color',[.2 1 .2]);
-            Draw(L+0.15,'-','LineWidth',1,'Color',[1 .2 1]);
+            Draw(obj.PF,'-','LineWidth',1,'Color',[1 .2 .2]);
+            Draw(obj.PF+0.05,'-','LineWidth',1,'Color',[.2 .2 1]);
+            Draw(obj.PF+0.1,'-','LineWidth',1,'Color',[.2 1 .2]);
+            Draw(obj.PF+0.15,'-','LineWidth',1,'Color',[1 .2 1]);
         end
     end
 end

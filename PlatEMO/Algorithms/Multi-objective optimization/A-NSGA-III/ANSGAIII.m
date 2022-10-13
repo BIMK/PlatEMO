@@ -1,5 +1,5 @@
 classdef ANSGAIII < ALGORITHM
-% <multi/many> <real/binary/permutation> <constrained/none>
+% <multi/many> <real/integer/label/binary/permutation> <constrained/none>
 % Adaptive NSGA-III
 
 %------------------------------- Reference --------------------------------
@@ -32,7 +32,7 @@ classdef ANSGAIII < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,sum(max(0,Population.cons),2));
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Zmin       = min([Zmin;Offspring(all(Offspring.cons<=0,2)).objs],[],1);
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N,Z,Zmin);
                 Z          = Adaptive(Population.objs,Z,Problem.N,interval);

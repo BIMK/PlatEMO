@@ -1,5 +1,5 @@
 classdef CSO < ALGORITHM
-% <single> <real> <large/none> <constrained/none>
+% <single> <real/integer> <large/none> <constrained/none>
 % Competitive swarm optimizer
 % phi --- 0.1 --- Social factor
 
@@ -37,12 +37,12 @@ classdef CSO < ALGORITHM
                 LoserDec  = Population(loser).decs;
                 WinnerDec = Population(winner).decs;
                 LoserVel  = Population(loser).adds(zeros(size(LoserDec)));
-                R1  = repmat(rand(Problem.N/2,1),1,Problem.D);
-                R2  = repmat(rand(Problem.N/2,1),1,Problem.D);
-                R3  = repmat(rand(Problem.N/2,1),1,Problem.D);
+                R1  = rand(Problem.N/2,Problem.D);
+                R2  = rand(Problem.N/2,Problem.D);
+                R3  = rand(Problem.N/2,Problem.D);
                 LoserVel = R1.*LoserVel + R2.*(WinnerDec-LoserDec) + phi.*R3.*(repmat(mean(Population.decs,1),Problem.N/2,1)-LoserDec);
                 LoserDec = LoserDec + LoserVel;
-                Population(loser) = SOLUTION(LoserDec,LoserVel);
+                Population(loser) = Problem.Evaluation(LoserDec,LoserVel);
             end
         end
     end

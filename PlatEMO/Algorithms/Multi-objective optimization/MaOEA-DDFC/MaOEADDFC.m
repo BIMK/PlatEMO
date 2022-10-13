@@ -1,5 +1,5 @@
 classdef MaOEADDFC < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Many-objective evolutionary algorithm based on directional diversity and
 % favorable convergence
 % K --- 5 --- The number of neighbors for estimating density
@@ -30,7 +30,7 @@ classdef MaOEADDFC < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = MatingSelection(Population.objs,Zmin);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Zmin       = min([Zmin;Offspring.objs],[],1);
                 Population = EnvironmentalSelection([Population,Offspring],Zmin,Problem.N,K,L);
             end

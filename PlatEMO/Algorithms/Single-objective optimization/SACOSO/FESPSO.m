@@ -38,7 +38,7 @@ function [tArchive,SwarmFES,VelFES,PbestFES,GbestFES,notEval,notEST,PBEval] = FE
     tArchive = [];
     % Fitness determinatin
     if iter == 1
-        offspring       = SOLUTION(SwarmFES(:,1:D));
+        offspring       = Problem.Evaluation(SwarmFES(:,1:D));
         SwarmFES(:,end) = offspring.objs;
         tArchive        = [tArchive,offspring];
     else
@@ -112,7 +112,7 @@ function [tArchive,SwarmFES,VelFES,PbestFES,GbestFES,notEval,notEST,PBEval] = FE
                 end
             else
                 if SwarmFES(i,D+1) < PbestFES(i,D+1) && srgtObj(i) < PbestFES(i,D+1)
-                    offspring = SOLUTION(SwarmFES(i,1:D));
+                    offspring = Problem.Evaluation(SwarmFES(i,1:D));
                     SwarmFES(i,D+1) = offspring.objs;
                     if offspring.objs < PbestFES(i,D+1)
                         PbestFES(i,:) = SwarmFES(i,:);
@@ -131,7 +131,7 @@ function [tArchive,SwarmFES,VelFES,PbestFES,GbestFES,notEval,notEST,PBEval] = FE
                 DF   = mean(diff);
                 select    = find(diff>DF);
                 if ~isempty(select)
-                    offspring = SOLUTION(SwarmFES(remain(select),1:D));
+                    offspring = Problem.Evaluation(SwarmFES(remain(select),1:D));
                     SwarmFES(remain(select),1+D) = offspring.objs;
                     tArchive = [tArchive,offspring];
                     notEval(remain(select)) = false;
@@ -155,7 +155,7 @@ function [tArchive,SwarmFES,VelFES,PbestFES,GbestFES,notEval,notEST,PBEval] = FE
     else
         if value < GbestFES(:,1+D)
             if ~PBEval(best)
-                new  = SOLUTION(PbestFES(best,1:D));
+                new  = Problem.Evaluation(PbestFES(best,1:D));
                 PbestFES(best,D+1) = new.objs;
                 if new.objs < GbestFES(:,D+1)
                     GbestFES = PbestFES(best,:);

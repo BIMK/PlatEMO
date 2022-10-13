@@ -1,5 +1,5 @@
 classdef ABSAEA < ALGORITHM
-% <multi/many> <real> <expensive>
+% <multi/many> <real/integer> <expensive>
 % Adaptive Bayesian based surrogate-assisted evolutionary algorithm
 % alpha ---  2 --- The parameter controlling the rate of change of penalty
 % wmax  --- 20 --- Number of generations before updating Kriging models
@@ -29,25 +29,22 @@ classdef ABSAEA < ALGORITHM
             V1    = V0;
             NI    = 11*Problem.D-1;
             P     = UniformPoint(NI,Problem.D,'Latin');
-            A1    = SOLUTION(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));  
+            A1    = Problem.Evaluation(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));  
             L     = 11*Problem.D-1+25; % L = 300;
             THETA = 5.*ones(Problem.M,Problem.D);
             Model = cell(1,Problem.M);
 
             %% Optimization
             while Algorithm.NotTerminated(A1)
-                % Refresh the model and generate promising solutions
-                %%delete the multiple data
+                % Refresh the model and generate promising solutions delete the multiple data
                 [~,index]  = unique(A1.decs,'rows');
                 A1Dec = A1.decs;
                 A1Dec = A1Dec(index,:);                
                 A1Obj = A1.objs;
                 A1Obj = A1Obj(index,:);
                 Numdata=size(A1Dec,1);
-                %%limit the size of the data
-                if Numdata <=L
-                    % fprintf('No training data decrease\n');
-                else 
+                % Limit the size of the data
+                if Numdata > L
                     [FrontNo,~] = NDSort(A1Obj,Numdata);
                     [~,index] = sort(FrontNo);
                     A1Dec1 = A1Dec(index(1:floor(L/2)), :);
@@ -71,8 +68,8 @@ classdef ABSAEA < ALGORITHM
                 PopDec = A1Dec;
                 w      = 1;
                 while w <= wmax
-                    drawnow();
-                    OffDec = OperatorGA(PopDec);
+                    drawnow('limitrate');
+                    OffDec = OperatorGA(Problem,PopDec);
                     PopDec = [PopDec;OffDec];
                     [N,~]  = size(PopDec);
                     PopObj = zeros(N,Problem.M);
@@ -93,14 +90,13 @@ classdef ABSAEA < ALGORITHM
                     w = w + 1;
                 end
 
-                % Select mu solutions for re-evaluation
-                %%acquisiion function
+                % Select mu solutions for re-evaluation acquisiion function
                 a=-0.5*cos(Problem.FE*pi/Problem.maxFE)+0.5;
                 b=0.5*cos(Problem.FE*pi/Problem.maxFE)+0.5;
                 [MMSE,~]=max(MSE,[],1);
                 [MPopObj,~]=max(PopObj,[],1);
                 fit=PopObj./MPopObj*b+MSE./MMSE*a;
-                %%select by the reference vectors
+                % Select by the reference vectors
                 if a>0.5
                     Flag=2;
                 else
@@ -114,11 +110,11 @@ classdef ABSAEA < ALGORITHM
                     PopNew=PopNew1(randperm(size(PopNew1,1),5),1:Problem.D);
                 end
                 
-                %%adapt referece vectors
+                % Adapt referece vectors
                 if(mod(Problem.FE, ceil(Problem.maxFE*0.1)) == 0)
                     V1 = V0.*repmat(max(A1Obj,[],1)-min(A1Obj,[],1),size(V0,1),1);
                 end
-                PopNew1 = SOLUTION(PopNew);
+                PopNew1 = Problem.Evaluation(PopNew);
                 A1 = [A1 PopNew1];
             end
         end

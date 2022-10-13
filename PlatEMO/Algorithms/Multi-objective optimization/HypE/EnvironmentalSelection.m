@@ -18,7 +18,7 @@ function Population = EnvironmentalSelection(Population,N,RefPoint,nSample)
     Last   = find(FrontNo==MaxFNo);
     Choose = true(1,length(Last));
     while sum(Choose) > N-sum(Next)
-        drawnow();
+        drawnow('limitrate');
         Remain  = find(Choose);
         F       = CalHV(Population(Last(Remain)).objs,RefPoint,sum(Choose)-N+sum(Next),nSample);
         [~,del] = min(F);

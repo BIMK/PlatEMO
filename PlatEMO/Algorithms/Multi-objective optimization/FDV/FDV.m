@@ -1,5 +1,5 @@
 classdef FDV < ALGORITHM
-% <multi/many> <real> <large/none> 
+% <multi/many> <real/integer> <large/none> 
 % Fuzzy decision variable framework with various internal optimizers
 % Rate      --- 0.8 --- Fuzzy evolution rate. Default = 0.8
 % Acc       --- 0.4 --- Step acceleration. Default = 0.4
@@ -29,13 +29,12 @@ classdef FDV < ALGORITHM
                 % Optimization
                 while Algorithm.NotTerminated(Population)
                     MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
-                    OffDec     = OperatorGA(Population(MatingPool).decs);
+                    OffDec     = OperatorGA(Problem,Population(MatingPool).decs);
                     %% FDV
-                    iter = Problem.FE/Problem.maxFE;
-                    if iter <= Rate
+                    if Problem.FE/Problem.maxFE <= Rate
                         Offspring = FDVOperator(Rate,Acc,OffDec);
                     else
-                        Offspring = SOLUTION(OffDec);
+                        Offspring = Problem.Evaluation(OffDec);
                     end
                     %% 
                     [Population,FrontNo,CrowdDis] = EnvironmentalSelection_NSGAII([Population,Offspring],Problem.N);
@@ -52,13 +51,12 @@ classdef FDV < ALGORITHM
                 % Optimization
                 while Algorithm.NotTerminated(Population)
                     MatingPool = TournamentSelection(2,Problem.N,sum(max(0,Population.cons),2));
-                    OffDec     = OperatorGA(Population(MatingPool).decs);
+                    OffDec     = OperatorGA(Problem,Population(MatingPool).decs);
                     %% FDV
-                    iter = Problem.FE/Problem.maxFE;
-                    if iter <= Rate
-                        Offspring = FDVOperator(Rate,Acc,OffDec);
+                    if Problem.FE/Problem.maxFE <= Rate
+                        Offspring = FDVOperator(Problem,Rate,Acc,OffDec);
                     else
-                        Offspring = SOLUTION(OffDec);
+                        Offspring = Problem.Evaluation(OffDec);
                     end
                     Zmin       = min([Zmin;Offspring(all(Offspring.cons<=0,2)).objs],[],1);
                     Population = EnvironmentalSelection_NSGAIII([Population,Offspring],Problem.N,Z,Zmin);
@@ -88,13 +86,12 @@ classdef FDV < ALGORITHM
                         P = B(i,randperm(size(B,2)));
 
                         % Generate an offspring
-                        OffDec = OperatorGAhalf(Population(P(1:2)).decs);
+                        OffDec = OperatorGAhalf(Problem,Population(P(1:2)).decs);
                         %% FDV
-                        iter = Problem.FE/Problem.maxFE;
-                        if iter <= Rate
-                            Offspring = FDVOperator(Rate,Acc,OffDec);
+                        if Problem.FE/Problem.maxFE <= Rate
+                            Offspring = FDVOperator(Problem,Rate,Acc,OffDec);
                         else
-                            Offspring = SOLUTION(OffDec);
+                            Offspring = Problem.Evaluation(OffDec);
                         end
 
                         % Update the ideal point
@@ -137,13 +134,12 @@ classdef FDV < ALGORITHM
 
                 % Optimization
                 while Algorithm.NotTerminated(Population)
-                    [OffDec,OffVel]  = Operator_CMOPSO(Population);
+                    [OffDec,OffVel] = Operator_CMOPSO(Problem,Population);
                     %% FDV
-                    iter = Problem.FE/Problem.maxFE;
-                    if iter <= Rate
+                    if Problem.FE/Problem.maxFE <= Rate
                         Offspring = FDVOperator(Rate,Acc,OffDec,OffVel);
                     else
-                        Offspring = SOLUTION(OffDec,OffVel);
+                        Offspring = Problem.Evaluation(OffDec,OffVel);
                     end
                     Population = EnvironmentalSelection_CMOPSO([Population,Offspring],Problem.N);
                 end
@@ -153,8 +149,8 @@ classdef FDV < ALGORITHM
             if optimizer == 5
                  % Generate random population
                 [V,Problem.N] = UniformPoint(Problem.N,Problem.M);
-                Population   = Problem.Initialization();
-                Population   = EnvironmentalSelection_LMOCSO(Population,V,(Problem.FE/Problem.maxFE)^2);
+                Population    = Problem.Initialization();
+                Population    = EnvironmentalSelection_LMOCSO(Population,V,(Problem.FE/Problem.maxFE)^2);
 
                 % Optimization
                 while Algorithm.NotTerminated(Population)
@@ -185,13 +181,13 @@ classdef FDV < ALGORITHM
                     Winner(Change) = Loser(Change);
                     Loser(Change)  = Temp;
 
-                    [OffDec,OffVel] = Operator_LMOCSO(Population(Loser),Population(Winner),Rate);
+                    [OffDec,OffVel] = Operator_LMOCSO(Problem,Population(Loser),Population(Winner),Rate);
                     %% FDV
                     iter = Problem.FE/Problem.maxFE;
                     if iter <= Rate
-                        Offspring = FDVOperator(Rate,Acc,OffDec,OffVel);
+                        Offspring = FDVOperator(Problem,Rate,Acc,OffDec,OffVel);
                     else
-                        Offspring = SOLUTION(OffDec,OffVel);
+                        Offspring = Problem.Evaluation(OffDec,OffVel);
                     end
                     Population = EnvironmentalSelection_LMOCSO([Population,Offspring],V,(Problem.FE/Problem.maxFE)^2);
                 end

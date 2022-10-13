@@ -1,5 +1,5 @@
 classdef LMOCSO < ALGORITHM
-% <multi/many> <real> <large/none> <constrained/none>
+% <multi/many> <real/integer> <large/none> <constrained/none>
 % Large-scale multi-objective competitive swarm optimization algorithm
 
 %------------------------------- Reference --------------------------------
@@ -36,7 +36,7 @@ classdef LMOCSO < ALGORITHM
                 Temp   = Winner(Change);
                 Winner(Change) = Loser(Change);
                 Loser(Change)  = Temp;
-                Offspring      = Operator(Population(Loser),Population(Winner));
+                Offspring      = Operator(Problem,Population(Loser),Population(Winner));
                 Population     = EnvironmentalSelection([Population,Offspring],V,(Problem.FE/Problem.maxFE)^2);
             end
         end

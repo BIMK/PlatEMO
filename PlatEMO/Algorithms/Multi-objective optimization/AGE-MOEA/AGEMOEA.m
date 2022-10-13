@@ -1,5 +1,5 @@
 classdef AGEMOEA < ALGORITHM
-% <multi/many> <real/binary/permutation> <constrained/none>
+% <multi/many> <real/integer/label/binary/permutation> <constrained/none>
 % Adaptive geometry estimation-based many-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -26,7 +26,7 @@ classdef AGEMOEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
               MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
-              Offspring  = OperatorGA(Population(MatingPool));
+              Offspring  = OperatorGA(Problem,Population(MatingPool));
               [Population,FrontNo,CrowdDis] = EnvironmentalSelection([Population,Offspring],Problem.N);
             end
         end
