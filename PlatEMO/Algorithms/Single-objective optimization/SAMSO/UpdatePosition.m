@@ -1,8 +1,8 @@
-function [Population,Position,Velocity,Gbest,Pbest] = UpdatePosition(Population,Position,Velocity,Pbest,Gbest,currFES,maxFES,Wnc,Pr,model,eta)
+function [Population,Position,Velocity,Gbest,Pbest] = UpdatePosition(Problem,Population,Position,Velocity,Pbest,Gbest,currFES,maxFES,Wnc,Pr,model,eta)
 % Update Position for L and S swarm in SAMSO
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2021 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -34,25 +34,20 @@ function [Population,Position,Velocity,Gbest,Pbest] = UpdatePosition(Population,
         tPosition(IDX(label),1:D) = Position(IDX(label),1:D) + tVelocity(IDX(label),:);
         
         % Eigencoordinate System
-        length(Population.objs)
         [~,I]  = sort(Population.objs,'ascend');
         num    = min(length(Population.objs),2*D);
         TopDec = Population(I(1:num)).decs;
         B      = orth(cov(TopDec));
         remain = find(~label);
-        if isempty(remain)
+        if ~isempty(remain)
             num = length(remain);
-            [R1,R2] = deal(zeros(num));
-            R1(logical(eye(num))) = rand(1,num);
-            R2(logical(eye(num))) = rand(1,num);
+            R1  = rand(1,num);
+            R2  = rand(1,num);
             for i = 1 : num
-                    tVelocity(IDX(remain(i)),:) = w*Velocity(IDX(remain(i)),:) + c1*B*R1*B'*(Pbest(IDX(remain(i)),1:D)-Position(IDX(remain(i)),1:D))+...
-                c1*B*R2*B'*(repmat(Gbest(1:D),sum(~label),1)-Position(IDX(remain(i)),1:D));
+                    tVelocity(IDX(remain(i)),:) = w*Velocity(IDX(remain(i)),:) + c1*(Pbest(IDX(remain(i)),1:D)-Position(IDX(remain(i)),1:D))*B*R1(i)*B'+...
+                c1*(Gbest(1:D)-Position(IDX(remain(i)),1:D))*B*R2(i)*B';
             end
         end
-%         tVelocity(IDX(~label),:) = w*Velocity(IDX(~label),:) + c1*B*r1*B'*(Pbest(IDX(~label),1:D)-Position(IDX(~label),1:D))+...
-%             c1*B*r2*B'*(repmat(Gbest(1:D),sum(~label),1)-Position(IDX(~label),1:D));
-%         tPosition(IDX(~label),1:D) = Position(IDX(~label),1:D) + tVelocity(IDX(~label),:);
     end
     % L-Swarm
     learner1 = 1:1:N2;
@@ -72,7 +67,7 @@ function [Population,Position,Velocity,Gbest,Pbest] = UpdatePosition(Population,
     dist       = min(pdist2(tPosition(:,1:D),Population.decs),[],2);
     evaluation = find(dist > eta & srgtObj < Position(:,D+1));
     if ~isempty(evaluation)
-        news   = SOLUTION(tPosition(evaluation,1:D));
+        news   = Problem.Evaluation(tPosition(evaluation,1:D));
         tPosition(evaluation,D+1) = news.objs;
         % Update particle
         update = tPosition(evaluation,D+1) < Position(evaluation,D+1);
@@ -88,7 +83,7 @@ function [Population,Position,Velocity,Gbest,Pbest] = UpdatePosition(Population,
     else
         % No new position is exactly evaluated
         [~,best] = min(tPosition(:,D+1));
-        new      = SOLUTION(tPosition(best,1:D));
+        new      = Problem.Evaluation(tPosition(best,1:D));
         Population = [Population,new];
         if new.objs < Position(best,D+1)
             Position(best,1:D) = tPosition(best,1:D);

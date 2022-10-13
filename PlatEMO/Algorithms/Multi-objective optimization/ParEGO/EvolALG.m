@@ -1,4 +1,4 @@
-function PopDec = EvolALG(PCheby,Dec,model,IFEs)
+function PopDec = EvolALG(Problem,PCheby,Dec,model,IFEs)
 % Solution update in ParEGO, where a solution with the best expected
 % improvement is re-evaluated
 
@@ -13,13 +13,13 @@ function PopDec = EvolALG(PCheby,Dec,model,IFEs)
 
 % This function is written by Cheng He
 
-    Off   = [OperatorGA(Dec(TournamentSelection(2,size(Dec,1),PCheby),:));OperatorGA(Dec,{0,0,1,20})];
+    Off   = [OperatorGA(Problem,Dec(TournamentSelection(2,size(Dec,1),PCheby),:));OperatorGA(Problem,Dec,{0,0,1,20})];
     N     = size(Off,1);
     EI    = zeros(N,1);
     Gbest = min(PCheby);
     E0    = inf;
     while IFEs > 0
-        drawnow();
+        drawnow('limitrate');
         for i = 1 : N
             [y,~,mse] = predictor(Off(i,:),model);
             s         = sqrt(mse);
@@ -31,7 +31,7 @@ function PopDec = EvolALG(PCheby,Dec,model,IFEs)
             E0   = EI(index(1));
         end
         Parent = Off(index(1:ceil(N/2)),:);
-        Off    = [OperatorGA(Parent(TournamentSelection(2,size(Parent,1),EI(index(1:ceil(N/2)))),:));OperatorGA(Parent,{0,0,1,20})];
+        Off    = [OperatorGA(Problem,Parent(TournamentSelection(2,size(Parent,1),EI(index(1:ceil(N/2)))),:));OperatorGA(Problem,Parent,{0,0,1,20})];
         IFEs   = IFEs - size(Off,1);
     end
     PopDec = Best;

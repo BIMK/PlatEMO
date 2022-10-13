@@ -1,5 +1,5 @@
 classdef MSOPSII < ALGORITHM
-% <multi/many> <real> <constrained/none>
+% <multi/many> <real/integer> <constrained/none>
 % Multiple single objective Pareto sampling II
 
 %------------------------------- Reference --------------------------------
@@ -34,7 +34,7 @@ classdef MSOPSII < ALGORITHM
             % uncontrollable, use the population as the final output
             while Algorithm.NotTerminated(Population)
                 Parents    = MatingSelection(Population,Archive);
-                Offspring  = OperatorGAhalf(Parents);
+                Offspring  = OperatorGAhalf(Problem,Parents);
                 Feasible   = all(Offspring.cons<=0,2);
                 Archive    = UpdateArchive(Archive,Offspring(Feasible),Problem.N);
                 Weight     = UpdateWeight(Weight,Offspring(Feasible).objs,Problem.N);

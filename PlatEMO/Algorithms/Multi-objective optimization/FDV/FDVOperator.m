@@ -1,9 +1,7 @@
-function Offspring = FDVOperator(Rate,Acc,OffDec,OffVel)
+function Offspring = FDVOperator(Problem,Rate,Acc,OffDec,OffVel)
 
 %  Copyright (C) 2021 Xu Yang
 %  Xu Yang <xuyang.busyxu@qq.com> or <xuyang369369@gmail.com>
-    
-    Problem = PROBLEM.Current();
     
     %% Fuzzy Evolution Sub-stages Division
     Total = 1;
@@ -29,8 +27,8 @@ function Offspring = FDVOperator(Rate,Acc,OffDec,OffVel)
         end
     end
     if nargin > 3
-        Offspring = SOLUTION(OffDec,OffVel);
+        Offspring = Problem.Evaluation(OffDec,OffVel);
     else
-        Offspring = SOLUTION(OffDec);
+        Offspring = Problem.Evaluation(OffDec);
     end
 end

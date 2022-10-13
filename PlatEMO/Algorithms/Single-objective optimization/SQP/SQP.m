@@ -23,27 +23,29 @@ classdef SQP < ALGORITHM
             lam   = zeros(1,length(X.con));
             Bk    = eye(Problem.D);
             sigma = 0.8;
-            [dfk,Ai] = FiniteDifference(X);
+            dfk   = Problem.CalObjGrad(X.dec);
+            Ai    = Problem.CalConGrad(X.dec);
             
             %% Optimization
             while Algorithm.NotTerminated(X)
-                [~,dk,mu,~] = qpsubp(dfk,Bk,[],[],-Ai',-X.con');
+                [~,dk,mu,~] = qpsubp(dfk',Bk,[],[],-Ai,-X.con');
                 tau = max(norm(mu,inf),norm(lam,inf));
                 if sigma*(tau+0.05) >= 1
                     sigma = 1/(tau+2*0.05);
                 end
                 for mk = 0 : 20
                     temp = eta*ro^mk*dphi1(X,sigma,dfk,dk);
-                    X1   = SOLUTION(X.dec+ro^mk*dk');
+                    X1   = Problem.Evaluation(X.dec+ro^mk*dk');
                     if phi1(X1,sigma)-phi1(X,sigma) < temp
                         break;
                     end
                 end
                 [dfk0,Ai0] = deal(dfk,Ai);
-                [dfk,Ai]   = FiniteDifference(X1);
-                lam = pinv(-Ai)*dfk;
+                dfk        = Problem.CalObjGrad(X1.dec);
+                Ai         = Problem.CalConGrad(X1.dec);
+                lam = pinv(-Ai')*dfk';
                 sk  = (X1.dec-X.dec)';
-                yk  = dlax(dfk,-Ai',lam) - dlax(dfk0,-Ai0',lam);
+                yk  = dlax(dfk,-Ai,lam) - dlax(dfk0,-Ai0,lam);
                 if sk'*yk>0.2*sk'*Bk*sk
                     omega = 1;
                 else
@@ -62,9 +64,9 @@ function p = phi1(X,sigma)
 end
 
 function dp = dphi1(X,sigma,df,d)
-    dp = df'*d - 1/sigma*norm(max(X.con',0),1);
+    dp = df*d - 1/sigma*norm(max(X.con',0),1);
 end
 
 function dl = dlax(df,Ai,lam)
-    dl = df - Ai'*lam;
+    dl = df' - Ai'*lam;
 end

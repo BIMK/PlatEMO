@@ -1,5 +1,5 @@
 classdef RMMEDA < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % Regularity model-based multiobjective estimation of distribution
 % algorithm
 
@@ -23,7 +23,7 @@ classdef RMMEDA < ALGORITHM
 
             %% Optimization
             while Algorithm.NotTerminated(Population)
-                Offspring  = Operator(Population);
+                Offspring  = Operator(Problem,Population);
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N);
             end
         end

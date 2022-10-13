@@ -33,7 +33,7 @@ function currentAxes = Draw(Data,varargin)
     if length(Data) == 1 && isgraphics(Data)
         ax = Data;
         cla(ax);
-    elseif ~isempty(Data)
+    elseif ~isempty(Data) && ismatrix(Data)
         if isempty(ax) || ~isgraphics(ax)
             ax = gca;
         end

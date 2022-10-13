@@ -1,4 +1,4 @@
-function [tArchive,GbestRBF] = UpdateRBF(tArchive,SwarmRBF,GbestRBF)
+function [tArchive,GbestRBF] = UpdateRBF(Problem,tArchive,SwarmRBF,GbestRBF)
 % Update solutions in RBF-assisted swarm
 
 %------------------------------- Copyright --------------------------------
@@ -14,7 +14,7 @@ function [tArchive,GbestRBF] = UpdateRBF(tArchive,SwarmRBF,GbestRBF)
     D     = D - 1;
     [value,best] = min(SwarmRBF(:,1+D));
     
-    new = SOLUTION(SwarmRBF(best,1:D));
+    new = Problem.Evaluation(SwarmRBF(best,1:D));
     SwarmRBF(best,D+1) = new.objs;
     if new.objs < GbestRBF(:,D+1)
         GbestRBF = SwarmRBF(best,:);

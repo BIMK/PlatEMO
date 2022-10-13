@@ -1,5 +1,5 @@
 classdef MSCMO < ALGORITHM
-% <multi> <real/binary/permutation> <constrained>
+% <multi> <real/integer/label/binary/permutation> <constrained>
 % Multi-stage constrained multi-objective evolutionary algorithm
 % type --- 1 --- Type of operator (1. GA 2. DE)
 
@@ -80,11 +80,11 @@ classdef MSCMO < ALGORITHM
                 % Reproduction
                 if type == 1
                     MatingPool = TournamentSelection(2,Problem.N,Fitness);
-                    Offspring  = OperatorGA(Population(MatingPool));
+                    Offspring  = OperatorGA(Problem,Population(MatingPool));
                 elseif type == 2
                     MatingPool1 = TournamentSelection(2,Problem.N,Fitness);
                     MatingPool2 = TournamentSelection(2,Problem.N,Fitness);
-                    Offspring   = OperatorDE(Population,Population(MatingPool1),Population(MatingPool2));
+                    Offspring   = OperatorDE(Problem,Population,Population(MatingPool1),Population(MatingPool2));
                 end
                 %  Update external archive
                 if flag==1 && constraint_handing~=1

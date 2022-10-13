@@ -1,5 +1,5 @@
 classdef MPMMEA < ALGORITHM
-% <multi> <real> <large/none> <multimodal> <sparse>
+% <multi> <real/integer> <large/none> <multimodal> <sparse>
 % Multi-population multi-modal multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -19,14 +19,14 @@ classdef MPMMEA < ALGORITHM
     methods
         function main(Algorithm,Problem)
             %% Population initialization
-            Dec   = unifrnd(repmat(Problem.lower,Problem.N,1),repmat(Problem.upper,Problem.N,1)); 
-            Mask  = zeros(Problem.N,Problem.D);
-            GV    = ones(1,Problem.D);
+            Dec  = unifrnd(repmat(Problem.lower,Problem.N,1),repmat(Problem.upper,Problem.N,1)); 
+            Mask = zeros(Problem.N,Problem.D);
+            GV   = ones(1,Problem.D);
             for i = 1 : Problem.N
                 Mask(i,TournamentSelection(2,ceil(rand*Problem.D),GV)) = 1;
                 GV(Mask(i,:)==1) = GV(Mask(i,:)==1)+1;
             end
-            Population  = SOLUTION(Dec.*Mask);
+            Population  = Problem.Evaluation(Dec.*Mask);
             K           = 2;  % Number of subpopulations
             Masks       = cell(1,K);
             Decs        = cell(1,K);
@@ -52,8 +52,8 @@ classdef MPMMEA < ALGORITHM
                 for i = 1 : K                
                     GV{rank(i)}          = UpdateGV(GV{rank(i)},Masks{rank(i)},FrontNo{rank(i)});
                     Mating               = TournamentSelection(2,2*length(Populations{rank(i)}),FrontNo{rank(i)},-CrowdDis{rank(i)});
-                    [OffDec,OffMask]     = Operator(Decs{rank(i)}(Mating,:),Masks{rank(i)}(Mating,:),GV{rank(i)});
-                    Offspring            = SOLUTION(OffDec.*OffMask);
+                    [OffDec,OffMask]     = Operator(Problem,Decs{rank(i)}(Mating,:),Masks{rank(i)}(Mating,:),GV{rank(i)});
+                    Offspring            = Problem.Evaluation(OffDec.*OffMask);
                     Populations{rank(i)} = [Populations{rank(i)},Offspring];
                     Decs{rank(i)}        = [Decs{rank(i)};OffDec];
                     Masks{rank(i)}       = [Masks{rank(i)};OffMask];
@@ -101,7 +101,7 @@ classdef MPMMEA < ALGORITHM
                         for i = 1 : floor(Problem.N/K)
                             Mask(i,TournamentSelection(2,floor(rand*Problem.D),F)) = 1;
                         end
-                        Populations{K} = SOLUTION(Dec.*Mask);
+                        Populations{K} = Problem.Evaluation(Dec.*Mask);
                         Masks{K}       = Mask;
                         Decs{K}        = Dec;
                         GV{K}          = zeros(1,Problem.D);

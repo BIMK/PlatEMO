@@ -24,14 +24,14 @@ function [Subcomponents,Population] = DividingDistanceVariables(Problem,NIA,Dive
     PopDec(:,ConverIndexes) = rand(Problem.N,sum(ConverIndexes));
     % Generate the initial population
     PopDec     = PopDec.*repmat(Problem.upper-Problem.lower,Problem.N,1) + repmat(Problem.lower,Problem.N,1);
-    Population = SOLUTION(PopDec);
+    Population = Problem.Evaluation(PopDec);
     
     %% Interdependence analysis
     interaction = false(Problem.D);
     interaction(logical(eye(Problem.D))) = true;
     for i = 1 : Problem.D-1
         for j = i+1 : Problem.D
-            drawnow();
+            drawnow('limitrate');
             for time2try = 1 : NIA
                 % Detect whether the i-th and j-th decision variables are
                 % interacting
@@ -42,7 +42,7 @@ function [Subcomponents,Population] = DividingDistanceVariables(Problem,NIA,Dive
                 Decs(1,i) = a2;
                 Decs(2,j) = b2;
                 Decs(3,[i,j]) = [a2,b2];
-                F = SOLUTION(Decs);
+                F = Problem.Evaluation(Decs);
                 delta1 = F(1).obj - Population(x).obj;
                 delta2 = F(3).obj - F(2).obj;
                 interaction(i,j) = interaction(i,j) | any(delta1.*delta2<0);

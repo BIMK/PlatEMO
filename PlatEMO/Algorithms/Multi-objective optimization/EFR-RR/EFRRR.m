@@ -1,5 +1,5 @@
 classdef EFRRR < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Ensemble fitness ranking with a ranking restriction scheme
 % K --- 2 --- Number of nearest weight vectors
 
@@ -30,7 +30,7 @@ classdef EFRRR < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,RgFrontNO);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,z,znad] = EnvironmentalSelection([Population,Offspring],W,Problem.N,K,z,znad);
             end
         end

@@ -22,32 +22,31 @@ classdef DOC3 < PROBLEM
             obj.D = 10;
             obj.lower    = [0 0 0 0 0 0 0 0 0 0.01];
             obj.upper    = [1 1 300 100 200 100 1 100 200 0.03];
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
-        %% Calculate objective values
-        function PopObj = CalObj(~,X)
-             g_temp = -9.* X(:, 6) - 15.* X(:, 9) + 6.* X(:, 2) + 16.* X(:, 3) + 10.* (X(:, 7) + X(:, 8));
-             g = (g_temp+400.0551) +1;
-             PopObj(:,1) = X(:,1);
-             PopObj(:,2) = g.*(1 - (PopObj(:,1))./g);
-        end
-        %% Calculate constraint violations
-        function PopCon = CalCon(obj,X)
-            PopObj = obj.CalObj(X);
-           % Constraints in objective space
-           c(:,1) = max( -(PopObj(:,1).^2 + PopObj(:,2).^2-1), 0);
-           c(:,2) = max(-( abs( (-PopObj(:,1) + PopObj(:,2) -0.5)/sqrt(2)) - 0.1/sqrt(2)), 0);
-           c(:,3) = max(-( abs( (-PopObj(:,1) + PopObj(:,2) -0)/sqrt(2)) - 0.1/sqrt(2)), 0);
-           c(:,4) = max(-( abs( (-PopObj(:,1) + PopObj(:,2) +0.5)/sqrt(2)) - 0.1/sqrt(2)), 0);
-    
-           % Constraints in decision space
-           c(:, 5)  = X(:, 10).* X(:, 4) + 0.02.* X(:, 7) - 0.025.* X(:, 6);
-           c(:, 6)  = X(:, 10).* X(:, 5) + 0.02.* X(:, 8) - 0.015.* X(:, 9);
-           c(:, 7)  = abs(X(:, 2) + X(:, 3) - X(:, 4) - X(:, 5)) - 0.0001;
-           c(:, 8)  = abs(0.03.* X(:, 2) + 0.01.* X(:, 3) - X(:, 10).* (X(:, 4) + X(:, 5))) - 0.0001;
-           c(:, 9)  = abs(X(:, 4) + X(:, 7) - X(:, 6)) - 0.0001;
-           c(:, 10) = abs(X(:, 5) + X(:, 8) - X(:, 9)) - 0.0001;
-           PopCon   =c;
+        %% Calculate objective values and constraint violations
+        function Population = Evaluation(obj,varargin)
+            X = varargin{1};
+            X = max(min(X,repmat(obj.upper,size(X,1),1)),repmat(obj.lower,size(X,1),1));
+            g_temp = -9.* X(:, 6) - 15.* X(:, 9) + 6.* X(:, 2) + 16.* X(:, 3) + 10.* (X(:, 7) + X(:, 8));
+            g = (g_temp+400.0551) +1;
+            PopObj(:,1) = X(:,1);
+            PopObj(:,2) = g.*(1 - (PopObj(:,1))./g);
+            % Constraints in objective space
+            c(:,1) = max( -(PopObj(:,1).^2 + PopObj(:,2).^2-1), 0);
+            c(:,2) = max(-( abs( (-PopObj(:,1) + PopObj(:,2) -0.5)/sqrt(2)) - 0.1/sqrt(2)), 0);
+            c(:,3) = max(-( abs( (-PopObj(:,1) + PopObj(:,2) -0)/sqrt(2)) - 0.1/sqrt(2)), 0);
+            c(:,4) = max(-( abs( (-PopObj(:,1) + PopObj(:,2) +0.5)/sqrt(2)) - 0.1/sqrt(2)), 0);
+
+            % Constraints in decision space
+            c(:,5)  = X(:, 10).* X(:, 4) + 0.02.* X(:, 7) - 0.025.* X(:, 6);
+            c(:,6)  = X(:, 10).* X(:, 5) + 0.02.* X(:, 8) - 0.015.* X(:, 9);
+            c(:,7)  = abs(X(:, 2) + X(:, 3) - X(:, 4) - X(:, 5)) - 0.0001;
+            c(:,8)  = abs(0.03.* X(:, 2) + 0.01.* X(:, 3) - X(:, 10).* (X(:, 4) + X(:, 5))) - 0.0001;
+            c(:,9)  = abs(X(:, 4) + X(:, 7) - X(:, 6)) - 0.0001;
+            c(:,10) = abs(X(:, 5) + X(:, 8) - X(:, 9)) - 0.0001;
+            Population = SOLUTION(X,PopObj,c,varargin{2:end});
+            obj.FE     = obj.FE + length(Population);
         end
         %% Generate points on the Pareto front
         function R = GetOptimum(obj,N)

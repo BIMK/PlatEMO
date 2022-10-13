@@ -18,19 +18,19 @@ classdef NelderMead < ALGORITHM
         function main(Algorithm,Problem)            
             %% Generate random solutions
             P = Problem.Initialization(1);
-            P = [P,SOLUTION(repmat(P.dec,Problem.D,1).*(1+eye(Problem.D)*0.05))];
+            P = [P,Problem.Evaluation(repmat(P.dec,Problem.D,1).*(1+eye(Problem.D)*0.05))];
 
             %% Optimization
             while Algorithm.NotTerminated(P)
                 [~,rank] = sort(P.objs);
                 P        = P(rank);
                 Mean     = mean(P(1:end-1).decs,1);
-                R        = SOLUTION(2*Mean-P(end).dec);
+                R        = Problem.Evaluation(2*Mean-P(end).dec);
                 if P(1).obj <= R.obj && R.obj < P(end-1).obj
                     P(end) = R;
                     continue;
                 elseif R.obj < P(1).obj
-                    S = SOLUTION(Mean+2*(Mean-P(end).dec));
+                    S = Problem.Evaluation(Mean+2*(Mean-P(end).dec));
                     if S.obj < R.obj
                         P(end) = S;
                     else
@@ -38,19 +38,19 @@ classdef NelderMead < ALGORITHM
                     end
                     continue;
                 elseif P(end-1).obj <= R.obj && R.obj < P(end).obj
-                    C = SOLUTION(Mean+(R.dec-Mean)/2);
+                    C = Problem.Evaluation(Mean+(R.dec-Mean)/2);
                     if C.obj < R.obj
                         P(end) = C;
                         continue;
                     end
                 else
-                    C = SOLUTION(Mean+(P(end).dec-Mean)/2);
+                    C = Problem.Evaluation(Mean+(P(end).dec-Mean)/2);
                     if C.obj < P(end).obj
                         P(end) = C;
                         continue;
                     end
                 end
-                P(2:end) = SOLUTION(repmat(P(1).dec,Problem.D,1)+(P(2:end).decs-repmat(P(1).dec,Problem.D,1))/2);
+                P(2:end) = Problem.Evaluation(repmat(P(1).dec,Problem.D,1)+(P(2:end).decs-repmat(P(1).dec,Problem.D,1))/2);
             end
         end
     end

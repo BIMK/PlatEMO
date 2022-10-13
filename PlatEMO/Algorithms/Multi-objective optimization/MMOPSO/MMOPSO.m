@@ -1,5 +1,5 @@
 classdef MMOPSO < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % MOPSO with multiple search strategies
 
 %------------------------------- Reference --------------------------------
@@ -30,10 +30,10 @@ classdef MMOPSO < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Archive)
                 [Pbest,Gbest] = GetBest(Archive,W,Z);
-                Population    = Operator(Population,Pbest,Gbest);
+                Population    = Operator(Problem,Population,Pbest,Gbest);
                 Z             = min([Z;Population.objs],[],1);
                 Archive       = UpdateArchive([Archive,Population],Problem.N); 
-                S             = OperatorGAhalf(Archive([1:length(Archive),randi(ceil(length(Archive)/2),1,length(Archive))]));
+                S             = OperatorGAhalf(Problem,Archive([1:length(Archive),randi(ceil(length(Archive)/2),1,length(Archive))]));
                 Z             = min([Z;S.objs],[],1);
                 Archive       = UpdateArchive([Archive,S],Problem.N);
             end

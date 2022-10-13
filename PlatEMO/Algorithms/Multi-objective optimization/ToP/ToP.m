@@ -1,5 +1,5 @@
 classdef ToP < ALGORITHM
-% <multi> <real> <constrained>
+% <multi> <real/integer> <constrained>
 % Two-phase framework with NSGA-II
 
 %------------------------------- Reference --------------------------------
@@ -33,12 +33,12 @@ classdef ToP < ALGORITHM
                     for i = 1 : Problem.N
                         if rand<0.5                 % Perform DE/current-to-rand/1
                             MatingPool=[i,randi(Problem.N,1,3)];
-                            Offspring_i=DE_cr(Population(MatingPool(1)),Population(MatingPool(2)),Population(MatingPool(3)),Population(MatingPool(4)));
+                            Offspring_i=DE_cr(Problem,Population(MatingPool(1)),Population(MatingPool(2)),Population(MatingPool(3)),Population(MatingPool(4)));
                             Offspring=cat(2,Offspring,Offspring_i);
                         else                        % Perform DE/rand-to-best/1/bin
                             [~,bestindex]=min(fp_transformed);
                             MatingPool=[bestindex,randi(Problem.N,1,3)];
-                            Offspring_i=DE_rb(Population(MatingPool(1)),Population(MatingPool(2)),Population(MatingPool(3)),Population(MatingPool(4)));
+                            Offspring_i=DE_rb(Problem,Population(MatingPool(1)),Population(MatingPool(2)),Population(MatingPool(3)),Population(MatingPool(4)));
                             Offspring=cat(2,Offspring,Offspring_i);
                         end
                     end
@@ -66,7 +66,7 @@ classdef ToP < ALGORITHM
                 else
                     %% Phase II
                     [~,FrontNo,CrowdDis] = EnvironmentalSelection(Population,Problem.N);
-                    Offspring  = OperatorDE(Population(TournamentSelection(2,Problem.N,FrontNo,-CrowdDis)),Population(randi(Problem.N,1,Problem.N)),Population(randi(Problem.N,1,Problem.N)));
+                    Offspring  = OperatorDE(Problem,Population(TournamentSelection(2,Problem.N,FrontNo,-CrowdDis)),Population(randi(Problem.N,1,Problem.N)),Population(randi(Problem.N,1,Problem.N)));
                     Population = EnvironmentalSelection([Population,Offspring],Problem.N);
                 end
             end

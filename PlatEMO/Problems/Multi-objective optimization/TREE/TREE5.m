@@ -49,14 +49,14 @@ classdef TREE5 < PROBLEM
             % the dataset
             obj.lower    = reshape(Lower-obj.Mean,1,[]);
             obj.upper    = reshape(Upper-obj.Mean,1,[]);
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Generate initial solutions
         function Population = Initialization(obj,N)
             if nargin < 2; N = obj.N; end
             PopDec = obj.Mean(:)'.*(rand(N,obj.D)*0.008-0.004);
             PopDec = min(max(PopDec,repmat(obj.lower,N,1)),repmat(obj.upper,N,1));
-            Population = SOLUTION(PopDec);
+            Population = obj.Evaluation(PopDec);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

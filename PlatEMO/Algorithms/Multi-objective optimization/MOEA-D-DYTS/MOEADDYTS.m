@@ -1,12 +1,11 @@
 classdef MOEADDYTS < ALGORITHM
-% <multi/many> <real>
-% MOEA/D with fitness-rate-rank-based multiarmed bandit
+% <multi/many> <real/integer>
+% MOEA/D with dynamic Thompson sampling
 
 %------------------------------- Reference --------------------------------
-% K. Li, A. Fialho, S. Kwong, and Q. Zhang, Adaptive operator selection
-% with bandits for a multiobjective evolutionary algorithm based on
-% decomposition, IEEE Transactions on Evolutionary Computation, 2014,
-% 18(1): 114-130.
+% L. Sun and K. Li, Adaptive operator selection based on dynamic Thompson
+% sampling for MOEA/D, Proceedings of the International Conference on
+% Parallel Problem Solving from Nature, 2020, 271-284.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -67,8 +66,7 @@ classdef MOEADDYTS < ALGORITHM
                         end
 
                         % Generate an offspring
-                        % Offspring = FourDE(op,Population(i),Population(P(1)),Population(P(2)),Population(P(3)),Population(P(4)),Population(P(5)));
-                        Offspring = FiveOps(op, Population(i), Population(P(1)), Population(P(2)), Population(P(3)), Population(P(4)), Population(P(5)));
+                        Offspring = FiveOps(Problem, op, Population(i), Population(P(1)), Population(P(2)), Population(P(3)), Population(P(4)), Population(P(5)));
 
                         % Update the ideal point
                         Z = min(Z, Offspring.obj);

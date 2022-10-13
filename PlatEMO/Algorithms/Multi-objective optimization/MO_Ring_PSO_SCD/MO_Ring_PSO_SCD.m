@@ -1,5 +1,5 @@
 classdef MO_Ring_PSO_SCD < ALGORITHM
-% <multi> <real> <multimodal>
+% <multi> <real/integer> <multimodal>
 % Multiobjective PSO using ring topology and special crowding distance
 
 %------------------------------- Reference --------------------------------
@@ -27,7 +27,7 @@ classdef MO_Ring_PSO_SCD < ALGORITHM
             Vmax = mv;
             ParticleDec = Problem.lower+(Problem.upper-Problem.lower).*rand(Problem.N,Problem.D);
             ParticleVel = Vmin+2.*Vmax.*rand(Problem.N,Problem.D);
-            Population  = SOLUTION(ParticleDec,ParticleVel);
+            Population  = Problem.Evaluation(ParticleDec,ParticleVel);
 
             %% Initialize personal best archive PBA and Neighborhood best archive NBA
             PBA = cell(1,Problem.N);
@@ -40,7 +40,7 @@ classdef MO_Ring_PSO_SCD < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 NBA = UpdateNBA(NBA,n_NBA,PBA);
-                Population = Operator(Population,PBA,NBA);
+                Population = Operator(Problem,Population,PBA,NBA);
                 PBA = UpdatePBA(Population,PBA,n_PBA);
                 if Problem.FE >= Problem.maxFE
                     tempNBA = [];

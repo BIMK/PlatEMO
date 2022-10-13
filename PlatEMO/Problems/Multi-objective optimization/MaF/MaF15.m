@@ -27,7 +27,7 @@ classdef MaF15 < PROBLEM
             if isempty(obj.D); obj.D = 20*obj.M; end
             obj.lower    = zeros(1,obj.D);
             obj.upper    = [ones(1,obj.M-1),10.*ones(1,obj.D-obj.M+1)];
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
             % Calculate the number of variables in each subcomponent
             nk = 2;
             c  = 3.8*0.1*(1-0.1);

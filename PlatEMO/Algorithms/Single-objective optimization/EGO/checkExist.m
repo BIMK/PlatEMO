@@ -1,9 +1,4 @@
 function notExist = checkExist(AllDec,PopDec)
-% Remove existing candidates, AllDec represents decs in the current database
-% and the decision variables of candidates is PopDec.
-% Example:
-%   notExist = checkExist(AllDec,PopDec)
-% 
 
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for

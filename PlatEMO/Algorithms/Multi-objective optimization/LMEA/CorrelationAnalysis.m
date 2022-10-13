@@ -15,7 +15,7 @@ function DVSet = CorrelationAnalysis(Problem,Population,DV,nCor)
         RelatedSet = [];
         for d = 1 : length(DVSet)
             for u = DVSet{d}
-                drawnow();
+                drawnow('limitrate');
                 sign = false;
                 for i = 1 : nCor
                     p    = Population(randi(length(Population)));
@@ -25,7 +25,7 @@ function DVSet = CorrelationAnalysis(Problem,Population,DV,nCor)
                     decs(1,v)     = a2;
                     decs(2,u)     = b2;
                     decs(3,[v,u]) = [a2,b2];
-                    F = SOLUTION(decs);
+                    F = Problem.Evaluation(decs);
                     delta1 = F(1).obj - p.obj;
                     delta2 = F(3).obj - F(2).obj;
                     if any(delta1.*delta2<0)

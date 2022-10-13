@@ -22,20 +22,20 @@ classdef MW7 < PROBLEM
             if isempty(obj.D); obj.D = 15; end
             obj.lower    = zeros(1,obj.D);
             obj.upper    = ones(1,obj.D);
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
-        %% Calculate objective values
-        function PopObj = CalObj(obj,X)
+        %% Calculate objective values and constraint violations
+        function Population = Evaluation(obj,varargin)
+            X = varargin{1};
+            X = max(min(X,repmat(obj.upper,size(X,1),1)),repmat(obj.lower,size(X,1),1));
             g = 1 + sum(2*(X(:,obj.M:end) + (X(:,obj.M-1:end-1) - 0.5).^2 - 1).^2,2);
             PopObj(:,1) = g.*X(:,1);
             PopObj(:,2) = g.*sqrt(1 - (PopObj(:,1)./g).^2);
-        end
-        %% Calculate constraint violations
-        function PopCon = CalCon(obj,X)
-            PopObj = obj.CalObj(X);
-            l      = atan(PopObj(:,2)./PopObj(:,1));
+            l           = atan(PopObj(:,2)./PopObj(:,1));
             PopCon(:,1) = PopObj(:,1).^2 + PopObj(:,2).^2 - (1.2+0.4*sin(4*l).^16).^2;
             PopCon(:,2) = (1.15-0.2*sin(4*l).^8).^2 - PopObj(:,1).^2 - PopObj(:,2).^2;
+            Population  = SOLUTION(X,PopObj,PopCon,varargin{2:end});
+            obj.FE      = obj.FE + length(Population);
         end
         %% Generate points on the Pareto front
         function R = GetOptimum(obj,N)

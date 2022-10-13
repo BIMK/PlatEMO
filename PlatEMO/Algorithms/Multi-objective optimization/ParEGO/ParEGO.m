@@ -1,5 +1,5 @@
 classdef ParEGO < ALGORITHM
-% <multi> <real> <expensive>
+% <multi> <real/integer> <expensive>
 % Efficient global optimization for Pareto optimization
 % IFEs --- 10000 --- Internal GA evals per iteration
 
@@ -27,7 +27,7 @@ classdef ParEGO < ALGORITHM
             [W,Problem.N] = UniformPoint(Problem.N,Problem.M);
             N             = 11*Problem.D-1;
             PopDec        = UniformPoint(N,Problem.D,'Latin');
-            Population    = SOLUTION(repmat(Problem.upper-Problem.lower,N,1).*PopDec+repmat(Problem.lower,N,1));
+            Population    = Problem.Evaluation(repmat(Problem.upper-Problem.lower,N,1).*PopDec+repmat(Problem.lower,N,1));
             theta         = 10.*ones(1,Problem.D);
 
             %% Optimization
@@ -57,8 +57,8 @@ classdef ParEGO < ALGORITHM
                 % Surrogate-assisted prediction
                 dmodel     = dacefit(PDec,PCheby,'regpoly1','corrgauss',theta,1e-5.*ones(1,D),20.*ones(1,D));
                 theta      = dmodel.theta;
-                PopDec     = EvolALG(PCheby,Population.decs,dmodel,IFEs);
-                Population = [Population,SOLUTION(PopDec)];
+                PopDec     = EvolALG(Problem,PCheby,Population.decs,dmodel,IFEs);
+                Population = [Population,Problem.Evaluation(PopDec)];
             end
         end
     end

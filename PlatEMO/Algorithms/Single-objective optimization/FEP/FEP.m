@@ -1,5 +1,5 @@
 classdef FEP < ALGORITHM
-% <single> <real> <large/none> <constrained/none>
+% <single> <real/integer> <large/none> <constrained/none>
 % Fast evolutionary programming
 
 %------------------------------- Reference --------------------------------
@@ -21,7 +21,7 @@ classdef FEP < ALGORITHM
             
             %% Optimization
             while Algorithm.NotTerminated(Population)
-                Offspring  = OperatorFEP(Population);
+                Offspring  = OperatorFEP(Problem,Population);
                 Population = [Population,Offspring];
                 Fit = FitnessSingle(Population);
                 Win = zeros(1,length(Population));

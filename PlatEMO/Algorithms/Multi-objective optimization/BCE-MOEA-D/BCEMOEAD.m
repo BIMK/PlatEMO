@@ -1,5 +1,5 @@
 classdef BCEMOEAD < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Bi-criterion evolution based MOEA/D
 
 %------------------------------- Reference --------------------------------
@@ -35,7 +35,7 @@ classdef BCEMOEAD < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(PC)
                 % PC evolving
-                NewPC = Exploration(PC,NPC,nND,Problem.N);
+                NewPC = Exploration(Problem,PC,NPC,nND,Problem.N);
                 % NPC selection
                 for i = 1 : length(NewPC)
                     % Update the ideal point
@@ -56,7 +56,7 @@ classdef BCEMOEAD < ALGORITHM
                         P = randperm(length(NPC));
                     end
                     % Generate an offspring
-                    NewNPC(i) = OperatorGAhalf(NPC(P(1:2)));
+                    NewNPC(i) = OperatorGAhalf(Problem,NPC(P(1:2)));
                     % Update the ideal point
                     Z = min(Z,NewNPC(i).obj);
                     % Update the solutions in P by modified Tchebycheff approach

@@ -1,5 +1,5 @@
 classdef NSGAIISDR < ALGORITHM
-% <many> <real/binary/permutation>
+% <many> <real/integer/label/binary/permutation>
 % NSGA-II with strengthened dominance relation
 
 %------------------------------- Reference --------------------------------
@@ -27,7 +27,7 @@ classdef NSGAIISDR < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 zmin       = min([zmin;Offspring.objs],[],1);
                 zmax       = max(Population(FrontNo==1).objs,[],1);
                 [Population,FrontNo,CrowdDis] = EnvironmentalSelection([Population,Offspring],Problem.N,zmin,zmax);

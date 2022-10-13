@@ -99,7 +99,7 @@ function Population = WOF_optimiseByMOEAD(GlobalDummy,Population,W,evaluations,i
                 Offspring = WOF_WeightIndividual(NewDec,GlobalDummy);
         
             else
-                Offspring = OperatorGAhalf(Population(P(1:2)));
+                Offspring = OperatorGAhalf(GlobalDummy,Population(P(1:2)));
             end
             
             % Update the ideal point

@@ -1,4 +1,4 @@
-function [Offspring] = DEgenerator2(Population,Problem)
+function [Offspring] = DEgenerator2(Problem,Population)
 
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
@@ -84,5 +84,5 @@ function [Offspring] = DEgenerator2(Population,Problem)
         end
     end
     Offspring = trial;
-    Offspring = SOLUTION(Offspring);
+    Offspring = Problem.Evaluation(Offspring);
 end

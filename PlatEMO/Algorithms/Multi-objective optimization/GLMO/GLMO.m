@@ -1,5 +1,5 @@
 classdef GLMO < ALGORITHM
-% <multi> <real> <large/none>
+% <multi> <real/integer> <large/none>
 % Grouped and linked mutation operator algorithm
 % optimiser      --- 3 --- The optimisation method. 1 = SMPSO, 2 = NSGA-II, 3 = NSGA-III. Default = NSGA-III
 % typeOfGroups   --- 2 --- Grouping method, 1 = linear, 2 = ordered, 3 = random. Default = ordered
@@ -70,7 +70,7 @@ classdef GLMO < ALGORITHM
             Pbest            = Population;
             [Gbest,CrowdDis] = GLMO_UpdateGbest(Population,Problem.N);
             while Algorithm.NotTerminated(Gbest)
-                Population       = GLMO_SMPSOOperator(Population,Pbest,Gbest(TournamentSelection(2,Problem.N,-CrowdDis)), numberOfGroups, typeOfGroups);
+                Population       = GLMO_SMPSOOperator(Problem, Population, Pbest, Gbest(TournamentSelection(2,Problem.N,-CrowdDis)), numberOfGroups, typeOfGroups);
                 [Gbest,CrowdDis] = GLMO_UpdateGbest([Gbest,Population],Problem.N);
                 Pbest            = GLMO_UpdatePbest(Pbest,Population);
             end
@@ -80,7 +80,7 @@ classdef GLMO < ALGORITHM
             [~,FrontNo,CrowdDis] = GLMO_NSGAIIEnvironmentalSelection(Population,Problem.N);
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
-                Offspring  = GLMO_GA(Population(MatingPool), numberOfGroups, typeOfGroups);
+                Offspring  = GLMO_GA(Problem, Population(MatingPool), numberOfGroups, typeOfGroups);
                 [Population,FrontNo,CrowdDis] = GLMO_NSGAIIEnvironmentalSelection([Population,Offspring],Problem.N);
             end
         end
@@ -90,7 +90,7 @@ classdef GLMO < ALGORITHM
             Zmin          = min(Population(all(Population.cons<=0,2)).objs,[],1);
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,sum(max(0,Population.cons),2));
-                Offspring  = GLMO_GA(Population(MatingPool), numberOfGroups, typeOfGroups);
+                Offspring  = GLMO_GA(Problem, Population(MatingPool), numberOfGroups, typeOfGroups);
                 Zmin       = min([Zmin;Offspring(all(Offspring.cons<=0,2)).objs],[],1);
                 Population = GLMO_NSGAIIIEnvironmentalSelection([Population,Offspring],Problem.N,Z,Zmin);
             end

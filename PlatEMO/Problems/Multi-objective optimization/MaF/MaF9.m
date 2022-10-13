@@ -28,7 +28,7 @@ classdef MaF9 < PROBLEM
             obj.D        = 2;
             obj.lower    = [-10000,-10000];
             obj.upper    = [10000,10000];
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
             % Generate vertexes
             obj.Points = [];
             [thera,rho] = cart2pol(0,1);

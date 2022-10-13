@@ -20,7 +20,7 @@ function [grade,X,SR,improve,AppSet] = LocalSearch3(Problem,X,SR,improve,AppSet)
             value = SearchL(i) : Disp(i) : SearchU(i);
             Decs  = repmat(Best.dec,length(value),1);
             Decs(:,i) = value;
-            Y     = SOLUTION(Decs);
+            Y     = Problem.Evaluation(Decs);
             for j = 1 : length(Y)
                 % 'grade', 'SR' and 'improve' will not be updated in local
                 % search 3

@@ -1,5 +1,5 @@
 function score = Spread(Population,optimum)
-% <min>
+% <min> <multi/many> <real/integer/label/binary/permutation> <large/none> <constrained/none> <expensive/none> <multimodal/none> <sparse/none> <dynamic/none>
 % Spread
 
 %------------------------------- Reference --------------------------------

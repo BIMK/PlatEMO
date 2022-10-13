@@ -23,11 +23,11 @@ classdef WFG4 < PROBLEM
         %% Default settings of the problem
         function Setting(obj)
             if isempty(obj.M); obj.M = 3; end
-            if isempty(obj.D); obj.D = obj.M + 9; end
             obj.K = obj.ParameterSet(obj.M-1);
+            if isempty(obj.D); obj.D = obj.K + 10; end
             obj.lower    = zeros(1,obj.D);
             obj.upper    = 2 : 2 : 2*obj.D;
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

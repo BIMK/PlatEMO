@@ -1,4 +1,4 @@
-function [OffDec,OffMask] = Operator(ParentDec,ParentMask,Fitness,REAL)
+function [OffDec,OffMask] = Operator(Problem,ParentDec,ParentMask,Fitness)
 % The operator of SparseEA
 
 %------------------------------- Copyright --------------------------------
@@ -43,8 +43,9 @@ function [OffDec,OffMask] = Operator(ParentDec,ParentMask,Fitness,REAL)
     end
     
     %% Crossover and mutation for dec
-    if REAL
-        OffDec = OperatorGAhalf(ParentDec);
+    if any(Problem.encoding~=4)
+        OffDec = OperatorGAhalf(Problem,ParentDec);
+        OffDec(:,Problem.encoding==4) = 1;
     else
         OffDec = ones(N/2,D);
     end

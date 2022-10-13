@@ -28,7 +28,7 @@ classdef mQAP < PROBLEM
             c = obj.ParameterSet(0);
             if isempty(obj.M); obj.M = 2; end
             if isempty(obj.D); obj.D = 10; end
-            obj.encoding = 'permutation';
+            obj.encoding = 5 + zeros(1,obj.D);
             % Randomly generate distances and flows
             file = sprintf('mQAP-M%d-D%d-c%.4f.mat',obj.M,obj.D,c);
             file = fullfile(fileparts(mfilename('fullpath')),file);

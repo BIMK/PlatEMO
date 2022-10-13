@@ -1,5 +1,5 @@
 function score = HV(Population,optimum)
-% <max>
+% <max> <multi/many> <real/integer/label/binary/permutation> <large/none> <constrained/none> <expensive/none> <multimodal/none> <sparse/none> <dynamic/none> <robust/none>
 % Hypervolume
 
 %------------------------------- Reference --------------------------------
@@ -55,7 +55,7 @@ function score = HV(Population,optimum)
             MinValue  = min(PopObj,[],1);
             Samples   = unifrnd(repmat(MinValue,SampleNum,1),repmat(MaxValue,SampleNum,1));
             for i = 1 : size(PopObj,1)
-                drawnow();
+                drawnow('limitrate');
                 domi = true(size(Samples,1),1);
                 m    = 1;
                 while m <= M && any(domi)

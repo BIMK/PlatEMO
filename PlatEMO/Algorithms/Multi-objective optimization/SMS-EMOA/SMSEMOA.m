@@ -1,5 +1,5 @@
 classdef SMSEMOA < ALGORITHM
-% <multi> <real/binary/permutation>
+% <multi> <real/integer/label/binary/permutation>
 % S metric selection based evolutionary multiobjective optimization
 % algorithm
 
@@ -26,8 +26,8 @@ classdef SMSEMOA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 for i = 1 : Problem.N
-                    drawnow();
-                    Offspring = OperatorGAhalf(Population(randperm(end,2)));
+                    drawnow('limitrate');
+                    Offspring = OperatorGAhalf(Problem,Population(randperm(end,2)));
                     [Population,FrontNo] = Reduce([Population,Offspring],FrontNo);
                 end
             end

@@ -1,5 +1,5 @@
 classdef MOEADUR < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % MOEA/D with update when required
 % start  ---  0.2 --- Start adaptation
 % finish --- 0.93 --- Finish adaptation
@@ -8,7 +8,7 @@ classdef MOEADUR < ALGORITHM
 %------------------------------- Reference --------------------------------
 % L. R. de Farias, A. F. Araujo, A decomposition-based many-objective
 % evolutionary algorithm updating weights when required, Swarm and
-% Evolutionary Computation, 2021.
+% Evolutionary Computation, 2022, 68: 100980.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -26,10 +26,10 @@ classdef MOEADUR < ALGORITHM
             [start, finish, K] = Algorithm.ParameterSet(0.2, 0.93, 10);
 
             %% Parameter setting
-            delta = 0.9; % The probability of choosing parents locally
-            nr = 2; % Maximum number of solutions replaced by each offspring
+            delta = 0.9;            % The probability of choosing parents locally
+            nr = 2;                 % Maximum number of solutions replaced by each offspring
             T = ceil(Problem.N/10); % Size of neighborhood
-            mini_generation = 1; % The number of generations carried out within the objective space division method
+            mini_generation = 1;    % The number of generations carried out within the objective space division method
 
             %% Generate the weight vectors
             [W,Problem.N] = UniformlyRandomlyPoint(Problem.N,Problem.M);    
@@ -45,10 +45,9 @@ classdef MOEADUR < ALGORITHM
             Population = Problem.Initialization();
             Z          = min(Population.objs,[],1);  
             EP = Population(NDSort(Population.objs,1)==1); % external population
-    
-    
-            WhenDoesItStart	=	floor(start*(Problem.maxFE/Problem.N));
-            whenItEnds		=	floor(finish*(Problem.maxFE/Problem.N));
+
+            WhenDoesItStart	= floor(start*(Problem.maxFE/Problem.N));
+            whenItEnds		= floor(finish*(Problem.maxFE/Problem.N));
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 % For each solution	
@@ -63,7 +62,7 @@ classdef MOEADUR < ALGORITHM
                     end
 
                     % Generate an offspring
-                    Offsprings(i) = OperatorGAhalf(Population(P(1:2)));
+                    Offsprings(i) = OperatorGAhalf(Problem,Population(P(1:2)));
                     
                     % Update the ideal point
                     Z = min(Z,Offsprings(i).obj);
@@ -77,24 +76,24 @@ classdef MOEADUR < ALGORITHM
                 if Problem.FE/Problem.N == WhenDoesItStart			
                     X = unique(Population.objs,'rows');
                     X = X(NDSort(X,1)==1,:);
-                    X = normalize(X,'norm'); % Normalizada da Pop via segunda norma
-                    spreading_index = norm(X)/4; % Norma L2 na Pop Normalizada
+                    X = normalize(X,'norm');        % Normalizada da Pop via segunda norma
+                    spreading_index = norm(X)/4;	% Norma L2 na Pop Normalizada
 
                     fun_threshold=[-1.989e-05;0.0002034;0.03376;0.2373];
                     threshold = polyval(fun_threshold,Problem.M);
 
-                    if spreading_index<=threshold % Regular MOP
-                        period = 12; % period between adaptation
-                        nus = 0.25; % number of updated subproblems
+                    if spreading_index<=threshold   % Regular MOP
+                        period = 12;                % period between adaptation
+                        nus    = 0.25;              % number of updated subproblems
                     else % Irregular MOP
-                        period = 28; % period between adaptation
-                        nus = 0.075; % number of updated subproblems
+                        period = 28;                % period between adaptation
+                        nus    = 0.075;             % number of updated subproblems
                     end
 
-                    rate_update_weight=round(nus*Problem.N); % Ratio of updated weight vectors
+                    rate_update_weight = round(nus*Problem.N);	% Ratio of updated weight vectors
 
                     fun_rho = [-0.4707,0.8644,-0.1508,0.05745];
-                    rho = polyval(fun_rho,spreading_index); % convergence threshold           
+                    rho     = polyval(fun_rho,spreading_index);	% convergence threshold           
 
                     I_old = max(abs((Population.objs-repmat(Z,Problem.N,1)).*W),[],2);
                 end

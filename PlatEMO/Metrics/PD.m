@@ -1,5 +1,5 @@
 function score = PD(Population,~)
-% <max>
+% <max> <multi/many> <real/integer/label/binary/permutation> <large/none> <constrained/none> <expensive/none> <multimodal/none> <sparse/none> <dynamic/none>
 % Pure diversity
 
 %------------------------------- Reference --------------------------------

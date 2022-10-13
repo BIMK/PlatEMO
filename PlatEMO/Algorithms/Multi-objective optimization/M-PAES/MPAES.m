@@ -1,5 +1,5 @@
 classdef MPAES < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % Memetic algorithm with Pareto archived evolution strategy
 % l_fails   ---  5 --- Maximum number of consecutive failing local moves
 % l_opt     --- 10 --- Maximum number of local moves
@@ -32,14 +32,14 @@ classdef MPAES < ALGORITHM
             while Algorithm.NotTerminated(G)
                 for i = 1 : Problem.N
                     H = G(~all(G.objs<=repmat(P(i).obj,length(G),1),2));
-                    [P(i),G] = PAES(P(i),G,[H,P(i)],Problem.N,l_fails,l_opt,div);
+                    [P(i),G] = PAES(Problem,P(i),G,[H,P(i)],Problem.N,l_fails,l_opt,div);
                 end
                 P1(1:Problem.N) = SOLUTION();
                 for i = 1 : Problem.N
                     for r = 1 : cr_trials
                         Combine = [P,G];
                         parents = Combine(randperm(length(Combine),2));
-                        c       = OperatorGAhalf(parents,{1,20,0,0});
+                        c       = OperatorGAhalf(Problem,parents,{1,20,0,0});
                         [G,dominated,GCrowd,cCrowd,pCrowd] = UpdateArchive(G,c,parents,Problem.N,div);
                         if ~dominated && any(cCrowd<=pCrowd)
                             break;

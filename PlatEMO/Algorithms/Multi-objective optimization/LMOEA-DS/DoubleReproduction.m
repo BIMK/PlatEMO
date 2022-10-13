@@ -1,4 +1,4 @@
-function Pop = DoubleReproduction(Global,Pop,GuidingSolution,RefV)
+function Pop = DoubleReproduction(Problem,Pop,GuidingSolution,RefV)
 % Generate a promising population by the double reproduction and
 % complementary environment selection strategy.
 
@@ -15,34 +15,34 @@ function Pop = DoubleReproduction(Global,Pop,GuidingSolution,RefV)
 % E-mail: shufen.qin@stu.tyust.edu.cn
 
     %% The First Phase
-    OffPopX = GAonce(Pop.decs,GuidingSolution.decs);
+    OffPopX = GAonce(Problem,Pop.decs,GuidingSolution.decs);
     OffPopX = unique(OffPopX,'rows');
-    OffPop  = SOLUTION(OffPopX);
+    OffPop  = Problem.Evaluation(OffPopX);
     
     % Environmental Selection
     PopCom = [Pop,GuidingSolution,OffPop];
    
     [associate,Cosinemax] = Assign(PopCom,RefV);
     Ns = length(unique(associate)');
-    if Ns < (2/3) * Global.N
-        Pop = DominationSelection(Global,PopCom);
+    if Ns < (2/3) * Problem.N
+        Pop = DominationSelection(Problem,PopCom);
     else
-        Pop = DecompositionSelection(Global,PopCom,associate,Cosinemax);
+        Pop = DecompositionSelection(Problem,PopCom,associate,Cosinemax);
     end
     
     %% The Second Phase
     %OffPopX = GA(Pop.decs);
-    OffPopX = GATwice(Pop.decs,Global);
+    OffPopX = GATwice(Pop.decs,Problem);
     OffPopX = unique(OffPopX,'rows');
-    OffPop  = SOLUTION(OffPopX);
+    OffPop  = Problem.Evaluation(OffPopX);
     PopCom  = [Pop,OffPop];
   
     [associate2,Cosinemax2] = Assign(PopCom,RefV);
     Ns = length(unique(associate2));
-    if Ns<(2/3)*Global.N
-        Pop = DominationSelection(Global,PopCom);
+    if Ns<(2/3)*Problem.N
+        Pop = DominationSelection(Problem,PopCom);
     else
-        Pop = DecompositionSelection(Global,PopCom,associate2,Cosinemax2);
+        Pop = DecompositionSelection(Problem,PopCom,associate2,Cosinemax2);
     end
 end
 
@@ -55,36 +55,34 @@ function [associate,Cosinemax] = Assign(PopCom,RefV)
     [Cosinemax,associate] = max(Cosine,[],2);
 end
 
-function Offspring = GAonce(MatingPool,PopS)
+function Offspring = GAonce(Problem,MatingPool,PopS)
 % This function is mainly used in the first reproduction.
 
-N = size(MatingPool,1);
-RandList = randperm(N);
-MatingPool = MatingPool(RandList, :);
+    N = size(MatingPool,1);
+    RandList = randperm(N);
+    MatingPool = MatingPool(RandList, :);
 
-Ns = size(PopS,1);
-Offspring=[];
+    Ns = size(PopS,1);
+    Offspring=[];
 
-for i = 1: size(MatingPool,1)
-    
-    k = randi([1,Ns],1);
-    Pop = PopS(k,:);
-    Parent = [MatingPool(i,:);Pop];
-    Offspringtempt = GAhalfrand(Parent);
-    Offspring = [Offspring;Offspringtempt];
+    for i = 1: size(MatingPool,1)
+        k = randi([1,Ns],1);
+        Pop = PopS(k,:);
+        Parent = [MatingPool(i,:);Pop];
+        Offspringtempt = GAhalfrand(Problem,Parent);
+        Offspring = [Offspring;Offspringtempt];
+    end
 end
-end
 
-function Offspring = GAhalfrand(Parent)
+function Offspring = GAhalfrand(Problem,Parent)
 
     %% Parameter setting
 
-     [proC,disC,proM,disM] = deal(0.9,20,1,20);
+	[proC,disC,proM,disM] = deal(0.9,20,1,20);
 
     Parent1 = Parent(1,:);
     Parent2 = Parent(2,:);
     [N,D]   = size(Parent1);
-    Problem = PROBLEM.Current();
 
     %% Genetic operators for real encoding
     % Simulated binary crossover

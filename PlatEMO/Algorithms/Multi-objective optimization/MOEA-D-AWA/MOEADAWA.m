@@ -1,5 +1,5 @@
 classdef MOEADAWA < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % MOEA/D with adaptive weight adjustment
 % rate_update_weight --- 0.05 --- Ratio of updated weight vectors
 % rate_evol          ---  0.8 --- Ratio of iterations to evolve with only MOEA/D
@@ -72,7 +72,7 @@ classdef MOEADAWA < ALGORITHM
                         end
 
                         % Generate an offspring
-                        Offspring(i) = OperatorGAhalf(Population(P(1:2)));
+                        Offspring(i) = OperatorGAhalf(Problem,Population(P(1:2)));
 
                         % Update the ideal point
                         Z = min(Z,Offspring(i).obj);

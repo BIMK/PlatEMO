@@ -22,7 +22,7 @@ classdef VNT1 < PROBLEM
             obj.D        = 2;
             obj.lower    = [-2,-2];
             obj.upper    = [2,2];
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

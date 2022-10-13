@@ -1,5 +1,5 @@
 classdef OFA < ALGORITHM
-% <single> <real> <large/none> <constrained/none>
+% <single> <real/integer> <large/none> <constrained/none>
 % Optimal foraging algorithm
 
 %------------------------------- Reference --------------------------------
@@ -25,7 +25,7 @@ classdef OFA < ALGORITHM
             while Algorithm.NotTerminated(Population)
                 PopDec     = Population.decs;
                 OffDec     = PopDec + Problem.FE./Problem.maxFE.*(rand(size(PopDec))-rand(size(PopDec))).*(PopDec-PopDec([end,floor(unifrnd(ones(1,end-1),2:end))],:));
-                Offspring  = SOLUTION(OffDec);
+                Offspring  = Problem.Evaluation(OffDec);
                 lambda     = rand(Problem.N,1);
                 replace    = lambda.*FitnessSingle(Offspring)./(1+lambda*ceil(Problem.FE/Problem.N)) < FitnessSingle(Population)/ceil(Problem.FE/Problem.N);
                 Population(replace) = Offspring(replace);

@@ -1,5 +1,5 @@
 classdef MOEADPFE < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % MOEA/D with Pareto front estimation
 % phi   --- 0.1 --- The frequency of employing weight update
 % alpha --- 0.1 --- Alpha radius or threshold parameter
@@ -55,7 +55,7 @@ classdef MOEADPFE < ALGORITHM
                     P = B(i,randperm(size(B,2)));
 
                     % Generate an offspring
-                    Offsprings(i) = OperatorGAhalf(Population(P(1:2)));
+                    Offsprings(i) = OperatorGAhalf(Problem,Population(P(1:2)));
 
                     % Update the ideal point
                     Z = min(Z,Offsprings(i).obj);

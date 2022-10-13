@@ -19,7 +19,7 @@ function HVLoss = CalHVLoss(PopObj,FrontNo)
         current  = find(FrontNo==f);
         totalWHV = CalHV(PopObj(current,:),RefPoint);
         for i = 1 : length(current)
-            drawnow();
+            drawnow('limitrate');
             currenti          = current([1:i-1,i+1:end]);
             HVLoss(current(i))= totalWHV - CalHV(PopObj(currenti,:),RefPoint);
         end

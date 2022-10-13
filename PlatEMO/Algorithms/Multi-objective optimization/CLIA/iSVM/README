@@ -1,0 +1,69 @@
+Incremental SVM Learning
+Chris Diehl
+diehl@alumni.cmu.edu
+
+Description
+===========
+
+This MATLAB package implements the methods for exact incremental/decremental SVM learning, regularization parameter perturbation and kernel parameter perturbation presented in "SVM Incremental Learning, Adaptation and Optimization" by Christopher Diehl and Gert Cauwenberghs.  The PDF file of the paper is included with the code distribution.  
+
+This code is designed for training SVMs to solve binary classification problems.  The code can typically handle training problems with dataset sizes ranging up to 10,000 examples.  This constraint is driven primarily by the fact that this method is computing and updating the inverse of the kernel matrix for the support vectors.
+
+The primary benefits of this code are:
+* exact incremental learning - one or more examples can be exactly incremented into the current SVM solution, resulting in a classifier that is valid for the entire training set seen up to that point
+* regularization parameter perturbation - the current SVM valid for a given set of regularization parameters C can be exactly perturbed to the valid SVM for a set of regularization parameters C'
+* kernel parameter perturbation - the current SVM valid for a given kernel parameter sigma can be exactly perturbed to the valid SVM for the kernel parameter sigma'
+* exact and approximate leave-one-out (LOO) error estimation - the exact LOO error estimate can be efficiently computed by exactly unlearning one example at a time and testing the classifier on the example.  An efficient LOO approximation is also implemented that predicts the change in the example's margin based on the margin sensitivity.  This approximation is referred to as the span bound in the literature, as introduced by Vapnik and Chapelle.  
+
+
+Installation
+============
+
+Simply place the collection of m-files in a directory that is in MATLAB's path.  To verify everything is working properly, execute the commands listed in the file testresults.txt.  You should be able to replicate the output shown in this file.
+
+
+Routines
+========
+
+The following m-files are the main functions supporting SVM learning, parameter perturbation and leave-one-out error estimation.  Help is available for each m-file by typing 'help <function name>' within MATLAB.  
+
+svmtrain, svmtrain2 - These m-files train a new SVM or the current SVM in memory on the given training data.  svmtrain trains the SVM incrementally on one example at a time.  svmtrain2 performs batch training, incrementing all the training examples into the solution simultaneously.  svmtrain can often scale to larger problems than svmtrain2, yet svmtrain2 is often faster. 
+
+svmeval   - Evaluates the current SVM in memory on the given classifier input
+
+perturbc  - Performs regularization parameter perturbation on the current SVM in memory
+perturbk  - Performs kernel parameter perturbation on the current SVM in memory
+
+svmloo    - Performs exact leave-one-out error estimation for the current SVM in memory
+looest    - Performs approximate leave-one-out error estimation for the current SVM in memory
+
+saveclass - Saves the current SVM in memory to a file
+loadclass - Loads a saved SVM from a file into memory
+
+plot2dkm  - A plotting routine to visualize the decision boundary of an SVM trained on a 2-d input space
+
+
+Questions/Comments
+==================
+
+Drop me a line at the email address above!
+
+
+License
+=======
+
+Copyright (C) 2006  Christopher P. Diehl
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.

@@ -1,5 +1,5 @@
 classdef ISIBEA < ALGORITHM
-% <multi> <real/binary/permutation> <preference>
+% <multi> <real/integer/label/binary/permutation>
 % Interactive simple indicator-based evolutionary algorithm
 % Point --- --- Preferred point
 
@@ -33,7 +33,7 @@ classdef ISIBEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,-WHVLoss);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,FrontNo,WHVLoss] = EnvironmentalSelection([Population,Offspring],Problem.N,wz,AA,RA);
                 if ~mod(ceil(Problem.FE/Problem.N),ceil(ceil(Problem.maxFE/Problem.N)/4))
                     [wz,AA,RA] = Interaction(Population.objs,Point);

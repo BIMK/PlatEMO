@@ -1,4 +1,4 @@
-function [para,pop,BestVal,BestIndividual] = Operator(para,bestmem,dim_index)  
+function [para,pop,BestVal,BestIndividual] = Operator(Problem,para,bestmem,dim_index)  
 % CMA-ES
 
 %------------------------------- Copyright --------------------------------
@@ -47,7 +47,7 @@ function [para,pop,BestVal,BestIndividual] = Operator(para,bestmem,dim_index)
     tempDecs   = repmat(bestmem,lambda,1);
     pop        = arx';
     tempDecs(:,dim_index) = pop;
-    population = SOLUTION(tempDecs);
+    population = Problem.Evaluation(tempDecs);
     objs       = population.objs;
 
     arfitness = sum(objs.^2,2);

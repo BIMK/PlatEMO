@@ -1,5 +1,5 @@
 classdef CCMO < ALGORITHM
-% <multi> <real/binary/permutation> <constrained>
+% <multi> <real/integer/label/binary/permutation> <constrained>
 % Coevolutionary constrained multi-objective optimization framework
 % type --- 1 --- Type of operator (1. GA 2. DE)
 
@@ -32,13 +32,13 @@ classdef CCMO < ALGORITHM
                 if type == 1
                     MatingPool1 = TournamentSelection(2,Problem.N,Fitness1);
                     MatingPool2 = TournamentSelection(2,Problem.N,Fitness2);
-                    Offspring1  = OperatorGAhalf(Population1(MatingPool1));
-                    Offspring2  = OperatorGAhalf(Population2(MatingPool2));
+                    Offspring1  = OperatorGAhalf(Problem,Population1(MatingPool1));
+                    Offspring2  = OperatorGAhalf(Problem,Population2(MatingPool2));
                 elseif type == 2
                     MatingPool1 = TournamentSelection(2,2*Problem.N,Fitness1);
                     MatingPool2 = TournamentSelection(2,2*Problem.N,Fitness2);
-                    Offspring1  = OperatorDE(Population1,Population1(MatingPool1(1:end/2)),Population1(MatingPool1(end/2+1:end)));
-                    Offspring2  = OperatorDE(Population2,Population2(MatingPool2(1:end/2)),Population2(MatingPool2(end/2+1:end)));
+                    Offspring1  = OperatorDE(Problem,Population1,Population1(MatingPool1(1:end/2)),Population1(MatingPool1(end/2+1:end)));
+                    Offspring2  = OperatorDE(Problem,Population2,Population2(MatingPool2(1:end/2)),Population2(MatingPool2(end/2+1:end)));
                 end
                 [Population1,Fitness1] = EnvironmentalSelection([Population1,Offspring1,Offspring2],Problem.N,true);
                 [Population2,Fitness2] = EnvironmentalSelection([Population2,Offspring1,Offspring2],Problem.N,false);

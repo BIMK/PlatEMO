@@ -1,5 +1,5 @@
 classdef PREA < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Promising-region based EMO algorithm
 
 %------------------------------- Reference --------------------------------
@@ -46,7 +46,7 @@ classdef PREA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = MatingStrategy(IMatrix);
-                Offspring  = OperatorGAhalf(Population(MatingPool));
+                Offspring  = OperatorGAhalf(Problem,Population(MatingPool));
                 Zmin       = min([Zmin;Offspring.objs],[],1);
                 [Population,IMatrix] = PREA_Update([Population,Offspring],Problem.N,Zmin);
             end

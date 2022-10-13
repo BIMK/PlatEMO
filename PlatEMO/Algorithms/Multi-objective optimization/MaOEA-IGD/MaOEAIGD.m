@@ -1,5 +1,5 @@
 classdef MaOEAIGD < ALGORITHM
-% <many> <real/binary/permutation>
+% <many> <real/integer/label/binary/permutation>
 % IGD based many-objective evolutionary algorithm
 % DNPE --- --- Number of evaluations for nadir point estimation
 
@@ -26,7 +26,7 @@ classdef MaOEAIGD < ALGORITHM
             % Optimize Problem.M single-objective optimization problems
             Population = Problem.Initialization();
             while Algorithm.NotTerminated(Population) && Problem.FE < DNPE
-                Offspring  = OperatorGA(Population(randi(end,1,Problem.N)),{0.9,20,1,20});
+                Offspring  = OperatorGA(Problem,Population(randi(end,1,Problem.N)),{0.9,20,1,20});
                 Population = [Population,Offspring];
                 [~,rank]   = sort(Fitness(Population.objs),1);
                 Population = Population(unique(rank(1:ceil(Problem.N/Problem.M),:)));
@@ -46,7 +46,7 @@ classdef MaOEAIGD < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,Rank,min(Dis,[],2));
-                Offspring  = OperatorGAhalf(Population(MatingPool));
+                Offspring  = OperatorGAhalf(Problem,Population(MatingPool));
                 [Population,Rank,Dis] = EnvironmentalSelection([Population,Offspring],W,Problem.N);
             end
         end

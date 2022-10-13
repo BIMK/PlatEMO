@@ -1,4 +1,4 @@
-function [OffDec,OffMask] = Operator(ParentDec,ParentMask,Score)
+function [OffDec,OffMask] = Operator(Problem,ParentDec,ParentMask,Score)
 % Operator of MP-MMEA
 
 %--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ function [OffDec,OffMask] = Operator(ParentDec,ParentMask,Score)
     end
     
     %% Crossover and mutation for dec
-    OffDec = OperatorGAhalf(ParentDec);
+    OffDec = OperatorGAhalf(Problem,ParentDec);
 end
 
 function index = TS(Fitness)

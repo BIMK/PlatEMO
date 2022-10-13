@@ -1,5 +1,5 @@
 classdef RVEA < ALGORITHM
-% <multi/many> <real/binary/permutation> <constrained/none>
+% <multi/many> <real/integer/label/binary/permutation> <constrained/none>
 % Reference vector guided evolutionary algorithm
 % alpha ---   2 --- The parameter controlling the rate of change of penalty
 % fr    --- 0.1 --- The frequency of employing reference vector adaptation
@@ -30,7 +30,7 @@ classdef RVEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = randi(length(Population),1,Problem.N);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Population = EnvironmentalSelection([Population,Offspring],V,(Problem.FE/Problem.maxFE)^alpha);
                 if ~mod(ceil(Problem.FE/Problem.N),ceil(fr*Problem.maxFE/Problem.N))
                     V(1:Problem.N,:) = ReferenceVectorAdaptation(Population.objs,V0);

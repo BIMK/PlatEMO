@@ -6,7 +6,7 @@ classdef Sparse_KP < PROBLEM
 % Y. Su, Z. Jin, Y. Tian, X. Zhang, and K. C. Tan, Comparing the
 % performance of evolutionary algorithms for sparse multi-objective
 % optimization via a comprehensive indicator, IEEE Computational
-% Intelligence Magazine, 2022.
+% Intelligence Magazine, 2022, 17(3): 34-53.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -26,7 +26,7 @@ classdef Sparse_KP < PROBLEM
             % Parameter setting
             if isempty(obj.M); obj.M = 2; end
             if isempty(obj.D); obj.D = 250; end
-            obj.encoding = 'binary';
+            obj.encoding = 4 + zeros(1,obj.D);
             % Randomly generate profits and weights
             file = sprintf('Dataset_KP-M%d-D%d.mat',obj.M,obj.D);
             file = fullfile(fileparts(mfilename('fullpath')),file);

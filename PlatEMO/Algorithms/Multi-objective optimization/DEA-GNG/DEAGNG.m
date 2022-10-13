@@ -1,5 +1,5 @@
 classdef DEAGNG < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Decomposition based evolutionary algorithm guided by growing neural gas
 % aph ---   0.1 --- Parameter alpha
 % eps --- 0.314 --- Parameter epsilon
@@ -52,7 +52,7 @@ classdef DEAGNG < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)        
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,crd);
-                Offspring  = OperatorGA(Population(MatingPool));       
+                Offspring  = OperatorGA(Problem,Population(MatingPool));       
                 Zmin       = min([Zmin;Offspring.objs],[],1);
 
                 %% GNG-based adaptation

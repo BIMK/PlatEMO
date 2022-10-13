@@ -1,5 +1,5 @@
 classdef NSGAII < ALGORITHM
-% <multi> <real/binary/permutation> <constrained/none>
+% <multi> <real/integer/label/binary/permutation> <constrained/none>
 % Nondominated sorting genetic algorithm II
 
 %------------------------------- Reference --------------------------------
@@ -24,7 +24,7 @@ classdef NSGAII < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,FrontNo,CrowdDis] = EnvironmentalSelection([Population,Offspring],Problem.N);
             end
         end

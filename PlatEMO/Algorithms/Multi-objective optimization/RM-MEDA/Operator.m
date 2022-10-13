@@ -1,4 +1,4 @@
-function Offspring = Operator(Population,K)
+function Offspring = Operator(Problem,Population,K)
 % Generate offsprings by the models
 
 %------------------------------- Copyright --------------------------------
@@ -14,7 +14,7 @@ function Offspring = Operator(Population,K)
 % http://dces.essex.ac.uk/staff/zhang/IntrotoResearch/RegEDA.htm
 
     %% Parameter setting
-    if nargin < 2
+    if nargin < 3
         K = 5;
     end
     PopDec = Population.decs;
@@ -41,5 +41,5 @@ function Offspring = Operator(Population,K)
             OffspringDec(i,:) = Model(k).mean + randn(1,D);
         end
     end
-    Offspring = SOLUTION(OffspringDec);
+    Offspring = Problem.Evaluation(OffspringDec);
 end

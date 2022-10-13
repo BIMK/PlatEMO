@@ -1,4 +1,4 @@
-function Offspring = Operator(Loser,Winner)
+function Offspring = Operator(Problem,Loser,Winner)
 % The competitive swarm optimizer
 
 % Copyright (c) 2020-2021 Cheng He
@@ -9,7 +9,6 @@ function Offspring = Operator(Loser,Winner)
     [N,D]     = size(LoserDec);
 	LoserVel  = Loser.adds(zeros(N,D));
     WinnerVel = Winner.adds(zeros(N,D));
-    Problem   = PROBLEM.Current();
 
     %% Competitive swarm optimizer
     r1     = repmat(rand(N,1),1,D);
@@ -35,5 +34,5 @@ function Offspring = Operator(Loser,Winner)
     temp  = Site & mu>0.5; 
     OffDec(temp) = OffDec(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                    (1-(Upper(temp)-OffDec(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
-	Offspring = SOLUTION(OffDec,OffVel);
+	Offspring = Problem.Evaluation(OffDec,OffVel);
 end

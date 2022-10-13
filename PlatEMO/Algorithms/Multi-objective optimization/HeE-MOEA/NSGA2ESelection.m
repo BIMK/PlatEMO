@@ -22,14 +22,11 @@ function Centers = NSGA2ESelection(tr_x, tr_y, models, str, Problem, Ke)
         for i=1:floor(Problem.maxFE/Problem.N)
             MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
             parent     = population(MatingPool,:);
-            offspring  = OperatorGA(parent(:,1:Problem.D),{1,20,1,20});
+            offspring  = OperatorGA(Problem,parent(:,1:Problem.D),{1,20,1,20});
             offspring(:,Problem.D+1:Problem.D+Problem.M)=Estimate(offspring(:,1:Problem.D), tr_x, tr_y, models, str, Problem.M);%The value of objective by model
             [population,FrontNo,CrowdDis] = EnvironmentalSelection([population;offspring],Problem.N,Problem.D,Problem.M);
         end
         [Centers, nn]=Kmean([population,FrontNo',CrowdDis'], tr_x, Problem.N, Problem.D, Ke);
-        if nn==100
-            fprintf('restart\n');
-        end
     end
 end
 

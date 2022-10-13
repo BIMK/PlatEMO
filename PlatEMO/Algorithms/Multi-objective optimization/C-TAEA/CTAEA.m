@@ -1,5 +1,5 @@
 classdef CTAEA < ALGORITHM
-% <multi/many> <real/binary/permutation> <constrained>
+% <multi/many> <real/integer/label/binary/permutation> <constrained>
 % Two-archive evolutionary algorithm for constrained MOPs
 
 %------------------------------- Reference --------------------------------
@@ -22,49 +22,49 @@ classdef CTAEA < ALGORITHM
 
             %% Generate random population
             Population = Problem.Initialization();
-            CA=UpdateCA([],Population,W);            % initial CA
-            DA=UpdateDA(CA,[],Population,W);         % initial DA
+            CA = UpdateCA([],Population,W);
+            DA = UpdateDA(CA,[],Population,W);
 
             %% Optimization
             while Algorithm.NotTerminated(CA)
                 %% mating pool choosing
                 % calculate the ratio of non-dominated solutions of CA and DA in Hm
-                Hm=[CA,DA];                         
-                [FrontNo,~]=NDSort(Hm.objs,inf);
-                FrontNo_C=FrontNo(1:ceil(length(Hm)/2));
-                Nc=size(find(FrontNo_C==1),2);      
-                Pc=Nc/length(Hm);
-                FrontNo_D=FrontNo(ceil(length(Hm)/2)+1:length(Hm));
-                Nd=size(find(FrontNo_D==1),2);      
-                Pd=Nd/length(Hm);
+                Hm = [CA,DA];                         
+                [FrontNo,~] = NDSort(Hm.objs,inf);
+                FrontNo_C   = FrontNo(1:ceil(length(Hm)/2));
+                Nc = size(find(FrontNo_C==1),2);      
+                Pc = Nc/length(Hm);
+                FrontNo_D = FrontNo(ceil(length(Hm)/2)+1:length(Hm));
+                Nd = size(find(FrontNo_D==1),2);      
+                Pd = Nd/length(Hm);
 
                 % calculate the proportion of non-dominated solutions in CA
-                [FrontNo,~]=NDSort(CA.objs,inf);
-                NC=size(find(FrontNo==1),2);         
-                PC=NC/length(CA);                     % PC denotes the proportion of non-dominated solutions in CA,it is different from Pc
+                [FrontNo,~] = NDSort(CA.objs,inf);
+                NC = size(find(FrontNo==1),2);         
+                PC = NC/length(CA);                     % PC denotes the proportion of non-dominated solutions in CA,it is different from Pc
 
                 %reproduction
-                Q=[];
-                for i=1:size(W,1)
-                    if Pc>Pd
-                        P1=MatingSelection(CA); 
+                Q = [];
+                for i = 1 : size(W,1)
+                    if Pc > Pd
+                        P1 = MatingSelection(CA); 
                     else
-                        P1=MatingSelection(DA);
+                        P1 = MatingSelection(DA);
                     end
-                    pf=rand();
-                    if pf<PC
-                        P2=MatingSelection(CA);
+                    pf = rand();
+                    if pf < PC
+                        P2 = MatingSelection(CA);
                     else
-                        P2=MatingSelection(DA);
+                        P2 = MatingSelection(DA);
                     end
-                    MatingPool=[P1,P2];
-                    Offspring=OperatorGAhalf(MatingPool);
-                    Q=[Q,Offspring];
+                    MatingPool = [P1,P2];
+                    Offspring  = OperatorGAhalf(Problem,MatingPool);
+                    Q = [Q,Offspring];
                 end
 
                %% update CA and DA
-                CA=UpdateCA(CA,Q,W);
-                DA=UpdateDA(CA,DA,Q,W);
+                CA = UpdateCA(CA,Q,W);
+                DA = UpdateDA(CA,DA,Q,W);
             end
         end
     end

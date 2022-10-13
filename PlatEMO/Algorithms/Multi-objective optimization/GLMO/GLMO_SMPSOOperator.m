@@ -1,4 +1,4 @@
-function Offspring = GLMO_SMPSOOperator(Particle,Pbest,Gbest, numberOfGroups, typeOfGroups)
+function Offspring = GLMO_SMPSOOperator(Problem, Particle, Pbest, Gbest, numberOfGroups, typeOfGroups)
 % ----------------------------------------------------------------------- 
 %  Copyright (C) 2020 Heiner Zille
 %
@@ -55,7 +55,6 @@ function Offspring = GLMO_SMPSOOperator(Particle,Pbest,Gbest, numberOfGroups, ty
     GbestDec    = Gbest.decs;
     [N,D]       = size(ParticleDec);
     ParticleVel = Particle.adds(zeros(N,D));
-    Problem     = PROBLEM.Current();
 
     %% Particle swarm optimization
     W  = repmat(unifrnd(0.1,0.5,N,1),1,D);
@@ -80,14 +79,12 @@ function Offspring = GLMO_SMPSOOperator(Particle,Pbest,Gbest, numberOfGroups, ty
     %% Polynomial mutation
     disM  = 20;
     Site1 = repmat(rand(N,1)<0.15,1,D);
-    
 
     [outIndexList,~] = GLMO_createGroups(numberOfGroups,OffDec,D,typeOfGroups); % 3 = random groups
     chosengroups = randi(numberOfGroups,size(outIndexList,1),1);
     Site2 = outIndexList == chosengroups;
     mu    = rand(N,1);
-    mu = repmat(mu,1,D);
-            
+    mu    = repmat(mu,1,D);       
     
     temp  = Site1 & Site2 & mu<=0.5;
     OffDec(temp) = OffDec(temp)+(Upper(temp)-Lower(temp)).*((2.*mu(temp)+(1-2.*mu(temp)).*...
@@ -95,5 +92,5 @@ function Offspring = GLMO_SMPSOOperator(Particle,Pbest,Gbest, numberOfGroups, ty
     temp  = Site1 & Site2 & mu>0.5; 
     OffDec(temp) = OffDec(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                    (1-(Upper(temp)-OffDec(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
-    Offspring = SOLUTION(OffDec,OffVel);
+    Offspring = Problem.Evaluation(OffDec,OffVel);
 end

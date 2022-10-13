@@ -1,5 +1,5 @@
 classdef DWU < ALGORITHM
-% <multi> <real/binary/permutation>
+% <multi> <real/integer/label/binary/permutation>
 % Dominance-weighted uniformity multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -26,7 +26,7 @@ classdef DWU < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,FrontNo,] = EnvironmentalSelection([Population,Offspring],Problem.N);
             end
         end

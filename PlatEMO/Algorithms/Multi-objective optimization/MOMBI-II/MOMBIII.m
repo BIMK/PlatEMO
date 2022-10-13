@@ -1,5 +1,5 @@
 classdef MOMBIII < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Many objective metaheuristic based on the R2 indicator II
 % alpha   ---   0.5 --- Threshold of variances
 % epsilon --- 0.001 --- Tolerance threshold
@@ -40,7 +40,7 @@ classdef MOMBIII < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool  = TournamentSelection(2,Problem.N,Rank,Norm);
-                Offspring   = OperatorGA(Population(MatingPool));
+                Offspring   = OperatorGA(Problem,Population(MatingPool));
                 Population  = [Population,Offspring];
                 [Rank,Norm] = R2Ranking(Population.objs,W,zmin,zmax);
                 [~,rank]    = sortrows([Rank,Norm]);

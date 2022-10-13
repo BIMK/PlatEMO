@@ -1,5 +1,5 @@
 classdef SLMEA < ALGORITHM
-% <multi> <real/binary> <large/none> <constrained/none> <sparse>
+% <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
 % Super-large-scale multi-objective evolutionary algorithm
 % useGPU --- 0 --- Whether use GPU acceleration
 
@@ -22,7 +22,6 @@ classdef SLMEA < ALGORITHM
             useGPU = Algorithm.ParameterSet(0);
              
             %% Generate initial variables
-            REAL        = ~strcmp(Problem.encoding,'binary');
             P           = 0.5;
             ArchiveObj  = [];
             ArchiveMask = [];
@@ -33,34 +32,28 @@ classdef SLMEA < ALGORITHM
             GlobalGen   = 1;
             
             %% Population initialization
-            Mask = zeros(Problem.N,Problem.D);
+            Mask = false(Problem.N,Problem.D);
             for i = 1 : Problem.N
                 Mask(i,TournamentSelection(2,ceil(rand*Problem.D),ones(1,Problem.D))) = 1;
             end
             if ~useGPU
                 Lower = Problem.lower;
                 Upper = Problem.upper;
-                if REAL
-                    Dec = unifrnd(repmat(Lower,Problem.N,1),repmat(Upper,Problem.N,1));
-                else
-                    Dec = ones(Problem.N,Problem.D);
-                end
+                Dec   = unifrnd(repmat(Lower,Problem.N,1),repmat(Upper,Problem.N,1));
+                Dec(:,Problem.encoding==4) = 1;
             else
                 Lower = gpuArray(Problem.lower);
                 Upper = gpuArray(Problem.upper);
                 Mask  = gpuArray(Mask);
-                if REAL
-                    Dec = unifrnd(repmat(Lower,Problem.N,1),repmat(Upper,Problem.N,1));
-                else
-                    Dec = gpuArray.ones(Problem.N,Problem.D);
-                end
+                Dec   = unifrnd(repmat(Lower,Problem.N,1),repmat(Upper,Problem.N,1));
+                Dec(:,Problem.encoding==4) = 1;
             end            
-            Population = SOLUTION(Dec.*Mask);
+            Population = Problem.Evaluation(Dec.*Mask);
             
            %% Update Archive
             [Population,Dec,Mask,FrontNo,CrowdDis] = EnvironmentalSelection(Population,Dec,Mask,Problem.N);
             PopObj      = gather(Population.objs);
-            ArchiveObj   = [ArchiveObj;PopObj(FrontNo==1,:)];
+            ArchiveObj  = [ArchiveObj;PopObj(FrontNo==1,:)];
             ArchiveMask = [ArchiveMask;Mask(FrontNo==1,:)];
             [Fitness,Mix,Zero,One] = CalculateFitness(ArchiveMask,Problem.D);
             
@@ -68,19 +61,19 @@ classdef SLMEA < ALGORITHM
             while Algorithm.NotTerminated(Population)
                 % Update population
                 MatingPool = TournamentSelection(2,2*Problem.N,FrontNo,-CrowdDis);
-                [OffDec,OffMask,long,numGroup] = Operator(Dec(MatingPool,:),Mask(MatingPool,:),REAL,Fitness,Mix,P,T,Zero,One,Upper,Lower,RC,numGroup,useGPU,GlobalGen);
-                Offspring  = SOLUTION(OffDec.*OffMask);
+                [OffDec,OffMask,long,numGroup] = Operator(Problem,Dec(MatingPool,:),Mask(MatingPool,:),Fitness,Mix,P,T,Zero,One,Upper,Lower,RC,numGroup,useGPU,GlobalGen);
+                Offspring  = Problem.Evaluation(OffDec.*OffMask);
                 GlobalGen  = GlobalGen + 1;
                 [Population,Dec,Mask,FrontNo,CrowdDis] = EnvironmentalSelection([Population,Offspring],[Dec;OffDec],[Mask;OffMask],Problem.N);
                 % Update P
                 if GlobalGen >= T+1
-                  Fn  = NDSort(gather(Offspring.objs),1); 
-                  LOC = find(Fn==1);
-                  a   = find(LOC<=long);
-                  b   = find(LOC>long);
-                  P   = min(0.95,max(0.05,0.5*(P+(length(a)*(Problem.N-long)/(length(a)*(Problem.N-long)+length(b)*long)))));
-                  RC  = exp((length(a)/(long+0.00001)-Lr)/numGroup);
-                  Lr  = length(a)/long;
+                    Fn  = NDSort(gather(Offspring.objs),1); 
+                    LOC = find(Fn==1);
+                    a   = find(LOC<=long);
+                    b   = find(LOC>long);
+                    P   = min(0.95,max(0.05,0.5*(P+(length(a)*(Problem.N-long)/(length(a)*(Problem.N-long)+length(b)*long)))));
+                    RC  = exp((length(a)/(long+0.00001)-Lr)/numGroup);
+                    Lr  = length(a)/long;
                 end
                 % Update Archive
                 PopObj          = gather(Population.objs);

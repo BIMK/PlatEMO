@@ -1,5 +1,5 @@
 classdef WOF < ALGORITHM
-% <multi> <real> <large/none>
+% <multi> <real/integer> <large/none>
 % Weighted optimization framework
 % gamma         --- 4    --- Number of groups. Default = 4 
 % groups        --- 2    --- Grouping method, 1 = linear, 2 = ordered, 3 = random. Default = ordered 
@@ -74,7 +74,8 @@ classdef WOF < ALGORITHM
         function main(Algorithm,Problem)
             %% Set the default parameters
             [gamma,groups,psi,t1,t2,q,delta,optimiser,randomOptimisers] = Algorithm.ParameterSet(4,2,3,1000,500,Problem.M+1,0.5,1,1);
-
+            WOF_WeightIndividual.Current(Problem);
+            
             % The size of the population of weight-Individuals
             transformedProblemPopulationSize = 10;
 
@@ -138,7 +139,7 @@ classdef WOF < ALGORITHM
                     xPrime              = xPrimeList(c);
 
                     % create variable groups 
-                    [G,gamma]                   = WOF_createGroups(gamma,xPrime,Problem.D,groups);
+                    [G,gamma]                   = WOF_createGroups(Problem,gamma,xPrime,groups);
 
                     if (diceForType == true)
                         optimiser = randomizeType(optimiser);
@@ -274,7 +275,7 @@ function WeightPopulation = WOFcreateInitialWeightPopulation(N, gamma, GlobalDum
     end
 end
 
-function W = WOFextractPopulation(WeightPopulation, Global, Population, G, psi, xPrime, q, methodToSelectxPrimeSolutions)
+function W = WOFextractPopulation(WeightPopulation, Problem, Population, G, psi, xPrime, q, methodToSelectxPrimeSolutions)
     % Extracts a population of individuals for the original problem based
     % on the optimised weights. 
     % First a selection of M+1 Weight-Individuals is selected and apllied
@@ -286,7 +287,7 @@ function W = WOFextractPopulation(WeightPopulation, Global, Population, G, psi, 
     weightIndividualList = WOF_selectxPrimes(WeightPopulation, q, methodToSelectxPrimeSolutions);
     calc = size(weightIndividualList,2)*size(Population,2);
 
-    PopDec1 = ones(calc,Global.D);
+    PopDec1 = ones(calc,Problem.D);
     count = 1;
     for wi = 1:size(weightIndividualList,2)
         weightIndividual = weightIndividualList(wi);
@@ -295,7 +296,7 @@ function W = WOFextractPopulation(WeightPopulation, Global, Population, G, psi, 
         for i = 1:size(Population,2)
             individualVars = Population(i).dec;
             
-            x = WOF_transformationFunctionMatrixForm(individualVars,weightVars(G),Global.upper,Global.lower, psi);
+            x = WOF_transformationFunctionMatrixForm(individualVars,weightVars(G),Problem.upper,Problem.lower, psi);
 
             PopDec1(count,:) = x;
             count = count + 1;
@@ -303,7 +304,7 @@ function W = WOFextractPopulation(WeightPopulation, Global, Population, G, psi, 
         
     end
     
-    W1 = SOLUTION(PopDec1);
+    W1 = Problem.Evaluation(PopDec1);
 
     % Step 2
     PopDec2 = [];
@@ -312,13 +313,13 @@ function W = WOFextractPopulation(WeightPopulation, Global, Population, G, psi, 
         weightVars = weightIndividual.dec;
         
             individualVars = xPrime.dec;
-            x = 1:Global.D;
-            for j = 1:Global.D
-                x(j) = WOF_transformationFunction(individualVars(j),weightVars(G(j)),Global.upper(j),Global.lower(j), psi);   
+            x = 1:Problem.D;
+            for j = 1:Problem.D
+                x(j) = WOF_transformationFunction(individualVars(j),weightVars(G(j)),Problem.upper(j),Problem.lower(j), psi);   
             end
             PopDec2 = [PopDec2;x]; 
     end
-    W2 = SOLUTION(PopDec2);
+    W2 = Problem.Evaluation(PopDec2);
     
     W = [W1,W2];
 end

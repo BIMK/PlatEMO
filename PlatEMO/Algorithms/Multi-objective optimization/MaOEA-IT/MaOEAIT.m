@@ -1,5 +1,5 @@
 classdef MaOEAIT < ALGORITHM
-% <multi/many> <real> <constrained/none>
+% <multi/many> <real/integer> <constrained/none>
 % Many-objective evolutionary algorithms based on an independent two-stage
 % approach
 % Evaluation1 --- 20000 --- Number of evaluations for NDWA
@@ -46,7 +46,7 @@ classdef MaOEAIT < ALGORITHM
                     W_index = num_W;
                 end
                 MatingPool          = TournamentSelection(2,Problem.N,SF(1:Problem.N));
-                Offspring           = OperatorGA(Population(MatingPool),{0.9,20,1,20});
+                Offspring           = OperatorGA(Problem,Population(MatingPool),{0.9,20,1,20});
                 SF(Problem.N+1:end) = sum(Offspring.objs.*UW(W_index,:),2);
                 [Population,SF]     = NDWA_EnvironmentalSelection([Population,Offspring],SF,Problem.N);
                 Archive             = [Archive,Population];
@@ -76,11 +76,11 @@ classdef MaOEAIT < ALGORITHM
             for i = 1 : Problem.M
                 Curr_evl        = Problem.FE;
                 PopDec          = rand(Problem.N, Problem.D).*repmat(u_limit-l_limit,Problem.N,1) + repmat(l_limit,Problem.N,1);
-                Population      = SOLUTION(PopDec);
+                Population      = Problem.Evaluation(PopDec);
                 SF(1:Problem.N) = cos_v_func(Population.objs,rf_list(i,:));
                 while Algorithm.NotTerminated(Population) && Problem.FE < (Curr_evl+SO_maxeval)
                     MatingPool          = TournamentSelection(2,Problem.N,SF(1:Problem.N));
-                    Offspring           = Operator(Population(MatingPool).decs,l_limit,u_limit);            
+                    Offspring           = Operator(Problem,Population(MatingPool).decs,l_limit,u_limit);            
                     SF(Problem.N+1:end) = cos_v_func(Offspring.objs,rf_list(i,:));
                     [~,Rank]            = sort(SF,1);
                     Population          = [Population,Offspring];
@@ -100,11 +100,11 @@ classdef MaOEAIT < ALGORITHM
             for i = 1 : W_num
                 Curr_evl        = Problem.FE;
                 PopDec          = rand(Problem.N,Problem.D).*repmat(u_limit-l_limit,Problem.N, 1) + repmat(l_limit,Problem.N,1);
-                Population      = SOLUTION(PopDec);
+                Population      = Problem.Evaluation(PopDec);
                 SF(1:Problem.N) = cos_v_func(Population.objs,RefPoint(i,:));
                 while Algorithm.NotTerminated(Population) && Problem.FE < (Curr_evl+SO_maxeval)
                     MatingPool          = TournamentSelection(2,Problem.N,SF(1:Problem.N));
-                    Offspring           = Operator(Population(MatingPool).decs,l_limit,u_limit);
+                    Offspring           = Operator(Problem,Population(MatingPool).decs,l_limit,u_limit);
                     SF(Problem.N+1:end) = cos_v_func(Offspring.objs,RefPoint(i,:));
                     [~,Rank]            = sort(SF,1);
                     Population          = [Population,Offspring];
@@ -141,7 +141,7 @@ function SF = cos_v_func(PopObj,v)
     SF = -r1./r2;
 end
 
-function Offspring = Operator(ParentDec,lower,upper)
+function Offspring = Operator(Problem,ParentDec,lower,upper)
 % Simulated binary crossover and polynomial mutation
 
     [proC,disC,proM,disM] = deal(1,20,1,20);
@@ -171,5 +171,5 @@ function Offspring = Operator(ParentDec,lower,upper)
     Offspring(temp) = Offspring(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                       (1-(Upper(temp)-Offspring(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
 
-    Offspring = SOLUTION(Offspring);
+    Offspring = Problem.Evaluation(Offspring);
 end

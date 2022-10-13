@@ -1,5 +1,5 @@
 classdef ABC < ALGORITHM
-% <single> <real> <large/none> <constrained/none>
+% <single> <real/integer> <large/none> <constrained/none>
 % Artificial bee colony algorithm
 % limit --- 20 --- The number of trials for releasing a food source
 
@@ -29,7 +29,7 @@ classdef ABC < ALGORITHM
                 % Employed bees
                 Pdec      = Population.decs;
                 Odec      = Pdec + (rand(size(Pdec))*2-1).*(Pdec-Pdec(randi(end,1,end),:));
-                Offspring = SOLUTION(Odec);
+                Offspring = Problem.Evaluation(Odec);
                 replace             = FitnessSingle(Population) > FitnessSingle(Offspring);
                 Population(replace) = Offspring(replace);
                 Limit(~replace)     = Limit(~replace) + 1;
@@ -38,7 +38,7 @@ classdef ABC < ALGORITHM
                 Q         = RouletteWheelSelection(Problem.N,exp(Population.objs/mean(abs(Population.objs+1e-6))));
                 Pdec      = Population.decs;
                 Odec      = Pdec(Q,:) + (rand(size(Pdec))*2-1).*(Pdec(Q,:)-Pdec(randi(end,1,end),:));
-                Offspring = SOLUTION(Odec);
+                Offspring = Problem.Evaluation(Odec);
                 replace             = FitnessSingle(Population) > FitnessSingle(Offspring);
                 Population(replace) = Offspring(replace);
                 Limit(~replace)     = Limit(~replace) + 1;

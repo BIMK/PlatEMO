@@ -23,18 +23,16 @@ classdef DTLZ8 < PROBLEM
             obj.D        = ceil(obj.D/obj.M)*obj.M;
             obj.lower    = zeros(1,obj.D);
             obj.upper    = ones(1,obj.D);
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
-        %% Calculate objective values
-        function PopObj = CalObj(obj,PopDec)
+        %% Calculate objective values and constraint violations
+        function Population = Evaluation(obj,varargin)
+            PopDec = varargin{1};
+            PopDec = max(min(PopDec,repmat(obj.upper,size(PopDec,1),1)),repmat(obj.lower,size(PopDec,1),1));
             PopObj = zeros(size(PopDec,1),obj.M);
             for m = 1 : obj.M
                 PopObj(:,m) = mean(PopDec(:,(m-1)*obj.D/obj.M+1:m*obj.D/obj.M),2);
             end
-        end
-        %% Calculate constraint violations
-        function PopCon = CalCon(obj,PopDec)
-            PopObj = obj.CalObj(PopDec);
             PopCon = zeros(size(PopObj,1),obj.M);
             PopCon(:,1:obj.M-1) = 1 - repmat(PopObj(:,obj.M),1,obj.M-1) - 4*PopObj(:,1:obj.M-1);
             if obj.M == 2
@@ -43,6 +41,8 @@ classdef DTLZ8 < PROBLEM
                 minValue = sort(PopObj(:,1:obj.M-1),2);
                 PopCon(:,obj.M) = 1 - 2*PopObj(:,obj.M) - sum(minValue(:,1:2),2);
             end
+            Population = SOLUTION(PopDec,PopObj,PopCon,varargin{2:end});
+            obj.FE     = obj.FE + length(Population);
         end
         %% Generate points on the Pareto front
         function R = GetOptimum(obj,N)

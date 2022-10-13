@@ -21,7 +21,7 @@ classdef SOP_F4 < PROBLEM
             if isempty(obj.D); obj.D = 30; end
             obj.lower    = zeros(1,obj.D) - 100;
             obj.upper    = zeros(1,obj.D) + 100;
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

@@ -1,5 +1,5 @@
 classdef MOEADM2M < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % MOEA/D based on MOP to MOP
 % K --- 10 --- Number of reference vectors
 
@@ -34,7 +34,7 @@ classdef MOEADM2M < ALGORITHM
                 MatingPoolGlobal     = randi(Problem.N,1,Problem.N);
                 rnd                  = rand(S,K) < 0.7;
                 MatingPoolLocal(rnd) = MatingPoolGlobal(rnd);
-                Offspring  = Operator(Population,Population(MatingPoolLocal(:)));
+                Offspring  = Operator(Problem,Population,Population(MatingPoolLocal(:)));
                 Population = Associate([Population,Offspring],W,S);
             end
         end

@@ -1,5 +1,5 @@
 classdef tDEA < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % theta-dominance based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -25,7 +25,7 @@ classdef tDEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population) 
                 MatingPool = randi(Problem.N,1,Problem.N);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,z,znad] = EnvironmentalSelection([Population,Offspring],W,Problem.N,z,znad);
             end
         end

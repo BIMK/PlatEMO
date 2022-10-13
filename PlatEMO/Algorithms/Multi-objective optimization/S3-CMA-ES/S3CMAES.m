@@ -1,5 +1,5 @@
 classdef S3CMAES < ALGORITHM
-% <multi/many> <real> <large/none>
+% <multi/many> <real/integer> <large/none>
 % Scalable small subpopulations based covariance matrix adaptation
 % evolution strategy
 
@@ -26,7 +26,7 @@ classdef S3CMAES < ALGORITHM
             nPerGroup = 35;	% the group size for separative variables
 
             [PV, DV] = ControlVariableAnalysis(Problem,nPer);	% divide the convergence- and diversity-related variables        
-            Groups   = GroupDV(Problem,DV,PV,nPerGroup);         % divide the convergence-related variables based on correlation
+            Groups   = GroupDV(Problem,DV,PV,nPerGroup);     	% divide the convergence-related variables based on correlation
 
             popN = 5;	% the number of sub-populations
             % V: random unit vectors in diversity space
@@ -50,7 +50,7 @@ classdef S3CMAES < ALGORITHM
             end
 
             %% Optimization
-            Archive      = SOLUTION(BigPopulation{1});
+            Archive      = Problem.Evaluation(BigPopulation{1});
             lastBestValA = zeros(1,popN);	% Record the best val last iteration
             stopTag      = false(1,popN);
             unUpdateNum  = zeros(1,popN);
@@ -62,7 +62,7 @@ classdef S3CMAES < ALGORITHM
 
                 Archive = ConvergedSolutionSet;
                 popN    = length(BigPopulation);
-                for p = 1: popN	% evolute each small population
+                for p = 1 : popN	% evolute each small population
                     if stopTag(p)	% if the subpopulaton has converged, then no evolve it
                         continue;
                     end
@@ -77,7 +77,7 @@ classdef S3CMAES < ALGORITHM
                     for g = 1:  length(Groups) % evolute each group of convergence-related variables for a sub-population
                         dim_index = Groups{g};
                         % employ the CMA-ES
-                        [CMAParaMPopu(p,g),pop,BestVal,BestIndividual] = Operator(CMAParaMPopu(p,g),bestmem,dim_index);
+                        [CMAParaMPopu(p,g),pop,BestVal,BestIndividual] = Operator(Problem,CMAParaMPopu(p,g),bestmem,dim_index);
                         tempDecs(:,dim_index) = pop;
                     end
                     Archive          = [Archive,BestIndividual];            
@@ -114,9 +114,9 @@ classdef S3CMAES < ALGORITHM
                         Upper = repmat(Problem.upper(PV),N,1);	% Upper boundary
                         OffspringDec = max(min(OffspringDec,Upper),Lower);
 
-                        newDecs        = ExiDecs;
-                        newDecs(:,PV)  = OffspringDec;
-                        newPop         = SOLUTION(newDecs);
+                        newDecs       = ExiDecs;
+                        newDecs(:,PV) = OffspringDec;
+                        newPop        = Problem.Evaluation(newDecs);
 
                         % environmental selection
                         Archive = UpdateArchive(Problem.N,[newPop,Archive]);
@@ -138,7 +138,7 @@ classdef S3CMAES < ALGORITHM
                         DecPop      = BigPopulation{bp};
                         Decs(bp, :) = DecPop(1,:);
                     end
-                    finalPop = SOLUTION(Decs);
+                    finalPop = Problem.Evaluation(Decs);
                     Archive  = UpdateArchive(Problem.N,[finalPop,Archive]);
                 end
             end

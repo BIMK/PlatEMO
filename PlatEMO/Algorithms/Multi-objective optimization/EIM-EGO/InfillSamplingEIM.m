@@ -59,16 +59,16 @@ function PopDec = InfillSamplingEIM(Problem,KrigingModel,PopObjScaled,InfillCrit
             EIM_max   = EIM(index(1));
         end
         Parent    = Offspring(index(1:ceil(GAPopulationSize/2)),:);
-        Offspring = [OperatorGA(Parent(TournamentSelection(2,size(Parent,1),EIM(index(1:ceil(GAPopulationSize/2)))),:));
-                     OperatorGA(Parent,{0,0,1,20})];
+        Offspring = [OperatorGA(Problem,Parent(TournamentSelection(2,size(Parent,1),EIM(index(1:ceil(GAPopulationSize/2)))),:));
+                     OperatorGA(Problem,Parent,{0,0,1,20})];
     end
     PopDec = Best;
 end
 
-function y=Gaussian_PDF(x)
-    y=1/sqrt(2*pi)*exp(-x.^2/2);
+function y = Gaussian_PDF(x)
+    y = 1/sqrt(2*pi)*exp(-x.^2/2);
 end
 
-function y=Gaussian_CDF(x)
-	y=0.5*(1+erf(x/sqrt(2)));
+function y = Gaussian_CDF(x)
+	y = 0.5*(1+erf(x/sqrt(2)));
 end

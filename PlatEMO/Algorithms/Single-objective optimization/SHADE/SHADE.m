@@ -1,5 +1,5 @@
 classdef SHADE < ALGORITHM
-% <single> <real> <large/none> <constrained/none>
+% <single> <real/integer> <large/none> <constrained/none>
 % Success-history based adaptive differential evolution
 
 %------------------------------- Reference --------------------------------
@@ -42,7 +42,7 @@ classdef SHADE < ALGORITHM
                 Site         = rand(size(CR)) < CR;
                 OffDec       = Population.decs;
                 OffDec(Site) = OffDec(Site) + F(Site).*(Xpb(Site)-OffDec(Site)+Xr1(Site)-Xr2(Site));
-                Offspring    = SOLUTION(OffDec);
+                Offspring    = Problem.Evaluation(OffDec);
                 % Update the population and archive
                 delta   = FitnessSingle(Population) - FitnessSingle(Offspring);
                 replace = delta > 0;

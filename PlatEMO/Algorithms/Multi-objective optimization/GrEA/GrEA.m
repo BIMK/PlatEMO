@@ -1,5 +1,5 @@
 classdef GrEA < ALGORITHM
-% <many> <real/binary/permutation>
+% <many> <real/integer/label/binary/permutation>
 % Grid-based evolutionary algorithm
 % div --- --- The number of divisions in each objective
 
@@ -28,7 +28,7 @@ classdef GrEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = MatingSelection(Population.objs,div);
-                Offspring  = OperatorGA(Population(MatingPool));    
+                Offspring  = OperatorGA(Problem,Population(MatingPool));    
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N,div);
             end
         end

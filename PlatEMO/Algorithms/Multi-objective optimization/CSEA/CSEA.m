@@ -1,5 +1,5 @@
 classdef CSEA < ALGORITHM
-% <multi/many> <real> <expensive>
+% <multi/many> <real/integer> <expensive>
 % Classification based surrogate-assisted evolutionary algorithm
 % k    ---    6 --- Number of reference solutions
 % gmax --- 3000 --- Number of solutions evaluated by surrogate model
@@ -28,7 +28,7 @@ classdef CSEA < ALGORITHM
             %% Initalize the population by Latin hypercube sampling
             N          = 11*Problem.D-1;
             PopDec     = UniformPoint(N,Problem.D,'Latin');
-            Population = SOLUTION(repmat(Problem.upper-Problem.lower,N,1).*PopDec+repmat(Problem.lower,N,1));
+            Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,N,1).*PopDec+repmat(Problem.lower,N,1));
             Arc        = Population;
 
             %% Optimization
@@ -52,9 +52,9 @@ classdef CSEA < ALGORITHM
                 p1 = sum(abs((TestOut(~IndexGood)-TestPre(~IndexGood))))/sum(~IndexGood);
 
                 % Surrogate-assisted selection and update the population
-                Next = SurrogateAssistedSelection(net,p0,p1,Ref,Population.decs,gmax,tr);
+                Next = SurrogateAssistedSelection(Problem,net,p0,p1,Ref,Population.decs,gmax,tr);
                 if ~isempty(Next)
-                    Arc = [Arc,SOLUTION(Next)];
+                    Arc = [Arc,Problem.Evaluation(Next)];
                 end
                 Population = RefSelect(Arc,Problem.N);
             end

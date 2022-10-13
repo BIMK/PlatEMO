@@ -22,7 +22,7 @@ classdef MOEADDE_F6 < PROBLEM
             if isempty(obj.D); obj.D = 10; end
             obj.lower    = [0,0,zeros(1,obj.D-2)-2];
             obj.upper    = [1,1,zeros(1,obj.D-2)+2];
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,X)

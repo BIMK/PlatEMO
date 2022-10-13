@@ -1,5 +1,5 @@
 classdef GDE3 < ALGORITHM
-% <multi> <real> <constrained/none>
+% <multi> <real/integer> <constrained/none>
 % Generalized differential evolution 3
 
 %------------------------------- Reference --------------------------------
@@ -22,7 +22,7 @@ classdef GDE3 < ALGORITHM
 
             %% Optimization
             while Algorithm.NotTerminated(Population)
-                Offspring  = OperatorDE(Population,Population(randi(Problem.N,1,Problem.N)),Population(randi(Problem.N,1,Problem.N)));
+                Offspring  = OperatorDE(Problem,Population,Population(randi(Problem.N,1,Problem.N)),Population(randi(Problem.N,1,Problem.N)));
                 Population = EnvironmentalSelection(Population,Offspring,Problem.N);
             end
         end

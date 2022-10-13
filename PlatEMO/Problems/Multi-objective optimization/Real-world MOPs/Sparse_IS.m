@@ -49,7 +49,7 @@ classdef Sparse_IS < PROBLEM
             obj.D = size(obj.Data,1);
             obj.lower    = zeros(1,obj.D);
             obj.upper    = ones(1,obj.D);
-            obj.encoding = 'binary';
+            obj.encoding = 4 + zeros(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

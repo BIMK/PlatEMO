@@ -1,5 +1,5 @@
 classdef CMOPSO < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % Competitive mechanism based multi-objective particle swarm optimizer
 
 %------------------------------- Reference --------------------------------
@@ -22,7 +22,7 @@ classdef CMOPSO < ALGORITHM
 
             %% Optimization
             while Algorithm.NotTerminated(Population)
-                Offspring  = Operator(Population);
+                Offspring  = Operator(Problem,Population);
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N);
             end
         end

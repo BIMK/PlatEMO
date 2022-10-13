@@ -21,6 +21,7 @@ classdef SMMOP4 < PROBLEM
     properties(Access = private)
         theta = 0.1;    % Sparsity of the Pareto sets
         np    = 4;    	% Number of the Pareto sets
+        POS;            % Pareto optimal set for IGDX calculation
     end 
     methods
         %% Default settings of the problem
@@ -30,7 +31,7 @@ classdef SMMOP4 < PROBLEM
             if isempty(obj.D); obj.D = 100; end
             obj.lower    = [zeros(1,obj.M-1)+0,zeros(1,obj.D-obj.M+1)-1];
             obj.upper    = [zeros(1,obj.M-1)+1,zeros(1,obj.D-obj.M+1)+2];
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,X)
@@ -45,9 +46,21 @@ classdef SMMOP4 < PROBLEM
         end
         %% Generate Pareto optimal solutions
         function R = GetOptimum(obj,N)
-            A = GetPS(obj.D-obj.M+1,obj.np,ceil(obj.theta*(obj.D-obj.M)));
-            X = UniformPoint(N/size(A,1),obj.M-1,'grid');
-            R = [repmat(X,size(A,1),1),A(repmat(1:end,size(X,1),1),:)];
+            % Generate points in Pareto optimal set
+            A       = GetPS(obj.D-obj.M+1,obj.np,ceil(obj.theta*(obj.D-obj.M)));
+            X       = UniformPoint(N/size(A,1),obj.M-1,'grid');
+            obj.POS = [repmat(X,size(A,1),1),A(repmat(1:end,size(X,1),1),:)];
+            % Generate points on Pareto front
+            R = UniformPoint(N,obj.M);
+            c = ones(size(R,1),obj.M);
+            for i = 1 : size(R,1) 
+                for j = 2 : obj.M
+                    temp = R(i,j)/R(i,1)*prod(1-c(i,obj.M-j+2:obj.M-1));
+                    c(i,obj.M-j+1) = (temp^2-temp+sqrt(2*temp))/(temp^2+1);
+                end
+            end
+            x = acos(c)*2/pi;
+            R = fliplr(cumprod([ones(size(x,1),1),1-cos(x(:,1:end-1)*pi/2)],2)).*[ones(size(x,1),1),1-sin(x(:,end-1:-1:1)*pi/2)];
         end
         %% Generate the image of Pareto front
         function R = GetPF(obj)
@@ -59,6 +72,15 @@ classdef SMMOP4 < PROBLEM
                 R = {(1-cos(a))*(1-cos(a')),(1-cos(a))*(1-sin(a')),(1-sin(a))*ones(size(a'))};
             else
                 R = [];
+            end
+        end
+        %% Calculate the metric value
+        function score = CalMetric(obj,metName,Population)
+            switch metName
+                case 'IGDX'
+                    score = feval(metName,Population,obj.POS);
+                otherwise
+                    score = feval(metName,Population,obj.optimum);
             end
         end
         %% Display a population in the objective space

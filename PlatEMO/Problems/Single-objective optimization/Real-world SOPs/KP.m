@@ -25,7 +25,7 @@ classdef KP < PROBLEM
             % Parameter setting
             obj.M = 1;
             if isempty(obj.D); obj.D = 250; end
-            obj.encoding = 'binary';
+            obj.encoding = 4 + zeros(1,obj.D);
             % Randomly generate profits and weights
             file = sprintf('KP-D%d.mat',obj.D);
             file = fullfile(fileparts(mfilename('fullpath')),file);

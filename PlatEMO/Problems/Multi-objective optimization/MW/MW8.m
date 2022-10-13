@@ -22,19 +22,19 @@ classdef MW8 < PROBLEM
             if isempty(obj.D); obj.D = 15; end
             obj.lower    = zeros(1,obj.D);
             obj.upper    = ones(1,obj.D);
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
-        %% Calculate objective values
-        function PopObj = CalObj(obj,X)
-             z = 1 - exp(-10*(X(:,obj.M:end) - ((obj.M:obj.D) - 1)/obj.D).^2);
-             g = sum((1.5 + (0.1/obj.D)*z.^2 - 1.5*cos(2*pi*z)),2);
-             PopObj = repmat(1+g,1,obj.M).*flip(cumprod([ones(size(X,1),1),cos(X(:,1:obj.M-1)*pi/2)],2),2).*[ones(size(X,1),1),sin(X(:,obj.M-1:-1:1)*pi/2)];
-        end
-        %% Calculate constraint violations
-        function PopCon = CalCon(obj,X)
-            PopObj = obj.CalObj(X);
+        %% Calculate objective values and constraint violations
+        function Population = Evaluation(obj,varargin)
+            X = varargin{1};
+            X = max(min(X,repmat(obj.upper,size(X,1),1)),repmat(obj.lower,size(X,1),1));
+            z = 1 - exp(-10*(X(:,obj.M:end) - ((obj.M:obj.D) - 1)/obj.D).^2);
+            g = sum((1.5 + (0.1/obj.D)*z.^2 - 1.5*cos(2*pi*z)),2);
+            PopObj = repmat(1+g,1,obj.M).*flip(cumprod([ones(size(X,1),1),cos(X(:,1:obj.M-1)*pi/2)],2),2).*[ones(size(X,1),1),sin(X(:,obj.M-1:-1:1)*pi/2)];
             l      = asin(PopObj(:,end)./sqrt(sum(PopObj.^2,2)));
             PopCon = sum(PopObj.^2,2) - (1.25 - 0.5*sin(6*l).^2).^2;
+            Population  = SOLUTION(X,PopObj,PopCon,varargin{2:end});
+            obj.FE      = obj.FE + length(Population);
         end
         %% Generate points on the Pareto front
         function R = GetOptimum(obj,N)

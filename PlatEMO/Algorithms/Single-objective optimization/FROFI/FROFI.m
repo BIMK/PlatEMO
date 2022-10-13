@@ -1,5 +1,5 @@
 classdef FROFI < ALGORITHM
-% <single> <real> <large/none> <constrained>
+% <single> <real/integer> <large/none> <constrained>
 % Feasibility rule with the incorporation of objective function information
 
 %------------------------------- Reference --------------------------------
@@ -22,9 +22,9 @@ classdef FROFI < ALGORITHM
             
             %% Optimization
             while Algorithm.NotTerminated(Population)
-                Offspring  = Operator(Population);
+                Offspring  = Operator(Problem,Population);
                 Population = EnvironmentalSelection(Population,Offspring);
-                Population = Mutation(Population,Problem.lower,Problem.upper);
+                Population = Mutation(Problem,Population);
             end
         end
     end

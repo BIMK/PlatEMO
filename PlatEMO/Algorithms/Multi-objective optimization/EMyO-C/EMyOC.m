@@ -1,5 +1,5 @@
 classdef EMyOC < ALGORITHM
-% <multi/many> <real>
+% <multi/many> <real/integer>
 % Evolutionary many-objective optimization algorithm with clustering-based
 % selection
 
@@ -29,7 +29,7 @@ classdef EMyOC < ALGORITHM
 
             %% Optimization
             while Algorithm.NotTerminated(Population)
-                Offspring  = Operator(Population,Population(randi(Problem.N,1,Problem.N)),Population(randi(Problem.N,1,Problem.N)));
+                Offspring  = Operator(Problem,Population,Population(randi(Problem.N,1,Problem.N)),Population(randi(Problem.N,1,Problem.N)));
                 Z          = min(Z,min(Offspring.objs,[],1));
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N,Z);
             end

@@ -16,7 +16,7 @@ function [DiverIndexes,ConverIndexes] = ControlVariableAnalysis(Problem,NCA)
         x      = unifrnd(Problem.lower,Problem.upper);
         S      = repmat(x,NCA,1);
         S(:,i) = ((1:NCA)'-1+rand(NCA,1))/NCA*(Problem.upper(i)-Problem.lower(i)) + Problem.lower(i);
-        S      = SOLUTION(S);
+        S      = Problem.Evaluation(S);
         [~,MaxFNo] = NDSort(S.objs,inf);
         if MaxFNo == length(S)
             ConverIndexes(i) = true;

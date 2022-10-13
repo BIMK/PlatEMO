@@ -19,14 +19,14 @@ classdef uicontext < handle
     end
     methods
         %% Constructor
-        function obj = uicontext(fig)
+        function obj = uicontext(fig,width)
             obj.fig   = fig;
-            obj.panel = uipanel(obj.fig,'Position',[0 0 110 0],'Visible',false);
+            obj.panel = uipanel(obj.fig,'Position',[0 0 width 0],'Visible',false);
         end
         %% Add a new item
         function add(obj,str,icon,cb)
-        	obj.items = [obj.items,uibutton(obj.panel,'Position',[-2 0 115 25],'Text',str,'HorizontalAlignment','left','BackgroundColor',[.94 .94 .94],'Icon',icon,'ButtonPushedFcn',cb)];
-            obj.gaps  = [obj.gaps,uipanel(obj.panel,'Position',[-2 0 115 3],'BorderType','none')];
+        	obj.items = [obj.items,uibutton(obj.panel,'Position',[-2 0 obj.panel.Position(3)+5 25],'Text',str,'HorizontalAlignment','left','BackgroundColor',[.94 .94 .94],'Icon',icon,'ButtonPushedFcn',cb)];
+            obj.gaps  = [obj.gaps,uipanel(obj.panel,'Position',[-2 0 obj.panel.Position(3)+5 3],'BorderType','none')];
             obj.panel.Children = obj.panel.Children([1,3:end,2]);
         end
         %% Flush the menu
@@ -44,9 +44,18 @@ classdef uicontext < handle
         %% Show the menu
         function show(obj)
             if ~isempty(obj.items)
-                obj.panel.Position(1:2) = [obj.fig.CurrentPoint(1)-10,obj.fig.CurrentPoint(2)+10-obj.panel.Position(4)];
-                obj.panel.Visible       = true;
-                obj.listener            = obj.fig.addlistener('CurrentPoint','PostSet',@obj.cb_motion);
+                if obj.fig.CurrentPoint(1)-10+obj.panel.Position(3) < obj.fig.Position(3)
+                    obj.panel.Position(1) = obj.fig.CurrentPoint(1) - 10;
+                else
+                    obj.panel.Position(1) = obj.fig.CurrentPoint(1) + 10 - obj.panel.Position(3);
+                end
+                if obj.fig.CurrentPoint(2)+10-obj.panel.Position(4) > 0
+                    obj.panel.Position(2) = obj.fig.CurrentPoint(2) + 10 - obj.panel.Position(4);
+                else
+                    obj.panel.Position(2) = obj.fig.CurrentPoint(2) - 10;
+                end
+                obj.panel.Visible = true;
+                obj.listener      = obj.fig.addlistener('CurrentPoint','PostSet',@obj.cb_motion);
             end
         end
     end

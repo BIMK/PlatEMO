@@ -1,5 +1,5 @@
 classdef RSEA < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Radial space division based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -26,7 +26,7 @@ classdef RSEA < ALGORITHM
                 Range(1,:) = min([Range(1,:);Population.objs],[],1);
                 Range(2,:) = max(Population(NDSort(Population.objs,1)==1).objs,[],1);
                 MatingPool = MatingSelection(Population.objs,Range,ceil(Problem.N/2)*2);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Population = EnvironmentalSelection(Problem,[Population,Offspring],Range,Problem.N);
             end
         end

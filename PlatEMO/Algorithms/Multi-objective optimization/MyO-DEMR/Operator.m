@@ -1,4 +1,4 @@
-function Offspring = Operator(Parent1,Parent2,Parent3,Parameter)
+function Offspring = Operator(Problem,Parent1,Parent2,Parent3,Parameter)
 % Differental evolution with variable-wise mutation restriction
 
 %------------------------------- Copyright --------------------------------
@@ -13,7 +13,7 @@ function Offspring = Operator(Parent1,Parent2,Parent3,Parameter)
 % This function is written by Roman Denysiuk
 
     %% Parameter setting
-    if nargin > 3
+    if nargin > 4
         [CR,proM,disM] = deal(Parameter{:});
     else
         [CR,proM,disM] = deal(0.15,1,20);
@@ -22,7 +22,6 @@ function Offspring = Operator(Parent1,Parent2,Parent3,Parameter)
     Parent2 = Parent2.decs;
     Parent3 = Parent3.decs;
     [N,D]   = size(Parent1);
-    Problem = PROBLEM.Current();
 
     %% Calculate the difference vectors
     V = Parent2 - Parent3;
@@ -44,5 +43,5 @@ function Offspring = Operator(Parent1,Parent2,Parent3,Parameter)
     Site         = rand(N,D) < CR;
     OffDec       = Parent1;
     OffDec(Site) = OffDec(Site) + V(Site);
-    Offspring    = SOLUTION(OffDec);
+    Offspring    = Problem.Evaluation(OffDec);
 end

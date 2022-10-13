@@ -1,5 +1,5 @@
 classdef MOEADVA < ALGORITHM
-% <multi> <real> <large>
+% <multi> <real/integer> <large>
 % Multi-objective evolutionary algorithm based on decision variable
 % analyses
 % NCA --- 20 --- The number of sampling solutions in control variable analysis
@@ -41,8 +41,8 @@ classdef MOEADVA < ALGORITHM
             if Problem.M == 2; threshold = 0.01; else threshold = 0.03; end
             while Algorithm.NotTerminated(Population)
                 for i = 1 : length(Subcomponents)
-                    drawnow();
-                    Population = SubcomponentOptimizer(Population,Neighbour,Subcomponents{i});
+                    drawnow('limitrate');
+                    Population = SubcomponentOptimizer(Problem,Population,Neighbour,Subcomponents{i});
                 end
             end
         end

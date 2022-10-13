@@ -1,5 +1,5 @@
 classdef MOEAIGDNS < ALGORITHM
-% <multi> <real/binary/permutation>
+% <multi> <real/integer/label/binary/permutation>
 % Multi-objective evolutionary algorithm based on an enhanced IGD
 
 %------------------------------- Reference --------------------------------
@@ -25,7 +25,7 @@ classdef MOEAIGDNS < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = randi(Problem.N,1,Problem.N);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Archive    = UpdateArchive([Archive,Offspring],5*Problem.N);
                 Population = EnvironmentalSelection([Population,Offspring],Archive.objs,Problem.N);
             end

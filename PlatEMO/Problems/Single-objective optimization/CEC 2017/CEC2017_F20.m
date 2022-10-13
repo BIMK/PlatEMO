@@ -30,7 +30,7 @@ classdef CEC2017_F20 < PROBLEM
             obj.D = min(obj.D,length(obj.O));
             obj.lower    = zeros(1,obj.D) - 100;
             obj.upper    = zeros(1,obj.D) + 100;
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

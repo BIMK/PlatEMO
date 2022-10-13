@@ -1,4 +1,4 @@
-function Next = SurrogateAssistedSelection(net,p0,p1,Ref,Input,wmax,tr)
+function Next = SurrogateAssistedSelection(Problem,net,p0,p1,Ref,Input,wmax,tr)
 % Surrogate-assisted selection for selecting promising solutions
 
 %------------------------------- Copyright --------------------------------
@@ -12,7 +12,7 @@ function Next = SurrogateAssistedSelection(net,p0,p1,Ref,Input,wmax,tr)
 
 % This function is written by Cheng He
 
-    Next  = OperatorGA([Input;Ref.decs],{1,15,1,5});
+    Next  = OperatorGA(Problem,[Input;Ref.decs],{1,15,1,5});
     Label = net.predict(Next);
     a     = tr;
     b     = 1 - tr;
@@ -21,7 +21,7 @@ function Next = SurrogateAssistedSelection(net,p0,p1,Ref,Input,wmax,tr)
         while i < wmax
             [~,index] = sort(Label,'descend');
             Input     = Next(index(1:length(Ref)),:);
-            Next      = OperatorGA([Input;Ref.decs],{1,15,1,5});
+            Next      = OperatorGA(Problem,[Input;Ref.decs],{1,15,1,5});
             Label     = net.predict(Next);
             i = i+size(Next,1);
         end
@@ -32,7 +32,7 @@ function Next = SurrogateAssistedSelection(net,p0,p1,Ref,Input,wmax,tr)
         while i<wmax
             [~,index] = sort(Label);
             Input     = Next(index(1:length(Ref)),:);
-            Next      = OperatorGA([Input;Ref.decs],{1,15,1,5});
+            Next      = OperatorGA(Problem,[Input;Ref.decs],{1,15,1,5});
             Label     = net.predict(Next);
             i = i+size(Next,1);
         end

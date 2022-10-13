@@ -1,5 +1,5 @@
 classdef MOEAD < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Multiobjective evolutionary algorithm based on decomposition
 % type --- 1 --- The type of aggregation function
 
@@ -42,7 +42,7 @@ classdef MOEAD < ALGORITHM
                     P = B(i,randperm(size(B,2)));
 
                     % Generate an offspring
-                    Offspring = OperatorGAhalf(Population(P(1:2)));
+                    Offspring = OperatorGAhalf(Problem,Population(P(1:2)));
 
                     % Update the ideal point
                     Z = min(Z,Offspring.obj);

@@ -1,4 +1,4 @@
-function [OffDec,OffVel] = Operator_LMOCSO(Loser,Winner,Rate)
+function [OffDec,OffVel] = Operator_LMOCSO(Problem,Loser,Winner,Rate)
 % The competitive swarm optimizer of LMOCSO
 
 %  Copyright (C) 2021 Xu Yang
@@ -10,7 +10,6 @@ function [OffDec,OffVel] = Operator_LMOCSO(Loser,Winner,Rate)
     [N,D]     = size(LoserDec);
 	LoserVel  = Loser.adds(zeros(N,D));
     WinnerVel = Winner.adds(zeros(N,D));
-    Problem   = PROBLEM.Current();
     
     %% Competitive swarm optimizer
     r1     = repmat(rand(N,1),1,D);
@@ -33,13 +32,13 @@ function [OffDec,OffVel] = Operator_LMOCSO(Loser,Winner,Rate)
     OffVel = [OffVel;WinnerVel];
  
     %% Polynomial mutation
-    [N,D]     = size(OffDec);
-    Lower  = repmat(Problem.lower,N,1);
-    Upper  = repmat(Problem.upper,N,1);
-    disM   = 20;
-    Site   = rand(N,D) < 1/D;
-    mu     = rand(N,D);
-    temp   = Site & mu<=0.5;
+    [N,D] = size(OffDec);
+    Lower = repmat(Problem.lower,N,1);
+    Upper = repmat(Problem.upper,N,1);
+    disM  = 20;
+    Site  = rand(N,D) < 1/D;
+    mu    = rand(N,D);
+    temp  = Site & mu<=0.5;
     OffDec       = max(min(OffDec,Upper),Lower);
     OffDec(temp) = OffDec(temp)+(Upper(temp)-Lower(temp)).*((2.*mu(temp)+(1-2.*mu(temp)).*...
                    (1-(OffDec(temp)-Lower(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1))-1);

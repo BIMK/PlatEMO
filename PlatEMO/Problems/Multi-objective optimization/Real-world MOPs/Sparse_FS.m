@@ -50,7 +50,7 @@ classdef Sparse_FS < PROBLEM
             % Parameter setting
             obj.M        = 2;
             obj.D        = size(obj.TrainIn,2);
-            obj.encoding = 'binary';
+            obj.encoding = 4 + zeros(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

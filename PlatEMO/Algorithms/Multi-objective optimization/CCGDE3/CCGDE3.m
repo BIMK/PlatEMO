@@ -1,5 +1,5 @@
 classdef CCGDE3 < ALGORITHM
-% <multi> <real> <large/none>
+% <multi> <real/integer> <large/none>
 % Cooperative coevolution generalized differential evolution 3
 
 %------------------------------- Reference --------------------------------
@@ -33,8 +33,8 @@ classdef CCGDE3 < ALGORITHM
             Dec         = unifrnd(repmat(Problem.lower,numSPop,1),repmat(Problem.upper,numSPop,1));
             subDec1     = Dec(:,Index==1);
             subDec2     = Dec(:,Index==2);
-            Population1 = GetInd(subDec1,subDec2,Problem,Index,numSPop,1);
-            Population2 = GetInd(subDec2,subDec1,Problem,Index,numSPop,2);
+            Population1 = GetInd(Problem,subDec1,subDec2,Index,numSPop,1);
+            Population2 = GetInd(Problem,subDec2,subDec1,Index,numSPop,2);
             Population  = EnvironmentalSelection([Population1,Population2],Problem.N);
             
             %% Optimization
@@ -47,13 +47,13 @@ classdef CCGDE3 < ALGORITHM
                     for k = 1 : Gmax
                         if j == 1
                         	OffDec1     = CCDE(subDec1,subDec1(randi(numSPop,1,numSPop),:),subDec1(randi(numSPop,1,numSPop),:),Problem.lower(Index==j),Problem.upper(Index==j));
-                        	Offspring   = GetInd(OffDec1,NDsubDec2,Problem,Index,numSPop,j);
+                        	Offspring   = GetInd(Problem,OffDec1,NDsubDec2,Index,numSPop,j);
                         	Population1 = GDE3_EnvironmentalSelection(Population1,Offspring,numSPop);
                         	Dec1        = Population1.decs;
                         	subDec1     = Dec1(:,Index==1);
                         else
                         	OffDec2     = CCDE(subDec2,subDec2(randi(numSPop,1,numSPop),:),subDec2(randi(numSPop,1,numSPop),:),Problem.lower(Index==j),Problem.upper(Index==j));
-                        	Offspring   = GetInd(OffDec2,NDsubDec1,Problem,Index,numSPop,j);
+                        	Offspring   = GetInd(Problem,OffDec2,NDsubDec1,Index,numSPop,j);
                         	Population2 = GDE3_EnvironmentalSelection(Population2,Offspring,numSPop);
                         	Dec2        = Population1.decs;
                         	subDec2     = Dec2(:,Index==2);
@@ -65,8 +65,8 @@ classdef CCGDE3 < ALGORITHM
         end
     end
 end
-function Population = GetInd(subDec1,subDec2,Global,Index,numSPop,j)
-    Dec = zeros(numSPop,Global.D);
+function Population = GetInd(Problem,subDec1,subDec2,Index,numSPop,j)
+    Dec = zeros(numSPop,Problem.D);
     if j == 1
        Dec(:,Index==1) = subDec1;
        Dec(:,Index==2) = subDec2(randi(end,numSPop,1),:);
@@ -74,5 +74,5 @@ function Population = GetInd(subDec1,subDec2,Global,Index,numSPop,j)
        Dec(:,Index==2) = subDec1;
        Dec(:,Index==1) = subDec2(randi(end,numSPop,1),:);           
     end
-    Population = SOLUTION(Dec);
+    Population = Problem.Evaluation(Dec);
 end

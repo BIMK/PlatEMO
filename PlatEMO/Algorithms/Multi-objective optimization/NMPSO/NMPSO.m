@@ -1,5 +1,5 @@
 classdef NMPSO < ALGORITHM
-% <multi/many> <real>
+% <multi/many> <real/integer>
 % Novel multi-objective particle swarm optimization
 
 %------------------------------- Reference --------------------------------
@@ -25,10 +25,10 @@ classdef NMPSO < ALGORITHM
 
             %% Optimization
             while Algorithm.NotTerminated(Archive)
-                Population = Operator(Population,Pbest,Archive(randi(ceil(length(Archive)/10),1,Problem.N)));
+                Population = Operator(Problem,Population,Pbest,Archive(randi(ceil(length(Archive)/10),1,Problem.N)));
                 Pbest      = UpdatePbest(Pbest,Population);
                 Archive    = UpdateArchive(Archive,Population,Problem.N);
-                S          = OperatorGAhalf(Archive([1:length(Archive),randi(ceil(length(Archive)/2),1,length(Archive))]));
+                S          = OperatorGAhalf(Problem,Archive([1:length(Archive),randi(ceil(length(Archive)/2),1,length(Archive))]));
                 Archive    = UpdateArchive(Archive,S,Problem.N);
             end
         end

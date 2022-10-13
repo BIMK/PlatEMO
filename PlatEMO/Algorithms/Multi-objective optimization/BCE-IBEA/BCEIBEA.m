@@ -1,5 +1,5 @@
 classdef BCEIBEA < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Bi-criterion evolution based IBEA
 % kappa --- 0.05 --- Fitness scaling factor
 
@@ -28,12 +28,12 @@ classdef BCEIBEA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(PC)
                 % PC evolving
-                NewPC = Exploration(PC,NPC,nND,Problem.N);
+                NewPC = Exploration(Problem,PC,NPC,nND,Problem.N);
                 % NPC selection
                 NPC = EnvironmentalSelection([NPC,NewPC],Problem.N,kappa);
                 % NPC evolving
                 MatingPool = TournamentSelection(2,Problem.N,-CalFitness(NPC.objs,kappa));
-                NewNPC     = OperatorGA(NPC(MatingPool));
+                NewNPC     = OperatorGA(Problem,NPC(MatingPool));
                 NPC        = EnvironmentalSelection([NPC,NewNPC],Problem.N,kappa);
                 % PC selection
                 [PC,nND] = PCSelection([PC,NewNPC,NewPC],Problem.N);

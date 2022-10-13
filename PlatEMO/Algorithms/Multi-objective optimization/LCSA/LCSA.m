@@ -1,5 +1,5 @@
 classdef LCSA < ALGORITHM
-% <multi/many> <real> <large/none>
+% <multi/many> <real/integer> <large/none>
 % Linear combination-based search algorithm
 % optimiser --- 3 --- The optimisation method. 1 = SMPSO, 2 = NSGA-II, 3 = NSGA-III. Default = NSGA-III
 
@@ -75,7 +75,7 @@ classdef LCSA < ALGORITHM
 
             %% Optimization
             while Algorithm.NotTerminated(Gbest)
-                Population       = LCSA_SMPSOOperator(Population,Pbest,Gbest(TournamentSelection(2,Problem.N,-CrowdDis)));
+                Population       = LCSA_SMPSOOperator(Problem,Population,Pbest,Gbest(TournamentSelection(2,Problem.N,-CrowdDis)));
                 [Gbest,CrowdDis] = LCSA_SMPSOUpdateGbest([Gbest,Population],Problem.N);
                 Pbest            = LCSA_SMPSOUpdatePbest(Pbest,Population);
                 iter = iter + 1;
@@ -87,14 +87,14 @@ classdef LCSA < ALGORITHM
                     xupper              = ones(1,Problem.N)*10;     % 10
                     newPopSize          = Problem.N;
                     xDecs               = repmat(xlower,newPopSize,1) + rand(newPopSize,Problem.N).*repmat(xupper-xlower,newPopSize,1); %newPopSize solutions with N vars each.
-                    xPop                = SOLUTION(transpose(transpose(decs)*transpose(xDecs)),packDecAndVel(xDecs, zeros(newPopSize,Problem.N)));
+                    xPop                = Problem.Evaluation(transpose(transpose(decs)*transpose(xDecs)),packDecAndVel(xDecs, zeros(newPopSize,Problem.N)));
                     xPbest              = xPop;
                     [xGbest,xCrowdDis]  = LCSA_SMPSOUpdateGbest(xPop,Problem.N);
                     [Gbest,CrowdDis]    = LCSA_SMPSOUpdateGbest([Gbest,xGbest],Problem.N);
                     for temp = 1:noOfXOptGenerations 
                         Algorithm.NotTerminated(Gbest);
                         [xDecs,xVels] = LCSA_CoefficientSMPSOOperator(xPop,xPbest,xGbest(TournamentSelection(2,Problem.N,-xCrowdDis)),xlower,xupper);
-                        newSols       = SOLUTION(transpose(transpose(decs)*transpose(xDecs)),packDecAndVel(xDecs, xVels));
+                        newSols       = Problem.Evaluation(transpose(transpose(decs)*transpose(xDecs)),packDecAndVel(xDecs, xVels));
                         xPbest        = LCSA_SMPSOUpdatePbest(xPbest,newSols);
                         [xGbest,xCrowdDis] = LCSA_SMPSOUpdateGbest([xPop,newSols],Problem.N);
                         [Gbest,CrowdDis]   = LCSA_SMPSOUpdateGbest([Gbest,xGbest],Problem.N);
@@ -117,7 +117,7 @@ classdef LCSA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,FrontNo,CrowdDis] = LCSA_NSGAIIEnvironmentalSelection([Population,Offspring],Problem.N);
                 iter = iter + 1;
                 if mod(iter,xintervall) == 0
@@ -128,14 +128,14 @@ classdef LCSA < ALGORITHM
                     xupper              = ones(1,Problem.N)*10; %10
                     newPopSize          = Problem.N;
                     xDecs               = repmat(xlower,newPopSize,1) + rand(newPopSize,Problem.N).*repmat(xupper-xlower,newPopSize,1); %newPopSize solutions with N vars each.
-                    xPop                = SOLUTION(transpose(transpose(decs)*transpose(xDecs)), xDecs);
+                    xPop                = Problem.Evaluation(transpose(transpose(decs)*transpose(xDecs)), xDecs);
                     [~,xFrontNo,xCrowdDis] = LCSA_NSGAIIEnvironmentalSelection(xPop,Problem.N);
                     [Population,~,~] = LCSA_NSGAIIEnvironmentalSelection([Population,xPop],Problem.N);
                     for temp = 1:noOfXOptGenerations 
                         Algorithm.NotTerminated(Population);
                         xMatingPool = TournamentSelection(2,Problem.N,xFrontNo,-xCrowdDis);
-                        xDecs       = LCSA_GA(xPop(xMatingPool).adds,{1,20,1,20},xlower,xupper);
-                        newSols     = SOLUTION(transpose(transpose(decs)*transpose(xDecs)), xDecs);
+                        xDecs       = LCSA_GA(Problem,xPop(xMatingPool).adds,{1,20,1,20},xlower,xupper);
+                        newSols     = Problem.Evaluation(transpose(transpose(decs)*transpose(xDecs)), xDecs);
                         [xPop,xFrontNo,xCrowdDis] = LCSA_NSGAIIEnvironmentalSelection([xPop,newSols],Problem.N);
                         [Population,FrontNo,CrowdDis] = LCSA_NSGAIIEnvironmentalSelection([Population,xPop],Problem.N);
                     end 
@@ -153,7 +153,7 @@ classdef LCSA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,sum(max(0,Population.cons),2));
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Zmin       = min([Zmin;Offspring(all(Offspring.cons<=0,2)).objs],[],1);
                 Population = LCSA_NSGAIIIEnvironmentalSelection([Population,Offspring],Problem.N,Z,Zmin);
                 iter = iter + 1;
@@ -165,14 +165,14 @@ classdef LCSA < ALGORITHM
                     xupper              = ones(1,Problem.N)*10; %10
                     newPopSize          = Problem.N;
                     xDecs               = repmat(xlower,newPopSize,1) + rand(newPopSize,Problem.N).*repmat(xupper-xlower,newPopSize,1); %newPopSize solutions with N vars each.
-                    xPop                = SOLUTION(transpose(transpose(decs)*transpose(xDecs)), xDecs);
+                    xPop                = Problem.Evaluation(transpose(transpose(decs)*transpose(xDecs)), xDecs);
                     Zmin                = min([Zmin;xPop(all(xPop.cons<=0,2)).objs],[],1);
                     Population          = LCSA_NSGAIIIEnvironmentalSelection([Population,xPop],Problem.N,Z,Zmin);
                     for temp = 1:noOfXOptGenerations 
                         Algorithm.NotTerminated(Population);
                         xMatingPool = TournamentSelection(2,Problem.N,sum(max(0,xPop.cons),2));
-                        xDecs       = LCSA_GA(xPop(xMatingPool).adds,{1,20,1,20},xlower,xupper);
-                        newSols     = SOLUTION(transpose(transpose(decs)*transpose(xDecs)), xDecs);
+                        xDecs       = LCSA_GA(Problem,xPop(xMatingPool).adds,{1,20,1,20},xlower,xupper);
+                        newSols     = Problem.Evaluation(transpose(transpose(decs)*transpose(xDecs)), xDecs);
                         Zmin        = min([Zmin;newSols(all(newSols.cons<=0,2)).objs],[],1);
                         xPop        = LCSA_NSGAIIIEnvironmentalSelection([xPop,newSols],Problem.N,Z,Zmin);
                         Population  = LCSA_NSGAIIIEnvironmentalSelection([Population,xPop],Problem.N,Z,Zmin);

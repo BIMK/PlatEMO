@@ -1,5 +1,5 @@
 classdef TriMOEATAR < ALGORITHM
-% <multi> <real> <multimodal>
+% <multi> <real/integer> <multimodal>
 % Multi-modal MOEA using two-archive and recombination strategies
 % p_con       --- 0.5  --- Probability of selecting parents from the convergence archive
 % sigma_niche --- 0.1  --- Niche radius in the decision space
@@ -49,7 +49,7 @@ classdef TriMOEATAR < ALGORITHM
                 MatingPoolD = TournamentSelection(2,Pd,RankD);
                 Parents     = [AC(MatingPoolC),AD(MatingPoolD)];
                 Parents     = Parents(randperm(Problem.N));
-                Population  = OperatorGA(Parents);        
+                Population  = OperatorGA(Problem,Parents);        
                 % Update Archives
                 Z             = min([Z;Population.objs],[],1);
                 [AC,RankC,fS] = UpdateConvergenceArchive(AC,Population,NC,Z,Xic,sigma_niche,Problem);        
@@ -57,7 +57,7 @@ classdef TriMOEATAR < ALGORITHM
                 % Recombination
                 if Problem.FE >= Problem.maxFE && sum(Xic) > 0
                     FS = Recombination(AC,AD,Xic,Xre,eps_peak,fS,RankC);
-                    AD = SOLUTION(FS);
+                    AD = Problem.Evaluation(FS);
                 end
             end
         end

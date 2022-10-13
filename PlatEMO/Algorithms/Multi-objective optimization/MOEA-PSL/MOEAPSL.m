@@ -1,5 +1,5 @@
 classdef MOEAPSL < ALGORITHM
-% <multi> <real/binary> <large/none> <constrained/none> <sparse>
+% <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
 % Multi-objective evolutionary algorithm based on Pareto optimal subspace
 % learning
 
@@ -20,15 +20,11 @@ classdef MOEAPSL < ALGORITHM
     methods
         function main(Algorithm,Problem)
             %% Population initialization
-            REAL = ~strcmp(Problem.encoding,'binary');
-            if REAL
-                P   = UniformPoint(Problem.N,Problem.D,'Latin');
-                Dec = P.*repmat(Problem.upper-Problem.lower,Problem.N,1) + repmat(Problem.lower,Problem.N,1);
-            else
-                Dec = ones(Problem.N,Problem.D);
-            end
+            P   = UniformPoint(Problem.N,Problem.D,'Latin');
+            Dec = P.*repmat(Problem.upper-Problem.lower,Problem.N,1) + repmat(Problem.lower,Problem.N,1);
+            Dec(:,Problem.encoding==4) = 1;
             Mask = UniformPoint(Problem.N,Problem.D,'Latin') > 0.5;
-            Population = SOLUTION(Dec.*Mask);
+            Population = Problem.Evaluation(Dec.*Mask);
             [Population,Dec,Mask,FrontNo,CrowdDis] = EnvironmentalSelection(Population,Dec,Mask,Problem.N,0,0);
 
             %% Optimization
@@ -36,13 +32,13 @@ classdef MOEAPSL < ALGORITHM
             while Algorithm.NotTerminated(Population)
                 Site = rho > rand(1,ceil(Problem.N/2));
                 if any(Site)
-                    [rbm,dae,allZero,allOne] = ModelTraining(Mask,Dec,REAL);
+                    [rbm,dae,allZero,allOne] = ModelTraining(Mask,Dec,any(Problem.encoding~=4));
                 else
                     [rbm,dae,allZero,allOne] = deal([]);
                 end
                 MatingPool = TournamentSelection(2,ceil(Problem.N/2)*2,FrontNo,-CrowdDis);
-                [OffDec,OffMask] = Operator(Dec(MatingPool,:),Mask(MatingPool,:),rbm,dae,Site,allZero,allOne,Problem.lower,Problem.upper,REAL);
-                Offspring = SOLUTION(OffDec.*OffMask);
+                [OffDec,OffMask] = Operator(Problem,Dec(MatingPool,:),Mask(MatingPool,:),rbm,dae,Site,allZero,allOne);
+                Offspring = Problem.Evaluation(OffDec.*OffMask);
                 [Population,Dec,Mask,FrontNo,CrowdDis,sRatio] = EnvironmentalSelection([Population,Offspring],[Dec;OffDec],[Mask;OffMask],Problem.N,length(Population),2*sum(Site));
                 rho = (rho+sRatio)/2;
             end

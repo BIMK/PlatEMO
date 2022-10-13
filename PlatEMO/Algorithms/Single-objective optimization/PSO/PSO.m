@@ -1,5 +1,5 @@
 classdef PSO < ALGORITHM
-% <single> <real> <large/none> <constrained/none>
+% <single> <real/integer> <large/none> <constrained/none>
 % Particle swarm optimization
 % W --- 0.4 --- Inertia weight
 
@@ -29,7 +29,7 @@ classdef PSO < ALGORITHM
             
             %% Optimization
             while Algorithm.NotTerminated(Population)
-                Population     = OperatorPSO(Population,Pbest,Gbest,W);
+                Population     = OperatorPSO(Problem,Population,Pbest,Gbest,W);
                 replace        = FitnessSingle(Pbest) > FitnessSingle(Population);
                 Pbest(replace) = Population(replace);
                 [~,best]       = min(FitnessSingle(Pbest));

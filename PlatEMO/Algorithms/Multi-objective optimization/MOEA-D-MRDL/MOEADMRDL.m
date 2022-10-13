@@ -1,5 +1,5 @@
 classdef MOEADMRDL < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % MOEA/D with maximum relative diversity loss
 % gamma --- 20 --- Maximum allowable maximum relative diversity loss
 % nmov  --- 10 --- Size of moving average
@@ -44,9 +44,9 @@ classdef MOEADMRDL < ALGORITHM
                 % Select parents
                 MatingPool = [B(randi(T,1,Problem.N)+(0:Problem.N-1)*T),B(randi(T,1,Problem.N)+(0:Problem.N-1)*T)];
                 % Generate offsprings
-                OffDec    = OperatorGAhalf(Population(MatingPool).decs,{1,disC,1,20});
+                OffDec    = OperatorGAhalf(Problem,Population(MatingPool).decs,{1,disC,1,20});
                 OffDec    = OffDec + randn(size(OffDec))*Pn;
-                Offspring = SOLUTION(OffDec);
+                Offspring = Problem.Evaluation(OffDec);
                 % Update the ideal point
                 Z          = min([Z;Offspring.objs],[],1);
                 % Environmental selection

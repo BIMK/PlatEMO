@@ -24,7 +24,7 @@ classdef DAEA < ALGORITHM
 
             %% Optimization
             while Algorithm.NotTerminated(Population)
-                Offspring  = NicVariation(Population);
+                Offspring  = NicVariation(Problem,Population);
                 Population = EnvironmentalSelection([Population, Offspring],Problem.N);
             end
         end
@@ -36,19 +36,19 @@ function Pop = InitialPop(Problem)
     D = Problem.D;
     T = min(D, N * 3);
     if T < D
-        Pop = zeros(N, D);
+        Pop = false(N, D);
         for i = 1 : N
             k = randperm(T, 1);
             j = randperm(D, k);
             Pop(i, j) = 1;
         end
-        Pop = SOLUTION(Pop);
+        Pop = Problem.Evaluation(Pop);
     else
         Pop = Problem.Initialization();
     end
 end
 
-function Offspring = NicVariation(Population)
+function Offspring = NicVariation(Problem,Population)
     Objs  = Population.objs;    
     Decs  = Population.decs;
     [N,D] = size(Decs);
@@ -102,7 +102,7 @@ function Offspring = NicVariation(Population)
 
     % get unique offspring and individuals (function evaluated)
     Offspring = unique(Offspring, 'rows');
-    Offspring = SOLUTION(Offspring);
+    Offspring = Problem.Evaluation(Offspring);
 end
 
 function Population = EnvironmentalSelection(Population, N)

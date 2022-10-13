@@ -25,10 +25,12 @@ classdef LIRCMOP3 < PROBLEM
             if isempty(obj.D); obj.D = 30; end
             obj.lower    = zeros(1,obj.D);
             obj.upper    = ones(1,obj.D);
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
-        %% Calculate objective values
-        function PopObj = CalObj(obj,X)
+        %% Calculate objective values and constraint violations
+        function Population = Evaluation(obj,varargin)
+            X = varargin{1};
+            X = max(min(X,repmat(obj.upper,size(X,1),1)),repmat(obj.lower,size(X,1),1));
             x_odd       = X(:,3:2:end);
             x_even      = X(:,2:2:end);
             len_odd     = size(x_odd,2); 
@@ -37,19 +39,12 @@ classdef LIRCMOP3 < PROBLEM
             g_2         = sum((x_even - repmat(X(:,1),1,len_even)).^2,2);      
             PopObj(:,1) = X(:,1) + g_1;
             PopObj(:,2) = 1 - X(:,1) .^ 2 + g_2;
-        end
-        %% Calculate constraint violations
-        function PopCon = CalCon(obj,X)
-            x_odd       = X(:,3:2:end);
-            x_even      = X(:,2:2:end);
-            len_odd     = size(x_odd,2); 
-            len_even    = size(x_even,2);
-            g_1         = sum((x_odd - repmat(X(:,1),1,len_odd)).^2,2);
-            g_2         = sum((x_even - repmat(X(:,1),1,len_even)).^2,2);
             PopCon(:,1) = (0.5 - g_1).*(0.51 - g_1);
             PopCon(:,2) = (0.5 - g_2).*(0.51 - g_2);
             PopCon(:,3) = 0.5 - sin(20 * pi * X(:,1));
-        end 
+            Population  = SOLUTION(X,PopObj,PopCon,varargin{2:end});
+            obj.FE      = obj.FE + length(Population);
+        end
         %% Generate points on the Pareto front
         function R = GetOptimum(obj,N)
             R(:,1) = linspace(0,1,N)';

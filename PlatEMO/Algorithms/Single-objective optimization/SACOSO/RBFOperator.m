@@ -16,6 +16,7 @@ function [SwarmRBF,DeltaRBF] = RBFOperator(net,Demons,SwarmRBF,DeltaRBF,Gbest,Pr
     D      = D - 1;
     BU     = Problem.upper;
     BD     = Problem.lower;
+    
     %% SL-PSO
     for i = 1 : N
         % Choose an individual to learn one dimension to follow
@@ -45,6 +46,4 @@ function [SwarmRBF,DeltaRBF] = RBFOperator(net,Demons,SwarmRBF,DeltaRBF,Gbest,Pr
     SwarmRBF(:,1:D) = min(SwarmRBF(:,1:D),repmat(Problem.upper,N,1));
     % Approximate the fitness of each particle
     SwarmRBF(:,1+D) = sim(net,SwarmRBF(:,1:D)')';
-%     preDecs = (SwarmRBF(:,1:D)-BD)./repmat(BU-BD,N,1);
-%     SwarmRBF(:,1+D) = sim(net,preDecs')';
 end

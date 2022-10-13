@@ -30,7 +30,7 @@ classdef Sparse_PM < PROBLEM
             [numTran,lenTran,numPa,lenPa,numItem] = obj.ParameterSet(10000,50,100,5,100);
             obj.M        = 2;
             obj.D        = numItem;
-            obj.encoding = 'binary';
+            obj.encoding = 4 + zeros(1,obj.D);
             % Randomly generate transaction dataset
             fileName = fullfile(fileparts(mfilename('fullpath')),sprintf('Dataset_PM-D%d-T%d-L%d-I%d-N%d.mat',numTran,lenTran,numPa,lenPa,numItem));
             if exist(fileName,'file') == 2
@@ -68,7 +68,7 @@ classdef Sparse_PM < PROBLEM
                 N = obj.N;
             end
             PopDec     = rand(N,obj.D) < 20/obj.D;
-            Population = SOLUTION(PopDec);
+            Population = obj.Evaluation(PopDec);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

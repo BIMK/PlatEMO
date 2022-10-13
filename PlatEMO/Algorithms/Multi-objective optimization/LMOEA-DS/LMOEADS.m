@@ -1,5 +1,5 @@
 classdef LMOEADS < ALGORITHM
-% <multi> <real> <large/none>
+% <multi> <real/integer> <large/none>
 % Large-scale evolutionary multi-objective optimization assisted by
 % directed sampling
 % Nw --- 10 --- Cluster number

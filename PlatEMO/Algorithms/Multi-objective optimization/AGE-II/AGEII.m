@@ -1,5 +1,5 @@
 classdef AGEII < ALGORITHM
-% <multi> <real/binary/permutation>
+% <multi> <real/integer/label/binary/permutation>
 % Approximation-guided evolutionary multi-objective algorithm II
 % epsilon --- 0.1 --- The parameter in grid location calculation
 
@@ -28,7 +28,7 @@ classdef AGEII < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = MatingSelection(Population.objs);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 Archive    = UpdateArchive([Archive,Offspring],epsilon);
                 Population = EnvironmentalSelection([Population,Offspring],Archive.objs,Problem.N);
             end

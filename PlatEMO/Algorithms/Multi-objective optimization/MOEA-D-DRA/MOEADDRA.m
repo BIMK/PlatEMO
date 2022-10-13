@@ -1,5 +1,5 @@
 classdef MOEADDRA < ALGORITHM
-% <multi/many> <real>
+% <multi/many> <real/integer>
 % MOEA/D with dynamical resource allocation
 
 %------------------------------- Reference --------------------------------
@@ -54,7 +54,7 @@ classdef MOEADDRA < ALGORITHM
                         end
 
                         % Generate an offspring
-                        Offspring = OperatorDE(Population(i),Population(P(1)),Population(P(2)));
+                        Offspring = OperatorDE(Problem,Population(i),Population(P(1)),Population(P(2)));
 
                         % Update the ideal point
                         Z = min(Z,Offspring.obj);

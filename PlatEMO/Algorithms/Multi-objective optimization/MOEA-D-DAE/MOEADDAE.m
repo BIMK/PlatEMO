@@ -1,5 +1,5 @@
 classdef MOEADDAE < ALGORITHM
-% <multi> <real/binary/permutation> <constrained>
+% <multi> <real/integer/label/binary/permutation> <constrained>
 % MOEA/D with detect-and-escape strategy
 
 %------------------------------- Reference --------------------------------
@@ -57,7 +57,7 @@ classdef MOEADDAE < ALGORITHM
                         else
                             P = randperm(Problem.N);
                         end
-                        Offspring = OperatorGAhalf(Population(P(1:2)));
+                        Offspring = OperatorGAhalf(Problem,Population(P(1:2)));
                         z = min([z;Offspring.objs],[],1);
                         [Population,Pi] = UpdatePop(Population,P,Offspring,epsilon,z,W,sigma,Pi,avg_fit);
                         if current == 1

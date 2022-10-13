@@ -22,13 +22,13 @@ classdef uilist < handle
     methods
         %% Constructor
         function obj = uilist(parent,fig,icon)
-            obj.grid  = uigridlayout(parent,'RowHeight',{20},'ColumnWidth',{20,'1x','1x',20},'Padding',[5 0 5 0],'RowSpacing',5,'ColumnSpacing',0,'Scrollable','on','BackgroundColor','w');
-            obj.menus = uicontext(fig);
+            obj.grid  = uigridlayout(parent,'RowHeight',{20},'ColumnWidth',{15,'1x','1x',20},'Padding',[5 0 5 0],'RowSpacing',5,'ColumnSpacing',3,'Scrollable','on','BackgroundColor','w');
+            obj.menus = uicontext(fig,100);
             obj.menus.add('Open file',icon.file,@obj.cb_openfile);
             obj.menus.add('Open folder',icon.folder,@obj.cb_openfolder);
             obj.menus.add('Search online',icon.scholar,@obj.cb_search);
             obj.menus.flush();
-            obj.menus(2) = uicontext(fig);
+            obj.menus(2) = uicontext(fig,100);
             obj.menus(2).add('Move up',icon.moveup,@obj.cb_moveup);
             obj.menus(2).add('Move down',icon.movedown,@obj.cb_movedown);
             obj.menus(2).add('Delete',icon.delete,@obj.cb_delete);
@@ -108,17 +108,22 @@ classdef uilist < handle
             item.title.Layout.Column = [1 4];
             item.tip = uibutton(obj.grid,'Text','¨‹','FontSize',10,'BackgroundColor',color,'FontColor',[1 1 1],'Tooltip',Comment,'ButtonPushedFcn',@obj.cb_callmenu);
             item.tip.Layout.Column = 4;
-            item.label = [];
-            item.edit  = [];
+            item.label  = [];
+            item.edit   = [];
+            item.button = [];
             for i = 1 : size(Parameter,1)
                 item.label = [item.label,uilabel(obj.grid,'Text',Parameter{i,1},'Tooltip',Parameter{i,3})];
                 item.label(end).Layout.Column = 2;
                 if type<0 && i==2 && singleobj  % Single-objective optimization
-                    item.edit = [item.edit,uieditfield(obj.grid,'Value','1','Enable','off','HorizontalAlignment','right','Tooltip',Parameter{i,3})];
+                    item.edit = [item.edit,uieditfield(obj.grid,'Value','1','Enable','off','HorizontalAlignment','right','Tooltip',Parameter{i,3},'UserData',false)];
                 else                            % Multi-objective optimization
-                    item.edit = [item.edit,uieditfield(obj.grid,'Value',Parameter{i,2},'HorizontalAlignment','right','Tooltip',Parameter{i,3})];
+                    item.edit = [item.edit,uieditfield(obj.grid,'Value',Parameter{i,2},'HorizontalAlignment','right','Tooltip',Parameter{i,3},'UserData',true)];
                 end
                 item.edit(end).Layout.Column = 3;
+                if strcmp(Parameter{i,1},'maxFE')
+                    item.button = uibutton(obj.grid,'Text','¨‹','FontSize',10,'BackgroundColor','w','UserData',{item.label(end),item.edit(end)},'ButtonPushedFcn',@obj.cb_switch);
+                    item.button.Layout.Column = 4;
+                end
             end
             obj.items = [obj.items,item];
         end
@@ -133,6 +138,7 @@ classdef uilist < handle
                     delete(obj.items(i).tip);
                     delete([obj.items(i).label]);
                     delete([obj.items(i).edit]);
+                    delete(obj.items(i).button);
                 end
                 obj.items(index) = [];
             end
@@ -156,6 +162,9 @@ classdef uilist < handle
                             obj.items(i).label(j).Layout.Row = loc;
                             obj.items(i).edit(j).Layout.Row  = loc;
                         end
+                        if ~isempty(obj.items(i).button)
+                            obj.items(i).button.Layout.Row = obj.items(i).button.UserData{1}.Layout.Row;
+                        end
                     end
                 end
             end
@@ -164,7 +173,10 @@ classdef uilist < handle
         function set.Enable(obj,value)
             set([obj.items.title],'Enable',value);
             set([obj.items.tip],'Enable',value);
-            set([obj.items.edit],'Enable',value);
+            set([obj.items.button],'Enable',value);
+            edits = [obj.items.edit];
+            set(edits,'Enable',value);
+            set(edits(~cell2mat(get(edits,'UserData'))),'Enable','off');
         end
     end
     methods(Access = private)
@@ -181,6 +193,9 @@ classdef uilist < handle
                     if ~isempty(obj.items(i).label)
                         [obj.items(i).label.Visible] = deal(~obj.items(i).fold);
                         [obj.items(i).edit.Visible]  = deal(~obj.items(i).fold);
+                        if ~isempty(obj.items(i).button)
+                            obj.items(i).button.Visible = ~obj.items(i).fold;
+                        end
                         obj.flush();
                     end
                     break;
@@ -195,6 +210,18 @@ classdef uilist < handle
                     obj.menus(abs(obj.items(i).type)).show();
                     break;
                 end
+            end
+        end
+        %% Switch between maxFE and maxRuntime
+        function cb_switch(obj,ui,~)
+            if strcmp(ui.UserData{1}.Text,'maxFE')
+                set(ui.UserData{1},'Text','maxRuntime','Tooltip','Maximum runtime (in second)');
+                set(ui.UserData{2},'Value','1','Tooltip','Maximum runtime (in second)');
+                set(ui,'Text','¡ø');
+            else
+                set(ui.UserData{1},'Text','maxFE','Tooltip','Maximum number of function evaluations');
+                set(ui.UserData{2},'Value','10000','Tooltip','Maximum number of function evaluations');
+                set(ui,'Text','¨‹');
             end
         end
         %% Open file

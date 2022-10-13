@@ -1,5 +1,5 @@
 classdef EGO < ALGORITHM
-% <single> <real> <expensive>
+% <single> <real/integer> <expensive>
 % Efficient global optimization
 % IFEs --- 10000 --- Internal GA evals per iteration
 
@@ -24,7 +24,7 @@ classdef EGO < ALGORITHM
             %% Generate the random population
             N          = 10*Problem.D;
             PopDec     = UniformPoint(N,Problem.D,'Latin');
-            Population = SOLUTION(repmat(Problem.upper-Problem.lower,N,1).*PopDec+repmat(Problem.lower,N,1));
+            Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,N,1).*PopDec+repmat(Problem.lower,N,1));
             theta      = 10.*ones(1,Problem.D);
             
             %% Optimization
@@ -43,11 +43,11 @@ classdef EGO < ALGORITHM
                 % Surrogate-assisted prediction
                 dmodel     = dacefit(Population.decs,Population.objs,'regpoly1','corrgauss',theta,1e-5.*ones(1,D),20.*ones(1,D));
                 theta      = dmodel.theta;
-                PopDec     = EvolEI(PDec,PObj,dmodel,IFEs);
+                PopDec     = EvolEI(Problem,PDec,PObj,dmodel,IFEs);
                 
                 if checkExist(Population.decs,PopDec)
                     % Evaluate new candidate
-                    Population = [Population,SOLUTION(PopDec)];
+                    Population = [Population,Problem.Evaluation(PopDec)];
                 end
             end
         end

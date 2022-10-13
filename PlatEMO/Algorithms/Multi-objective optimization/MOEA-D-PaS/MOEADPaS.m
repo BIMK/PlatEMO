@@ -1,5 +1,5 @@
 classdef MOEADPaS < ALGORITHM
-% <multi/many> <real>
+% <multi/many> <real/integer>
 % MOEA/D with Pareto adaptive scalarizing approximation
 
 %------------------------------- Reference --------------------------------
@@ -47,7 +47,7 @@ classdef MOEADPaS < ALGORITHM
                     end
 
                     % Generate an offspring
-                    Offspring = OperatorDE(Population(i),Population(P(1)),Population(P(2)));
+                    Offspring = OperatorDE(Problem,Population(i),Population(P(1)),Population(P(2)));
 
                     % Update the solutions in P by the scalarizing method
                     INF   = p(P) == inf;

@@ -1,4 +1,4 @@
-function [OffDec,OffMask] = Operator(ParentDec,ParentMask,Fitness,REAL)
+function [OffDec,OffMask] = Operator(Problem,ParentDec,ParentMask,Fitness)
 % The operator of SparseEA2
 
 %------------------------------- Copyright --------------------------------
@@ -18,8 +18,11 @@ function [OffDec,OffMask] = Operator(ParentDec,ParentMask,Fitness,REAL)
     Parent2Mask = ParentMask(floor(end/2)+1:floor(end/2)*2,:);
     
      %% Crossover and mutation for dec
-     if REAL
-         [OffDec,groupIndex,chosengroups] = GLP_OperatorGAhalf(Parent1Dec,Parent2Dec,4); % 4 -- numberofgroups
+     if any(Problem.encoding~=4)
+         [OffDec,groupIndex,chosengroups] = GLP_OperatorGAhalf(Problem,Parent1Dec,Parent2Dec,4);	% 4 -- numberofgroups
+         OffDec(:,Problem.encoding==4) = 1;
+     else
+         OffDec = ones(size(Parent1Dec));
      end
             
     %% Crossover for mask
@@ -37,7 +40,7 @@ function [OffDec,OffMask] = Operator(ParentDec,ParentMask,Fitness,REAL)
     end
     
     %% Mutation for mask
-    if REAL
+    if any(Problem.encoding~=4)
         chosenindex = groupIndex == chosengroups;
         for i = 1 : N/2
             if rand < 0.5

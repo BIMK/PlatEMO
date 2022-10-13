@@ -1,5 +1,5 @@
 classdef MOCell < ALGORITHM
-% <multi> <real/binary/permutation> <constrained/none>
+% <multi> <real/integer/label/binary/permutation> <constrained/none>
 % Cellular genetic algorithm
 
 %------------------------------- Reference --------------------------------
@@ -44,7 +44,7 @@ classdef MOCell < ALGORITHM
                 Offspring(1:length(Population)) = SOLUTION();
                 for i = 1 : length(Population)
                     parents      = Neighbor(i,TournamentSelection(2,2,FrontNo(Neighbor(i,:)),-CrowdDis(Neighbor(i,:))));
-                    Offspring(i) = OperatorGAhalf(Population(parents));
+                    Offspring(i) = OperatorGAhalf(Problem,Population(parents));
                 end
 
                 % Replace the old population

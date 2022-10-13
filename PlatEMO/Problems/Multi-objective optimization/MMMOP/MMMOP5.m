@@ -18,10 +18,11 @@ classdef MMMOP5 < PROBLEM
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    properties(Access = private)
+	properties(Access = private)
         kA;     % Number of decision variables in XA
         c;      % Parameter c
         d;      % Parameter d
+        POS;    % Pareto optimal set for IGDX calculation
     end
 	methods
         %% Default settings of the problem
@@ -31,7 +32,7 @@ classdef MMMOP5 < PROBLEM
             [obj.kA,obj.c,obj.d] = obj.ParameterSet(1,2,2);
             obj.lower    = zeros(1,obj.D);
             obj.upper    = ones(1,obj.D);
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)
@@ -48,9 +49,13 @@ classdef MMMOP5 < PROBLEM
         end
         %% Generate Pareto optimal solutions
         function R = GetOptimum(obj,N)
-            XA = Grid(0.5/obj.c:1/obj.c:(1-0.5/obj.c),obj.kA);
-            X  = UniformPoint(N/size(XA,1),obj.M-1,'grid');
-            R  = [repmat(X,size(XA,1),1),XA(repmat(1:end,size(X,1),1),:),zeros(size(X,1)*size(XA,1),obj.D-size(X,2)-size(XA,2))+0.5];
+            % Generate points in Pareto optimal set
+            XA      = Grid(0.5/obj.c:1/obj.c:(1-0.5/obj.c),obj.kA);
+            X       = UniformPoint(N/size(XA,1),obj.M-1,'grid');
+            obj.POS = [repmat(X,size(XA,1),1),XA(repmat(1:end,size(X,1),1),:),zeros(size(X,1)*size(XA,1),obj.D-size(X,2)-size(XA,2))+0.5];
+            % Generate points on Pareto front
+            R = UniformPoint(N,obj.M);
+            R = R./repmat(sqrt(sum(R.^2,2)),1,obj.M);
         end
         %% Generate the image of Pareto front
         function R = GetPF(obj)
@@ -62,6 +67,15 @@ classdef MMMOP5 < PROBLEM
                 R = {sin(a)*cos(a'),sin(a)*sin(a'),cos(a)*ones(size(a'))};
             else
                 R = [];
+            end
+        end
+        %% Calculate the metric value
+        function score = CalMetric(obj,metName,Population)
+            switch metName
+                case 'IGDX'
+                    score = feval(metName,Population,obj.POS);
+                otherwise
+                    score = feval(metName,Population,obj.optimum);
             end
         end
         %% Display a population in the objective space

@@ -1,5 +1,5 @@
 classdef MOEADURAW < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % MOEA/D with uniform randomly adaptive weights
 % delta --- 0.9 --- The probability of choosing parents locally
 % nr    ---   2 --- Maximum number of solutions replaced by each offspring
@@ -47,7 +47,7 @@ classdef MOEADURAW < ALGORITHM
 
             %% Optimization
             EP = [];
-            adaptation_moment=round(ceil(Problem.maxFE/Problem.N)*0.05);
+            adaptation_moment = round(ceil(Problem.maxFE/Problem.N)*0.05);
             while Algorithm.NotTerminated(Population)
                 % For each solution	
                 Offsprings(1:Problem.N) = SOLUTION();
@@ -60,7 +60,7 @@ classdef MOEADURAW < ALGORITHM
                     end
 
                     % Generate an offspring
-                    Offsprings(i) = OperatorGAhalf(Population(P(1:2)));
+                    Offsprings(i) = OperatorGAhalf(Problem,Population(P(1:2)));
 
                     % Update the ideal point
                     Z = min(Z,Offsprings(i).obj);

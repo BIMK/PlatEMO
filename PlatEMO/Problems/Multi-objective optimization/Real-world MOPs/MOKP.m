@@ -25,7 +25,7 @@ classdef MOKP < PROBLEM
             % Parameter setting
             if isempty(obj.M); obj.M = 2; end
             if isempty(obj.D); obj.D = 250; end
-            obj.encoding = 'binary';
+            obj.encoding = 4 + zeros(1,obj.D);
             % Randomly generate profits and weights
             file = sprintf('MOKP-M%d-D%d.mat',obj.M,obj.D);
             file = fullfile(fileparts(mfilename('fullpath')),file);

@@ -35,7 +35,7 @@ function WHVLoss = CalWHVLoss(PopObj,FrontNo,wz,AA,RA)
         current  = find(FrontNo==f);
         totalWHV = CalWHV(PopObj(current,:),RefPoint,Weight(current));
         for i = 1 : length(current)
-            drawnow();
+            drawnow('limitrate');
             currenti           = current([1:i-1,i+1:end]);
             WHVLoss(current(i))= totalWHV - CalWHV(PopObj(currenti,:),RefPoint,Weight(currenti));
         end

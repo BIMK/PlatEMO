@@ -23,7 +23,7 @@ classdef MaF11 < PROBLEM
             obj.D        = ceil((obj.D-obj.M+1)/2)*2 + obj.M - 1;
             obj.lower    = zeros(1,obj.D);
             obj.upper    = 2 : 2 : 2*obj.D;
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

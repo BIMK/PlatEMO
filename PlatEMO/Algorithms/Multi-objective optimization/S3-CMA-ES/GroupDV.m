@@ -22,13 +22,13 @@ function group = GroupDV(Problem,DV,PV,nPerGroup)
    
    fhatDVDecs     = repmat(lb,dim,1) + eye(dim).*repmat(meanDV,dim,1);
    fhatDecs       = [repmat(fixPV,dim,1) fhatDVDecs];
-   fhatPopulation = SOLUTION(fhatDecs);
+   fhatPopulation = Problem.Evaluation(fhatDecs);
    fhat_archiveF  = fhatPopulation.objs;
    
    lambdaF = repmat(zeros(dim,dim),1,Problem.M);	% cell(dim, dim);
    
    p1Dec   = [fixPV lb]; 
-   tempFp1 = SOLUTION(p1Dec);
+   tempFp1 = Problem.Evaluation(p1Dec);
    fp1F    = tempFp1.objs;
    
    for i = 1 : dim-1      
@@ -41,7 +41,7 @@ function group = GroupDV(Problem,DV,PV,nPerGroup)
            p4(i)   = meanDV(i);	% temp;
            p4(j)   = meanDV(j);	% temp;
            p4Dec   = [fixPV p4];
-           tempFp4 = SOLUTION(p4Dec);
+           tempFp4 = Problem.Evaluation(p4Dec);
            fp4     = tempFp4.objs;
            
            f_archiveF(i,j:dim:size(f_archiveF,2)) = fp4;

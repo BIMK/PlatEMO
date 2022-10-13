@@ -1,5 +1,5 @@
 classdef PBRVEA < ALGORITHM
-% <multi/many> <real> <expensive>
+% <multi/many> <real/integer> <expensive>
 % RVEA based on Pareto based bi-indicator infill sampling criterion
 % alpha ---  2 --- The parameter controlling the rate of change of penalty
 % wmax  --- 15 --- Number of generations before updating Kriging models
@@ -7,7 +7,7 @@ classdef PBRVEA < ALGORITHM
 %------------------------------- Reference --------------------------------
 % Z. Song, H. Wang, and H. Xu, A framework for expensive many-objective
 % optimization with Pareto-based bi-indicator infill sampling criterion.
-% Memetic Computing, 2021.
+% Memetic Computing, 2022, 14: 179-191.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -31,7 +31,7 @@ classdef PBRVEA < ALGORITHM
             V1            = V;
             NI            = Problem.N;
             P             = UniformPoint(NI,Problem.D,'Latin');
-            Population    = SOLUTION(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
+            Population    = Problem.Evaluation(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
             
             A             = Population;
             THETA         = 5.*ones(Problem.M,Problem.D);
@@ -43,8 +43,8 @@ classdef PBRVEA < ALGORITHM
                 train_X = A.decs;
                 train_Y = A.objs;
                 [~,distinct] = unique(round(train_X*1e6)/1e6,'rows');  
-                train_X    = train_X(distinct,:);
-                train_Y   = train_Y(distinct,:);
+                train_X      = train_X(distinct,:);
+                train_Y      = train_Y(distinct,:);
                 for i = 1:Problem.M % train surrogates
                     dmodel     = dacefit(train_X,train_Y(:,i),'regpoly0','corrgauss',THETA(i,:),1e-5.*ones(1,Problem.D),100.*ones(1,Problem.D));
                     Model{i}   = dmodel;
@@ -54,7 +54,7 @@ classdef PBRVEA < ALGORITHM
                 w = 1;
                 while w <= wmax
                     theta = (w/wmax)^alpha;
-                    OffspringDec = OperatorGA(Dec);
+                    OffspringDec = OperatorGA(Problem,Dec);
                     N = size(OffspringDec,1);
                     OffspringObj = zeros(N,Problem.M);
                     for i = 1:N
@@ -94,8 +94,8 @@ classdef PBRVEA < ALGORITHM
                 end
                 
                %% Pareto-based bi-indicator infill sampling criterion 
-                DAdec =     Dec;
-                DA    =     Population;
+                DAdec = Dec;
+                DA    = Population;
                 % Normalization
                 DA_Nor = (DA.objs - repmat(min([Obj;DA.objs],[],1),length(DA),1))...  
                     ./repmat(max([Obj;DA.objs],[],1) - min([Obj;DA.objs],[],1),length(DA),1);
@@ -115,20 +115,19 @@ classdef PBRVEA < ALGORITHM
                 % Diversity Indicator
                 DI = -min(dist_D,[],2); 
                 
-                
                 % Calculate the distance between candidate solutions and ideal point
                 dist_C = pdist2(DA_Nor_pre,repmat(Zmin,size(DA_Nor_pre,1),1));
                 
                 % Convergence Indicator
-                CI = dist_C(:,1);
-                newObj= [DI,CI];
-                ND1 = NDSort(newObj,1);
+                CI      = dist_C(:,1);
+                newObj  = [DI,CI];
+                ND1     = NDSort(newObj,1);
                 PnewDec = DAdec((ND1==1),:);  % find solutions in the first front
                 PnewDec = unique(PnewDec,'rows');
                 
-                New = SOLUTION(PnewDec);
-                A = [A,New];
-                mu = size(PnewDec,1);
+                New = Problem.Evaluation(PnewDec);
+                A   = [A,New];
+                mu  = size(PnewDec,1);
                 Population = UpdataArchive(Population,New,V1,mu,NI); 
                 V1(1:size(V0,1),:) = ReferenceVectorAdaptation(Population.objs,V0);
                 V = V1;

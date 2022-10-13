@@ -1,5 +1,5 @@
 classdef EDNARMOEA < ALGORITHM
-% <multi/many> <real> <expensive>
+% <multi/many> <real/integer> <expensive>
 % Efficient dropout neural network based AR-MOEA
 % delta --- 0.05 --- Threshold of judging the diversity
 % wmax  ---   20 --- Number of generations before updating Kriging models
@@ -9,7 +9,8 @@ classdef EDNARMOEA < ALGORITHM
 % D. Guo, X. Wang, K. Gao, Y. Jin, J. Ding, and T. Chai. Evolutionary
 % optimization of high-dimensional multiobjective and many-objective
 % expensive problems assisted by a dropout neural network. IEEE
-% Transactions on Systems, Man, and Cybernetics: Systems, 2021.
+% Transactions on Systems, Man, and Cybernetics: Systems, 2022, 52(4):
+% 2084-2097.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -28,7 +29,7 @@ classdef EDNARMOEA < ALGORITHM
             W     = UniformPoint(Problem.N,Problem.M);
             NI    = 11*Problem.D-1;
             P     = UniformPoint(NI,Problem.D,'Latin');
-            A     = SOLUTION(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
+            A     = Problem.Evaluation(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
             tr_x  = A.decs;
             tr_y  = A.objs;
             [tr_xx,ps] = mapminmax(tr_x');tr_xx=tr_xx';
@@ -56,7 +57,7 @@ classdef EDNARMOEA < ALGORITHM
                 w=1;
                 while w < wmax
                     MatingPool = MatingSelection(PopObj,RefPoint,Range);
-                    OffspringDec  = OperatorGA(PopDec(MatingPool,:),{1,20,1,20});
+                    OffspringDec  = OperatorGA(Problem,PopDec(MatingPool,:),{1,20,1,20});
                     [OffspringObj, OffspringMSE] = Estimate(OffspringDec, net, Params, Problem.M);
                     [Archive,RefPoint,Range, Ratio] = UpdateRefPoint([Archive;OffspringObj],W,Range);
                     MediatePopDec=[PopDec;OffspringDec];
@@ -71,7 +72,7 @@ classdef EDNARMOEA < ALGORITHM
                 flag=RatioOld-Ratio<delta;
                 PopNew=IndividualSelect(PopDec, PopObj, PopMSE, Ke, flag);
                 RatioOld=Ratio;
-                New = SOLUTION(PopNew);
+                New = Problem.Evaluation(PopNew);
                 A   = [A,New];
                 [tr_x, tr_y]=SelectTrainData(A, 11*Problem.D-1, length(New));
                 [tr_xx,ps]=mapminmax(tr_x');tr_xx=tr_xx';

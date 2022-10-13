@@ -1,5 +1,5 @@
 classdef gNSGAII < ALGORITHM
-% <multi> <real/binary/permutation> <preference>
+% <multi> <real/integer/label/binary/permutation>
 % g-dominance based NSGA-II
 % Point --- --- Preferred point
 
@@ -30,7 +30,7 @@ classdef gNSGAII < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
-                Offspring  = OperatorGA(Population(MatingPool));
+                Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,FrontNo,CrowdDis] = EnvironmentalSelection([Population,Offspring],Problem.N,Point);
             end
         end

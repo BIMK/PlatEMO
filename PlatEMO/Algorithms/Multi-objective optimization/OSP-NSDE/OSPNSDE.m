@@ -1,7 +1,6 @@
 classdef OSPNSDE < ALGORITHM
-% <multi> <real>
-% Non-dominated sorting differential evolution with prediction in the
-% objective space
+% <multi> <real/integer>
+% Non-dominated sorting differential evolution with prediction in the objective space
 % lambda --- 0.2 --- Hypervolume variation percent
 % p      ---  50 --- Initial forecast horizon
 
@@ -33,7 +32,7 @@ classdef OSPNSDE < ALGORITHM
 
             Nadyr_P = max(Population.objs);
 
-            t_init = 2;  %Initial generation for regression
+            t_init = 2;  % Initial generation for regression
             t = 0;
 
             %% Optimization
@@ -67,14 +66,14 @@ classdef OSPNSDE < ALGORITHM
 
                     else
                         MatingPool = [1:Problem.N,randi(Problem.N,1,2*Problem.N)];
-                        Offspring = OperatorDE(Population(MatingPool(1:length(MatingPool)/3)),...
+                        Offspring = OperatorDE(Problem,Population(MatingPool(1:length(MatingPool)/3)),...
                             Population(MatingPool(length(MatingPool)/3+1:length(MatingPool)/3*2)),...
                             Population(MatingPool(length(MatingPool)/3*2+1:end)));              
                         [Population,FrontNo] = EnvironmentalSelection([Population,Offspring],Problem.N);
                     end
                 else
                     MatingPool = [1:Problem.N,randi(Problem.N,1,2*Problem.N)];
-                    Offspring = OperatorDE(Population(MatingPool(1:length(MatingPool)/3)),...
+                    Offspring = OperatorDE(Problem,Population(MatingPool(1:length(MatingPool)/3)),...
                         Population(MatingPool(length(MatingPool)/3+1:length(MatingPool)/3*2)),...
                         Population(MatingPool(length(MatingPool)/3*2+1:end)));               
                     [Population,FrontNo] = EnvironmentalSelection([Population,Offspring],Problem.N);

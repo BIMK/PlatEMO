@@ -1,5 +1,5 @@
 classdef CMOEA_MS < ALGORITHM
-% <multi> <real/binary/permutation> <constrained>
+% <multi> <real/integer/label/binary/permutation> <constrained>
 % Constrained multiobjective evolutionary algorithm with multiple stages
 % type   ---   1 --- Type of operator (1. GA 2. DE)
 % lambda --- 0.5 --- Parameter for determining the current stage
@@ -8,7 +8,7 @@ classdef CMOEA_MS < ALGORITHM
 % Y. Tian, Y. Zhang, Y. Su, X. Zhang, K. C. Tan, and Y. Jin, Balancing
 % objective optimization and constraint satisfaction in constrained
 % evolutionary multi-objective optimization, IEEE Transactions on
-% Cybernetics, 2020.
+% Cybernetics, 2022, 52(9): 9559-9572.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -31,11 +31,11 @@ classdef CMOEA_MS < ALGORITHM
             while Algorithm.NotTerminated(Population)
                 if type == 1
                     MatingPool = TournamentSelection(2,Problem.N,Fitness);  
-                    Offspring  = OperatorGA(Population(MatingPool));
+                    Offspring  = OperatorGA(Problem,Population(MatingPool));
                 elseif type == 2
                     Mat1 = TournamentSelection(2,Problem.N,Fitness);
                     Mat2 = TournamentSelection(2,Problem.N,Fitness);
-                    Offspring = OperatorDE(Population,Population(Mat1),Population(Mat2));
+                    Offspring = OperatorDE(Problem,Population,Population(Mat1),Population(Mat2));
                 end
                 Q  = [Population,Offspring];
                 CV = CalCV(Q.cons);

@@ -1,5 +1,5 @@
 classdef SACCEAMII < ALGORITHM
-% <single> <real> <expensive>
+% <single> <real/integer> <expensive>
 % Surrogate-assisted cooperative co-evolutionary algorithm of Minamo
 % s --- 50 --- Number of subcomponents of separable variables
 
@@ -26,12 +26,12 @@ classdef SACCEAMII < ALGORITHM
             BU = Problem.lower;
             BD = Problem.upper;
             D  = Problem.D;
-            [Population,Groups,K] = spiltVariables(BU,BD,s);
+            [Population,Groups,K] = spiltVariables(Problem,BU,BD,s);
             
             %% Initialize each component
             % Start point
             GlobalIndi  = rand(1,D).*(BU-BD) + BD;
-            GlobalObj   = SOLUTION(GlobalIndi);
+            GlobalObj   = Problem.Evaluation(GlobalIndi);
             Population  = [Population,GlobalObj];
             Fmin        = GlobalObj.objs;
             GlobalCandi = GlobalIndi;
@@ -44,16 +44,16 @@ classdef SACCEAMII < ALGORITHM
                 RepGlobal = repmat(GlobalIndi,subN,1);
                 Decs   = rand(subN,subD).*repmat(BU(select)-BD(select),subN,1) + repmat(BD(select),subN,1);
                 RepGlobal(:,select) = Decs;
-                news   = SOLUTION(RepGlobal);
+                news   = Problem.Evaluation(RepGlobal);
                 database{i} = news;
-                Population = [Population,news];
-                [~,best]   = min(news.objs);
-                BestDec    = news(best).decs;
+                Population  = [Population,news];
+                [~,best]    = min(news.objs);
+                BestDec     = news(best).decs;
                 GlobalCandi(select) = BestDec(select);
             end
             % Evaluate the global candidate
-            NewCandi = SOLUTION(GlobalCandi);
-            CandiObj = NewCandi.objs;
+            NewCandi   = Problem.Evaluation(GlobalCandi);
+            CandiObj   = NewCandi.objs;
             Population = [Population,NewCandi];
             if CandiObj < Fmin
                 Fmin = CandiObj;
@@ -71,7 +71,7 @@ classdef SACCEAMII < ALGORITHM
                     PopSize   = 10*sum(select);
                     ProposedPoint       = GAOptimize(model,PopSize,Decs(:,select),BU(select),BD(select));
                     tGlobalIndi(select) = ProposedPoint;
-                    newPropose    = SOLUTION(tGlobalIndi);
+                    newPropose    = Problem.Evaluation(tGlobalIndi);
                     database{i}   = [database{i},newPropose];
                     if newPropose.objs < CandiObj
                         decs = newPropose.decs;
@@ -80,7 +80,7 @@ classdef SACCEAMII < ALGORITHM
                     end
                     Population = [Population,newPropose];
                 end
-                new = SOLUTION(GlobalCandi);
+                new = Problem.Evaluation(GlobalCandi);
                 Population = [Population,new];
                 if new.objs < Fmin
                     Fmin = new.objs;

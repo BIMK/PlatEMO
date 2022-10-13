@@ -27,18 +27,19 @@ classdef C3_DTLZ4 < PROBLEM
             end
             obj.lower    = zeros(1,obj.D);
             obj.upper    = ones(1,obj.D);
-            obj.encoding = 'real';
+            obj.encoding = ones(1,obj.D);
         end
-        %% Calculate objective values
-        function PopObj = CalObj(obj,PopDec)
+        %% Calculate objective values and constraint violations
+        function Population = Evaluation(obj,varargin)
+            PopDec = varargin{1};
+            PopDec = max(min(PopDec,repmat(obj.upper,size(PopDec,1),1)),repmat(obj.lower,size(PopDec,1),1));
+            X      = PopDec;
             PopDec(:,1:obj.M-1) = PopDec(:,1:obj.M-1).^100;
             g      = sum((PopDec(:,obj.M:end)-0.5).^2,2);
             PopObj = repmat(1+g,1,obj.M).*fliplr(cumprod([ones(size(g,1),1),cos(PopDec(:,1:obj.M-1)*pi/2)],2)).*[ones(size(g,1),1),sin(PopDec(:,obj.M-1:-1:1)*pi/2)];
-        end
-        %% Calculate constraint violations
-        function PopCon = CalCon(obj,PopDec)
-            PopObj = obj.CalObj(PopDec);
             PopCon = 1 - PopObj.^2/4 - (repmat(sum(PopObj.^2,2),1,obj.M)-PopObj.^2);
+            Population = SOLUTION(X,PopObj,PopCon,varargin{2:end});
+            obj.FE     = obj.FE + length(Population);
         end
         %% Generate points on the Pareto front
         function R = GetOptimum(obj,N)

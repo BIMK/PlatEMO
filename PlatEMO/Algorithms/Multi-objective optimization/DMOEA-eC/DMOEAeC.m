@@ -1,5 +1,5 @@
 classdef DMOEAeC < ALGORITHM
-% <multi> <real/binary/permutation>
+% <multi> <real/integer/label/binary/permutation>
 % Decomposition-based multi-objective evolutionary algorithm with the
 % e-constraint framework
 % INm --- 0.2 --- Iteration interval of alternating the main objective function
@@ -85,7 +85,7 @@ classdef DMOEAeC < ALGORITHM
                         end
 
                         % Generate an offspring
-                        Offspring(i) = OperatorGAhalf(Population(P(1:2)));
+                        Offspring(i) = OperatorGAhalf(Problem,Population(P(1:2)));
 
                         % Update the ideal point
                         z = min(z,Offspring(i).obj);

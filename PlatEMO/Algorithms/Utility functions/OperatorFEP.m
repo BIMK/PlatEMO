@@ -1,13 +1,14 @@
-function Offspring = OperatorFEP(Population)
+function Offspring = OperatorFEP(Problem,Population)
 %OperatorFEP - The operator of fast evolutionary programming.
 %
-%   Off = OperatorFEP(P) uses the operator of fast evolutionary programming
-%   to generate offsprings based on the parents P. P should be an array of
-%   SOLUTION objects, and Off is also an array of SOLUTION objects. Each
-%   object of P is used to generate one offspring.
+%   Off = OperatorFEP(Pro,P) uses the operator of fast evolutionary
+%   programming to generate offsprings for problem Pro based on the parents
+%   P. P should be an array of SOLUTION objects, and Off is also an array
+%   of SOLUTION objects. Each object of P is used to generate one
+%   offspring.
 %
 %   Example:
-%       Off = OperatorFEP(Population)
+%       Off = OperatorFEP(Problem,Population)
 
 %------------------------------- Reference --------------------------------
 % X. Yao, Y. Liu, and G. Lin, Evolutionary programming made faster, IEEE
@@ -34,5 +35,5 @@ function Offspring = OperatorFEP(Population)
     CauchyRandj   = trnd(1,N,D);
     OffDec        = PopulationDec + PopulationEta.*CauchyRandj;
     OffEta        = PopulationEta.*exp(tau1*GaussianRand+tau*GaussianRandj);
-    Offspring     = SOLUTION(OffDec,OffEta);
+    Offspring     = Problem.Evaluation(OffDec,OffEta);
 end

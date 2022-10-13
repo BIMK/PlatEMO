@@ -1,4 +1,4 @@
-function Offspring = DE_cr(Parent1,Parent2,Parent3,Parent4)
+function Offspring = DE_cr(Problem,Parent1,Parent2,Parent3,Parent4)
 % DE operator used in TOP
 
 %------------------------------- Copyright --------------------------------
@@ -14,16 +14,15 @@ function Offspring = DE_cr(Parent1,Parent2,Parent3,Parent4)
     [CR,F,proM,disM] = deal(1,0.5,1,20);
     
     if isa(Parent1(1),'SOLUTION')
-        calObj  = true;
+        evaluated = true;
         Parent_i  = Parent1.decs;
         Parent_r1 = Parent2.decs;
         Parent_r2 = Parent3.decs;
         Parent_r3 = Parent4.decs;
     else
-        calObj = false;
+        evaluated = false;
     end
-    [N,D]   = size(Parent1);
-    Problem = PROBLEM.Current();
+    [N,D] = size(Parent1);
 
     %% Differental evolution
     Site = rand(N,D) < CR;
@@ -42,7 +41,7 @@ function Offspring = DE_cr(Parent1,Parent2,Parent3,Parent4)
     temp = Site & mu>0.5; 
     Offspring(temp) = Offspring(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                       (1-(Upper(temp)-Offspring(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
-    if calObj
-        Offspring = SOLUTION(Offspring);
+    if evaluated
+        Offspring = Problem.Evaluation(Offspring);
     end
 end

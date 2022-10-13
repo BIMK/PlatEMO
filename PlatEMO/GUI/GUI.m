@@ -25,7 +25,7 @@ classdef GUI < handle
             obj.readList();
             
             % Create the window
-            obj.app.figure   = uifigure('Name','PlatEMO v3.5','Position',[0 0 1200 650],'Interruptible','off','icon',obj.icon.logo1,'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
+            obj.app.figure   = uifigure('Name','PlatEMO v4.0','Position',[0 0 1200 650],'Interruptible','off','icon',obj.icon.logo1,'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
             obj.app.maingrid = uigridlayout(obj.app.figure,'RowHeight',{25,80,'1x'},'ColumnWidth',{'1x'},'Padding',[0 0 0 0],'RowSpacing',0);
             
             % Create the tab buttons
@@ -108,10 +108,10 @@ classdef GUI < handle
         %% Read the function lists
         function readList(obj)
             % Read the algorithm list
-            LabelStr    = {'none','single','multi','many','real','binary','permutation','large','constrained','expensive','multimodal','sparse','preference'};
+            LabelStr    = {'none','single','multi','many','real','integer','label','binary','permutation','large','constrained','expensive','multimodal','sparse','dynamic','multitask','bilevel','robust'};
             obj.algList = obj.readList2('Algorithms',LabelStr);
             obj.proList = obj.readList2('Problems',LabelStr);
-            obj.metList = obj.readList2('Metrics',{'min','max'});
+            obj.metList = obj.readList2('Metrics',[LabelStr,'min','max']);
         end
         function List = readList2(obj,folder,LabelStr)
             List    = {};

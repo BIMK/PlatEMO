@@ -29,9 +29,9 @@ classdef RMSProp < ALGORITHM
             %% Optimization
             k = 1;
             while Algorithm.NotTerminated(X)
-                gk = FiniteDifference(X)';
+                gk = Problem.CalObjGrad(X.dec);
                 v  = rho*v0 + (1-rho)*gk.^2;
-                X  = SOLUTION(X.dec-alpha./sqrt(1e-6+v).*gk);
+                X  = Problem.Evaluation(X.dec-alpha./sqrt(1e-6+v).*gk);
                 k  = k + 1;
             end
         end

@@ -1,5 +1,5 @@
 classdef IDBEA < ALGORITHM
-% <multi/many> <real/binary/permutation> <constrained/none>
+% <multi/many> <real/integer/label/binary/permutation> <constrained/none>
 % Improved decomposition-based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
@@ -31,7 +31,7 @@ classdef IDBEA < ALGORITHM
                 % For each solution
                 for i = 1 : Problem.N
                     % Generate an offspring
-                    Offspring = OperatorGAhalf(Population([i,randi(Problem.N)]));
+                    Offspring = OperatorGAhalf(Problem,Population([i,randi(Problem.N)]));
 
                     % Update the population
                     Feasible = all(Population.cons<=0,2);

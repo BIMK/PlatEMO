@@ -1,5 +1,5 @@
 classdef MOCMA < ALGORITHM
-% <multi> <real>
+% <multi> <real/integer>
 % Multi-objective covariance matrix adaptation evolution strategy
 
 %------------------------------- Reference --------------------------------
@@ -27,7 +27,7 @@ classdef MOCMA < ALGORITHM
                 for k = 1 : Problem.N
                     a1(k)            = a(k);
                     a1(k).x          = mvnrnd(a(k).x,a(k).sigma^2*a(k).C,1);
-                    a1(k).Individual = SOLUTION(a1(k).x);
+                    a1(k).Individual = Problem.Evaluation(a1(k).x);
                 end
 
                 % Update the fitness of each individual

@@ -1,4 +1,4 @@
-function Offspring = FourDE(op,x,x1,x2,x3,x4,x5)
+function Offspring = FourDE(Problem,op,x,x1,x2,x3,x4,x5)
 % Four different DE operators
 
 %------------------------------- Copyright --------------------------------
@@ -12,8 +12,7 @@ function Offspring = FourDE(op,x,x1,x2,x3,x4,x5)
 
     %% Parameter setting
     [CR,F,proM,disM,K] = deal(1,0.5,1,20,0.5);
-    D       = length(x.dec);
-    Problem = PROBLEM.Current();
+    D = length(x.dec);
 
     %% Differental evolution
     switch op
@@ -46,5 +45,5 @@ function Offspring = FourDE(op,x,x1,x2,x3,x4,x5)
     temp = Site & mu>0.5; 
     Offspring(temp) = Offspring(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                       (1-(Upper(temp)-Offspring(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
-    Offspring = SOLUTION(Offspring);
+    Offspring = Problem.Evaluation(Offspring);
 end

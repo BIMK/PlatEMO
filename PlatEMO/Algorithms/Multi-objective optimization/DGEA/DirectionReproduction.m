@@ -61,5 +61,5 @@ function Offspring = DirectionReproduction(Problem,Population,FrontNo,RefNo)
     temp  = Site & mu>0.5; 
     OffDec(temp) = OffDec(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                    (1-(Upper(temp)-OffDec(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
-	Offspring = SOLUTION(OffDec);
+	Offspring = Problem.Evaluation(OffDec);
 end

@@ -1,5 +1,5 @@
 classdef MOEADFRRMAB < ALGORITHM
-% <multi/many> <real>
+% <multi/many> <real/integer>
 % MOEA/D with fitness-rate-rank-based multiarmed bandit
 % C --- 5 --- Scaling factor in bandit-based operator selection
 % W ---   --- Size of sliding window
@@ -66,7 +66,7 @@ classdef MOEADFRRMAB < ALGORITHM
                         end
 
                         % Generate an offspring
-                        Offspring = FourDE(op,Population(i),Population(P(1)),Population(P(2)),Population(P(3)),Population(P(4)),Population(P(5)));
+                        Offspring = FourDE(Problem,op,Population(i),Population(P(1)),Population(P(2)),Population(P(3)),Population(P(4)),Population(P(5)));
 
                         % Update the ideal point
                         Z = min(Z,Offspring.obj);

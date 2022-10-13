@@ -21,7 +21,7 @@ classdef ZDT5 < PROBLEM
             obj.M = 2;
             if isempty(obj.D); obj.D = 80; end
             obj.D        = ceil(max(obj.D-30,1)/5)*5 + 30;
-            obj.encoding = 'binary';
+            obj.encoding = 4 + zeros(1,obj.D);
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

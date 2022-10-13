@@ -1,5 +1,5 @@
-function [OffDec,OffMask] = Operator(ParentDec,ParentMask,rbm,dae,Site,allZero,allOne,Lower,Upper,REAL)
-% The operator of MOEA/DSR
+function [OffDec,OffMask] = Operator(Problem,ParentDec,ParentMask,rbm,dae,Site,allZero,allOne)
+% The operator of MOEA/PSL
 %
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
@@ -31,7 +31,7 @@ function [OffDec,OffMask] = Operator(ParentDec,ParentMask,rbm,dae,Site,allZero,a
     OffMask = BinaryMutation(OffMask);
     
     %% Real variation
-    if REAL
+    if any(Problem.encoding~=4)
         if any(Site)
             OffDec = RealCrossover(dae.reduce(Parent1Dec(Site,:)),dae.reduce(Parent2Dec(Site,:)));
             OffDec = dae.recover(OffDec);
@@ -39,7 +39,8 @@ function [OffDec,OffMask] = Operator(ParentDec,ParentMask,rbm,dae,Site,allZero,a
             OffDec = [];
         end
         OffDec = [OffDec;RealCrossover(Parent1Dec(~Site,:),Parent2Dec(~Site,:))];
-        OffDec = RealMutation(OffDec,Lower,Upper);
+        OffDec = RealMutation(OffDec,Problem.lower,Problem.upper);
+        OffDec(:,Problem.encoding==4) = 1;
     else
         OffDec = ones(size(OffMask));
     end

@@ -1,5 +1,5 @@
 classdef Two_Arch2 < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <multi/many> <real/integer/label/binary/permutation>
 % Two-archive algorithm 2
 % CAsize --- --- Convergence archive size
 % p      --- --- The parameter of fractional distance
@@ -30,7 +30,7 @@ classdef Two_Arch2 < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(DA)
                 [ParentC,ParentM] = MatingSelection(CA,DA,Problem.N);
-                Offspring         = [OperatorGA(ParentC,{1,20,0,0}),OperatorGA(ParentM,{0,0,1,20})];
+                Offspring         = [OperatorGA(Problem,ParentC,{1,20,0,0}),OperatorGA(Problem,ParentM,{0,0,1,20})];
                 CA = UpdateCA(CA,Offspring,CAsize);
                 DA = UpdateDA(DA,Offspring,Problem.N,p);
             end
