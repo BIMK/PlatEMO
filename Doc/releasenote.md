@@ -1,3 +1,19 @@
+# Release Highlights of PlatEMO 4.0
+
+* Dynamic optimization, multitasking optimization, bilevel optimization, and robust optimization are now supported in PlatEMO.
+
+* Hybrid encoding is now supported in PlatEMO, where a problem can include real variables, integral variables, label variables, binary variables, and permutation variables simultaneously.
+
+* Maximum runtime is provided as a new termination criterion, which can be set instead of maximum number of function evaluations.
+
+* More algorithms and problems for single-objective optimization, multi-objective optimization, constrained optimization, sparse optimization, expensive optimization, multimodal optimization, dynamic optimization, multitasking optimization, bilevel optimization, and robust optimization. There are currently 216 algorithms and 432 problems in the platform.
+
+* More efficient and powerful GUI, where the execution of algorithms in the test module and application module is highly accelerated.
+
+* More performance metrics for different types of optimization problems, and the metrics are also tagged with labels. Different metrics will be shown in the dropdown lists when selecting different labels in the GUI.
+
+* Gradient based search is now supported in PlatEMO, where users can define gradient functions to accelerate the convergence via mathematical programming algorithms and gradient assisted evolutionary algorithms.
+
 # Release Highlights of PlatEMO 3.5
 
 * Enhance the application module, where users can define problems and save results more easily.
