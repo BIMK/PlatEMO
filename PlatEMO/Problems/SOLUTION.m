@@ -42,7 +42,7 @@ classdef SOLUTION < handle
     properties
         add;        % Additional properties of the solution
     end
-    methods(Access = ?PROBLEM)
+    methods
         function obj = SOLUTION(PopDec,PopObj,PopCon,PopAdd)
         %SOLUTION - The constructor of SOLUTION.
         %
