@@ -1,4 +1,4 @@
-function currentAxes = Draw(Data,varargin)
+function currentAxes = Draw(Data,PRO,varargin)
 %Draw - Display data.
 %
 %   Draw(P) displays all the points in P, where each row of P indicates one
@@ -32,7 +32,21 @@ function currentAxes = Draw(Data,varargin)
     persistent ax;
     if length(Data) == 1 && isgraphics(Data)
         ax = Data;
-        cla(ax);
+        if PRO.initialized == 0
+            cla(ax)
+        end
+        k = length(ax.Children);
+        if k > 1
+            K = zeros(1, k);
+            for i = 1: k
+                if strcmp(ax.Children(i).Marker, 'o')
+                    K(i) = 1;
+                end
+            end
+            delete(ax.Children(K==1))
+        else
+            cla(ax)
+        end
     elseif ~isempty(Data) && ismatrix(Data)
         if isempty(ax) || ~isgraphics(ax)
             ax = gca;
@@ -40,14 +54,15 @@ function currentAxes = Draw(Data,varargin)
         if size(Data,2) == 1
             Data = [(1:size(Data,1))',Data];
         end
-        set(ax,'FontName','Times New Roman','FontSize',13,'NextPlot','add','Box','on','View',[0 90],'GridLineStyle','none');
-        if islogical(Data)
-            [ax.XLabel.String,ax.YLabel.String,ax.ZLabel.String] = deal('Solution No.','Dimension No.',[]);
-        elseif size(Data,2) > 3
-            [ax.XLabel.String,ax.YLabel.String,ax.ZLabel.String] = deal('Dimension No.','Value',[]);
-        elseif ~isempty(varargin) && iscell(varargin{end})
-            [ax.XLabel.String,ax.YLabel.String,ax.ZLabel.String] = deal(varargin{end}{:});
-        end
+        if PRO.initalized == 0
+            set(ax,'FontName','Times New Roman','FontSize',13,'NextPlot','add','Box','on','View',[0 90],'GridLineStyle','none');
+            if islogical(Data)
+                [ax.XLabel.String,ax.YLabel.String,ax.ZLabel.String] = deal('Solution No.','Dimension No.',[]);
+            elseif size(Data,2) > 3
+                [ax.XLabel.String,ax.YLabel.String,ax.ZLabel.String] = deal('Dimension No.','Value',[]);
+            elseif ~isempty(varargin) && iscell(varargin{end})
+                [ax.XLabel.String,ax.YLabel.String,ax.ZLabel.String] = deal(varargin{end}{:});
+            end
         if ~isempty(varargin) && iscell(varargin{end})
             varargin = varargin(1:end-1);
         end
@@ -77,9 +92,11 @@ function currentAxes = Draw(Data,varargin)
             Label(2:2:end,:) = fliplr(Label(2:2:end,:));
             plot(ax,reshape(Label',[],1),reshape(Data',[],1),varargin{:});
         end
-        axis(ax,'tight');
-        set(ax.Toolbar,'Visible','off');
-        set(ax.Toolbar,'Visible','on');
+        if PRO.initialized == 0
+            axis(ax,'tight');
+            set(ax.Toolbar,'Visible','off');
+            set(ax.Toolbar,'Visible','on');
+        end
     end
     currentAxes = ax;
 end
