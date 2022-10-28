@@ -119,6 +119,7 @@ classdef ALGORITHM < handle & matlab.mixin.Heterogeneous
             obj.outputFcn(obj,obj.pro);
             nofinish = obj.pro.FE < obj.pro.maxFE;
             assert(nofinish,'PlatEMO:Termination',''); tic;
+            obj.pro.initialized = 1;
         end
         function varargout = ParameterSet(obj,varargin)
         %ParameterSet - Obtain the parameters of the algorithm.
