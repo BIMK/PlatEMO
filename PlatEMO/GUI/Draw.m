@@ -63,6 +63,7 @@ function currentAxes = Draw(Data,PRO,varargin)
             elseif ~isempty(varargin) && iscell(varargin{end})
                 [ax.XLabel.String,ax.YLabel.String,ax.ZLabel.String] = deal(varargin{end}{:});
             end
+        end
         if ~isempty(varargin) && iscell(varargin{end})
             varargin = varargin(1:end-1);
         end
