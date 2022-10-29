@@ -314,6 +314,9 @@ classdef module_test < handle
                 index = max(1,round(obj.app.slider.Value/rate*size(ALG.result,1)));
                 obj.app.labelC.Text = sprintf('%d evaluations',ALG.result{index,1});
                 % Clear the default or specified axes
+                if ~strcmp(PRO.display,obj.app.dropC(1).Value)
+                    PRO.fastdraw = 0;
+                end
                 if nargin > 3
                     Draw(ax, PRO);
                 else
@@ -359,6 +362,8 @@ classdef module_test < handle
                         obj.app.labelD.Text = sprintf('%.4e',value(end));
                     end
                 end
+                PRO.display = obj.app.dropC(1).Value;
+                PRO.fastdraw = 1;
             end
         end
         %% Create the gif
