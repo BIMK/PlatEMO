@@ -32,7 +32,7 @@ function currentAxes = Draw(Data,PRO,varargin)
     persistent ax;
     if length(Data) == 1 && isgraphics(Data)
         ax = Data;
-        if PRO.initialized == 0
+        if PRO.fastdraw == 0
             cla(ax)
         end
         k = length(ax.Children);
@@ -51,10 +51,13 @@ function currentAxes = Draw(Data,PRO,varargin)
         if isempty(ax) || ~isgraphics(ax)
             ax = gca;
         end
+        if PRO.fastdraw == 0
+            cla(ax)
+        end
         if size(Data,2) == 1
             Data = [(1:size(Data,1))',Data];
         end
-        if PRO.initalized == 0
+        if PRO.fastdraw == 0
             set(ax,'FontName','Times New Roman','FontSize',13,'NextPlot','add','Box','on','View',[0 90],'GridLineStyle','none');
             if islogical(Data)
                 [ax.XLabel.String,ax.YLabel.String,ax.ZLabel.String] = deal('Solution No.','Dimension No.',[]);
@@ -93,7 +96,7 @@ function currentAxes = Draw(Data,PRO,varargin)
             Label(2:2:end,:) = fliplr(Label(2:2:end,:));
             plot(ax,reshape(Label',[],1),reshape(Data',[],1),varargin{:});
         end
-        if PRO.initialized == 0
+        if PRO.fastdraw == 0
             axis(ax,'tight');
             set(ax.Toolbar,'Visible','off');
             set(ax.Toolbar,'Visible','on');
