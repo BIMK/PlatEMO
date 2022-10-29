@@ -48,7 +48,8 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
         N          = 100;      	% Population size
         maxFE      = 10000;     % Maximum number of function evaluations
         FE         = 0;        	% Number of consumed function evaluations
-	initialized = 0;        
+	fastdraw   = 0;         % Draw method (0.normal 1.fast)
+	display    = ''         % Name of displayed result
     end
     properties(SetAccess = protected)
         M;                    	% Number of objectives
