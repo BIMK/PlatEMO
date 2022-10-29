@@ -314,9 +314,6 @@ classdef module_test < handle
                 index = max(1,round(obj.app.slider.Value/rate*size(ALG.result,1)));
                 obj.app.labelC.Text = sprintf('%d evaluations',ALG.result{index,1});
                 % Clear the default or specified axes
-                if ~strcmp(PRO.display,obj.app.dropC(1).Value)
-                    PRO.fastdraw = 0;
-                end
                 if nargin > 3
                     Draw(ax, PRO);
                 else
@@ -324,6 +321,9 @@ classdef module_test < handle
                 end
                 isMetric = false;
                 if PRO.M > 1    % Multi-objective optimization
+                    if ~strcmp(PRO.display,obj.app.dropC(1).Value)
+                        PRO.fastdraw = 0;
+                    end
                     switch obj.app.dropC(1).Value
                         case 'Population (objectives)'
                             PRO.DrawObj(ALG.result{index,2});
@@ -345,7 +345,11 @@ classdef module_test < handle
                         value = ALG.CalMetric(obj.app.dropD(2).Value);
                         obj.app.labelD.Text = sprintf('%.4e',value(end));
                     end
+                    PRO.display = obj.app.dropC(1).Value;
                 else            % Single-objective optimization
+                    if ~strcmp(PRO.display,obj.app.dropC(2).Value)
+                        PRO.fastdraw = 0;
+                    end
                     switch obj.app.dropC(2).Value
                         case 'Population (variables)'
                             PRO.DrawDec(ALG.result{index,2});
@@ -361,8 +365,8 @@ classdef module_test < handle
                         value = ALG.CalMetric(obj.app.dropD(3).Value);
                         obj.app.labelD.Text = sprintf('%.4e',value(end));
                     end
+                    PRO.display = obj.app.dropC(2).Value;
                 end
-                PRO.display = obj.app.dropC(1).Value;
                 PRO.fastdraw = 1;
             end
         end
