@@ -326,7 +326,7 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
         %       Problem.DrawObj(Population)
 
             ax = Draw(Population.objs,obj,{'\it f\rm_1','\it f\rm_2','\it f\rm_3'});
-            if ~isempty(obj.PF) && obj.initialized == 0
+            if ~isempty(obj.PF) && obj.fastdraw == 0
                 if ~iscell(obj.PF)
                     if obj.M == 2
                         plot(ax,obj.PF(:,1),obj.PF(:,2),'-k','LineWidth',1);
@@ -341,7 +341,7 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
                     end
                     set(ax,'Children',ax.Children(flip(1:end)));
                 end
-            elseif size(obj.optimum,1) > 1 && obj.M < 4 && obj.initialized == 0
+            elseif size(obj.optimum,1) > 1 && obj.M < 4 && obj.fastdraw == 0
                 if obj.M == 2
                     plot(ax,obj.optimum(:,1),obj.optimum(:,2),'.k');
                 elseif obj.M == 3
