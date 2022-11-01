@@ -31,7 +31,7 @@ function [Population,Z]=space_divide(Problem,EP,Population,Z,W_URP,W,K,mini_gene
             %% Associate individuals to weights
             currentGroup=associate_newW2allInd(allInd,W_normalized,Z);
 
-            [candidates,Z]=mini_gen(currentGroup,Z,group_size,mini_generation);
+            [candidates,Z]=mini_gen(Problem,currentGroup,Z,group_size,mini_generation);
             allInd=[allInd candidates];
         end
 	end
@@ -50,7 +50,7 @@ function Population = associate_newW2allInd(candidates,W,Z)
     Population = Combine(best);
 end
 
-function [currentGroup,Z] = mini_gen(currentGroup,Z,group_size,mini_generation)
+function [currentGroup,Z] = mini_gen(Problem,currentGroup,Z,group_size,mini_generation)
 	generation = 1;
 	while generation <= mini_generation
 		
@@ -58,7 +58,7 @@ function [currentGroup,Z] = mini_gen(currentGroup,Z,group_size,mini_generation)
 		parents=unique(currentGroup);
 		MatingPool = randi(length(parents),1,group_size);
 		% Generate offsprings
-        Offsprings  = OperatorGA(parents(MatingPool));
+        Offsprings  = OperatorGA(Problem,parents(MatingPool));
         
 		% Update the ideal point
 		Z = min([Z;Offsprings.objs],[],1);

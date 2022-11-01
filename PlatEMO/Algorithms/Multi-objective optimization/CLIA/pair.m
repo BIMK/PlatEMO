@@ -1,4 +1,14 @@
 function [distance, Allocation] = pair(O, Z, type)
+
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% research purposes. All publications which use this platform or any code
+% in the platform should acknowledge the use of "PlatEMO" and reference "Ye
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
+% Computational Intelligence Magazine, 2017, 12(4): 73-87".
+%--------------------------------------------------------------------------
+
 BLOCK_SIZE = 10000;
 blocks = floor(size(Z, 1) / BLOCK_SIZE);
 B = mat2cell(Z, [BLOCK_SIZE * ones(1, blocks), size(Z, 1) - BLOCK_SIZE * blocks], size(Z, 2));
