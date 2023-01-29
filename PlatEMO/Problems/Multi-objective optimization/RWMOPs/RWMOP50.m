@@ -44,7 +44,7 @@ classdef RWMOP50 < PROBLEM
             PL = zeros(size(x,1),1);
             for i = 1 : size(x,2)
                 for j = 1 : size(x,2)
-                    PL = PL + x(:,i) .* B(i,j) .* x(j);
+                    PL = PL + x(:,i) .* B(i,j) .* x(:,j);
                 end
             end
             % Objectives
