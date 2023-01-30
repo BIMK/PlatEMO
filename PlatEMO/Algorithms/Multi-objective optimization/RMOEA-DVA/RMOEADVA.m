@@ -10,7 +10,7 @@ classdef RMOEADVA< ALGORITHM
 % IEEE Transactions on Systems, Man, and Cybernetics: Systems, 2022, 52(5):
 % 3360-3375.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

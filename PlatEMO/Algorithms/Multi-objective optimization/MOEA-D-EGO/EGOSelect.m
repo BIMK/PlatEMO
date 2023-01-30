@@ -3,7 +3,7 @@ function PopDec = EGOSelect(Problem,Population,L1,L2,Ke,delta,nr)
 % Gaussian models
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -21,16 +21,15 @@ function PopDec = EGOSelect(Problem,Population,L1,L2,Ke,delta,nr)
     maxeva  = 20*(11*Problem.D-1);
     
 	%% Generate the weight vectors
-	N       = [200 300 595 600 800 800 800 800 800 800];
-    [W, N]  = UniformPoint(N,Problem.M);
-    T       = ceil(N/10);
-    B       = pdist2(W,W);
-    [~,B]   = sort(B,2);
-    B       = B(:,1:T);
+    [W,N]  = UniformPoint(300,Problem.M);
+    T      = ceil(N/10);
+    B      = pdist2(W,W);
+    [~,B]  = sort(B,2);
+    B      = B(:,1:T);
     duplicated = randi(length(Population),N,1);
-    NewPop  = Population(duplicated);  % Sample N individuals from the initial population
-    PopDec  = NewPop.decs; PopObj = NewPop.objs;
-    gmin    = inf;
+    NewPop = Population(duplicated);  % Sample N individuals from the initial population
+    PopDec = NewPop.decs; PopObj = NewPop.objs;
+    gmin   = inf;
     while (maxeva>0)
        for i = 1 : N
            if rand < delta
@@ -96,7 +95,7 @@ function EI = EICal(Obj,Z,lamda,MSE,Gbest)
             [y,x] = GPcal(lamda0,mu0,abs(sig20));
         end
     end
-    EI = (Gbest-y)*normcdf((Gbest-y)/sqrt(x)) + sqrt(x)*normpdf((Gbest-y)/sqrt(x));
+    EI = (Gbest-y)*normcdf((Gbest-y)/sqrt(abs(x))) + sqrt(abs(x))*normpdf((Gbest-y)/sqrt(abs(x)));
 end
 
 function [y,x] = GPcal(lamda,mu,sig2)

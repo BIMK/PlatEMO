@@ -10,7 +10,7 @@ classdef SMEA < ALGORITHM
 % organizing multiobjective evolutionary algorithm, IEEE Transactions on
 % Evolutionary Computation, 2016, 20(5): 792-806.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -36,7 +36,7 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
 %   ParameterSet	<protected>	obtain the parameter settings of the problem
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -120,7 +120,7 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
                 PopDec(:,Type{2}) = round(unifrnd(repmat(obj.lower(Type{2}),N,1),repmat(obj.upper(Type{2}),N,1)));
             end
             if ~isempty(Type{3})        % Label variables
-                PopDec(:,Type{3}) = unifrnd(ones(N,length(Type{3})),repmat(randi(length(Type{3}),N,1),1,length(Type{3})));
+                PopDec(:,Type{3}) = round(unifrnd(repmat(obj.lower(Type{3}),N,1),repmat(obj.upper(Type{3}),N,1)));
             end
             if ~isempty(Type{4})        % Binary variables
                 PopDec(:,Type{4}) = logical(randi([0,1],N,length(Type{4})));
@@ -169,7 +169,7 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
         %       PopDec = Problem.CalDec(PopDec)
 
             Type  = arrayfun(@(i)find(obj.encoding==i),1:5,'UniformOutput',false);
-            index = [Type{1:2}];
+            index = [Type{1:3}];
             if ~isempty(index)
                 PopDec(:,index) = max(min(PopDec(:,index),repmat(obj.upper(index),size(PopDec,1),1)),repmat(obj.lower(index),size(PopDec,1),1));
             end

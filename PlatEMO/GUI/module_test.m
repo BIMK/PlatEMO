@@ -2,7 +2,7 @@ classdef module_test < handle
 %module_test - Test module.
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -110,12 +110,12 @@ classdef module_test < handle
             filter = [obj.app.stateA.Value];
             func   = @(s)all(any(repmat([true,filter],size(s,1),1)&s,2)) && all((any(s(:,2:end),1)&filter)==filter);
             % Update the list of algorithms
-            show   = cellfun(func,obj.GUI.algList(:,1));
+            show = cellfun(func,obj.GUI.algList(:,1));
             obj.app.listA(1).Items = ['(Open File)';obj.GUI.algList(show,2)];
             obj.app.listA(1).Value = {};
             obj.app.labelA(5).Text = sprintf('%d / %d',sum(show),length(show));
             % Update the list of problems
-            show   = cellfun(func,obj.GUI.proList(:,1));
+            show = cellfun(func,obj.GUI.proList(:,1));
             obj.app.listA(2).Items = ['(Open File)';obj.GUI.proList(show,2)];
             obj.app.listA(2).Value = {};
             obj.app.labelA(7).Text = sprintf('%d / %d',sum(show),length(show));

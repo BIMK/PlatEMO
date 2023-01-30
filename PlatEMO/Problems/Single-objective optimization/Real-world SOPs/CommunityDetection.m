@@ -8,7 +8,7 @@ classdef CommunityDetection < PROBLEM
 % optimization based fuzzy method for overlapping community detection, IEEE
 % Transactions on Fuzzy Systems, 2020, 28(11): 2841-2855.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
@@ -41,7 +41,20 @@ classdef CommunityDetection < PROBLEM
             % Parameter setting
             obj.M = 1;
             obj.D = size(obj.Adj,2);
-            obj.encoding = 3 + zeros(1,obj.D);
+            obj.lower    = 1     + zeros(1,obj.D);
+            obj.upper    = obj.D + zeros(1,obj.D);
+            obj.encoding = 3     + zeros(1,obj.D);
+        end
+        %% Repair invalid solutions
+        function PopDec = CalDec(obj,PopDec)
+            for i = 1 : size(PopDec,1)
+                P = zeros(1,obj.D);
+                while ~all(P)
+                    x = find(~P,1);
+                    P(PopDec(i,:)==PopDec(i,x)) = max(P) + 1;
+                end
+                PopDec(i,:) = P;
+            end
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)

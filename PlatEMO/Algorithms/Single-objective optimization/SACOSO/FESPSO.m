@@ -5,7 +5,7 @@ function [tArchive,SwarmFES,VelFES,PbestFES,GbestFES,notEval,notEST,PBEval] = FE
 %       [tArchive,SwarmFES,PbestFES,GbestFES,notEval] = FESPSO(SwarmFES,VelFES,PbestFES,GbestFES,GbestRBF,Problem,notEval,SwarmFESt1,SwarmFESt)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

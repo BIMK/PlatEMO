@@ -2,7 +2,7 @@ classdef module_app < handle
 %module_test - Application module.
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -61,7 +61,7 @@ classdef module_app < handle
             obj.app.buttonB(2)  = GUI.APP(1,3,uibutton(tempGrid,'Text','Del','Enable',false,'FontSize',10,'Tooltip','Delete the data','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,-1}));
             obj.app.labelB(6)   = GUI.APP(8,1,uilabel(obj.app.grid(2),'Text','data =','HorizontalAlignment','right'));
             obj.app.editB(4)    = GUI.APP(8,[2 4],uieditfield(obj.app.grid(2),'Value','eye(10)','Tooltip','User-defined data of the problem'));
-            obj.app.buttonB(3)  = GUI.APP(8,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing data','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,obj.app.editB(4),{'*.txt','Text file';'*.dat','Text file';'*.csv','Text file';'*.mat','MAT file'}}));
+            obj.app.buttonB(3)  = GUI.APP(8,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing data','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,obj.app.editB(4),{'*.txt;*.dat;*.csv','Text file';'*.mat','MAT file'}}));
             % Initialization function
             tempGrid            = GUI.APP(9,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{135,30,30,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
             obj.app.titleB(4)   = GUI.APP(1,[1 4],uilabel(tempGrid,'Text',' Initialization function','FontSize',13,'FontColor',[.9 .5 .2],'BackgroundColor',[.9 .9 .9],'FontWeight','bold'));
@@ -88,7 +88,7 @@ classdef module_app < handle
             obj.app.buttonB(14) = GUI.APP(1,3,uibutton(tempGrid,'Text','Del','Enable',false,'FontSize',10,'Tooltip','Delete the last objective function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,-4}));
             obj.pro(1).label    = GUI.APP(14,1,uilabel(obj.app.grid(2),'Text','f1(x) =','HorizontalAlignment','right'));
             obj.pro(1).edit     = GUI.APP(14,[2 4],uieditfield(obj.app.grid(2),'Value','mean(x)','Tooltip','Objective function to be minimized'));
-            obj.pro(1).button   = GUI.APP(14,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,obj.pro(1).edit,{'*.m','MATLAB function'}}));
+            obj.pro(1).button   = GUI.APP(14,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function or data','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,obj.pro(1).edit,{'*.m','MATLAB function';'*.txt;*.dat;*.csv','Text file'}}));
             obj.pro(1).button2  = GUI.APP(14,6,uibutton(obj.app.grid(2),'Text','+','Fontsize',15,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,obj.pro(1).edit,'objective'}));
             % Constraint functions
             tempGrid            = GUI.APP(34,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{135,30,30,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
@@ -98,7 +98,7 @@ classdef module_app < handle
             obj.con(1).labelA   = GUI.APP(35,1,uilabel(obj.app.grid(2),'Text','g1(x) =','HorizontalAlignment','right'));
             obj.con(1).edit     = GUI.APP(35,[2 3],uieditfield(obj.app.grid(2),'Value','0.5-mean(x)','Tooltip','Constraint function to be satisfied'));
             obj.con(1).labelB   = GUI.APP(35,4,uilabel(obj.app.grid(2),'Text','<= 0'));
-            obj.con(1).button   = GUI.APP(35,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,obj.con(1).edit,{'*.m','MATLAB function'}}));
+            obj.con(1).button   = GUI.APP(35,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function or data','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,obj.con(1).edit,{'*.m','MATLAB function';'*.txt;*.dat;*.csv','Text file'}}));
             obj.con(1).button2  = GUI.APP(35,6,uibutton(obj.app.grid(2),'Text','+','Fontsize',15,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,obj.con(1).edit,'constraint'}));
             % Special difficulties
             tempGrid            = GUI.APP(55,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{127,30,30,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
@@ -168,9 +168,6 @@ classdef module_app < handle
             if nargin > 3
                 if index < 4
                     [obj.app.stateC(1:3).Value] = deal(0);
-                    obj.app.stateC(index).Value = 1;
-                elseif index < 9
-                    [obj.app.stateC(4:8).Value] = deal(0);
                     obj.app.stateC(index).Value = 1;
                 end
             end
@@ -258,7 +255,7 @@ classdef module_app < handle
                         end
                         item.label   = GUI.APP(length(obj.pro)+14,1,uilabel(obj.app.grid(2),'Text',sprintf('f%d(x%s) =',length(obj.pro)+1,str{1}),'HorizontalAlignment','right'));
                         item.edit    = GUI.APP(length(obj.pro)+14,[2 4],uieditfield(obj.app.grid(2),'Value',sprintf('mean(x%s)',str{2}),'Tooltip','Objective function to be minimized'));
-                        item.button  = GUI.APP(length(obj.pro)+14,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,item.edit,{'*.m','MATLAB function'}}));
+                        item.button  = GUI.APP(length(obj.pro)+14,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function or data','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,item.edit,{'*.m','MATLAB function';'*.txt;*.dat;*.csv','Text file'}}));
                         item.button2 = GUI.APP(length(obj.pro)+14,6,uibutton(obj.app.grid(2),'Text','+','Fontsize',15,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,item.edit,'objective'}));
                         obj.pro      = [obj.pro,item];
                     elseif index<0 && length(obj.pro)>0
@@ -281,7 +278,7 @@ classdef module_app < handle
                         item.labelA  = GUI.APP(length(obj.con)+35,1,uilabel(obj.app.grid(2),'Text',sprintf('g%d(x%s) =',length(obj.con)+1,str{1}),'HorizontalAlignment','right'));
                         item.edit    = GUI.APP(length(obj.con)+35,[2 3],uieditfield(obj.app.grid(2),'Value',sprintf('0.5-mean(x%s)',str{2}),'Tooltip','Constraint function to be satisfied'));
                         item.labelB  = GUI.APP(length(obj.con)+35,4,uilabel(obj.app.grid(2),'Text','<= 0'));
-                        item.button  = GUI.APP(length(obj.con)+35,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,item.edit,{'*.m','MATLAB function'}}));
+                        item.button  = GUI.APP(length(obj.con)+35,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function or data','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,item.edit,{'*.m','MATLAB function';'*.txt;*.dat;*.csv','Text file'}}));
                         item.button2 = GUI.APP(length(obj.con)+35,6,uibutton(obj.app.grid(2),'Text','+','Fontsize',15,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,item.edit,'constraint'}));
                         obj.con      = [obj.con,item];
                     elseif index<0 && length(obj.con)>0
@@ -568,17 +565,17 @@ classdef module_app < handle
         function cb_updateFilter(obj,~,~)
             oldState = [obj.app.stateC.Value];
             if strcmp(obj.app.buttonB(10).Text,'Integrate')
-                obj.app.stateC(1).Value  = length(obj.pro) <= 1;
-                obj.app.stateC(2).Value  = length(obj.pro) >= 2 && length(obj.pro) <= 3;
-                obj.app.stateC(3).Value  = length(obj.pro) >= 4;
+                obj.app.stateC(1).Value = length(obj.pro) <= 1;
+                obj.app.stateC(2).Value = length(obj.pro) >= 2 && length(obj.pro) <= 3;
+                obj.app.stateC(3).Value = length(obj.pro) >= 4;
             end
             encoding = str2num(obj.app.editB(1).Value);
-            obj.app.stateC(4).Value  = any(encoding==1);
-            obj.app.stateC(5).Value  = any(encoding==2);
-            obj.app.stateC(6).Value  = any(encoding==3);
-            obj.app.stateC(7).Value  = any(encoding==4);
-            obj.app.stateC(8).Value  = any(encoding==5);
-            obj.app.stateC(9).Value  = obj.app.checkB(1).Value;
+            obj.app.stateC(4).Value = any(encoding==1);
+            obj.app.stateC(5).Value = any(encoding==2);
+            obj.app.stateC(6).Value = any(encoding==3);
+            obj.app.stateC(7).Value = any(encoding==4);
+            obj.app.stateC(8).Value = any(encoding==5);
+            obj.app.stateC(9).Value = obj.app.checkB(1).Value;
             if strcmp(obj.app.buttonB(10).Text,'Integrate')
                 obj.app.stateC(10).Value = ~isempty(obj.con);
             end

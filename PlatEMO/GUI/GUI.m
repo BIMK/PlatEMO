@@ -2,7 +2,7 @@ classdef GUI < handle
 %GUI - The class of the main figure of PlatEMO.
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -25,7 +25,7 @@ classdef GUI < handle
             obj.readList();
             
             % Create the window
-            obj.app.figure   = uifigure('Name','PlatEMO v4.0','Position',[0 0 1200 650],'Interruptible','off','icon',obj.icon.logo1,'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
+            obj.app.figure   = uifigure('Name','PlatEMO v4.1','Position',[0 0 1200 650],'Interruptible','off','icon',obj.icon.logo1,'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
             obj.app.maingrid = uigridlayout(obj.app.figure,'RowHeight',{25,80,'1x'},'ColumnWidth',{'1x'},'Padding',[0 0 0 0],'RowSpacing',0);
             
             % Create the tab buttons
@@ -157,7 +157,7 @@ classdef GUI < handle
             uiimage(f,'Position',[145 40 150 150],'ImageSource',obj.icon.logo2);
             uilabel(f,'Position',[10 160 170 30],'Text',obj.app.figure.Name,'HorizontalAlignment','left','FontSize',18);
             uilabel(f,'Position',[10 130 160 40],'Text',{'Evolutionary Multi-Objective','Optimization Platform'},'HorizontalAlignment','left','FontSize',12,'FontAngle','italic','FontColor',[.4 .4 .4]);
-            uilabel(f,'Position',[10 80 150 40],'Text',{'Copyright (c) 2022','BIMK Group'},'HorizontalAlignment','left','FontSize',12);
+            uilabel(f,'Position',[10 80 150 40],'Text',{'Copyright (c) 2023','BIMK Group'},'HorizontalAlignment','left','FontSize',12);
             uilabel(f,'Position',[10 20 150 50],'Text',{'<Contact>','field910921@gmail.com','bimk.ahu.edu.cn'},'HorizontalAlignment','left','FontSize',12);
             uibutton(f,'Position',[210 10 70 22],'Text','OK','ButtonpushedFcn',@(~,~)delete(f));
         end

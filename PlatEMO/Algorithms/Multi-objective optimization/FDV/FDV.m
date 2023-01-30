@@ -10,7 +10,7 @@ classdef FDV < ALGORITHM
 % X. Yang, J. Zou, S. Yang, J. Zheng, and Y. Liu, A fuzzy decision
 % variables framework for large-scale multiobjective optimization, IEEE
 % Transactions on Evolutionary Computation, 2021.
-% -----------------------------------------------------------------------
+%--------------------------------------------------------------------------
 
 %  Copyright (C) 2021 Xu Yang
 %  Xu Yang <xuyang.busyxu@qq.com> or <xuyang369369@gmail.com>

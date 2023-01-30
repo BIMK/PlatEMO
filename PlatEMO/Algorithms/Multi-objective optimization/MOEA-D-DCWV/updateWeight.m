@@ -2,7 +2,7 @@ function W = updateWeight(objs,W)
 % Update the weight vectors
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -13,8 +13,8 @@ function W = updateWeight(objs,W)
 % This function is written by Tomoaki Takagi
 
     % Calculate the intermediate objective value p
-    M = size(objs,2);
-    objs = normalize(objs,'range');
+    M       = size(objs,2);
+    objs    = normalize(objs,'range');
     normP   = sqrt(sum(objs.^2,2));
     CosineP = sum(objs./M,2).*sqrt(M)./normP;
     [~,I]   = min(normP.*sqrt(1-CosineP.^2));

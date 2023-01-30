@@ -10,7 +10,7 @@ classdef MOMBIII < ALGORITHM
 % on the R2 indicator for many-objective optimization, Proceedings of the
 % Annual Conference on Genetic and Evolutionary Computation, 2015, 679-686.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
