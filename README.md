@@ -43,21 +43,13 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 4.0
+# Release Highlights of PlatEMO 4.1
 [Release Note can be found here](./Doc/releasenote.md)
-* Dynamic optimization, multitasking optimization, bilevel optimization, and robust optimization are now supported in PlatEMO.
+* Automated function creation is supported. Users can input a dataset as an objective function or constraint function when solving user-defined problems, where a function will be automatically fitted according to the dataset.
 
-* Hybrid encoding is now supported in PlatEMO, where a problem can include real variables, integral variables, label variables, binary variables, and permutation variables simultaneously.
+* Add two large-scale multi-objective evolutionary algorithms FLEA and LERD, one expensive multi-objective optimization algorithm SMOA, and one constrained multi-objective evolutionary algorithm C3M. There are currently 220 algorithms in the platform.
 
-* Maximum runtime is provided as a new termination criterion, which can be set instead of maximum number of function evaluations.
-
-* More algorithms and problems for single-objective optimization, multi-objective optimization, constrained optimization, sparse optimization, expensive optimization, multimodal optimization, dynamic optimization, multitasking optimization, bilevel optimization, and robust optimization. There are currently 216 algorithms and 432 problems in the platform.
-
-* More efficient and powerful GUI, where the execution of algorithms in the test module and application module is highly accelerated.
-
-* More performance metrics for different types of optimization problems, and the metrics are also tagged with labels. Different metrics will be shown in the dropdown lists when selecting different labels in the GUI.
-
-* Gradient based search is now supported in PlatEMO, where users can define gradient functions to accelerate the convergence via mathematical programming algorithms and gradient assisted evolutionary algorithms.
+* Add 16 constrained multi-objective benchmark problems ZXH_CF1-ZXH_CF16. There are currently 448 problems in the platform.
 
 
 # Features of PlatEMO
