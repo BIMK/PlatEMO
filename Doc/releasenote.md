@@ -1,3 +1,12 @@
+# Release Highlights of PlatEMO 4.1
+Release Highlights of PlatEMO 4.1
+
+Automated function creation is supported. Users can input a dataset as an objective function or constraint function when solving user-defined problems, where a function will be automatically fitted according to the dataset.
+
+Add two large-scale multi-objective evolutionary algorithms FLEA and LERD, one expensive multi-objective optimization algorithm SMOA, and one constrained multi-objective evolutionary algorithm C3M. There are currently 220 algorithms in the platform.
+
+Add 16 constrained multi-objective benchmark problems ZXH_CF1-ZXH_CF16. There are currently 448 problems in the platform.
+
 # Release Highlights of PlatEMO 4.0
 
 * Dynamic optimization, multitasking optimization, bilevel optimization, and robust optimization are now supported in PlatEMO.
