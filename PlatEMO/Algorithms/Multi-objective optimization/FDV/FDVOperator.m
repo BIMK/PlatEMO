@@ -26,7 +26,7 @@ function Offspring = FDVOperator(Problem,Rate,Acc,OffDec,OffVel)
             OffDec(find(logical)) = gamma_a(find(logical));
         end
     end
-    if nargin > 3
+    if nargin > 4
         Offspring = Problem.Evaluation(OffDec,OffVel);
     else
         Offspring = Problem.Evaluation(OffDec);

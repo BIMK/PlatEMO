@@ -32,7 +32,7 @@ classdef FDV < ALGORITHM
                     OffDec     = OperatorGA(Problem,Population(MatingPool).decs);
                     %% FDV
                     if Problem.FE/Problem.maxFE <= Rate
-                        Offspring = FDVOperator(Rate,Acc,OffDec);
+                        Offspring = FDVOperator(Problem,Rate,Acc,OffDec);
                     else
                         Offspring = Problem.Evaluation(OffDec);
                     end
