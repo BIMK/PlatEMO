@@ -14,7 +14,7 @@ function Population = loadData(Problem)
     dir = fullfile(pwd,'Algorithms','Multi-objective optimization','SMOA');
     [file,path] = uigetfile('*.*','Select data',dir);
 
-    if endsWith(file,'.mat') % PlarEMO's default save file
+    if endsWith(file,'.mat') % PlatEMO's default save file
         load(fullfile(path, file),'result');
         Population = result{end,2};
     else % Decision variables save file
