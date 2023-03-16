@@ -63,7 +63,7 @@ classdef ISMOA < ALGORITHM
                 for i = 1 : Problem.D
                     dec(i) = estimator(W(index,:),X,Dec(:,i));
                 end
-                dec = min(max(dec,0),1);
+                dec = min(max(dec,Problem.lower),Problem.upper);
                 Population = [Population,Problem.Evaluation(dec)];
             end
             Algorithm.NotTerminated(Population);
