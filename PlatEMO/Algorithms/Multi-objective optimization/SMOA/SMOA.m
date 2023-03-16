@@ -6,7 +6,7 @@ classdef SMOA < ALGORITHM
 %------------------------------- Reference --------------------------------
 % T. Takagi, K. Takadama, and H. Sato, Supervised multi-objective
 % optimization algorithm using estimation, Proceedings of the IEEE Congress
-% on Evolutionary Computation, 2022.
+% on Evolutionary Computation, 2022, 1-8.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -18,9 +18,9 @@ classdef SMOA < ALGORITHM
 
 % This function is written by Tomoaki Takagi
 
-% This function requires supervised data like 'DTLZ2_M3_D12.mat' or
-% 'DTLZ2_M3_D12.dat'. This function return all evaluated solutions.
-% This function do not use random number and evolutionary algorithm.
+% This function requires supervised data like 'DTLZ2_M3_D12_ILD.mat' or
+% 'DTLZ2_M3_D12_ILD.dat'. This function return all evaluated solutions.
+% This function is deterministic method without random numbers.
 
     methods
         function main(Algorithm,Problem)
@@ -40,7 +40,7 @@ classdef SMOA < ALGORITHM
                     dacefit(X,Y,'regpoly0','corrgauss',I,1e-3*I,1e3*I));
             end
             
-            %% Load supervised data
+            %% Load solution data
             Population = loadData(Problem);
             Obj = Population.objs;
             Dec = Population.decs;
@@ -57,10 +57,13 @@ classdef SMOA < ALGORITHM
             end
             
             %% Generate decision variables
-            decs = zeros(length(W),Problem.D);
+            N = length(W);
+            decs = zeros(N,Problem.D);
             for i = 1 : Problem.D
                 decs(:,i) = estimator(W,X,Dec(:,i));
             end
+            decs = max(decs,repmat(Problem.lower,N,1));
+            decs = min(decs,repmat(Problem.upper,N,1));
             
             %% Generate population
             Population = [Population,Problem.Evaluation(decs)];
