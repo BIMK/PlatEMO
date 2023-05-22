@@ -8,10 +8,11 @@
 [![](https://img.shields.io/badge/Linux-Pass-brightgreen.svg)](#PlatEMO)
 [![](https://img.shields.io/badge/MacOS-Pass-brightgreen.svg)](#PlatEMO)
 <h3>Evolutionary multi-objective optimization platform</h3>
-Developed by BIMK (Institute of Bioinspired Intelligence and Mining Knowledge) of Anhui University and NICE (Nature Inspired Computing and Engineering Group) of University of Surrey
+Developed by BIMK (Institute of Bioinspired Intelligence and Mining Knowledge) of Anhui University 
+<!-- and NICE (Nature Inspired Computing and Engineering Group) of University of Surrey -->
 <div>
 <img src="https://wx2.sinaimg.cn/mw690/00752cx4ly1gnpnfh0i4yj30m80m83zx.jpg" width=160>
-<img src="https://wx2.sinaimg.cn/mw690/00752cx4ly1gnpnfgz0ulj30px08n74t.jpg" height=140>
+<!-- <img src="https://wx2.sinaimg.cn/mw690/00752cx4ly1gnpnfgz0ulj30px08n74t.jpg" height=140> -->
 </div>
 
 * 200+ open source evolutionary algorithms
