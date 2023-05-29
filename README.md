@@ -44,14 +44,11 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 4.1
+# Release Highlights of PlatEMO 4.2
 [Release Note can be found here](./Doc/releasenote.md)
-* Automated function creation is supported. Users can input a dataset as an objective function or constraint function when solving user-defined problems, where a function will be automatically fitted according to the dataset.
+* Add one multi-objective evolutionary algorithm TS-NSGA-II, six constrained multi-objective evolutionary algorithms CMME, CMOCSO, CMOEMT, CMOQLMT, C-TSEA, DP-PPS, two multi-modal multi-objective evolutionary algorithms CMMO and HHC-MMEA, one surrogate-assisted multi-objective evolutionary algorithm PC-SAEA, and one sparse multi-objective evolutionary algorithm SGECF. Refactor the code of CSEA. There are currently 231 algorithms in the platform.
 
-* Add two large-scale multi-objective evolutionary algorithms FLEA and LERD, one expensive multi-objective optimization algorithm SMOA, and one constrained multi-objective evolutionary algorithm C3M. There are currently 220 algorithms in the platform.
-
-* Add 16 constrained multi-objective benchmark problems ZXH_CF1-ZXH_CF16. There are currently 448 problems in the platform.
-
+* Add 18 multi-objective neural architecture search benchmark problems C10MOP1-C10MOP9 and IN1KMOP1-IN1KMOP9. There are currently 466 problems in the platform.
 
 # Features of PlatEMO
 *  Totally Developed in MATLAB  
