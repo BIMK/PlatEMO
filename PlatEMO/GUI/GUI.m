@@ -25,7 +25,7 @@ classdef GUI < handle
             obj.readList();
             
             % Create the window
-            obj.app.figure   = uifigure('Name','PlatEMO v4.1','Position',[0 0 1200 650],'Interruptible','off','icon',obj.icon.logo1,'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
+            obj.app.figure   = uifigure('Name','PlatEMO v4.2','Position',[0 0 1200 650],'Interruptible','off','icon',obj.icon.logo1,'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
             obj.app.maingrid = uigridlayout(obj.app.figure,'RowHeight',{25,80,'1x'},'ColumnWidth',{'1x'},'Padding',[0 0 0 0],'RowSpacing',0);
             
             % Create the tab buttons
@@ -37,7 +37,7 @@ classdef GUI < handle
             tempPanel          = GUI.APP(1,4,uipanel(obj.app.grid(1),'BorderType','none','BackgroundColor',[0 .25 .45]));
             tempImage          = uiimage(tempPanel,'Position',[0 3 99 21],'ImageSource',obj.icon.bar);
             tempPanel2         = uipanel(tempPanel,'Position',[13 4 18 18],'BorderType','none','BackgroundColor',[.549 .6627 .7529]);
-            obj.app.buttonT(3) = uibutton(tempPanel2,'Position',[-2 -2 24 24],'Text','','Icon',obj.icon.researchgate,'BackgroundColor',[.549 .6627 .7529],'Tooltip','ResearchGate','ButtonpushedFcn',@(~,~)web('https://www.researchgate.net/publication/312061859','-browser'));
+            obj.app.buttonT(3) = uibutton(tempPanel2,'Position',[-2 -2 24 24],'Text','','Icon',obj.icon.researchgate,'BackgroundColor',[.549 .6627 .7529],'Tooltip','ResearchGate','ButtonpushedFcn',@(~,~)web('https://www.researchgate.net/publication/365027806','-browser'));
             tempPanel2         = uipanel(tempPanel,'Position',[43 4 18 18],'BorderType','none','BackgroundColor',[.549 .6627 .7529]);
             obj.app.buttonT(4) = uibutton(tempPanel2,'Position',[-2 -2 24 24],'Text','','Icon',obj.icon.github,'BackgroundColor',[.549 .6627 .7529],'Tooltip','GitHub','ButtonpushedFcn',@(~,~)web('https://github.com/BIMK/PlatEMO','-browser'));
             tempPanel2         = uipanel(tempPanel,'Position',[73 4 18 18],'BorderType','none','BackgroundColor',[.549 .6627 .7529]);

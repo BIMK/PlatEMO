@@ -42,5 +42,5 @@ function Offspring = OperatorPSO(Problem,Particle,Pbest,Gbest,W)
     r2        = rand(N,D);
     OffVel    = W.*ParticleVel + r1.*(PbestDec-ParticleDec) + r2.*(GbestDec-ParticleDec);
     OffDec    = ParticleDec + OffVel;
-    Offspring = Problem.Evaluation(OffDec);
+    Offspring = Problem.Evaluation(OffDec,OffVel);
 end

@@ -68,7 +68,7 @@ classdef module_app < handle
             obj.app.buttonB(4)  = GUI.APP(1,2,uibutton(tempGrid,'Text','Add','FontSize',10,'Tooltip','Add an initialization function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,2}));
             obj.app.buttonB(5)  = GUI.APP(1,3,uibutton(tempGrid,'Text','Del','Enable',false,'FontSize',10,'Tooltip','Delete the initialization function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,-2}));
             obj.app.labelB(7)   = GUI.APP(10,1,uilabel(obj.app.grid(2),'Text','I(N) =','HorizontalAlignment','right'));
-            obj.app.editB(5)    = GUI.APP(10,[2 4],uieditfield(obj.app.grid(2),'Value','rand(N,10)','Tooltip','Function for generating an initial population with size n'));
+            obj.app.editB(5)    = GUI.APP(10,[2 4],uieditfield(obj.app.grid(2),'Value','rand(N,10)','Tooltip','Function for generating an initial population with size N'));
             obj.app.buttonB(6)  = GUI.APP(10,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,obj.app.editB(5),{'*.m','MATLAB function'}}));
             obj.app.buttonB(7)  = GUI.APP(10,6,uibutton(obj.app.grid(2),'Text','+','Fontsize',15,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,obj.app.editB(5),'initialization'}));
             % Repair function

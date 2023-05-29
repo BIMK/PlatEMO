@@ -65,6 +65,7 @@ classdef CCGDE3 < ALGORITHM
         end
     end
 end
+
 function Population = GetInd(Problem,subDec1,subDec2,Index,numSPop,j)
     Dec = zeros(numSPop,Problem.D);
     if j == 1

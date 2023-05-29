@@ -26,10 +26,30 @@ classdef CSEA < ALGORITHM
             [k,gmax] = Algorithm.ParameterSet(6,3000);
 
             %% Initalize the population by Latin hypercube sampling
-            N          = 11*Problem.D-1;
+            N          = min(11*Problem.D-1,109);
             PopDec     = UniformPoint(N,Problem.D,'Latin');
             Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,N,1).*PopDec+repmat(Problem.lower,N,1));
             Arc        = Population;
+            
+            %% Initialize the network
+            hiddenLayerSize = ceil(Problem.D*2);
+            layers = [featureInputLayer(Problem.D,'Normalization', 'zscore')
+                    fullyConnectedLayer(hiddenLayerSize)
+                    batchNormalizationLayer
+                    reluLayer
+                    fullyConnectedLayer(1)
+                    sigmoidLayer
+                    regressionLayer];
+
+            maxEpochs = 400;
+            miniBatchSize = 32;
+            options = trainingOptions('adam', ...
+                        'ExecutionEnvironment','auto', ...
+                        'MaxEpochs',maxEpochs, ...
+                        'MiniBatchSize',miniBatchSize, ...
+                        'Shuffle','every-epoch', ...
+                        'Plots','none', ...
+                        'Verbose',false);%, ... Plots','none'
 
             %% Optimization
             while Algorithm.NotTerminated(Arc)
@@ -40,13 +60,10 @@ classdef CSEA < ALGORITHM
                 rr     = sum(Output)/length(Output);
                 tr     = min(rr,1-rr)*0.5;
                 [TrainIn,TrainOut,TestIn,TestOut] = DataProcess(Input,Output);
-
-                % Construct and update the FNN
-                net = FNN(ceil(Problem.D*2),800);
-                net.train(TrainIn,TrainOut);
+                net = trainNetwork(TrainIn,TrainOut-0,layers,options);
 
                 % Error rates calculation
-                TestPre   = net.predict(TestIn);
+                TestPre = predict(net,TestIn);
                 IndexGood = TestOut==1;
                 p0 = sum(abs((TestOut(IndexGood)-TestPre(IndexGood))))/sum(IndexGood);
                 p1 = sum(abs((TestOut(~IndexGood)-TestPre(~IndexGood))))/sum(~IndexGood);

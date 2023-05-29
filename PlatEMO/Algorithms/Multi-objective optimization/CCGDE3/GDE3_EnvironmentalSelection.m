@@ -1,5 +1,5 @@
 function Population = GDE3_EnvironmentalSelection(Population,Offspring,N)
-% The environmental selection of CCGDE3
+% The environmental selection of GDE3
 
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
@@ -9,32 +9,39 @@ function Population = GDE3_EnvironmentalSelection(Population,Offspring,N)
 % for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
-
-    % Select the offsprings dominating their corresponding parents firstly,
-    % and then select the offspring population non-dominated with the
-    % parent population
-    PopObj = Population.objs;
-    OffObj = Offspring.objs;
+    
+    %% Select by constraint-domination
+    PopObj    = Population.objs;
+    PopCon    = Population.cons;
+    feasibleP = all(PopCon<=0,2);
+    OffObj    = Offspring.objs;
+    OffCon    = Offspring.cons;
+    feasibleO = all(OffCon<=0,2);
     % The offsprings which can replace its parent
-    updated = all(PopObj>=OffObj,2);
+    updated = ~feasibleP&feasibleO  | ...
+              ~feasibleP&~feasibleO & all(PopCon>=OffCon,2) | ...
+              feasibleP&feasibleO   & all(PopObj>=OffObj,2);
     % The offsprings which can add to the population
-    selected = any(PopObj<OffObj,2) & any(PopObj>OffObj,2);
+    selected = feasibleP&feasibleO & any(PopObj<OffObj,2) & any(PopObj>OffObj,2);
     % Update the population
     Population(updated) = Offspring(updated);
     Population          = [Population,Offspring(selected)];
     
-    %% Non-dominated sorting
-    [FrontNo,MaxFNo] = NDSort(Population.objs,N);
-    Next = FrontNo < MaxFNo;
-    
-    %% Calculate the crowding distance of each solution
-    CrowdDis = CrowdingDistance(Population.objs,FrontNo);
-    
-    %% Select the solutions in the last front based on their crowding distances
-    Last     = find(FrontNo==MaxFNo);
-    [~,Rank] = sort(CrowdDis(Last),'descend');
-    Next(Last(Rank(1:N-sum(Next)))) = true;
-    
-    %% Population for next generation
-    Population = Population(Next);
+    %% Select by non-dominated sorting and crowding distance
+    PopObj   = Population.objs;
+    PopCon   = Population.cons;
+    feasible = all(PopCon<=0,2);
+    % Non-dominated sorting based on constraint-domination
+    FrontNo = inf(1,length(Population));
+    [FrontNo(feasible),MaxFNo] = NDSort(PopObj(feasible,:),inf);
+    FrontNo(~feasible) = NDSort(PopCon(~feasible,:),inf) + MaxFNo;
+    % Determine the last front
+    MaxFNo    = find(cumsum(hist(FrontNo,1:max(FrontNo)))>=N,1);
+    lastFront = find(FrontNo==MaxFNo);
+    % Eliminate solutions in the last front one by one
+    while length(lastFront) > N - sum(FrontNo<MaxFNo)
+        [~,worst] = min(CrowdingDistance(PopObj(lastFront,:)));
+        lastFront(worst) = [];
+    end
+    Population = Population([find(FrontNo<MaxFNo),lastFront]);
 end

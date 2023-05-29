@@ -13,7 +13,7 @@ function Next = SurrogateAssistedSelection(Problem,net,p0,p1,Ref,Input,wmax,tr)
 % This function is written by Cheng He
 
     Next  = OperatorGA(Problem,[Input;Ref.decs],{1,15,1,5});
-    Label = net.predict(Next);
+    Label = predict(net,Next);
     a     = tr;
     b     = 1 - tr;
     i     = 0;
@@ -22,18 +22,19 @@ function Next = SurrogateAssistedSelection(Problem,net,p0,p1,Ref,Input,wmax,tr)
             [~,index] = sort(Label,'descend');
             Input     = Next(index(1:length(Ref)),:);
             Next      = OperatorGA(Problem,[Input;Ref.decs],{1,15,1,5});
-            Label     = net.predict(Next);
+            Label = predict(net,Next);
             i = i+size(Next,1);
         end
         Next = Next(Label>0.9,:);
-    elseif p0>b && p1<a
-        Next = [];
+    elseif p0>b && p1<a % Randomly select one to avoid loop
+        randindex = randperm(length(Next));
+        Next = Next(randindex(1),:);
     elseif p1 > b
         while i<wmax
             [~,index] = sort(Label);
             Input     = Next(index(1:length(Ref)),:);
             Next      = OperatorGA(Problem,[Input;Ref.decs],{1,15,1,5});
-            Label     = net.predict(Next);
+            Label = predict(net,Next);
             i = i+size(Next,1);
         end
         Next = Next(Label<0.1,:);

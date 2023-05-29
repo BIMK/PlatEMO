@@ -75,7 +75,7 @@ classdef PPS < ALGORITHM
                         epsilon_k = epsilon_0;
                     end
                     if search_stage == -1
-                        epsilon_k =  update_epsilon(tao,epsilon_k,epsilon_0,rf,alpha,gen,Tc,cp);
+                        epsilon_k = update_epsilon(tao,epsilon_k,epsilon_0,rf,alpha,gen,Tc,cp);
                     end
                 else
                     epsilon_k = 0;

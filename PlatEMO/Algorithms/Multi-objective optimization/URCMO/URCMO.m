@@ -52,7 +52,7 @@ classdef URCMO < ALGORITHM
                     succ_jilu(cnt,3) = sum(succ2(1:Problem.N/2));
                     succ_jilu(cnt,4) = sum(succ2(1 + Problem.N/2 : Problem.N)); % only succ2 is used in the paper
                     
-                    if Problem.FE == first_FES
+                    if Problem.FE >= first_FES
                         for num = 1 : 4
                             if std(succ_jilu(:,num)) ~= 0
                                 a(num) = mean(succ_jilu(:,num)) / std(succ_jilu(:,num));

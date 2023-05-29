@@ -1,6 +1,6 @@
 classdef C10MOP1 < EvoXBenchProblem
 % <multi> <real> <large/none> <expensive/none>
-% EvoXBench
+% EvoXBench on CIFAR-10
 
 %------------------------------- Reference --------------------------------
 % Z. Lu, R. Cheng, Y. Jin, K. C. Tan, and K. Deb, Neural architecture

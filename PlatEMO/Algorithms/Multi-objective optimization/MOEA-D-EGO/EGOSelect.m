@@ -99,7 +99,7 @@ function EI = EICal(Obj,Z,lamda,MSE,Gbest)
 end
 
 function [y,x] = GPcal(lamda,mu,sig2)
-% Calculate the mu (x) and sigma^2 (y) of the aggregation function
+% Calculate the mu (y) and sigma^2 (x) of the aggregation function
 
     tao   = sqrt(lamda(1)^2*sig2(1)+lamda(2)^2*sig2(2));
     alpha = (mu(1)-mu(2))/tao;
