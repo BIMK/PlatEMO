@@ -21,11 +21,10 @@ classdef DWU < ALGORITHM
         function main(Algorithm,Problem)
             %% Generate random population
             Population = Problem.Initialization();
-            [Population,FrontNo] = EnvironmentalSelection(Population,Problem.N);
 
             %% Optimization
             while Algorithm.NotTerminated(Population)
-                MatingPool = TournamentSelection(2,Problem.N,FrontNo);
+                MatingPool = TournamentSelection(2,Problem.N,sum(max(0,Population.cons),2));
                 Offspring  = OperatorGA(Problem,Population(MatingPool));
                 [Population,FrontNo,] = EnvironmentalSelection([Population,Offspring],Problem.N);
             end
