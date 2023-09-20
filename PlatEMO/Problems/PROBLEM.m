@@ -69,9 +69,9 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
         %   a subclass of PROBLEM, while PROBLEM cannot be instantiated
         %   directly.
         %
-        %   If proName is UserProblem, all the properties can be be
-        %   specified to define the details of the problem. Otherwise, only
-        %   the properties N, M, D, maxFE, maxRuntime can be defined. The
+        %   If proName is UserProblem, all the properties can be specified
+        %   to define the details of the problem. Otherwise, only the
+        %   properties N, M, D, maxFE, maxRuntime can be defined. The
         %   properties M, D, encoding, lower, upper may be automatically
         %   revised after specification.
         %
@@ -244,10 +244,6 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
         %   For multi-objective optimization problems, an optimum can be a
         %   point on the Pareto front; if the Pareto front is unknown, an
         %   optimum can be a reference point for hypervolume calculation.
-        %
-        %   For multi-modal multi-objective optimization problems, an
-        %   optimum can be the decision variables of a Pareto optimal
-        %   solution.
         %
         %   This function is usually called by the constructor.
         %

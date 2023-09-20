@@ -38,7 +38,7 @@ classdef EvoXBenchProblem < PROBLEM
 %
 %       pro = @C10MOP1;
 %       problem = pro();
-%       [decs, objs, cons] = platemo('algorithm',@NSGAII,'problem',pro,'N',100,'maxFE',10000)
+%       [decs, objs, cons] = platemo('algorithm',@NSGAII,'problem',pro,'N',100,'maxFE',10000);
 %       population = SOLUTION(decs, objs, cons);
 %       igd = problem.CalMetric('IGD', population);
 %   runs NSGAII with a population size of 100 on C10MOP1 for 10000

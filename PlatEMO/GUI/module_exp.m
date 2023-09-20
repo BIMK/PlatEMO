@@ -591,6 +591,8 @@ classdef module_exp < handle
         function cb_tableDisplay(obj,~,~)
             if ~isempty(obj.app.table.UserData)
                 obj.app.tablemenu.show();
+            else
+                uialert(obj.GUI.app.figure,'Please select at least one cell of metric value in the table.','Error');
             end
         end
         %% Show the results in new figure

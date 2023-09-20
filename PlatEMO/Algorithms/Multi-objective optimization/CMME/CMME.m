@@ -3,7 +3,7 @@ classdef CMME < ALGORITHM
 % Constrained many-objective evolutionary algorithm with enhanced mating and environmental selections
 
 %------------------------------- Reference --------------------------------
-% F. Ming, W. Gong, L. Wang, and L. Gao, A Constrained many-objective
+% F. Ming, W. Gong, L. Wang, and L. Gao, A constrained many-objective
 % optimization evolutionary algorithm with enhanced mating and
 % environmental selections, IEEE Transactions on Cybernetics, 2022.
 %------------------------------- Copyright --------------------------------

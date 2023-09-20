@@ -25,7 +25,7 @@ classdef GUI < handle
             obj.readList();
             
             % Create the window
-            obj.app.figure   = uifigure('Name','PlatEMO v4.2','Position',[0 0 1200 650],'Interruptible','off','icon',obj.icon.logo1,'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
+            obj.app.figure   = uifigure('Name','PlatEMO v4.3','Position',[0 0 1200 650],'Interruptible','off','icon',obj.icon.logo1,'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
             obj.app.maingrid = uigridlayout(obj.app.figure,'RowHeight',{25,80,'1x'},'ColumnWidth',{'1x'},'Padding',[0 0 0 0],'RowSpacing',0);
             
             % Create the tab buttons
@@ -41,17 +41,18 @@ classdef GUI < handle
             tempPanel2         = uipanel(tempPanel,'Position',[43 4 18 18],'BorderType','none','BackgroundColor',[.549 .6627 .7529]);
             obj.app.buttonT(4) = uibutton(tempPanel2,'Position',[-2 -2 24 24],'Text','','Icon',obj.icon.github,'BackgroundColor',[.549 .6627 .7529],'Tooltip','GitHub','ButtonpushedFcn',@(~,~)web('https://github.com/BIMK/PlatEMO','-browser'));
             tempPanel2         = uipanel(tempPanel,'Position',[73 4 18 18],'BorderType','none','BackgroundColor',[.549 .6627 .7529]);
-            obj.app.buttonT(5) = uibutton(tempPanel2,'Position',[-2 -2 24 24],'Text','','Icon',obj.icon.qq,'BackgroundColor',[.549 .6627 .7529],'Tooltip','QQ','ButtonpushedFcn',@(~,~)web('https://jq.qq.com/?_wv=1027&k=cA5nUOl4','-browser'));
+            obj.app.buttonT(5) = uibutton(tempPanel2,'Position',[-2 -2 24 24],'Text','','Icon',obj.icon.qq,'BackgroundColor',[.549 .6627 .7529],'Tooltip','QQ','ButtonpushedFcn',@(~,~)web('https://qm.qq.com/cgi-bin/qm/qr?k=navfQ--MBttd9Zs0BBdPqFv4h4BbePnj&authKey=gChNL40JKTQN/xGuGhICBWJd9cl7fWof9DloY3xgANd2bHv4Jtm/kO9Z49mhFRfg&noverify=0&personal_qrcode_source=1001','-browser'));
             
             % Create the menu
-            obj.app.grid(2)   = GUI.APP(2,1,uigridlayout(obj.app.maingrid,'RowHeight',{'1x',13,1},'ColumnWidth',{1,75,75,75,'1x',13,1},'Padding',[0 0 0 5],'RowSpacing',5));
+            obj.app.grid(2)   = GUI.APP(2,1,uigridlayout(obj.app.maingrid,'RowHeight',{'1x',13,1},'ColumnWidth',{1,75,75,75,75,'1x',13,1},'Padding',[0 0 0 5],'RowSpacing',5));
             obj.app.button(1) = GUI.APP([1 2],2,uibutton(obj.app.grid(2),'Text',{'Test','Module'},'VerticalAlignment','bottom','FontSize',11,'Icon',obj.icon.test,'IconAlignment','top','Tooltip',{'Test one algorithm on a problem with specified parameter settings.','You can analyse the result and study the performance of the algorithm from various aspects.'},'ButtonpushedFcn',{@obj.cb_module,1}));
             obj.app.button(2) = GUI.APP([1 2],3,uibutton(obj.app.grid(2),'Text',{'Application','Module'},'VerticalAlignment','bottom','FontSize',11,'Icon',obj.icon.application,'IconAlignment','top','Tooltip',{'Use algorithms to solve your own problem.','You can design your own problem and solve it by the suggested algorithms.'},'ButtonpushedFcn',{@obj.cb_module,2}));
             obj.app.button(3) = GUI.APP([1 2],4,uibutton(obj.app.grid(2),'Text',{'Experiment','Module'},'VerticalAlignment','bottom','FontSize',11,'Icon',obj.icon.experiment,'IconAlignment','top','Tooltip',{'Do experiment on multiple algorithms and problems.','You can observe the statistical results shown in a table and save it as an Excel or LaTeX table.'},'ButtonpushedFcn',{@obj.cb_module,3}));
-            obj.app.button(4) = GUI.APP([1 2],2,uibutton(obj.app.grid(2),'Visible',false,'Text',{'About','PlatEMO'},'VerticalAlignment','bottom','FontSize',11,'Icon',obj.icon.author,'IconAlignment','top','ButtonpushedFcn',@obj.cb_author));
-            obj.app.button(5) = GUI.APP([1 2],3,uibutton(obj.app.grid(2),'Visible',false,'Text',{'User','Manual'},'VerticalAlignment','bottom','FontSize',11,'Icon',obj.icon.help,'IconAlignment','top','ButtonpushedFcn',@(~,~)web(['file://',fullfile(fileparts(fileparts(mfilename('fullpath'))),'manual.pdf')],'-browser')));
-            obj.app.tip       = GUI.APP(2,6,uiimage(obj.app.grid(2),'ImageSource',obj.icon.tip2,'ImageClickedFcn',@obj.cb_fold,'UserData',true));
-            tempLine          = GUI.APP(3,[1 7],uipanel(obj.app.grid(2),'BackgroundColor',[.8 .8 .8]));
+            obj.app.button(4) = GUI.APP([1 2],5,uibutton(obj.app.grid(2),'Text',{'Creation','Module'},'VerticalAlignment','bottom','FontSize',11,'Icon',obj.icon.creation,'IconAlignment','top','Tooltip',{'Create new algorithms via blocks.','You can visually create a new algorithm by connecting blocks and train it on problems.'},'ButtonpushedFcn',{@obj.cb_module,4}));
+            obj.app.button(5) = GUI.APP([1 2],2,uibutton(obj.app.grid(2),'Visible',false,'Text',{'About','PlatEMO'},'VerticalAlignment','bottom','FontSize',11,'Icon',obj.icon.author,'IconAlignment','top','ButtonpushedFcn',@obj.cb_author));
+            obj.app.button(6) = GUI.APP([1 2],3,uibutton(obj.app.grid(2),'Visible',false,'Text',{'User','Manual'},'VerticalAlignment','bottom','FontSize',11,'Icon',obj.icon.help,'IconAlignment','top','ButtonpushedFcn',@(~,~)web(['file://',fullfile(fileparts(fileparts(mfilename('fullpath'))),'manual.pdf')],'-browser')));
+            obj.app.tip       = GUI.APP(2,7,uiimage(obj.app.grid(2),'ImageSource',obj.icon.tip2,'ImageClickedFcn',@obj.cb_fold,'UserData',true));
+            tempLine          = GUI.APP(3,[1 8],uipanel(obj.app.grid(2),'BackgroundColor',[.8 .8 .8]));
             
             % Create the modules
             movegui(obj.app.figure,'center');
@@ -65,15 +66,15 @@ classdef GUI < handle
         function cb_tab(obj,~,~,type)
             switch type
                 case 1
-                    [obj.app.button(1:3).Visible] = deal(true);
-                    [obj.app.button(4:5).Visible] = deal(false);
+                    [obj.app.button(1:4).Visible] = deal(true);
+                    [obj.app.button(5:6).Visible] = deal(false);
                     obj.app.buttonT(1).BackgroundColor = [.94 .94 .94];
                     obj.app.buttonT(1).FontColor       = 'k';
                     obj.app.buttonT(2).BackgroundColor = [0 .25 .45];
                     obj.app.buttonT(2).FontColor       = 'w';
                 case 2
-                    [obj.app.button(1:3).Visible] = deal(false);
-                    [obj.app.button(4:5).Visible] = deal(true);
+                    [obj.app.button(1:4).Visible] = deal(false);
+                    [obj.app.button(5:6).Visible] = deal(true);
                     obj.app.buttonT(1).BackgroundColor = [0 .25 .45];
                     obj.app.buttonT(1).FontColor       = 'w';
                     obj.app.buttonT(2).BackgroundColor = [.94 .94 .94];
@@ -107,7 +108,6 @@ classdef GUI < handle
         end
         %% Read the function lists
         function readList(obj)
-            % Read the algorithm list
             LabelStr    = {'none','single','multi','many','real','integer','label','binary','permutation','large','constrained','expensive','multimodal','sparse','dynamic','multitask','bilevel','robust'};
             obj.algList = obj.readList2('Algorithms',LabelStr);
             obj.proList = obj.readList2('Problems',LabelStr);
@@ -120,26 +120,29 @@ classdef GUI < handle
                 Files = what(Folders{i});
                 Files = Files.m;
                 for j = 1 : length(Files)
-                    f = fopen(Files{j});
-                    fgetl(f);
-                    str = regexprep(fgetl(f),'^\s*%\s*','','once');
-                    fclose(f);
-                    labelstr = regexp(str,'(?<=<).*?(?=>)','match');
-                    if ~isempty(labelstr)
-                        label = false(length(labelstr),length(LabelStr));
-                        for k = 1 : length(labelstr)
-                            label(k,:) = ismember(LabelStr,split(labelstr{k},'/'));
+                    try
+                        f = fopen(Files{j});
+                        fgetl(f);
+                        str = regexprep(fgetl(f),'^\s*%\s*','','once');
+                        fclose(f);
+                        labelstr = regexp(str,'(?<=<).*?(?=>)','match');
+                        if ~isempty(labelstr)
+                            label = false(length(labelstr),length(LabelStr));
+                            for k = 1 : length(labelstr)
+                                label(k,:) = ismember(LabelStr,split(labelstr{k},'/'));
+                            end
+                            if any(label(:))
+                                List = [List;{label},Files{j}(1:end-2)];
+                            end
                         end
-                        if any(label(:))
-                            List = [List;{label},Files{j}(1:end-2)];
-                        end
+                    catch
                     end
                 end
             end
         end
         %% Change the module
         function cb_module(obj,~,~,GUIsetting)
-            name = {'module_test','module_app','module_exp'};
+            name = {'module_test','module_app','module_exp','module_cre'};
             for i = 1 : length(name)
                 if isfield(obj.app,name{i})
                     obj.app.(name{i}).app.maingrid.Visible = i==GUIsetting;
