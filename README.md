@@ -46,6 +46,7 @@ following literature:
 
 # Release Highlights of PlatEMO 4.3
 [Release Note can be found here](./Doc/releasenote.md)
+
 *Add a sparse multi-objective evolutionary algorithm S-NSGA-II, a multimodal multi-objective evolutionary algorithm CoMMEA, four surrogate-assisted multi-objective evolutionary algorithms ADSAPSO, EMMOEA, ESBCEO, and KTS, and three constrained multi-objective evolutionary algorithms CMEGL, IMTCMO, and MCCMO. There are currently 240 algorithms in the platform.
 
 * Add 15 constrained multi-objective benchmark problems SDC1-SDC15. There are currently 481 problems in the platform.
