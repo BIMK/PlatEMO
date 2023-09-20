@@ -44,11 +44,11 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 4.2
+# Release Highlights of PlatEMO 4.3
 [Release Note can be found here](./Doc/releasenote.md)
-* Add one multi-objective evolutionary algorithm TS-NSGA-II, six constrained multi-objective evolutionary algorithms CMME, CMOCSO, CMOEMT, CMOQLMT, C-TSEA, DP-PPS, two multi-modal multi-objective evolutionary algorithms CMMO and HHC-MMEA, one surrogate-assisted multi-objective evolutionary algorithm PC-SAEA, and one sparse multi-objective evolutionary algorithm SGECF. Refactor the code of CSEA. There are currently 231 algorithms in the platform.
+*Add a sparse multi-objective evolutionary algorithm S-NSGA-II, a multimodal multi-objective evolutionary algorithm CoMMEA, four surrogate-assisted multi-objective evolutionary algorithms ADSAPSO, EMMOEA, ESBCEO, and KTS, and three constrained multi-objective evolutionary algorithms CMEGL, IMTCMO, and MCCMO. There are currently 240 algorithms in the platform.
 
-* Add 18 multi-objective neural architecture search benchmark problems C10MOP1-C10MOP9 and IN1KMOP1-IN1KMOP9. There are currently 466 problems in the platform.
+* Add 15 constrained multi-objective benchmark problems SDC1-SDC15. There are currently 481 problems in the platform.
 
 # Features of PlatEMO
 *  Totally Developed in MATLAB  
