@@ -20,31 +20,30 @@ classdef HEA < ALGORITHM
 
     methods
         function main(Algorithm,Problem)
-        %% Parameter setting
+            %% Parameter setting
             MaxT = Algorithm.ParameterSet(0.05);
             [W, Problem.N] = UniformPoint(Problem.N,Problem.M);
             T = 0;
             step = MaxT/(Problem.maxFE / Problem.N);
-        %% Generate random population
+            %% Generate random population
             Population          = Problem.Initialization(); 
             Solutions =  Population;
             zmin = min(Population.objs,[],1);
             zmax = max(max(Population.objs, [], 1), zmin + 1e-6);
-        %% External archive initialization
-            while Algorithm.NotTerminated(Solutions)
-        %% Optimization        
+            %% Optimization
+            while Algorithm.NotTerminated(Solutions)       
                 MatingPool = randperm(length(Population));
                 Offsprings = OperatorGA(Problem, Population(MatingPool));
                 Population = [Offsprings, Solutions];  
                 zmin = min(zmin, min(Population.objs,[],1));          
-                [non_dominated, hd] = DominationCal_HEA(Population.objs, zmin, zmax, T);
+                [non_dominated, hd] = DominationCal_HEA(Population.objs, zmin, zmax, T);               
                 Population = Population(non_dominated == 1);
-                zmax = max(max(Population.objs, [], 1), zmin + 1e-6);
                 hd = hd(non_dominated == 1);
-           %% Environmental Selection
-                [Solutions, hd] = EnvironmentalSelection_HEA(Population, hd, zmin, zmax, Problem.N, W);
-                T = T + step;   
-           %% Population regeneration
+                zmax = max(max(Population.objs, [], 1), zmin + 1e-6);
+                T = T + step;
+                [Solutions, hd] = EnvironmentalSelection_HEA(Population, hd, zmin, zmax, Problem.N, W); 
+                
+            %% Population reselection strategy
                 Population = Solutions;
                 r = unidrnd(Problem.N,[1,Problem.N]);
                 for i = 1: Problem.N
