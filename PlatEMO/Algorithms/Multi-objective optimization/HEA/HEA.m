@@ -5,7 +5,7 @@ classdef HEA < ALGORITHM
 
 %------------------------------- Reference --------------------------------
 % Z. Liu, F. Han, Q. Ling, H. Han, and J. Jiang, A many-objective 
-% optimization evolutionary algorithm based on hyper-dominande degree, 
+% optimization evolutionary algorithm based on hyper-dominance degree, 
 % Swarm and Evolutionary Computation, 2023, 83: 101411.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
