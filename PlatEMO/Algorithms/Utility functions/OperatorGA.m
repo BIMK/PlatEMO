@@ -34,7 +34,7 @@ function Offspring = OperatorGA(Problem,Parent,Parameter)
 % [4] D. B. Fogel, An evolutionary approach to the traveling salesman
 % problem, Biological Cybernetics, 1988, 60(2): 139-144.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -61,7 +61,7 @@ function Offspring = OperatorGA(Problem,Parent,Parameter)
         Offspring(:,[Type{1:2}]) = GAreal(Parent1(:,[Type{1:2}]),Parent2(:,[Type{1:2}]),Problem.lower([Type{1:2}]),Problem.upper([Type{1:2}]),proC,disC,proM*length([Type{1:2}])/size(Parent1,2),disM);
     end
     if ~isempty(Type{3})        % Label variables
-        Offspring(:,Type{3}) = GAlabel(Parent1(:,Type{3}),Parent2(:,Type{3}),proC,proM*length(Type{3})/size(Parent1,2));
+        Offspring(:,Type{3}) = GAlabel(Parent1(:,Type{3}),Parent2(:,Type{3}),Problem.lower(Type{3}),Problem.upper(Type{3}),proC,proM*length(Type{3})/size(Parent1,2));
     end
     if ~isempty(Type{4})        % Binary variables
         Offspring(:,Type{4}) = GAbinary(Parent1(:,Type{4}),Parent2(:,Type{4}),proC,proM*length(Type{4})/size(Parent1,2));
@@ -103,7 +103,7 @@ function Offspring = GAreal(Parent1,Parent2,lower,upper,proC,disC,proM,disM)
                       (1-(Upper(temp)-Offspring(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
 end
 
-function Offspring = GAlabel(Parent1,Parent2,proC,proM)
+function Offspring = GAlabel(Parent1,Parent2,lower,upper,proC,proM)
 % Genetic operators for label variables
 
     %% Uniform crossover
@@ -118,18 +118,8 @@ function Offspring = GAlabel(Parent1,Parent2,proC,proM)
     
     %% Bitwise mutation
     Site = rand(2*N,D) < proM/D;
-    Rand = randi(D,2*N,D);
+    Rand = round(unifrnd(repmat(lower,2*N,1),repmat(upper,2*N,1)));
     Offspring(Site) = Rand(Site);
-    
-    %% Repair
-    for i = 1 : 2*N
-        Off = zeros(1,D);
-        while ~all(Off)
-            x = find(~Off,1);
-            Off(Offspring(i,:)==Offspring(i,x)) = max(Off) + 1;
-        end
-        Offspring(i,:) = Off;
-    end
 end
 
 function Offspring = GAbinary(Parent1,Parent2,proC,proM)

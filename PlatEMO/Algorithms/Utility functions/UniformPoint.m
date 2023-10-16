@@ -42,7 +42,7 @@ function [W,N] = UniformPoint(N,M,method)
 % of weight vector set, Proceedings of the Genetic and Evolutionary
 % Computation Conference Companion, 2020, 1486-1494.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

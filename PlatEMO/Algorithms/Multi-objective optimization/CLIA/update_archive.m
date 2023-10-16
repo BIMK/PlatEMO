@@ -1,4 +1,14 @@
 function archive = update_archive(archive, P, Z, picks, Problem)
+
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% research purposes. All publications which use this platform or any code
+% in the platform should acknowledge the use of "PlatEMO" and reference "Ye
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
+% Computational Intelligence Magazine, 2017, 12(4): 73-87".
+%--------------------------------------------------------------------------
+
 global disable_flag;
 if disable_flag
     return;
@@ -12,7 +22,7 @@ P = P(ia);
 archive = P(index_frontiers);
 O = [archive.objs];
 if numel(archive) > picks
-    O = normalize(O);
+    O = normalization(O);
     %% Associate each frontier solution with one reference point
     [min_metric, allocation] = pair(O, Z, 'sin');
     %% Identify the active reference lines

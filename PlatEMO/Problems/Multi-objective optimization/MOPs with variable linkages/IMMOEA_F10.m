@@ -7,7 +7,7 @@ classdef IMMOEA_F10 < PROBLEM
 % evolutionary algorithm using Gaussian process-based inverse modeling,
 % IEEE Transactions on Evolutionary Computation, 2015, 19(6): 838-856.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

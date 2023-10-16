@@ -8,7 +8,7 @@ classdef URCMO < ALGORITHM
 % constrained multi-objective optimization, IEEE Transactions on
 % Cybernetics, 2022.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -52,7 +52,7 @@ classdef URCMO < ALGORITHM
                     succ_jilu(cnt,3) = sum(succ2(1:Problem.N/2));
                     succ_jilu(cnt,4) = sum(succ2(1 + Problem.N/2 : Problem.N)); % only succ2 is used in the paper
                     
-                    if Problem.FE == first_FES
+                    if Problem.FE >= first_FES
                         for num = 1 : 4
                             if std(succ_jilu(:,num)) ~= 0
                                 a(num) = mean(succ_jilu(:,num)) / std(succ_jilu(:,num));

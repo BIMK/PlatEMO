@@ -1,5 +1,5 @@
 classdef UserProblem < PROBLEM
-%UserProblem - User defined problem.
+%UserProblem - User-defined problem.
 %
 %   This problem provides a general framework, whose details can be defined
 %   by the inputs of the constructor.
@@ -18,7 +18,7 @@ classdef UserProblem < PROBLEM
 %   data        <any>               data of the problem
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -55,8 +55,8 @@ classdef UserProblem < PROBLEM
             obj.initFcn    = Str2Fcn(obj.initFcn,2,~isempty(obj.data),'initialization function');
             obj.evalFcn    = Str2Fcn(obj.evalFcn,3,~isempty(obj.data),'evaluation function');
             obj.decFcn     = Str2Fcn(obj.decFcn,3,~isempty(obj.data),'repair function');
-            obj.objFcn     = Strs2Fcns(obj.objFcn,3,~isempty(obj.data),'objective function f');
-            obj.conFcn     = Strs2Fcns(obj.conFcn,3,~isempty(obj.data),'constraint function g');
+            obj.objFcn     = Strs2Fcns(obj.objFcn,4,~isempty(obj.data),'objective function f');
+            obj.conFcn     = Strs2Fcns(obj.conFcn,4,~isempty(obj.data),'constraint function g');
             obj.objGradFcn = Strs2Fcns(obj.objGradFcn,3,~isempty(obj.data),'gradient of objective fg');
             obj.conGradFcn = Strs2Fcns(obj.conGradFcn,3,~isempty(obj.data),'gradient of constraint gg');
             Pop   = obj.Initialization(1);
@@ -154,24 +154,28 @@ function var = Str2Fcn(var,type,useData,name,D)
         try
             if ~isempty(regexp(var,'^<.+>$','once'))
                 switch type
-                    case 1
+                    case 1      % For lower, upper, data
                         var = load(var(2:end-1));
-                    otherwise
-                        [folder,file] = fileparts(var(2:end-1));
-                        addpath(folder);
-                        var = str2func(file);
+                    otherwise   % For initFcn, evalFcn, decFcn, objFcn, conFcn, objGradFcn, objConFcn
+                        [folder,file,ext] = fileparts(var(2:end-1));
+                        if type ~= 4 || strcmp(ext,'.m')
+                            addpath(folder);
+                            var = str2func(file);
+                        else
+                            var = load(var(2:end-1));
+                        end
                 end
             else
                 switch type
-                    case 1
+                    case 1      % For lower, upper, data
                         var = str2num(var);
-                    case 2
+                    case 2      % For initFcn
                         if useData
                             var = str2func(['@(N,data)',var]);
                         else
                             var = str2func(['@(N)',var]);
                         end
-                    case 3
+                    case {3,4}	% For evalFcn, decFcn, objFcn, conFcn, objGradFcn, objConFcn
                         if useData
                             var = str2func(['@(x,data)',var]);
                         else
@@ -184,11 +188,21 @@ function var = Str2Fcn(var,type,useData,name,D)
             rethrow(err);
         end
     end
-    if type == 1 && nargin > 4
+    if type == 1 && nargin > 4      % For lower, upper, data
         if isscalar(var)
             var = repmat(var,1,D);
         else
             assert(ismatrix(var)&&all(size(var)==[1,D]),'the %s should be a scalar or a 1*%d vector, while its current size is %d*%d.',name,D,size(var,1),size(var,2));
+        end
+    end
+    if type == 4 && isnumeric(var)   % For objFcn, conFcn
+        try
+            fprintf('Fit the %s...\n',name);
+            Model = fitrgp(var(:,1:end-1),var(:,end),'OptimizeHyperparameters','all','HyperparameterOptimizationOptions',struct('ShowPlots',false,'Verbose',0));
+            var   = @(x)predict(Model,x);
+        catch err
+            err = addCause(err,MException('','Fail to fit the %s',name));
+            rethrow(err);
         end
     end
 end

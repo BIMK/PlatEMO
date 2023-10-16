@@ -1,8 +1,18 @@
 function [Z, active_Z] = generate_reference(PopObj, original_active_number, Global, action, mode)
+
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% research purposes. All publications which use this platform or any code
+% in the platform should acknowledge the use of "PlatEMO" and reference "Ye
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
+% Computational Intelligence Magazine, 2017, 12(4): 73-87".
+%--------------------------------------------------------------------------
+
 global LEARNING_DISABLE_FLAG;
 if strcmp(mode, 'strict')
     active_number = 0;
-    PopObj = normalize(PopObj);
+    PopObj = normalization(PopObj);
     active_Z = [];
     while active_number < original_active_number
         instructed_action = action;

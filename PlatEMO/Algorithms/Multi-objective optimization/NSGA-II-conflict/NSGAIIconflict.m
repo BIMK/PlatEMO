@@ -9,7 +9,7 @@ classdef NSGAIIconflict < ALGORITHM
 % space partitioning using conflict information for solving many-objective
 % problems, Information Sciences, 2014, 268: 305-327.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

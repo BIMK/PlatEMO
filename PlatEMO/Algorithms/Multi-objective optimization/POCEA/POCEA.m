@@ -64,5 +64,5 @@ function [INDEX,THETA,DIS] = Association(Population,V,k)
 	DIS	      = sum(PopObj.^2,2);
     THETA     = acos(1 - pdist2(PopObj,V,'cosine'));
     [~,index] = sort(THETA,1);
-    INDEX     = index(1:min(k,length(index)),:);
+    INDEX     = index(1:min(k,end),:);
 end

@@ -2,7 +2,7 @@ classdef module_exp < handle
 %module_exp - Experimental module.
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -37,7 +37,7 @@ classdef module_exp < handle
             obj.app.stateA(4)  = GUI.APP(4,1,uibutton(obj.app.grid(1),'state','Text','real','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',1,'Tooltip','The decision variables are real numbers','ValueChangedFcn',{@obj.cb_filter,4}));
             obj.app.stateA(5)  = GUI.APP(4,2,uibutton(obj.app.grid(1),'state','Text','integer','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision variables are integers','ValueChangedFcn',{@obj.cb_filter,5}));
             obj.app.stateA(6)  = GUI.APP(4,3,uibutton(obj.app.grid(1),'state','Text','label','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision variables are labels','ValueChangedFcn',{@obj.cb_filter,6}));
-            obj.app.stateA(7)  = GUI.APP(5,1,uibutton(obj.app.grid(1),'state','Text','binarys','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision variables are binary numbers','ValueChangedFcn',{@obj.cb_filter,7}));
+            obj.app.stateA(7)  = GUI.APP(5,1,uibutton(obj.app.grid(1),'state','Text','binary','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision variables are binary numbers','ValueChangedFcn',{@obj.cb_filter,7}));
             obj.app.stateA(8)  = GUI.APP(5,2,uibutton(obj.app.grid(1),'state','Text','permutation','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision vector is a permutation','ValueChangedFcn',{@obj.cb_filter,8}));
             obj.app.labelA(3)  = GUI.APP(6,[1 3],uilabel(obj.app.grid(1),'Text','Special difficulties','VerticalAlignment','bottom','FontSize',12,'FontColor',[.15 .6 .2],'FontWeight','bold'));
             obj.app.stateA(9)  = GUI.APP(7,1,uibutton(obj.app.grid(1),'state','Text','large','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has more than 100 decision variables','ValueChangedFcn',{@obj.cb_filter,9}));
@@ -104,8 +104,8 @@ classdef module_exp < handle
             if index < 4
                 [obj.app.stateA(1:3).Value] = deal(0);
                 obj.app.stateA(index).Value = 1;
-            elseif index < 7
-                [obj.app.stateA(4:6).Value] = deal(0);
+            elseif index < 9
+                [obj.app.stateA(4:8).Value] = deal(0);
                 obj.app.stateA(index).Value = 1;
             end
             filter = [obj.app.stateA.Value];
@@ -591,6 +591,8 @@ classdef module_exp < handle
         function cb_tableDisplay(obj,~,~)
             if ~isempty(obj.app.table.UserData)
                 obj.app.tablemenu.show();
+            else
+                uialert(obj.GUI.app.figure,'Please select at least one cell of metric value in the table.','Error');
             end
         end
         %% Show the results in new figure

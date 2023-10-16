@@ -7,9 +7,9 @@ classdef MOCGDE < ALGORITHM
 % Y. Tian, H. Chen, H. Ma, X. Zhang, K. C. Tan, and Y. Jin, Integrating
 % conjugate gradients into evolutionary algorithms for large-scale
 % continuous multi-objective optimization, IEEE/CAA Journal of Automatica
-% Sinica, 2022.
+% Sinica, 2022, 9(10): 1801-1817.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
