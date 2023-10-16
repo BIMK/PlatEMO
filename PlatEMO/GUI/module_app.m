@@ -726,12 +726,15 @@ classdef module_app < handle
                 obj.app.labelD.Text = sprintf('%d evaluations',ALG.result{index,1});
                 % Clear the default or specified axes
                 if nargin > 3
-                    Draw(ax);
+                    Draw(ax, PRO);
                 else
-                    Draw(obj.app.axes);
+                    Draw(obj.app.axes, PRO);
                 end
                 if PRO.M > 1
                     % Show the result of multi-objective optimization
+                    if ~strcmp(PRO.display, obj.app.dropD(1).Value)
+                        PRO.fastdraw = 0;
+                    end
                     switch obj.app.dropD(1).Value
                         case 'Population (objectives)'
                             PRO.DrawObj(ALG.result{index,2});
@@ -739,18 +742,24 @@ classdef module_app < handle
                             PRO.DrawDec(ALG.result{index,2});
                         otherwise
                             obj.app.waittip.Visible = 'on'; drawnow();
-                            Draw(ALG.CalMetric(obj.app.dropD(1).Value),'-k.','LineWidth',1.5,'MarkerSize',10,{'Number of function evaluations',strrep(obj.app.dropD(1).Value,'_',' '),[]});
+                            Draw(ALG.CalMetric(obj.app.dropD(1).Value), PRO,'-k.','LineWidth',1.5,'MarkerSize',10,{'Number of function evaluations',strrep(obj.app.dropD(1).Value,'_',' '),[]});
                             obj.app.waittip.Visible = 'off';
                     end
+                    PRO.display = obj.app.dropD(1).Value;
                 else
                     % Show the result of single-objective optimization
+                    if ~strcmp(PRO.display, obj.app.dropD(2).Value)
+                        PRO.fastdraw = 0;
+                    end
                     switch obj.app.dropD(2).Value
                         case 'Population (variables)'
                             PRO.DrawDec(ALG.result{index,2});
                         otherwise
-                            Draw(ALG.CalMetric(obj.app.dropD(2).Value),'-k.','LineWidth',1.5,'MarkerSize',10,{'Number of function evaluations',strrep(obj.app.dropD(2).Value,'_',' '),[]});
+                            Draw(ALG.CalMetric(obj.app.dropD(2).Value),PRO,'-k.','LineWidth',1.5,'MarkerSize',10,{'Number of function evaluations',strrep(obj.app.dropD(2).Value,'_',' '),[]});
                     end
+                    PRO.display = obj.app.dropD(2).Value
                 end
+                PRO.fastdraw = 1;
             end
         end
         %% Create the gif

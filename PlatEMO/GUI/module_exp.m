@@ -606,7 +606,7 @@ classdef module_exp < handle
                 movegui(figure('NumberTitle','off','Name','','Position',[0 0 240*nCol 220*nRow]),'center');
                 for r = 1 : nRow
                     for c = 1 : nCol
-                        ax    = Draw(axes('Unit','pixels','Position',[(c-1)*240+35 (nRow-r)*220+35 200 170]));
+                        ax    = Draw(axes('Unit','pixels','Position',[(c-1)*240+35 (nRow-r)*220+35 200 170]),obj.data.PRO);
                         valid = find(reshape(~cellfun(@isempty,obj.data.result(r+loc(1)-1,c+loc(2)-1,:)),1,[]));
                         if ~isempty(valid)
                             [~,rank] = sort(obj.GetMetricValue(r+loc(1)-1,c+loc(2)-1,metric,false));
@@ -624,11 +624,11 @@ classdef module_exp < handle
             else
                 movegui(figure('NumberTitle','off','Name','','Position',[0 0 290*nRow 260]),'center');
                 for r = 1 : nRow
-                    ax = Draw(axes('Unit','pixels','Position',[(r-1)*290+50 40 220 200]));
+                    ax = Draw(axes('Unit','pixels','Position',[(r-1)*290+50 40 220 200]),obj.data.PRO);
                     s  = {'o','+','s','*','^','x';'-k','--k','-b','--b','-g','--g'};
                     for c = 1 : nCol
                         value = obj.GetMetricValue(r+loc(1)-1,c+loc(2)-1,metric,true);
-                        Draw(value,[s{1,mod(c-1,size(s,2))+1},s{2,mod(ceil(c/size(s,2))-1,size(s,2))+1}],'MarkerSize',5,'LineWidth',0.6);
+                        Draw(value,obj.data.PRO,[s{1,mod(c-1,size(s,2))+1},s{2,mod(ceil(c/size(s,2))-1,size(s,2))+1}],'MarkerSize',5,'LineWidth',0.6);
                     end
                     legend(ax,arrayfun(@(s)class(s),obj.data.ALG(loc(2):loc(4)),'UniformOutput',false),'Location','best');
                     set(ax,'FontSize',10);

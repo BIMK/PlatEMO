@@ -315,22 +315,25 @@ classdef module_test < handle
                 obj.app.labelC.Text = sprintf('%d evaluations',ALG.result{index,1});
                 % Clear the default or specified axes
                 if nargin > 3
-                    Draw(ax);
+                    Draw(ax, PRO);
                 else
-                    Draw(obj.app.axes);
+                    Draw(obj.app.axes, PRO);
                 end
                 isMetric = false;
                 if PRO.M > 1    % Multi-objective optimization
+                    if ~strcmp(PRO.display,obj.app.dropC(1).Value)
+                        PRO.fastdraw = 0;
+                    end
                     switch obj.app.dropC(1).Value
                         case 'Population (objectives)'
                             PRO.DrawObj(ALG.result{index,2});
                         case 'Population (variables)'
                             PRO.DrawDec(ALG.result{index,2});
                         case 'True Pareto front'
-                            Draw(PRO.optimum,{'\it f\rm_1','\it f\rm_2','\it f\rm_3'});
+                            Draw(PRO.optimum,PRO,{'\it f\rm_1','\it f\rm_2','\it f\rm_3'});
                         otherwise
                             obj.app.waittip.Visible = 'on'; drawnow();
-                            Draw(ALG.CalMetric(obj.app.dropC(1).Value),'-k.','LineWidth',1.5,'MarkerSize',10,{'Number of function evaluations',strrep(obj.app.dropC(1).Value,'_',' '),[]});
+                            Draw(ALG.CalMetric(obj.app.dropC(1).Value),PRO,'-k.','LineWidth',1.5,'MarkerSize',10,{'Number of function evaluations',strrep(obj.app.dropC(1).Value,'_',' '),[]});
                             obj.app.waittip.Visible = 'off';
                             isMetric = true;
                     end
@@ -342,12 +345,16 @@ classdef module_test < handle
                         value = ALG.CalMetric(obj.app.dropD(2).Value);
                         obj.app.labelD.Text = sprintf('%.4e',value(end));
                     end
+                    PRO.display = obj.app.dropC(1).Value;
                 else            % Single-objective optimization
+                    if ~strcmp(PRO.display,obj.app.dropC(2).Value)
+                        PRO.fastdraw = 0;
+                    end
                     switch obj.app.dropC(2).Value
                         case 'Population (variables)'
                             PRO.DrawDec(ALG.result{index,2});
                         otherwise
-                            Draw(ALG.CalMetric(obj.app.dropC(2).Value),'-k.','LineWidth',1.5,'MarkerSize',10,{'Number of function evaluations',strrep(obj.app.dropC(2).Value,'_',' '),[]});
+                            Draw(ALG.CalMetric(obj.app.dropC(2).Value),PRO,'-k.','LineWidth',1.5,'MarkerSize',10,{'Number of function evaluations',strrep(obj.app.dropC(2).Value,'_',' '),[]});
                             isMetric = true;
                     end
                     if ~isMetric
@@ -358,7 +365,9 @@ classdef module_test < handle
                         value = ALG.CalMetric(obj.app.dropD(3).Value);
                         obj.app.labelD.Text = sprintf('%.4e',value(end));
                     end
+                    PRO.display = obj.app.dropC(2).Value;
                 end
+                PRO.fastdraw = 1;
             end
         end
         %% Create the gif

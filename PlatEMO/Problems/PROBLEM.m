@@ -48,6 +48,8 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
         N          = 100;      	% Population size
         maxFE      = 10000;     % Maximum number of function evaluations
         FE         = 0;        	% Number of consumed function evaluations
+	fastdraw   = 0;         % Draw method (0.normal 1.fast)
+	display    = ''         % Item of displayed result
     end
     properties(SetAccess = protected)
         M;                    	% Number of objectives
@@ -304,9 +306,9 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
         %       Problem.DrawDec(Population)
         
             if all(obj.encoding==4)
-                Draw(logical(Population.decs));
+                Draw(logical(Population.decs),obj);
             else
-                Draw(Population.decs,{'\it x\rm_1','\it x\rm_2','\it x\rm_3'});
+                Draw(Population.decs,obj,{'\it x\rm_1','\it x\rm_2','\it x\rm_3'});
             end
         end
         function DrawObj(obj,Population)
@@ -319,8 +321,8 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
         %   Example:
         %       Problem.DrawObj(Population)
 
-            ax = Draw(Population.objs,{'\it f\rm_1','\it f\rm_2','\it f\rm_3'});
-            if ~isempty(obj.PF)
+            ax = Draw(Population.objs,obj,{'\it f\rm_1','\it f\rm_2','\it f\rm_3'});
+            if ~isempty(obj.PF) && obj.fastdraw == 0
                 if ~iscell(obj.PF)
                     if obj.M == 2
                         plot(ax,obj.PF(:,1),obj.PF(:,2),'-k','LineWidth',1);
@@ -335,7 +337,7 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
                     end
                     set(ax,'Children',ax.Children(flip(1:end)));
                 end
-            elseif size(obj.optimum,1) > 1 && obj.M < 4
+            elseif size(obj.optimum,1) > 1 && obj.M < 4 && obj.fastdraw == 0
                 if obj.M == 2
                     plot(ax,obj.optimum(:,1),obj.optimum(:,2),'.k');
                 elseif obj.M == 3
