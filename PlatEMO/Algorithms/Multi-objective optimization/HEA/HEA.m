@@ -1,7 +1,7 @@
 classdef HEA < ALGORITHM
 % <multi/many> <real/binary/permutation>
 % Hyper-dominance based evolutionary algorithm
-% MaxT ---  0.05 --- The maximum value of tolerance
+% MaxT --- 0.05 --- The maximum value of tolerance
 
 %------------------------------- Reference --------------------------------
 % Z. Liu, F. Han, Q. Ling, H. Han, and J. Jiang, A many-objective 
@@ -20,16 +20,19 @@ classdef HEA < ALGORITHM
 
     methods
         function main(Algorithm,Problem)
+            
             %% Parameter setting
             MaxT = Algorithm.ParameterSet(0.05);
             [W, Problem.N] = UniformPoint(Problem.N,Problem.M);
             T = 0;
             step = MaxT/(Problem.maxFE / Problem.N);
+            
             %% Generate random population
             Population          = Problem.Initialization(); 
             Solutions =  Population;
             zmin = min(Population.objs,[],1);
             zmax = max(max(Population.objs, [], 1), zmin + 1e-6);
+            
             %% Optimization
             while Algorithm.NotTerminated(Solutions)       
                 MatingPool = randperm(length(Population));
@@ -43,7 +46,7 @@ classdef HEA < ALGORITHM
                 T = T + step;
                 [Solutions, hd] = EnvironmentalSelection_HEA(Population, hd, zmin, zmax, Problem.N, W); 
                 
-            %% Population reselection strategy
+                %% Population reselection strategy
                 Population = Solutions;
                 r = unidrnd(Problem.N,[1,Problem.N]);
                 for i = 1: Problem.N
@@ -55,4 +58,3 @@ classdef HEA < ALGORITHM
         end
     end
 end
-

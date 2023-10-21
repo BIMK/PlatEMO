@@ -42,7 +42,7 @@ function Fitness = CalFitness2(PopObj,PopCon)
         if CV(i)==0||R(i)==0
             Fitness(i)=0;
         else
-            Fitness(i)=CalFitness(PopObj(i,:),PopCon(i,:));
+            Fitness(i)=CalFitness1(PopObj(i,:),PopCon(i,:));
         end
     end
 end
