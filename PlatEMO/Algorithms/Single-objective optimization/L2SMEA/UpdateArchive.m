@@ -29,7 +29,7 @@ function [TArchive,Archive] = UpdateArchive(TArchive,Problem,popNew,Archive)
         [~,idx]     = sort(popNew(:,D+1),'ascend');
         topRemain   = idx(1:RemainFE);
         Dec         = popNew(topRemain,1:D).*repmat(BU-BD,RemainFE,1) + repmat(BD,RemainFE,1);
-        NewSolution = SOLUTION(Dec);
+        NewSolution = Problem.Evaluation(Dec);
         TArchive    = [TArchive;popNew(topRemain,1:D),NewSolution.ojs];
         Archive     = [Archive, NewSolution];
     end

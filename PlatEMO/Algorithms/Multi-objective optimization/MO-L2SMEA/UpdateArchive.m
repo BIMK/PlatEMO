@@ -20,7 +20,7 @@ function [Archive,currFEs,Population] = UpdateArchive(Archive,Problem,popNew,rem
     elseif newN <= remain
         % Evaluate all candidate solutions with true function
         Dec        = popNew(:,1:D).*repmat(BU-BD,newN,1) + repmat(BD,newN,1);
-        NEWOFF     = SOLUTION(Dec);
+        NEWOFF     = Problem.Evaluation(Dec);
         Population = [Population,NEWOFF];
         NNEW       = length(NEWOFF);
         MinObj     = min([NNEW.objs;MinObj],[],1);
@@ -34,7 +34,7 @@ function [Archive,currFEs,Population] = UpdateArchive(Archive,Problem,popNew,rem
         [~,idx]    = sort(popNew(:,D+1),'ascend');
         topRemain  = idx(1:remain);
         Dec        = popNew(topRemain,1:D).*repmat(BU-BD,remain,1) + repmat(BD,remain,1);
-        NEWOFF     = SOLUTION(Dec);
+        NEWOFF     = Problem.Evaluation(Dec);
         NNEW       = length(NEWOFF);
         Obj        = (NEWOFF.objs-repmat(MinObj,NNEW,1))./repmat(MaxObj-MinObj,NNEW,1);
         Obj        = sum(Obj,2);
