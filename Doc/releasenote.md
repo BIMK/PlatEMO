@@ -1,3 +1,8 @@
+# Release Highlights of PlatEMO 4.5 (2023-12)
+* Enhance the GUI with new features.
+
+* Add two sparse multi-objective evolutionary algorithms MGCEA and NUCEA. There are currently 252 algorithms in the platform.
+
 # Release Highlights of PlatEMO 4.4 (2023-10)
 * Add a deep reinforcement learning based multi-objective evolutionary algorithm MOEA/D-DQN, two many-objective evolutionary algorithms HEA and SSCEA, two constrained multi-objective evolutionary algorithms MSCEA and TPCMaO, two surrogate-assisted evolutionary algorithms L2SMEA and MO-L2SMEA, and three surrogate-assisted constrained multi-objective evolutionary algorithms MGSAEA, RGA-M1-2, and RGA-M2-2. There are currently 250 algorithms in the platform.
 
