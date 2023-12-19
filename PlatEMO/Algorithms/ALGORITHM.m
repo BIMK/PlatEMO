@@ -11,6 +11,7 @@ classdef ALGORITHM < handle & matlab.mixin.Heterogeneous
 %   pro             <class>     problem solved in current execution
 %   result          <cell>      populations saved in current execution
 %   metric          <struct>    metric values of current populations
+%   starttime       <scalar>	Used for runtime recording
 %
 % ALGORITHM methods:
 %   ALGORITHM       <protected> the constructor setting all the properties specified by user
@@ -35,6 +36,7 @@ classdef ALGORITHM < handle & matlab.mixin.Heterogeneous
         pro;                            % Problem solved in current execution
         result;                         % Populations saved in current execution
         metric;                         % Metric values of current populations
+        starttime;                      % Used for runtime recording
     end
     methods(Access = protected)
         function obj = ALGORITHM(varargin)
@@ -74,7 +76,8 @@ classdef ALGORITHM < handle & matlab.mixin.Heterogeneous
                 obj.pro.FE = 0;
                 addpath(fileparts(which(class(obj))));
                 addpath(fileparts(which(class(obj.pro))));
-                tic; obj.main(obj.pro);
+                obj.starttime = tic;
+                obj.main(obj.pro);
             catch err
                 if ~strcmp(err.identifier,'PlatEMO:Termination')
                     rethrow(err);
@@ -108,7 +111,7 @@ classdef ALGORITHM < handle & matlab.mixin.Heterogeneous
         %           ... ...
         %       end
         
-            obj.metric.runtime = obj.metric.runtime + toc;
+            obj.metric.runtime = obj.metric.runtime + toc(obj.starttime);
             if obj.pro.maxRuntime < inf
                 obj.pro.maxFE = obj.pro.FE*obj.pro.maxRuntime/obj.metric.runtime;
             end
@@ -118,7 +121,8 @@ classdef ALGORITHM < handle & matlab.mixin.Heterogeneous
             drawnow('limitrate');
             obj.outputFcn(obj,obj.pro);
             nofinish = obj.pro.FE < obj.pro.maxFE;
-            assert(nofinish,'PlatEMO:Termination',''); tic;
+            assert(nofinish,'PlatEMO:Termination','');
+            obj.starttime = tic;
         end
         function varargout = ParameterSet(obj,varargin)
         %ParameterSet - Obtain the parameters of the algorithm.

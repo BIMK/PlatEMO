@@ -4,7 +4,7 @@ classdef MOL2SMEA < ALGORITHM
 % NLinear --- 8 --- Number of one-dimensional models
 
 %------------------------------- Reference --------------------------------
-% S. L, X. Zhang, Y. Tian, S. Yang, L. Zhang, and Y. Jin, Linear subspace
+% L. Si, X. Zhang, Y. Tian, S. Yang, L. Zhang, and Y. Jin, Linear subspace
 % surrogate modeling for large-scale expensive single/multi-objective
 % optimization, IEEE Transactions on Evolutionary Computation, 2023.
 %------------------------------- Copyright --------------------------------
