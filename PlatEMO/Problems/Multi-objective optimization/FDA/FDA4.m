@@ -44,6 +44,7 @@ classdef FDA4 < PROBLEM
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)
             t = floor(obj.FE/obj.N/obj.taut)/obj.nt;
+            disp(t)
             G = abs(sin(0.5*pi*t));
             g = sum((PopDec(:,obj.M:end)-G).^2,2);
             PopObj = repmat(1+g,1,obj.M).*fliplr(cumprod([ones(size(g,1),1),cos(PopDec(:,1:obj.M-1)*pi/2)],2)).*[ones(size(g,1),1),sin(PopDec(:,obj.M-1:-1:1)*pi/2)];

@@ -71,8 +71,8 @@ function varargout = platemo(varargin)
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    cd(fileparts(mfilename('fullpath')));
-    addpath(genpath(cd));
+    % cd(fileparts(mfilename('fullpath')));
+    % addpath(genpath(cd));
     if isempty(varargin)
         if verLessThan('matlab','9.9')
             errordlg('Fail to create the GUI of PlatEMO since the version for MATLAB is lower than R2020b. You can use PlatEMO without GUI by calling platemo() with parameters.','Error','modal');
