@@ -35,6 +35,7 @@ classdef FIP < ALGORITHM
 
                 Offspring  = Operator(Problem,Population);
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N);
+                
             end
         end
     end

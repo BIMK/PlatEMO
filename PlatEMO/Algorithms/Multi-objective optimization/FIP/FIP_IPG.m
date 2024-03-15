@@ -5,28 +5,29 @@ function Population = FIP_IPG(Problem,PopDec)
 	options.gamma = 20;               
 	options.T = 10;      
     %寻找边界点和拐点
-    SpecialPoints=findSpecialPoints(PopDec);
+    SpecialPoints=findSpecialPoints(Problem,PopDec);
 
     Pop_FI=SpecialPoints;
     lastProblem=Problem;
     lastProblem.FE=Problem.FE-Problem.N;
     X=lastProblem.Initialization();
     Y=Problem.Initialization();
-    Fx=X.obj;
-    Fy=Y.obj;
-    [~,~,A]=JDA(X.decs,Fx,Y.decs,Fy,options);
+    [Fx,~] = NDSort(X.objs,X.cons,Problem.N);
+    [Fy,~] = NDSort(Y.objs,Y.cons,Problem.N);
+    [acc,acc_ite,A]=JDA(X.objs,Fx',Y.objs,Fy',options);
 
 
 end
 
-function SpcecialPoints=findSpecialPoints(PopDec)
+function SpcecialPoints=findSpecialPoints(Problem,PopDec)
     % 边界点
-    [~,index]=min(PopDec);
+    [~,index]=min(Problem.CalObj(PopDec));
     boundary_points = PopDec(index,:);
     distance=zeros(length(PopDec),1);
     for i=1:size(PopDec,1)
         distance(i)=point_to_hyperplane(PopDec(i,:),boundary_points);
     end
+    clear index
     [~,index]=max(distance);
     SpcecialPoints=[boundary_points;PopDec(index,:)];
 end
