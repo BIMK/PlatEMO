@@ -1,16 +1,11 @@
 function [FrontNo,MaxFNo] = WASFGASort(Vectors, PopObj, nsort, Point, ro)
-
-
-    
+  
     [nvectors, ~] = size(Vectors);
-    
     [Loc,MaxFNo] = frontsclass(Vectors, PopObj,inf, Point, ro);
-    %disp(Loc)
     [popsize, ~] = size(PopObj);
-    
     FrontNo = inf(1,size(PopObj,1));
+
     for i = 1:popsize
-       
         Position = find(Loc == i);
         iter = 0;
         while nvectors*iter < Position
@@ -20,22 +15,11 @@ function [FrontNo,MaxFNo] = WASFGASort(Vectors, PopObj, nsort, Point, ro)
             FrontNo(i) = inf;
         else
             FrontNo(i) = iter;
-        
         end
-
     end
-
 end
 
-
-
-
-
-
-
-
 function [Loc, Max] = frontsclass(Vectors, PopObj, nsort, Point, ro)
-    
     [nvectors, ~] = size(Vectors);
     %N is the population size
     [N, ~] = size(PopObj);
@@ -58,29 +42,20 @@ function [Loc, Max] = frontsclass(Vectors, PopObj, nsort, Point, ro)
             Values = zeros(n, 1);
             
             for j = 1:n
-                
                 Values(j) = max((PopObj(j, :) - Point) .* Vectors(i, :)) + ro * sum(Vectors(i, :) .* (PopObj(j, :) - Point));
-
             end
 
             Vmin = min(Values);
             Sol1 = find(Values == Vmin);
-            
             Front = [Front, Sol1'];
             FrontG = [FrontG, Front];
-
-            
             valid_Loc = Front(Front <= size(PopObj, 1));
             SolG = [SolG; PopObj(valid_Loc, :)];
-            
             PopObj(valid_Loc, :) = [];
             [n, ~] = size(PopObj);
-           
         end
     end
-    
     Loc = find_Loc(SolG, PopObj2);
-    
 end
 
 %This function will allow us to identify the position in the original
@@ -89,9 +64,7 @@ function index = find_Loc(rows, initial_matrix)
     index = zeros(size(rows, 1), 1);
 
     for i = 1:size(rows, 1)
-        
         [equalrow, loc] = ismember(rows(i, :), initial_matrix, 'rows');
-
         
         if equalrow
             index(i) = loc;

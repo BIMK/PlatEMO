@@ -1,54 +1,46 @@
 classdef WASFGA < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
-% g-dominance based NSGA-II
-% Point --- --- Preferred point
+    % <multi> <real/integer/label/binary/permutation>
+    % WASFGA
+    % Point --- --- Preferred point
 
-%------------------------------- Reference --------------------------------
-% L. B. Said, S. Bechikh, and K. Ghedira, The r-dominance: A new dominance
-% relation for interactive evolutionary multicriteria decision making, IEEE
-% Transactions on Evolutionary Computation, 2010, 14(5): 801-818.
-%------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
-% research purposes. All publications which use this platform or any code
-% in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
-% for evolutionary multi-objective optimization [educational forum], IEEE
-% Computational Intelligence Magazine, 2017, 12(4): 73-87".
-%--------------------------------------------------------------------------
+    %------------------------------- Reference --------------------------------
+    % Ruiz, A. B., Saborido, R., & Luque, M. (2015). A preference-based
+    % evolutionary algorithm for multiobjective optimization: the weighting
+    % achievement scalarizing function genetic algorithm. Journal of Global
+    % Optimization, 62, 101-129.
+    %------------------------------- Copyright --------------------------------
+    % Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+    % research purposes. All publications which use this platform or any code
+    % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
+    % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+    % for evolutionary multi-objective optimization [educational forum], IEEE
+    % Computational Intelligence Magazine, 2017, 12(4): 73-87".
+    %--------------------------------------------------------------------------
 
     methods
         function main(Algorithm,Problem)
             %% Parameter setting
-             Point = Algorithm.ParameterSet(zeros(1,Problem.M)+0.5,0.00001);
-             ro = 0.0001;
+            Point = Algorithm.ParameterSet(zeros(1,Problem.M)+0.5,0.00001);
+            ro = 0.0001;
             %% Generate random population
-             Population = Problem.Initialization();
+            Population = Problem.Initialization();
             %% Generate a sample of weight vectors
-             [n,~] = size(Population.objs); 
-             if Problem.M == 2
+            [n,~] = size(Population.objs);
+            if Problem.M == 2
+                Vectors = generateWeightVectors2(n, 0.001);
+            else
+                [Vectors,Problem.N] = UniformPoint(Problem.N,Problem.M);
+            end
 
-             
-             Vectors = generateWeightVectors2(n, 0.001);
+            FrontNo    = WASFGASort(Vectors, Population.objs, inf, Point,ro);
+            CrowdDis   = CrowdingDistance(Population.objs,FrontNo);
+            [v,~] = size(Vectors);
+            if v >= n
+                nsort = 2;
+            else
+                nsort = floor(n/v) + 1;
+            end
 
-
-             else 
-                 [Vectors,Problem.N] = UniformPoint(Problem.N,Problem.M);
-             end
-             
-             
-             FrontNo    = WASFGASort(Vectors, Population.objs, inf, Point,ro);
-             CrowdDis   = CrowdingDistance(Population.objs,FrontNo);
-             [v,~] = size(Vectors);
-             if v >= n
-                 nsort = 2;
-             else 
-                 nsort = floor(n/v) + 1;
-             end
-
-            
-
-                 
-             
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
