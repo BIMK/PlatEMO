@@ -8,7 +8,7 @@ classdef BFGS < ALGORITHM
 % D. F. Shanno, Conditioning of quasi-Newton methods for function
 % minimization, Mathematics of Computation, 1970, 24: 647-656.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -24,7 +24,7 @@ classdef BFGS < ALGORITHM
             %% Generate random solution
             X  = Problem.Initialization(1);
             Bk = eye(Problem.D);
-            gk = Problem.CalObjGrad(X.dec);
+            gk = Problem.CalGrad(X.dec);
             
             %% Optimization
             while Algorithm.NotTerminated(X)
@@ -35,7 +35,7 @@ classdef BFGS < ALGORITHM
                         break;
                     end
                 end
-                gk1 = Problem.CalObjGrad(X1.dec);
+                gk1 = Problem.CalGrad(X1.dec);
                 sk  = (X1.dec-X.dec)';
                 yk  = gk1 - gk;
                 if yk*sk > 0

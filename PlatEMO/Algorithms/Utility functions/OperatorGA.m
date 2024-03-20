@@ -34,7 +34,7 @@ function Offspring = OperatorGA(Problem,Parent,Parameter)
 % [4] D. B. Fogel, An evolutionary approach to the traveling salesman
 % problem, Biological Cybernetics, 1988, 60(2): 139-144.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

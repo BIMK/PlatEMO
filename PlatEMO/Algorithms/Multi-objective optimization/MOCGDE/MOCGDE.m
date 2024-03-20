@@ -9,7 +9,7 @@ classdef MOCGDE < ALGORITHM
 % continuous multi-objective optimization, IEEE/CAA Journal of Automatica
 % Sinica, 2022, 9(10): 1801-1817.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
@@ -72,12 +72,14 @@ classdef MOCGDE < ALGORITHM
 end
 
 function [df,site] = FiniteDifference(Problem,X,W)
-    if any(X.con>0)
-        df   = Problem.CalConGrad(X.dec)';
-        site = false(1,length(X.dec));
-        df   = sum(df,2);
+    feasible = X.con <= 0;
+    if ~all(feasible)
+        [~,df] = Problem.CalGrad(X.dec);
+        site   = false(1,length(X.dec));
+        df(feasible,:) = 0;
+        df     = sum(df',2);
     else
-        df   = Problem.CalObjGrad(X.dec)';
+        df   = Problem.CalGrad(X.dec)';
         site = (any(df<0,2)&any(df>0,2))';
         df   = df*W';
     end

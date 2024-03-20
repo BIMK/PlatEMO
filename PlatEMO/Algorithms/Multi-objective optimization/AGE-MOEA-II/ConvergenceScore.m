@@ -1,7 +1,7 @@
 function CrowdDis = ConvergenceScore(front, p)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -11,10 +11,10 @@ function CrowdDis = ConvergenceScore(front, p)
 
 % This function is written by Annibale Panichella
 
-[m,~] = size(front);
-CrowdDis = zeros(1,m);
+    [m,~] = size(front);
+    CrowdDis = zeros(1,m);
 
-for i=1:m
-    CrowdDis(i) = -norm(front(i,:),p);
-end
+    for i=1:m
+        CrowdDis(i) = -norm(front(i,:),p);
+    end
 end 

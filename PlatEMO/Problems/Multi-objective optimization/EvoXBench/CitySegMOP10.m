@@ -12,9 +12,10 @@ classdef CitySegMOP10 < EvoXBenchProblem
         %% Default settings of the problem
         function Setting(obj)
             config.name = 'mosegnas';
-            config.args.objs = 'err&h1_latency&h1_energy_consumption&flops&params';
+            config.args.objs = 'err&h2_latency&h2_energy_consumption&flops&params';
             config.args.normalized_objectives = false;
             obj.Setting@EvoXBenchProblem(config);
         end
     end
 end
+

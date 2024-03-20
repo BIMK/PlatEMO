@@ -1,7 +1,7 @@
 function [TArchive,Archive] = UpdateArchive(TArchive,Problem,popNew,Archive)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -30,7 +30,7 @@ function [TArchive,Archive] = UpdateArchive(TArchive,Problem,popNew,Archive)
         topRemain   = idx(1:RemainFE);
         Dec         = popNew(topRemain,1:D).*repmat(BU-BD,RemainFE,1) + repmat(BD,RemainFE,1);
         NewSolution = Problem.Evaluation(Dec);
-        TArchive    = [TArchive;popNew(topRemain,1:D),NewSolution.ojs];
+        TArchive    = [TArchive;popNew(topRemain,1:D),NewSolution.objs];
         Archive     = [Archive, NewSolution];
     end
 end

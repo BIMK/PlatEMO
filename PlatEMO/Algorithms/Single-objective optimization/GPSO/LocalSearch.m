@@ -1,7 +1,7 @@
 function optimo = LocalSearch(Problem,pos)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
@@ -29,10 +29,12 @@ function optimo = LocalSearch(Problem,pos)
 end
 
 function df = FiniteDifference(X,Problem)
-    if any(X.con>0)
-        df = Problem.CalConGrad(X.dec)';
-        df = sum(df,2);
+    feasible = X.con <= 0;
+    if ~all(feasible)
+        [~,df] = Problem.CalGrad(X.dec);
+        df(feasible,:) = [];
+        df = sum(df',2);
     else
-        df = Problem.CalObjGrad(X.dec)';
+        df = Problem.CalGrad(X.dec)';
     end
 end

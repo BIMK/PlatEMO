@@ -2,7 +2,7 @@ function Fitness = CalFitness1(PopObj,PopCon,processcon,epsilon)
 % Calculate the fitness of each solution
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -13,7 +13,8 @@ function Fitness = CalFitness1(PopObj,PopCon,processcon,epsilon)
     N = size(PopObj,1);
     CV = PopCon(:,processcon);
     CV = sum(max(0,CV),2);
-    CV(find(CV<=epsilon)) = 0;
+    CV(CV<=epsilon) = 0;
+    
     %% Detect the dominance relation between each two solutions
     Dominate = false(N);
     for i = 1 : N-1

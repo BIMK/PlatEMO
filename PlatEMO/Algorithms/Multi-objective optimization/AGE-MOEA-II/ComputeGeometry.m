@@ -1,7 +1,7 @@
 function [p] = ComputeGeometry(front, m, n)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -11,13 +11,13 @@ function [p] = ComputeGeometry(front, m, n)
 
 % This function is written by Annibale Panichella
 
-d = pdist2(front, zeros(1,n));
-Extreme = FindCornerSolutions(front);
-d(Extreme) = Inf;
-[~, index] = min(d);
+    d = pdist2(front, zeros(1,n));
+    Extreme = FindCornerSolutions(front);
+    d(Extreme) = Inf;
+    [~, index] = min(d);
 
-point = front(index,:);
-x = NewtonRaphsonMethod(point, 0.001);
+    point = front(index,:);
+    x = NewtonRaphsonMethod(point, 0.001);
     if isnan(x) || x<=0
         p = 1;
     else
