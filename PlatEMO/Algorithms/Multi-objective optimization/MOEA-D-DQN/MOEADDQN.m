@@ -8,7 +8,7 @@ classdef MOEADDQN < ALGORITHM
 % multi-objective optimization, IEEE Transactions on Emerging Topics in
 % Computational Intelligence, 2023, 7(4): 1051-1064.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

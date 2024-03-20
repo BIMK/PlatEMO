@@ -9,7 +9,7 @@ classdef RGA_M1_2 < ALGORITHM
 % metamodeling framework for evolutionary multiobjective optimization, IEEE
 % Transactons on Evolutionary Computation, 2019, 23(1): 104-116.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -9,7 +9,7 @@ classdef RMSProp < ALGORITHM
 % running average of its recent magnitude, COURSERA: Neural networks for
 % machine learning, 2012.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -29,7 +29,7 @@ classdef RMSProp < ALGORITHM
             %% Optimization
             k = 1;
             while Algorithm.NotTerminated(X)
-                gk = Problem.CalObjGrad(X.dec);
+                gk = Problem.CalGrad(X.dec);
                 v  = rho*v0 + (1-rho)*gk.^2;
                 X  = Problem.Evaluation(X.dec-alpha./sqrt(1e-6+v).*gk);
                 k  = k + 1;

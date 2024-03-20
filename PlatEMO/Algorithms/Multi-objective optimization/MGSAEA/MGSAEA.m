@@ -10,9 +10,9 @@ classdef MGSAEA < ALGORITHM
 % Y. Zhang, H. Jiang, Y. Tian, H. Ma, and X. Zhang, Multigranularity
 % surrogate modeling for evolutionary multiobjective optimization with
 % expensive constraints, IEEE Transactions on Neural Networks and Learning
-% Systems, 2023.
+% Systems, 2024, 35(3): 2956-2968.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

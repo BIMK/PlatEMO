@@ -6,7 +6,7 @@ classdef SQP < ALGORITHM
 % P. T. Boggs and J. W. Tolle, Sequential quadratic programming, Acta
 % Numerica, 1995, 4(1): 1-51.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -23,8 +23,7 @@ classdef SQP < ALGORITHM
             lam   = zeros(1,length(X.con));
             Bk    = eye(Problem.D);
             sigma = 0.8;
-            dfk   = Problem.CalObjGrad(X.dec);
-            Ai    = Problem.CalConGrad(X.dec);
+            [dfk,Ai] = Problem.CalGrad(X.dec);
             
             %% Optimization
             while Algorithm.NotTerminated(X)
@@ -41,8 +40,7 @@ classdef SQP < ALGORITHM
                     end
                 end
                 [dfk0,Ai0] = deal(dfk,Ai);
-                dfk        = Problem.CalObjGrad(X1.dec);
-                Ai         = Problem.CalConGrad(X1.dec);
+                [dfk,Ai]   = Problem.CalGrad(X1.dec);
                 lam = pinv(-Ai')*dfk';
                 sk  = (X1.dec-X.dec)';
                 yk  = dlax(dfk,-Ai,lam) - dlax(dfk0,-Ai0,lam);

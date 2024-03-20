@@ -9,7 +9,7 @@ classdef Adam < ALGORITHM
 % D. P. Kingma and J. Ba, Adam: A method for stochastic optimization, arXiv
 % preprint arXiv:1412.6980, 2014.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -30,7 +30,7 @@ classdef Adam < ALGORITHM
             %% Optimization
             k = 1;
             while Algorithm.NotTerminated(X)
-                gk = Problem.CalObjGrad(X.dec);
+                gk = Problem.CalGrad(X.dec);
                 m  = beta1*m0 + (1-beta1)*gk;
                 v  = beta2*v0 + (1-beta2)*gk.^2;
                 X  = Problem.Evaluation(X.dec-alpha*(m/(1-beta1.^k))./(sqrt(v/(1-beta2.^k))+1e-8));
