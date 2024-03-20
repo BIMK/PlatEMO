@@ -7,7 +7,7 @@ classdef CMOSMA < ALGORITHM
 % self-organizing map approach for constrained multi-objective optimization
 % problems, Complex & Intelligent Systems, 2022, 8: 5355-5375.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

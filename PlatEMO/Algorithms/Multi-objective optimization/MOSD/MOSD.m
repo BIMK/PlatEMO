@@ -8,7 +8,7 @@ classdef MOSD < ALGORITHM
 % applications to optimal well control, Computational Geosciences, 2016,
 % 20: 355-374.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
@@ -29,7 +29,7 @@ classdef MOSD < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Archive)
                 for i = 1 : Problem.N
-                    gk  = FiniteDifference(Problem,Population(i)); 
+                    gk  = FiniteDifference(Problem,Population(i))'; 
                     gk1 = norm(gk(:,1));
                     gk2 = norm(gk(:,2));
                     if gk1 <= gk2
@@ -63,9 +63,9 @@ end
 
 function df = FiniteDifference(Problem,X)
     if any(X.con>0)
-        df = Problem.CalConGrad(X.dec)';
+        [~,df] = Problem.CalGrad(X.dec);
     else
-        df = Problem.CalObjGrad(X.dec)';
+        df = Problem.CalGrad(X.dec);
     end
 end
 

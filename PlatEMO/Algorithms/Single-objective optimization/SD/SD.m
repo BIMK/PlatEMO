@@ -8,7 +8,7 @@ classdef SD < ALGORITHM
 % S. S. Petrova and A. D. Solov'ev, The origin of the method of steepest
 % descent, Historia Mathematica, 1997, 24(4): 361-375.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -26,7 +26,7 @@ classdef SD < ALGORITHM
 
             %% Optimization
             while Algorithm.NotTerminated(X)
-                gk = Problem.CalObjGrad(X.dec);
+                gk = Problem.CalGrad(X.dec);
                 dk = -gk;
                 for m = 0 : 20
                     X1 = Problem.Evaluation(X.dec+beta^m*dk);

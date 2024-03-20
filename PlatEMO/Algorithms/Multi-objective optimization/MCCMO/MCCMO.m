@@ -6,9 +6,9 @@ classdef MCCMO< ALGORITHM
 % J. Zou, R. Sun, Y. Liu, Y. Hu, S. Yang, J. Zheng, and K. Li, A
 % multi-population evolutionary algorithm using new cooperative mechanism
 % for solving multi-objective problems with multi-constraint, IEEE
-% Transactions on Evolutionary Computation, 2023.
+% Transactions on Evolutionary Computation, 2024, 28(1): 267-280.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -1,7 +1,7 @@
 function Next = RSurrogateAssistedSelection(Problem,Ref,Input,wmax,Smodel)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -9,8 +9,8 @@ function Next = RSurrogateAssistedSelection(Problem,Ref,Input,wmax,Smodel)
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    Next  = OperatorGA(Problem,[Input;Ref.decs],{1,15,1,5});
-    i     = 0;
+    Next = OperatorGA(Problem,[Input;Ref.decs],{1,15,1,5});
+    i    = 0;
     while i < wmax
         [soerted_index,~]= model_select(Smodel,Next);
         Input = Next(soerted_index(1:length(Ref)),:);

@@ -6,9 +6,9 @@ classdef HREA < ALGORITHM
 %------------------------------- Reference --------------------------------
 % W. Li, X. Yao, T. Zhang, R. Wang, and L. Wang, Hierarchy ranking method
 % for multimodal multi-objective optimization with local Pareto fronts,
-% IEEE Transactions on Evolutionary Computation, 2022.
+% IEEE Transactions on Evolutionary Computation, 2023, 27(1): 98-110.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -26,8 +26,7 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
 %   CalDec          <public>    repair invalid solutions
 %   CalObj          <public>    calculate the objective values of solutions
 %   CalCon          <public>    calculate the constraint violations of solutions
-%   CalObjGrad      <public>    calculate the gradients of objectives
-%   CalConGrad      <public>    calculate the gradients of constraints
+%   CalGrad         <public>    calculate the gradients of objectives and constraints
 %   GetOptimum      <public>    generate the optimal objective values of the problem
 %   GetPF          	<public>    generate the image of the Pareto front
 %   CalMetric       <public>    calculate the metric value of a population
@@ -36,7 +35,7 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
 %   ParameterSet	<protected>	obtain the parameter settings of the problem
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -202,35 +201,24 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
         
             PopCon = zeros(size(PopDec,1),1);
         end
-        function ObjGrad = CalObjGrad(obj,Dec)
-        %CalObjGrad - Calculate the gradients of objectives of a solution.
+        function [ObjGrad,ConGrad] = CalGrad(obj,Dec)
+        %CalGrad - Calculate the gradients of objectives and constraints of a solution.
         %
-        %   Grad = obj.CalObjGrad(Dec) returns the gradients of objectives
-        %   of Dec, i.e., a Jacobian matrix.
-        %
-        %   This function is usually called by gradient-based algorithms.
-        %
-        %   Example:
-        %       ObjGrad = Problem.CalObjGrad(Dec)
-
-            Dec(Dec==0) = 1e-12;
-            X           = repmat(Dec,length(Dec),1).*(1+eye(length(Dec))*1e-6);
-            ObjGrad     = (obj.CalObj(X)-repmat(obj.CalObj(Dec),size(X,1),1))'./Dec./1e-6;
-        end
-        function ConGrad = CalConGrad(obj,Dec)
-        %CalConGrad - Calculate the gradients of constraints of a solution.
-        %
-        %   Grad = obj.CalConGrad(Dec) returns the gradients of constraints
-        %   of Dec, i.e., a Jacobian matrix.
+        %   [OGrad,CGrad] = obj.CalGrad(Dec) returns the gradients of
+        %   objectives OGrad and constraints CGrad of Dec, i.e., Jacobian
+        %   matrices.
         %
         %   This function is usually called by gradient-based algorithms.
         %
         %   Example:
-        %       ConGrad = Problem.CalConGrad(Dec)
+        %       [ObjGrad,ConGrad] = Problem.CalGrad(Dec)
         
             Dec(Dec==0) = 1e-12;
-            X           = repmat(Dec,length(Dec),1).*(1+eye(length(Dec))*1e-6);
-            ConGrad     = (obj.CalCon(X)-repmat(obj.CalCon(Dec),size(X,1),1))'./Dec./1e-6;
+            P1 = obj.Evaluation(Dec);
+            P2 = obj.Evaluation(repmat(Dec,obj.D,1).*(1+eye(obj.D)*1e-6));
+            ObjGrad = (P2.objs-repmat(P1.objs,obj.D,1))'./Dec./1e-6;
+            ConGrad = (P2.cons-repmat(P1.cons,obj.D,1))'./Dec./1e-6;
+            obj.FE  = obj.FE - obj.D;
         end
         function R = GetOptimum(obj,N)
         %GetOptimum - Generate the optimums of the problem.

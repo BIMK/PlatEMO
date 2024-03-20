@@ -44,13 +44,17 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 4.5
+# Release Highlights of PlatEMO 4.6
 [Release Note can be found here](./Doc/releasenote.md)
 
-* Enhance the GUI with new features.
+* Automated metric calculation without GUI is supported. Users can specify the metrics to display or save by setting the value of 'metName' when calling the main function platemo() with parameters.
 
-* Add two sparse multi-objective evolutionary algorithms MGCEA and NUCEA. There are currently 252 algorithms in the platform.
+* Modify the way of defining gradient functions, where a method CalGrad is defined instead of CalObjGrad and CalConGrad in PROBLEM class, and a parameter 'gradFcn' is defined instead of 'objGradFcn' and 'conGradFcn' in UserProblem class.
 
+* Add a bi-level evolutionary algorithm BL-SAEA, three constrained multi-objective evolutionary algorithms IMTCMO_BS, MFO-SPEA2, and MOEA/D-2WA, a sparse multi-objective evolutionary algorithm SCEA, a surrogate-assisted multi-objective evolutionary algorithm SFA-DE, and two multi-objective feature selection algorithms MFFS and PRDH. There are currently 260 algorithms in the platform.
+
+* Add 15 EvoXBench problems CitySegMOP1-15 and 12 constrained multi-objective benchmark problems LSCM1-LSCM12. There are currently 508 problems in the platform.
+  
 # Features of PlatEMO
 *  Totally Developed in MATLAB  
 PlatEMO consists of a number of MATLAB functions without using any other libraries. Any machines able to run MATLAB can use PlatEMO regardless of the operating system.  

@@ -1,5 +1,5 @@
 classdef  IMTCMO_BS < ALGORITHM
-% <multi/many> <real/binary/permutation> <large> <constrained/none>
+% <multi/many> <real/integer/label/binary/permutation> <large> <constrained/none>
 % Improved evolutionary multitasking-based CMOEA with bidirectional sampling
 
 %------------------------------- Reference --------------------------------
@@ -8,7 +8,7 @@ classdef  IMTCMO_BS < ALGORITHM
 % optimization with baseline results, Swarm and Evolutionary Computation,
 % 2024, 86: 101504.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -2,7 +2,7 @@ function [Next,Range] = EnvironmentalSelection(Obj,RefPoint,Range,N)
 % The environmental selection of AR-MOEA
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -10,18 +10,18 @@ function [Next,Range] = EnvironmentalSelection(Obj,RefPoint,Range,N)
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-        %% Selection among feasible solutions
-        % Non-dominated sorting
-        [FrontNo,MaxFNo] = NDSort(Obj,N);%population 2*N
-        Next = FrontNo < MaxFNo;
-        % Select the solutions in the last front
-        Last   = find(FrontNo==MaxFNo);
-        Choose = LastSelection(Obj(Last,:),RefPoint,Range,N-sum(Next));
-        Next(Last(Choose)) = true;
-        %Population = Population(Next,:);
-        % Update the range for normalization
-        Range(2,:) = max(Obj,[],1);
-        Range(2,Range(2,:)-Range(1,:)<1e-6) = 1;
+    %% Selection among feasible solutions
+    % Non-dominated sorting
+    [FrontNo,MaxFNo] = NDSort(Obj,N);%population 2*N
+    Next = FrontNo < MaxFNo;
+    % Select the solutions in the last front
+    Last   = find(FrontNo==MaxFNo);
+    Choose = LastSelection(Obj(Last,:),RefPoint,Range,N-sum(Next));
+    Next(Last(Choose)) = true;
+    %Population = Population(Next,:);
+    % Update the range for normalization
+    Range(2,:) = max(Obj,[],1);
+    Range(2,Range(2,:)-Range(1,:)<1e-6) = 1;
 end
 
 function Remain = LastSelection(PopObj,RefPoint,Range,K)

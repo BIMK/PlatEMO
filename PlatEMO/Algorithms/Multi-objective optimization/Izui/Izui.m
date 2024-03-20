@@ -7,7 +7,7 @@ classdef Izui < ALGORITHM
 % optimization using an aggregative gradient-based method, Structural and
 % Multidisciplinary Optimization, 2015, 51: 173-182.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
@@ -24,7 +24,7 @@ classdef Izui < ALGORITHM
             while Algorithm.NotTerminated(Population)
                 for i = 1 : Problem.N
                     w             = Calw(Population,Population(i));
-                    PopObj_g      = Calg(Problem,Population(i));
+                    PopObj_g      = Calg(Problem,Population(i))';
                     OffspringDec  = Calf(w,PopObj_g,Problem.lower,Problem.upper);
                     Offspring     = Problem.Evaluation(OffspringDec');
                     Population(i) = Offspring;
@@ -36,9 +36,9 @@ end
 
 function df = Calg(Problem,X)
     if any(X.con>0)
-        df = Problem.CalConGrad(X.dec)';
+        [~,df] = Problem.CalGrad(X.dec);
     else
-        df = Problem.CalObjGrad(X.dec)';
+        df = Problem.CalGrad(X.dec);
     end
 end
 

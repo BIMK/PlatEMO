@@ -15,6 +15,8 @@ function varargout = platemo(varargin)
 %	'maxFE'         <positive integer>  maximum number of function evaluations
 %   'maxRuntime'    <positive integer>  maximum runtime (in second)
 %   'save'       	<integer>           number of saved populations
+%   'run'           <integer>           current run number
+%   'metName'       <string>            names of metrics to calculate
 %   'outputFcn'     <function handle>   function called after each iteration
 %   'encoding'      <string>            encoding scheme of each decision variable (1.real 2.integer 3.label 4.binary 5.permutation)
 %   'lower'         <vector>            lower bound of each decision variable
@@ -46,24 +48,24 @@ function varargout = platemo(varargin)
 %   runs KnEA on 5-objective WFG4 and sets the parameters in KnEA and WFG4.
 %
 %       for i = 1 : 10
-%           platemo('algorithm',@MOEAD,'problem',@ZDT1,'save',5)
+%           platemo('algorithm',@MOEAD,'problem',@ZDT1,'save',5,'run',i)
 %       end
 %
 %   runs MOEA/D on ZDT1 for 10 times, where 5 populations are saved to a
 %   distinct file in PlatEMO/Data/MOEAD each time.
 %
-%       platemo('algorithm',@CCMO,'objFcn',@CalObj,'conFcn',@CalCon)
+%       platemo('algorithm',@CCMO,'objFcn',{@Obj1,@Obj2},'conFcn',@Con)
 %
-%   runs CCMO on a problem whose objective values are calculated by
-%   CalObj() and constraint violations are calculated by CalCon().
+%   runs CCMO on a problem whose two objective values are calculated by
+%   Obj1() and Obj2() and one constraint violation is calculated by Con().
 %
 %       platemo('algorithm',@SparseEA,'evalFcn',@Evaluation)
 %
 %   runs SparseEA on a problem whose objective values and constraint
-%   violations are all calculated by Evaluation().
+%   violations are all calculated by a single function Evaluation().
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
