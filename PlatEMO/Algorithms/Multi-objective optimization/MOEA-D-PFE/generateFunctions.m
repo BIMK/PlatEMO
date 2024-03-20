@@ -43,7 +43,7 @@ function [validator, estimator] = generateFunctions(M,alpha)
     end
 
     function W = alphaShapeValidator(W,X)
-        shp = alphaShape(X*A,alpha);
+        shp = alphaShape(unique(X*A,'rows'),alpha);
         if alpha > min(alphaSpectrum(shp))
             W = W(inShape(shp,W*A),:);
         end
