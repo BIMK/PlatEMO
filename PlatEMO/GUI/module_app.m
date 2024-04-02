@@ -739,7 +739,7 @@ classdef module_app < handle
                             PRO.DrawDec(ALG.result{index,2});
                         otherwise
                             obj.app.waittip.Visible = 'on'; drawnow();
-                            Draw(ALG.CalMetric(obj.app.dropD(1).Value),'-k.','LineWidth',1.5,'MarkerSize',10,{'Number of function evaluations',strrep(obj.app.dropD(1).Value,'_',' '),[]});
+                            Draw([cell2mat(ALG.result(:,1)),ALG.CalMetric(obj.app.dropD(1).Value)],'-k.','LineWidth',1.5,'MarkerSize',10,{'Number of function evaluations',strrep(obj.app.dropD(1).Value,'_',' '),[]});
                             obj.app.waittip.Visible = 'off';
                     end
                 else
@@ -748,7 +748,7 @@ classdef module_app < handle
                         case 'Population (variables)'
                             PRO.DrawDec(ALG.result{index,2});
                         otherwise
-                            Draw(ALG.CalMetric(obj.app.dropD(2).Value),'-k.','LineWidth',1.5,'MarkerSize',10,{'Number of function evaluations',strrep(obj.app.dropD(2).Value,'_',' '),[]});
+                            Draw([cell2mat(ALG.result(:,1)),ALG.CalMetric(obj.app.dropD(2).Value)],'-k.','LineWidth',1.5,'MarkerSize',10,{'Number of function evaluations',strrep(obj.app.dropD(2).Value,'_',' '),[]});
                     end
                 end
             end
