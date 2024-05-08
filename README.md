@@ -44,16 +44,12 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 4.6
+# Release Highlights of PlatEMO 4.7
 [Release Note can be found here](./Doc/releasenote.md)
 
-* Automated metric calculation without GUI is supported. Users can specify the metrics to display or save by setting the value of 'metName' when calling the main function platemo() with parameters.
+* Add two large-scale binary optimization algorithms NNDREA-MO and NNDREA-SO, two single-objective particle swarm optimization algorithm ECPO and MVPA, a surrogate-assisted multi-objective evolutionary algorithm AVG-SAEA, five constrained multi-objective evolutionary algorithms CMaDPPs, CMOES, DRLOS-EMCMO, MOEA/D-CMT, tDEA-CPBI, and a multimodal multi-objective evolutionary algorithm MMEAPSL. Delete a duplicated algorithm TriP. There are currently 270 algorithms in the platform.
 
-* Modify the way of defining gradient functions, where a method CalGrad is defined instead of CalObjGrad and CalConGrad in PROBLEM class, and a parameter 'gradFcn' is defined instead of 'objGradFcn' and 'conGradFcn' in UserProblem class.
-
-* Add a bi-level evolutionary algorithm BL-SAEA, three constrained multi-objective evolutionary algorithms IMTCMO_BS, MFO-SPEA2, and MOEA/D-2WA, a sparse multi-objective evolutionary algorithm SCEA, a surrogate-assisted multi-objective evolutionary algorithm SFA-DE, and two multi-objective feature selection algorithms MFFS and PRDH. There are currently 260 algorithms in the platform.
-
-* Add 15 EvoXBench problems CitySegMOP1-15 and 12 constrained multi-objective benchmark problems LSCM1-LSCM12. There are currently 508 problems in the platform.
+* Add the max-cut problem. Convert MOKP into a constrained multi-objective optimization problem. There are currently 509 problems in the platform.
   
 # Features of PlatEMO
 *  Totally Developed in MATLAB  
