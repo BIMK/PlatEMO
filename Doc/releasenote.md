@@ -1,3 +1,8 @@
+# Release Highlights of PlatEMO 4.7 (2024-05)
+* Add two large-scale binary optimization algorithms NNDREA-MO and NNDREA-SO, two single-objective particle swarm optimization algorithm ECPO and MVPA, a surrogate-assisted multi-objective evolutionary algorithm AVG-SAEA, five constrained multi-objective evolutionary algorithms CMaDPPs, CMOES, DRLOS-EMCMO, MOEA/D-CMT, tDEA-CPBI, and a multimodal multi-objective evolutionary algorithm MMEAPSL. Delete a duplicated algorithm TriP. There are currently 270 algorithms in the platform.
+
+* Add the max-cut problem. Convert MOKP into a constrained multi-objective optimization problem. There are currently 509 problems in the platform.
+
 # Release Highlights of PlatEMO 4.6 (2024-03)
 * Automated metric calculation without GUI is supported. Users can specify the metrics to display or save by setting the value of 'metName' when calling the main function platemo() with parameters.
 
