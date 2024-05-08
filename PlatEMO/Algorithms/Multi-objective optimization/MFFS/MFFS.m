@@ -78,17 +78,17 @@ end
 function alphaSet = UpdateWeight(PartitionSet, Fmin)
     % Update direction vectors
     if isequal(PartitionSet(1, :), PartitionSet(2, :)) && ~isequal(PartitionSet(1, :), zeros(1, 2))
-        Alpha1 = roundn(rand(), -2);
+        Alpha1 = round(rand(), -2);
         Alpha2 = (PartitionSet(2, 1) - Fmin(1, 1))./((PartitionSet(2, 1) - Fmin(1, 1)) + (PartitionSet(1, 2) - Fmin(1, 2)));
-        Alpha2 = roundn(Alpha2, -2);
+        Alpha2 = round(Alpha2, -2);
     elseif isequal(PartitionSet(1, :), zeros(1, 2)) && isequal(PartitionSet(2, :), zeros(1, 2))
-        Alpha1 = roundn(rand(), -2);
-        Alpha2 = roundn(rand(), -2);
+        Alpha1 = round(rand(), -2);
+        Alpha2 = round(rand(), -2);
     else
         Alpha1 = (PartitionSet(1, 1)-Fmin(1,1))./((PartitionSet(1, 1) - Fmin(1, 1)) + (PartitionSet(1, 2) - Fmin(1, 2)));
-        Alpha1 = roundn(Alpha1, -2);
+        Alpha1 = round(Alpha1, -2);
         Alpha2 = (PartitionSet(2, 1) - Fmin(1, 1))./((PartitionSet(2, 1) - Fmin(1, 1)) + (PartitionSet(2, 2) - Fmin(1, 2)));
-        Alpha2 = roundn(Alpha2, -2);
+        Alpha2 = round(Alpha2, -2);
     end
     alphaSet = [Alpha1; Alpha2];
 end

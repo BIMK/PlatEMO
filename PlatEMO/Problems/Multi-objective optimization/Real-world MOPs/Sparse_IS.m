@@ -26,7 +26,7 @@ classdef Sparse_IS < PROBLEM
 % 2     Abalone  	 4177       9       2
 % 3     Phishing	11055      68       2
 
-    properties(Access = private)
+    properties(SetAccess = private)
         Data;   % Dataset
     end
     methods

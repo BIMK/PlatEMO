@@ -1,5 +1,5 @@
 classdef MOKP < PROBLEM
-% <multi/many> <binary> <large/none>
+% <multi/many> <binary> <large/none> <constrained>
 % The multi-objective knapsack problem
 
 %------------------------------- Reference --------------------------------
@@ -15,7 +15,7 @@ classdef MOKP < PROBLEM
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    properties(Access = private)
+    properties(SetAccess = private)
         P;	% Profit of each item according to each knapsack
         W;  % Weight of each item according to each knapsack
     end
@@ -39,20 +39,13 @@ classdef MOKP < PROBLEM
             obj.P = P;
             obj.W = W;
         end
-        %% Repair invalid solutions
-        function PopDec = CalDec(obj,PopDec)
-            C = sum(obj.W,2)/2;
-            [~,rank] = sort(max(obj.P./obj.W));
-            for i = 1 : size(PopDec,1)
-                while any(obj.W*PopDec(i,:)'>C)
-                    k = find(PopDec(i,rank),1);
-                    PopDec(i,rank(k)) = 0;
-                end
-            end
-        end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)
             PopObj = repmat(sum(obj.P,2)',size(PopDec,1),1) - PopDec*obj.P';
+        end
+        %% Calculate constraint violations
+        function PopCon = CalCon(obj,PopDec)
+            PopCon = PopDec*obj.W' - repmat(sum(obj.W,2)'/2,size(PopDec,1),1);
         end
         %% Generate a point for hypervolume calculation
         function R = GetOptimum(obj,~)

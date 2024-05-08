@@ -107,7 +107,7 @@ classdef KTS < ALGORITHM
                     % build surrogate models for constraints
                     Dec = [DA.decs;CA.decs;P2.decs];
                     Obj = [DA.cons;CA.cons;P2.cons];
-                    [~,index] = unique( roundn(Dec,-4) ,'rows');
+                    [~,index] = unique( round(Dec,-4) ,'rows');
                     Dec =  Dec(index,:);
                     Obj = Obj(index,:);
                     for i = Problem.M+1: (Problem.M + size(DA.cons,2))

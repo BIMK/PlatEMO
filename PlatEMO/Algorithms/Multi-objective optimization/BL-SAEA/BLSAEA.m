@@ -200,7 +200,7 @@ classdef BLSAEA < ALGORITHM
                 Archive_xu=[Archive_xu;Offspring(Num',:)]; Archive_xl=[Archive_xl;ND_off_llPop(1:non_n,:)]; Archive_F=[Archive_F;ND_off_ul_obj(1:non_n,:)]; Archive_f=[Archive_f;ND_off_llFunctionValue(1:non_n,:)];
 
                 %Update archive
-                A=roundn(Archive_xu, -9);
+                A=round(Archive_xu, -9);
                 [~,ia,~] = unique(A,'rows');
 
                 Archive_xu = Archive_xu(ia,:);

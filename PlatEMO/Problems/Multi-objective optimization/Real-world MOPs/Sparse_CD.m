@@ -25,7 +25,7 @@ classdef Sparse_CD < PROBLEM
 % 3     Polbook     105     441
 % 4     Football    115     613
 
-    properties(Access = private)
+    properties(SetAccess = private)
         Adj;    % Adjacency matrix of the network
         ACT;    % Similarity between nodes
         G;      % The graph object

@@ -15,7 +15,7 @@ classdef KP < PROBLEM
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    properties(Access = private)
+    properties(SetAccess = private)
         P;	% Profit of each item
         W;  % Weight of each item
     end

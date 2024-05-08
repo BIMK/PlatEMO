@@ -24,7 +24,7 @@ classdef Sparse_CN < PROBLEM
 % 3     GD01             311     640
 % 4     GD97             452     460
 
-    properties(Access = private)
+    properties(SetAccess = private)
         A;  % Adjacency matrix of the graph
         G;  % The graph object
     end

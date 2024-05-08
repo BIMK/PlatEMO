@@ -41,7 +41,7 @@ classdef PCSAEA < ALGORITHM
                 net.train(TrainIn,Problem.D);              
 
                 % Error rates calculation
-                TestPre   = net.lastpredict(TestIn,Problem.D,Pmid,1);
+                TestPre = net.lastpredict(TestIn,Problem.D,Pmid,1);
                 % New and suitble reliability selection
                 validIndex = TestPre~=1.5;
                 Error1 = sum(TestOut(validIndex)==TestPre(validIndex))/length(TestOut);   

@@ -1,5 +1,5 @@
-function Population = archive(Population,N)
-% Select feasible and non-dominated solutions by using SPEA2-CDP
+function [Population,Fitness,Next] = EnvironmentalSelection(Population,N,isOrigin)
+% The environmental selection of SPEA2
 
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
@@ -10,19 +10,30 @@ function Population = archive(Population,N)
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    %% Select feasible solutions
-    fIndex     = all(Population.cons <= 0,2);
-    Population = Population(fIndex);
-    if isempty(Population)
-        return
-    elseif size(Population,2) > N
+    %% Calculate the fitness of each solution
+    if isOrigin==1
         Fitness = CalFitness(Population.objs,Population.cons);
-        Next = Fitness < 1;
+    else
+        Fitness = CalFitness(Population.objs);
+    end
+
+    %% Environmental selection
+    Next = Fitness < 1;
+    if sum(Next) < N
+        [~,Rank] = sort(Fitness);
+        Next(Rank(1:N)) = true;
+    elseif sum(Next) > N
         Del  = Truncation(Population(Next).objs,sum(Next)-N);
         Temp = find(Next);
         Next(Temp(Del)) = false;
-        Population = Population(Next);
     end
+
+    % Population for next generation
+    Population = Population(Next);
+    Fitness    = Fitness(Next);
+    % Sort the population
+    [Fitness,rank] = sort(Fitness);
+    Population = Population(rank);
 end
 
 function Del = Truncation(PopObj,K)
