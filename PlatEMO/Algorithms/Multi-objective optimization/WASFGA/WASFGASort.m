@@ -47,7 +47,7 @@ function [Loc, Max] = frontsclass(Vectors, PopObj, nsort, Point, ro)
 
             Vmin = min(Values);
             Sol1 = find(Values == Vmin);
-            Front = [Front, Sol1'];
+            Front = [Front, Sol1(1)];
             FrontG = [FrontG, Front];
             valid_Loc = Front(Front <= size(PopObj, 1));
             SolG = [SolG; PopObj(valid_Loc, :)];
