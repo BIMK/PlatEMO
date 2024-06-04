@@ -22,6 +22,7 @@ classdef MOEADPFE < ALGORITHM
 
     methods
         function main(Algorithm,Problem)
+            warning('off','MATLAB:rankDeficientMatrix')
              %% Parameter setting
             [phi,alpha] = Algorithm.ParameterSet(0.1,0.1);
 
