@@ -1,11 +1,7 @@
 classdef MOEADEGO < ALGORITHM
 % <multi> <real/integer> <expensive>
 % MOEA/D with efficient global optimization
-% Ke    ---   5 --- The number of function evaluations at each generation
-% delta --- 0.9 --- The probability of choosing parents locally
-% nr    ---   2 --- Maximum number of solutions replaced by each offspring
-% L1    ---  80 --- The maximal number of points used for building a local model
-% L2    ---  20 --- The maximal number of points used for building a local model
+% batch_size --- 5 --- Number of true function evaluations per iteration
 
 %------------------------------- Reference --------------------------------
 % Q. Zhang, W. Liu, E. Tsang, and B. Virginas, Expensive multiobjective
@@ -20,24 +16,34 @@ classdef MOEADEGO < ALGORITHM
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-% This function is written by Cheng He
+% This function was written by Liang Zhao (liazhao5-c@my.cityu.edu.hk).
+% - The Java Code of MOEA/D-EGO (written by Wudong Liu) is avaliable at 
+%   https://sites.google.com/view/moead/resources 
+% - The Matlab Code of MOEA/D-EGO without FuzzyCM (written by Liang ZHAO) is 
+%   avaliable at https://github.com/mobo-d/MOEAD-EGO
 
     methods
         function main(Algorithm,Problem)
-            %% Parameter setting
-            [Ke,delta,nr,L1,L2] = Algorithm.ParameterSet(5,0.9,2,80,20);
-
-            %% Generate random population
-            NI = 11*Problem.D-1;
-            P  = UniformPoint(NI,Problem.D,'Latin');
-            Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
-            L1 = min(L1,length(Population));
-
+           %% Parameter setting
+            batch_size = Algorithm.ParameterSet(5); 
+            
+            %% Generate initial design using LHS or other DOE methods
+            x_lhs   = lhsdesign(11*Problem.D-1, Problem.D,'criterion','maximin','iterations',1000);
+            x_init  = Problem.lower +  (Problem.upper - Problem.lower).*x_lhs;  
+            Archive = Problem.Evaluation(x_init);     
+            % find non-dominated solutions
+            FrontNo = NDSort(Archive.objs,1); 
+           
             %% Optimization
-            while Algorithm.NotTerminated(Population)
-                PopDec     = EGOSelect(Problem,Population,L1,L2,Ke,delta,nr);
-                Offspring  = Problem.Evaluation(PopDec);
-                Population = [Population,Offspring];
+            while Algorithm.NotTerminated(Archive(FrontNo==1))     
+              %% Maximize ETI using MOEA/D and select q candidate points
+                Batch_size = min(Problem.maxFE - Problem.FE,batch_size); % the total budget is  Problem.maxFE 
+                train_x    = Archive.decs; train_y = Archive.objs;
+                new_x      = Opt_ETI_FCM(Problem.M,Problem.D,Problem.lower,Problem.upper,Batch_size,train_x,train_y);              
+ 
+               %% Expensive Evaluation
+                Archive = [Archive,Problem.Evaluation(new_x)];
+                FrontNo = NDSort(Archive.objs,1);
             end
         end
     end
