@@ -1,7 +1,7 @@
 function new_x = Opt_ETI_FCM(M,D,xlower,xupper,Batch_size,train_x,train_y)
 % Maximizing N Subproblems and Selecting Batch of Points 
 % Expected Tchebycheff Improvement (ETI)
- 
+
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -12,10 +12,10 @@ function new_x = Opt_ETI_FCM(M,D,xlower,xupper,Batch_size,train_x,train_y)
 %--------------------------------------------------------------------------
 
 % This function was written by Liang Zhao (liazhao5-c@my.cityu.edu.hk).
- 
+
    %% Fuzzy clustering the solutions
-   L1 = 80; % The maximal number of points used for building a local model
-   L2 = 20; % The number of points for adding one more local model
+   L1 = 80;
+   L2 = 20;
    [GPModels,centers] = GPmodelFCM(train_x,train_y,L1,L2);
 
    %% Generate the initial weight vectors

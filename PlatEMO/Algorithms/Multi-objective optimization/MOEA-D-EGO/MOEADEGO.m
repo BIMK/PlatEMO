@@ -19,7 +19,7 @@ classdef MOEADEGO < ALGORITHM
 % This function was written by Liang Zhao (liazhao5-c@my.cityu.edu.hk).
 % - The Java Code of MOEA/D-EGO (written by Wudong Liu) is avaliable at 
 %   https://sites.google.com/view/moead/resources 
-% - The Matlab Code of MOEA/D-EGO without FuzzyCM (written by Liang Zhao) is 
+% - The Matlab Code of MOEA/D-EGO without FuzzyCM (written by Liang ZHAO) is 
 %   avaliable at https://github.com/mobo-d/MOEAD-EGO
 
     methods
@@ -37,9 +37,8 @@ classdef MOEADEGO < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Archive(FrontNo==1))     
               %% Maximize ETI using MOEA/D and select q candidate points
-                Batch_size = min(Problem.maxFE - Problem.FE,batch_size); % the total budget is Problem.maxFE 
-                train_x    = Archive.decs; 
-                train_y    = Archive.objs;
+                Batch_size = min(Problem.maxFE - Problem.FE,batch_size); % the total budget is  Problem.maxFE 
+                train_x    = Archive.decs; train_y = Archive.objs;
                 new_x      = Opt_ETI_FCM(Problem.M,Problem.D,Problem.lower,Problem.upper,Batch_size,train_x,train_y);              
  
                %% Expensive Evaluation
