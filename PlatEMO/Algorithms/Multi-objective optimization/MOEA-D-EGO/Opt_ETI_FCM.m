@@ -1,11 +1,7 @@
 function new_x = Opt_ETI_FCM(M,D,xlower,xupper,Batch_size,train_x,train_y)
 % Maximizing N Subproblems and Selecting Batch of Points 
 % Expected Tchebycheff Improvement (ETI)
-
-%------------------------------- Reference --------------------------------
-% Q. Zhang, W. Liu, E. Tsang, and B. Virginas, Expensive multiobjective
-% optimization by MOEA/D with Gaussian process model, IEEE Transactions on
-% Evolutionary Computation, 2010, 14(3): 456-474.
+ 
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -16,17 +12,15 @@ function new_x = Opt_ETI_FCM(M,D,xlower,xupper,Batch_size,train_x,train_y)
 %--------------------------------------------------------------------------
 
 % This function was written by Liang Zhao (liazhao5-c@my.cityu.edu.hk).
-% Predictor.m is avaliable .\PlatEMO\Algorithms\surrogate_models\DACE\
-
-% L1    ---  80 --- The maximal number of points used for building a local model
-% L2    ---  20 --- The number of points for adding one more local model
+ 
    %% Fuzzy clustering the solutions
-   L1 = 80; L2 = 20;
+   L1 = 80; % The maximal number of points used for building a local model
+   L2 = 20; % The number of points for adding one more local model
    [GPModels,centers] = GPmodelFCM(train_x,train_y,L1,L2);
 
    %% Generate the initial weight vectors
     % # of weight vectors：M = 2,  3,  4,  5,  6  
-    num_weights    =        [200,210,295,456,462]; 
+    num_weights = [200,210,295,456,462]; 
     if M <= 3
         [ref_vecs, ~]  = UniformPoint(num_weights(M-1),M); % simplex-lattice design 
     elseif M <= 6
@@ -306,5 +300,4 @@ function Offspring = operator_DE(Parent1,Parent2,Parent3, xlower,xupper)
     temp = Site & mu>0.5; 
     Offspring(temp) = Offspring(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
                       (1-(Upper(temp)-Offspring(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
- 
 end

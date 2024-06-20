@@ -1,11 +1,7 @@
 function [model,centers] = GPmodelFCM(train_x,train_y,L1,L2)
-% Fuzzy clustering-based method for modeling c_size* M models, where c_size
+% Fuzzy clustering-based method for modeling c_size* M GP models, where c_size
 % is the number of clusters and M the number of objectives.
-
-%------------------------------- Reference --------------------------------
-% Q. Zhang, W. Liu, E. Tsang, and B. Virginas, Expensive multiobjective
-% optimization by MOEA/D with Gaussian process model, IEEE Transactions on
-% Evolutionary Computation, 2010, 14(3): 456-474.
+ 
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -16,8 +12,7 @@ function [model,centers] = GPmodelFCM(train_x,train_y,L1,L2)
 %--------------------------------------------------------------------------
 
 % This function was written by Liang Zhao (liazhao5-c@my.cityu.edu.hk).
-% Dacefit.m is avaliable .\PlatEMO\Algorithms\surrogate_models\DACE\
-
+ 
     [K,M] = size(train_y);
     D     = size(train_x,2);
     if K <= L1
