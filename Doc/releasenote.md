@@ -1,3 +1,13 @@
+
+# Release Highlights of PlatEMO 4.8 (2024-09)
+* Add the creation module, where users can visually create a new algorithm by connecting blocks and train it on problems.
+
+* When solving user-defined problems, users can set the value of 'once' to 1 to evaluate multiple solutions simultaneously.
+
+* Add three multi-objective evolutionary algorithms MOBCA, NRV-MOEA, and NSBiDiCo, add five sparse multi-objective evolutionary algorithms AC-MMEA, AGSEA, MOEA/CKF, MOEA-NZD, and TELSO, add one robust multi-objective evolutionary algorithm LRMOEA, add twp expensive multi-objective evolutionary algorithms LDS-AF and SSDE, update the codes of MOEA/D-EGO. There are currently 281 algorithms in the platform.
+
+* Add six integer single-objective optimization problems SO_ISCSO_2016 - SO_ISCSO_2022, add nine multi-objective optimization problems GLSMOP1 - GLSMOP9, add six robust multi-objective optimization problems LRMOP1-LRMOP6. There are currently 530 problems in the platform.
+
 # Release Highlights of PlatEMO 4.7 (2024-05)
 * Add two large-scale binary optimization algorithms NNDREA-MO and NNDREA-SO, two single-objective particle swarm optimization algorithm ECPO and MVPA, a surrogate-assisted multi-objective evolutionary algorithm AVG-SAEA, five constrained multi-objective evolutionary algorithms CMaDPPs, CMOES, DRLOS-EMCMO, MOEA/D-CMT, tDEA-CPBI, and a multimodal multi-objective evolutionary algorithm MMEAPSL. Delete a duplicated algorithm TriP. There are currently 270 algorithms in the platform.
 
