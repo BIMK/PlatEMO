@@ -44,12 +44,16 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 4.7
+# Release Highlights of PlatEMO 4.8
 [Release Note can be found here](./Doc/releasenote.md)
 
-* Add two large-scale binary optimization algorithms NNDREA-MO and NNDREA-SO, two single-objective particle swarm optimization algorithm ECPO and MVPA, a surrogate-assisted multi-objective evolutionary algorithm AVG-SAEA, five constrained multi-objective evolutionary algorithms CMaDPPs, CMOES, DRLOS-EMCMO, MOEA/D-CMT, tDEA-CPBI, and a multimodal multi-objective evolutionary algorithm MMEAPSL. Delete a duplicated algorithm TriP. There are currently 270 algorithms in the platform.
+* Add the creation module, where users can visually create a new algorithm by connecting blocks and train it on problems.
 
-* Add the max-cut problem. Convert MOKP into a constrained multi-objective optimization problem. There are currently 509 problems in the platform.
+* When solving user-defined problems, users can set the value of 'once' to 1 to evaluate multiple solutions simultaneously.
+
+* Add three multi-objective evolutionary algorithms MOBCA, NRV-MOEA, and NSBiDiCo, add five sparse multi-objective evolutionary algorithms AC-MMEA, AGSEA, MOEA/CKF, MOEA-NZD, and TELSO, add one robust multi-objective evolutionary algorithm LRMOEA, add twp expensive multi-objective evolutionary algorithms LDS-AF and SSDE, update the codes of MOEA/D-EGO. There are currently 281 algorithms in the platform.
+
+* Add six integer single-objective optimization problems SO_ISCSO_2016 - SO_ISCSO_2022, add nine multi-objective optimization problems GLSMOP1 - GLSMOP9, add six robust multi-objective optimization problems LRMOP1-LRMOP6. There are currently 530 problems in the platform.
   
 # Features of PlatEMO
 *  Totally Developed in MATLAB  
