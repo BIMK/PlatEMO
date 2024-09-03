@@ -15,6 +15,7 @@ classdef UserProblem < PROBLEM
 %   conFcn     	<function handle>   constraint functions
 %   gradFcn     <function handle>   function for calculating the gradients of objectives and constraints
 %   data        <any>               data of the problem
+%   once        <logical>           whether the inputs of evalFcn, decFcn, objFcn, conFcn can be multiple solutions
 
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
@@ -26,19 +27,20 @@ classdef UserProblem < PROBLEM
 %--------------------------------------------------------------------------
 
     properties(SetAccess = protected)
-        initFcn    = {};        % Function for initializing solutions
-        evalFcn    = {};        % Function for evaluating solutions
-        decFcn     = {};    	% Function for repairing invalid solutions
-        objFcn     = {};     	% Objective functions
-        conFcn     = {};     	% Constraint functions
-        gradFcn    = {};    	% Function for calculating the gradients of objectives and constraints
-        data       = {};        % Data of the problem
+        initFcn	= {};     	% Function for initializing solutions
+        evalFcn = {};      	% Function for evaluating solutions
+        decFcn  = {};    	% Function for repairing invalid solutions
+        objFcn  = {};     	% Objective functions
+        conFcn  = {};     	% Constraint functions
+        gradFcn = {};    	% Function for calculating the gradients of objectives and constraints
+        data    = {};     	% Data of the problem
+        once    = false;    % Whether the inputs of evalFcn, decFcn, objFcn, conFcn can be multiple solutions
     end
     methods
         %% Constructor
         function obj = UserProblem(varargin)
             isStr = find(cellfun(@ischar,varargin(1:end-1))&~cellfun(@isempty,varargin(2:end)));
-            for i = isStr(ismember(varargin(isStr),{'N','M','D','maxFE','maxRuntime','encoding','lower','upper','initFcn','evalFcn','decFcn','objFcn','conFcn','gradFcn','data'}))
+            for i = isStr(ismember(varargin(isStr),{'N','M','D','maxFE','maxRuntime','encoding','lower','upper','initFcn','evalFcn','decFcn','objFcn','conFcn','gradFcn','data','once'}))
                 obj.(varargin{i}) = varargin{i+1};
             end
             if isempty(obj.D)
@@ -74,8 +76,12 @@ classdef UserProblem < PROBLEM
         %% Evaluate multiple solutions
         function Population = Evaluation(obj,varargin)
             if ~isempty(obj.evalFcn)
-                for i = 1 : size(varargin{1},1)
-                    [PopDec(i,:),PopObj(i,:),PopCon(i,:)] = CallFcn(obj.evalFcn,varargin{1}(i,:),obj.data,'evaluation function',[1 obj.D]);
+                if obj.once
+                    [PopDec,PopObj,PopCon] = CallFcn(obj.evalFcn,varargin{1},obj.data,'evaluation function',[size(varargin{1},1) obj.D],[size(varargin{1},1) 1],[size(varargin{1},1) 1]);
+                else
+                    for i = 1 : size(varargin{1},1)
+                        [PopDec(i,:),PopObj(i,:),PopCon(i,:)] = CallFcn(obj.evalFcn,varargin{1}(i,:),obj.data,'evaluation function',[1 obj.D],[1 1],[1 1]);
+                    end
                 end
                 Population = SOLUTION(PopDec,PopObj,PopCon,varargin{2:end});
                 obj.FE     = obj.FE + length(Population);
@@ -86,8 +92,12 @@ classdef UserProblem < PROBLEM
         %% Repair invalid solutions
         function PopDec = CalDec(obj,PopDec)
             if ~isempty(obj.decFcn)
-                for i = 1 : size(PopDec,1)
-                    PopDec(i,:) = CallFcn(obj.decFcn,PopDec(i,:),obj.data,'repair function',[1 obj.D]);
+                if obj.once
+                    PopDec = CallFcn(obj.decFcn,PopDec,obj.data,'repair function',[size(PopDec,1) obj.D]);
+                else
+                    for i = 1 : size(PopDec,1)
+                        PopDec(i,:) = CallFcn(obj.decFcn,PopDec(i,:),obj.data,'repair function',[1 obj.D]);
+                    end
                 end
             else
                 PopDec = CalDec@PROBLEM(obj,PopDec);
@@ -97,9 +107,13 @@ classdef UserProblem < PROBLEM
         function PopObj = CalObj(obj,PopDec)
             if ~isempty(obj.objFcn)
                 PopObj = zeros(size(PopDec,1),length(obj.objFcn));
-                for i = 1 : size(PopDec,1)
-                    for j = 1 : length(obj.objFcn)
-                        PopObj(i,j) = CallFcn(obj.objFcn{j},PopDec(i,:),obj.data,sprintf('objective function f%d',j),[1 1]);
+                for j = 1 : length(obj.objFcn)
+                    if obj.once
+                        PopObj(:,j) = CallFcn(obj.objFcn{j},PopDec,obj.data,sprintf('objective function f%d',j),[size(PopDec,1) 1]);
+                    else
+                        for i = 1 : size(PopDec,1)
+                            PopObj(i,j) = CallFcn(obj.objFcn{j},PopDec(i,:),obj.data,sprintf('objective function f%d',j),[1 1]);
+                        end
                     end
                 end
             else
@@ -110,9 +124,13 @@ classdef UserProblem < PROBLEM
         function PopCon = CalCon(obj,PopDec)
             if ~isempty(obj.conFcn)
                 PopCon = zeros(size(PopDec,1),length(obj.conFcn));
-                for i = 1 : size(PopDec,1)
-                    for j = 1 : length(obj.conFcn)
-                        PopCon(i,j) = CallFcn(obj.conFcn{j},PopDec(i,:),obj.data,sprintf('constraint function g%d',j),[1 1]);
+                for j = 1 : length(obj.conFcn)
+                    if obj.once
+                        PopCon(:,j) = CallFcn(obj.conFcn{j},PopDec,obj.data,sprintf('constraint function g%d',j),[size(PopDec,1) 1]);
+                    else
+                        for i = 1 : size(PopDec,1)
+                            PopCon(i,j) = CallFcn(obj.conFcn{j},PopDec(i,:),obj.data,sprintf('constraint function g%d',j),[1 1]);
+                        end
                     end
                 end
             else

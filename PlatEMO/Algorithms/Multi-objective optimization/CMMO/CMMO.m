@@ -35,7 +35,7 @@ classdef CMMO < ALGORITHM
             epsilon_k = epsilon_0;
             
             %% calculate fitness of populations
-            [Fitness1,D_Dec,D_Pop] = CalFitness(Population1.objs,Population1.decs);
+            [D_Dec,D_Pop,Fitness1] = CalFitness(Population1.objs,Population1.decs);
             [Fitness2,D] = CalFitnessDecEpsilon(Population2.objs,Population2.decs,epsilon_k);
 
             %% Optimization

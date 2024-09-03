@@ -130,7 +130,10 @@ classdef uilist < handle
         %% Delete existing items
         function del(obj,index,type)
             if ~isempty(obj.items)
-                if nargin >= 3
+                if nargin > 2
+                    if type == 3
+                        type = 1;
+                    end
                     index = find([obj.items.type]==type);
                 end
                 for i = index
@@ -143,7 +146,7 @@ classdef uilist < handle
                 obj.items(index) = [];
             end
         end
-        %% Flush the list
+        %% Refresh the list
         function flush(obj)
             if ~isempty(obj.items)
                 % Sort the items
@@ -225,39 +228,33 @@ classdef uilist < handle
             end
         end
         %% Open file
-        function cb_openfile(obj,ui,~)
-            ui.Parent.Visible = false;
+        function cb_openfile(obj,~,~)
             web(['file://',which(obj.items(obj.current).title.Text)],'-browser');
         end
         %% Open folder
-        function cb_openfolder(obj,ui,~)
-            ui.Parent.Visible = false;
+        function cb_openfolder(obj,~,~)
             web(['file://',fileparts(which(obj.items(obj.current).title.Text))],'-browser');
         end
         %% Search online
-        function cb_search(obj,ui,~)
-            ui.Parent.Visible = false;
+        function cb_search(obj,~,~)
             web(['https://scholar.google.com/scholar?q=%',strjoin(cellstr(dec2hex(double(obj.items(obj.current).cite))),'%')],'-browser');
         end
         %% Move the item up
-        function cb_moveup(obj,ui,~)
-            ui.Parent.Visible = false;
+        function cb_moveup(obj,~,~)
             if obj.current > 1
                 obj.items = obj.items([1:obj.current-2,obj.current,obj.current-1,obj.current+1:end]);
                 obj.flush();
             end
         end
         %% Move the item down
-        function cb_movedown(obj,ui,~)
-            ui.Parent.Visible = false;
+        function cb_movedown(obj,~,~)
             if obj.current < length(obj.items)
                 obj.items = obj.items([1:obj.current-1,obj.current+1,obj.current,obj.current+2:end]);
                 obj.flush();
             end
         end
         %% Delete the item
-        function cb_delete(obj,ui,~)
-            ui.Parent.Visible = false;
+        function cb_delete(obj,~,~)
             obj.del(obj.current);
             obj.flush();
         end

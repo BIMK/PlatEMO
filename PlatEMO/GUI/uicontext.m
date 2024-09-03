@@ -25,11 +25,11 @@ classdef uicontext < handle
         end
         %% Add a new item
         function add(obj,str,icon,cb)
-        	obj.items = [obj.items,uibutton(obj.panel,'Position',[-2 0 obj.panel.Position(3)+5 25],'Text',str,'HorizontalAlignment','left','BackgroundColor',[.94 .94 .94],'Icon',icon,'ButtonPushedFcn',cb)];
+        	obj.items = [obj.items,uibutton(obj.panel,'Position',[-2 0 obj.panel.Position(3)+5 25],'Text',str,'HorizontalAlignment','left','BackgroundColor',[.94 .94 .94],'Icon',icon,'ButtonPushedFcn',@obj.cb_callback,'UserData',cb)];
             obj.gaps  = [obj.gaps,uipanel(obj.panel,'Position',[-2 0 obj.panel.Position(3)+5 3],'BorderType','none')];
             obj.panel.Children = obj.panel.Children([1,3:end,2]);
         end
-        %% Flush the menu
+        %% Refresh the menu
         function flush(obj)
             if ~isempty(obj.items)
                 obj.panel.Position(4) = 23*length(obj.items) - 2;
@@ -65,6 +65,18 @@ classdef uicontext < handle
             if obj.fig.CurrentPoint(1)<obj.panel.Position(1) || obj.fig.CurrentPoint(1)>sum(obj.panel.Position([1,3])) || obj.fig.CurrentPoint(2)<obj.panel.Position(2) || obj.fig.CurrentPoint(2)>sum(obj.panel.Position([2,4]))
                 obj.panel.Visible = false;
                 delete(obj.listener);
+                obj.listener = [];
+            end
+        end
+        %% Callback of menus
+        function cb_callback(obj,h,event)
+            obj.panel.Visible = false;
+            delete(obj.listener);
+        	obj.listener = [];
+            if iscell(h.UserData)
+                h.UserData{1}(h,event,h.UserData{2:end});
+            else
+                h.UserData(h,event);
             end
         end
     end

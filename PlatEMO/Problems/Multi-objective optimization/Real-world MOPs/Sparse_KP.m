@@ -1,5 +1,5 @@
 classdef Sparse_KP < PROBLEM
-% <multi/many> <binary> <large/none>
+% <multi/many> <binary> <large/none> <expensive/none> <sparse/none>
 % The sparse multi-objective knapsack problem
 
 %------------------------------- Reference --------------------------------

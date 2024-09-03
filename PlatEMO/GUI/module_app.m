@@ -40,7 +40,7 @@ classdef module_app < handle
                                          'Constrained multi-objective optimization','Rotated optimization','Integer optimization','Binary optimization','Permutation optimization','Hybrid optimization'},'ItemsData',1:11,'Value',1,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.cb_selectProblem));
           
             % The second panel
-            obj.app.grid(2)     = GUI.APP(3,1,uigridlayout(obj.app.maingrid,'RowHeight',num2cell([25,25,25,25,25,25,25,0,25,0,25,0,25,25,zeros(1,19),25,25,zeros(1,19),25,25,25,25,25,25]),'ColumnWidth',{75,50,'1x',25,20,20},'Padding',[0 10 0 0],'RowSpacing',5,'ColumnSpacing',5,'Scrollable','on','BackgroundColor','w'));
+            obj.app.grid(2)     = GUI.APP(3,1,uigridlayout(obj.app.maingrid,'RowHeight',num2cell([25,25,25,25,25,25,25,0,25,0,25,0,25,25,zeros(1,19),25,25,zeros(1,19),25,25,25,25,25,25]),'ColumnWidth',{75,50,'1x',25,20,22},'Padding',[0 10 0 0],'RowSpacing',5,'ColumnSpacing',5,'Scrollable','on','BackgroundColor','w'));
             % Encoding scheme
             tempGrid            = GUI.APP(1,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
             obj.app.titleB(1)   = GUI.APP(1,1,uilabel(tempGrid,'Text',' Encoding scheme','FontSize',13,'FontColor',[.9 .5 .2],'BackgroundColor',[.9 .9 .9],'FontWeight','bold'));
@@ -55,51 +55,51 @@ classdef module_app < handle
             obj.app.labelB(5)   = GUI.APP(6,1,uilabel(obj.app.grid(2),'Text','Upper: x <=','HorizontalAlignment','right'));
             obj.app.editB(3)    = GUI.APP(6,[2 5],uieditfield(obj.app.grid(2),'Value','1,1,1,1,1,1,1,1,1,1','Tooltip','Upper bound of each decision variable'));
             % Data
-            tempGrid            = GUI.APP(7,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{50,30,30,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
+            tempGrid            = GUI.APP(7,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{50,20,20,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
             obj.app.titleB(3)   = GUI.APP(1,[1 4],uilabel(tempGrid,'Text',' Data','FontSize',13,'FontColor',[.9 .5 .2],'BackgroundColor',[.9 .9 .9],'FontWeight','bold'));
-            obj.app.buttonB(1)  = GUI.APP(1,2,uibutton(tempGrid,'Text','Add','FontSize',10,'Tooltip','Add a data','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,1}));
-            obj.app.buttonB(2)  = GUI.APP(1,3,uibutton(tempGrid,'Text','Del','Enable',false,'FontSize',10,'Tooltip','Delete the data','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,-1}));
+            obj.app.buttonB(1)  = GUI.APP(1,2,uibutton(tempGrid,'Text','+','FontSize',11,'Tooltip','Add a data','BackgroundColor',[.9 .9 .9],'ButtonpushedFcn',{@obj.cb_updateProblem,1}));
+            obj.app.buttonB(2)  = GUI.APP(1,3,uibutton(tempGrid,'Text','-','Enable',false,'FontSize',11,'Tooltip','Delete the data','BackgroundColor',[.9 .9 .9],'ButtonpushedFcn',{@obj.cb_updateProblem,-1}));
             obj.app.labelB(6)   = GUI.APP(8,1,uilabel(obj.app.grid(2),'Text','data =','HorizontalAlignment','right'));
             obj.app.editB(4)    = GUI.APP(8,[2 4],uieditfield(obj.app.grid(2),'Value','eye(10)','Tooltip','User-defined data of the problem'));
             obj.app.buttonB(3)  = GUI.APP(8,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing data','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,obj.app.editB(4),{'*.txt;*.dat;*.csv','Text file';'*.mat','MAT file'}}));
             % Initialization function
-            tempGrid            = GUI.APP(9,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{135,30,30,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
+            tempGrid            = GUI.APP(9,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{135,20,20,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
             obj.app.titleB(4)   = GUI.APP(1,[1 4],uilabel(tempGrid,'Text',' Initialization function','FontSize',13,'FontColor',[.9 .5 .2],'BackgroundColor',[.9 .9 .9],'FontWeight','bold'));
-            obj.app.buttonB(4)  = GUI.APP(1,2,uibutton(tempGrid,'Text','Add','FontSize',10,'Tooltip','Add an initialization function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,2}));
-            obj.app.buttonB(5)  = GUI.APP(1,3,uibutton(tempGrid,'Text','Del','Enable',false,'FontSize',10,'Tooltip','Delete the initialization function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,-2}));
+            obj.app.buttonB(4)  = GUI.APP(1,2,uibutton(tempGrid,'Text','+','FontSize',11,'Tooltip','Add an initialization function','BackgroundColor',[.9 .9 .9],'ButtonpushedFcn',{@obj.cb_updateProblem,2}));
+            obj.app.buttonB(5)  = GUI.APP(1,3,uibutton(tempGrid,'Text','-','Enable',false,'FontSize',11,'Tooltip','Delete the initialization function','BackgroundColor',[.9 .9 .9],'ButtonpushedFcn',{@obj.cb_updateProblem,-2}));
             obj.app.labelB(7)   = GUI.APP(10,1,uilabel(obj.app.grid(2),'Text','I(N) =','HorizontalAlignment','right'));
             obj.app.editB(5)    = GUI.APP(10,[2 4],uieditfield(obj.app.grid(2),'Value','rand(N,10)','Tooltip','Function for generating an initial population with size N'));
             obj.app.buttonB(6)  = GUI.APP(10,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,obj.app.editB(5),{'*.m','MATLAB function'}}));
-            obj.app.buttonB(7)  = GUI.APP(10,6,uibutton(obj.app.grid(2),'Text','+','Fontsize',15,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,obj.app.editB(5),'initialization'}));
+            obj.app.buttonB(7)  = GUI.APP(10,6,uibutton(obj.app.grid(2),'Text','</>','FontSize',9,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,obj.app.editB(5),'initialization'}));
             % Repair function
-            tempGrid            = GUI.APP(11,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{135,30,30,50,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
+            tempGrid            = GUI.APP(11,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{135,20,20,50,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
             obj.app.titleB(5)   = GUI.APP(1,[1 5],uilabel(tempGrid,'Text',' Repair function','FontSize',13,'FontColor',[.9 .5 .2],'BackgroundColor',[.9 .9 .9],'FontWeight','bold'));
-            obj.app.buttonB(8)  = GUI.APP(1,2,uibutton(tempGrid,'Text','Add','FontSize',10,'Tooltip','Add a repair function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,3}));
-            obj.app.buttonB(9)  = GUI.APP(1,3,uibutton(tempGrid,'Text','Del','Enable',false,'FontSize',10,'Tooltip','Delete the repair function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,-3}));
-            obj.app.buttonB(10) = GUI.APP(1,4,uibutton(tempGrid,'Text','Integrate','FontSize',10,'Tooltip','Integrate the repair function, objective functions, and constraint functions into a single evaluation function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,6}));
+            obj.app.buttonB(8)  = GUI.APP(1,2,uibutton(tempGrid,'Text','+','FontSize',11,'Tooltip','Add a repair function','BackgroundColor',[.9 .9 .9],'ButtonpushedFcn',{@obj.cb_updateProblem,3}));
+            obj.app.buttonB(9)  = GUI.APP(1,3,uibutton(tempGrid,'Text','-','Enable',false,'FontSize',11,'Tooltip','Delete the repair function','BackgroundColor',[.9 .9 .9],'ButtonpushedFcn',{@obj.cb_updateProblem,-3}));
+            obj.app.buttonB(10) = GUI.APP(1,4,uibutton(tempGrid,'Text','Integrate','FontSize',10,'Tooltip','Integrate the repair function, objective functions, and constraint functions into a single evaluation function','BackgroundColor',[.9 .9 .9],'ButtonpushedFcn',{@obj.cb_updateProblem,6}));
             obj.app.labelB(8)   = GUI.APP(12,1,uilabel(obj.app.grid(2),'Text','R(x) =','HorizontalAlignment','right'));
             obj.app.editB(6)    = GUI.APP(12,[2 4],uieditfield(obj.app.grid(2),'Value','max(min(x,1),0)','Tooltip','Function for repairing invalid solution','UserData',''));
             obj.app.buttonB(11) = GUI.APP(12,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,obj.app.editB(6),{'*.m','MATLAB function'}}));
-            obj.app.buttonB(12) = GUI.APP(12,6,uibutton(obj.app.grid(2),'Text','+','Fontsize',15,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,obj.app.editB(6),'repair'}));
+            obj.app.buttonB(12) = GUI.APP(12,6,uibutton(obj.app.grid(2),'Text','</>','Fontsize',9,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,obj.app.editB(6),'repair'}));
             % Objective functions
-            tempGrid            = GUI.APP(13,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{135,30,30,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
+            tempGrid            = GUI.APP(13,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{135,20,20,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
             obj.app.titleB(6)   = GUI.APP(1,[1 4],uilabel(tempGrid,'Text',' Objective functions','FontSize',13,'FontColor',[.9 .5 .2],'BackgroundColor',[.9 .9 .9],'FontWeight','bold'));
-            obj.app.buttonB(13) = GUI.APP(1,2,uibutton(tempGrid,'Text','Add','FontSize',10,'Tooltip','Add an objective function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,4}));
-            obj.app.buttonB(14) = GUI.APP(1,3,uibutton(tempGrid,'Text','Del','Enable',false,'FontSize',10,'Tooltip','Delete the last objective function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,-4}));
+            obj.app.buttonB(13) = GUI.APP(1,2,uibutton(tempGrid,'Text','+','FontSize',11,'Tooltip','Add an objective function','BackgroundColor',[.9 .9 .9],'ButtonpushedFcn',{@obj.cb_updateProblem,4}));
+            obj.app.buttonB(14) = GUI.APP(1,3,uibutton(tempGrid,'Text','-','Enable',false,'FontSize',11,'Tooltip','Delete the last objective function','BackgroundColor',[.9 .9 .9],'ButtonpushedFcn',{@obj.cb_updateProblem,-4}));
             obj.pro(1).label    = GUI.APP(14,1,uilabel(obj.app.grid(2),'Text','f1(x) =','HorizontalAlignment','right'));
             obj.pro(1).edit     = GUI.APP(14,[2 4],uieditfield(obj.app.grid(2),'Value','mean(x)','Tooltip','Objective function to be minimized'));
             obj.pro(1).button   = GUI.APP(14,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function or data','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,obj.pro(1).edit,{'*.m','MATLAB function';'*.txt;*.dat;*.csv','Text file'}}));
-            obj.pro(1).button2  = GUI.APP(14,6,uibutton(obj.app.grid(2),'Text','+','Fontsize',15,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,obj.pro(1).edit,'objective'}));
+            obj.pro(1).button2  = GUI.APP(14,6,uibutton(obj.app.grid(2),'Text','</>','Fontsize',9,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,obj.pro(1).edit,'objective'}));
             % Constraint functions
-            tempGrid            = GUI.APP(34,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{135,30,30,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
+            tempGrid            = GUI.APP(34,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{135,20,20,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
             obj.app.titleB(7)   = GUI.APP(1,[1 4],uilabel(tempGrid,'Text',' Constraint functions','FontSize',13,'FontColor',[.9 .5 .2],'BackgroundColor',[.9 .9 .9],'FontWeight','bold'));
-            obj.app.buttonB(15) = GUI.APP(1,2,uibutton(tempGrid,'Text','Add','FontSize',10,'Tooltip','Add a constraint function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,5}));
-            obj.app.buttonB(16) = GUI.APP(1,3,uibutton(tempGrid,'Text','Del','FontSize',10,'Tooltip','Delete the last constraint function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_updateProblem,-5}));
+            obj.app.buttonB(15) = GUI.APP(1,2,uibutton(tempGrid,'Text','+','FontSize',11,'Tooltip','Add a constraint function','BackgroundColor',[.9 .9 .9],'ButtonpushedFcn',{@obj.cb_updateProblem,5}));
+            obj.app.buttonB(16) = GUI.APP(1,3,uibutton(tempGrid,'Text','-','FontSize',11,'Tooltip','Delete the last constraint function','BackgroundColor',[.9 .9 .9],'ButtonpushedFcn',{@obj.cb_updateProblem,-5}));
             obj.con(1).labelA   = GUI.APP(35,1,uilabel(obj.app.grid(2),'Text','g1(x) =','HorizontalAlignment','right'));
             obj.con(1).edit     = GUI.APP(35,[2 3],uieditfield(obj.app.grid(2),'Value','0.5-mean(x)','Tooltip','Constraint function to be satisfied'));
             obj.con(1).labelB   = GUI.APP(35,4,uilabel(obj.app.grid(2),'Text','<= 0'));
             obj.con(1).button   = GUI.APP(35,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function or data','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,obj.con(1).edit,{'*.m','MATLAB function';'*.txt;*.dat;*.csv','Text file'}}));
-            obj.con(1).button2  = GUI.APP(35,6,uibutton(obj.app.grid(2),'Text','+','Fontsize',15,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,obj.con(1).edit,'constraint'}));
+            obj.con(1).button2  = GUI.APP(35,6,uibutton(obj.app.grid(2),'Text','</>','Fontsize',9,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,obj.con(1).edit,'constraint'}));
             % Special difficulties
             tempGrid            = GUI.APP(55,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{127,30,30,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
             obj.app.titleB(7)   = GUI.APP(1,[1 4],uilabel(tempGrid,'Text',' Special difficulties','FontSize',13,'FontColor',[.9 .5 .2],'BackgroundColor',[.9 .9 .9],'FontWeight','bold'));
@@ -109,32 +109,13 @@ classdef module_app < handle
             obj.app.checkB(4)   = GUI.APP(59,[1 6],uicheckbox(obj.app.grid(2),'FontSize',11,'Text','<sparse> The optimal solutions are sparse, i.e., most decision variables of which are zero.','WordWrap','on','ValueChangedFcn',@obj.cb_updateFilter));
             
             % The third panel
-            obj.app.grid(3)    = GUI.APP([2 3],4,uigridlayout(obj.app.maingrid,'RowHeight',{16,19,16,19,19,16,19,19,19,22,'1.2x','1x'},'ColumnWidth',{'1x','1x','1x'},'Padding',[8 10 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
-            obj.app.labelC(1)  = GUI.APP(1,[1 3],uilabel(obj.app.grid(3),'Text','Number of objectives','VerticalAlignment','bottom','FontSize',12,'FontColor',[.15 .6 .2],'FontWeight','bold'));
-            obj.app.stateC(1)  = GUI.APP(2,1,uibutton(obj.app.grid(3),'state','Text','single','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The problem has a single objective','ValueChangedFcn',{@obj.cb_filter,1}));
-            obj.app.stateC(2)  = GUI.APP(2,2,uibutton(obj.app.grid(3),'state','Text','multi','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The problem has 2 or 3 objectives','ValueChangedFcn',{@obj.cb_filter,2}));
-            obj.app.stateC(3)  = GUI.APP(2,3,uibutton(obj.app.grid(3),'state','Text','many','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The problem has more than 3 objectives','ValueChangedFcn',{@obj.cb_filter,3}));
-            obj.app.labelC(2)  = GUI.APP(3,[1 3],uilabel(obj.app.grid(3),'Text','Encoding scheme','VerticalAlignment','bottom','FontSize',12,'FontColor',[.15 .6 .2],'FontWeight','bold'));
-            obj.app.stateC(4)  = GUI.APP(4,1,uibutton(obj.app.grid(3),'state','Text','real','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The decision variables are real numbers','ValueChangedFcn',{@obj.cb_filter,4}));
-            obj.app.stateC(5)  = GUI.APP(4,2,uibutton(obj.app.grid(3),'state','Text','integer','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The decision variables are integers','ValueChangedFcn',{@obj.cb_filter,5}));
-            obj.app.stateC(6)  = GUI.APP(4,3,uibutton(obj.app.grid(3),'state','Text','label','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The decision variables are labels','ValueChangedFcn',{@obj.cb_filter,6}));
-            obj.app.stateC(7)  = GUI.APP(5,1,uibutton(obj.app.grid(3),'state','Text','binary','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The decision variables are binary numbers','ValueChangedFcn',{@obj.cb_filter,7}));
-            obj.app.stateC(8)  = GUI.APP(5,2,uibutton(obj.app.grid(3),'state','Text','permutation','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The decision vector is a permutation','ValueChangedFcn',{@obj.cb_filter,8}));
-            obj.app.labelC(3)  = GUI.APP(6,[1 3],uilabel(obj.app.grid(3),'Text','Special difficulties','VerticalAlignment','bottom','FontSize',12,'FontColor',[.15 .6 .2],'FontWeight','bold'));
-            obj.app.stateC(9)  = GUI.APP(7,1,uibutton(obj.app.grid(3),'state','Text','large','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The problem has more than 100 decision variables','ValueChangedFcn',{@obj.cb_filter,9}));
-            obj.app.stateC(10) = GUI.APP(7,2,uibutton(obj.app.grid(3),'state','Text','constrained','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The problem has constraints','ValueChangedFcn',{@obj.cb_filter,10}));
-            obj.app.stateC(11) = GUI.APP(7,3,uibutton(obj.app.grid(3),'state','Text','expensive','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The objectives are computationally time-consuming','ValueChangedFcn',{@obj.cb_filter,11}));
-            obj.app.stateC(12) = GUI.APP(8,1,uibutton(obj.app.grid(3),'state','Text','multimodal','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The objectives are multimodal','ValueChangedFcn',{@obj.cb_filter,12}));
-            obj.app.stateC(13) = GUI.APP(8,2,uibutton(obj.app.grid(3),'state','Text','sparse','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','Most decision variables of the optimal solutions are zero','ValueChangedFcn',{@obj.cb_filter,13}));
-            obj.app.stateC(14) = GUI.APP(8,3,uibutton(obj.app.grid(3),'state','Text','dynamic','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The objectives vary periodically','ValueChangedFcn',{@obj.cb_filter,14}));
-            obj.app.stateC(15) = GUI.APP(9,1,uibutton(obj.app.grid(3),'state','Text','multitask','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The problem has multiple tasks to be solved simultaneously','ValueChangedFcn',{@obj.cb_filter,15}));
-            obj.app.stateC(16) = GUI.APP(9,2,uibutton(obj.app.grid(3),'state','Text','bilevel','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The problem has two nested objectives','ValueChangedFcn',{@obj.cb_filter,16}));
-            obj.app.stateC(17) = GUI.APP(9,3,uibutton(obj.app.grid(3),'state','Text','robust','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Tooltip','The objectives are influenced by uncertain factors','ValueChangedFcn',{@obj.cb_filter,17}));
-            obj.app.labelC(4)  = GUI.APP(10,[1 2],uilabel(obj.app.grid(3),'Text','Algorithms','VerticalAlignment','bottom','FontSize',13,'FontColor',[.2 .4 .7],'FontWeight','bold'));
-            obj.app.labelC(5)  = GUI.APP(10,3,uilabel(obj.app.grid(3),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.2 .4 .7]));
-            obj.app.listC      = GUI.APP(11,[1 3],uilistbox(obj.app.grid(3),'FontColor',[.2 .4 .7],'ValueChangedFcn',{@obj.cb_updateList,3}));
-            obj.app.listD      = uilist(obj.app.grid(3),obj.GUI.app.figure,obj.GUI.icon);
-            obj.app.tipD       = GUI.APP(12,[1 3],uilabel(obj.app.grid(3),'Text','Select an algorithm','HorizontalAlignment','center'));
+            obj.app.grid(3)   = GUI.APP([2 3],4,uigridlayout(obj.app.maingrid,'RowHeight',{16,19,16,19,19,16,19,19,19,22,'1.1x','1x'},'ColumnWidth',{'1x','1x','1x'},'Padding',[8 10 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
+            [obj.app.stateC,obj.app.labelC] = GUI.GenerateLabelButton(obj.app.grid(3),zeros(1,17),@obj.cb_filter);
+            obj.app.labelC(4) = GUI.APP(10,[1 2],uilabel(obj.app.grid(3),'Text','Algorithms','VerticalAlignment','bottom','FontSize',13,'FontColor',[.2 .4 .7],'FontWeight','bold'));
+            obj.app.labelC(5) = GUI.APP(10,3,uilabel(obj.app.grid(3),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.2 .4 .7]));
+            obj.app.listC     = GUI.APP(11,[1 3],uilistbox(obj.app.grid(3),'FontColor',[.2 .4 .7],'ValueChangedFcn',@obj.cb_updateList));
+            obj.app.listD     = uilist(obj.app.grid(3),obj.GUI.app.figure,obj.GUI.icon);
+            obj.app.tipD      = GUI.APP(12,[1 3],uilabel(obj.app.grid(3),'Text','Select an algorithm','HorizontalAlignment','center'));
             obj.app.listD.grid.Padding = [0,0,0,0];
             GUI.APP(12,[1 3],obj.app.listD.grid);
             
@@ -144,13 +125,13 @@ classdef module_app < handle
             obj.app.grid(4)  = GUI.APP([2 3],[6 8],uigridlayout(obj.app.maingrid,'RowHeight',{'1x',40,30},'ColumnWidth',{20,150,'1x','1x',120,30,20},'Padding',[15 10 15 0],'RowSpacing',5,'BackgroundColor','w'));
             obj.app.axes     = GUI.APP(1,[2 6],uiaxes(obj.app.grid(4),'BackgroundColor','w','Box','on'));
             obj.app.waittip  = GUI.APP(1,[2 6],uilabel(obj.app.grid(4),'HorizontalAlignment','center','Text','                 Please wait ... ...','Visible',false));
-            tempTb = axtoolbar(obj.app.axes(1),{'rotate','pan','zoomin','zoomout'});
+            tempTb = axtoolbar(obj.app.axes,{'rotate','pan','zoomin','zoomout'});
             obj.app.toolD(1)   = axtoolbarbtn(tempTb,'push','Icon',obj.GUI.icon.gif,'Tooltip','Save the evolutionary process to gif','ButtonPushedFcn',@obj.cb_toolbutton1);
             obj.app.toolD(2)   = axtoolbarbtn(tempTb,'push','Icon',obj.GUI.icon.newfigure,'Tooltip','Open in new figure and save to workspace','ButtonPushedFcn',@obj.cb_toolbutton2);
             obj.app.slider     = GUI.APP(2,[1 7],uislider(obj.app.grid(4),'Limits',[0 1],'MajorTicks',0:0.25:1,'MajorTickLabels',{'0%','25%','50%','75%','100%'},'MinorTicks',0:0.01:1,'ValueChangedFcn',@obj.cb_slider));
             obj.app.labelD     = GUI.APP(3,[1 2],uilabel(obj.app.grid(4),'Text','','HorizontalAlignment','left'));
             obj.app.buttonD(1) = GUI.APP(3,3,uibutton(obj.app.grid(4),'push','Text','Start','FontSize',16,'Enable',false,'ButtonpushedFcn',@obj.cb_start));
-            obj.app.buttonD(2) = GUI.APP(3,4,uibutton(obj.app.grid(4),'push','Text','Stop','FontSize',16,'Enable',false,'ButtonpushedFcn',@obj.cb_stop));
+            obj.app.buttonD(2) = GUI.APP(3,4,uibutton(obj.app.grid(4),'push','Text','Stop','FontSize',16,'Enable',false,'ButtonpushedFcn',@(~,~)set(obj.app.buttonD(1:2),{'Enable','Text'},{true,'Start';false,'Stop'})));
             obj.app.menuD      = uicontext(obj.GUI.app.figure,120);
             obj.app.menuD.add('  Save best solutions','',{@obj.cb_save,1});
             obj.app.menuD.add('  Save all solutions','',{@obj.cb_save,2});
@@ -159,30 +140,19 @@ classdef module_app < handle
             
             % Initialization
             obj.cb_updateFilter();
-            obj.cb_filter();
+            obj.cb_filter([],[],0);
         end
     end
     methods(Access = private)
-        %% Update the algorithms in the lists
+        %% Update the algorithms in the list
         function cb_filter(obj,~,~,index)
-            if nargin > 3
-                if index < 4
-                    [obj.app.stateC(1:3).Value] = deal(0);
-                    obj.app.stateC(index).Value = 1;
-                end
-            end
-            filter = [obj.app.stateC.Value];
-            func   = @(s)all(any(repmat([true,filter],size(s,1),1)&s,2)) && all((any(s(:,2:end),1)&filter)==filter);
             % Update the list of algorithms
-            show   = cellfun(func,obj.GUI.algList(:,1));
-            obj.app.listC.Items = ['(Open File)';obj.GUI.algList(show,2)];
-            obj.app.listC.Value = {};
-            obj.app.labelC(5).Text = sprintf('%d / %d',sum(show),length(show));
+            func = GUI.UpdateAlgProList(index,obj.app.stateC,obj.app.listC,obj.app.labelC(5),obj.GUI.algList);
             obj.app.listD.del(1);
-            obj.app.tipD.Visible      = 'on';
-            obj.app.buttonD(1).Enable = 'off';
+            obj.app.tipD.Visible      = true;
+            obj.app.buttonD(1).Enable = false;
             % Update the list of metrics
-            show   = cellfun(@(s)func(s(2:end,1:end-2)),obj.GUI.metList(:,1));
+            show = cellfun(@(s)func(s(2:end,1:end-2)),obj.GUI.metList(:,1));
             if obj.app.stateC(1).Value == 0 % Multi-objective optimization
                 obj.app.dropD(1).Items = ['Population (objectives)';'Population (variables)';obj.GUI.metList(show,2)];
             else                            % Single-objective optimization
@@ -190,33 +160,10 @@ classdef module_app < handle
             end
         end
         %% Update the parameter list
-        function cb_updateList(obj,~,~,type)
-            filename = obj.app.listC.Value;
-            if contains(filename,'Open File')
-                [file,path] = uigetfile({'*.m','MATLAB class'},'');
-                if file ~= 0
-                    try
-                        filename = fullfile(path,file);
-                        f   = fopen(filename);
-                        str = fgetl(f);
-                        fclose(f);
-                        assert(contains(str,'< ALGORITHM'));
-                        addpath(path);
-                    catch
-                        uialert(obj.GUI.app.figure,'The selected file is not a subclass of ALGORITHM.','Error');
-                        return;
-                    end
-                else
-                    return;
-                end
-            else
-                filename = [filename,'.m'];
-            end
-            obj.app.tipD.Visible      = 'off';
-            obj.app.buttonD(1).Enable = 'on';
-            obj.app.listD.del(1);
-            obj.app.listD.add(filename,type);
-            obj.app.listD.flush();
+        function cb_updateList(obj,~,~)
+            GUI.UpdateAlgProPara(obj.GUI.app.figure,obj.app.listC,obj.app.listD,'ALGORITHM',3);
+            obj.app.tipD.Visible      = false;
+            obj.app.buttonD(1).Enable = true;
         end
         %% Update the problem definition panel
         function cb_updateProblem(obj,~,~,index,noFlush)
@@ -256,7 +203,7 @@ classdef module_app < handle
                         item.label   = GUI.APP(length(obj.pro)+14,1,uilabel(obj.app.grid(2),'Text',sprintf('f%d(x%s) =',length(obj.pro)+1,str{1}),'HorizontalAlignment','right'));
                         item.edit    = GUI.APP(length(obj.pro)+14,[2 4],uieditfield(obj.app.grid(2),'Value',sprintf('mean(x%s)',str{2}),'Tooltip','Objective function to be minimized'));
                         item.button  = GUI.APP(length(obj.pro)+14,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function or data','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,item.edit,{'*.m','MATLAB function';'*.txt;*.dat;*.csv','Text file'}}));
-                        item.button2 = GUI.APP(length(obj.pro)+14,6,uibutton(obj.app.grid(2),'Text','+','Fontsize',15,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,item.edit,'objective'}));
+                        item.button2 = GUI.APP(length(obj.pro)+14,6,uibutton(obj.app.grid(2),'Text','</>','Fontsize',9,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,item.edit,'objective'}));
                         obj.pro      = [obj.pro,item];
                     elseif index<0 && length(obj.pro)>0
                         delete(obj.pro(end).label);
@@ -279,7 +226,7 @@ classdef module_app < handle
                         item.edit    = GUI.APP(length(obj.con)+35,[2 3],uieditfield(obj.app.grid(2),'Value',sprintf('0.5-mean(x%s)',str{2}),'Tooltip','Constraint function to be satisfied'));
                         item.labelB  = GUI.APP(length(obj.con)+35,4,uilabel(obj.app.grid(2),'Text','<= 0'));
                         item.button  = GUI.APP(length(obj.con)+35,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function or data','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,item.edit,{'*.m','MATLAB function';'*.txt;*.dat;*.csv','Text file'}}));
-                        item.button2 = GUI.APP(length(obj.con)+35,6,uibutton(obj.app.grid(2),'Text','+','Fontsize',15,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,item.edit,'constraint'}));
+                        item.button2 = GUI.APP(length(obj.con)+35,6,uibutton(obj.app.grid(2),'Text','</>','Fontsize',9,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,item.edit,'constraint'}));
                         obj.con      = [obj.con,item];
                     elseif index<0 && length(obj.con)>0
                         delete(obj.con(end).labelA);
@@ -350,15 +297,15 @@ classdef module_app < handle
                 uialert(obj.GUI.app.figure,'The problem definition is valid.','Valid problem','Icon','success');
             end
         end
-        %% Define a problem
-        function cb_selectProblem(obj,~,~)
-            if obj.app.dropA.Value == 1
-                if ~isempty(obj.app.dropA.UserData)
-                    GetSetProblem(obj,obj.app.dropA.UserData);
-                    obj.app.dropA.UserData = [];
+        %% Select a predefined a problem
+        function cb_selectProblem(obj,h,~)
+            if h.Value == 1
+                if ~isempty(h.UserData)
+                    GetSetProblem(obj,h.UserData);
+                    h.UserData = [];
                 end
             else
-                switch obj.app.dropA.Value
+                switch h.Value
                     case 2
                         Str = {'ones(1,10)','zeros(1,10)','ones(1,10)','','','','mean(x.^2)',''};
                     case 3
@@ -380,8 +327,8 @@ classdef module_app < handle
                     case 11
                         Str = {'1,1,1,2,2,2,4,4,4','zeros(1,9)','zeros(1,9)+10','','','','sum((x-pi).^2)',''};
                 end
-                if isempty(obj.app.dropA.UserData)
-                    obj.app.dropA.UserData = GetSetProblem(obj);
+                if isempty(h.UserData)
+                    h.UserData = GetSetProblem(obj);
                 end
                 GetSetProblem(obj,Str);
             end
@@ -389,6 +336,7 @@ classdef module_app < handle
         %% Load a problem
         function cb_loadProblem(obj,~,~)
             [file,folder] = uigetfile({'*.m','MATLAB code'});
+            figure(obj.GUI.app.figure);
             if ischar(file)
                 try
                     f = fopen(fullfile(folder,file));
@@ -417,6 +365,7 @@ classdef module_app < handle
         %% Save the problem
         function cb_saveProblem(obj,~,~)
             [Name,Path] = uiputfile({'*.m','MATLAB code'},'','new');
+            figure(obj.GUI.app.figure);
             if ischar(Name)
                 try
                     Str      = GetSetProblem(obj);
@@ -450,6 +399,7 @@ classdef module_app < handle
                         fprintf(fid,'%s\n',Code{i});
                     end
                     fclose(fid);
+                    web(['file://',fullfile(Path,Name)],'-browser');
                 catch err
                     uialert(obj.GUI.app.figure,'Fail to save the problem, please refer to the command window for details.','Error');
                     rethrow(err);
@@ -463,6 +413,7 @@ classdef module_app < handle
             else
                 [file,folder] = uigetfile(ext,'',cd);
             end
+            figure(obj.GUI.app.figure);
             if file ~= 0
                 h.Value = sprintf('<%s>',fullfile(folder,file));
             end
@@ -474,6 +425,7 @@ classdef module_app < handle
             else
                 [file,folder] = uiputfile({'*.m','MATLAB function'},'',fullfile(cd,'myFcn'));
             end
+            figure(obj.GUI.app.figure);
             if ischar(file)
                 try
                     fid      = fopen(fullfile(folder,file),'wt');
@@ -583,7 +535,7 @@ classdef module_app < handle
             obj.app.stateC(12).Value = obj.app.checkB(3).Value;
             obj.app.stateC(13).Value = obj.app.checkB(4).Value;
             if any(oldState~=[obj.app.stateC.Value])
-                obj.cb_filter();
+                obj.cb_filter([],[],0);
             end
         end
         %% Start the execution
@@ -595,38 +547,22 @@ classdef module_app < handle
             else
                 % Generate the ALGORITHM object
                 try
-                    item = obj.app.listD.items(1);
-                    para = cell(1,length(item.edit));
-                    for j = 1 : length(para)
-                        if ~isempty(item.edit(j).Value)
-                            para{j} = str2num(item.edit(j).Value);
-                            assert(~isempty(para{j}),'The parameter "%s" of %s is illegal.',item.label(j).Text,item.title.Text);
-                        end
-                    end
-                    ALG = feval(item.title.Text,'parameter',para(3:end),'outputFcn',@obj.outputFcn,'save',inf);
+                    [name,para] = GUI.GetParameterSetting(obj.app.listD.items(1));
+                    ALG = feval(name,'parameter',para(3:end),'outputFcn',@obj.outputFcn,'save',20);
                 catch err
                     uialert(obj.GUI.app.figure,err.message,'Invalid parameter settings');
                     return;
                 end
                 % Generate the PROBLEM object
-                PRO = obj.cb_validation(para(1:2),item.label(2).Text);
+                PRO = obj.cb_validation(para(1:2),obj.app.listD.items(1).label(2).Text);
                 % Update the data
                 obj.data = {ALG,PRO,{obj.app.buttonB.Enable}};
                 % Update the GUI
-                [obj.GUI.app.button.Enable]   = deal('off');
-                [obj.app.buttonA.Enable]      = deal('off');
-                obj.app.dropA.Enable          = 'off';
-                obj.app.editB(1).Enable       = 'off';
-                [obj.app.editB(2:end).Enable] = deal('off');
-                [obj.app.buttonB.Enable]      = deal('off');
-                [obj.app.checkB.Enable]       = deal('off');
-                [obj.app.stateC.Enable]       = deal('off');
-                obj.app.listC.Enable          = 'off';
-                obj.app.listD.Enable          = 'off';
-                [obj.app.toolD(1:2).Visible]  = deal('off');
-                obj.app.buttonD(1).Text       = 'Pause';
-                obj.app.buttonD(2).Enable     = 'on';
-                obj.app.buttonD(3).Enable     = 'on';
+                set([obj.GUI.app.button,obj.app.buttonA,obj.app.dropA,obj.app.editB,obj.app.buttonB,obj.app.checkB,obj.app.stateC,obj.app.listC,obj.app.dropD],'Enable',false);
+                obj.app.listD.Enable    = false;
+                set(obj.app.toolD,'Visible',false);
+                obj.app.buttonD(1).Text = 'Pause';
+                set(obj.app.buttonD([2,3]),'Enable',true);
                 if PRO.M > 1
                     obj.app.dropD(1).Value   = obj.app.dropD(1).Items{1};
                     obj.app.dropD(1).Visible = 'on';
@@ -636,10 +572,7 @@ classdef module_app < handle
                     obj.app.dropD(1).Visible = 'off';
                     obj.app.dropD(2).Visible = 'on';
                 end
-                obj.app.dropD(1).Enable = 'off';
-                obj.app.dropD(2).Enable = 'off';
-                set([obj.pro.edit,obj.con.edit],'Enable','off');
-                set([obj.pro.button,obj.pro.button2,obj.con.button,obj.con.button2],'Enable','off');
+                set([obj.pro.edit,obj.con.edit,obj.pro.button,obj.pro.button2,obj.con.button,obj.con.button2],'Enable',false);
                 % Execute the algorithm
                 try
                     ALG.Solve(PRO);
@@ -653,23 +586,17 @@ classdef module_app < handle
         end
         %% Stop the execution
         function cb_stop(obj,~,~)
-            [obj.GUI.app.button.Enable]   = deal('on');
-            [obj.app.buttonA.Enable]      = deal('on');
-            obj.app.dropA.Enable          = 'on';
-            obj.app.editB(1).Enable       = 'on';
-            [obj.app.editB(2:end).Enable] = deal('on');
-            [obj.app.buttonB.Enable]      = deal(obj.data{3}{:});
-            [obj.app.checkB.Enable]       = deal('on');
-            [obj.app.stateC.Enable]       = deal('on');
-            obj.app.listC.Enable          = 'on';
-            obj.app.listD.Enable          = 'on';
-            [obj.app.toolD(1:2).Visible]  = deal('on');
-            obj.app.buttonD(1).Text       = 'Start';
-            obj.app.buttonD(2).Enable     = 'off';
-            obj.app.dropD(1).Enable       = 'on';
-            obj.app.dropD(2).Enable       = 'on';
-            set([obj.pro.edit,obj.con.edit],'Enable','on');
-            set([obj.pro.button,obj.pro.button2,obj.con.button,obj.con.button2],'Enable','on');
+            set([obj.GUI.app.button,obj.app.buttonA,obj.app.dropA,obj.app.editB,obj.app.checkB,obj.app.stateC,obj.app.listC,obj.app.dropD],'Enable',true);
+            obj.app.listD.Enable      = true;
+            [obj.app.buttonB.Enable]  = deal(obj.data{3}{:});
+            obj.app.listD.Enable      = true;
+            set(obj.app.toolD,'Visible',true);
+            obj.app.buttonD(1).Text   = 'Start';
+            obj.app.buttonD(2).Enable = false;
+            set([obj.pro.edit,obj.con.edit,obj.pro.button,obj.pro.button2,obj.con.button,obj.con.button2],'Enable',true);
+            if isempty(obj.data{1}.result)
+                obj.data = {};
+            end
         end
         %% Save the result
         function cb_save(obj,~,~,type)
@@ -677,30 +604,7 @@ classdef module_app < handle
             PRO   = obj.data{2};
             rate  = PRO.FE/max(PRO.FE,PRO.maxFE);
             index = max(1,round(obj.app.slider.Value/rate*size(ALG.result,1)));
-            Pop   = ALG.result{index,2};
-            if type == 1
-                Pop = Pop.best;
-            end
-            if isempty(Pop)
-                uialert(obj.GUI.app.figure,'No solution can be saved.','Error');
-            else
-                Data = [Pop.decs,Pop.objs,Pop.cons];
-                try
-                    [Name,Path] = uiputfile({'*.txt','Text file';'*.dat','Text file';'*.csv','Text file';'*.mat','MAT file';'*.xlsx','Excel table'},'','data');
-                    if ischar(Name)
-                        [~,~,Type] = fileparts(Name);
-                        switch Type
-                            case '.mat'
-                                save(fullfile(Path,Name),'Data','-mat');
-                            otherwise
-                                writematrix(Data,fullfile(Path,Name));
-                        end
-                    end
-                catch err
-                    uialert(obj.GUI.app.figure,'Fail to save the result, please refer to the command window for details.','Error');
-                    rethrow(err);
-                end
-            end
+            GUI.SavePopulation(obj.GUI.app.figure,ALG.result{index,2},type);
         end
         %% Output function
         function outputFcn(obj,Algorithm,Problem)
@@ -757,6 +661,7 @@ classdef module_app < handle
         function cb_toolbutton1(obj,~,~)
             if ~isempty(obj.data)
                 [file,folder] = uiputfile({'*.gif','GIF image'},'');
+                figure(obj.GUI.app.figure);
                 if file ~= 0
                     try
                         filename = fullfile(folder,file);

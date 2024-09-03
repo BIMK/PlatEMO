@@ -47,10 +47,10 @@ classdef FDA2 < PROBLEM
         function PopObj = CalObj(obj,PopDec)
             PopObj(:,1) = PopDec(:,1); 
             t = floor(obj.FE/obj.N/obj.taut)/obj.nt;
-            g = 1 + sum(PopDec(:,2:(end-1)/2).^2,2);
+            g = 1 + sum(PopDec(:,2:(end+1)/2).^2,2);
             H = 0.75 + 0.7*sin(0.5.*pi.*t);
             % Note: The original definition of h is questionable
-            h = 1 - (PopObj(:,1)./g).^(H+sum((PopDec(:,(end-1)/2+1:end)-H).^2,2));
+            h = 1 - (PopObj(:,1)./g).^(H+sum((PopDec(:,(end+1)/2+1:end)-H).^2,2));
             PopObj(:,2) = g.*h;
         end
         %% Generate points on the Pareto front

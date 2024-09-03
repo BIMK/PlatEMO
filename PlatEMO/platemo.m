@@ -26,8 +26,9 @@ function varargout = platemo(varargin)
 %   'decFcn'        <function handle>   function for repairing invalid solutions
 %   'objFcn'        <function handle>   objective functions
 %   'conFcn'        <function handle>   constraint functions
-%   'objGradFcn'    <function handle>   function for calculating the gradients of objectives
-%   'conGradFcn'    <function handle>   function for calculating the gradients of constraints
+%   'gradFcn'       <function handle>   function for calculating the gradients of objectives and constraints
+%   'data'          <any>               data of the problem
+%   'once'          <logical>           whether the inputs of evalFcn, decFcn, objFcn, conFcn can be multiple solutions
 %
 %   Example:
 %
@@ -75,6 +76,7 @@ function varargout = platemo(varargin)
 
     cd(fileparts(mfilename('fullpath')));
     addpath(genpath(cd));
+    rng('shuffle');
     if isempty(varargin)
         if verLessThan('matlab','9.9')
             errordlg('Fail to create the GUI of PlatEMO since the version for MATLAB is lower than R2020b. You can use PlatEMO without GUI by calling platemo() with parameters.','Error','modal');

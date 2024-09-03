@@ -29,44 +29,27 @@ classdef module_exp < handle
 
             % The first panel
             obj.app.grid(1)    = GUI.APP(2,1,uigridlayout(obj.app.maingrid,'RowHeight',{16,19,16,19,19,16,19,19,19,20,'1x',20,'1x',21,21,21},'ColumnWidth',{'1x','1x','1x'},'Padding',[8 5 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
-            obj.app.labelA(1)  = GUI.APP(1,[1 3],uilabel(obj.app.grid(1),'Text','Number of objectives','VerticalAlignment','bottom','FontSize',12,'FontColor',[.15 .6 .2],'FontWeight','bold'));
-            obj.app.stateA(1)  = GUI.APP(2,1,uibutton(obj.app.grid(1),'state','Text','single','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has a single objective','ValueChangedFcn',{@obj.cb_filter,1}));
-            obj.app.stateA(2)  = GUI.APP(2,2,uibutton(obj.app.grid(1),'state','Text','multi','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',1,'Tooltip','The problem has 2 or 3 objectives','ValueChangedFcn',{@obj.cb_filter,2}));
-            obj.app.stateA(3)  = GUI.APP(2,3,uibutton(obj.app.grid(1),'state','Text','many','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has more than 3 objectives','ValueChangedFcn',{@obj.cb_filter,3}));
-            obj.app.labelA(2)  = GUI.APP(3,[1 3],uilabel(obj.app.grid(1),'Text','Encoding scheme','VerticalAlignment','bottom','FontSize',12,'FontColor',[.15 .6 .2],'FontWeight','bold'));
-            obj.app.stateA(4)  = GUI.APP(4,1,uibutton(obj.app.grid(1),'state','Text','real','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',1,'Tooltip','The decision variables are real numbers','ValueChangedFcn',{@obj.cb_filter,4}));
-            obj.app.stateA(5)  = GUI.APP(4,2,uibutton(obj.app.grid(1),'state','Text','integer','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision variables are integers','ValueChangedFcn',{@obj.cb_filter,5}));
-            obj.app.stateA(6)  = GUI.APP(4,3,uibutton(obj.app.grid(1),'state','Text','label','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision variables are labels','ValueChangedFcn',{@obj.cb_filter,6}));
-            obj.app.stateA(7)  = GUI.APP(5,1,uibutton(obj.app.grid(1),'state','Text','binary','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision variables are binary numbers','ValueChangedFcn',{@obj.cb_filter,7}));
-            obj.app.stateA(8)  = GUI.APP(5,2,uibutton(obj.app.grid(1),'state','Text','permutation','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The decision vector is a permutation','ValueChangedFcn',{@obj.cb_filter,8}));
-            obj.app.labelA(3)  = GUI.APP(6,[1 3],uilabel(obj.app.grid(1),'Text','Special difficulties','VerticalAlignment','bottom','FontSize',12,'FontColor',[.15 .6 .2],'FontWeight','bold'));
-            obj.app.stateA(9)  = GUI.APP(7,1,uibutton(obj.app.grid(1),'state','Text','large','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has more than 100 decision variables','ValueChangedFcn',{@obj.cb_filter,9}));
-            obj.app.stateA(10) = GUI.APP(7,2,uibutton(obj.app.grid(1),'state','Text','constrained','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has constraints','ValueChangedFcn',{@obj.cb_filter,10}));
-            obj.app.stateA(11) = GUI.APP(7,3,uibutton(obj.app.grid(1),'state','Text','expensive','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The objectives are computationally time-consuming','ValueChangedFcn',{@obj.cb_filter,11}));
-            obj.app.stateA(12) = GUI.APP(8,1,uibutton(obj.app.grid(1),'state','Text','multimodal','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The objectives are multimodal','ValueChangedFcn',{@obj.cb_filter,12}));
-            obj.app.stateA(13) = GUI.APP(8,2,uibutton(obj.app.grid(1),'state','Text','sparse','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','Most decision variables of the optimal solutions are zero','ValueChangedFcn',{@obj.cb_filter,13}));
-            obj.app.stateA(14) = GUI.APP(8,3,uibutton(obj.app.grid(1),'state','Text','dynamic','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The objectives vary periodically','ValueChangedFcn',{@obj.cb_filter,14}));
-            obj.app.stateA(15) = GUI.APP(9,1,uibutton(obj.app.grid(1),'state','Text','multitask','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has multiple tasks to be solved simultaneously','ValueChangedFcn',{@obj.cb_filter,15}));
-            obj.app.stateA(16) = GUI.APP(9,2,uibutton(obj.app.grid(1),'state','Text','bilevel','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The problem has two nested objectives','ValueChangedFcn',{@obj.cb_filter,16}));
-            obj.app.stateA(17) = GUI.APP(9,3,uibutton(obj.app.grid(1),'state','Text','robust','FontSize',11,'FontColor',[.15 .6 .2],'BackgroundColor','w','Value',0,'Tooltip','The objectives are influenced by uncertain factors','ValueChangedFcn',{@obj.cb_filter,17}));
+            [obj.app.stateA,obj.app.labelA] = GUI.GenerateLabelButton(obj.app.grid(1),[0 1 0 1,zeros(1,13)],@obj.cb_filter);
             obj.app.labelA(4)  = GUI.APP(10,[1 2],uilabel(obj.app.grid(1),'Text','Algorithms','VerticalAlignment','bottom','FontSize',13,'FontColor',[.2 .4 .7],'FontWeight','bold'));
             obj.app.labelA(5)  = GUI.APP(10,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.2 .4 .7]));
-            obj.app.listA(1)   = GUI.APP(11,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.2 .4 .7],'ValueChangedFcn',{@obj.cb_updateList,2}));
+            obj.app.listA(1)   = GUI.APP(11,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.2 .4 .7]));
             obj.app.labelA(6)  = GUI.APP(12,[1 2],uilabel(obj.app.grid(1),'Text','Problems','VerticalAlignment','bottom','FontSize',13,'FontColor',[.9 .5 .2],'FontWeight','bold'));
             obj.app.labelA(7)  = GUI.APP(12,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.9 .5 .2]));
-            obj.app.listA(2)   = GUI.APP(13,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.9 .5 .2],'ValueChangedFcn',{@obj.cb_updateList,-2}));
+            obj.app.listA(2)   = GUI.APP(13,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.9 .5 .2]));
             obj.app.labelA(8)  = GUI.APP(14,[1 2],uilabel(obj.app.grid(1),'Text','Number of runs','FontColor',[.15 .6 .2],'FontWeight','bold','Tooltip','Number of runs for each algorithm on each problem'));
             obj.app.editA(1)   = GUI.APP(14,3,uieditfield(obj.app.grid(1),'numeric','Value',30,'limits',[1 inf],'RoundFractionalValues','on','Tooltip','Number of runs for each algorithm on each problem'));
             obj.app.labelA(9)  = GUI.APP(15,[1 2],uilabel(obj.app.grid(1),'Text','Number of results','FontColor',[.15 .6 .2],'FontWeight','bold','Tooltip','Number of populations saved in each run'));
             obj.app.editA(2)   = GUI.APP(15,3,uieditfield(obj.app.grid(1),'numeric','Value',1,'limits',[1 inf],'RoundFractionalValues','on','Tooltip','Number of populations saved in each run'));
             tempGrid           = GUI.APP(16,[1 3],uigridlayout(obj.app.grid(1),'RowHeight',{'1x'},'ColumnWidth',{'0.5x',20,'1x'},'Padding',[0 0 0 0],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
             obj.app.labelA(10) = GUI.APP(1,1,uilabel(tempGrid,'Text','File path','FontColor',[.15 .6 .2],'FontWeight','bold','Tooltip','File path for saving experimental settings'));
-            obj.app.buttonA    = GUI.APP(1,2,uibutton(tempGrid,'Text','...','BackgroundColor','w','ButtonpushedFcn',@obj.cb_filepath));
+            obj.app.buttonA    = GUI.APP(1,2,uibutton(tempGrid,'Text','...','BackgroundColor','w','ButtonpushedFcn',@obj.cb_filepath,'Tooltip','File path for saving experimental settings'));
             obj.app.editA(3)   = GUI.APP(1,3,uieditfield(tempGrid,'Value',fullfile(cd,'Data','Setting.mat'),'HorizontalAlignment','right','Tooltip','File path for saving experimental settings'));
             
             % The second panel
             obj.app.listB   = uilist(obj.app.maingrid,obj.GUI.app.figure,obj.GUI.icon);
             obj.app.grid(2) = GUI.APP(2,3,obj.app.listB.grid);
+            obj.app.listA(1).ValueChangedFcn = @(~,~)GUI.UpdateAlgProPara(obj.GUI.app.figure,obj.app.listA(1),obj.app.listB,'ALGORITHM',2);
+            obj.app.listA(2).ValueChangedFcn = @(~,~)GUI.UpdateAlgProPara(obj.GUI.app.figure,obj.app.listA(2),obj.app.listB,'PROBLEM',-2);
 
             % The third panel
             obj.app.grid(3)    = GUI.APP(2,5,uigridlayout(obj.app.maingrid,'RowHeight',{30,'1x',30},'ColumnWidth',{230,'1x','1x',230},'Padding',[20 10 20 0],'ColumnSpacing',20,'BackgroundColor','w'));
@@ -84,7 +67,7 @@ classdef module_exp < handle
             obj.app.dropC(3)   = GUI.APP([1 3],9,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Perform the Wilcoxon rank sum test','Items',{'none','Signed rank test','Rank sum test','Friedman test'},'ItemsData',1:4,'Value',3,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
             obj.app.dropC(4)   = GUI.APP([1 3],10,uidropdown(tempGrid,'BackgroundColor',[.95 .95 1],'Tooltip','Highlight the best result','Items',{'none','Highlight the best','Highlight all the bests'},'ItemsData',1:3,'Value',2,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.TableUpdate));
             obj.app.table      = GUI.APP(2,[1 4],uitable(obj.app.grid(3),'CellSelectionCallback',@obj.cb_tableSelect));
-            obj.app.checkC     = GUI.APP(3,1,uicheckbox(obj.app.grid(3),'Text','Parallel execution','Tooltip','Perform the experiment with multiple CPUs','Value',0,'Enable',~isempty(ver('parallel'))));
+            obj.app.checkC     = GUI.APP(3,1,uicheckbox(obj.app.grid(3),'Text','Parallel execution','Tooltip','Perform the experiment with multiple CPUs','Enable',~isempty(ver('parallel'))));
             obj.app.buttonC(1) = GUI.APP(3,2,uibutton(obj.app.grid(3),'push','Text','Start','FontSize',16,'ButtonpushedFcn',@obj.cb_start));
             obj.app.buttonC(2) = GUI.APP(3,3,uibutton(obj.app.grid(3),'push','Text','Stop','FontSize',16,'Enable','off','ButtonpushedFcn',@obj.cb_stop));
             obj.app.labelC     = GUI.APP(3,4,uilabel(obj.app.grid(3),'Text','','HorizontalAlignment','right','VerticalAlignment','center'));
@@ -101,67 +84,19 @@ classdef module_exp < handle
     methods(Access = private)
         %% Update the algorithms and problems in the lists
         function cb_filter(obj,~,~,index)
-            if index < 4
-                [obj.app.stateA(1:3).Value] = deal(0);
-                obj.app.stateA(index).Value = 1;
-            elseif index < 9
-                [obj.app.stateA(4:8).Value] = deal(0);
-                obj.app.stateA(index).Value = 1;
-            end
-            filter = [obj.app.stateA.Value];
-            func   = @(s)all(any(repmat([true,filter],size(s,1),1)&s,2)) && all((any(s(:,2:end),1)&filter)==filter);
-            % Update the list of algorithms
-            show   = cellfun(func,obj.GUI.algList(:,1));
-            obj.app.listA(1).Items = ['(Open File)';obj.GUI.algList(show,2)];
-            obj.app.listA(1).Value = {};
-            obj.app.labelA(5).Text = sprintf('%d / %d',sum(show),length(show));
-            % Update the list of problems
-            show   = cellfun(func,obj.GUI.proList(:,1));
-            obj.app.listA(2).Items = ['(Open File)';obj.GUI.proList(show,2)];
-            obj.app.listA(2).Value = {};
-            obj.app.labelA(7).Text = sprintf('%d / %d',sum(show),length(show));
-            % Update the lists of metrics
-            show   = cellfun(@(s)func(s(2:end,1:end-2)),obj.GUI.metList(:,1));
+            % Update the lists of algorithms and problems
+            func = GUI.UpdateAlgProList(index,obj.app.stateA,obj.app.listA(1),obj.app.labelA(5),obj.GUI.algList,obj.app.listA(2),obj.app.labelA(7),obj.GUI.proList);
+            % Update the list of metrics
+            show = cellfun(@(s)func(s(2:end,1:end-2)),obj.GUI.metList(:,1));
             obj.app.dropC(1).Items = ['Number of runs';'runtime';obj.GUI.metList(show,2)];
             obj.TableUpdate();
-        end
-        %% Update the parameter list
-        function cb_updateList(obj,~,~,type)
-            if type > 0
-                filename = obj.app.listA(1).Value;
-                tip = 'ALGORITHM';
-            else
-                filename = obj.app.listA(2).Value;
-                tip = 'PROBLEM';
-            end
-            if contains(filename,'Open File')
-                [file,path] = uigetfile({'*.m','MATLAB class'},'');
-                if file ~= 0
-                    try
-                        filename = fullfile(path,file);
-                        f   = fopen(filename);
-                        str = fgetl(f);
-                        fclose(f);
-                        assert(contains(str,['< ',tip]));
-                        addpath(path);
-                    catch
-                        uialert(obj.GUI.app.figure,sprintf('The selected file is not a subclass of %s.',tip),'Error');
-                        return;
-                    end
-            	else
-                    return;
-                end
-            else
-                filename = [filename,'.m'];
-            end
-            obj.app.listB.add(filename,type);
-            obj.app.listB.flush();
         end
         %% Load or save experimental settings
         function success = cb_filepath(obj,~,~,filename)
             success = false;
             if nargin < 4   % Load experimental settings
                 [file,folder] = uigetfile({'*.mat','MAT file'},'',fileparts(obj.app.editA(3).Value));
+                figure(obj.GUI.app.figure);
                 if ischar(file)
                     try
                         filename = fullfile(folder,file);
@@ -220,28 +155,21 @@ classdef module_exp < handle
                     allLabel = any(cell2mat(allList(ismember(allList(:,2),get([obj.app.listB.items.title],'Text')),1)),1);
                     SorM     = [allLabel(2),allLabel(3)||allLabel(4)];
                     assert(SorM(1)~=SorM(2),'Cannot perform single- and multi-objective optimization simultaneously.');
-                    % Generate the ALGORITHM and PROBLEM object
+                    % Generate the ALGORITHM and PROBLEM objects
                     for i = 1 : length(type)
-                        item = obj.app.listB.items(i);
-                        para = cell(1,length(item.edit));
-                        for j = 1 : length(para)
-                            if ~isempty(item.edit(j).Value)
-                                para{j} = str2num(item.edit(j).Value);
-                                assert(~isempty(para{j}),'The parameter "%s" of %s is illegal.',item.label(j).Text,item.title.Text);
-                            end
-                        end
+                        [name,para] = GUI.GetParameterSetting(obj.app.listB.items(i));
                         if type(i) > 0
                             if ~isParallel
-                                ALG = [ALG,feval(item.title.Text,'parameter',para,'save',obj.app.editA(2).Value,'outputFcn',@obj.outputFcn)];
+                                ALG = [ALG,feval(name,'parameter',para,'save',obj.app.editA(2).Value,'outputFcn',@obj.outputFcn)];
                             else
-                                ALG = [ALG,feval(item.title.Text,'parameter',para,'save',obj.app.editA(2).Value,'outputFcn',@(~,~)[])];
+                                ALG = [ALG,feval(name,'parameter',para,'save',obj.app.editA(2).Value,'outputFcn',@(~,~)[])];
                             end
                         else
                             len = cellfun(@length,para(1:4));
                             for j = 1 : max(1,max(len))
                                 paraSub        = para;
                                 paraSub(len>1) = cellfun(@(s)s(min(end,j)),para(len>1),'UniformOutput',false);
-                                PRO            = [PRO,feval(item.title.Text,'N',paraSub{1},'M',paraSub{2},'D',paraSub{3},item.label(4).Text,paraSub{4},'parameter',paraSub(5:end))];
+                                PRO            = [PRO,feval(name,'N',paraSub{1},'M',paraSub{2},'D',paraSub{3},obj.app.listB.items(i).label(4).Text,paraSub{4},'parameter',paraSub(5:end))];
                             end
                         end
                     end
@@ -265,15 +193,10 @@ classdef module_exp < handle
                 obj.app.table.Data    = cell(length(PRO),length(ALG));
                 obj.TableUpdateColumn();
                 % Update the GUI
-                [obj.GUI.app.button.Enable] = deal('off');
-                [obj.app.stateA.Enable]     = deal('off');
-                [obj.app.listA.Enable]      = deal('off');
-                [obj.app.editA(1:2).Enable] = deal('off');
-                [obj.app.editA(3).Enable]   = deal('off');
-                obj.app.buttonA.Enable      = deal('off');
-                obj.app.listB.Enable        = deal('off');
-                obj.app.buttonC(1).Text     = 'Pause';
-                obj.app.buttonC(2).Enable   = 'on';
+                set([obj.GUI.app.button,obj.app.stateA,obj.app.listA,obj.app.editA,obj.app.buttonA],'Enable',false);
+                obj.app.listB.Enable      = false;
+                obj.app.buttonC(1).Text   = 'Pause';
+                obj.app.buttonC(2).Enable = true;
                 drawnow('limitrate');
                 % Perform the experiment
                 for p = 1 : length(PRO)
@@ -282,8 +205,7 @@ classdef module_exp < handle
                         arrayfun(@(r)obj.ResultLoad(p,a,r),1:size(obj.data.result,3));
                         obj.TableUpdate([],[],p);
                         runIndex = find(reshape(cellfun(@isempty,obj.data.result(p,a,:)),1,[]));
-                        % Run algorithms in sequence
-                        if ~isempty(runIndex) && ~isParallel
+                        if ~isempty(runIndex) && ~isParallel    % Run algorithms in sequence
                             try
                                 for r = runIndex
                                     ALG(a).Solve(PRO(p));
@@ -299,8 +221,7 @@ classdef module_exp < handle
                                 obj.cb_stop();
                                 rethrow(err);
                             end
-                        % Run algorithms in parallel
-                        elseif ~isempty(runIndex)
+                        elseif ~isempty(runIndex)               % Run algorithms in parallel
                             try
                                 Future = arrayfun(@(s)parfeval(@parallelFcn,2,ALG(a),PRO(p)),runIndex);
                                 while ~all([Future.Read])
@@ -340,15 +261,10 @@ classdef module_exp < handle
         end
         %% Stop the execution
         function cb_stop(obj,~,~)
-            [obj.GUI.app.button.Enable] = deal('on');
-            [obj.app.stateA.Enable]     = deal('on');
-            [obj.app.listA.Enable]      = deal('on');
-            [obj.app.editA(1:2).Enable] = deal('on');
-            [obj.app.editA(3).Enable]   = deal('on');
-            obj.app.buttonA.Enable      = deal('on');
-            obj.app.listB.Enable        = deal('on');
-            obj.app.buttonC(1).Text     = 'Start';
-            obj.app.buttonC(2).Enable   = 'off';
+            set([obj.GUI.app.button,obj.app.stateA,obj.app.listA,obj.app.editA,obj.app.buttonA],'Enable',true);
+            obj.app.listB.Enable      = true;
+            obj.app.buttonC(1).Text   = 'Start';
+            obj.app.buttonC(2).Enable = false;
         end
         %% Output function
         function outputFcn(obj,Algorithm,Problem)
@@ -556,6 +472,7 @@ classdef module_exp < handle
             if ~isempty(obj.app.table.Data)
                 try
                     [Name,Path] = uiputfile({'*.xlsx','Excel table';'*.tex','TeX table';'*.txt','Text file';'*.mat','MAT file'},'','new');
+                    figure(obj.GUI.app.figure);
                     if ischar(Name)
                         [~,~,Type] = fileparts(Name);
                         switch Type
@@ -596,8 +513,7 @@ classdef module_exp < handle
             end
         end
         %% Show the results in new figure
-        function cb_tableShow(obj,ui,~,type)
-            ui.Parent.Visible = false;
+        function cb_tableShow(obj,~,~,type)
             metric = obj.app.dropC(1).Value;
             loc    = obj.app.table.UserData;
             nRow   = loc(3) - loc(1) + 1;

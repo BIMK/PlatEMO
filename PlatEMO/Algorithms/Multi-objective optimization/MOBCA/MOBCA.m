@@ -1,6 +1,6 @@
 classdef MOBCA < ALGORITHM
 % <multi> <real/integer>
-% Multi-objective besiege and conquer alogrithm
+% Multi-objective besiege and conquer algorithm
 % BCB       --- 0.2 --- Set BCB
 % nSoldiers ---   3 --- Number of soldiers for each armies
 % div       ---  10 --- Division number of grids
