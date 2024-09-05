@@ -40,7 +40,7 @@ classdef module_app < handle
                                          'Constrained multi-objective optimization','Rotated optimization','Integer optimization','Binary optimization','Permutation optimization','Hybrid optimization'},'ItemsData',1:11,'Value',1,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.cb_selectProblem));
           
             % The second panel
-            obj.app.grid(2)     = GUI.APP(3,1,uigridlayout(obj.app.maingrid,'RowHeight',num2cell([25,25,25,25,25,25,25,0,25,0,25,0,25,25,zeros(1,19),25,25,zeros(1,19),25,25,25,25,25,25]),'ColumnWidth',{75,50,'1x',25,20,22},'Padding',[0 10 0 0],'RowSpacing',5,'ColumnSpacing',5,'Scrollable','on','BackgroundColor','w'));
+            obj.app.grid(2)     = GUI.APP(3,1,uigridlayout(obj.app.maingrid,'RowHeight',num2cell([25,25,25,25,25,25,25,0,25,0,25,0,25,25,zeros(1,19),25,25,zeros(1,19),25,28,28,38,28]),'ColumnWidth',{75,50,'1x',25,20,22},'Padding',[0 10 0 0],'RowSpacing',5,'ColumnSpacing',5,'Scrollable','on','BackgroundColor','w'));
             % Encoding scheme
             tempGrid            = GUI.APP(1,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
             obj.app.titleB(1)   = GUI.APP(1,1,uilabel(tempGrid,'Text',' Encoding scheme','FontSize',13,'FontColor',[.9 .5 .2],'BackgroundColor',[.9 .9 .9],'FontWeight','bold'));
@@ -72,7 +72,7 @@ classdef module_app < handle
             obj.app.buttonB(6)  = GUI.APP(10,5,uibutton(obj.app.grid(2),'Text','...','Tooltip','Load existing function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_loadFunction,obj.app.editB(5),{'*.m','MATLAB function'}}));
             obj.app.buttonB(7)  = GUI.APP(10,6,uibutton(obj.app.grid(2),'Text','</>','FontSize',9,'Tooltip','Create new function','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_createFunction,obj.app.editB(5),'initialization'}));
             % Repair function
-            tempGrid            = GUI.APP(11,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{135,20,20,50,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
+            tempGrid            = GUI.APP(11,[1 6],uigridlayout(obj.app.grid(2),'RowHeight',{'1x'},'ColumnWidth',{135,20,20,60,'1x'},'Padding',[0 0 0 6],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
             obj.app.titleB(5)   = GUI.APP(1,[1 5],uilabel(tempGrid,'Text',' Repair function','FontSize',13,'FontColor',[.9 .5 .2],'BackgroundColor',[.9 .9 .9],'FontWeight','bold'));
             obj.app.buttonB(8)  = GUI.APP(1,2,uibutton(tempGrid,'Text','+','FontSize',11,'Tooltip','Add a repair function','BackgroundColor',[.9 .9 .9],'ButtonpushedFcn',{@obj.cb_updateProblem,3}));
             obj.app.buttonB(9)  = GUI.APP(1,3,uibutton(tempGrid,'Text','-','Enable',false,'FontSize',11,'Tooltip','Delete the repair function','BackgroundColor',[.9 .9 .9],'ButtonpushedFcn',{@obj.cb_updateProblem,-3}));
@@ -109,7 +109,7 @@ classdef module_app < handle
             obj.app.checkB(4)   = GUI.APP(59,[1 6],uicheckbox(obj.app.grid(2),'FontSize',11,'Text','<sparse> The optimal solutions are sparse, i.e., most decision variables of which are zero.','WordWrap','on','ValueChangedFcn',@obj.cb_updateFilter));
             
             % The third panel
-            obj.app.grid(3)   = GUI.APP([2 3],4,uigridlayout(obj.app.maingrid,'RowHeight',{16,19,16,19,19,16,19,19,19,22,'1.1x','1x'},'ColumnWidth',{'1x','1x','1x'},'Padding',[8 10 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
+            obj.app.grid(3)   = GUI.APP([2 3],4,uigridlayout(obj.app.maingrid,'RowHeight',{16,21,16,21,21,16,21,21,21,22,'1.1x','1x'},'ColumnWidth',{'1x','1.1x','1x'},'Padding',[8 10 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
             [obj.app.stateC,obj.app.labelC] = GUI.GenerateLabelButton(obj.app.grid(3),zeros(1,17),@obj.cb_filter);
             obj.app.labelC(4) = GUI.APP(10,[1 2],uilabel(obj.app.grid(3),'Text','Algorithms','VerticalAlignment','bottom','FontSize',13,'FontColor',[.2 .4 .7],'FontWeight','bold'));
             obj.app.labelC(5) = GUI.APP(10,3,uilabel(obj.app.grid(3),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.2 .4 .7]));

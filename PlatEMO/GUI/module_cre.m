@@ -67,7 +67,7 @@ classdef module_cre < handle
             obj.app.menu.flush();
             
             % The third panel
-            obj.app.grid(3)   = GUI.APP([2 6],4,uigridlayout(obj.app.maingrid,'RowHeight',{16,19,16,19,19,16,19,19,19,22,'1.1x','1x'},'ColumnWidth',{'1x','1x','1x'},'Padding',[8 10 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
+            obj.app.grid(3)   = GUI.APP([2 6],4,uigridlayout(obj.app.maingrid,'RowHeight',{16,21,16,21,21,16,21,21,21,22,'1.1x','1x'},'ColumnWidth',{'1x','1.1x','1x'},'Padding',[8 10 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
             [obj.app.stateC,obj.app.labelC] = GUI.GenerateLabelButton(obj.app.grid(3),[1 0 0 1,zeros(1,13)],@obj.cb_filter);
             obj.app.labelC(4) = GUI.APP(10,[1 2],uilabel(obj.app.grid(3),'Text','Problems','VerticalAlignment','bottom','FontSize',13,'FontColor',[.9 .5 .2],'FontWeight','bold'));
             obj.app.labelC(5) = GUI.APP(10,3,uilabel(obj.app.grid(3),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.9 .5 .2]));
@@ -78,14 +78,14 @@ classdef module_cre < handle
             GUI.APP(12,[1 3],obj.app.listD.grid);
             
             % The fourth panel
-            obj.app.grid(4)    = GUI.APP([2 3],7,uigridlayout(obj.app.maingrid,'RowHeight',{22,22,22,'1x',26},'ColumnWidth',{'1x',20,'1x',5,'1x',20,'1x'},'Padding',[5 5 5 0],'BackgroundColor','w','RowSpacing',5,'ColumnSpacing',5)); 
+            obj.app.grid(4)    = GUI.APP([2 3],7,uigridlayout(obj.app.maingrid,'RowHeight',{22,22,22,'1x',27},'ColumnWidth',{'1.3x','0.7x','1.3x',5,'1.3x','0.7x','1.3x'},'Padding',[5 5 5 0],'BackgroundColor','w','RowSpacing',5,'ColumnSpacing',5)); 
             GUI.APP(1,[1 2],uilabel(obj.app.grid(4),'Text','Population size','Tooltip','Population size of the trainer'));
             obj.app.editD(1)   = GUI.APP(1,3,uieditfield(obj.app.grid(4),'numeric','Value',50,'Limits',[10 inf],'RoundFractionalValues',true,'Tooltip','Population size of the trainer'));
-            GUI.APP(1,[5 6],uilabel(obj.app.grid(4),'Text','Max evaluations','FontSize',11,'Tooltip','Maximum number of function evaluations of the trainer'));
+            GUI.APP(1,[5 6],uilabel(obj.app.grid(4),'Text','Max evaluations','Tooltip','Maximum number of function evaluations of the trainer'));
             obj.app.editD(2)   = GUI.APP(1,7,uieditfield(obj.app.grid(4),'numeric','Value',10000,'ValueDisplayFormat','%d','Limits',[100 inf],'RoundFractionalValues',true,'Tooltip','Maximum number of function evaluations of the trainer'));
-            GUI.APP(2,[1 2],uilabel(obj.app.grid(4),'Text','Execution times','FontSize',11,'Tooltip','Times of using each algorithm to solve the problem in algorithm performance evaluation'));
+            GUI.APP(2,[1 2],uilabel(obj.app.grid(4),'Text','Execution times','Tooltip','Times of using each algorithm to solve the problem in algorithm performance evaluation'));
             obj.app.editD(3)   = GUI.APP(2,3,uieditfield(obj.app.grid(4),'numeric','Value',3,'Limits',[1 inf],'RoundFractionalValues',true,'Tooltip','Times of using each algorithm to solve the problem in algorithm performance evaluation'));
-            GUI.APP(2,[5 6],uilabel(obj.app.grid(4),'Text','Parallel execution','FontSize',10,'Tooltip','Perform the training with multiple CPUs'));
+            GUI.APP(2,[5 6],uilabel(obj.app.grid(4),'Text','Parallelization','Tooltip','Perform the training with multiple CPUs'));
             obj.app.checkD     = GUI.APP(2,7,uicheckbox(obj.app.grid(4),'Text','','Tooltip','Perform the training with multiple CPUs','Enable',~isempty(ver('parallel'))));
             GUI.APP(3,1,uilabel(obj.app.grid(4),'Text','File path','Tooltip','The population will be automatically loaded from file before training and saved to file after each iteration'));
             obj.app.editD(4)   = GUI.APP(3,[3 7],uieditfield(obj.app.grid(4),'Value',fullfile(cd,'Algorithms','Blocks','myAlgorithm.mat'),'Tooltip','The population will be automatically loaded from file before training and saved to file after each iteration'));
@@ -94,15 +94,15 @@ classdef module_cre < handle
             axtoolbar(obj.app.axesD);
             obj.app.buttonD(2) = GUI.APP(5,3,uibutton(obj.app.grid(4),'push','Text','Start','ButtonpushedFcn',@obj.cb_train));
             obj.app.buttonD(3) = GUI.APP(5,5,uibutton(obj.app.grid(4),'push','Text','Stop','Enable',false,'ButtonpushedFcn',@(~,~)set(obj.app.buttonD(2:3),{'Enable','Text'},{true,'Start';false,'Stop'})));
-            obj.app.labelD     = GUI.APP(5,[1 2],uilabel(obj.app.grid(4),'Text','0.00%','FontSize',9));
+            obj.app.labelD     = GUI.APP(5,[1 2],uilabel(obj.app.grid(4),'Text','0.00%','WordWrap',true));
             
             % The fifth panel
-            obj.app.grid(5)    = GUI.APP(6,7,uigridlayout(obj.app.maingrid,'RowHeight',{'1x',26},'ColumnWidth',{'1x',20,'1x',5,'1x',20,'1x'},'Padding',[5 5 5 0],'BackgroundColor','w','RowSpacing',5,'ColumnSpacing',5)); 
+            obj.app.grid(5)    = GUI.APP(6,7,uigridlayout(obj.app.maingrid,'RowHeight',{'1x',27},'ColumnWidth',{'1.3x','0.7x','1.3x',5,'1.3x','0.7x','1.3x'},'Padding',[5 5 5 0],'BackgroundColor','w','RowSpacing',5,'ColumnSpacing',5)); 
             obj.app.axesE      = GUI.APP(1,[1 7],uiaxes(obj.app.grid(5),'BackgroundColor','w','Box','on'));
             axtoolbar(obj.app.axesE);
             obj.app.buttonE(1) = GUI.APP(2,3,uibutton(obj.app.grid(5),'push','Text','Start','ButtonpushedFcn',@obj.cb_test));
             obj.app.buttonE(2) = GUI.APP(2,5,uibutton(obj.app.grid(5),'push','Text','Stop','Enable',false,'ButtonpushedFcn',@(~,~)set(obj.app.buttonE(1:2),{'Enable','Text'},{true,'Start';false,'Stop'})));
-            obj.app.labelE     = GUI.APP(2,[1 2],uilabel(obj.app.grid(5),'Text','0.00%','FontSize',9));
+            obj.app.labelE     = GUI.APP(2,[1 2],uilabel(obj.app.grid(5),'Text','0.00%','WordWrap',true));
             obj.app.menuE      = uicontext(obj.GUI.app.figure,120);
             obj.app.menuE.add('  Save best solutions','',@(~,~)GUI.SavePopulation(obj.GUI.app.figure,obj.data{1}.result{end},1));
             obj.app.menuE.add('  Save all solutions','',@(~,~)GUI.SavePopulation(obj.GUI.app.figure,obj.data{1}.result{end},2));

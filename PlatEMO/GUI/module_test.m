@@ -30,7 +30,7 @@ classdef module_test < handle
             GUI.APP([1 2],8,uipanel(obj.app.maingrid,'BackgroundColor',[.8 .8 .8]));
 
             % The first panel
-            obj.app.grid(1)   = GUI.APP(2,1,uigridlayout(obj.app.maingrid,'RowHeight',{16,19,16,19,19,16,19,19,19,22,'1x',22,'1x'},'ColumnWidth',{'1x','1x','1x'},'Padding',[8 10 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
+            obj.app.grid(1)   = GUI.APP(2,1,uigridlayout(obj.app.maingrid,'RowHeight',{16,21,16,21,21,16,21,21,21,22,'1x',22,'1x'},'ColumnWidth',{'1x','1.1x','1x'},'Padding',[8 10 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
             [obj.app.stateA,obj.app.labelA] = GUI.GenerateLabelButton(obj.app.grid(1),[0,1,0,1,zeros(1,13)],@obj.cb_filter);
             obj.app.labelA(4) = GUI.APP(10,[1 2],uilabel(obj.app.grid(1),'Text','Algorithms','VerticalAlignment','bottom','FontSize',13,'FontColor',[.2 .4 .7],'FontWeight','bold'));
             obj.app.labelA(5) = GUI.APP(10,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.2 .4 .7]));
