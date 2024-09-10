@@ -1,5 +1,5 @@
 classdef MOEADEGO < ALGORITHM
-% <multi> <real/integer> <expensive>
+% <multi/many> <real/integer> <expensive>
 % MOEA/D with efficient global optimization
 % batch_size --- 5 --- Number of true function evaluations per iteration
 
