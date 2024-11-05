@@ -1,4 +1,11 @@
 
+# Release Highlights of PlatEMO 4.9 (2024-11)
+* Add a year label to each algorithm and problem, so that they can be selected by year in the GUI.
+
+* Add a single-objective evolutionary algorithm GWO, add two expensive single-objective evolutionary algorithms SADE-ATDSC and SAPO, add a gradient-assisted constrained multi-objective evolutionary algorithm CMOEA-MSG, add an expensive multi-objective evolutionary algorithm DirHV-EI, add a sparse multi-objective evolutionary algorithm DKCA, add two constrained multi-objective evolutionary algorithms CMODE-FTR and IM-C-MOEA/D. There are currently 289 algorithms in the platform.
+
+* Add 20 multi-objective optimization problems ZCAT1-ZCAT20. There are currently 550 benchmark problems in the platform.
+
 # Release Highlights of PlatEMO 4.8 (2024-09)
 * Add the creation module, where users can visually create a new algorithm by connecting blocks and train it on problems.
 
