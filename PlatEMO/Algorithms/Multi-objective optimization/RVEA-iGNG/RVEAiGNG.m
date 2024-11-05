@@ -1,5 +1,5 @@
 classdef RVEAiGNG < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2022> <multi/many> <real/integer/label/binary/permutation>
 % RVEA based on improved growing neural gas
 % alpha --- 2 --- The parameter controlling the rate of change of penalty
 

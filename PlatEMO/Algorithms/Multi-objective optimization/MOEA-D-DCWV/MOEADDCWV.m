@@ -1,5 +1,5 @@
 classdef MOEADDCWV < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2019> <multi/many> <real/integer/label/binary/permutation>
 % MOEA/D with distribution control of weight vector set
 % p --- -1 --- The intermediate objective value
 

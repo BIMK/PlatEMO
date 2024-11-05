@@ -1,5 +1,5 @@
 classdef SRA < ALGORITHM
-% <many> <real/integer/label/binary/permutation>
+% <2016> <many> <real/integer/label/binary/permutation>
 % Stochastic ranking algorithm
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef TELSO < ALGORITHM
-% <multi> <real/binary> <large/none> <constrained/none> <sparse>
+% <2024> <multi> <real/binary> <large/none> <constrained/none> <sparse>
 % Two-layer encoding learning swarm optimizer
 
 %------------------------------- Reference --------------------------------

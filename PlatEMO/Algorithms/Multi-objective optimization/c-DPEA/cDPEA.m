@@ -1,5 +1,5 @@
 classdef cDPEA < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained>
+% <2021> <multi> <real/integer/label/binary/permutation> <constrained>
 % Constrained dual-population evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

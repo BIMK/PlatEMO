@@ -1,5 +1,5 @@
 classdef SIBEAkEMOSS < ALGORITHM
-% <many> <real/integer/label/binary/permutation>
+% <2007> <many> <real/integer/label/binary/permutation>
 % SIBEA with minimum objective subset of size k with minimum error
 % G --- 5 --- Reduction frequency generations
 % k --- 2 --- Size of reduced objective set

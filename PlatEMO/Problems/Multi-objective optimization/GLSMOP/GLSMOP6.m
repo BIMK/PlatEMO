@@ -1,5 +1,5 @@
 classdef GLSMOP6 < PROBLEM
-% <multi/many> <real> <large/none> <expensive/none>
+% <2024> <multi/many> <real> <large/none> <expensive/none>
 % General large-scale benchmark MOP
 % nk --- 5 --- Number of subcomponents in each variable group
 

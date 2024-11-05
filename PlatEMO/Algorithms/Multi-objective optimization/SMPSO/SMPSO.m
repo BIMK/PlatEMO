@@ -1,5 +1,5 @@
 classdef SMPSO < ALGORITHM
-% <multi> <real/integer>
+% <2009> <multi> <real/integer>
 % Speed-constrained multi-objective particle swarm optimization
 
 %------------------------------- Reference --------------------------------

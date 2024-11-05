@@ -1,5 +1,5 @@
 classdef LERD < ALGORITHM
-% <multi/many> <real> <large/none>
+% <2024> <multi/many> <real> <large/none>
 % Large-scale evolutionary algorithm with reformulated decision variable analysis
 % sN  ---  3 --- Number of sampled points
 % N   --- 10 --- Population size in DVA optimization

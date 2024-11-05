@@ -1,5 +1,5 @@
 classdef SPEA2 < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <2001> <multi> <real/integer/label/binary/permutation>
 % Strength Pareto evolutionary algorithm 2
 
 %------------------------------- Reference --------------------------------

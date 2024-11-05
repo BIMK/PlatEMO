@@ -1,5 +1,5 @@
 classdef SQP < ALGORITHM
-% <single> <real> <large/none> <constrained/none>
+% <1995> <single> <real> <large/none> <constrained/none>
 % Sequential quadratic programming
 
 %------------------------------- Reference --------------------------------

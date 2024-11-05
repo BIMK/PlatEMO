@@ -1,5 +1,5 @@
 classdef MO_Ring_PSO_SCD < ALGORITHM
-% <multi> <real/integer> <multimodal>
+% <2018> <multi> <real/integer> <multimodal>
 % Multiobjective PSO using ring topology and special crowding distance
 
 %------------------------------- Reference --------------------------------

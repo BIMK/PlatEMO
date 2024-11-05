@@ -1,5 +1,5 @@
 classdef OFA < ALGORITHM
-% <single> <real/integer> <large/none> <constrained/none>
+% <2017> <single> <real/integer> <large/none> <constrained/none>
 % Optimal foraging algorithm
 
 %------------------------------- Reference --------------------------------

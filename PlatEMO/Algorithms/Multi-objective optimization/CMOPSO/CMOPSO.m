@@ -1,5 +1,5 @@
 classdef CMOPSO < ALGORITHM
-% <multi> <real/integer>
+% <2018> <multi> <real/integer>
 % Competitive mechanism based multi-objective particle swarm optimizer
 
 %------------------------------- Reference --------------------------------

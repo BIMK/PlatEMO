@@ -1,5 +1,5 @@
 classdef CMOEAD < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation> <constrained/none>
+% <2014> <multi/many> <real/integer/label/binary/permutation> <constrained/none>
 % Constraint-MOEA/D
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef MOEARE < ALGORITHM  
-% <multi> <real/integer/label/binary/permutation> <robust>
+% <2020> <multi> <real/integer/label/binary/permutation> <robust>
 % Multi-objective evolutionary algorithm with robustness enhancement
 % alpha --- 1.5 --- Parameter for deleting solutions from archive
 

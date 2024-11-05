@@ -1,5 +1,5 @@
 classdef MMF8 < PROBLEM
-% <multi> <real> <multimodal>
+% <2018> <multi> <real> <multimodal>
 % Multi-modal multi-objective test function
 
 %------------------------------- Reference --------------------------------

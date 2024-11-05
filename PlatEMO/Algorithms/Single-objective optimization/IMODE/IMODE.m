@@ -1,5 +1,5 @@
 classdef IMODE < ALGORITHM
-% <single> <real/integer> <large/none> <constrained/none>
+% <2020> <single> <real/integer> <large/none> <constrained/none>
 % Improved multi-operator differential evolution
 % minN  ---   4 --- Minimum population size
 % aRate --- 2.6 --- Ratio of archive size to population size

@@ -1,5 +1,5 @@
 classdef PMMOEA < ALGORITHM
-% <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
+% <2022> <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
 % Pattern mining based multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

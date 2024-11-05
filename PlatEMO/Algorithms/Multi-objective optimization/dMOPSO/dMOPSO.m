@@ -1,5 +1,5 @@
 classdef dMOPSO < ALGORITHM
-% <multi> <real/integer>
+% <2011> <multi> <real/integer>
 % MOPSO based on decomposition
 % Ta --- 2 --- Age threshold
 

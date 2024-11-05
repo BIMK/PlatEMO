@@ -1,5 +1,5 @@
 classdef Instance2 < PROBLEM
-% <multi> <real> <large/none> <constrained> <multitask>
+% <2017> <multi> <real> <large/none> <constrained> <multitask>
 % Multitasking multi-objective problem (ZDT4-RC + ZDT4-A)
 % SubD --- 10,10 --- Number of decision variables of each task
 

@@ -1,5 +1,5 @@
 classdef EAGMOEAD < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <2015> <multi> <real/integer/label/binary/permutation>
 % External archive guided MOEA/D
 % LGs --- 8 --- The number of learning generations
 

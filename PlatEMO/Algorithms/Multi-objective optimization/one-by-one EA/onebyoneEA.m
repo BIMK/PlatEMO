@@ -1,5 +1,5 @@
 classdef onebyoneEA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2017> <multi/many> <real/integer/label/binary/permutation>
 % Many-objective evolutionary algorithm using a one-by-one selection
 % strategy
 

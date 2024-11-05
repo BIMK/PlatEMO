@@ -1,5 +1,5 @@
 classdef MaF6 < PROBLEM
-% <multi/many> <real> <large/none>
+% <2017> <multi/many> <real> <large/none>
 % DTLZ5IM
 
 %------------------------------- Reference --------------------------------

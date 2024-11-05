@@ -1,11 +1,12 @@
 classdef PRDH < ALGORITHM
-% <multi> <binary> 
+% <2024> <multi> <binary> 
 % Problem reformulation and duplication handling
 
 %------------------------------- Reference --------------------------------
-% R. Jiao, B. Xue, and M. Zhang, Solving multiobjective feature selection 
-% problems in classification via problem reformulation and duplication 
-% handling, IEEE Transactions on Evolutionary Computation, 2022.
+% R. Jiao, B. Xue, and M. Zhang, Solving multiobjective feature selection
+% problems in classification via problem reformulation and duplication
+% handling, IEEE Transactions on Evolutionary Computation, 2024, 28(4):
+% 846-860.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

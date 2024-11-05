@@ -1,5 +1,5 @@
 classdef RVEA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation> <constrained/none>
+% <2016> <multi/many> <real/integer/label/binary/permutation> <constrained/none>
 % Reference vector guided evolutionary algorithm
 % alpha ---   2 --- The parameter controlling the rate of change of penalty
 % fr    --- 0.1 --- The frequency of employing reference vector adaptation

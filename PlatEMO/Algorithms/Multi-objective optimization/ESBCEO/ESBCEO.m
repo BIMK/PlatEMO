@@ -1,5 +1,5 @@
 classdef ESBCEO < ALGORITHM
-% <multi> <real> <expensive>
+% <2023> <multi> <real> <expensive>
 % Bayesian co-evolutionary optimization based entropy search
 % Ke    ---   5 --- The number of function evaluations at each generation
 % delta --- 0.9 --- The probability of choosing parents locally

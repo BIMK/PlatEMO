@@ -1,5 +1,5 @@
 classdef MOCGDE < ALGORITHM
-% <multi/many> <real> <large/none> <constrained/none>
+% <2022> <multi/many> <real> <large/none> <constrained/none>
 % Multi-objective conjugate gradient and differential evolution algorithm
 % NP --- 10 --- Small population size
 

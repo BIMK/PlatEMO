@@ -1,5 +1,5 @@
 classdef WVMOEAP < ALGORITHM
-% <multi> <real/integer>
+% <2016> <multi> <real/integer>
 % Weight vector based multi-objective optimization algorithm with preference
 % Points ---      --- Set of preferred points
 % b      --- 0.05 --- Range of preferred region

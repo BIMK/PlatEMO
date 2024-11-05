@@ -1,5 +1,5 @@
 classdef PREA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2021> <multi/many> <real/integer/label/binary/permutation>
 % Promising-region based EMO algorithm
 
 %------------------------------- Reference --------------------------------

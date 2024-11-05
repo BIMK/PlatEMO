@@ -1,5 +1,5 @@
 classdef SOP_F18 < PROBLEM
-% <single> <real> <expensive/none>
+% <1999> <single> <real> <expensive/none>
 % Goldstein-price function
 
 %------------------------------- Reference --------------------------------

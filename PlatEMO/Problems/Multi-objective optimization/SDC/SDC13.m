@@ -1,12 +1,12 @@
 classdef SDC13 < PROBLEM
-% <multi> <real> <constrained>
+% <2024> <multi> <real> <constrained>
 % Scalable high-dimensional decicsion constraint benchamrk
 
 %------------------------------- Reference --------------------------------
 % K. Qiao, J. Liang, K. Yu, C. Yue, H. Lin, D. Zhang, and B. Qu,
 % Evolutionary constrained multiobjective optimization: scalable
 % high-dimensional constraint benchmarks and algorithm, IEEE Transactions
-% on Evolutionary Computation, 2023.
+% on Evolutionary Computation, 2024, 28(4): 965-979.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

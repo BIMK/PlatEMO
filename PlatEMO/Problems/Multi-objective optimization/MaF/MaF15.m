@@ -1,5 +1,5 @@
 classdef MaF15 < PROBLEM
-% <multi/many> <real> <large/none>
+% <2017> <multi/many> <real> <large/none>
 % Inverted LSMOP8
 
 %------------------------------- Reference --------------------------------

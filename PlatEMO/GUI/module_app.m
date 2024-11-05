@@ -109,15 +109,16 @@ classdef module_app < handle
             obj.app.checkB(4)   = GUI.APP(59,[1 6],uicheckbox(obj.app.grid(2),'FontSize',11,'Text','<sparse> The optimal solutions are sparse, i.e., most decision variables of which are zero.','WordWrap','on','ValueChangedFcn',@obj.cb_updateFilter));
             
             % The third panel
-            obj.app.grid(3)   = GUI.APP([2 3],4,uigridlayout(obj.app.maingrid,'RowHeight',{16,21,16,21,21,16,21,21,21,22,'1.1x','1x'},'ColumnWidth',{'1x','1.1x','1x'},'Padding',[8 10 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
+            obj.app.grid(3)   = GUI.APP([2 3],4,uigridlayout(obj.app.maingrid,'RowHeight',{16,21,16,21,21,16,21,21,21,4,18,'1.1x','1x'},'ColumnWidth',{'1x','1.1x','1x'},'Padding',[8 10 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
             [obj.app.stateC,obj.app.labelC] = GUI.GenerateLabelButton(obj.app.grid(3),zeros(1,17),@obj.cb_filter);
-            obj.app.labelC(4) = GUI.APP(10,[1 2],uilabel(obj.app.grid(3),'Text','Algorithms','VerticalAlignment','bottom','FontSize',13,'FontColor',[.2 .4 .7],'FontWeight','bold'));
-            obj.app.labelC(5) = GUI.APP(10,3,uilabel(obj.app.grid(3),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.2 .4 .7]));
-            obj.app.listC     = GUI.APP(11,[1 3],uilistbox(obj.app.grid(3),'FontColor',[.2 .4 .7],'ValueChangedFcn',@obj.cb_updateList));
+            obj.app.labelC(4) = GUI.APP(11,[1 2],uilabel(obj.app.grid(3),'Text','Algorithms','FontSize',13,'FontColor',[.2 .4 .7],'FontWeight','bold'));
+            obj.app.labelC(5) = GUI.APP(11,3,uilabel(obj.app.grid(3),'HorizontalAlignment','right','FontSize',10,'FontColor',[.2 .4 .7]));
+            obj.app.listC     = GUI.APP(12,[1 3],uilistbox(obj.app.grid(3),'FontColor',[.2 .4 .7],'ValueChangedFcn',@obj.cb_updateList));
+            obj.app.dropC     = GUI.APP(11,2,uidropdown(obj.app.grid(3),'BackgroundColor','w','FontColor',[.2 .4 .7],'Items',{'All year'},'ValueChangedFcn',@(h,~)GUI.UpdateAlgProListYear(obj.app.listC,h,obj.app.labelC(5),obj.GUI.algList)));
             obj.app.listD     = uilist(obj.app.grid(3),obj.GUI.app.figure,obj.GUI.icon);
-            obj.app.tipD      = GUI.APP(12,[1 3],uilabel(obj.app.grid(3),'Text','Select an algorithm','HorizontalAlignment','center'));
+            obj.app.tipD      = GUI.APP(13,[1 3],uilabel(obj.app.grid(3),'Text','Select an algorithm','HorizontalAlignment','center'));
             obj.app.listD.grid.Padding = [0,0,0,0];
-            GUI.APP(12,[1 3],obj.app.listD.grid);
+            GUI.APP(13,[1 3],obj.app.listD.grid);
             
             % The fourth panel
             obj.app.dropD(1) = GUI.APP(1,7,uidropdown(obj.app.maingrid,'BackgroundColor','w','Items',{},'ValueChangedFcn',@obj.cb_slider,'Visible',false));
@@ -147,7 +148,7 @@ classdef module_app < handle
         %% Update the algorithms in the list
         function cb_filter(obj,~,~,index)
             % Update the list of algorithms
-            func = GUI.UpdateAlgProList(index,obj.app.stateC,obj.app.listC,obj.app.labelC(5),obj.GUI.algList);
+            func = GUI.UpdateAlgProList(index,obj.app.stateC,obj.app.listC,obj.app.dropC,obj.app.labelC(5),obj.GUI.algList);
             obj.app.listD.del(1);
             obj.app.tipD.Visible      = true;
             obj.app.buttonD(1).Enable = false;
@@ -558,7 +559,7 @@ classdef module_app < handle
                 % Update the data
                 obj.data = {ALG,PRO,{obj.app.buttonB.Enable}};
                 % Update the GUI
-                set([obj.GUI.app.button,obj.app.buttonA,obj.app.dropA,obj.app.editB,obj.app.buttonB,obj.app.checkB,obj.app.stateC,obj.app.listC,obj.app.dropD],'Enable',false);
+                set([obj.GUI.app.button,obj.app.buttonA,obj.app.dropA,obj.app.editB,obj.app.buttonB,obj.app.checkB,obj.app.stateC,obj.app.listC,obj.app.dropC,obj.app.dropD],'Enable',false);
                 obj.app.listD.Enable    = false;
                 set(obj.app.toolD,'Visible',false);
                 obj.app.buttonD(1).Text = 'Pause';
@@ -586,7 +587,7 @@ classdef module_app < handle
         end
         %% Stop the execution
         function cb_stop(obj,~,~)
-            set([obj.GUI.app.button,obj.app.buttonA,obj.app.dropA,obj.app.editB,obj.app.checkB,obj.app.stateC,obj.app.listC,obj.app.dropD],'Enable',true);
+            set([obj.GUI.app.button,obj.app.buttonA,obj.app.dropA,obj.app.editB,obj.app.checkB,obj.app.stateC,obj.app.listC,obj.app.dropC,obj.app.dropD],'Enable',true);
             obj.app.listD.Enable      = true;
             [obj.app.buttonB.Enable]  = deal(obj.data{3}{:});
             obj.app.listD.Enable      = true;

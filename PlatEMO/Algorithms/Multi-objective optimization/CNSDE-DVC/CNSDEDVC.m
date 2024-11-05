@@ -1,5 +1,5 @@
 classdef CNSDEDVC < ALGORITHM
-% <multi> <real/integer> <robust>
+% <2019> <multi> <real/integer> <robust>
 % Constrained nondominated sorting differential evolution based on decision variable classification
 % SN     ---     4 --- Number of perturbed solutions
 % PN     ---     6 --- Number of perturbations
@@ -11,7 +11,7 @@ classdef CNSDEDVC < ALGORITHM
 % W. Du, W. Zhong, Y. Tang, W. Du, and Y. Jin, High-dimensional robust
 % multi-objective optimization for order scheduling: A decision variable
 % classification approach, IEEE Transactions on Industrial Informatics,
-% 15(1): 293-304.
+% 2019, 15(1): 293-304.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

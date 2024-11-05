@@ -1,5 +1,5 @@
 classdef MaxCut < PROBLEM
-% <single> <binary> <large/none>
+% <2024> <single> <binary> <large/none>
 % The max-cut problem
 % dataNo --- 1 --- Number of dataset
 

@@ -77,10 +77,10 @@ classdef UserProblem < PROBLEM
         function Population = Evaluation(obj,varargin)
             if ~isempty(obj.evalFcn)
                 if obj.once
-                    [PopDec,PopObj,PopCon] = CallFcn(obj.evalFcn,varargin{1},obj.data,'evaluation function',[size(varargin{1},1) obj.D],[size(varargin{1},1) 1],[size(varargin{1},1) 1]);
+                    [PopDec,PopObj,PopCon] = CallFcn(obj.evalFcn,varargin{1},obj.data,'evaluation function',[size(varargin{1},1) obj.D]);
                 else
                     for i = 1 : size(varargin{1},1)
-                        [PopDec(i,:),PopObj(i,:),PopCon(i,:)] = CallFcn(obj.evalFcn,varargin{1}(i,:),obj.data,'evaluation function',[1 obj.D],[1 1],[1 1]);
+                        [PopDec(i,:),PopObj(i,:),PopCon(i,:)] = CallFcn(obj.evalFcn,varargin{1}(i,:),obj.data,'evaluation function',[1 obj.D]);
                     end
                 end
                 Population = SOLUTION(PopDec,PopObj,PopCon,varargin{2:end});

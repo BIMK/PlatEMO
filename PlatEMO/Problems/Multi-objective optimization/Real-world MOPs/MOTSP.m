@@ -1,5 +1,5 @@
 classdef MOTSP < PROBLEM
-% <multi/many> <permutation> <large/none>
+% <2007> <multi/many> <permutation> <large/none>
 % The multi-objective traveling salesman problem
 % c --- 0 --- Correlation parameter
 
@@ -48,14 +48,16 @@ classdef MOTSP < PROBLEM
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)
-            [N,D]  = size(PopDec);
-            PopObj = zeros(N,obj.M);
-            for i = 1 : obj.M
-                for j = 1 : N
-                    for k = 1 : D-1
-                        PopObj(j,i) = PopObj(j,i) + obj.C{i}(PopDec(j,k),PopDec(j,k+1));
+            [sorted,rank] = sort(PopDec,2);
+            index = any(sorted~=repmat(1:size(PopDec,2),size(PopDec,1),1),2);
+            PopDec(index,:) = rank(index,:);
+            PopObj = zeros(size(PopDec,1),obj.M);
+            for i = 1 : size(PopDec,1)
+                for j = 1 : obj.M
+                    for k = 1 : size(PopDec,2)-1
+                        PopObj(i,j) = PopObj(i,j) + obj.C{j}(PopDec(i,k),PopDec(i,k+1));
                     end
-                    PopObj(j,i) = PopObj(j,i) + obj.C{i}(PopDec(j,D),PopDec(j,1));
+                    PopObj(i,j) = PopObj(i,j) + obj.C{j}(PopDec(i,end),PopDec(i,1));
                 end
             end
         end

@@ -1,5 +1,5 @@
 classdef EFRRR < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2016> <multi/many> <real/integer/label/binary/permutation>
 % Ensemble fitness ranking with a ranking restriction scheme
 % K --- 2 --- Number of nearest weight vectors
 

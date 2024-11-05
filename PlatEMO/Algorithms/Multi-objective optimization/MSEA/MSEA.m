@@ -1,5 +1,5 @@
 classdef MSEA < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <2021> <multi> <real/integer/label/binary/permutation>
 % Multi-stage multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

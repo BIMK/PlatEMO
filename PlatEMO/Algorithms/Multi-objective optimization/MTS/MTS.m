@@ -1,5 +1,5 @@
 classdef MTS < ALGORITHM
-% <multi> <real/integer>
+% <2009> <multi> <real/integer>
 % Multiple trajectory search
 % popsize           --- 40 --- Size of the population
 % ofLocalSearchTest ---  5 --- Number of iterations for determining the best local search

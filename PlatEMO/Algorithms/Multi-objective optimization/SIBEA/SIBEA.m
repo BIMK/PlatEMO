@@ -1,5 +1,5 @@
 classdef SIBEA < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <2007> <multi> <real/integer/label/binary/permutation>
 % Simple indicator-based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

@@ -25,7 +25,7 @@ classdef GUI < handle
             obj.readList();
             
             % Create the window
-            obj.app.figure   = uifigure('Name','PlatEMO v4.8','Position',[0 0 1200 650],'Interruptible','off','icon',obj.icon.logo1,'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
+            obj.app.figure   = uifigure('Name','PlatEMO v4.9','Position',[0 0 1200 650],'Interruptible','off','icon',obj.icon.logo1,'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
             obj.app.maingrid = uigridlayout(obj.app.figure,'RowHeight',{25,80,'1x'},'ColumnWidth',{'1x'},'Padding',[0 0 0 0],'RowSpacing',0);
             
             % Create the tab buttons
@@ -34,8 +34,8 @@ classdef GUI < handle
             obj.app.buttonT(1) = uibutton(tempPanel,'Position',[-5 -5 90 35],'Text','Modules','FontSize',14,'FontColor','k','BackgroundColor',[.94 .94 .94],'ButtonpushedFcn',{@obj.cb_tab,1});
             tempPanel          = GUI.APP(1,2,uipanel(obj.app.grid(1),'BorderType','none','BackgroundColor',[0 .25 .45]));
             obj.app.buttonT(2) = uibutton(tempPanel,'Position',[-5 -5 90 35],'Text','Support','FontSize',14,'FontColor','w','BackgroundColor',[0 .25 .45],'ButtonpushedFcn',{@obj.cb_tab,2});
-            tempPanel          = GUI.APP(1,4,uipanel(obj.app.grid(1),'BorderType','none','BackgroundColor',[0 .25 .45]));
-            tempImage          = uiimage(tempPanel,'Position',[0 3 99 21],'ImageSource',obj.icon.bar);
+            tempPanel          = GUI.APP(1,4,uipanel(obj.app.grid(1),'BorderType','none','BackgroundColor',[0 .25 .45],'AutoResizeChildren',false));
+            tempImage          = uiimage(tempPanel,'Position',[0 3 99 21],'ImageSource',obj.icon.bar,'ScaleMethod','fill');
             tempPanel2         = uipanel(tempPanel,'Position',[13 4 18 18],'BorderType','none','BackgroundColor',[.549 .6627 .7529]);
             obj.app.buttonT(3) = uibutton(tempPanel2,'Position',[-2 -2 24 24],'Text','','Icon',obj.icon.researchgate,'BackgroundColor',[.549 .6627 .7529],'Tooltip','ResearchGate','ButtonpushedFcn',@(~,~)web('https://www.researchgate.net/publication/365027806','-browser'));
             tempPanel2         = uipanel(tempPanel,'Position',[43 4 18 18],'BorderType','none','BackgroundColor',[.549 .6627 .7529]);
@@ -138,7 +138,14 @@ classdef GUI < handle
                                 label(k,:) = ismember(LabelStr,split(labelstr{k},'/'));
                             end
                             if any(label(:))
-                                List = [List;{label},Files{j}(1:end-2)];
+                                emptyLine = find(~any(label,2));
+                                if isempty(emptyLine)
+                                    year = ' ';
+                                else
+                                    year = labelstr{emptyLine(1)};
+                                    label(emptyLine,:) = [];
+                                end
+                                List = [List;{label},Files{j}(1:end-2),year];
                             end
                         end
                     catch
@@ -229,12 +236,27 @@ classdef GUI < handle
             end
             filter = [stateButton.Value];
             func   = @(s)all(any(repmat([true,filter],size(s,1),1)&s,2)) && all((any(s(:,2:end),1)&filter)==filter);
-            for i = 1 : 3 : length(varargin)
-                [listBox,label,list] = deal(varargin{i:i+2});
-                show = cellfun(func,list(:,1));
-                listBox.Items = ['(Open File)';list(show,2)];
-                listBox.Value = {};
-                label.Text    = sprintf('%d / %d',sum(show),length(show));
+            for i = 1 : 4 : length(varargin)
+                [~,drop,~,list] = deal(varargin{i:i+3});
+                drop.UserData   = find(cellfun(func,list(:,1)));
+                drop.Items      = flip([unique(list(drop.UserData,3));'All year']);
+            end
+            GUI.UpdateAlgProListYear(varargin{:});
+        end
+        %% Update the list of algorithms and problems by year
+        function UpdateAlgProListYear(varargin)
+            for i = 1 : 4 : length(varargin)
+                [listBox,drop,label,list] = deal(varargin{i:i+3});
+                if strcmp(drop.Value,'All year')
+                    listBox.Items = ['(Open File)';list(drop.UserData,2)];
+                    listBox.Value = {};
+                    label.Text    = sprintf('%d / %d',length(drop.UserData),size(list,1));
+                else
+                    index = ismember(list(drop.UserData,3),drop.Value);
+                    listBox.Items = ['(Open File)';list(drop.UserData(index),2)];
+                    listBox.Value = {};
+                    label.Text    = sprintf('%d / %d',length(drop.UserData(index)),size(list,1));
+                end
             end
         end
         %% Update the parameter list of algorithms and problems

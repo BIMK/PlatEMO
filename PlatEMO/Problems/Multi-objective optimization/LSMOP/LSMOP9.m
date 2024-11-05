@@ -1,5 +1,5 @@
 classdef LSMOP9 < PROBLEM
-% <multi/many> <real> <large/none>
+% <2017> <multi/many> <real> <large/none>
 % Large-scale benchmark MOP
 % nk --- 5 --- Number of subcomponents in each variable group
 

@@ -1,5 +1,5 @@
 classdef GPSO < ALGORITHM
-% <single> <real> <large/none> <constrained/none>
+% <2012> <single> <real> <large/none> <constrained/none>
 % Gradient based particle swarm optimization algorithm
 
 %------------------------------- Reference --------------------------------

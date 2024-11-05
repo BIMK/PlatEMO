@@ -1,5 +1,5 @@
 classdef MOEAPC < ALGORITHM
-% <multi> <real/integer>
+% <2015> <multi> <real/integer>
 % Multiobjective evolutionary algorithm based on polar coordinates
 % delta --- 0.8 --- The probability of choosing parents locally
 % T     ---  20 --- Neighborhood size 

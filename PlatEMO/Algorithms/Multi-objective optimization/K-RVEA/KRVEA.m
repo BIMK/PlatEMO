@@ -1,5 +1,5 @@
 classdef KRVEA < ALGORITHM
-% <multi/many> <real/integer> <expensive>
+% <2018> <multi/many> <real/integer> <expensive>
 % Surrogate-assisted RVEA
 % alpha ---  2 --- The parameter controlling the rate of change of penalty
 % wmax  --- 20 --- Number of generations before updating Kriging models

@@ -1,5 +1,5 @@
 classdef TiGE2 < ALGORITHM
-% <many> <real/integer/label/binary/permutation> <constrained/none>
+% <2020> <many> <real/integer/label/binary/permutation> <constrained/none>
 % Tri-Goal Evolution Framework for CMaOPs
 
 %------------------------------- Reference --------------------------------

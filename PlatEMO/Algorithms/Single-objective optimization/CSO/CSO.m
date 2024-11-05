@@ -1,5 +1,5 @@
 classdef CSO < ALGORITHM
-% <single> <real/integer> <large/none> <constrained/none>
+% <2014> <single> <real/integer> <large/none> <constrained/none>
 % Competitive swarm optimizer
 % phi --- 0.1 --- Social factor
 

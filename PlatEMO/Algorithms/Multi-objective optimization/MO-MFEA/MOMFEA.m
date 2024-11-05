@@ -1,5 +1,5 @@
 classdef MOMFEA < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained/none> <multitask>
+% <2017> <multi> <real/integer/label/binary/permutation> <constrained/none> <multitask>
 % Multi-objective multifactorial evolutionary algorithm
 % rmp --- 1 --- Random mating probability
 

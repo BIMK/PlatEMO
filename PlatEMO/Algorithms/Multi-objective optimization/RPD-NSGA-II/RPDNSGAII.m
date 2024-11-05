@@ -1,5 +1,5 @@
 classdef RPDNSGAII < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2018> <multi/many> <real/integer/label/binary/permutation>
 % Reference point dominance-based NSGA-II
 
 %------------------------------- Reference --------------------------------

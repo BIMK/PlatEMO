@@ -1,5 +1,5 @@
 classdef CI_HS < PROBLEM
-% <single> <real> <large/none> <multitask>
+% <2020> <single> <real> <large/none> <multitask>
 % Multitasking problem (Griewank function + Rastrigin function)
 % SubD --- 50,50 --- Number of decision variables of each task
 

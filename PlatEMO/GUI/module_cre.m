@@ -52,7 +52,7 @@ classdef module_cre < handle
             tempPanel          = GUI.APP(2,7,uipanel(obj.app.grid(1),'BorderType','none','BackgroundColor',[.95 .95 1]));
             obj.app.buttonA(6) = uibutton(tempPanel,'Position',[-2.5 -2.5 24 24],'Text','','Icon',obj.GUI.icon.arrange,'BackgroundColor',[.95 .95 1],'Tooltip','Arrange the blocks','Interruptible','off','BusyAction','cancel','ButtonpushedFcn',@obj.cb_arrange);
             obj.app.buttonA(7) = GUI.APP([1 3],9,uibutton(obj.app.grid(1),'Text','Validation','BackgroundColor',[.95 .95 1],'Tooltip','Check the validity of the algorithm','Interruptible','off','BusyAction','cancel','ButtonpushedFcn',@obj.cb_validation));
-            obj.app.dropA      = GUI.APP([1 3],10,uidropdown(obj.app.grid(1),'BackgroundColor',[.95 .95 1],'Tooltip','Select predefined examples','Items',{'User-defined algorithm','General algorithm','Coevolutionary algorithm','Complex algorithm 1','Complex algorithm 2'},'ItemsData',1:5,'Value',1,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.cb_selectAlgorithm));
+            obj.app.dropA      = GUI.APP([1 3],10,uidropdown(obj.app.grid(1),'BackgroundColor',[.95 .95 1],'Tooltip','Select predefined examples','Items',{'User-defined algorithm','General algorithm','Coevolutionary algorithm','Complex algorithm'},'ItemsData',1:4,'Value',1,'Interruptible','off','BusyAction','cancel','ValueChangedFcn',@obj.cb_selectAlgorithm));
             
             % The second panel
             obj.app.grid(2) = GUI.APP([3 6],1,uigridlayout(obj.app.maingrid,'RowHeight',{'1x'},'ColumnWidth',{'1x'},'Padding',[0 0 15 10],'BackgroundColor',[.95 .95 1],'RowSpacing',0,'ColumnSpacing',0)); 
@@ -67,15 +67,16 @@ classdef module_cre < handle
             obj.app.menu.flush();
             
             % The third panel
-            obj.app.grid(3)   = GUI.APP([2 6],4,uigridlayout(obj.app.maingrid,'RowHeight',{16,21,16,21,21,16,21,21,21,22,'1.1x','1x'},'ColumnWidth',{'1x','1.1x','1x'},'Padding',[8 10 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
+            obj.app.grid(3)   = GUI.APP([2 6],4,uigridlayout(obj.app.maingrid,'RowHeight',{16,21,16,21,21,16,21,21,21,4,18,'1.1x','1x'},'ColumnWidth',{'1x','1.1x','1x'},'Padding',[8 10 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
             [obj.app.stateC,obj.app.labelC] = GUI.GenerateLabelButton(obj.app.grid(3),[1 0 0 1,zeros(1,13)],@obj.cb_filter);
-            obj.app.labelC(4) = GUI.APP(10,[1 2],uilabel(obj.app.grid(3),'Text','Problems','VerticalAlignment','bottom','FontSize',13,'FontColor',[.9 .5 .2],'FontWeight','bold'));
-            obj.app.labelC(5) = GUI.APP(10,3,uilabel(obj.app.grid(3),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.9 .5 .2]));
-            obj.app.listC     = GUI.APP(11,[1 3],uilistbox(obj.app.grid(3),'FontColor',[.9 .5 .2]));
+            obj.app.labelC(4) = GUI.APP(11,[1 2],uilabel(obj.app.grid(3),'Text','Problems','FontSize',13,'FontColor',[.9 .5 .2],'FontWeight','bold'));
+            obj.app.labelC(5) = GUI.APP(11,3,uilabel(obj.app.grid(3),'HorizontalAlignment','right','FontSize',10,'FontColor',[.9 .5 .2]));
+            obj.app.listC     = GUI.APP(12,[1 3],uilistbox(obj.app.grid(3),'FontColor',[.9 .5 .2]));
+            obj.app.dropC     = GUI.APP(11,2,uidropdown(obj.app.grid(3),'BackgroundColor','w','FontColor',[.9 .5 .2],'Items',{'All year'},'ValueChangedFcn',@(h,~)GUI.UpdateAlgProListYear(obj.app.listC,h,obj.app.labelC(5),obj.GUI.proList)));
             obj.app.listD     = uilist(obj.app.grid(3),obj.GUI.app.figure,obj.GUI.icon);
             obj.app.listC.ValueChangedFcn = @(~,~)GUI.UpdateAlgProPara(obj.GUI.app.figure,obj.app.listC,obj.app.listD,'PROBLEM',-1);
             obj.app.listD.grid.Padding    = [0,0,0,0];
-            GUI.APP(12,[1 3],obj.app.listD.grid);
+            GUI.APP(13,[1 3],obj.app.listD.grid);
             
             % The fourth panel
             obj.app.grid(4)    = GUI.APP([2 3],7,uigridlayout(obj.app.maingrid,'RowHeight',{22,22,22,'1x',27},'ColumnWidth',{'1.3x','0.7x','1.3x',5,'1.3x','0.7x','1.3x'},'Padding',[5 5 5 0],'BackgroundColor','w','RowSpacing',5,'ColumnSpacing',5)); 
@@ -88,7 +89,7 @@ classdef module_cre < handle
             GUI.APP(2,[5 6],uilabel(obj.app.grid(4),'Text','Parallelization','Tooltip','Perform the training with multiple CPUs'));
             obj.app.checkD     = GUI.APP(2,7,uicheckbox(obj.app.grid(4),'Text','','Tooltip','Perform the training with multiple CPUs','Enable',~isempty(ver('parallel'))));
             GUI.APP(3,1,uilabel(obj.app.grid(4),'Text','File path','Tooltip','The population will be automatically loaded from file before training and saved to file after each iteration'));
-            obj.app.editD(4)   = GUI.APP(3,[3 7],uieditfield(obj.app.grid(4),'Value',fullfile(cd,'Algorithms','Blocks','myAlgorithm.mat'),'Tooltip','The population will be automatically loaded from file before training and saved to file after each iteration'));
+            obj.app.editD(4)   = GUI.APP(3,[3 7],uieditfield(obj.app.grid(4),'Value',fullfile(cd,'Algorithms','Graph evolutionary algorithm','myAlgorithm.mat'),'Tooltip','The population will be automatically loaded from file before training and saved to file after each iteration'));
             obj.app.buttonD(1) = GUI.APP(3,2,uibutton(obj.app.grid(4),'Text','...','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_filepath,obj.app.editD(4)},'Tooltip','The population will be automatically loaded from file before training and saved to file after each iteration'));
             obj.app.axesD      = GUI.APP(4,[1 7],uiaxes(obj.app.grid(4),'BackgroundColor','w','Box','on','FontName','Times New Roman','FontSize',11));
             axtoolbar(obj.app.axesD);
@@ -119,7 +120,7 @@ classdef module_cre < handle
             
             % Read block list
             obj.blockList = {};
-            Folders = split(genpath(fullfile(fileparts(mfilename('fullpath')),'..','Algorithms','Blocks')),pathsep);
+            Folders = split(genpath(fullfile(fileparts(mfilename('fullpath')),'..','Algorithms','Graph evolutionary algorithm')),pathsep);
             for i = 1 : length(Folders) - 1
                 Files = what(Folders{i});
                 Files = Files.m;
@@ -237,6 +238,9 @@ classdef module_cre < handle
                         return;
                     end
                 end
+                rotate3d(obj.GUI.app.figure,'off');
+                pan(obj.GUI.app.figure,'off');
+                zoom(obj.GUI.app.figure,'off');
                 set(obj.GUI.app.figure,'WindowButtonMotionFcn',@obj.cb_figmove,'WindowButtonUpFcn',@(h,~)set(h,'WindowButtonMotionFcn',@(~,~)[],'WindowButtonUpFcn',[]));
             else
                 % Right-click on the block
@@ -252,6 +256,9 @@ classdef module_cre < handle
             HighlightObject(obj.app.canvas,h);
             if event.Button ~= 3
                 % Left-click on the line
+                rotate3d(obj.GUI.app.figure,'off');
+                pan(obj.GUI.app.figure,'off');
+                zoom(obj.GUI.app.figure,'off');
                 set(obj.GUI.app.figure,'WindowButtonMotionFcn',@obj.cb_figmove,'WindowButtonUpFcn',@(h,~)set(h,'WindowButtonMotionFcn',@(~,~)[],'WindowButtonUpFcn',[]));
             else
                 % Right-click on the line
@@ -521,11 +528,11 @@ classdef module_cre < handle
                     % Save the source code
                     try
                         [~,name] = fileparts(Name);
-                        Code = {['classdef ',name,' < BlockEA % < ALGORITHM']
+                        Code = {['classdef ',name,' < GEA % < ALGORITHM']
                                ''
                                '    methods'
                                ['        function obj = ',name,'(varargin)']
-                               '            obj    = obj@BlockEA(varargin{:});'};
+                               '            obj    = obj@GEA(varargin{:});'};
                         for i = 1 : numnodes(obj.Graph)
                             Parameter = obj.blockList{ismember(obj.blockList(:,1),class(obj.Graph.Nodes.block(i))),3};
                             paras     = cell(1,size(Parameter,1));
@@ -588,7 +595,7 @@ classdef module_cre < handle
                 Blocks = obj.Graph.Nodes.block;
                 Graph  = adjacency(obj.Graph,'weighted');
                 Blocks.Validity(Graph);
-                ALG = BlockEA('parameter',{Blocks,Graph},'outputFcn',@(~,~)[]);
+                ALG = GEA('parameter',{Blocks,Graph},'outputFcn',@(~,~)[]);
                 % Generate the PROBLEM object
                 [name,para] = GUI.GetParameterSetting(obj.app.listD.items(1));
                 PRO = feval(name,'N',para{1},'M',para{2},'D',para{3},'maxFE',para{1}+1,'parameter',para(5:end));
@@ -620,15 +627,15 @@ classdef module_cre < handle
             else
                 switch h.Value
                     case 2
-                        Blocks = [Block_Population(),Block_Tournament(200,5),Block_Crossover(2,5),Block_Mutation(5),Block_Selection(100)];
+                        Blocks = [Block_Population(),Block_Tournament(200,3),Block_Crossover(2,3),Block_Mutation(3),Block_Selection(100)];
                         Graph  = [0 1 0 0 1
                                   0 0 1 0 0
                                   0 0 0 1 0
                                   0 0 0 0 1
                                   1 0 0 0 0];
                     case 3
-                        Blocks = [Block_Population(),Block_Tournament(100,5),Block_Crossover(2,5),Block_Mutation(5),Block_Selection(100),...
-                                  Block_Population(),Block_Tournament(100,5),Block_Crossover(2,5),Block_Mutation(5),Block_Selection(100)];
+                        Blocks = [Block_Population(),Block_Tournament(100,10),Block_Crossover(2,3),Block_Mutation(3),Block_Selection(100),...
+                                  Block_Population(),Block_Tournament(100,10),Block_Crossover(2,3),Block_Mutation(3),Block_Selection(100)];
                         Graph  = [0 1 0 0 1 0 0 0 0 0
                                   0 0 1 0 0 0 0 0 0 0
                                   0 0 0 1 0 0 0 0 0 0
@@ -640,23 +647,9 @@ classdef module_cre < handle
                                   0 0 0 0 1 0 0 0 0 1
                                   0 0 0 0 0 1 0 0 0 0];
                     case 4
-                        Blocks = [Block_Population(),Block_Tournament(4,10),Block_Tournament(4,10),Block_Tournament(4,10),...
+                        Blocks = [Block_Population(),Block_Tournament(200,10),Block_Tournament(200,10),Block_Tournament(200,10),...
                                   Block_Exchange(3),Block_Exchange(3),Block_Exchange(3),Block_Exchange(3),...
-                                  Block_Crossover(2,5),Block_Selection(100)];
-                        Graph  = [0 1 1 1 0 0 0 0 0 1
-                                  0 0 0 0 1/4 1/4 1/4 1/4 0 0
-                                  0 0 0 0 1/4 1/4 1/4 1/4 0 0
-                                  0 0 0 0 1/4 1/4 1/4 1/4 0 0
-                                  0 0 0 0 0 0 0 0 1 0
-                                  0 0 0 0 0 0 0 0 1 0
-                                  0 0 0 0 0 0 0 0 1 0
-                                  0 0 0 0 0 0 0 0 1 0
-                                  0 0 0 0 0 0 0 0 0 1
-                                  1 0 0 0 0 0 0 0 0 0];
-                    case 5
-                        Blocks = [Block_Population(),Block_Tournament(4,10),Block_Tournament(4,10),Block_Tournament(4,10),...
-                                  Block_Exchange(3),Block_Exchange(3),Block_Exchange(3),Block_Exchange(3),...
-                                  Block_Crossover(2,5),Block_Mutation(5),Block_Selection(100)];
+                                  Block_Crossover(2,3),Block_Mutation(3),Block_Selection(100)];
                         Graph  = [0 1 1 1 0 0 0 0 0 0 1
                                   0 0 0 0 1/4 1/4 1/4 1/4 0 0 0
                                   0 0 0 0 1/4 1/4 1/4 1/4 0 0 0
@@ -684,7 +677,7 @@ classdef module_cre < handle
         end
         %% Update the problems in the list
         function cb_filter(obj,~,~,index)
-            GUI.UpdateAlgProList(index,obj.app.stateC,obj.app.listC,obj.app.labelC(5),obj.GUI.proList);
+            GUI.UpdateAlgProList(index,obj.app.stateC,obj.app.listC,obj.app.dropC,obj.app.labelC(5),obj.GUI.proList);
         end
         %% Determine the file to load and save training results
         function cb_filepath(obj,~,~,edit)
@@ -706,7 +699,7 @@ classdef module_cre < handle
                     Blocks = obj.Graph.Nodes.block;
                     Graph  = adjacency(obj.Graph,'weighted');
                     Blocks.Validity(Graph);
-                    ALG = BlockEA('parameter',{Blocks,Graph},'outputFcn',@obj.outputFcnTest,'save',1);
+                    ALG = GEA('parameter',{Blocks,Graph},'outputFcn',@obj.outputFcnTest,'save',1);
                 catch err
                     err = addCause(err,MException('','The algorithm is invalid'));
                     uialert(obj.GUI.app.figure,sprintf('%s, since %s',err.cause{end}.message,err.message),'Invalid algorithm');
@@ -723,7 +716,7 @@ classdef module_cre < handle
                 % Update the data
                 obj.data = {ALG,PRO};
                 % Update the GUI
-                set([obj.GUI.app.button,obj.app.buttonA,obj.app.dropA,obj.app.stateC,obj.app.listC,obj.app.editD,obj.app.checkD,obj.app.buttonD],'Enable',false);
+                set([obj.GUI.app.button,obj.app.buttonA,obj.app.dropA,obj.app.stateC,obj.app.listC,obj.app.dropC,obj.app.editD,obj.app.checkD,obj.app.buttonD],'Enable',false);
                 obj.app.listD.Enable    = false;
                 obj.app.buttonE(1).Text = 'Pause';
                 set(obj.app.buttonE(2:3),'Enable',true);
@@ -743,7 +736,7 @@ classdef module_cre < handle
         function cb_stoptest(obj,~,~,metValue)
             if nargin < 4
                 RefreshText(obj.Graph,obj.app.canvas.UserData.features);
-                set([obj.GUI.app.button,obj.app.buttonA,obj.app.dropA,obj.app.stateC,obj.app.listC,obj.app.editD,obj.app.buttonD(1:2)],'Enable',true);
+                set([obj.GUI.app.button,obj.app.buttonA,obj.app.dropA,obj.app.stateC,obj.app.listC,obj.app.dropC,obj.app.editD,obj.app.buttonD(1:2)],'Enable',true);
                 obj.app.checkD.Enable     = ~isempty(ver('parallel'));
                 obj.app.listD.Enable      = true;
                 obj.app.buttonE(1).Text   = 'Start';
@@ -786,7 +779,7 @@ classdef module_cre < handle
                     Blocks = obj.Graph.Nodes.block;
                     Graph  = adjacency(obj.Graph,'weighted');
                     Blocks.Validity(Graph);
-                    obj.data{1} = BlockEA('parameter',{Blocks,Graph},'outputFcn',@(~,~)[],'save',1);
+                    obj.data{1} = GEA('parameter',{Blocks,Graph},'outputFcn',@(~,~)[],'save',1);
                 catch err
                     err = addCause(err,MException('','The algorithm is invalid'));
                     uialert(obj.GUI.app.figure,sprintf('%s, since %s',err.cause{end}.message,err.message),'Invalid algorithm');
@@ -801,7 +794,7 @@ classdef module_cre < handle
                     return;
                 end
                 % Update the GUI
-                set([obj.GUI.app.button,obj.app.buttonA,obj.app.dropA,obj.app.stateC,obj.app.listC,obj.app.editD,obj.app.checkD,obj.app.buttonD(1),obj.app.buttonE],'Enable',false);
+                set([obj.GUI.app.button,obj.app.buttonA,obj.app.dropA,obj.app.stateC,obj.app.listC,obj.app.dropC,obj.app.editD,obj.app.checkD,obj.app.buttonD(1),obj.app.buttonE],'Enable',false);
                 obj.app.listD.Enable      = false;
                 obj.app.buttonD(2).Text   = 'Pause';
                 obj.app.buttonD(3).Enable = true;
@@ -827,7 +820,7 @@ classdef module_cre < handle
         %% Stop the training
         function cb_stoptrain(obj,~,~)
             RefreshText(obj.Graph,obj.app.canvas.UserData.features);
-            set([obj.GUI.app.button,obj.app.buttonA,obj.app.dropA,obj.app.stateC,obj.app.listC,obj.app.editD,obj.app.buttonD(1),obj.app.buttonE(1:2)],'Enable',true);
+            set([obj.GUI.app.button,obj.app.buttonA,obj.app.dropA,obj.app.stateC,obj.app.listC,obj.app.dropC,obj.app.editD,obj.app.buttonD(1),obj.app.buttonE(1:2)],'Enable',true);
             obj.app.checkD.Enable     = ~isempty(ver('parallel'));
             obj.app.listD.Enable      = true;
             obj.app.buttonD(2).Text   = 'Start';
@@ -860,7 +853,7 @@ classdef module_cre < handle
         	assert(strcmp(obj.app.buttonD(3).Enable,'on'),'PlatEMO:Termination','');
             % Show the results
             obj.app.labelD.Text = sprintf('%.2f%%',Problem.FE/Problem.maxFE*100);
-            if Problem.M == 1
+            if obj.data{2}.M == 1
                 point = [Algorithm.result{end,1},min(Algorithm.result{end,2}.objs)];
             else
                 point = [Algorithm.result{end,1},-min(Algorithm.result{end,2}.objs)];
@@ -967,7 +960,7 @@ classdef module_cre < handle
                     end
                 end
             end
-            PopObj = max(PopObj,[],2);
+            PopObj = mean(PopObj,2) + std(PopObj,0,2);
         end
     end
 end

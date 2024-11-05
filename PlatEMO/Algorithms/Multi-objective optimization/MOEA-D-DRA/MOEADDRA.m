@@ -1,5 +1,5 @@
 classdef MOEADDRA < ALGORITHM
-% <multi/many> <real/integer>
+% <2009> <multi/many> <real/integer>
 % MOEA/D with dynamical resource allocation
 
 %------------------------------- Reference --------------------------------

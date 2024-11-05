@@ -1,5 +1,5 @@
 classdef CMOSMA < ALGORITHM
-% <multi/many> <real/integer> <constrained>
+% <2022> <multi/many> <real/integer> <constrained>
 % Constrained multi-objective evolutionary algorithm with self-organizing map
 
 %------------------------------- Reference --------------------------------

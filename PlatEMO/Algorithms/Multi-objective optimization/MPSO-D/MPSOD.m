@@ -1,5 +1,5 @@
 classdef MPSOD < ALGORITHM
-% <multi/many> <real/integer>
+% <2015> <multi/many> <real/integer>
 % Multi-objective particle swarm optimization algorithm based on
 % decomposition
 

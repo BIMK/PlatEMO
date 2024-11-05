@@ -1,5 +1,5 @@
 classdef GrEA < ALGORITHM
-% <many> <real/integer/label/binary/permutation>
+% <2013> <many> <real/integer/label/binary/permutation>
 % Grid-based evolutionary algorithm
 % div --- --- The number of divisions in each objective
 

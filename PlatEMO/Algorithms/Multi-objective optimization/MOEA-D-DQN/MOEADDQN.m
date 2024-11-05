@@ -1,5 +1,5 @@
 classdef MOEADDQN < ALGORITHM
-% <multi/many> <real/integer>
+% <2023> <multi/many> <real/integer>
 % MOEA/D based on deep Q-network
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef SMSEMOA < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <2005> <multi> <real/integer/label/binary/permutation>
 % S metric selection based evolutionary multiobjective optimization algorithm
 
 %------------------------------- Reference --------------------------------

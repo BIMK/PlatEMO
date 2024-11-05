@@ -1,5 +1,5 @@
 classdef CEC2013_F8 < PROBLEM
-% <single> <real> <large>
+% <2013> <single> <real> <large>
 % 20-nonseparable shifted and rotated elliptic function
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef Sparse_PM < PROBLEM
-% <multi> <binary> <large/none> <expensive/none> <sparse/none>
+% <2020> <multi> <binary> <large/none> <expensive/none> <sparse/none>
 % The pattern mining problem
 % numTran --- 10000 --- Number of transactions
 % lenTran ---    50 --- Average length of transactions

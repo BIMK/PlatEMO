@@ -1,5 +1,5 @@
 classdef RWMOP25 < PROBLEM
-% <multi> <real> <constrained>
+% <2021> <multi> <real> <constrained>
 % Process synthesis problem
 
 %------------------------------- Reference --------------------------------

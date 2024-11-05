@@ -1,5 +1,5 @@
 classdef LCSA < ALGORITHM
-% <multi/many> <real/integer> <large/none>
+% <2019> <multi/many> <real/integer> <large/none>
 % Linear combination-based search algorithm
 % optimiser --- 3 --- The optimisation method. 1 = SMPSO, 2 = NSGA-II, 3 = NSGA-III. Default = NSGA-III
 

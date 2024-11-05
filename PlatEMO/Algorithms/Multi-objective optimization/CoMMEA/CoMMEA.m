@@ -1,5 +1,5 @@
 classdef CoMMEA < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <multimodal>
+% <2023> <multi> <real/integer/label/binary/permutation> <multimodal>
 % Coevolutionary multimodal multi-objective evolutionary algorithm
 % eps --- 0.2 --- Parameter for quality of the local Pareto front (suggested to be 0 if the problem has no local Pareto front).
 

@@ -1,5 +1,5 @@
 classdef MOEAIGDNS < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <2016> <multi> <real/integer/label/binary/permutation>
 % Multi-objective evolutionary algorithm based on an enhanced IGD
 
 %------------------------------- Reference --------------------------------

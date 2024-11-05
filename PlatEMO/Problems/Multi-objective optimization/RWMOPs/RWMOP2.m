@@ -1,5 +1,5 @@
 classdef RWMOP2 < PROBLEM
-% <multi> <real> <constrained>
+% <2021> <multi> <real> <constrained>
 % Vibrating platform
 
 %------------------------------- Reference --------------------------------

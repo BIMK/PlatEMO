@@ -1,5 +1,5 @@
 classdef RMSProp < ALGORITHM
-% <single> <real> <large/none>
+% <2012> <single> <real> <large/none>
 % Root mean square propagation
 % alpha ---   1 --- Learning rate
 % rho   --- 0.9 --- A parameter within [0 1)

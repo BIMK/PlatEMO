@@ -1,5 +1,5 @@
 classdef MOEADDU < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2016> <multi/many> <real/integer/label/binary/permutation>
 % MOEA/D with a distance based updating strategy
 % delta --- 0.9 --- The probability of choosing parents locally
 % K     ---   5 --- Number of nearest weight vectors

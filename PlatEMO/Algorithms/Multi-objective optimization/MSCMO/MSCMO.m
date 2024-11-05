@@ -1,5 +1,5 @@
 classdef MSCMO < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained>
+% <2021> <multi> <real/integer/label/binary/permutation> <constrained>
 % Multi-stage constrained multi-objective evolutionary algorithm
 % type --- 1 --- Type of operator (1. GA 2. DE)
 

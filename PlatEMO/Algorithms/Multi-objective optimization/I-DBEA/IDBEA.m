@@ -1,5 +1,5 @@
 classdef IDBEA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation> <constrained/none>
+% <2015> <multi/many> <real/integer/label/binary/permutation> <constrained/none>
 % Improved decomposition-based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

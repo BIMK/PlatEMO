@@ -1,5 +1,5 @@
 classdef MOEADDYTS < ALGORITHM
-% <multi/many> <real/integer>
+% <2020> <multi/many> <real/integer>
 % MOEA/D with dynamic Thompson sampling
 
 %------------------------------- Reference --------------------------------

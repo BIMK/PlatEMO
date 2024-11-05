@@ -1,5 +1,5 @@
 classdef NNDREAMO < ALGORITHM
-% <multi> <binary> <large/none> <constrained/none> <sparse/none>
+% <2024> <multi> <binary> <large/none> <constrained/none> <sparse/none>
 % Evolutionary algorithm with neural network-based dimensionality reduction
 % lower ---  -1 --- Lower bound of network weights
 % upper ---   1 --- Upper bound of network weights

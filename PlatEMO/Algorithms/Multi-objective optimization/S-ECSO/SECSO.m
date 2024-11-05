@@ -1,5 +1,5 @@
 classdef SECSO < ALGORITHM
-% <multi> <real> <large/none> <sparse>
+% <2022> <multi> <real> <large/none> <sparse>
 % Enhanced competitive swarm optimizer for sparse optimization
     
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef CEC2013_F6 < PROBLEM
-% <single> <real> <large>
+% <2013> <single> <real> <large>
 % 7-nonseparable, 1-separable shifted and rotated Ackley's function
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef ACMMEA < ALGORITHM
-% <multi> <real/integer> <large/none> <multimodal> <sparse>
+% <2023> <multi> <real/integer> <large/none> <multimodal> <sparse>
 % Adaptive merging and coordinated offspring generation based multi-modal multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

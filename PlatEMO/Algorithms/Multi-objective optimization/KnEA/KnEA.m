@@ -1,5 +1,5 @@
 classdef KnEA < ALGORITHM
-% <many> <real/integer/label/binary/permutation> <constrained/none>
+% <2015> <many> <real/integer/label/binary/permutation> <constrained/none>
 % Knee point driven evolutionary algorithm
 % rate --- 0.5 --- Rate of knee points in the population
 

@@ -1,5 +1,5 @@
 classdef Izui < ALGORITHM
-% <multi/many> <real> <large/none> <constrained/none>
+% <2015> <multi/many> <real> <large/none> <constrained/none>
 % An aggregative gradient based multi-objective optimizer proposed by Izui et al.
 
 %------------------------------- Reference --------------------------------

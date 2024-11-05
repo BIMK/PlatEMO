@@ -1,5 +1,5 @@
 classdef SAMSO < ALGORITHM
-% <single> <real/integer> <large/none> <expensive>
+% <2021> <single> <real/integer> <large/none> <expensive>
 % Multiswarm-assisted expensive optimization
 
 %------------------------------- Reference --------------------------------

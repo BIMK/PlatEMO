@@ -1,5 +1,5 @@
 classdef SMOA < ALGORITHM
-% <multi> <real> <expensive>
+% <2022> <multi> <real> <expensive>
 % Supervised multi-objective optimization algorithm
 % H --- 2.6e4 --- Size of uniformly distributed L1 unit vector set
 

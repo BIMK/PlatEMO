@@ -1,5 +1,5 @@
 classdef IMOP7 < PROBLEM
-% <multi> <real> <expensive/none>
+% <2019> <multi> <real> <expensive/none>
 % Benchmark MOP with irregular Pareto front
 % a1 --- 0.05 --- Parameter a1
 % a2 ---   10 --- Parameter a2

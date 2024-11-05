@@ -1,5 +1,5 @@
 classdef CMOES < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained>
+% <2024> <multi> <real/integer/label/binary/permutation> <constrained>
 % Constrained multi-objective optimization based on even search
 % type --- 1 --- Type of operator (1. GA 2. DE)
 

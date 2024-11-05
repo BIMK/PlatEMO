@@ -1,5 +1,5 @@
 classdef AdaW < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2020> <multi/many> <real/integer/label/binary/permutation>
 % Evolutionary algorithm with adaptive weights
 
 %------------------------------- Reference --------------------------------

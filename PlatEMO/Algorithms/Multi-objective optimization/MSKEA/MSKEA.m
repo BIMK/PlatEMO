@@ -1,6 +1,6 @@
 classdef MSKEA < ALGORITHM
- % <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
- % Multi-stage knowledge-guided evolutionary algorithm
+% <2022> <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
+% Multi-stage knowledge-guided evolutionary algorithm
  
 %------------------------------- Reference --------------------------------
 % Z. Ding, L. Chen, D. Sun, and X. Zhang, A multi-stage knowledge-guided

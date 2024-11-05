@@ -1,7 +1,6 @@
 classdef LMOEADS < ALGORITHM
-% <multi> <real/integer> <large/none>
-% Large-scale evolutionary multi-objective optimization assisted by
-% directed sampling
+% <2021> <multi> <real/integer> <large/none>
+% Large-scale evolutionary multi-objective optimization assisted by directed sampling
 % Nw --- 10 --- Cluster number
 % Ns --- 30 --- The number of random sampling along each guiding direction
 

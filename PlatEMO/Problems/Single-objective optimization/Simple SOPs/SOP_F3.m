@@ -1,5 +1,5 @@
 classdef SOP_F3 < PROBLEM
-% <single> <real> <expensive/none>
+% <1999> <single> <real> <expensive/none>
 % Schwefel's function 1.2
 
 %------------------------------- Reference --------------------------------

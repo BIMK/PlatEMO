@@ -1,5 +1,5 @@
 classdef RWMOP6 < PROBLEM
-% <multi> <real> <constrained>
+% <2021> <multi> <real> <constrained>
 % Speed reducer design problem
 
 %------------------------------- Reference --------------------------------

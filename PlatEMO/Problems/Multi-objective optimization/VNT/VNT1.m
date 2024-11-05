@@ -1,5 +1,5 @@
 classdef VNT1 < PROBLEM
-% <multi> <real>
+% <1996> <multi> <real>
 % Benchmark MOP proposed by Viennet
 
 %------------------------------- Reference --------------------------------

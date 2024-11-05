@@ -1,5 +1,5 @@
 classdef BCEIBEA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2016> <multi/many> <real/integer/label/binary/permutation>
 % Bi-criterion evolution based IBEA
 % kappa --- 0.05 --- Fitness scaling factor
 

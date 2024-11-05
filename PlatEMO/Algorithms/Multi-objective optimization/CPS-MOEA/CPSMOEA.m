@@ -1,5 +1,5 @@
 classdef CPSMOEA < ALGORITHM
-% <multi> <real/integer> <expensive>
+% <2015> <multi> <real/integer> <expensive>
 % Classification and Pareto domination based multi-objective evolutionary
 % algorithm
 % M --- 3 --- Number of generated offsprings for each solution

@@ -1,5 +1,5 @@
 classdef SA < ALGORITHM
-% <single> <real/integer> <large/none> <constrained/none>
+% <1993> <single> <real/integer> <large/none> <constrained/none>
 % Simulated annealing
 
 %------------------------------- Reference --------------------------------

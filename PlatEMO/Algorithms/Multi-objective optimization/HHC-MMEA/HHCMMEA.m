@@ -1,5 +1,5 @@
 classdef HHCMMEA < ALGORITHM
-% <multi> <real> <large/none> <multimodal> <sparse>
+% <2023> <multi> <real> <large/none> <multimodal> <sparse>
 % Hybrid hierarchical clustering based multi-modal multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

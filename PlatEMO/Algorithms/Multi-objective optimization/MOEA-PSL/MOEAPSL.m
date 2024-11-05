@@ -1,5 +1,5 @@
 classdef MOEAPSL < ALGORITHM
-% <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
+% <2021> <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
 % Multi-objective evolutionary algorithm based on Pareto optimal subspace
 % learning
 

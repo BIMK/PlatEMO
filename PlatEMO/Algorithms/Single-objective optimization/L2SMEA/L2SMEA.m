@@ -1,10 +1,10 @@
 classdef L2SMEA < ALGORITHM
-% <single> <real> <expensive>
+% <2015> <single> <real> <expensive>
 % Linear subspace surrogate modeling assisted evolutionary algorithm
 % NLinear --- 8 --- Number of linear subspaces
 
 %------------------------------- Reference --------------------------------
-% S. L, X. Zhang, Y. Tian, S. Yang, L. Zhang, and Y. Jin, Linear subspace
+% L. Si, X. Zhang, Y. Tian, S. Yang, L. Zhang, and Y. Jin, Linear subspace
 % surrogate modeling for large-scale expensive single/multi-objective
 % optimization, IEEE Transactions on Evolutionary Computation, 2023.
 %------------------------------- Copyright --------------------------------

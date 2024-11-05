@@ -1,5 +1,5 @@
 classdef MFFS < ALGORITHM
-% <multi> <binary> 
+% <2023> <multi> <binary> 
 % Multiform feature selection
 
 %------------------------------- Reference --------------------------------

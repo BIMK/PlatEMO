@@ -1,5 +1,5 @@
 classdef CEC2008_F2 < PROBLEM
-% <single> <real> <large/none> <expensive/none>
+% <2007> <single> <real> <large/none> <expensive/none>
 % Shifted Schwefel's function
 
 %------------------------------- Reference --------------------------------

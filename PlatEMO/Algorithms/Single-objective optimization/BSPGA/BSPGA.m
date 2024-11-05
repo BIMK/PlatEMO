@@ -1,5 +1,5 @@
 classdef BSPGA < ALGORITHM
-% <single> <binary> <large/none> <constrained/none>
+% <2020> <single> <binary> <large/none> <constrained/none>
 % Binary space partition tree based genetic algorithm
 % proC   ---  0.5 --- Probability of crossover
 % proM   ---    1 --- Expectation of the number of mutated variables

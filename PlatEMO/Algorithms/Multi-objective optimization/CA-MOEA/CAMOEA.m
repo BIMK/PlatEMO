@@ -1,5 +1,5 @@
 classdef CAMOEA < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <2019> <multi> <real/integer/label/binary/permutation>
 % Clustering based adaptive multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef CEC2020_F6 < PROBLEM
-% <single> <real>
+% <2019> <single> <real>
 % Hybrid function 2
 
 %------------------------------- Reference --------------------------------

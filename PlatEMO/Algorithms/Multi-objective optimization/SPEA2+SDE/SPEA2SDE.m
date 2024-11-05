@@ -1,5 +1,5 @@
 classdef SPEA2SDE < ALGORITHM
-% <many> <real/integer/label/binary/permutation>
+% <2014> <many> <real/integer/label/binary/permutation>
 % SPEA2 with shift-based density estimation
 
 %------------------------------- Reference --------------------------------

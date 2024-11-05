@@ -1,5 +1,5 @@
 classdef CEC2010_F4 < PROBLEM
-% <single> <real> <constrained>
+% <2010> <single> <real> <constrained>
 % CEC'2010 constrained optimization benchmark problem
 
 %------------------------------- Reference --------------------------------

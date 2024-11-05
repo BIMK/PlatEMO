@@ -1,5 +1,5 @@
 classdef CEC2008_F4 < PROBLEM
-% <single> <real> <large/none> <expensive/none>
+% <2007> <single> <real> <large/none> <expensive/none>
 % Shifted Rastrign's function
 
 %------------------------------- Reference --------------------------------

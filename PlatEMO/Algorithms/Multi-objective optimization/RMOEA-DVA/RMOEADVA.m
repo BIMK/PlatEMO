@@ -1,5 +1,5 @@
 classdef RMOEADVA< ALGORITHM
-% <multi> <real/integer> <robust>
+% <2022> <multi> <real/integer> <robust>
 % Robust multi-objective evolutionary algorithm with decision variable assortment
 % nDVA  ---  50 --- Number of solutions for decision variable assortment
 % theta --- 0.3 --- Threshold for decision variable assortment

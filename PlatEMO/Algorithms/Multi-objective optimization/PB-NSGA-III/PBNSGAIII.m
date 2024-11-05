@@ -1,5 +1,5 @@
 classdef PBNSGAIII < ALGORITHM
-% <multi/many> <real/integer> <expensive>
+% <2022> <multi/many> <real/integer> <expensive>
 % NSGA-III based on Pareto based bi-indicator infill sampling criterion
 % wmax --- 15 --- Number of generations before updating Kriging models
 

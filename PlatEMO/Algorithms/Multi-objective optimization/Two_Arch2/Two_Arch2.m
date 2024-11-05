@@ -1,5 +1,5 @@
 classdef Two_Arch2 < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2015> <multi/many> <real/integer/label/binary/permutation>
 % Two-archive algorithm 2
 % CAsize --- --- Convergence archive size
 % p      --- --- The parameter of fractional distance

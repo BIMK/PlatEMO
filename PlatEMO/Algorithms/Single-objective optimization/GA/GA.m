@@ -1,5 +1,5 @@
 classdef GA < ALGORITHM
-% <single> <real/integer/label/binary/permutation> <large/none> <constrained/none>
+% <1992> <single> <real/integer/label/binary/permutation> <large/none> <constrained/none>
 % Genetic algorithm
 % proC ---  1 --- Probability of crossover
 % disC --- 20 --- Distribution index of simulated binary crossover

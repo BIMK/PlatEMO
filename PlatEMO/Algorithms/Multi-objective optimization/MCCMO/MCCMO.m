@@ -1,5 +1,5 @@
 classdef MCCMO< ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained>
+% <2024> <multi> <real/integer/label/binary/permutation> <constrained>
 % Multi-population coevolutionary constrained multi-objective optimization
 
 %------------------------------- Reference --------------------------------

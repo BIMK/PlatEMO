@@ -1,5 +1,5 @@
 classdef RWMOP20 < PROBLEM
-% <multi> <real> <constrained>
+% <2021> <multi> <real> <constrained>
 % Hydro-static thrust bearing design problem
 
 %------------------------------- Reference --------------------------------

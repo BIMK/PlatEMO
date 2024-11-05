@@ -1,5 +1,5 @@
 classdef MaOPP_binary < PROBLEM
-% <many> <binary> <large/none> <expensive/none>
+% <2022> <many> <binary> <large/none> <expensive/none>
 % Many-objective pathfinding problem based on binary encoding
 % xmax                    ---  10 --- xmax
 % ymax                    ---  10 --- ymax

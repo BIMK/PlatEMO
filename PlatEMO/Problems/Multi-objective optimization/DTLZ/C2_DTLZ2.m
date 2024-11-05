@@ -1,5 +1,5 @@
 classdef C2_DTLZ2 < PROBLEM
-% <multi/many> <real> <large/none> <constrained> <expensive/none>
+% <2014> <multi/many> <real> <large/none> <constrained> <expensive/none>
 % Constrained DTLZ2
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef CSEA < ALGORITHM
-% <multi/many> <real/integer> <expensive>
+% <2019> <multi/many> <real/integer> <expensive>
 % Classification based surrogate-assisted evolutionary algorithm
 % k    ---    6 --- Number of reference solutions
 % gmax --- 3000 --- Number of solutions evaluated by surrogate model

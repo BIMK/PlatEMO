@@ -1,5 +1,5 @@
 classdef MOEADCMA < ALGORITHM
-% <multi/many> <real/integer>
+% <2017> <multi/many> <real/integer>
 % MOEA/D with covariance matrix adaptation evolution strategy
 % K --- 5 --- Number of groups
 

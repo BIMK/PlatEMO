@@ -1,5 +1,5 @@
 classdef SOP_F6 < PROBLEM
-% <single> <real> <expensive/none>
+% <1999> <single> <real> <expensive/none>
 % Step function
 
 %------------------------------- Reference --------------------------------

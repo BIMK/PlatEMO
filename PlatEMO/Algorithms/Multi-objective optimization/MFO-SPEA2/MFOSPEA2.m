@@ -1,5 +1,5 @@
 classdef MFOSPEA2 < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained>
+% <2023> <multi> <real/integer/label/binary/permutation> <constrained>
 % Multiform optimization framework based on SPEA2
 
 %------------------------------- Reference --------------------------------

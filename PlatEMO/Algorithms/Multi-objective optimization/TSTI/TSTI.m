@@ -1,5 +1,5 @@
 classdef TSTI < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained>
+% <2022> <multi> <real/integer/label/binary/permutation> <constrained>
 % Two-stage evolutionary algorithm with three indicators
 % epsilon --- 0.05 --- parameter for calculating frank
 % row     --- 1.01 --- parameter for adjusting epsilon

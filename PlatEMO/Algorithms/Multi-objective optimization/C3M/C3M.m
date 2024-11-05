@@ -1,5 +1,5 @@
 classdef C3M < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained>
+% <2023> <multi> <real/integer/label/binary/permutation> <constrained>
 % Constraint, multiobjective, multi-stage, multi-constraint evolutionary algorithm
 % type --- 1 --- Type of operator (1. DE 2. GA)
 

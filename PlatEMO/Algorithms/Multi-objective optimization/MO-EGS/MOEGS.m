@@ -1,5 +1,5 @@
 classdef MOEGS < ALGORITHM
-% <multi> <real> <large/none>
+% <2008> <multi> <real> <large/none>
 % Multi-objective evolutionary gradient search
 % r --- 500 --- Number of test candidates
 

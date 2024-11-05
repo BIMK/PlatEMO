@@ -1,5 +1,5 @@
 classdef HEA < ALGORITHM
-% <multi/many> <real/binary/permutation>
+% <2023> <multi/many> <real/binary/permutation>
 % Hyper-dominance based evolutionary algorithm
 % MaxT --- 0.05 --- The maximum value of tolerance
 

@@ -1,5 +1,5 @@
 classdef MOSD < ALGORITHM
-% <multi> <real> <large/none> <constrained/none>
+% <2016> <multi> <real> <large/none> <constrained/none>
 % Multiobjective steepest descent
 % step --- 0.1 --- Step size
 

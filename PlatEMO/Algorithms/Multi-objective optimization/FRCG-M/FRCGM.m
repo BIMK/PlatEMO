@@ -1,5 +1,5 @@
 classdef FRCGM < ALGORITHM
-% <multi/many> <real> <large/none> <constrained/none>
+% <1964> <multi/many> <real> <large/none> <constrained/none>
 % Fletcher-Reeves conjugate gradient (for multi-objective optimization)
 % beta  --- 0.6 --- A parameter within [0,1] for line search
 % sigma --- 0.4 --- A parameter within [0 0.5] for line search

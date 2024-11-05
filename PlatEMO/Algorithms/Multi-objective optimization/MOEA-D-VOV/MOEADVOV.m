@@ -1,5 +1,5 @@
 classdef MOEADVOV < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2021> <multi/many> <real/integer/label/binary/permutation>
 % MOEA/D with virtual objective vectors
 % G     ---  100 --- The weight update generation
 % C     ---    9 --- The weight update count

@@ -1,5 +1,5 @@
 classdef MW8 < PROBLEM
-% <multi/many> <real> <large/none> <constrained>
+% <2019> <multi/many> <real> <large/none> <constrained>
 % Constrained benchmark MOP proposed by Ma and Wang
 
 %------------------------------- Reference --------------------------------

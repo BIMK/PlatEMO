@@ -1,5 +1,5 @@
 classdef MaOEAIGD < ALGORITHM
-% <many> <real/integer/label/binary/permutation>
+% <2019> <many> <real/integer/label/binary/permutation>
 % IGD based many-objective evolutionary algorithm
 % DNPE --- --- Number of evaluations for nadir point estimation
 

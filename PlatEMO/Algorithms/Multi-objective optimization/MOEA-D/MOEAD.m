@@ -1,5 +1,5 @@
 classdef MOEAD < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2007> <multi/many> <real/integer/label/binary/permutation>
 % Multiobjective evolutionary algorithm based on decomposition
 % type --- 1 --- The type of aggregation function
 

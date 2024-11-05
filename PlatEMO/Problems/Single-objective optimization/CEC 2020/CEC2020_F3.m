@@ -1,5 +1,5 @@
 classdef CEC2020_F3 < PROBLEM
-% <single> <real>
+% <2019> <single> <real>
 % Shifted and rotated Lunacek bi-Rastrigin function
 
 %------------------------------- Reference --------------------------------

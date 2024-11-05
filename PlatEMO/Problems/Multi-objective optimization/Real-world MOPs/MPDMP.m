@@ -1,5 +1,5 @@
 classdef MPDMP < PROBLEM
-% <multi/many> <real>
+% <2007> <multi/many> <real>
 % The multi-point distance minimization problem
 % lower --- -100 --- Lower bound of decision variables
 % upper ---  100 --- Upper bound of decision variables

@@ -1,5 +1,5 @@
 classdef PICEAg < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2013> <multi/many> <real/integer/label/binary/permutation>
 % Preference-inspired coevolutionary algorithm with goals
 % NGoal --- --- Number of goals
 

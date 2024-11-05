@@ -1,5 +1,5 @@
 classdef MaF12 < PROBLEM
-% <multi/many> <real> <large/none>
+% <2017> <multi/many> <real> <large/none>
 % WFG9
 
 %------------------------------- Reference --------------------------------

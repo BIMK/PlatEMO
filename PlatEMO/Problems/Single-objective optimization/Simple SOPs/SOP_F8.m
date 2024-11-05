@@ -1,5 +1,5 @@
 classdef SOP_F8 < PROBLEM
-% <single> <real> <expensive/none>
+% <1999> <single> <real> <expensive/none>
 % Generalized Schwefel's function 2.26
 
 %------------------------------- Reference --------------------------------

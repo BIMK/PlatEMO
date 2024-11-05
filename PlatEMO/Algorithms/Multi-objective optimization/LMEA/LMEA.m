@@ -1,5 +1,5 @@
 classdef LMEA < ALGORITHM
-% <multi/many> <real/integer> <large>
+% <2018> <multi/many> <real/integer> <large>
 % Evolutionary algorithm for large-scale many-objective optimization
 % nSel ---  5 --- Number of selected solutions for decision variable clustering
 % nPer --- 50 --- Number of perturbations on each solution for decision variable clustering

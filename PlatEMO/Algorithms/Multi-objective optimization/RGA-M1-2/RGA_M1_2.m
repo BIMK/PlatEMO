@@ -1,5 +1,5 @@
 classdef RGA_M1_2 < ALGORITHM
-% <multi> <real> <expensive> <constrained>
+% <2019> <multi> <real> <expensive> <constrained>
 % Real-coded genetic algorithm with framework M1-2
 % wmax --- 20 --- Number of generations before updating surrogate models
 % mu   ---  5  -- Number of real evaluated solutions at each iteration

@@ -1,5 +1,5 @@
 classdef HREA < ALGORITHM
-% <multi> <real/integer> <multimodal>
+% <2023> <multi> <real/integer> <multimodal>
 % Hierarchy ranking based evolutionary algorithm
 % eps --- 0.3 --- Parameter for quality of the local Pareto front
 

@@ -1,5 +1,5 @@
 classdef ECPO < ALGORITHM
-% <single> <real/integer> <large/none> <constrained/none>
+% <2021> <single> <real/integer> <large/none> <constrained/none>
 % Electric charged particles optimization
 % Strategy --- 2 --- Strategy
 % nECPI    --- 3 --- Number of ECPs in interaction

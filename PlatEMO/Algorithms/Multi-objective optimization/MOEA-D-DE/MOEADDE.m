@@ -1,5 +1,5 @@
 classdef MOEADDE < ALGORITHM
-% <multi/many> <real/integer>
+% <2009> <multi/many> <real/integer>
 % MOEA/D based on differential evolution
 % delta --- 0.9 --- The probability of choosing parents locally
 % nr    ---   2 --- Maximum number of solutions replaced by each offspring

@@ -1,5 +1,5 @@
 classdef CMAES < ALGORITHM
-% <single> <real/integer> <large/none> <constrained/none>
+% <2001> <single> <real/integer> <large/none> <constrained/none>
 % Covariance matrix adaptation evolution strategy
 
 %------------------------------- Reference --------------------------------

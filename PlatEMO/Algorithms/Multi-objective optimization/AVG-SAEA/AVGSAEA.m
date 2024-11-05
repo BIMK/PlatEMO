@@ -1,5 +1,5 @@
 classdef AVGSAEA< ALGORITHM
-% <multi> <real/integer> <expensive> <large>
+% <2024> <multi> <real/integer> <expensive> <large>
 % Adaptive variable grouping based surrogate-assisted evolutionary algorithm
 % Numtrain --- 300 --- Number of train samples
 % wmax     ---  20 --- Number of generations before updating models

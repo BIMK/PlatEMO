@@ -1,5 +1,5 @@
 classdef WOF < ALGORITHM
-% <multi> <real/integer> <large/none>
+% <2018> <multi> <real/integer> <large/none>
 % Weighted optimization framework
 % gamma         --- 4    --- Number of groups. Default = 4 
 % groups        --- 2    --- Grouping method, 1 = linear, 2 = ordered, 3 = random. Default = ordered 
@@ -251,16 +251,16 @@ function Population = WOFeliminateDuplicates(input)
     Population = input(ia);
 end
 
-function Population = WOFfillPopulation(input, Global)
+function Population = WOFfillPopulation(input, Problem)
     % Fills the population with mutations in case its smaller than Global.N
     Population = input;
     theCurrentPopulationSize = size(input,2);
-    if theCurrentPopulationSize < Global.N
-        amountToFill    = Global.N-theCurrentPopulationSize;
+    if theCurrentPopulationSize < Problem.N
+        amountToFill    = Problem.N-theCurrentPopulationSize;
         FrontNo         = NDSort(input.objs,inf);
         CrowdDis        = CrowdingDistance(input.objs,FrontNo);
         MatingPool      = TournamentSelection(2,amountToFill+1,FrontNo,-CrowdDis);
-        Offspring       = OperatorGA(input(MatingPool));
+        Offspring       = OperatorGA(Problem,input(MatingPool));
         Population      = [Population,Offspring(1:amountToFill)];
     end
 end

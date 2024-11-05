@@ -1,5 +1,5 @@
 classdef MMOPSO < ALGORITHM
-% <multi> <real/integer>
+% <2015> <multi> <real/integer>
 % MOPSO with multiple search strategies
 
 %------------------------------- Reference --------------------------------

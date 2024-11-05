@@ -1,5 +1,5 @@
 classdef MOCMA < ALGORITHM
-% <multi> <real/integer>
+% <2007> <multi> <real/integer>
 % Multi-objective covariance matrix adaptation evolution strategy
 
 %------------------------------- Reference --------------------------------

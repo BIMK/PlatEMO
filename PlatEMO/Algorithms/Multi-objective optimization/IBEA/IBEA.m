@@ -1,5 +1,5 @@
 classdef IBEA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2004> <multi/many> <real/integer/label/binary/permutation>
 % Indicator-based evolutionary algorithm
 % kappa --- 0.05 --- Fitness scaling factor
 

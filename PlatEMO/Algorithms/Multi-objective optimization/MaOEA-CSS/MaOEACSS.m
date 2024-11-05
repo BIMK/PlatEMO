@@ -1,5 +1,5 @@
 classdef MaOEACSS < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2017> <multi/many> <real/integer/label/binary/permutation>
 % Many-objective evolutionary algorithms based on coordinated selection
 % strategy
 % t --- 0 --- Threshold value in environmental selection

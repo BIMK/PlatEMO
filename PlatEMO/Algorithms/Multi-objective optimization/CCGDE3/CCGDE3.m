@@ -1,5 +1,5 @@
 classdef CCGDE3 < ALGORITHM
-% <multi> <real/integer> <large/none>
+% <2013> <multi> <real/integer> <large/none>
 % Cooperative coevolution generalized differential evolution 3
 
 %------------------------------- Reference --------------------------------

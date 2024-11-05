@@ -1,5 +1,5 @@
 classdef CMaDPPs < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation> <constrained/none>
+% <2023> <multi/many> <real/integer/label/binary/permutation> <constrained/none>
 % Constrained many-objective optimization with determinantal point processes
 
 %------------------------------- Reference --------------------------------

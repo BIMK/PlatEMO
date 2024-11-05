@@ -1,5 +1,5 @@
 classdef MOEADPFE < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2021> <multi/many> <real/integer/label/binary/permutation>
 % MOEA/D with Pareto front estimation
 % phi   --- 0.1 --- The frequency of employing weight update
 % alpha --- 0.1 --- Alpha radius or threshold parameter

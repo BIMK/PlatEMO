@@ -1,5 +1,5 @@
 classdef MOEADMRDL < ALGORITHM
-% <multi> <real/integer>
+% <2015> <multi> <real/integer>
 % MOEA/D with maximum relative diversity loss
 % gamma --- 20 --- Maximum allowable maximum relative diversity loss
 % nmov  --- 10 --- Size of moving average

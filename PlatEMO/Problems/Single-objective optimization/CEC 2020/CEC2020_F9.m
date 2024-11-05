@@ -1,5 +1,5 @@
 classdef CEC2020_F9 < PROBLEM
-% <single> <real>
+% <2019> <single> <real>
 % Composition function 2
 
 %------------------------------- Reference --------------------------------

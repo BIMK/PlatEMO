@@ -1,5 +1,5 @@
 classdef ParEGO < ALGORITHM
-% <multi> <real/integer> <expensive>
+% <2006> <multi> <real/integer> <expensive>
 % Efficient global optimization for Pareto optimization
 % IFEs --- 10000 --- Internal GA evals per iteration
 

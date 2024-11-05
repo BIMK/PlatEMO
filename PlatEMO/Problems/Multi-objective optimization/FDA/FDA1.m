@@ -1,5 +1,5 @@
 classdef FDA1 < PROBLEM
-% <multi> <real> <large/none> <dynamic>
+% <2004> <multi> <real> <large/none> <dynamic>
 % Benchmark dynamic MOP proposed by Farina, Deb, and Amato
 % taut --- 10 --- Number of generations for static optimization
 % nt   --- 10 --- Number of distinct steps

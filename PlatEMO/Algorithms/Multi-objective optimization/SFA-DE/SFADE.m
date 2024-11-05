@@ -1,5 +1,5 @@
 classdef SFADE < ALGORITHM
-% <multi/many> <real/integer> <expensive>
+% <2024> <multi/many> <real/integer> <expensive>
 % Scalarization function approximation based differential evolution algorithm
 % F     --- 0.5 --- Scaling facter for inner DE
 % CR    --- 0.9 --- Crossover rate for inner DE

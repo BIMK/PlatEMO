@@ -1,11 +1,12 @@
 classdef MOEACKF < ALGORITHM
-% <multi> <real/binary> <large/none> <constrained/none> <sparse>
+% <2024> <multi> <real/binary> <large/none> <constrained/none> <sparse>
 % Multi-objective evolutionary algorithm based on cross-scale knowledge fusion
 
 %------------------------------- Reference --------------------------------
-% Z. Ding, L. Chen, D. Sun, X. and Zhang, Efficient sparse large-scale 
-% multi-objective optimization based on cross-scale knowledge fusion, 
-% IEEE Transactions on Systems, Man, and Cybernetics: Systems, 2024.
+% Z. Ding, L. Chen, D. Sun, X. and Zhang, Efficient sparse large-scale
+% multi-objective optimization based on cross-scale knowledge fusion, IEEE
+% Transactions on Systems, Man, and Cybernetics: Systems, 2024, 54(11):
+% 6989-7001.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

@@ -1,5 +1,5 @@
 classdef MTCMO < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained>
+% <2023> <multi> <real/integer/label/binary/permutation> <constrained>
 % Multitasking constrained multi-objective optimization
 
 %------------------------------- Reference --------------------------------

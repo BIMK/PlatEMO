@@ -1,5 +1,5 @@
 classdef CEC2020_F2 < PROBLEM
-% <single> <real>
+% <2019> <single> <real>
 % Shifted and rotated Schwefel's function
 
 %------------------------------- Reference --------------------------------

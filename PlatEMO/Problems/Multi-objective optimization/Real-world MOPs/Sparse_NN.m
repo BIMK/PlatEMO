@@ -1,5 +1,5 @@
 classdef Sparse_NN < PROBLEM
-% <multi> <real> <large/none> <expensive/none> <sparse/none>
+% <2020> <multi> <real> <large/none> <expensive/none> <sparse/none>
 % The neural network training problem
 % dataNo  ---  1 --- Number of dataset
 % nHidden --- 20 --- Size of hidden layer

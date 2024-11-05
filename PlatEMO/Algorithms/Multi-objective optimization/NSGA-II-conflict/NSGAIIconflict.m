@@ -1,5 +1,5 @@
 classdef NSGAIIconflict < ALGORITHM
-% <many> <real/integer/label/binary/permutation>
+% <2014> <many> <real/integer/label/binary/permutation>
 % NSGA-II with conflict-based partitioning strategy
 % NS     ---  2 --- Number of subspaces
 % cycles --- 10 --- Number of cycles

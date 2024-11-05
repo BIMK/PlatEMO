@@ -1,5 +1,5 @@
 classdef CEC2013_F15 < PROBLEM
-% <single> <real> <large>
+% <2013> <single> <real> <large>
 % Shifted Schwefel's function
 
 %------------------------------- Reference --------------------------------

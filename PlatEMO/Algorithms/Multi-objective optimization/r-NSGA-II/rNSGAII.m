@@ -1,5 +1,5 @@
 classdef rNSGAII < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <2010> <multi> <real/integer/label/binary/permutation>
 % r-dominance based NSGA-II
 % Points ---     --- Set of preferred points
 % W      ---     --- Set of weight vectors for preferred points

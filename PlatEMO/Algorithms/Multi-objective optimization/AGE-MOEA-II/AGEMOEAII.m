@@ -1,5 +1,5 @@
 classdef AGEMOEAII < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation> <constrained/none>
+% <2022> <multi/many> <real/integer/label/binary/permutation> <constrained/none>
 % Adaptive geometry estimation-based many-objective evolutionary algorithm II
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef DMOEAeC < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <2017> <multi> <real/integer/label/binary/permutation>
 % Decomposition-based multi-objective evolutionary algorithm with the
 % e-constraint framework
 % INm --- 0.2 --- Iteration interval of alternating the main objective function

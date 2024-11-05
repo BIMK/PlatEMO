@@ -1,5 +1,5 @@
 classdef MFEAII < ALGORITHM
-% <single> <real/integer/label/binary/permutation> <large/none> <multitask>
+% <2020> <single> <real/integer/label/binary/permutation> <large/none> <multitask>
 % Multifactorial evolutionary algorithm II
 
 %------------------------------- Reference --------------------------------

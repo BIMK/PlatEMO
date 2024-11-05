@@ -1,5 +1,5 @@
 classdef MOEADPaS < ALGORITHM
-% <multi/many> <real/integer>
+% <2016> <multi/many> <real/integer>
 % MOEA/D with Pareto adaptive scalarizing approximation
 
 %------------------------------- Reference --------------------------------

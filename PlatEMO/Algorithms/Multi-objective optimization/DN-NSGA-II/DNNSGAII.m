@@ -1,5 +1,5 @@
 classdef DNNSGAII < ALGORITHM
-% <multi> <real/integer> <multimodal>
+% <2016> <multi> <real/integer> <multimodal>
 % Decision space based niching NSGA-II
 
 %------------------------------- Reference --------------------------------

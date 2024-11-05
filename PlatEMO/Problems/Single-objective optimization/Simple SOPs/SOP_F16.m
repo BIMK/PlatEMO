@@ -1,5 +1,5 @@
 classdef SOP_F16 < PROBLEM
-% <single> <real> <expensive/none>
+% <1999> <single> <real> <expensive/none>
 % Six-hump camel-back function
 
 %------------------------------- Reference --------------------------------

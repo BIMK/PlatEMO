@@ -1,5 +1,5 @@
 classdef MSCEA < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained>
+% <2023> <multi> <real/integer/label/binary/permutation> <constrained>
 % Multi-stage constrained multi-objective evolutionary algorithm
 % cp --- 5 --- Decrease trend of the dynamic constraint boundary
 

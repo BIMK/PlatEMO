@@ -1,5 +1,5 @@
 classdef KP < PROBLEM
-% <single> <binary> <large/none> <constrained>
+% <1999> <single> <binary> <large/none> <constrained>
 % The knapsack problem
 
 %------------------------------- Reference --------------------------------

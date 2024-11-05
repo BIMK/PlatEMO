@@ -1,5 +1,5 @@
 classdef MFEA < ALGORITHM
-% <single> <real/integer/label/binary/permutation> <large/none> <multitask>
+% <2016> <single> <real/integer/label/binary/permutation> <large/none> <multitask>
 % Multifactorial evolutionary algorithm
 % rmp --- 0.3 --- Random mating probability
 

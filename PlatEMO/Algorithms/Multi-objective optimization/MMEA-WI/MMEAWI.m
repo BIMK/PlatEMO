@@ -1,5 +1,5 @@
 classdef MMEAWI < ALGORITHM
-% <multi> <real/integer> <multimodal>
+% <2021> <multi> <real/integer> <multimodal>
 % Weighted indicator-based evolutionary algorithm for multimodal multi-objective optimization
 
 %------------------------------- Reference --------------------------------

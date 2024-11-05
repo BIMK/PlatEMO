@@ -1,5 +1,5 @@
 classdef SMOP7 < PROBLEM
-% <multi/many> <real> <large/none> <expensive/none> <sparse/none>
+% <2020> <multi/many> <real> <large/none> <expensive/none> <sparse/none>
 % Benchmark MOP with sparse Pareto optimal solutions
 % theta --- 0.1 --- Sparsity of the Pareto set
 

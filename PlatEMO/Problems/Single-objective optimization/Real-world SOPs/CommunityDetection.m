@@ -1,5 +1,5 @@
 classdef CommunityDetection < PROBLEM
-% <single> <label> <large/none> <expensive/none>
+% <2020> <single> <label> <large/none> <expensive/none>
 % The community detection problem with label based encoding
 % dataNo --- 1 --- Number of dataset
 

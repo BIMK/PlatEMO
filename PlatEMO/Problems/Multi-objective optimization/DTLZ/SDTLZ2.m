@@ -1,5 +1,5 @@
 classdef SDTLZ2 < PROBLEM
-% <multi/many> <real> <large/none> <expensive/none>
+% <2014> <multi/many> <real> <large/none> <expensive/none>
 % Scaled DTLZ2
 % a --- 2 --- Scaling factor
 

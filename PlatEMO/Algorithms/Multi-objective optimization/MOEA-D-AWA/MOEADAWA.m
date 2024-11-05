@@ -1,5 +1,5 @@
 classdef MOEADAWA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2014> <multi/many> <real/integer/label/binary/permutation>
 % MOEA/D with adaptive weight adjustment
 % rate_update_weight --- 0.05 --- Ratio of updated weight vectors
 % rate_evol          ---  0.8 --- Ratio of iterations to evolve with only MOEA/D

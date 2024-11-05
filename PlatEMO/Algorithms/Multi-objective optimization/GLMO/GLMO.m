@@ -1,5 +1,5 @@
 classdef GLMO < ALGORITHM
-% <multi> <real/integer> <large/none>
+% <2019> <multi> <real/integer> <large/none>
 % Grouped and linked mutation operator algorithm
 % optimiser      --- 3 --- The optimisation method. 1 = SMPSO, 2 = NSGA-II, 3 = NSGA-III. Default = NSGA-III
 % typeOfGroups   --- 2 --- Grouping method, 1 = linear, 2 = ordered, 3 = random. Default = ordered

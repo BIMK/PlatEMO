@@ -1,5 +1,5 @@
 classdef SparseEA < ALGORITHM
-% <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
+% <2020> <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
 % Evolutionary algorithm for sparse multi-objective optimization problems
 
 %------------------------------- Reference --------------------------------

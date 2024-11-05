@@ -1,5 +1,5 @@
 classdef NRVMOEA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2024> <multi/many> <real/integer/label/binary/permutation>
 % Adaptive normal reference vector-based multi- and many-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

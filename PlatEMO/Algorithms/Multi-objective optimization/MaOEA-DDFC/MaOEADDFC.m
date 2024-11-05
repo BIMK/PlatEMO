@@ -1,5 +1,5 @@
 classdef MaOEADDFC < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2015> <multi/many> <real/integer/label/binary/permutation>
 % Many-objective evolutionary algorithm based on directional diversity and
 % favorable convergence
 % K --- 5 --- The number of neighbors for estimating density

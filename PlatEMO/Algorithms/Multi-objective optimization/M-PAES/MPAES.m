@@ -1,5 +1,5 @@
 classdef MPAES < ALGORITHM
-% <multi> <real/integer>
+% <2000> <multi> <real/integer>
 % Memetic algorithm with Pareto archived evolution strategy
 % l_fails   ---  5 --- Maximum number of consecutive failing local moves
 % l_opt     --- 10 --- Maximum number of local moves

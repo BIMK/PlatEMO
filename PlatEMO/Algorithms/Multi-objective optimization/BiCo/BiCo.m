@@ -1,5 +1,5 @@
 classdef BiCo < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained>
+% <2022> <multi> <real/integer/label/binary/permutation> <constrained>
 % Bidirectional coevolution constrained multiobjective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

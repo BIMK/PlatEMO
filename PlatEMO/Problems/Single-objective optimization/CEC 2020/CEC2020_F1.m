@@ -1,5 +1,5 @@
 classdef CEC2020_F1 < PROBLEM
-% <single> <real>
+% <2019> <single> <real>
 % Bent cigar function
 
 %------------------------------- Reference --------------------------------

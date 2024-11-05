@@ -1,5 +1,5 @@
 classdef BiGE < ALGORITHM
-% <many> <real/integer/label/binary/permutation>
+% <2015> <many> <real/integer/label/binary/permutation>
 % Bi-goal evolution
 
 %------------------------------- Reference --------------------------------

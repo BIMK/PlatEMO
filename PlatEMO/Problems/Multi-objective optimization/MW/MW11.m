@@ -1,5 +1,5 @@
 classdef MW11 < PROBLEM
-% <multi> <real> <large/none> <constrained>
+% <2019> <multi> <real> <large/none> <constrained>
 % Constrained benchmark MOP proposed by Ma and Wang
 
 %------------------------------- Reference --------------------------------

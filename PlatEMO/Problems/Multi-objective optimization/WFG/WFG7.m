@@ -1,5 +1,5 @@
 classdef WFG7 < PROBLEM
-% <multi/many> <real> <large/none> <expensive/none>
+% <2006> <multi/many> <real> <large/none> <expensive/none>
 % Benchmark MOP proposed by Walking Fish Group
 % K --- --- The position parameter, which should be a multiple of M-1
 

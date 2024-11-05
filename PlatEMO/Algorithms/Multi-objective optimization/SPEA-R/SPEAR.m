@@ -1,5 +1,5 @@
 classdef SPEAR < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2017> <multi/many> <real/integer/label/binary/permutation>
 % Strength Pareto evolutionary algorithm based on reference direction
 
 %------------------------------- Reference --------------------------------

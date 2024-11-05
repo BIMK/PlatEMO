@@ -1,5 +1,5 @@
 classdef PBRVEA < ALGORITHM
-% <multi/many> <real/integer> <expensive>
+% <2022> <multi/many> <real/integer> <expensive>
 % RVEA based on Pareto based bi-indicator infill sampling criterion
 % alpha ---  2 --- The parameter controlling the rate of change of penalty
 % wmax  --- 15 --- Number of generations before updating Kriging models

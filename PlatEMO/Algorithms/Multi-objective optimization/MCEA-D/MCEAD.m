@@ -1,5 +1,5 @@
 classdef MCEAD < ALGORITHM
-% <multi/many> <real/integer> <expensive>
+% <2022> <multi/many> <real/integer> <expensive>
 % Multiple classifiers-assisted evolutionary algorithm based on decomposition
 % delta  --- 0.9 --- The probability of choosing parents locally
 % nr     ---   2 --- Maximum number of solutions replaced by each offspring

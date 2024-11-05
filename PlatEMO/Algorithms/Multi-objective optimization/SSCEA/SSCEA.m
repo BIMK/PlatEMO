@@ -1,5 +1,5 @@
 classdef SSCEA < ALGORITHM
-% <multi/many> <real/integer>
+% <2023> <multi/many> <real/integer>
 % Subspace segmentation based co-evolutionary algorithm
 % nSel ---  5 --- Number of selected solutions for decision variable clustering
 % nPer --- 50 --- Number of perturbations on each solution for decision variable clustering

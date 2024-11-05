@@ -1,5 +1,5 @@
 classdef PSO < ALGORITHM
-% <single> <real/integer> <large/none> <constrained/none>
+% <1995> <single> <real/integer> <large/none> <constrained/none>
 % Particle swarm optimization
 % W --- 0.4 --- Inertia weight
 

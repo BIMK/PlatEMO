@@ -1,5 +1,5 @@
 classdef LDSAF < ALGORITHM
-% % <multi> <real/integer> <large/none> <expensive>
+% <2024> <multi> <real/integer> <large/none> <expensive>
 % Low-dimensional surrogate aggregation function
 
 %------------------------------- Reference --------------------------------

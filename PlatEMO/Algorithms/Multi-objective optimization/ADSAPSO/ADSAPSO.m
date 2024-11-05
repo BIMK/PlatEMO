@@ -1,5 +1,5 @@
 classdef ADSAPSO < ALGORITHM
-% <multi/many> <real/integer> <expensive>
+% <2022> <multi/many> <real/integer> <expensive>
 % Adaptive dropout based surrogate-assisted particle swarm optimization
 % k    ---   5 --- Number of re-evaluated solutions
 % beta --- 0.5 --- Percentage of Dropout

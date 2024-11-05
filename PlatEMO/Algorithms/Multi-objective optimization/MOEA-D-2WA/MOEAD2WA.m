@@ -1,5 +1,5 @@
 classdef MOEAD2WA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation> <constrained>
+% <2021> <multi/many> <real/integer/label/binary/permutation> <constrained>
 % MOEA/D with two-type weight vector adjustments
 
 %------------------------------- Reference --------------------------------

@@ -1,11 +1,11 @@
 classdef MOEANZD < ALGORITHM
-% <multi/many> <real> <large/none> <constrained/none> <sparse>
+% <2024> <multi/many> <real> <large/none> <constrained/none> <sparse>
 % Multi-objective evolutionary algorithm with nonzero detection
 
 %------------------------------- Reference --------------------------------
 % X. Wang, R. Cheng, and Y. Jin, Sparse large-scale multiobjective
 % optimization by identifying nonzero decision variables, IEEE Transactions
-% on Systems, Man, and Cybernetics: Systems, 2024.
+% on Systems, Man, and Cybernetics: Systems, 2024, 54(10): 6280-6292.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

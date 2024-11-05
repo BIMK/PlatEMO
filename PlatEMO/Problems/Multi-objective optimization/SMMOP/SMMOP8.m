@@ -1,5 +1,5 @@
 classdef SMMOP8 < PROBLEM
-% <multi/many> <real> <large/none> <multimodal> <sparse/none>
+% <2021> <multi/many> <real> <large/none> <multimodal> <sparse/none>
 % Sparse multi-modal multi-objective optimization problem
 % theta --- 0.1 --- Sparsity of the Pareto sets
 % np    ---   4 --- Number of the Pareto sets

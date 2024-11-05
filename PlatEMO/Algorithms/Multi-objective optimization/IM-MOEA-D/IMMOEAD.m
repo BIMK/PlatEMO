@@ -1,7 +1,6 @@
 classdef IMMOEAD < ALGORITHM
-% <multi> <real/integer> <large/none>
-% Inverse modeling multiobjective evolutionary algorithm based on
-% decomposition
+% <2021> <multi> <real/integer> <large/none>
+% Inverse modeling MOEA/D
 % K --- 10 --- Number of reference vectors
 
 %------------------------------- Reference --------------------------------

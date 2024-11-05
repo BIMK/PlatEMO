@@ -1,5 +1,5 @@
 classdef FROFI < ALGORITHM
-% <single> <real/integer> <large/none> <constrained>
+% <2015> <single> <real/integer> <large/none> <constrained>
 % Feasibility rule with the incorporation of objective function information
 
 %------------------------------- Reference --------------------------------

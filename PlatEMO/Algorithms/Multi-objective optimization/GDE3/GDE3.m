@@ -1,5 +1,5 @@
 classdef GDE3 < ALGORITHM
-% <multi> <real/integer> <constrained/none>
+% <2005> <multi> <real/integer> <constrained/none>
 % Generalized differential evolution 3
 
 %------------------------------- Reference --------------------------------

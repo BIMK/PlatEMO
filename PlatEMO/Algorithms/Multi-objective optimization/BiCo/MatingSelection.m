@@ -14,11 +14,11 @@ function MatingPool = MatingSelection(Population,ArcPop,N)
         SelectedIndex = TournamentSelection(2,N,-sum(max(0,Population.cons),2));
         MatingPool    = Population(SelectedIndex);
     else
-        AllPop = [ Population,ArcPop]; 
-        Zmin       = min(AllPop.objs,[],1);
+        AllPop = [Population,ArcPop]; 
+        Zmin   = min(AllPop.objs,[],1);
         PopObj = (AllPop.objs-repmat(Zmin,length(AllPop.objs),1))./(repmat(max(AllPop.objs),length(AllPop.objs),1)-repmat(Zmin,length(AllPop.objs),1)+1e-10)+1e-10;
-        Cosine   = 1 - pdist2(PopObj,PopObj,'cosine');
-        Cosine   = Cosine.*(1-eye(size(PopObj,1)));
+        Cosine = 1 - pdist2(PopObj,PopObj,'cosine');
+        Cosine = Cosine.*(1-eye(size(PopObj,1)));
 
         Temp     = sort(-Cosine,2);
         [~,Rank] = sortrows(Temp);

@@ -1,5 +1,5 @@
 classdef SCEA < ALGORITHM
-% <multi> <real/binary> <large/none> <constrained/none> <sparse>
+% <2024> <multi> <real/binary> <large/none> <constrained/none> <sparse>
 % Sparsity clustering basec evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef ABSAEA < ALGORITHM
-% <multi/many> <real/integer> <expensive>
+% <2020> <multi/many> <real/integer> <expensive>
 % Adaptive Bayesian based surrogate-assisted evolutionary algorithm
 % alpha ---  2 --- The parameter controlling the rate of change of penalty
 % wmax  --- 20 --- Number of generations before updating Kriging models

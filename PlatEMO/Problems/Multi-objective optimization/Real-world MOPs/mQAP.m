@@ -1,5 +1,5 @@
 classdef mQAP < PROBLEM
-% <multi/many> <permutation> <large/none>
+% <2003> <multi/many> <permutation> <large/none>
 % The multi-objective quadratic assignment problem
 % c --- 0 --- Correlation parameter
 
@@ -54,11 +54,13 @@ classdef mQAP < PROBLEM
         end
         %% Calculate objective values
         function PopObj = CalObj(obj,PopDec)
+            [sorted,rank] = sort(PopDec,2);
+            index = any(sorted~=repmat(1:size(PopDec,2),size(PopDec,1),1),2);
+            PopDec(index,:) = rank(index,:);
             PopObj = zeros(size(PopDec,1),obj.M);
-            [~,pi] = sort(PopDec,2);
-            for i = 1 : obj.M
-                for j = 1 : size(PopDec,1)
-                    PopObj(j,i) = sum(sum(obj.a.*obj.b{i}(pi(j,:),pi(j,:))));
+            for i = 1 : size(PopDec,1)
+                for j = 1 : obj.M
+                    PopObj(i,j) = sum(sum(obj.a.*obj.b{j}(PopDec(i,:),PopDec(i,:))));
                 end
             end
         end

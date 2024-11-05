@@ -1,5 +1,5 @@
 classdef MOEADDE_F8 < PROBLEM
-% <multi> <real> <large/none>
+% <2009> <multi> <real> <large/none>
 % Benchmark MOP for testing MOEA/D-DE
 
 %------------------------------- Reference --------------------------------

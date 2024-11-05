@@ -1,5 +1,5 @@
 classdef CEC2017_F13 < PROBLEM
-% <single> <real> <constrained>
+% <2016> <single> <real> <constrained>
 % CEC'2017 constrained optimization benchmark problem
 
 %------------------------------- Reference --------------------------------

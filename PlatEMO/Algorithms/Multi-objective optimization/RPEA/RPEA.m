@@ -1,5 +1,5 @@
 classdef RPEA < ALGORITHM
-% <many> <real/integer/label/binary/permutation>
+% <2017> <many> <real/integer/label/binary/permutation>
 % Reference points-based evolutionary algorithm
 % alpha --- 0.4 --- Ratio of individuals being used to generate reference points
 % delta --- 0.1 --- Parameter determining the difference between the reference point and the individuals

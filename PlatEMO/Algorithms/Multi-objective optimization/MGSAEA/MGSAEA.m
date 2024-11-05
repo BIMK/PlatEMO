@@ -1,5 +1,5 @@
 classdef MGSAEA < ALGORITHM
-% <multi> <real> <expensive> <constrained>
+% <2024> <multi> <real> <expensive> <constrained>
 % Multigranularity surrogate-assisted constrained evolutionary algorithm
 % wmax   ---    20 --- Number of generations before updating surrogate models
 % mu     ---     5 --- Number of real evaluated solutions at each iteration

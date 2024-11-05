@@ -1,5 +1,5 @@
 classdef CEC2008_F6 < PROBLEM
-% <single> <real> <large/none> <expensive/none>
+% <2007> <single> <real> <large/none> <expensive/none>
 % Shifted Ackley's function
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef RMMEDA < ALGORITHM
-% <multi> <real/integer>
+% <2008> <multi> <real/integer>
 % Regularity model-based multiobjective estimation of distribution
 % algorithm
 

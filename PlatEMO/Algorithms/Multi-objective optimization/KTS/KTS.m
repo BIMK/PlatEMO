@@ -1,5 +1,5 @@
 classdef KTS < ALGORITHM
-% <multi/many> <real> <expensive> <constrained>
+% <2024> <multi/many> <real> <expensive> <constrained>
 % Kriging-assisted evolutionary algorithm with two search modes
 % tau --- 0.6 --- Threshold value
 % phi --- 0.2 --- Threshold value
@@ -9,7 +9,7 @@ classdef KTS < ALGORITHM
 % Z. Song, H. Wang, B. Xue, M. Zhang, and Y. Jin, Balancing objective
 % optimization and constraint satisfaction in expensive constrained
 % evolutionary multi-objective optimization, IEEE Transactions on
-% Evolutionary Computation, 2023.
+% Evolutionary Computation, 2024, 28(5): 1286-1300.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

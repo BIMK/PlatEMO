@@ -1,5 +1,5 @@
 classdef SMSEGO < ALGORITHM
-% <multi> <real/integer> <expensive>
+% <2008> <multi> <real/integer> <expensive>
 % S-metric-selection-based efficient global optimization
 % wmax --- 10000 --- The maximum number of internal evluation
 

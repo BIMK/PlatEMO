@@ -1,5 +1,5 @@
 classdef CI_MS < PROBLEM
-% <single> <real> <large/none> <multitask>
+% <2020> <single> <real> <large/none> <multitask>
 % Multitasking problem (Ackley function + Rastrigin function)
 % SubD --- 50,50 --- Number of decision variables of each task
 

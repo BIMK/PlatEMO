@@ -1,5 +1,5 @@
 classdef REMO < ALGORITHM
-% <multi/many> <real> <expensive>
+% <2022> <multi/many> <real> <expensive>
 % Expensive multiobjective optimization by relation learning and prediction
 % k    ---    6 --- Number of reference solutions
 % gmax --- 3000 --- Number of solutions evaluated by surrogate model

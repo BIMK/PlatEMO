@@ -1,5 +1,5 @@
 classdef LRMOEA < ALGORITHM
-% <multi> <real/integer/binary> <large/none> <constrained/none> <sparse> <robust>
+% <2024> <multi> <real/integer/binary> <large/none> <constrained/none> <sparse> <robust>
 % Large-scale robust multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

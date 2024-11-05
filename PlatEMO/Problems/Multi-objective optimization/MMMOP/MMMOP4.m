@@ -1,5 +1,5 @@
 classdef MMMOP4 < PROBLEM
-% <multi/many> <real> <multimodal>
+% <2019> <multi/many> <real> <multimodal>
 % Multi-modal multi-objective optimization problem
 % kA --- 1 --- Number of decision variables in XA
 % c  --- 2 --- Parameter c

@@ -1,11 +1,11 @@
 classdef MGCEA < ALGORITHM
-% <multi> <real/binary> <large/none> <constrained/none> <sparse>
+% <2024> <multi> <real/binary> <large/none> <constrained/none> <sparse>
 % Multi-granularity clustering based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
 % Y. Tian, S. Shao, G. Xie, and Y. Jin, A multi-granularity clustering
 % based evolutionary algorithm for large-scale sparse multi-objective
-% optimization, Swarm and Evolutionary Computation, 2023.
+% optimization, Swarm and Evolutionary Computation, 2024, 84: 101453.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

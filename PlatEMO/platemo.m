@@ -44,7 +44,7 @@ function varargout = platemo(varargin)
 %
 %   runs PSO with a population size of 100 on SOP_F1 for 3 seconds.
 %
-%       platemo('algorithm',{@KnEA,0.4},'problem',{@WFG4,6},'M',5)
+%       platemo('algorithm',{@KnEA,0.4},'problem',{@WFG4,16},'M',5)
 %
 %   runs KnEA on 5-objective WFG4 and sets the parameters in KnEA and WFG4.
 %

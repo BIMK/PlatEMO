@@ -1,5 +1,5 @@
 classdef LRMOP3 < PROBLEM
-% <multi/many> <real> <large/none> <robust> <sparse/none>
+% <2024> <multi/many> <real> <large/none> <robust> <sparse/none>
 % Sparse robust multi-objective optimization problem
 % theta --- 0.1 --- Sparsity of the Pareto set
 % H     ---  50 --- Number of disturbances

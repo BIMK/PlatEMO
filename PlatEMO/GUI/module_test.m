@@ -30,14 +30,16 @@ classdef module_test < handle
             GUI.APP([1 2],8,uipanel(obj.app.maingrid,'BackgroundColor',[.8 .8 .8]));
 
             % The first panel
-            obj.app.grid(1)   = GUI.APP(2,1,uigridlayout(obj.app.maingrid,'RowHeight',{16,21,16,21,21,16,21,21,21,22,'1x',22,'1x'},'ColumnWidth',{'1x','1.1x','1x'},'Padding',[8 10 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
+            obj.app.grid(1)   = GUI.APP(2,1,uigridlayout(obj.app.maingrid,'RowHeight',{16,21,16,21,21,16,21,21,21,4,18,'1x',4,18,'1x'},'ColumnWidth',{'1x','1.1x','1x'},'Padding',[8 10 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
             [obj.app.stateA,obj.app.labelA] = GUI.GenerateLabelButton(obj.app.grid(1),[0,1,0,1,zeros(1,13)],@obj.cb_filter);
-            obj.app.labelA(4) = GUI.APP(10,[1 2],uilabel(obj.app.grid(1),'Text','Algorithms','VerticalAlignment','bottom','FontSize',13,'FontColor',[.2 .4 .7],'FontWeight','bold'));
-            obj.app.labelA(5) = GUI.APP(10,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.2 .4 .7]));
-            obj.app.listA(1)  = GUI.APP(11,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.2 .4 .7]));
-            obj.app.labelA(6) = GUI.APP(12,[1 2],uilabel(obj.app.grid(1),'Text','Problems','VerticalAlignment','bottom','FontSize',13,'FontColor',[.9 .5 .2],'FontWeight','bold'));
-            obj.app.labelA(7) = GUI.APP(12,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.9 .5 .2]));
-            obj.app.listA(2)  = GUI.APP(13,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.9 .5 .2]));
+            obj.app.labelA(4) = GUI.APP(11,[1 2],uilabel(obj.app.grid(1),'Text','Algorithms','FontSize',13,'FontColor',[.2 .4 .7],'FontWeight','bold'));
+            obj.app.labelA(5) = GUI.APP(11,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','FontSize',10,'FontColor',[.2 .4 .7]));
+            obj.app.listA(1)  = GUI.APP(12,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.2 .4 .7]));
+            obj.app.labelA(6) = GUI.APP(14,[1 2],uilabel(obj.app.grid(1),'Text','Problems','FontSize',13,'FontColor',[.9 .5 .2],'FontWeight','bold'));
+            obj.app.labelA(7) = GUI.APP(14,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','FontSize',10,'FontColor',[.9 .5 .2]));
+            obj.app.listA(2)  = GUI.APP(15,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.9 .5 .2]));
+            obj.app.dropA(1)  = GUI.APP(11,2,uidropdown(obj.app.grid(1),'BackgroundColor','w','FontColor',[.2 .4 .7],'Items',{'All year'},'ValueChangedFcn',@(h,~)GUI.UpdateAlgProListYear(obj.app.listA(1),h,obj.app.labelA(5),obj.GUI.algList)));
+            obj.app.dropA(2)  = GUI.APP(14,2,uidropdown(obj.app.grid(1),'BackgroundColor','w','FontColor',[.9 .5 .2],'Items',{'All year'},'ValueChangedFcn',@(h,~)GUI.UpdateAlgProListYear(obj.app.listA(2),h,obj.app.labelA(7),obj.GUI.proList)));
 
             % The second panel
             obj.app.listB   = uilist(obj.app.maingrid,obj.GUI.app.figure,obj.GUI.icon);
@@ -84,7 +86,7 @@ classdef module_test < handle
         %% Update the algorithms and problems in the lists
         function cb_filter(obj,~,~,index)
             % Update the lists of algorithms and problems
-            func = GUI.UpdateAlgProList(index,obj.app.stateA,obj.app.listA(1),obj.app.labelA(5),obj.GUI.algList,obj.app.listA(2),obj.app.labelA(7),obj.GUI.proList);
+            func = GUI.UpdateAlgProList(index,obj.app.stateA,obj.app.listA(1),obj.app.dropA(1),obj.app.labelA(5),obj.GUI.algList,obj.app.listA(2),obj.app.dropA(2),obj.app.labelA(7),obj.GUI.proList);
             % Update the list of metrics
             show = cellfun(@(s)func(s(2:end,1:end-2)),obj.GUI.metList(:,1));
             if obj.app.stateA(1).Value == 0 % Multi-objective optimization
@@ -124,7 +126,7 @@ classdef module_test < handle
                 end
                 obj.data = [obj.data;{ALG},{PRO},{str}];
                 % Update the GUI
-                set([obj.GUI.app.button,obj.app.stateA,obj.app.listA,obj.app.dropD,obj.app.dropC],'Enable',false);
+                set([obj.GUI.app.button,obj.app.stateA,obj.app.listA,obj.app.dropA,obj.app.dropD,obj.app.dropC],'Enable',false);
                 obj.app.listB.Enable = false;
                 set(obj.app.toolC,'Visible',false);
                 obj.app.buttonC(1).Text = 'Pause';
@@ -155,7 +157,7 @@ classdef module_test < handle
         end
         %% Stop the execution
         function cb_stop(obj,~,~)
-            set([obj.GUI.app.button,obj.app.stateA,obj.app.listA,obj.app.dropD,obj.app.dropC],'Enable',true);
+            set([obj.GUI.app.button,obj.app.stateA,obj.app.listA,obj.app.dropA,obj.app.dropD,obj.app.dropC],'Enable',true);
             obj.app.listB.Enable = true;
             set(obj.app.toolC,'Visible',true);
             obj.app.buttonC(1).Text   = 'Start';

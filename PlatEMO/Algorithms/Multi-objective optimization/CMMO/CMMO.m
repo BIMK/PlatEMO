@@ -1,5 +1,5 @@
 classdef CMMO < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <multimodal>
+% <2023> <multi> <real/integer/label/binary/permutation> <multimodal>
 % Coevolutionary multi-modal multi-objective optimization framework
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef ISIBEA < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <2015> <multi> <real/integer/label/binary/permutation>
 % Interactive simple indicator-based evolutionary algorithm
 % Point --- --- Preferred point
 

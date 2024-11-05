@@ -1,5 +1,5 @@
 classdef FLEA < ALGORITHM
-% <multi/many> <real> <large/none>
+% <2022> <multi/many> <real> <large/none>
 % Fast sampling based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

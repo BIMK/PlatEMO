@@ -1,5 +1,5 @@
 classdef MOCell < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained/none>
+% <2009> <multi> <real/integer/label/binary/permutation> <constrained/none>
 % Cellular genetic algorithm
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef DC3_DTLZ3 < PROBLEM
-% <multi/many> <real> <large/none> <constrained> <expensive/none>
+% <2018> <multi/many> <real> <large/none> <constrained> <expensive/none>
 % DTLZ3 with constrains in decision space
 
 %------------------------------- Reference --------------------------------

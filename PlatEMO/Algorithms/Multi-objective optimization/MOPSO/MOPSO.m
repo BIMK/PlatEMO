@@ -1,5 +1,5 @@
 classdef MOPSO < ALGORITHM
-% <multi> <real/integer>
+% <2002> <multi> <real/integer>
 % Multi-objective particle swarm optimization
 % div --- 10 --- The number of divisions in each objective
 

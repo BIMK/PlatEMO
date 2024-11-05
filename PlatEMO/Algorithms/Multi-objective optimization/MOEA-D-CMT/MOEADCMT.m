@@ -1,5 +1,5 @@
 classdef MOEADCMT < ALGORITHM
-% <multi> <real> <constrained>
+% <2024> <multi> <real> <constrained>
 % MOEA/D with competitive multitasking
 % delta --- 0.9 --- The probability of choosing parents locally
 % nr    ---   2 --- Maximum number of solutions replaced by each offspring

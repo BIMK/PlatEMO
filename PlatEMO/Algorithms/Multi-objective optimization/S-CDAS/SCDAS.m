@@ -1,5 +1,5 @@
 classdef SCDAS < ALGORITHM
-% <many> <real/integer/label/binary/permutation>
+% <2010> <many> <real/integer/label/binary/permutation>
 % Self-controlling dominance area of solutions
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef CEC2013_F3 < PROBLEM
-% <single> <real> <large>
+% <2013> <single> <real> <large>
 % Shifted Ackley's function
 
 %------------------------------- Reference --------------------------------

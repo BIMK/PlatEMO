@@ -1,5 +1,5 @@
 classdef LSMOF < ALGORITHM
-% <multi> <real/integer> <large/none>
+% <2019> <multi> <real/integer> <large/none>
 % Large-scale multi-objective optimization framework with NSGA-II
 % wD       --- 10 --- The generation of weight optimization with DE
 % SubN     --- 30 --- The population size of the transferred problem

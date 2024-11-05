@@ -1,5 +1,5 @@
 classdef LMPFE < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2023> <multi/many> <real/integer/label/binary/permutation>
 % Evolutionary algorithm with local model based Pareto front estimation
 % fPFE  --- 0.1 --- Frequency of employing generic front modeling
 % K     --- 5  --- Number of subregions

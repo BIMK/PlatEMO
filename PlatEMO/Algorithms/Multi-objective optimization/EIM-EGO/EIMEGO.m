@@ -1,5 +1,5 @@
 classdef EIMEGO < ALGORITHM
-% <multi> <real/integer> <expensive>
+% <2017> <multi> <real/integer> <expensive>
 % Expected improvement matrix based efficient global optimization
 % InfillCriterionIndex --- 1 --- infill criterion index number
 

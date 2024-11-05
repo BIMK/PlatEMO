@@ -1,5 +1,5 @@
 classdef MVPA < ALGORITHM
-% <single> <real/integer> <large/none> <constrained/none>
+% <2020> <single> <real/integer> <large/none> <constrained/none>
 % Most valuable player algorithm
 
 %------------------------------- Reference --------------------------------

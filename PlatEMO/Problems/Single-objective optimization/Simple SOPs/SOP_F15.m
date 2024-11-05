@@ -1,5 +1,5 @@
 classdef SOP_F15 < PROBLEM
-% <single> <real> <expensive/none>
+% <1999> <single> <real> <expensive/none>
 % Kowalik's function
 
 %------------------------------- Reference --------------------------------

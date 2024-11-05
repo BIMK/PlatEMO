@@ -1,5 +1,5 @@
 classdef DASCMOP5 < PROBLEM
-% <multi> <real> <large/none> <constrained>
+% <2020> <multi> <real> <large/none> <constrained>
 % Difficulty-adjustable and scalable constrained benchmark MOP
 
 %------------------------------- Reference --------------------------------

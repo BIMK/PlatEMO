@@ -1,5 +1,5 @@
 classdef BLEAQII < ALGORITHM
-% <multi> <real> <constrained/none> <bilevel>
+% <2020> <multi> <real> <constrained/none> <bilevel>
 % Bilevel evolutionary algorithm based on quadratic approximations II
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef CEC2008_F5 < PROBLEM
-% <single> <real> <large/none> <expensive/none>
+% <2007> <single> <real> <large/none> <expensive/none>
 % Shifted Griewank's function
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef PeEA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2021> <multi/many> <real/integer/label/binary/permutation>
 % Pareto front shape estimation based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

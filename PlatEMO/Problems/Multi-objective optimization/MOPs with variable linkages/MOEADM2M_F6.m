@@ -1,5 +1,5 @@
 classdef MOEADM2M_F6 < PROBLEM
-% <multi> <real> <large/none>
+% <2014> <multi> <real> <large/none>
 % Benchmark MOP for testing MOEA/D-M2M
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef HypE < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2011> <multi/many> <real/integer/label/binary/permutation>
 % Hypervolume estimation algorithm
 % nSample --- 10000 --- Number of sampled points for HV estimation
 

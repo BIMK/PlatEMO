@@ -1,5 +1,5 @@
 classdef ARMOEA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation> <constrained/none>
+% <2018> <multi/many> <real/integer/label/binary/permutation> <constrained/none>
 % Adaptive reference points based multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

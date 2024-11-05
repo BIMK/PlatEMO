@@ -1,5 +1,5 @@
 classdef SMD10 < PROBLEM
-% <multi> <real> <constrained> <bilevel>
+% <2014> <multi> <real> <constrained> <bilevel>
 % Bilevel optimization problems proposed by Sinha, Malo, and Deb
 % maxFElower --- 500 --- Maximum number of lower level function evaluations for each solution
 

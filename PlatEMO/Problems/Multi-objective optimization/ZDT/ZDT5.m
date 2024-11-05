@@ -1,5 +1,5 @@
 classdef ZDT5 < PROBLEM
-% <multi> <binary> <large/none> <expensive/none>
+% <2000> <multi> <binary> <large/none> <expensive/none>
 % Benchmark MOP proposed by Zitzler, Deb, and Thiele
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef EGO < ALGORITHM
-% <single> <real/integer> <expensive>
+% <1998> <single> <real/integer> <expensive>
 % Efficient global optimization
 % IFEs --- 10000 --- Internal GA evals per iteration
 

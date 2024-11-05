@@ -1,11 +1,11 @@
 classdef BLSAEA < ALGORITHM
-% <multi> <real> <constrained/none> <bilevel>
+% <2024> <multi> <real> <constrained/none> <bilevel>
 % Bi-level surrogate modelling based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
 % H. Jiang, K. Qiu, Y. Tian, X. Zhang, and Y. Jin, Efficient surrogate
 % modeling method for evolutionary algorithm to solve bilevel optimization
-% problems, IEEE Transactions on Cybernetics, 2023.
+% problems, IEEE Transactions on Cybernetics, 2024, 54(7): 4335-4347
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code

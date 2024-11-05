@@ -1,5 +1,5 @@
 classdef MaOPP_real < PROBLEM
-% <many> <real> <large/none> <expensive/none>
+% <2022> <many> <real> <large/none> <expensive/none>
 % Many-objective pathfinding problem based on real encoding
 % xmax                    ---  10 --- xmax
 % ymax                    ---  10 --- ymax

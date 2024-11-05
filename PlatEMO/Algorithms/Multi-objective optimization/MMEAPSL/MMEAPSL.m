@@ -1,5 +1,5 @@
 classdef MMEAPSL < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <multimodal>
+% <2024> <multi> <real/integer/label/binary/permutation> <multimodal>
 % Multimodal multi-objective evolutionary algorithm assisted by Pareto set learning
 
 %------------------------------- Reference --------------------------------

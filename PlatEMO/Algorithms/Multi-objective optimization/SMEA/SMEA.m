@@ -1,5 +1,5 @@
 classdef SMEA < ALGORITHM
-% <multi> <real/integer>
+% <2016> <multi> <real/integer>
 % Self-organizing multiobjective evolutionary algorithm
 % D    ---     --- Number of neurons in each dimension of the latent space
 % tau0 --- 0.7 --- Initial learning rate

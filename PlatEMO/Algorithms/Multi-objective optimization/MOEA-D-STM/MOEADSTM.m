@@ -1,5 +1,5 @@
 classdef MOEADSTM < ALGORITHM
-% <multi/many> <real/integer>
+% <2014> <multi/many> <real/integer>
 % MOEA/D with stable matching
 
 %------------------------------- Reference --------------------------------

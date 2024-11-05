@@ -1,5 +1,5 @@
 classdef CF8 < PROBLEM
-% <multi> <real> <large/none> <constrained>
+% <2009> <multi> <real> <large/none> <constrained>
 % Constrained benchmark MOP
 
 %------------------------------- Reference --------------------------------

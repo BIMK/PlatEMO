@@ -1,5 +1,5 @@
 classdef LMOCSO < ALGORITHM
-% <multi/many> <real/integer> <large/none> <constrained/none>
+% <2020> <multi/many> <real/integer> <large/none> <constrained/none>
 % Large-scale multi-objective competitive swarm optimization algorithm
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef GPSOM < ALGORITHM
-% <multi/many> <real> <large/none> <constrained/none>
+% <2012> <multi/many> <real> <large/none> <constrained/none>
 % Gradient based particle swarm optimization algorithm (for multi-objective optimization)
 % popsize --- 20 --- Population size of single run
 

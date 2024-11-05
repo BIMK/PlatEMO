@@ -1,5 +1,5 @@
 classdef SGEA<ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained/none> <dynamic>
+% <2017> <multi> <real/integer/label/binary/permutation> <constrained/none> <dynamic>
 % Steady-state and generational evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

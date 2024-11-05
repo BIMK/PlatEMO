@@ -1,5 +1,5 @@
 classdef MOEADUR < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2022> <multi/many> <real/integer/label/binary/permutation>
 % MOEA/D with update when required
 % start  ---  0.2 --- Start adaptation
 % finish --- 0.93 --- Finish adaptation

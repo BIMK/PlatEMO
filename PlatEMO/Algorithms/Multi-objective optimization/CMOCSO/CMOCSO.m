@@ -1,5 +1,5 @@
 classdef CMOCSO < ALGORITHM
-% <multi> <real> <large/none> <constrained>
+% <2023> <multi> <real> <large/none> <constrained>
 % Competitive and cooperative swarm optimization constrained multi-objective optimization algorithm
 
 %------------------------------- Reference --------------------------------

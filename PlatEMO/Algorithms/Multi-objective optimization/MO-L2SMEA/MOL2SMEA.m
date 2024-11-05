@@ -1,5 +1,5 @@
 classdef MOL2SMEA < ALGORITHM
-% <multi> <real> <expensive> <large/none>
+% <2023> <multi> <real> <expensive> <large/none>
 % Multi-objective linear subspace surrogate modeling assisted evolutionary algorithm
 % NLinear --- 8 --- Number of one-dimensional models
 

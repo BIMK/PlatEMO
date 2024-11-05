@@ -1,5 +1,5 @@
 classdef MOEADURAW < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2019> <multi/many> <real/integer/label/binary/permutation>
 % MOEA/D with uniform randomly adaptive weights
 % delta --- 0.9 --- The probability of choosing parents locally
 % nr    ---   2 --- Maximum number of solutions replaced by each offspring

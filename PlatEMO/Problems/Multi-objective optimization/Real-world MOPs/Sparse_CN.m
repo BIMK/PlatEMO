@@ -1,5 +1,5 @@
 classdef Sparse_CN < PROBLEM
-% <multi> <binary> <large/none> <expensive/none> <sparse/none>
+% <2020> <multi> <binary> <large/none> <expensive/none> <sparse/none>
 % The critical node detection problem
 % dataNo --- 1 --- Number of dataset
 

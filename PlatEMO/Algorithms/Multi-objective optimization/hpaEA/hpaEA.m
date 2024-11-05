@@ -1,5 +1,5 @@
 classdef hpaEA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2020> <multi/many> <real/integer/label/binary/permutation>
 % Hyperplane assisted evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

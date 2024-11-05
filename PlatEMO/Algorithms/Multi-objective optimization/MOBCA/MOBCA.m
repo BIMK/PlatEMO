@@ -1,5 +1,5 @@
 classdef MOBCA < ALGORITHM
-% <multi> <real/integer>
+% <2024> <multi> <real/integer>
 % Multi-objective besiege and conquer algorithm
 % BCB       --- 0.2 --- Set BCB
 % nSoldiers ---   3 --- Number of soldiers for each armies

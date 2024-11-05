@@ -1,5 +1,5 @@
 classdef GFMMOEA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2020> <multi/many> <real/integer/label/binary/permutation>
 % Generic front modeling based multi-objective evolutionary algorithm
 % theta --- 0.2 --- Penalty parameter
 % fPFE  --- 0.1 --- Frequency of employing generic front modeling

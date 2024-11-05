@@ -1,5 +1,5 @@
 classdef ICMA < ALGORITHM
-% <multi> <real/integer> <constrained>
+% <2022> <multi> <real/integer> <constrained>
 % Indicator-based constrained multi-objective algorithm
 
 %------------------------------- Reference --------------------------------

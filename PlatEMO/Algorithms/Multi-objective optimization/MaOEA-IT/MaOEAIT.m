@@ -1,5 +1,5 @@
 classdef MaOEAIT < ALGORITHM
-% <multi/many> <real/integer> <constrained/none>
+% <2019> <multi/many> <real/integer> <constrained/none>
 % Many-objective evolutionary algorithms based on an independent two-stage
 % approach
 % Evaluation1 --- 20000 --- Number of evaluations for NDWA

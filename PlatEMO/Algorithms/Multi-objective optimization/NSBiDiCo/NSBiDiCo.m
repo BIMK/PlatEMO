@@ -1,5 +1,5 @@
 classdef NSBiDiCo < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained>
+% <2023> <multi> <real/integer/label/binary/permutation> <constrained>
 % Non-dominated sorting bidirectional differential coevolution algorithm
 
 %------------------------------- Reference --------------------------------

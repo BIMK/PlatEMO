@@ -1,5 +1,5 @@
 classdef FCP2 < PROBLEM
-% <multi> <real> <constrained>
+% <2022> <multi> <real> <constrained>
 % Benchmark constrained MOP proposed by Jiawei Yuan
 
 %------------------------------- Reference --------------------------------

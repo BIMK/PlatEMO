@@ -1,5 +1,5 @@
 classdef NSGAIISDR < ALGORITHM
-% <many> <real/integer/label/binary/permutation>
+% <2019> <many> <real/integer/label/binary/permutation>
 % NSGA-II with strengthened dominance relation
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef BCEMOEAD < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2016> <multi/many> <real/integer/label/binary/permutation>
 % Bi-criterion evolution based MOEA/D
 
 %------------------------------- Reference --------------------------------

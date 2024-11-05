@@ -1,5 +1,5 @@
 classdef SD < ALGORITHM
-% <single> <real> <large/none>
+% <1997> <single> <real> <large/none>
 % Steepest descent
 % beta  --- 0.6 --- A parameter within [0,1] for line search
 % sigma --- 0.4 --- A parameter within [0 0.5] for line search

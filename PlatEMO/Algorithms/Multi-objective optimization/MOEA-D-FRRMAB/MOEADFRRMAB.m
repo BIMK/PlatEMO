@@ -1,5 +1,5 @@
 classdef MOEADFRRMAB < ALGORITHM
-% <multi/many> <real/integer>
+% <2014> <multi/many> <real/integer>
 % MOEA/D with fitness-rate-rank-based multiarmed bandit
 % C --- 5 --- Scaling factor in bandit-based operator selection
 % W ---   --- Size of sliding window

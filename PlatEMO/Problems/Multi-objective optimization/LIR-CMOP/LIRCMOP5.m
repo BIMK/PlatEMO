@@ -1,5 +1,5 @@
 classdef LIRCMOP5 < PROBLEM
-% <multi> <real> <large/none> <constrained>
+% <2019> <multi> <real> <large/none> <constrained>
 % Constrained benchmark MOP with large infeasible regions
 
 %------------------------------- Reference --------------------------------

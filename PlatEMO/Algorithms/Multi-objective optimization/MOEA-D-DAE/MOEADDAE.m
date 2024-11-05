@@ -1,5 +1,5 @@
 classdef MOEADDAE < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained>
+% <2020> <multi> <real/integer/label/binary/permutation> <constrained>
 % MOEA/D with detect-and-escape strategy
 
 %------------------------------- Reference --------------------------------

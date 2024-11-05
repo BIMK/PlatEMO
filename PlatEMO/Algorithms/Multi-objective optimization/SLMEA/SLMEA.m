@@ -1,5 +1,5 @@
 classdef SLMEA < ALGORITHM
-% <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
+% <2022> <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
 % Super-large-scale multi-objective evolutionary algorithm
 % useGPU --- 0 --- Whether use GPU acceleration
 

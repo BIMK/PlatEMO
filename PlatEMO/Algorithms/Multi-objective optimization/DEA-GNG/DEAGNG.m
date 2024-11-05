@@ -1,5 +1,5 @@
 classdef DEAGNG < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2020> <multi/many> <real/integer/label/binary/permutation>
 % Decomposition based evolutionary algorithm guided by growing neural gas
 % aph ---   0.1 --- Parameter alpha
 % eps --- 0.314 --- Parameter epsilon

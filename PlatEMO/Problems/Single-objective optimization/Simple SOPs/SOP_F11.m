@@ -1,5 +1,5 @@
 classdef SOP_F11 < PROBLEM
-% <single> <real> <expensive/none>
+% <1999> <single> <real> <expensive/none>
 % Generalized Griewank's function
 
 %------------------------------- Reference --------------------------------

@@ -1,4 +1,4 @@
-function Offspring = GAOperator(Parent,Upper,Lower)
+function Offspring = GAOperator(Parent,Lower,Upper)
 % OperatorGA - Crossover and mutation operators in SACC-EAM-II.
 
 %------------------------------- Copyright --------------------------------

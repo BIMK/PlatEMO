@@ -1,5 +1,5 @@
 classdef DGEA < ALGORITHM
-% <multi/many> <real/integer> <large/none>
+% <2022> <multi/many> <real/integer> <large/none>
 % Direction guided evolutionary algorithm
 % operation ---   1 --- Operation of the environmental selection
 % RefNo     ---  10 --- Number of reference vectors for offspring generation

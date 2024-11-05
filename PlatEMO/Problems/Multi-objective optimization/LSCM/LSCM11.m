@@ -1,5 +1,5 @@
 classdef LSCM11 < PROBLEM
-% <multi> <real> <large/none> <constrained>
+% <2024> <multi> <real> <large/none> <constrained>
 % Large-scale constrained multiobjective benchmark problem
 
 %------------------------------- Reference --------------------------------

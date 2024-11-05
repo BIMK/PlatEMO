@@ -1,5 +1,5 @@
 classdef RSEA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2017> <multi/many> <real/integer/label/binary/permutation>
 % Radial space division based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

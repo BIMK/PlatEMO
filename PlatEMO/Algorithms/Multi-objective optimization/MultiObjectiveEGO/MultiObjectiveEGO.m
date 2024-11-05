@@ -1,14 +1,14 @@
 classdef MultiObjectiveEGO < ALGORITHM
-% <multi> <real/integer> <constrained/none> <expensive>
+% <2016> <multi> <real/integer> <constrained/none> <expensive>
 % Multi-objective efficient global optimization
 % alpha --- 0.7 --- portion of samples for Kriging construction
 % num_k ---   5 --- number of infill points per iteration
 % H     ---  21 --- number of reference directions
 
 %------------------------------- Reference --------------------------------
-% R. Hussein, K. Deb, A Generative Kriging Surrogate Model for Constrained 
-% and Unconstrained Multi-objective Optimization, in: Proc. Genet. Evol. 
-% Comput. Conf. 2016, Denver, 2016, 573-580. 
+% R. Hussein, K. Deb, A Generative Kriging Surrogate Model for Constrained
+% and Unconstrained Multi-objective Optimization, Proceedings of the
+% Genetic and Evolutionary Computation Conference, 2016, 573-580.
 %--------------------------------------------------------------------------
 
 % This function is written by Youwei He (email: 1554748356@qq.com)

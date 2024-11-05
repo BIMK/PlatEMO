@@ -1,5 +1,5 @@
 classdef AGEII < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <2013> <multi> <real/integer/label/binary/permutation>
 % Approximation-guided evolutionary multi-objective algorithm II
 % epsilon --- 0.1 --- The parameter in grid location calculation
 

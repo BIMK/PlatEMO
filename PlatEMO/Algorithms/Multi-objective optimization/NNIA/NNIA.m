@@ -1,5 +1,5 @@
 classdef NNIA < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <2008> <multi> <real/integer/label/binary/permutation>
 % Nondominated neighbor immune algorithm
 % nA ---  20 --- Size of active population
 % nC --- 100 --- Size of clone population

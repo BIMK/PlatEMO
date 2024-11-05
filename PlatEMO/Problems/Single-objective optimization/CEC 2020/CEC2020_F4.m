@@ -1,5 +1,5 @@
 classdef CEC2020_F4 < PROBLEM
-% <single> <real>
+% <2019> <single> <real>
 % Expanded Rosenbrock's plus Griewangk's function
 
 %------------------------------- Reference --------------------------------

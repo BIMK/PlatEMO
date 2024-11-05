@@ -1,5 +1,5 @@
 classdef CEC2013_F13 < PROBLEM
-% <single> <real> <large>
+% <2013> <single> <real> <large>
 % Shifted Schwefel's function with conforming overlapping subcomponents
 
 %------------------------------- Reference --------------------------------

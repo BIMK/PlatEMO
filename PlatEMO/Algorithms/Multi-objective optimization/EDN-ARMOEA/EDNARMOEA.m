@@ -1,5 +1,5 @@
 classdef EDNARMOEA < ALGORITHM
-% <multi/many> <real/integer> <expensive>
+% <2022> <multi/many> <real/integer> <expensive>
 % Efficient dropout neural network based AR-MOEA
 % delta --- 0.05 --- Threshold of judging the diversity
 % wmax  ---   20 --- Number of generations before updating Kriging models

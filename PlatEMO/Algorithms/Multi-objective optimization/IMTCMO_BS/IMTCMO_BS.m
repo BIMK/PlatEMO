@@ -1,5 +1,5 @@
 classdef  IMTCMO_BS < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation> <large> <constrained/none>
+% <2024> <multi/many> <real/integer/label/binary/permutation> <large> <constrained/none>
 % Improved evolutionary multitasking-based CMOEA with bidirectional sampling
 
 %------------------------------- Reference --------------------------------

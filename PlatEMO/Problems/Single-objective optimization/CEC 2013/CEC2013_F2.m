@@ -1,5 +1,5 @@
 classdef CEC2013_F2 < PROBLEM
-% <single> <real> <large>
+% <2013> <single> <real> <large>
 % Shifted Rastrigin's function
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef MPMMEA < ALGORITHM
-% <multi> <real/integer> <large/none> <multimodal> <sparse>
+% <2021> <multi> <real/integer> <large/none> <multimodal> <sparse>
 % Multi-population multi-modal multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

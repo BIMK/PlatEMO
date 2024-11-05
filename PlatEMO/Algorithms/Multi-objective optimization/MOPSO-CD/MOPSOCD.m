@@ -1,5 +1,5 @@
 classdef MOPSOCD < ALGORITHM
-% <multi> <real/integer>
+% <2005> <multi> <real/integer>
 % MOPSO with crowding distance
 
 %------------------------------- Reference --------------------------------

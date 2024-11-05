@@ -1,5 +1,5 @@
 classdef Adam < ALGORITHM
-% <single> <real> <large/none>
+% <2014> <single> <real> <large/none>
 % Adaptive moment estimation
 % alpha ---     1 --- Learning rate
 % beta1 ---   0.9 --- A parameter within [0 1)

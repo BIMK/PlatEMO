@@ -1,5 +1,5 @@
 classdef MOMBIII < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2015> <multi/many> <real/integer/label/binary/permutation>
 % Many objective metaheuristic based on the R2 indicator II
 % alpha   ---   0.5 --- Threshold of variances
 % epsilon --- 0.001 --- Tolerance threshold

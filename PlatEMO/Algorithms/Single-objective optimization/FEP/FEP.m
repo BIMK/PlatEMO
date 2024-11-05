@@ -1,5 +1,5 @@
 classdef FEP < ALGORITHM
-% <single> <real/integer> <large/none> <constrained/none>
+% <1999> <single> <real/integer> <large/none> <constrained/none>
 % Fast evolutionary programming
 
 %------------------------------- Reference --------------------------------

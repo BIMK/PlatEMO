@@ -1,5 +1,5 @@
 classdef CLIA < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation>
+% <2019> <multi/many> <real/integer/label/binary/permutation>
 % Evolutionary algorithm with cascade clustering and reference point incremental learning
 
 %------------------------------- Reference --------------------------------

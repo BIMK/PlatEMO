@@ -1,11 +1,11 @@
 classdef SNSGAII < ALGORITHM
-% <multi> <real> <large/none> <constrained/none> <sparse>
+% <2024> <multi> <real> <large/none> <constrained/none> <sparse>
 % Sparse nondominated sorting genetic algorithm II
 
 %------------------------------- Reference --------------------------------
 % I. Kropp, A. Pouyan Nejadhashemi, and K. Deb, Improved evolutionary
 % operators for sparse large-scale multiobjective optimization problems,
-% IEEE Transactions on Evolutionary Computation, 2023.
+% IEEE Transactions on Evolutionary Computation, 2024, 28(2): 460-473.
 %--------------------------------------------------------------------------
 
 % This function is written by Ian Meyer Kropp

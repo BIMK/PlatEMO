@@ -1,5 +1,5 @@
 classdef KTA2 < ALGORITHM
-% <multi/many> <real/integer> <expensive>
+% <2021> <multi/many> <real/integer> <expensive>
 % Kriging-assisted Two_Arch2
 % tau  --- 0.75 --- Proportion of one type noninfluential points in training data
 % phi  ---  0.1 --- Number of randomly selected individuals

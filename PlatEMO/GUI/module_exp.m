@@ -28,19 +28,21 @@ classdef module_exp < handle
             GUI.APP([1 2],4,uipanel(obj.app.maingrid,'BackgroundColor',[.8 .8 .8]));
 
             % The first panel
-            obj.app.grid(1)    = GUI.APP(2,1,uigridlayout(obj.app.maingrid,'RowHeight',{16,21,16,21,21,16,21,21,21,20,'1x',20,'1x',21,21,21},'ColumnWidth',{'1x','1.1x','1x'},'Padding',[8 5 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
+            obj.app.grid(1)    = GUI.APP(2,1,uigridlayout(obj.app.maingrid,'RowHeight',{16,21,16,21,21,16,21,21,21,2,18,'1x',2,18,'1x',21,21,21},'ColumnWidth',{'1x','1.1x','1x'},'Padding',[8 5 8 0],'RowSpacing',3,'ColumnSpacing',5,'BackgroundColor','w'));
             [obj.app.stateA,obj.app.labelA] = GUI.GenerateLabelButton(obj.app.grid(1),[0 1 0 1,zeros(1,13)],@obj.cb_filter);
-            obj.app.labelA(4)  = GUI.APP(10,[1 2],uilabel(obj.app.grid(1),'Text','Algorithms','VerticalAlignment','bottom','FontSize',13,'FontColor',[.2 .4 .7],'FontWeight','bold'));
-            obj.app.labelA(5)  = GUI.APP(10,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.2 .4 .7]));
-            obj.app.listA(1)   = GUI.APP(11,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.2 .4 .7]));
-            obj.app.labelA(6)  = GUI.APP(12,[1 2],uilabel(obj.app.grid(1),'Text','Problems','VerticalAlignment','bottom','FontSize',13,'FontColor',[.9 .5 .2],'FontWeight','bold'));
-            obj.app.labelA(7)  = GUI.APP(12,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','VerticalAlignment','bottom','FontSize',10,'FontColor',[.9 .5 .2]));
-            obj.app.listA(2)   = GUI.APP(13,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.9 .5 .2]));
-            obj.app.labelA(8)  = GUI.APP(14,[1 2],uilabel(obj.app.grid(1),'Text','Number of runs','FontColor',[.15 .6 .2],'FontWeight','bold','Tooltip','Number of runs for each algorithm on each problem'));
-            obj.app.editA(1)   = GUI.APP(14,3,uieditfield(obj.app.grid(1),'numeric','Value',30,'limits',[1 inf],'RoundFractionalValues','on','Tooltip','Number of runs for each algorithm on each problem'));
-            obj.app.labelA(9)  = GUI.APP(15,[1 2],uilabel(obj.app.grid(1),'Text','Number of results','FontColor',[.15 .6 .2],'FontWeight','bold','Tooltip','Number of populations saved in each run'));
-            obj.app.editA(2)   = GUI.APP(15,3,uieditfield(obj.app.grid(1),'numeric','Value',1,'limits',[1 inf],'RoundFractionalValues','on','Tooltip','Number of populations saved in each run'));
-            tempGrid           = GUI.APP(16,[1 3],uigridlayout(obj.app.grid(1),'RowHeight',{'1x'},'ColumnWidth',{'0.5x',20,'1x'},'Padding',[0 0 0 0],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
+            obj.app.labelA(4)  = GUI.APP(11,[1 2],uilabel(obj.app.grid(1),'Text','Algorithms','FontSize',13,'FontColor',[.2 .4 .7],'FontWeight','bold'));
+            obj.app.labelA(5)  = GUI.APP(11,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','FontSize',10,'FontColor',[.2 .4 .7]));
+            obj.app.listA(1)   = GUI.APP(12,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.2 .4 .7]));
+            obj.app.labelA(6)  = GUI.APP(14,[1 2],uilabel(obj.app.grid(1),'Text','Problems','FontSize',13,'FontColor',[.9 .5 .2],'FontWeight','bold'));
+            obj.app.labelA(7)  = GUI.APP(14,3,uilabel(obj.app.grid(1),'HorizontalAlignment','right','FontSize',10,'FontColor',[.9 .5 .2]));
+            obj.app.listA(2)   = GUI.APP(15,[1 3],uilistbox(obj.app.grid(1),'FontColor',[.9 .5 .2]));
+            obj.app.dropA(1)   = GUI.APP(11,2,uidropdown(obj.app.grid(1),'BackgroundColor','w','FontColor',[.2 .4 .7],'Items',{'All year'},'ValueChangedFcn',@(h,~)GUI.UpdateAlgProListYear(obj.app.listA(1),h,obj.app.labelA(5),obj.GUI.algList)));
+            obj.app.dropA(2)   = GUI.APP(14,2,uidropdown(obj.app.grid(1),'BackgroundColor','w','FontColor',[.9 .5 .2],'Items',{'All year'},'ValueChangedFcn',@(h,~)GUI.UpdateAlgProListYear(obj.app.listA(2),h,obj.app.labelA(7),obj.GUI.proList)));
+            obj.app.labelA(8)  = GUI.APP(16,[1 2],uilabel(obj.app.grid(1),'Text','Number of runs','FontColor',[.15 .6 .2],'FontWeight','bold','Tooltip','Number of runs for each algorithm on each problem'));
+            obj.app.editA(1)   = GUI.APP(16,3,uieditfield(obj.app.grid(1),'numeric','Value',30,'limits',[1 inf],'RoundFractionalValues','on','Tooltip','Number of runs for each algorithm on each problem'));
+            obj.app.labelA(9)  = GUI.APP(17,[1 2],uilabel(obj.app.grid(1),'Text','Number of results','FontColor',[.15 .6 .2],'FontWeight','bold','Tooltip','Number of populations saved in each run'));
+            obj.app.editA(2)   = GUI.APP(17,3,uieditfield(obj.app.grid(1),'numeric','Value',1,'limits',[1 inf],'RoundFractionalValues','on','Tooltip','Number of populations saved in each run'));
+            tempGrid           = GUI.APP(18,[1 3],uigridlayout(obj.app.grid(1),'RowHeight',{'1x'},'ColumnWidth',{'0.5x',20,'1x'},'Padding',[0 0 0 0],'RowSpacing',0,'ColumnSpacing',5,'BackgroundColor','w'));
             obj.app.labelA(10) = GUI.APP(1,1,uilabel(tempGrid,'Text','File path','FontColor',[.15 .6 .2],'FontWeight','bold','Tooltip','File path for saving experimental settings'));
             obj.app.buttonA    = GUI.APP(1,2,uibutton(tempGrid,'Text','...','BackgroundColor','w','ButtonpushedFcn',@obj.cb_filepath,'Tooltip','File path for saving experimental settings'));
             obj.app.editA(3)   = GUI.APP(1,3,uieditfield(tempGrid,'Value',fullfile(cd,'Data','Setting.mat'),'HorizontalAlignment','right','Tooltip','File path for saving experimental settings'));
@@ -85,7 +87,7 @@ classdef module_exp < handle
         %% Update the algorithms and problems in the lists
         function cb_filter(obj,~,~,index)
             % Update the lists of algorithms and problems
-            func = GUI.UpdateAlgProList(index,obj.app.stateA,obj.app.listA(1),obj.app.labelA(5),obj.GUI.algList,obj.app.listA(2),obj.app.labelA(7),obj.GUI.proList);
+            func = GUI.UpdateAlgProList(index,obj.app.stateA,obj.app.listA(1),obj.app.dropA(1),obj.app.labelA(5),obj.GUI.algList,obj.app.listA(2),obj.app.dropA(2),obj.app.labelA(7),obj.GUI.proList);
             % Update the list of metrics
             show = cellfun(@(s)func(s(2:end,1:end-2)),obj.GUI.metList(:,1));
             obj.app.dropC(1).Items = ['Number of runs';'runtime';obj.GUI.metList(show,2)];
@@ -193,7 +195,7 @@ classdef module_exp < handle
                 obj.app.table.Data    = cell(length(PRO),length(ALG));
                 obj.TableUpdateColumn();
                 % Update the GUI
-                set([obj.GUI.app.button,obj.app.stateA,obj.app.listA,obj.app.editA,obj.app.buttonA],'Enable',false);
+                set([obj.GUI.app.button,obj.app.stateA,obj.app.listA,obj.app.dropA,obj.app.editA,obj.app.buttonA],'Enable',false);
                 obj.app.listB.Enable      = false;
                 obj.app.buttonC(1).Text   = 'Pause';
                 obj.app.buttonC(2).Enable = true;
@@ -261,7 +263,7 @@ classdef module_exp < handle
         end
         %% Stop the execution
         function cb_stop(obj,~,~)
-            set([obj.GUI.app.button,obj.app.stateA,obj.app.listA,obj.app.editA,obj.app.buttonA],'Enable',true);
+            set([obj.GUI.app.button,obj.app.stateA,obj.app.listA,obj.app.dropA,obj.app.editA,obj.app.buttonA],'Enable',true);
             obj.app.listB.Enable      = true;
             obj.app.buttonC(1).Text   = 'Start';
             obj.app.buttonC(2).Enable = false;
@@ -317,7 +319,7 @@ classdef module_exp < handle
                 obj.app.table.removeStyle();
                 % Identify the metric
                 metric = obj.app.dropC(1).Value;
-                allMet = [obj.GUI.metList;{[0 1]},'Number of runs';{[1 0]},'runtime'];
+                allMet = [obj.GUI.metList;{[0 1]},'Number of runs',{[]};{[1 0]},'runtime',{[]}];
                 minMet = allMet{find(ismember(allMet(:,2),metric),1),1}(1,end-1);
                 if strcmp(metric,'Number of runs')
                     for p = proindex

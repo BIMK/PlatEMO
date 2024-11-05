@@ -1,5 +1,5 @@
 classdef DWU < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <2019> <multi> <real/integer/label/binary/permutation>
 % Dominance-weighted uniformity multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

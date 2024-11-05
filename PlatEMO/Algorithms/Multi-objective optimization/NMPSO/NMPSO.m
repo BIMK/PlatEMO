@@ -1,5 +1,5 @@
 classdef NMPSO < ALGORITHM
-% <multi/many> <real/integer>
+% <2018> <multi/many> <real/integer>
 % Novel multi-objective particle swarm optimization
 
 %------------------------------- Reference --------------------------------

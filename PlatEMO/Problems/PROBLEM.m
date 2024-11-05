@@ -83,8 +83,8 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
                 obj.(varargin{i}) = varargin{i+1};
             end
             obj.Setting();
-            obj.optimum  = obj.GetOptimum(10000);
-            obj.PF       = obj.GetPF();
+            obj.optimum = obj.GetOptimum(10000);
+            obj.PF      = obj.GetPF();
         end
     end
     methods
@@ -122,10 +122,14 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
                 PopDec(:,Type{3}) = round(unifrnd(repmat(obj.lower(Type{3}),N,1),repmat(obj.upper(Type{3}),N,1)));
             end
             if ~isempty(Type{4})        % Binary variables
-                PopDec(:,Type{4}) = logical(randi([0,1],N,length(Type{4})));
+                PopDec(:,Type{4})  = logical(randi([0,1],N,length(Type{4})));
+                obj.lower(Type{4}) = 0;
+                obj.upper(Type{4}) = 1;
             end
             if ~isempty(Type{5})        % Permutation variables
                 [~,PopDec(:,Type{5})] = sort(rand(N,length(Type{5})),2);
+                obj.lower(Type{5})    = 1;
+                obj.upper(Type{5})    = length(Type{5});
             end
             Population = obj.Evaluation(PopDec);
         end
@@ -167,15 +171,9 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
         %   Example:
         %       PopDec = Problem.CalDec(PopDec)
 
-            Type  = arrayfun(@(i)find(obj.encoding==i),1:5,'UniformOutput',false);
-            index = [Type{1:3}];
-            if ~isempty(index)
-                PopDec(:,index) = max(min(PopDec(:,index),repmat(obj.upper(index),size(PopDec,1),1)),repmat(obj.lower(index),size(PopDec,1),1));
-            end
-            index = [Type{2:5}];
-            if ~isempty(index)
-                PopDec(:,index) = round(PopDec(:,index));
-            end
+            PopDec = max(min(PopDec,repmat(obj.upper,size(PopDec,1),1)),repmat(obj.lower,size(PopDec,1),1));
+            index  = ismember(obj.encoding,2:4);
+            PopDec(:,index) = round(PopDec(:,index));
         end
         function PopObj = CalObj(obj,PopDec)
         %CalObj - Calculate the objective values of multiple solutions.
@@ -218,7 +216,6 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
             P2 = obj.Evaluation(repmat(Dec,obj.D,1).*(1+eye(obj.D)*1e-6));
             ObjGrad = (P2.objs-repmat(P1.objs,obj.D,1))'./Dec./1e-6;
             ConGrad = (P2.cons-repmat(P1.cons,obj.D,1))'./Dec./1e-6;
-            obj.FE  = obj.FE - obj.D;
         end
         function R = GetOptimum(obj,N)
         %GetOptimum - Generate the optimums of the problem.

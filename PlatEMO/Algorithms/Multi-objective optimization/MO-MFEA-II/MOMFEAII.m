@@ -1,5 +1,5 @@
 classdef MOMFEAII < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained/none> <multitask>
+% <2021> <multi> <real/integer/label/binary/permutation> <constrained/none> <multitask>
 % Multi-objective multifactorial evolutionary algorithm II
 
 %------------------------------- Reference --------------------------------

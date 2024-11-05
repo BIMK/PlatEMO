@@ -1,5 +1,5 @@
 classdef ENSMOEAD < ALGORITHM
-% <multi/many> <real/integer>
+% <2012> <multi/many> <real/integer>
 % Ensemble of different neighborhood sizes based MOEA/D
 % NS --- 25:25:100 --- Set of neighborhood sizes
 % LP ---        50 --- Learning period

@@ -1,5 +1,5 @@
 classdef S3CMAES < ALGORITHM
-% <multi/many> <real/integer> <large/none>
+% <2020> <multi/many> <real/integer> <large/none>
 % Scalable small subpopulations based covariance matrix adaptation
 % evolution strategy
 

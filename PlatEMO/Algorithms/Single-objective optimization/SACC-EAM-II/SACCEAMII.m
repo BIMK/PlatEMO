@@ -1,5 +1,5 @@
 classdef SACCEAMII < ALGORITHM
-% <single> <real/integer> <expensive>
+% <2019> <single> <real/integer> <expensive>
 % Surrogate-assisted cooperative co-evolutionary algorithm of Minamo
 % s --- 50 --- Number of subcomponents of separable variables
 

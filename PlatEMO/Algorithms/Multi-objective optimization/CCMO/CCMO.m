@@ -1,5 +1,5 @@
 classdef CCMO < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained>
+% <2021> <multi> <real/integer/label/binary/permutation> <constrained>
 % Coevolutionary constrained multi-objective optimization framework
 % type --- 1 --- Type of operator (1. GA 2. DE)
 

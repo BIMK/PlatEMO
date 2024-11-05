@@ -1,5 +1,5 @@
 classdef MOKP < PROBLEM
-% <multi/many> <binary> <large/none> <constrained>
+% <1999> <multi/many> <binary> <large/none> <constrained>
 % The multi-objective knapsack problem
 
 %------------------------------- Reference --------------------------------

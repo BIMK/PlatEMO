@@ -1,5 +1,5 @@
 classdef PESAII < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <2001> <multi> <real/integer/label/binary/permutation>
 % Pareto envelope-based selection algorithm II
 % div --- 10 --- The number of divisions in each objective
 

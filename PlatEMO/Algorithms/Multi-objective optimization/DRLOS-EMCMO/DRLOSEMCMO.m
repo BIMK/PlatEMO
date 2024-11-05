@@ -1,5 +1,5 @@
 classdef DRLOSEMCMO < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained>
+% <2024> <multi> <real/integer/label/binary/permutation> <constrained>
 % EMCMO with deep reinforcement learning-assisted operator selection
 
 %------------------------------- Reference --------------------------------

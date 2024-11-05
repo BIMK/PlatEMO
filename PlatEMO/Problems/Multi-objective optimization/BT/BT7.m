@@ -1,5 +1,5 @@
 classdef BT7 < PROBLEM
-% <multi> <real> <large/none>
+% <2017> <multi> <real> <large/none>
 % Benchmark MOP with bias feature
 
 %------------------------------- Reference --------------------------------

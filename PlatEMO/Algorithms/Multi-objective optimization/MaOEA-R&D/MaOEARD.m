@@ -1,5 +1,5 @@
 classdef MaOEARD < ALGORITHM
-% <many> <real/integer/label/binary/permutation>
+% <2016> <many> <real/integer/label/binary/permutation>
 % Many-objective evolutionary algorithm based on objective space reduction
 % and diversity improvement
 

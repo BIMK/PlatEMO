@@ -1,5 +1,5 @@
 classdef NelderMead < ALGORITHM
-% <single> <real>
+% <1965> <single> <real>
 % The Nelder-Mead algorithm
 
 %------------------------------- Reference --------------------------------

@@ -1,5 +1,5 @@
 classdef RMMEDA_F7 < PROBLEM
-% <multi> <real> <large/none>
+% <2008> <multi> <real> <large/none>
 % Benchmark MOP for testing RM-MEDA
 
 %------------------------------- Reference --------------------------------

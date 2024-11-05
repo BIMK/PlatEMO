@@ -1,5 +1,5 @@
 classdef FDV < ALGORITHM
-% <multi/many> <real/integer> <large/none> 
+% <2023> <multi/many> <real/integer> <large/none> 
 % Fuzzy decision variable framework with various internal optimizers
 % Rate      --- 0.8 --- Fuzzy evolution rate. Default = 0.8
 % Acc       --- 0.4 --- Step acceleration. Default = 0.4
@@ -9,7 +9,7 @@ classdef FDV < ALGORITHM
 %------------------------------- Reference --------------------------------
 % X. Yang, J. Zou, S. Yang, J. Zheng, and Y. Liu, A fuzzy decision
 % variables framework for large-scale multiobjective optimization, IEEE
-% Transactions on Evolutionary Computation, 2021.
+% Transactions on Evolutionary Computation, 2023, 27(3): 445-459.
 %--------------------------------------------------------------------------
 
 %  Copyright (C) 2021 Xu Yang

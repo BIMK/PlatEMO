@@ -1,5 +1,5 @@
 classdef DAEA < ALGORITHM
-% <multi> <binary>
+% <2021> <multi> <binary>
 % Duplication analysis based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------

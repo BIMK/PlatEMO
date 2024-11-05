@@ -1,5 +1,5 @@
 classdef MOEADM2M < ALGORITHM
-% <multi> <real/integer>
+% <2014> <multi> <real/integer>
 % MOEA/D based on MOP to MOP
 % K --- 10 --- Number of reference vectors
 

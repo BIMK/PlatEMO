@@ -1,5 +1,5 @@
 classdef DNSGAII < ALGORITHM
- % <multi> <real/integer/label/binary/permutation> <constrained/none> <dynamic>
+ % <2007> <multi> <real/integer/label/binary/permutation> <constrained/none> <dynamic>
  % Dynamic NSGA-II
  % type ---   1 --- 1. Mutation based reinitialization 2. Random reinitialization
  % zeta --- 0.2 --- Ratio of reinitialized solutions

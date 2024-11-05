@@ -1,5 +1,5 @@
 classdef MOEADD < ALGORITHM
-% <multi/many> <real/integer/label/binary/permutation> <constrained/none>
+% <2015> <multi/many> <real/integer/label/binary/permutation> <constrained/none>
 % Many-objective evolutionary algorithm based on dominance and
 % decomposition
 % delta --- 0.9 --- The probability of choosing parents locally

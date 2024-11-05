@@ -1,5 +1,5 @@
 classdef TriMOEATAR < ALGORITHM
-% <multi> <real/integer> <multimodal>
+% <2019> <multi> <real/integer> <multimodal>
 % Multi-modal MOEA using two-archive and recombination strategies
 % p_con       --- 0.5  --- Probability of selecting parents from the convergence archive
 % sigma_niche --- 0.1  --- Niche radius in the decision space
