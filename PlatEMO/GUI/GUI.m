@@ -41,7 +41,7 @@ classdef GUI < handle
             tempPanel2         = uipanel(tempPanel,'Position',[43 4 18 18],'BorderType','none','BackgroundColor',[.549 .6627 .7529]);
             obj.app.buttonT(4) = uibutton(tempPanel2,'Position',[-2 -2 24 24],'Text','','Icon',obj.icon.github,'BackgroundColor',[.549 .6627 .7529],'Tooltip','GitHub','ButtonpushedFcn',@(~,~)web('https://github.com/BIMK/PlatEMO','-browser'));
             tempPanel2         = uipanel(tempPanel,'Position',[73 4 18 18],'BorderType','none','BackgroundColor',[.549 .6627 .7529]);
-            obj.app.buttonT(5) = uibutton(tempPanel2,'Position',[-2 -2 24 24],'Text','','Icon',obj.icon.qq,'BackgroundColor',[.549 .6627 .7529],'Tooltip','QQ','ButtonpushedFcn',@(~,~)web('https://qm.qq.com/cgi-bin/qm/qr?k=navfQ--MBttd9Zs0BBdPqFv4h4BbePnj&authKey=gChNL40JKTQN/xGuGhICBWJd9cl7fWof9DloY3xgANd2bHv4Jtm/kO9Z49mhFRfg&noverify=0&personal_qrcode_source=1001','-browser'));
+            obj.app.buttonT(5) = uibutton(tempPanel2,'Position',[-2 -2 24 24],'Text','','Icon',obj.icon.qq,'BackgroundColor',[.549 .6627 .7529],'Tooltip','QQ','ButtonpushedFcn',@(~,~)web('https://qm.qq.com/q/CmVRo5Adyw','-browser'));
             
             % Create the menu
             obj.app.grid(2)   = GUI.APP(2,1,uigridlayout(obj.app.maingrid,'RowHeight',{'1x',13,1},'ColumnWidth',{1,75,75,75,75,'1x',250,13,1},'Padding',[0 0 0 5],'RowSpacing',5));
