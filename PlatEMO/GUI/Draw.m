@@ -61,7 +61,7 @@ function currentAxes = Draw(Data,varargin)
             elseif size(Data,2) > 3
                 varargin = {'-','Color',[.5 .5 .5],'LineWidth',2};
             end
-        elseif min(Data(:,2)) > 0 && max(Data(:,2)) > 10*min(Data(:,2))
+        elseif min(Data(:,2)) > 0 && max(Data(:,2)) > 100*min(Data(:,2))
             set(ax,'YScale','log');
         end
         if islogical(Data)

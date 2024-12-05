@@ -1,6 +1,6 @@
 classdef Mario < PROBLEM
-% <single> <integer/label>
-% Play with mario!
+% <2024> <single> <integer/label>
+% Play with Mario!
 % stageNo ---  1 --- Stage no. (1-3)
 % nFrame  --- 60 --- Number of frames per second
 % isImage ---  1 --- Show image or not

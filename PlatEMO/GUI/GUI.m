@@ -25,7 +25,7 @@ classdef GUI < handle
             obj.readList();
             
             % Create the window
-            obj.app.figure   = uifigure('Name','PlatEMO v4.9','Position',[0 0 1200 650],'Interruptible','off','icon',obj.icon.logo1,'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
+            obj.app.figure   = uifigure('Name','PlatEMO v4.10','Position',[0 0 1200 650],'Interruptible','off','icon',obj.icon.logo1,'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
             obj.app.maingrid = uigridlayout(obj.app.figure,'RowHeight',{25,80,'1x'},'ColumnWidth',{'1x'},'Padding',[0 0 0 0],'RowSpacing',0);
             
             % Create the tab buttons
