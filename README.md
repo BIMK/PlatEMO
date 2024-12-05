@@ -44,15 +44,13 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 4.9
+# Release Highlights of PlatEMO 4.10
 [Release Note can be found here](./Doc/releasenote.md)
 
-* Add a year label to each algorithm and problem, so that they can be selected by year in the GUI.
+* Add a sparse multi-objective evolutionary algorithm TS-SparseEA, add a constrained multi-objective evolutionary algorithm LCMEA, add four multitasking multi-objective evolutionary algorithms EMOSKT, MOMFEA-SADE, MTDE-MKTA, and MTEA/D-DN. There are currently 295 algorithms in the platform.
 
-* Add a single-objective evolutionary algorithm GWO, add two expensive single-objective evolutionary algorithms SADE-ATDSC and SAPO, add a gradient-assisted constrained multi-objective evolutionary algorithm CMOEA-MSG, add an expensive multi-objective evolutionary algorithm DirHV-EI, add a sparse multi-objective evolutionary algorithm DKCA, add two constrained multi-objective evolutionary algorithms CMODE-FTR and IM-C-MOEA/D. There are currently 289 algorithms in the platform.
+* Add a label single-objective optimization problem Mario, add eight large-scale multitasking multi-objective optimization problems LSMMOPs. There are currently 559 problems in the platform.
 
-* Add 20 multi-objective optimization problems ZCAT1-ZCAT20. There are currently 550 benchmark problems in  the platform.
-  
 # Features of PlatEMO
 *  Totally Developed in MATLAB  
 PlatEMO consists of a number of MATLAB functions without using any other libraries. Any machines able to run MATLAB can use PlatEMO regardless of the operating system.  
