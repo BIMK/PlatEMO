@@ -68,6 +68,7 @@ classdef MTEADDN < ALGORITHM
                             if rand() < 0.5
                                 % Knowledge transfer
                                 k = B2k{t}(i);
+                                offspringDec(end) = k;
                                 offspring = Problem.Evaluation(offspringDec);
                                 Z{k}      = min(Z{k}, offspring.obj);
                                 g_old     = max(abs(SubPopulation{k}(P2).objs - repmat(Z{k}, length(P2), 1)) .* W{k}(P2, :), [], 2);
