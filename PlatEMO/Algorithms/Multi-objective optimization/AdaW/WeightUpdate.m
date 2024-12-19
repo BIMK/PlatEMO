@@ -24,7 +24,13 @@ function [Population,W,B] = WeightUpdate(Population,W,Archive,Z,T,Global)
     dis2 = pdist2(Archiveobjs,Archiveobjs);
     dis2 = sort(dis2,2);
     % Calculate the niche size(median of the distances from their closest solution in the archive )
-    niche_size = median(dis2(:,2));
+    if size(dis2, 2) >= 2
+        niche_size = median(dis2(:,2));
+    else
+        warning('dis2 只有一列数据，无法访问第二列。');
+    % If there is only one column for dis2, use the first column
+        niche_size = median(dis2(:,1));
+    end
     % Find undeveloped 
     Archive_und = Archive(dis1(:,1) >= niche_size);
     N_und = length(Archive_und);
