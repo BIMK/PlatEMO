@@ -1,14 +1,16 @@
-classdef SMOA < ALGORITHM
-% <2022> <multi> <real> <expensive>
-% Supervised multi-objective optimization algorithm
+classdef ISMOA < ALGORITHM
+% <multi> <real> <expensive>
+% Iterative supervised multi-objective optimization algorithm
 % H --- 2.6e4 --- Size of uniformly distributed L1 unit vector set
 
 %------------------------------- Reference --------------------------------
-% T. Takagi, K. Takadama, and H. Sato, Supervised multi-objective
-% optimization algorithm using estimation, Proceedings of the IEEE Congress
-% on Evolutionary Computation, 2022, 1-8.
+% T. Takagi, K. Takadama, and H. Sato, Pareto front upconvert by iterative
+% estimation modeling and solution sampling, Proceedings of The 12th
+% Edition of International Conference Series on Evolutionary Multi-
+% Criterion Optimization, Lecture Notes in Computer Science, 2023, 13970:
+% 218–230.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -18,7 +20,7 @@ classdef SMOA < ALGORITHM
 
 % This function is written by Tomoaki Takagi
 
-% This function requires supervised data like 'DTLZ2_M3_D12_ILD.mat' or
+% This function requires solution data like 'DTLZ2_M3_D12_ILD.mat' or
 % 'DTLZ2_M3_D12_ILD.dat'. This function return all evaluated solutions.
 % This function is deterministic method without random numbers.
 
@@ -28,7 +30,7 @@ classdef SMOA < ALGORITHM
             H = Algorithm.ParameterSet(2.6e4);
             
             %% Generate the uniformly distributed L1 unit vector set
-            W = UniformPoint(H,Problem.M,'ILD');
+            [W,N] = UniformPoint(H,Problem.M,'ILD');
             W(W==1e-6) = 0;
             
             %% Generate estimator
@@ -42,31 +44,28 @@ classdef SMOA < ALGORITHM
             
             %% Load solution data
             Population = loadData(Problem);
-            Obj = Population.objs;
-            Dec = Population.decs;
             
-            %% Generate model values
-            Y = vecnorm(Obj,1,2); % L1 norm set
-            X = Obj./Y;           % L1 unit vector set
-            
-            %% Search representative vector set
-            if Problem.maxFE < length(W)
-                Objhat = W.*estimator(W,X,Y);
-                Select = subsetSelection(Obj,Objhat,Problem.maxFE);
-                W = W(Select,:);
+            %%  Iterative loop
+            while size(Population) < Problem.maxFE
+                Obj = Population.objs;
+                Dec = Population.decs;
+                
+                % Generate model values
+                Y = vecnorm(Obj,1,2); % L1 norm set
+                X = Obj./Y;           % L1 unit vector set
+                
+                % Single solution sampling
+                objs = W.*estimator(W,X,Y);
+                [~,index] = max(min(pdist2(objs,Obj),[],2));
+                
+                % Evaluation and upconvert
+                dec = zeros(1,Problem.D);
+                for i = 1 : Problem.D
+                    dec(i) = estimator(W(index,:),X,Dec(:,i));
+                end
+                dec = min(max(dec,Problem.lower),Problem.upper);
+                Population = [Population,Problem.Evaluation(dec)];
             end
-            
-            %% Generate decision variables
-            N = length(W);
-            decs = zeros(N,Problem.D);
-            for i = 1 : Problem.D
-                decs(:,i) = estimator(W,X,Dec(:,i));
-            end
-            decs = max(decs,repmat(Problem.lower,N,1));
-            decs = min(decs,repmat(Problem.upper,N,1));
-            
-            %% Generate population
-            Population = [Population,Problem.Evaluation(decs)];
             Algorithm.NotTerminated(Population);
         end
     end
