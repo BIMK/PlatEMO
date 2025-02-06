@@ -15,7 +15,7 @@ Developed by BIMK (Institute of Bioinspired Intelligence and Mining Knowledge) o
 <!-- <img src="https://wx2.sinaimg.cn/mw690/00752cx4ly1gnpnfgz0ulj30px08n74t.jpg" height=140> -->
 </div>
 
-* 200+ open source evolutionary algorithms
+* 300+ open source evolutionary algorithms
 * 500+ open source benchmark problems
 * Powerful GUI for performing experiments in parallel
 * Generating results in the format of Excel or LaTeX table by one-click operation
@@ -56,7 +56,7 @@ following literature:
 PlatEMO consists of a number of MATLAB functions without using any other libraries. Any machines able to run MATLAB can use PlatEMO regardless of the operating system.  
 
 *  Includes Many Popular Algorithms  
-PlatEMO includes more than ninety existing popular MOEAs, including genetic algorithm, differential evolution, particle swarm optimization, memetic algorithm, estimation of distribution algorithm, and surrogate model based algorithm. Most of them are representative algorithms published in top journals after 2010.  
+PlatEMO includes more than three hundred existing popular MOEAs, including genetic algorithm, differential evolution, particle swarm optimization, memetic algorithm, estimation of distribution algorithm, and surrogate model based algorithm. Most of them are representative algorithms published in top journals after 2010.  
 
 *  Various Figure Demonstrations  
 Users can select various figures to be displayed, including the Pareto front of the result, the Pareto set of the result, the true Pareto front, and the evolutionary trajectories of any performance indicator values.  
