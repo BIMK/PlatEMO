@@ -47,9 +47,9 @@ following literature:
 # Release Highlights of PlatEMO 4.10
 [Release Note can be found here](./Doc/releasenote.md)
 
-* Add a sparse multi-objective evolutionary algorithm TS-SparseEA, add a constrained multi-objective evolutionary algorithm LCMEA, add four multitasking multi-objective evolutionary algorithms EMOSKT, MOMFEA-SADE, MTDE-MKTA, and MTEA/D-DN. There are currently 295 algorithms in the platform.
+* Add two multi-objective evolutionary algorithms GWASF-GA and WASF-GA, add three expensive multi-objective evolutionary algorithms NSGAIII-EHVI, PIEA, and PIMD, add two constrained multi-objective evolutionary algorithms APSEA and CMOEA-CD. There are currently 302 algorithms in the platform.
 
-* Add a label single-objective optimization problem Mario, add eight large-scale multitasking multi-objective optimization problems LSMMOPs. There are currently 559 problems in the platform.
+* Add 24 single-objective optimization problems BBOB_F1-BBOB_F24. There are current 583 problems in the platform.
 
 # Features of PlatEMO
 *  Totally Developed in MATLAB  
