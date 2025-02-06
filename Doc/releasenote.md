@@ -1,4 +1,9 @@
 
+# Release Highlights of PlatEMO 4.11 (2025-02)
+* Add two multi-objective evolutionary algorithms GWASF-GA and WASF-GA, add three expensive multi-objective evolutionary algorithms NSGAIII-EHVI, PIEA, and PIMD, add two constrained multi-objective evolutionary algorithms APSEA and CMOEA-CD. There are currently 302 algorithms in the platform.
+
+* Add 24 single-objective optimization problems BBOB_F1-BBOB_F24. There are current 583 problems in the platform.
+
 # Release Highlights of PlatEMO 4.10 (2024-12)
 * Add a sparse multi-objective evolutionary algorithm TS-SparseEA, add a constrained multi-objective evolutionary algorithm LCMEA, add four multitasking multi-objective evolutionary algorithms EMOSKT, MOMFEA-SADE, MTDE-MKTA, and MTEA/D-DN. There are currently 295 algorithms in the platform.
 
