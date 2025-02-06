@@ -44,7 +44,7 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 4.10
+# Release Highlights of PlatEMO 4.11
 [Release Note can be found here](./Doc/releasenote.md)
 
 * Add two multi-objective evolutionary algorithms GWASF-GA and WASF-GA, add three expensive multi-objective evolutionary algorithms NSGAIII-EHVI, PIEA, and PIMD, add two constrained multi-objective evolutionary algorithms APSEA and CMOEA-CD. There are currently 302 algorithms in the platform.
