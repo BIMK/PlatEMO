@@ -3,11 +3,11 @@ classdef BLSAEA < ALGORITHM
 % Bi-level surrogate modelling based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
-% H. Jiang, K. Qiu, Y. Tian, X. Zhang, and Y. Jin, Efficient surrogate
+% H. Jiang, K. Qiu, Y. Tian, X. Zhang, and Y. Jin. Efficient surrogate
 % modeling method for evolutionary algorithm to solve bilevel optimization
-% problems, IEEE Transactions on Cybernetics, 2024, 54(7): 4335-4347
+% problems. IEEE Transactions on Cybernetics, 2024, 54(7): 4335-4347
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

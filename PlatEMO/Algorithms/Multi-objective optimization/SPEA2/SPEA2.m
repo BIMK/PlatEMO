@@ -3,12 +3,12 @@ classdef SPEA2 < ALGORITHM
 % Strength Pareto evolutionary algorithm 2
 
 %------------------------------- Reference --------------------------------
-% E. Zitzler, M. Laumanns, and L. Thiele, SPEA2: Improving the strength
-% Pareto evolutionary algorithm, Proceedings of the Conference on
+% E. Zitzler, M. Laumanns, and L. Thiele. SPEA2: Improving the strength
+% Pareto evolutionary algorithm. Proceedings of the Conference on
 % Evolutionary Methods for Design, Optimization and Control with
 % Applications to Industrial Problems, 2001, 95-100.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

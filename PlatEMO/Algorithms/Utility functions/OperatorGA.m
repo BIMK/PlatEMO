@@ -23,18 +23,18 @@ function Offspring = OperatorGA(Problem,Parent,Parameter)
 %   See also OperatorGAhalf
 
 %------------------------------- Reference --------------------------------
-% [1] K. Deb, K. Sindhya, and T. Okabe, Self-adaptive simulated binary
-% crossover for real-parameter optimization, Proceedings of the Annual
+% [1] K. Deb, K. Sindhya, and T. Okabe. Self-adaptive simulated binary
+% crossover for real-parameter optimization. Proceedings of the Annual
 % Conference on Genetic and Evolutionary Computation, 2007, 1187-1194.
-% [2] K. Deb and M. Goyal, A combined genetic adaptive search (GeneAS) for
-% engineering design, Computer Science and informatics, 1996, 26: 30-45.
-% [3] L. Davis, Applying adaptive algorithms to epistatic domains,
+% [2] K. Deb and M. Goyal. A combined genetic adaptive search (GeneAS) for
+% engineering design. Computer Science and informatics, 1996, 26: 30-45.
+% [3] L. Davis. Applying adaptive algorithms to epistatic domains.
 % Proceedings of the International Joint Conference on Artificial
 % Intelligence, 1985, 162-164.
-% [4] D. B. Fogel, An evolutionary approach to the traveling salesman
-% problem, Biological Cybernetics, 1988, 60(2): 139-144.
+% [4] D. B. Fogel. An evolutionary approach to the traveling salesman
+% problem. Biological Cybernetics, 1988, 60(2): 139-144.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

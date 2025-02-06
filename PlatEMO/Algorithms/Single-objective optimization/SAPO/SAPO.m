@@ -16,8 +16,8 @@ classdef SAPO < ALGORITHM
 % data_times    --- 5     --- Parameter to define data size if change_data_n = 2
 
 %------------------------------- Reference --------------------------------
-% K. Nishihara and M. Nakata, A surrogate-assisted partial optimization for
-% expensive constrained optimization problems, Proceedings of the
+% K. Nishihara and M. Nakata. A surrogate-assisted partial optimization for
+% expensive constrained optimization problems. Proceedings of the
 % International Conference on Parallel Problem Solving from Nature, 2024,
 % 391–407.
 %--------------------------------------------------------------------------

@@ -3,11 +3,11 @@ classdef CMOSMA < ALGORITHM
 % Constrained multi-objective evolutionary algorithm with self-organizing map
 
 %------------------------------- Reference --------------------------------
-% C. He, M. Li, C. Zhang, H. Chen, P. Zhong, Z. Li, and J. Li, A
+% C. He, M. Li, C. Zhang, H. Chen, P. Zhong, Z. Li, and J. Li. A
 % self-organizing map approach for constrained multi-objective optimization
-% problems, Complex & Intelligent Systems, 2022, 8: 5355-5375.
+% problems. Complex & Intelligent Systems, 2022, 8: 5355-5375.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

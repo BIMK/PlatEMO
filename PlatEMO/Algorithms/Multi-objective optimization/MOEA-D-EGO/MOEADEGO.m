@@ -4,11 +4,11 @@ classdef MOEADEGO < ALGORITHM
 % batch_size --- 5 --- Number of true function evaluations per iteration
 
 %------------------------------- Reference --------------------------------
-% Q. Zhang, W. Liu, E. Tsang, and B. Virginas, Expensive multiobjective
-% optimization by MOEA/D with Gaussian process model, IEEE Transactions on
+% Q. Zhang, W. Liu, E. Tsang, and B. Virginas. Expensive multiobjective
+% optimization by MOEA/D with Gaussian process model. IEEE Transactions on
 % Evolutionary Computation, 2010, 14(3): 456-474.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

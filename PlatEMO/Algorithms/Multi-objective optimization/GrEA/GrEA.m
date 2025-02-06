@@ -4,11 +4,11 @@ classdef GrEA < ALGORITHM
 % div --- --- The number of divisions in each objective
 
 %------------------------------- Reference --------------------------------
-% S. Yang, M. Li, X. Liu, and J. Zheng, A grid-based evolutionary algorithm
-% for many-objective optimization, IEEE Transactions on Evolutionary
+% S. Yang, M. Li, X. Liu, and J. Zheng. A grid-based evolutionary algorithm
+% for many-objective optimization. IEEE Transactions on Evolutionary
 % Computation, 2013, 17(5): 721-736.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

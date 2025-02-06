@@ -4,11 +4,11 @@ classdef LSMOP8 < PROBLEM
 % nk --- 5 --- Number of subcomponents in each variable group
 
 %------------------------------- Reference --------------------------------
-% R. Cheng, Y. Jin, and M. Olhofer, Test problems for large-scale
-% multiobjective and many-objective optimization, IEEE Transactions on
+% R. Cheng, Y. Jin, and M. Olhofer. Test problems for large-scale
+% multiobjective and many-objective optimization. IEEE Transactions on
 % Cybernetics, 2017, 47(12): 4108-4121.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

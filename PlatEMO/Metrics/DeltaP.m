@@ -3,12 +3,12 @@ function score = DeltaP(Population,optimum)
 % Averaged Hausdorff distance
 
 %------------------------------- Reference --------------------------------
-% O. Schutze, X. Esquivel, A. Lara, and C. A. Coello Coello, Using the
+% O. Schutze, X. Esquivel, A. Lara, and C. A. Coello Coello. Using the
 % averaged Hausdorff distance as a performance measure in evolutionary
-% multiobjective optimization, IEEE Transactions on Evolutionary
+% multiobjective optimization. IEEE Transactions on Evolutionary
 % Computation, 2012, 16(4): 504-522.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

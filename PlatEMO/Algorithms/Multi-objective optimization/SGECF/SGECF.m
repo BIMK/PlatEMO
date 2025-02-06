@@ -3,12 +3,12 @@ classdef SGECF < ALGORITHM
 % Sparsity-guided elitism co-evolutionary framework
 
 %------------------------------- Reference --------------------------------
-% C. Wu, Y. Tian, Y. Zhang, H. Jiang, and X. Zhang, A sparsity-guided
+% C. Wu, Y. Tian, Y. Zhang, H. Jiang, and X. Zhang. A sparsity-guided
 % elitism co-evolutionary framework for sparse large-scale multi-objective
-% optimization, Proceedings of the IEEE Congress on Evolutionary
+% optimization. Proceedings of the IEEE Congress on Evolutionary
 % Computation, 2023.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -3,11 +3,11 @@ classdef MFFS < ALGORITHM
 % Multiform feature selection
 
 %------------------------------- Reference --------------------------------
-% R. Jiao, B. Xue, and M. Zhang, Benefiting from single-objective feature 
-% selection to multiobjective feature selection: A multiform approach, 
+% R. Jiao, B. Xue, and M. Zhang. Benefiting from single-objective feature 
+% selection to multiobjective feature selection: A multiform approach. 
 % IEEE Transactions on Cybernetics, 2023, 53(12): 7773-7786.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

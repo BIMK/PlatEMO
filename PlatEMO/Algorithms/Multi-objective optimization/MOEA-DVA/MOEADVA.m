@@ -6,12 +6,12 @@ classdef MOEADVA < ALGORITHM
 % NIA ---  6 --- The maximum number of tries required to judge the interaction
 
 %------------------------------- Reference --------------------------------
-% X. Ma, F. Liu, Y. Qi, X. Wang, L. Li, L. Jiao, M. Yin, and M. Gong, A
+% X. Ma, F. Liu, Y. Qi, X. Wang, L. Li, L. Jiao, M. Yin, and M. Gong. A
 % multiobjective evolutionary algorithm based on decision variable analyses
-% for multiobjective optimization problems with large-scale variables, IEEE
+% for multiobjective optimization problems with large-scale variables. IEEE
 % Transactions Evolutionary Computation, 2016, 20(2): 275-298.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

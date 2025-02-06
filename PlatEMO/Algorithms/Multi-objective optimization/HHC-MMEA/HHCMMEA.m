@@ -3,11 +3,11 @@ classdef HHCMMEA < ALGORITHM
 % Hybrid hierarchical clustering based multi-modal multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
-% Z. Ding, L. Cao, L. Chen, D. Sun, X. Zhang, and Z. Tao, Large-scale
+% Z. Ding, L. Cao, L. Chen, D. Sun, X. Zhang, and Z. Tao. Large-scale
 % multimodal multiobjective evolutionary optimization based on hybrid
-% hierarchical clustering, Knowledge-Based Systems, 2023, 266: 110398.
+% hierarchical clustering. Knowledge-Based Systems, 2023, 266: 110398.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -6,12 +6,12 @@ classdef LSMOF < ALGORITHM
 % operator ---  1 --- Original operators 1. GA 2. DE
 
 %------------------------------- Reference --------------------------------
-% C. He, L. Li, Y. Tian, X. Zhang, R. Cheng, Y. Jin, and X. Yao,
+% C. He, L. Li, Y. Tian, X. Zhang, R. Cheng, Y. Jin, and X. Yao.
 % Accelerating large-scale multi-objective optimization via problem
-% reformulation, IEEE Transactions on Evolutionary Computation, 2019,
+% reformulation. IEEE Transactions on Evolutionary Computation, 2019,
 % 23(6): 949-961.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

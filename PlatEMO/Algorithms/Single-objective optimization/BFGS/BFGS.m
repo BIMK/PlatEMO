@@ -5,10 +5,10 @@ classdef BFGS < ALGORITHM
 % sigma --- 0.4 --- A parameter within [0 0.5] for line search
 
 %------------------------------- Reference --------------------------------
-% D. F. Shanno, Conditioning of quasi-Newton methods for function
-% minimization, Mathematics of Computation, 1970, 24: 647-656.
+% D. F. Shanno. Conditioning of quasi-Newton methods for function
+% minimization. Mathematics of Computation, 1970, 24: 647-656.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

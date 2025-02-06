@@ -5,11 +5,11 @@ classdef LMOEADS < ALGORITHM
 % Ns --- 30 --- The number of random sampling along each guiding direction
 
 %------------------------------- Reference --------------------------------
-% S. Qin, C. Sun, Y. Jin, Y. Tan, and J. Fieldsend, Large-scale
-% evolutionary multi-objective optimization assisted by directed sampling,
+% S. Qin, C. Sun, Y. Jin, Y. Tan, and J. Fieldsend. Large-scale
+% evolutionary multi-objective optimization assisted by directed sampling.
 % IEEE Transactions on Evolutionary Computation, 2021, 25(4): 724-738.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

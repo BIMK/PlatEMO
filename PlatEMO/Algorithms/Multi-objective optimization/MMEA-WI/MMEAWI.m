@@ -3,11 +3,11 @@ classdef MMEAWI < ALGORITHM
 % Weighted indicator-based evolutionary algorithm for multimodal multi-objective optimization
 
 %------------------------------- Reference --------------------------------
-% W. Li, T. Zhang, R. Wang, and H. Ishibuchi, Weighted indicator-based
-% evolutionary algorithm for multimodal multiobjective optimization, IEEE
+% W. Li, T. Zhang, R. Wang, and H. Ishibuchi. Weighted indicator-based
+% evolutionary algorithm for multimodal multiobjective optimization. IEEE
 % Transactions on Evolutionary Computation, 2021, 25(6): 1064-1078.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -5,7 +5,7 @@ classdef DEAGNG < ALGORITHM
 % eps --- 0.314 --- Parameter epsilon
 
 %------------------------------- Reference --------------------------------
-% Y. Liu, H. Ishibuchi, N. Masuyama, and Y. Nojima, Adapting reference
+% Y. Liu, H. Ishibuchi, N. Masuyama, and Y. Nojima. Adapting reference
 % vectors and scalarizing functions by growing neural gas to handle
 % irregular Pareto fronts. IEEE Transactions on Evolutionary Computation,
 % 2020, 24(3): 439-453.

@@ -5,11 +5,11 @@ classdef RVEAa < ALGORITHM
 % fr    --- 0.1 --- The frequency of employing reference vector adaptation
 
 %------------------------------- Reference --------------------------------
-% R. Cheng, Y. Jin, M. Olhofer, and B. Sendhoff, A reference vector guided
-% evolutionary algorithm for many-objective optimization, IEEE Transactions
+% R. Cheng, Y. Jin, M. Olhofer, and B. Sendhoff. A reference vector guided
+% evolutionary algorithm for many-objective optimization. IEEE Transactions
 % on Evolutionary Computation, 2016, 20(5): 773-791.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

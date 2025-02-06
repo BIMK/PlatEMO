@@ -5,11 +5,11 @@ classdef WVMOEAP < ALGORITHM
 % b      --- 0.05 --- Range of preferred region
 
 %------------------------------- Reference --------------------------------
-% X. Zhang, X. Jiang, and L. Zhang, A weight vector based multi-objective
-% optimization algorithm with preference, Acta Electronica Sinica
+% X. Zhang, X. Jiang, and L. Zhang. A weight vector based multi-objective
+% optimization algorithm with preference. Acta Electronica Sinica
 % (Chinese), 2016, 44(11): 2639-2645.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

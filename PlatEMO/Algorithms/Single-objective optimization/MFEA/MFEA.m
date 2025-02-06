@@ -4,11 +4,11 @@ classdef MFEA < ALGORITHM
 % rmp --- 0.3 --- Random mating probability
 
 %------------------------------- Reference --------------------------------
-% A. Gupta, Y. Ong, and L. Feng, Multifactorial evolution: towards
-% evolutionary multitasking, IEEE Transactions on Evolutionary Computation,
+% A. Gupta, Y. Ong, and L. Feng. Multifactorial evolution: towards
+% evolutionary multitasking. IEEE Transactions on Evolutionary Computation,
 % 2016, 20(3): 343-357.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

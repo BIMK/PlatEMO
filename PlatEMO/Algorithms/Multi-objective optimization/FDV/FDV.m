@@ -7,8 +7,8 @@ classdef FDV < ALGORITHM
 % type      ---   1 --- The type of aggregation function for MOEA/D
 
 %------------------------------- Reference --------------------------------
-% X. Yang, J. Zou, S. Yang, J. Zheng, and Y. Liu, A fuzzy decision
-% variables framework for large-scale multiobjective optimization, IEEE
+% X. Yang, J. Zou, S. Yang, J. Zheng, and Y. Liu. A fuzzy decision
+% variables framework for large-scale multiobjective optimization. IEEE
 % Transactions on Evolutionary Computation, 2023, 27(3): 445-459.
 %--------------------------------------------------------------------------
 

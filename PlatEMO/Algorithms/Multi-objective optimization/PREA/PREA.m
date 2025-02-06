@@ -3,12 +3,12 @@ classdef PREA < ALGORITHM
 % Promising-region based EMO algorithm
 
 %------------------------------- Reference --------------------------------
-% J. Yuan, H. Liu, F. Gu, Q. Zhang, and Z. He, Investigating the properties
+% J. Yuan, H. Liu, F. Gu, Q. Zhang, and Z. He. Investigating the properties
 % of indicators and an evolutionary many-objective algorithm based on a
-% promising region, IEEE Transactions on Evolutionary Computation, 2021,
+% promising region. IEEE Transactions on Evolutionary Computation, 2021,
 % 25(1): 75-86.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

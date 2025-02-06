@@ -1,7 +1,7 @@
 function [OffDec,OffMask,len1]=Reproduction1(Problem,Pop1,Dec1,Mask1,FrontNo,CrowdDis,Pop1_Site,Local_Knowlege,Global_Knowlege,NSV,SV,theta,REAL)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -4,11 +4,11 @@ classdef MOL2SMEA < ALGORITHM
 % NLinear --- 8 --- Number of one-dimensional models
 
 %------------------------------- Reference --------------------------------
-% L. Si, X. Zhang, Y. Tian, S. Yang, L. Zhang, and Y. Jin, Linear subspace
+% L. Si, X. Zhang, Y. Tian, S. Yang, L. Zhang, and Y. Jin. Linear subspace
 % surrogate modeling for large-scale expensive single/multi-objective
-% optimization, IEEE Transactions on Evolutionary Computation, 2023.
+% optimization. IEEE Transactions on Evolutionary Computation, 2023.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

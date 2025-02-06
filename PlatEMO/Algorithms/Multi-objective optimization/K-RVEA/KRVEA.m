@@ -6,12 +6,12 @@ classdef KRVEA < ALGORITHM
 % mu    ---  5 --- Number of re-evaluated solutions at each generation
 
 %------------------------------- Reference --------------------------------
-% T. Chugh, Y. Jin, K. Miettinen, J. Hakanen, and K. Sindhya, A surrogate-
+% T. Chugh, Y. Jin, K. Miettinen, J. Hakanen, and K. Sindhya. A surrogate-
 % assisted reference vector guided evolutionary algorithm for
-% computationally expensive many-objective optimization, IEEE Transactions
+% computationally expensive many-objective optimization. IEEE Transactions
 % on Evolutionary Computation, 2018, 22(1): 129-142.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -3,7 +3,7 @@ function new_x = Opt_ETI_FCM(M,D,xlower,xupper,Batch_size,train_x,train_y)
 % Expected Tchebycheff Improvement (ETI)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -257,27 +257,6 @@ end
 % >>>>>>>>>>>>>>>>    functions in PlatEMO ====================
 function Offspring = operator_DE(Parent1,Parent2,Parent3, xlower,xupper)
 %OperatorDE - The operator of differential evolution.
-%
-%   Off = OperatorDE(P1,P2,P3, xlower,xupper) uses the operator of differential
-%   evolution to generate offsprings for problem Pro based on parents P1,
-%   P2, and P3.  if P1, P2, and P3 are
-%   matrices of decision variables, then Off is also a matrix of decision
-%   variables, i.e., the offsprings are not evaluated. Each object or row
-%   of P1, P2, and P3 is used to generate one offspring by P1 + 0.5*(P2-P3)
-%   and polynomial mutation.
-%
-%------------------------------- Reference --------------------------------
-% H. Li and Q. Zhang, Multiobjective optimization problems with complicated
-% Pareto sets, MOEA/D and NSGA-II, IEEE Transactions on Evolutionary
-% Computation, 2009, 13(2): 284-302.
-%------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
-% research purposes. All publications which use this platform or any code
-% in the platform should acknowledge the use of "PlatEMO" and reference "Ye
-% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
-% for evolutionary multi-objective optimization [educational forum], IEEE
-% Computational Intelligence Magazine, 2017, 12(4): 73-87".
-%--------------------------------------------------------------------------
 
     %% Parameter setting
     [CR,F,proM,disM] = deal(1,0.5,1,20);

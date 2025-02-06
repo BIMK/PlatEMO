@@ -3,11 +3,11 @@ classdef IDBEA < ALGORITHM
 % Improved decomposition-based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
-% M. Asafuddoula, T. Ray, and R. Sarker, A decomposition-based evolutionary
-% algorithm for many objective optimization, IEEE Transactions on
+% M. Asafuddoula, T. Ray, and R. Sarker. A decomposition-based evolutionary
+% algorithm for many objective optimization. IEEE Transactions on
 % Evolutionary Computation, 2015, 19(3): 445-460.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

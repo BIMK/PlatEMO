@@ -3,12 +3,12 @@ classdef MPMMEA < ALGORITHM
 % Multi-population multi-modal multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, R. Liu, X. Zhang, H. Ma, K. C. Tan, and Y. Jin, A
+% Y. Tian, R. Liu, X. Zhang, H. Ma, K. C. Tan, and Y. Jin. A
 % multipopulation evolutionary algorithm for solving large-scale multimodal
-% multiobjective optimization problems, IEEE Transactions on Evolutionary
+% multiobjective optimization problems. IEEE Transactions on Evolutionary
 % Computation, 2021, 25(3): 405-418.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

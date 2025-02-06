@@ -4,12 +4,12 @@ classdef S3CMAES < ALGORITHM
 % evolution strategy
 
 %------------------------------- Reference --------------------------------
-% H. Chen, R. Cheng, J. Wen, H. Li, and J. Weng, Solving large-scale
+% H. Chen, R. Cheng, J. Wen, H. Li, and J. Weng. Solving large-scale
 % many-objective optimization problems by covariance matrix adaptation
-% evolution strategy with scalable small subpopulations, Information
+% evolution strategy with scalable small subpopulations. Information
 % Sciences, 2020, 509: 457-469.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -3,11 +3,11 @@ classdef Izui < ALGORITHM
 % An aggregative gradient based multi-objective optimizer proposed by Izui et al.
 
 %------------------------------- Reference --------------------------------
-% K. Izui, T. Yamada, S. Nishiwaki, and K. Tanaka, Multiobjective
-% optimization using an aggregative gradient-based method, Structural and
+% K. Izui, T. Yamada, S. Nishiwaki, and K. Tanaka. Multiobjective
+% optimization using an aggregative gradient-based method. Structural and
 % Multidisciplinary Optimization, 2015, 51: 173-182.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform

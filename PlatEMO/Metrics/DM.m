@@ -3,10 +3,10 @@ function score = DM(Population,optimum)
 % Metric for diversity
 
 %------------------------------- Reference --------------------------------
-% K. Deb and S. Jain, Running performance metrics for evolutionary
-% multi-objective optimization, KanGAL Report 2002004, 2002.
+% K. Deb and S. Jain. Running performance metrics for evolutionary
+% multi-objective optimization. KanGAL Report 2002004, 2002.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

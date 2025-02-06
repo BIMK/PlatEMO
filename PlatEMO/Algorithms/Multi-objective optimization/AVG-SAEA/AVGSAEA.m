@@ -7,11 +7,11 @@ classdef AVGSAEA< ALGORITHM
 % mu       ---   5 --- Number of re-evaluated solutions in each iteration
  
 %------------------------------- Reference --------------------------------
-% Y. Li, X. Feng, and H. Yu, Solving high-dimensional expensive
+% Y. Li, X. Feng, and H. Yu. Solving high-dimensional expensive
 % multiobjective optimization problems by adaptive decision variable
-% grouping, IEEE Transactions on Evolutionary Computation, 2024.
+% grouping. IEEE Transactions on Evolutionary Computation, 2024.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

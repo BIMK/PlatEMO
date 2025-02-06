@@ -3,11 +3,11 @@ classdef FROFI < ALGORITHM
 % Feasibility rule with the incorporation of objective function information
 
 %------------------------------- Reference --------------------------------
-% Y. Wang, B. Wang, H. Li, G. G. Yen, Incorporating objective function
+% Y. Wang, B. Wang, H. Li, and G. G. Yen. Incorporating objective function
 % information into the feasibility rule for constrained evolutionary
-% optimization, IEEE Transactions on Cybernetics, 2015, 46(12): 1-15.
+% optimization. IEEE Transactions on Cybernetics, 2015, 46(12): 1-15.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

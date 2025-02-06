@@ -3,11 +3,11 @@ classdef MOEADDYTS < ALGORITHM
 % MOEA/D with dynamic Thompson sampling
 
 %------------------------------- Reference --------------------------------
-% L. Sun and K. Li, Adaptive operator selection based on dynamic Thompson
-% sampling for MOEA/D, Proceedings of the International Conference on
+% L. Sun and K. Li. Adaptive operator selection based on dynamic Thompson
+% sampling for MOEA/D. Proceedings of the International Conference on
 % Parallel Problem Solving from Nature, 2020, 271-284.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

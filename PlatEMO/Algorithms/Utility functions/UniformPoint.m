@@ -34,15 +34,15 @@ function [W,N] = UniformPoint(N,M,method)
 %       [W,N] = UniformPoint(103,10,'Latin')
 
 %------------------------------- Reference --------------------------------
-% [1] Y. Tian, X. Xiang, X. Zhang, R. Cheng, and Y. Jin, Sampling reference
+% [1] Y. Tian, X. Xiang, X. Zhang, R. Cheng, and Y. Jin. Sampling reference
 % points on the Pareto fronts of benchmark multi-objective optimization
-% problems, Proceedings of the IEEE Congress on Evolutionary Computation,
+% problems. Proceedings of the IEEE Congress on Evolutionary Computation,
 % 2018.
-% [2] T. Takagi, K. Takadama, and H. Sato, Incremental lattice design
-% of weight vector set, Proceedings of the Genetic and Evolutionary
+% [2] T. Takagi, K. Takadama, and H. Sato. Incremental lattice design
+% of weight vector set. Proceedings of the Genetic and Evolutionary
 % Computation Conference Companion, 2020, 1486-1494.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

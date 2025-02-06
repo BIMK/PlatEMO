@@ -6,9 +6,9 @@ classdef MultiObjectiveEGO < ALGORITHM
 % H     ---  21 --- number of reference directions
 
 %------------------------------- Reference --------------------------------
-% R. Hussein, K. Deb, A Generative Kriging Surrogate Model for Constrained
-% and Unconstrained Multi-objective Optimization, Proceedings of the
-% Genetic and Evolutionary Computation Conference, 2016, 573-580.
+% R. Hussein and K. Deb. A generative Kriging surrogate model for
+% constrained and unconstrained multi-objective optimization. Proceedings
+% of the Genetic and Evolutionary Computation Conference, 2016, 573-580.
 %--------------------------------------------------------------------------
 
 % This function is written by Youwei He (email: 1554748356@qq.com)

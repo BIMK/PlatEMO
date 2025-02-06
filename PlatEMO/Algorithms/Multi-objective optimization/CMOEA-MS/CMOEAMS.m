@@ -5,12 +5,12 @@ classdef CMOEAMS < ALGORITHM
 % lambda --- 0.5 --- Parameter for determining the current stage
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, Y. Zhang, Y. Su, X. Zhang, K. C. Tan, and Y. Jin, Balancing
+% Y. Tian, Y. Zhang, Y. Su, X. Zhang, K. C. Tan, and Y. Jin. Balancing
 % objective optimization and constraint satisfaction in constrained
-% evolutionary multi-objective optimization, IEEE Transactions on
+% evolutionary multi-objective optimization. IEEE Transactions on
 % Cybernetics, 2022, 52(9): 9559-9572.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -3,12 +3,12 @@ classdef Sparse_KP < PROBLEM
 % The sparse multi-objective knapsack problem
 
 %------------------------------- Reference --------------------------------
-% Y. Su, Z. Jin, Y. Tian, X. Zhang, and K. C. Tan, Comparing the
+% Y. Su, Z. Jin, Y. Tian, X. Zhang, and K. C. Tan. Comparing the
 % performance of evolutionary algorithms for sparse multi-objective
-% optimization via a comprehensive indicator, IEEE Computational
+% optimization via a comprehensive indicator. IEEE Computational
 % Intelligence Magazine, 2022, 17(3): 34-53.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

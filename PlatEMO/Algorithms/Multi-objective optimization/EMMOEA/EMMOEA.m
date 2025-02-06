@@ -4,11 +4,11 @@ classdef EMMOEA < ALGORITHM
 % gmax --- 10 --- Number of generations before updating Kriging Kmodels
 
 %------------------------------- Reference --------------------------------
-% S. Qin, C. Sun, Q. Liu, and Y. Jin, A performance indicator-based infill
-% criterion for expensive multi-/many-objective optimization, IEEE
+% S. Qin, C. Sun, Q. Liu, and Y. Jin. A performance indicator-based infill
+% criterion for expensive multi-/many-objective optimization. IEEE
 % Transactions on Evolutionary Computation, 2023, 27(4): 1085-1099.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

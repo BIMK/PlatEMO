@@ -3,12 +3,12 @@ classdef CMMO < ALGORITHM
 % Coevolutionary multi-modal multi-objective optimization framework
 
 %------------------------------- Reference --------------------------------
-% F. Ming, W. Gong, L. Wang, and L. Gao, Balancing convergence and
+% F. Ming, W. Gong, L. Wang, and L. Gao. Balancing convergence and
 % diversity in objective and decision spaces for multimodal multi-objective
-% optimization, IEEE Transactions on Emerging Topics in Computational
+% optimization. IEEE Transactions on Emerging Topics in Computational
 % Intelligence, 2023, 7(2): 474-486.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

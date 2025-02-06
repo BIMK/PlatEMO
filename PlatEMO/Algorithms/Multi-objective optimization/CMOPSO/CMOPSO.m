@@ -3,11 +3,11 @@ classdef CMOPSO < ALGORITHM
 % Competitive mechanism based multi-objective particle swarm optimizer
 
 %------------------------------- Reference --------------------------------
-% X. Zhang, X. Zheng, R. Cheng, J. Qiu, and Y. Jin, A competitive mechanism
-% based multi-objective particle swarm optimizer with fast convergence,
+% X. Zhang, X. Zheng, R. Cheng, J. Qiu, and Y. Jin. A competitive mechanism
+% based multi-objective particle swarm optimizer with fast convergence.
 % Information Sciences, 2018, 427: 63-76.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

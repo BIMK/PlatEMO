@@ -3,11 +3,11 @@ classdef MaF5 < PROBLEM
 % Scaled DTLZ4
 
 %------------------------------- Reference --------------------------------
-% R. Cheng, M. Li, Y. Tian, X. Zhang, S. Yang, Y. Jin, and X. Yao, A
-% benchmark test suite for evolutionary many-objective optimization,
+% R. Cheng, M. Li, Y. Tian, X. Zhang, S. Yang, Y. Jin, and X. Yao. A
+% benchmark test suite for evolutionary many-objective optimization.
 % Complex & Intelligent Systems, 2017, 3(1): 67-81.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

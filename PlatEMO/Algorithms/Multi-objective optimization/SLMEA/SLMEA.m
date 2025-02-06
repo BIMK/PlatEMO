@@ -4,11 +4,11 @@ classdef SLMEA < ALGORITHM
 % useGPU --- 0 --- Whether use GPU acceleration
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, Y. Feng, X. Zhang, and C. Sun, A fast clustering based
+% Y. Tian, Y. Feng, X. Zhang, and C. Sun. A fast clustering based
 % evolutionary algorithm for super-large-scale sparse multi-objective
-% optimization, IEEE/CAA Journal of Automatica Sinica, 2022, 9(4): 1-16.
+% optimization. IEEE/CAA Journal of Automatica Sinica, 2022, 9(4): 1-16.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

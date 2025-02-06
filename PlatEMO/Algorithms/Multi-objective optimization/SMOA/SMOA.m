@@ -4,11 +4,11 @@ classdef SMOA < ALGORITHM
 % H --- 2.6e4 --- Size of uniformly distributed L1 unit vector set
 
 %------------------------------- Reference --------------------------------
-% T. Takagi, K. Takadama, and H. Sato, Supervised multi-objective
-% optimization algorithm using estimation, Proceedings of the IEEE Congress
+% T. Takagi, K. Takadama, and H. Sato. Supervised multi-objective
+% optimization algorithm using estimation. Proceedings of the IEEE Congress
 % on Evolutionary Computation, 2022.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

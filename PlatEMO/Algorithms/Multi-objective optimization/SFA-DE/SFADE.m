@@ -6,12 +6,12 @@ classdef SFADE < ALGORITHM
 % omega ---  20 --- The maximum number of generations for DE-based search
 
 %------------------------------- Reference --------------------------------
-% Y. Horaguchi, K. Nishihara, and M. Nakata, Evolutionary multiobjective
+% Y. Horaguchi, K. Nishihara, and M. Nakata. Evolutionary multiobjective
 % optimization assisted by scalarization function approximation for
-% high-dimensional expensive problems, Swarm and Evolutionary Computation,
+% high-dimensional expensive problems. Swarm and Evolutionary Computation,
 % 2024, 86: 101516.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -3,12 +3,12 @@ classdef PMMOEA < ALGORITHM
 % Pattern mining based multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, C. Lu, X. Zhang, F. Cheng, and Y. Jin, A pattern mining based
+% Y. Tian, C. Lu, X. Zhang, F. Cheng, and Y. Jin. A pattern mining based
 % evolutionary algorithm for large-scale sparse multi-objective
-% optimization problems, IEEE Transactions on Cybernetics, 2022, 52(7):
+% optimization problems. IEEE Transactions on Cybernetics, 2022, 52(7):
 % 6784-6797.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

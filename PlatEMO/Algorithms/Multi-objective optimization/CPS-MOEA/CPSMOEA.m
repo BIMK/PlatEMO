@@ -5,11 +5,11 @@ classdef CPSMOEA < ALGORITHM
 % M --- 3 --- Number of generated offsprings for each solution
 
 %------------------------------- Reference --------------------------------
-% J. Zhang, A. Zhou, and G. Zhang, A classification and Pareto domination
-% based multiobjective evolutionary algorithm, Proceedings of the IEEE
+% J. Zhang, A. Zhou, and G. Zhang. A classification and Pareto domination
+% based multiobjective evolutionary algorithm. Proceedings of the IEEE
 % Congress on Evolutionary Computation, 2015, 2883-2890.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

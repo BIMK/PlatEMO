@@ -6,12 +6,12 @@ classdef MOEADFRRMAB < ALGORITHM
 % D --- 1 --- Decaying factor in calculating credit value
 
 %------------------------------- Reference --------------------------------
-% K. Li, A. Fialho, S. Kwong, and Q. Zhang, Adaptive operator selection
+% K. Li, A. Fialho, S. Kwong, and Q. Zhang. Adaptive operator selection
 % with bandits for a multiobjective evolutionary algorithm based on
-% decomposition, IEEE Transactions on Evolutionary Computation, 2014,
+% decomposition. IEEE Transactions on Evolutionary Computation, 2014,
 % 18(1): 114-130.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

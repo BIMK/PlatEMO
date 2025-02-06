@@ -3,12 +3,12 @@ classdef CEC2017_F18 < PROBLEM
 % CEC'2017 constrained optimization benchmark problem
 
 %------------------------------- Reference --------------------------------
-% G. Wu, R. Mallipeddi, and P. N. Suganthan, Problem definitions and
+% G. Wu, R. Mallipeddi, and P. N. Suganthan. Problem definitions and
 % evaluation criteria for the CEC 2017 competition on constrained real-
-% parameter optimization, National University of Defense Technology, China,
+% parameter optimization. National University of Defense Technology, China,
 % 2016.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

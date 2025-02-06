@@ -3,11 +3,11 @@ classdef AGSEA < ALGORITHM
 % Automated guiding vector selection-based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
-% S. Shao, Y. Tian, and X. Zhang, Deep reinforcement learning assisted
+% S. Shao, Y. Tian, and X. Zhang. Deep reinforcement learning assisted
 % automated guiding vector selection for large-scale sparse multi-objective
-% optimization, Swarm and Evolutionary Computation, 2024, 88: 101606.
+% optimization. Swarm and Evolutionary Computation, 2024, 88: 101606.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

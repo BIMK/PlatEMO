@@ -3,11 +3,11 @@ classdef AdaW < ALGORITHM
 % Evolutionary algorithm with adaptive weights
 
 %------------------------------- Reference --------------------------------
-% M. Li and X. Yao, What weights work for you? Adapting weights for any
+% M. Li and X. Yao. What weights work for you? Adapting weights for any
 % Pareto front shape in decomposition-based evolutionary multiobjective
-% optimisation, Evolutionary Computation, 2020, 28(2): 227-253.
+% optimisation. Evolutionary Computation, 2020, 28(2): 227-253.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

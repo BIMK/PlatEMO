@@ -3,12 +3,12 @@ classdef URCMO < ALGORITHM
 % Utilizing the relationship between constrained and unconstrained Pareto fronts for constrained multi-objective optimization
 
 %------------------------------- Reference --------------------------------
-% J. Liang, K. Qiao, K. Yu, B. Qu, C. Yue, W. Guo, and L. Wang, Utilizing
+% J. Liang, K. Qiao, K. Yu, B. Qu, C. Yue, W. Guo, and L. Wang. Utilizing
 % the relationship between unconstrained and constrained Pareto fronts for
-% constrained multi-objective optimization, IEEE Transactions on
+% constrained multi-objective optimization. IEEE Transactions on
 % Cybernetics, 2023, 53(6): 3873-3886.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

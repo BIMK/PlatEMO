@@ -4,12 +4,12 @@ classdef MaxCut < PROBLEM
 % dataNo --- 1 --- Number of dataset
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, L. Wang, S. Yang, J. Ding, Y. Jin, and X. Zhang, Neural
+% Y. Tian, L. Wang, S. Yang, J. Ding, Y. Jin, and X. Zhang. Neural
 % network-based dimensionality reduction for large-scale binary
-% optimization with millions of variables, IEEE Transactions on
+% optimization with millions of variables. IEEE Transactions on
 % Evolutionary Computation, 2024.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -4,12 +4,12 @@ classdef MyODEMR < ALGORITHM
 % nP --- 500 --- Number of reference points for IGD calculation
 
 %------------------------------- Reference --------------------------------
-% R. Denysiuk, L. Costa, and I. E. Santo, Many-objective optimization using
-% differential evolution with variable-wise mutation restriction,
+% R. Denysiuk, L. Costa, and I. E. Santo. Many-objective optimization using
+% differential evolution with variable-wise mutation restriction.
 % Proceedings of the Annual Conference on Genetic and Evolutionary
 % Computation, 2013, 591-598.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

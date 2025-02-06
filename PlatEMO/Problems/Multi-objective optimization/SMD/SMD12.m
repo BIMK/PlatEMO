@@ -4,10 +4,11 @@ classdef SMD12 < PROBLEM
 % maxFElower --- 500 --- Maximum number of lower level function evaluations for each solution
 
 %------------------------------- Reference --------------------------------
-% A. Sinha, P. Malo, K. Deb, Test problem construction for single-objective 
-% bilevel optimization, Evolutionary Computation, 2014, 22(3): 439-477.
+% A. Sinha, P. Malo, and K. Deb. Test problem construction for
+% single-objective bilevel optimization. Evolutionary Computation, 2014,
+% 22(3): 439-477.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

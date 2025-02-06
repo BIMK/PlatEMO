@@ -7,11 +7,11 @@ classdef MTS < ALGORITHM
 % ofForeground      ---  5 --- Number of best solutions for local search
 
 %------------------------------- Reference --------------------------------
-% L. Y. Tseng and C. Chen, Multiple trajectory search for unconstrained /
-% constrained multi-objective optimization, Proceedings of the IEEE
+% L. Y. Tseng and C. Chen. Multiple trajectory search for unconstrained /
+% constrained multi-objective optimization. Proceedings of the IEEE
 % Congress on Evolutionary Computation, 2009, 1951-1958.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

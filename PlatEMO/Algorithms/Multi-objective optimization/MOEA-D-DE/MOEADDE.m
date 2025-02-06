@@ -5,11 +5,11 @@ classdef MOEADDE < ALGORITHM
 % nr    ---   2 --- Maximum number of solutions replaced by each offspring
 
 %------------------------------- Reference --------------------------------
-% H. Li and Q. Zhang, Multiobjective optimization problems with complicated
-% Pareto sets, MOEA/D and NSGA-II, IEEE Transactions on Evolutionary
+% H. Li and Q. Zhang. Multiobjective optimization problems with complicated
+% Pareto sets, MOEA/D and NSGA-II. IEEE Transactions on Evolutionary
 % Computation, 2009, 13(2): 284-302.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

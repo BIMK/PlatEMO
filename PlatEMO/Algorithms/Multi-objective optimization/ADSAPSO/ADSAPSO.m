@@ -5,11 +5,11 @@ classdef ADSAPSO < ALGORITHM
 % beta --- 0.5 --- Percentage of Dropout
 
 %------------------------------- Reference --------------------------------
-% J. Lin, C. He, and R. Cheng, Adaptive dropout for high-dimensional 
-% expensive multiobjective optimization, Complex & Intelligent Systems,
+% J. Lin, C. He, and R. Cheng. Adaptive dropout for high-dimensional 
+% expensive multiobjective optimization. Complex & Intelligent Systems,
 % 2022, 8(1): 271¨C285.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -3,12 +3,12 @@ classdef CMME < ALGORITHM
 % Constrained many-objective evolutionary algorithm with enhanced mating and environmental selections
 
 %------------------------------- Reference --------------------------------
-% F. Ming, W. Gong, L. Wang, and L. Gao, A constrained many-objective
+% F. Ming, W. Gong, L. Wang, and L. Gao. A constrained many-objective
 % optimization evolutionary algorithm with enhanced mating and
-% environmental selections, IEEE Transactions on Cybernetics, 2023, 53(8):
+% environmental selections. IEEE Transactions on Cybernetics, 2023, 53(8):
 % 4934-4946.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

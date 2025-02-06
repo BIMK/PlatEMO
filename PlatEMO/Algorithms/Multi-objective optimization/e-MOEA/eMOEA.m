@@ -4,11 +4,11 @@ classdef eMOEA < ALGORITHM
 % epsilon --- 0.06 --- The parameter in grid location calculation
 
 %------------------------------- Reference --------------------------------
-% K. Deb, M. Mohan, and S. Mishra, Towards a quick computation of
-% well-spread Pareto-optimal solutions, Proceedings of the International
+% K. Deb, M. Mohan, and S. Mishra. Towards a quick computation of
+% well-spread Pareto-optimal solutions. Proceedings of the International
 % Conference on Evolutionary Multi-Criterion Optimization, 2003, 222-236.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

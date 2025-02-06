@@ -3,12 +3,12 @@ classdef tDEACPBI < ALGORITHM
 % Theta-dominance based evolutionary algorithm with CPBI
 
 %------------------------------- Reference --------------------------------
-% F. Ming, W. Gong, L. Wang, and L. Gao, A constraint-handling technique
+% F. Ming, W. Gong, L. Wang, and L. Gao. A constraint-handling technique
 % for decomposition-based constrained many-objective evolutionary
-% algorithms, IEEE Transactions on Systems, Man, and Cybernetics: Systems,
+% algorithms. IEEE Transactions on Systems, Man, and Cybernetics: Systems,
 % 2023, 53(12): 7783-7793.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

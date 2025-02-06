@@ -3,12 +3,12 @@ classdef LCMEA < ALGORITHM
 % Large-scale constrained multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
-% L. Si, X. Zhang, Y. Zhang, S. Yang, and Y. Tian, An efficient sampling
+% L. Si, X. Zhang, Y. Zhang, S. Yang, and Y. Tian. An efficient sampling
 % approach to offspring generation for evolutionary large-scale constrained
-% multi-objective optimization, IEEE Transactions on Emerging Topics in
+% multi-objective optimization. IEEE Transactions on Emerging Topics in
 % Computational Intelligence, 2024.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -4,11 +4,11 @@ classdef MMMOP2 < PROBLEM
 % kA --- 1 --- Number of decision variables in XA
 
 %------------------------------- Reference --------------------------------
-% Y. Liu, G. G. Yen, and D. Gong, A multi-modal multi-objective
-% evolutionary algorithm using two-archive and recombination strategies,
+% Y. Liu, G. G. Yen, and D. Gong. A multi-modal multi-objective
+% evolutionary algorithm using two-archive and recombination strategies.
 % IEEE Transactions on Evolutionary Computation, 2019, 23(4): 660-674.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

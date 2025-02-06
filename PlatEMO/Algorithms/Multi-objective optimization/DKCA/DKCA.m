@@ -5,12 +5,12 @@ classdef DKCA < ALGORITHM
 % k ---   4 --- Successive k generations of variables change their corresponding scores
 
 %------------------------------- Reference --------------------------------
-% Y. Li, X. Feng, and H. Yu, A dynamic knowledge-guided coevolutionary
-% algorithm for large-scale sparse multiobjective optimization problems,
+% Y. Li, X. Feng, and H. Yu. A dynamic knowledge-guided coevolutionary
+% algorithm for large-scale sparse multiobjective optimization problems.
 % IEEE Transactions on Systems, Man, and Cybernetics: Systems, 2024,
 % 54(11): 7054-7064.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

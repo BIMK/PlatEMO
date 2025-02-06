@@ -3,11 +3,11 @@ classdef AGEMOEAII < ALGORITHM
 % Adaptive geometry estimation-based many-objective evolutionary algorithm II
 
 %------------------------------- Reference --------------------------------
-% A. Panichella, An improved Pareto front modeling algorithm for large-
-% scale many-objective optimization, Proceedings of the Genetic and
+% A. Panichella. An improved Pareto front modeling algorithm for large-
+% scale many-objective optimization. Proceedings of the Genetic and
 % Evolutionary Computation Conference, 2022.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

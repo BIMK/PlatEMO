@@ -11,10 +11,10 @@ function Offspring = OperatorFEP(Problem,Population)
 %       Off = OperatorFEP(Problem,Population)
 
 %------------------------------- Reference --------------------------------
-% X. Yao, Y. Liu, and G. Lin, Evolutionary programming made faster, IEEE
+% X. Yao, Y. Liu, and G. Lin. Evolutionary programming made faster. IEEE
 % Transactions on Evolutionary Computation, 1999, 3(2): 82-102.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

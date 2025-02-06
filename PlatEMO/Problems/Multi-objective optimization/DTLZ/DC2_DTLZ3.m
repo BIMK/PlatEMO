@@ -3,11 +3,11 @@ classdef DC2_DTLZ3 < PROBLEM
 % DTLZ3 with constrains in decision space
 
 %------------------------------- Reference --------------------------------
-% K. Li, R. Chen, G. Fu, and X. Yao, Two-archive evolutionary algorithm for
-% constrained multi-objective optimization, IEEE Transactions on
+% K. Li, R. Chen, G. Fu, and X. Yao. Two-archive evolutionary algorithm for
+% constrained multi-objective optimization. IEEE Transactions on
 % Evolutionary Computation, 2018, 23(2): 303-315.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

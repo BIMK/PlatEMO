@@ -1,8 +1,8 @@
 function [Population,W,B] = WeightUpdate(Population,W,Archive,Z,T,Global)
-% Weight Update
+% Weight update
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -24,7 +24,12 @@ function [Population,W,B] = WeightUpdate(Population,W,Archive,Z,T,Global)
     dis2 = pdist2(Archiveobjs,Archiveobjs);
     dis2 = sort(dis2,2);
     % Calculate the niche size(median of the distances from their closest solution in the archive )
-    niche_size = median(dis2(:,2));
+    if size(dis2, 2) >= 2
+        niche_size = median(dis2(:,2));
+    else
+        % If there is only one column for dis2, use the first column
+        niche_size = median(dis2(:,1));
+    end
     % Find undeveloped 
     Archive_und = Archive(dis1(:,1) >= niche_size);
     N_und = length(Archive_und);

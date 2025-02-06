@@ -3,12 +3,12 @@ classdef LSCM3 < PROBLEM
 % Large-scale constrained multiobjective benchmark problem
 
 %------------------------------- Reference --------------------------------
-% K. Qiao, J. Liang, K. Yu, W. Guo, C. Yue, B. Qu, and P. N. Suganthan,
+% K. Qiao, J. Liang, K. Yu, W. Guo, C. Yue, B. Qu, and P. N. Suganthan.
 % Benchmark problems for large-scale constrained multi-objective
-% optimization with baseline results, Swarm and Evolutionary Computation,
+% optimization with baseline results. Swarm and Evolutionary Computation,
 % 2024, 86: 101504.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

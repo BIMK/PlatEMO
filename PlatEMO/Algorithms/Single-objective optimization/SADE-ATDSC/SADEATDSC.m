@@ -1,18 +1,18 @@
 classdef SADEATDSC < ALGORITHM
 % <2022> <single> <real/integer> <expensive>
 % Surrogate-assisted differential evolution with adaptation of training data selection criterion
-% N         --- 100   --- Population size of DE
-% F         --- 0.5   --- Scaling factor of DE
-% CR        --- 0.9   --- Crossover rate of DE
-% mut       --- 3     --- Mutation strategy ID 
-% xov       --- 1     --- Crossover strategy ID
-% delta     --- 0.2   --- Rate of validation data
-% RBFN_lib  --- 2     --- RBFN library {newrbe, RBF + RBF_eval, rbfcreate + rbfinterp}
-% kernel_id --- 2     --- RBFN kernel {'linear' 'cubic' 'gaussian' 'thinplate' 'multiquadric' 'inversemultiquadric'}
+% N         --- 100 --- Population size of DE
+% F         --- 0.5 --- Scaling factor of DE
+% CR        --- 0.9 --- Crossover rate of DE
+% mut       ---   3 --- Mutation strategy ID 
+% xov       ---   1 --- Crossover strategy ID
+% delta     --- 0.2 --- Rate of validation data
+% RBFN_lib  ---   2 --- RBFN library {newrbe, RBF + RBF_eval, rbfcreate + rbfinterp}
+% kernel_id ---   2 --- RBFN kernel {'linear' 'cubic' 'gaussian' 'thinplate' 'multiquadric' 'inversemultiquadric'}
 
 %------------------------------- Reference --------------------------------
-% K. Nishihara and M. Nakata, Surrogate-assisted differential evolution
-% with adaptation of training data selection criterion, Proceedings of the
+% K. Nishihara and M. Nakata. Surrogate-assisted differential evolution
+% with adaptation of training data selection criterion. Proceedings of the
 % IEEE Symposium Series on Computational Intelligence, 2022, 1675–1682.
 %--------------------------------------------------------------------------
    

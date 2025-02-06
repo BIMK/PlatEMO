@@ -5,11 +5,11 @@ classdef NNIA < ALGORITHM
 % nC --- 100 --- Size of clone population
 
 %------------------------------- Reference --------------------------------
-% M. Gong, L. Jiao, H. Du, and L. Bo, Multiobjective immune algorithm with
-% nondominated neighbor-based selection, Evolutionary Computation, 2008,
+% M. Gong, L. Jiao, H. Du, and L. Bo. Multiobjective immune algorithm with
+% nondominated neighbor-based selection. Evolutionary Computation, 2008,
 % 16(2): 225-255.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

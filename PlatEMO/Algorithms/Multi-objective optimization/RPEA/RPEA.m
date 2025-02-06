@@ -5,11 +5,11 @@ classdef RPEA < ALGORITHM
 % delta --- 0.1 --- Parameter determining the difference between the reference point and the individuals
 
 %------------------------------- Reference --------------------------------
-% Y. Liu, D. Gong, X. Sun, and Y. Zhang, Many-objective evolutionary
-% optimization based on reference points, Applied Soft Computing, 2017,
+% Y. Liu, D. Gong, X. Sun, and Y. Zhang. Many-objective evolutionary
+% optimization based on reference points. Applied Soft Computing, 2017,
 % 50: 344-355.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

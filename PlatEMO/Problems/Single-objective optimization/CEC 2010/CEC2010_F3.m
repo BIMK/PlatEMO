@@ -3,11 +3,11 @@ classdef CEC2010_F3 < PROBLEM
 % CEC'2010 constrained optimization benchmark problem
 
 %------------------------------- Reference --------------------------------
-% R. Mallipeddi and P. N. Suganthan, Problem definitions and evaluation
+% R. Mallipeddi and P. N. Suganthan. Problem definitions and evaluation
 % criteria for the CEC 2010 competition on constrained real-parameter
-% optimization, Nanyang Technological University, Singapore, 2010.
+% optimization. Nanyang Technological University, Singapore, 2010.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

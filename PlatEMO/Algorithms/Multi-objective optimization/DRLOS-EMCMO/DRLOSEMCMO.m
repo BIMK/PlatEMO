@@ -3,11 +3,11 @@ classdef DRLOSEMCMO < ALGORITHM
 % EMCMO with deep reinforcement learning-assisted operator selection
 
 %------------------------------- Reference --------------------------------
-% F. Ming, W. Gong, L. Wang, and Y. Jin, Constrained multi-objective
+% F. Ming, W. Gong, L. Wang, and Y. Jin. Constrained multi-objective
 % optimization with deep reinforcement learning assisted operator
-% selection, IEEE/CAA Journal of Automatica Sinica, 2024, 11(4): 919-931.
+% selection. IEEE/CAA Journal of Automatica Sinica, 2024, 11(4): 919-931.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

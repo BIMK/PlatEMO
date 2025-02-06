@@ -3,11 +3,11 @@ classdef SHADE < ALGORITHM
 % Success-history based adaptive differential evolution
 
 %------------------------------- Reference --------------------------------
-% R. Tanabe and A. Fukunaga, Success-history based parameter adaptation for
-% differential evolution, Proceedings of the IEEE Congress on Evolutionary
+% R. Tanabe and A. Fukunaga. Success-history based parameter adaptation for
+% differential evolution. Proceedings of the IEEE Congress on Evolutionary
 % Computation, 2013.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

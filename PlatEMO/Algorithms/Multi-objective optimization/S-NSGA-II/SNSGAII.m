@@ -3,8 +3,8 @@ classdef SNSGAII < ALGORITHM
 % Sparse nondominated sorting genetic algorithm II
 
 %------------------------------- Reference --------------------------------
-% I. Kropp, A. Pouyan Nejadhashemi, and K. Deb, Improved evolutionary
-% operators for sparse large-scale multiobjective optimization problems,
+% I. Kropp, A. Pouyan Nejadhashemi, and K. Deb. Improved evolutionary
+% operators for sparse large-scale multiobjective optimization problems.
 % IEEE Transactions on Evolutionary Computation, 2024, 28(2): 460-473.
 %--------------------------------------------------------------------------
 

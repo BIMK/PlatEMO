@@ -3,12 +3,12 @@ classdef SCEA < ALGORITHM
 % Sparsity clustering basec evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
-% Y. Zhang, C. Wu, Y. Tian, and X. Zhang, A co-evolutionary algorithm based
+% Y. Zhang, C. Wu, Y. Tian, and X. Zhang. A co-evolutionary algorithm based
 % on sparsity clustering for sparse large-scale multi-objective
-% optimization, Engineering Applications of Artificial Intelligence, 2024,
+% optimization. Engineering Applications of Artificial Intelligence, 2024,
 % 133: 108194
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

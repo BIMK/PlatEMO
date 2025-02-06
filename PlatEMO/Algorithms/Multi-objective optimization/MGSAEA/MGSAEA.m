@@ -7,12 +7,12 @@ classdef MGSAEA < ALGORITHM
 % lambda --- 0.001 --- Parameter determining the evolving stages 
 
 %------------------------------- Reference --------------------------------
-% Y. Zhang, H. Jiang, Y. Tian, H. Ma, and X. Zhang, Multigranularity
+% Y. Zhang, H. Jiang, Y. Tian, H. Ma, and X. Zhang. Multigranularity
 % surrogate modeling for evolutionary multiobjective optimization with
-% expensive constraints, IEEE Transactions on Neural Networks and Learning
+% expensive constraints. IEEE Transactions on Neural Networks and Learning
 % Systems, 2024, 35(3): 2956-2968.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -27,7 +27,7 @@ classdef MGSAEA < ALGORITHM
             
             %% Generate the initial population 
             NI          = 11*Problem.D-1;
-            P           = lhsamp(NI,Problem.D);
+            P           = UniformPoint(NI,Problem.D,'Latin');
             Population  = Problem.Evaluation(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));                      
             flag        = 0;  % 0 for the first stage, 1 for the second stage
             Iter        = 1;

@@ -3,11 +3,11 @@ classdef MO_Ring_PSO_SCD < ALGORITHM
 % Multiobjective PSO using ring topology and special crowding distance
 
 %------------------------------- Reference --------------------------------
-% C. Yue, B. Qu, and J. Liang, A multiobjective particle swarm optimizer 
-% using ring topology for solving multimodal multiobjective problems,IEEE 
+% C. Yue, B. Qu, and J. Liang. A multiobjective particle swarm optimizer 
+% using ring topology for solving multimodal multiobjective problems. IEEE 
 % Transactions on Evolutionary Computation, 2018, 22(5): 805-817.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

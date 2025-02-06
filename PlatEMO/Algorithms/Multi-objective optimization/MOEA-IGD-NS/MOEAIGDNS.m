@@ -3,12 +3,12 @@ classdef MOEAIGDNS < ALGORITHM
 % Multi-objective evolutionary algorithm based on an enhanced IGD
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, X. Zhang, R. Cheng, and Y. Jin, A multi-objective evolutionary
-% algorithm based on an enhanced inverted generational distance metric,
+% Y. Tian, X. Zhang, R. Cheng, and Y. Jin. A multi-objective evolutionary
+% algorithm based on an enhanced inverted generational distance metric.
 % Proceedings of the IEEE Congress on Evolutionary Computation, 2016,
 % 5222-5229.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

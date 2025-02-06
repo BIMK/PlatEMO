@@ -5,10 +5,10 @@ classdef EMCMO < ALGORITHM
 %------------------------------- Reference --------------------------------
 % K. Qiao, K. Yu, B. Qu, J. Liang, H. Song, and C. Yue. An evolutionary
 % multitasking optimization framework for constrained multi-objective
-% optimization problems, IEEE Transactions on Evolutionary Computation,
+% optimization problems. IEEE Transactions on Evolutionary Computation,
 % 2022, 26(2): 263-277.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

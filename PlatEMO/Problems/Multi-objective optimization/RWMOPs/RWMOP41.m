@@ -3,12 +3,12 @@ classdef RWMOP41 < PROBLEM
 % Optimal power flow for minimizing voltage deviation, active and reactive power loss
 
 %------------------------------- Reference --------------------------------
-% A. Kumar, G. Wu, M. Ali, Q. Luo, R. Mallipeddi, P. Suganthan, and S. Das,
+% A. Kumar, G. Wu, M. Ali, Q. Luo, R. Mallipeddi, P. Suganthan, and S. Das.
 % A benchmark-suite of real-world constrained multi-objective optimization
-% problems and some baseline results, Swarm and Evolutionary Computation,
+% problems and some baseline results. Swarm and Evolutionary Computation,
 % 2021, 67: 100961.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

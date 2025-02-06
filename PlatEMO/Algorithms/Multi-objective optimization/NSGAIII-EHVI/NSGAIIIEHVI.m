@@ -1,5 +1,5 @@
 classdef NSGAIIIEHVI < ALGORITHM
-% <multi/many> <real> <expensive>
+% <2023> <multi/many> <real> <expensive>
 % NSGA-III with expected hypervolume improvement
 % wmax    ---    15 --- Number of generations before updating Kriging models
 % LB      ---  -0.5 --- Low bound for EHVI calculation
@@ -8,12 +8,12 @@ classdef NSGAIIIEHVI < ALGORITHM
 % randp   ---   0.3 --- The parameter in generating a random number
 
 %------------------------------- Reference --------------------------------
-% Y. Pang, Y. Wang, S. Zhang, X. Lai, W. Sun and X. Song, An expensive 
+% Y. Pang, Y. Wang, S. Zhang, X. Lai, W. Sun, and X. Song. An expensive 
 % many-objective optimization algorithm based on efficient expected 
-% hypervolume improvement, IEEE Transactions on Evolutionary 
+% hypervolume improvement. IEEE Transactions on Evolutionary 
 % Computation, 2023, 27(6): 1822-1836.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

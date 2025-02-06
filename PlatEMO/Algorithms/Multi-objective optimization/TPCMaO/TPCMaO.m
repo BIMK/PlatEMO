@@ -3,12 +3,12 @@ classdef TPCMaO < ALGORITHM
 % Three-population based constrained many-objective co-evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, Z. Shi, Y. Zhang, L. Zhang, H. Zhang, and X. Zhang, Solving
+% Y. Tian, Z. Shi, Y. Zhang, L. Zhang, H. Zhang, and X. Zhang. Solving
 % optimal power flow problems via a constrained many-objective
-% co-evolutionary algorithm, Frontiers in Energy Research, 2023, 11:
+% co-evolutionary algorithm. Frontiers in Energy Research, 2023, 11:
 % 1293193.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

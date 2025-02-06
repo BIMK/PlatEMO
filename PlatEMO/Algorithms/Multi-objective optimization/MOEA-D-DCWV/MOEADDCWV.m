@@ -4,13 +4,13 @@ classdef MOEADDCWV < ALGORITHM
 % p --- -1 --- The intermediate objective value
 
 %------------------------------- Reference --------------------------------
-% T. Takagi, K. Takadama, and H. Sato, A distribution control of weight 
-% vector set for multi-objective evolutionary algorithms, Proceedings of 
+% T. Takagi, K. Takadama, and H. Sato. A distribution control of weight 
+% vector set for multi-objective evolutionary algorithms. Proceedings of 
 % the Bio-inspired Information and Communication Technologies, Lecture 
 % Notes of the Institute for Computer Sciences, Social Informatics and 
 % Telecommunications Engineering, 2019, 70-80.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

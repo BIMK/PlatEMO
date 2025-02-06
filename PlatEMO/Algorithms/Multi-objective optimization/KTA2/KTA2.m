@@ -7,11 +7,11 @@ classdef KTA2 < ALGORITHM
 % mu   ---    5 --- Number of re-evaluated solutions at each generation
 
 %------------------------------- Reference --------------------------------
-% Z. Song, H. Wang, C. He and Y. Jin, A Kriging-assisted two-archive
-% evolutionary algorithm for expensive many-objective optimization, IEEE
+% Z. Song, H. Wang, C. He, and Y. Jin. A Kriging-assisted two-archive
+% evolutionary algorithm for expensive many-objective optimization. IEEE
 % Transactions on Evolutionary Computation, 2021, 25(6): 1013-1027.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

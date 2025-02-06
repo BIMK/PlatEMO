@@ -4,12 +4,12 @@ classdef EAGMOEAD < ALGORITHM
 % LGs --- 8 --- The number of learning generations
 
 %------------------------------- Reference --------------------------------
-% X. Cai, Y. Li, Z. Fan, and Q. Zhang, An external archive guided
+% X. Cai, Y. Li, Z. Fan, and Q. Zhang. An external archive guided
 % multiobjective evolutionary algorithm based on decomposition for
-% combinatorial optimization, IEEE Transactions on Evolutionary
+% combinatorial optimization. IEEE Transactions on Evolutionary
 % Computation, 2015, 19(4): 508-523.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

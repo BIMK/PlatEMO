@@ -4,11 +4,11 @@ classdef onebyoneEA < ALGORITHM
 % strategy
 
 %------------------------------- Reference --------------------------------
-% Y. Liu, D. Gong, J. Sun, and Y. Jin, A many-objective evolutionary
-% algorithm using a one-by-one selection strategy, IEEE Transactions on
+% Y. Liu, D. Gong, J. Sun, and Y. Jin. A many-objective evolutionary
+% algorithm using a one-by-one selection strategy. IEEE Transactions on
 % Cybernetics, 2017, 47(9): 2689-2702.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

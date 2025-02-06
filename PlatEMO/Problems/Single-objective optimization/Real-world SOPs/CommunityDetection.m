@@ -4,11 +4,11 @@ classdef CommunityDetection < PROBLEM
 % dataNo --- 1 --- Number of dataset
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, S. Yang, and X. Zhang, An evolutionary multiobjective
-% optimization based fuzzy method for overlapping community detection, IEEE
+% Y. Tian, S. Yang, and X. Zhang. An evolutionary multiobjective
+% optimization based fuzzy method for overlapping community detection. IEEE
 % Transactions on Fuzzy Systems, 2020, 28(11): 2841-2855.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform

@@ -3,11 +3,11 @@ classdef DTLZ2 < PROBLEM
 % Benchmark MOP proposed by Deb, Thiele, Laumanns, and Zitzler
 
 %------------------------------- Reference --------------------------------
-% K. Deb, L. Thiele, M. Laumanns, and E. Zitzler, Scalable test problems
-% for evolutionary multiobjective optimization, Evolutionary multiobjective
+% K. Deb, L. Thiele, M. Laumanns, and E. Zitzler. Scalable test problems
+% for evolutionary multiobjective optimization. Evolutionary multiobjective
 % Optimization. Theoretical Advances and Applications, 2005, 105-145.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

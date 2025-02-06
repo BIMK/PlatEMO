@@ -9,8 +9,8 @@ classdef TriMOEATAR < ALGORITHM
 % NIA         --- 6    --- Maximum number of tries required to judge the interaction
 
 %------------------------------- Reference --------------------------------
-% Y. Liu, G. G. Yen, and D. Gong, A multi-modal multi-objective
-% evolutionary algorithm using two-archive and recombination strategies,
+% Y. Liu, G. G. Yen, and D. Gong. A multi-modal multi-objective
+% evolutionary algorithm using two-archive and recombination strategies.
 % IEEE Transactions on Evolutionary Computation, 2019, 23(4): 660-674.
 %------------------------------- Copyright --------------------------------
 % Copyright 2017-2018 Yiping Liu

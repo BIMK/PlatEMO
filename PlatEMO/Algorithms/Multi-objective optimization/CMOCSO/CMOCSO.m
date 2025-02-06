@@ -3,12 +3,12 @@ classdef CMOCSO < ALGORITHM
 % Competitive and cooperative swarm optimization constrained multi-objective optimization algorithm
 
 %------------------------------- Reference --------------------------------
-% F. Ming, W. Gong, D. Li, L. Wang, and L. Gao, A competitive and
+% F. Ming, W. Gong, D. Li, L. Wang, and L. Gao. A competitive and
 % cooperative swarm optimizer for constrained multi-objective optimization
-% problems, IEEE Transactions on Evolutionary Computation, 2023, 27(5):
+% problems. IEEE Transactions on Evolutionary Computation, 2023, 27(5):
 % 1313-1326.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

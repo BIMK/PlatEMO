@@ -3,11 +3,11 @@ classdef DAEA < ALGORITHM
 % Duplication analysis based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
-% H. Xu, B. Xue, and M. Zhang, A duplication analysis based evolutionary
-% algorithm for bi-objective feature selection, IEEE Transactions on
+% H. Xu, B. Xue, and M. Zhang. A duplication analysis based evolutionary
+% algorithm for bi-objective feature selection. IEEE Transactions on
 % Evolutionary Computation, 2021, 25(2): 205-218.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

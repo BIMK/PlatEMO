@@ -3,11 +3,11 @@ classdef SparseEA2 < ALGORITHM
 % Improved SparseEA
 
 %------------------------------- Reference --------------------------------
-% Y. Zhang, Y. Tian, and X. Zhang, Improved SparseEA for sparse large-scale
-% multi-objective optimization problems, Complex & Intelligent Systems,
+% Y. Zhang, Y. Tian, and X. Zhang. Improved SparseEA for sparse large-scale
+% multi-objective optimization problems. Complex & Intelligent Systems,
 % 2023, 9: 1127-1142.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

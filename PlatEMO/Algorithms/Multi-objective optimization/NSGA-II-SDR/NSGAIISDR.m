@@ -3,12 +3,12 @@ classdef NSGAIISDR < ALGORITHM
 % NSGA-II with strengthened dominance relation
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, R. Cheng, X. Zhang, Y. Su, and Y. Jin, A strengthened dominance
+% Y. Tian, R. Cheng, X. Zhang, Y. Su, and Y. Jin. A strengthened dominance
 % relation considering convergence and diversity for evolutionary many-
-% objective optimization, IEEE Transactions on Evolutionary Computation,
+% objective optimization. IEEE Transactions on Evolutionary Computation,
 % 2019, 23(2): 331-345.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

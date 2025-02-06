@@ -6,10 +6,10 @@ classdef MOBCA < ALGORITHM
 % div       ---  10 --- Division number of grids
 
 %------------------------------- Reference --------------------------------
-% J. Jiang, J. Wu, J. Luo, X. Yang, and Z. Huang, MOBCA: multi-objective
+% J. Jiang, J. Wu, J. Luo, X. Yang, and Z. Huang. MOBCA: multi-objective
 % besiege and conquer algorithm. Biomimetics, 2024, 9: 316.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

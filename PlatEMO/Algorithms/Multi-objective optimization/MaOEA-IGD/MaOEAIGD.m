@@ -4,11 +4,11 @@ classdef MaOEAIGD < ALGORITHM
 % DNPE --- --- Number of evaluations for nadir point estimation
 
 %------------------------------- Reference --------------------------------
-% Y. Sun, G. G. Yen, and Z. Yi, IGD indicator-based evolutionary algorithm
-% for many-objective optimization problems, IEEE Transactions on
+% Y. Sun, G. G. Yen, and Z. Yi. IGD indicator-based evolutionary algorithm
+% for many-objective optimization problems. IEEE Transactions on
 % Evolutionary Computation, 2019, 23(2): 173-187.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -5,12 +5,12 @@ classdef SSCEA < ALGORITHM
 % nPer --- 50 --- Number of perturbations on each solution for decision variable clustering
 
 %------------------------------- Reference --------------------------------
-% G. Liu, Z. Pei, N. Liu, and Y. Tian, Subspace segmentation based
+% G. Liu, Z. Pei, N. Liu, and Y. Tian. Subspace segmentation based
 % co-evolutionary algorithm for balancing convergence and diversity in
-% many-objective optimization, Swarm and Evolutionary Computation, 2023,
+% many-objective optimization. Swarm and Evolutionary Computation, 2023,
 % 83: 101410.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

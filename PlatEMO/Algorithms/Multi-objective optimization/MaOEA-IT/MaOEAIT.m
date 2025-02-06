@@ -7,11 +7,11 @@ classdef MaOEAIT < ALGORITHM
 % epsilon     --- 0.999 --- Threshold in PCA
 
 %------------------------------- Reference --------------------------------
-% Y. Sun, B. Xue, M. Zhang, G. G. Yen, A new two-stage evolutionary
-% algorithm for many-objective optimization, IEEE Transactions on
+% Y. Sun, B. Xue, M. Zhang, and G. G. Yen. A new two-stage evolutionary
+% algorithm for many-objective optimization. IEEE Transactions on
 % Evolutionary Computation, 2019, 23(5): 748-761.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -11,11 +11,11 @@ classdef MaOPP_real < PROBLEM
 % overheadVariablesFactor --- 1.5 --- overheadVariablesFactor
 
 %------------------------------- Reference --------------------------------
-% J. Weise and S. Mostaghim, A scalable many-objective pathfinding
-% benchmark suite, IEEE Transactions on Evolutionary Computation, 2022,
+% J. Weise and S. Mostaghim. A scalable many-objective pathfinding
+% benchmark suite. IEEE Transactions on Evolutionary Computation, 2022,
 % 26(1): 188-194.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

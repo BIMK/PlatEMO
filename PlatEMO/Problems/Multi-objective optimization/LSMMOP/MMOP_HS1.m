@@ -5,12 +5,12 @@ classdef MMOP_HS1 < PROBLEM
 % SubTheta ---   0.1,0.1 --- Number of decision variables of each task
 
 %------------------------------- Reference --------------------------------
-% C. Wu, Y. Tian, L. Zhang, X. Xiang, and X. Zhang, A sparsity knowledge
+% C. Wu, Y. Tian, L. Zhang, X. Xiang, and X. Zhang. A sparsity knowledge
 % transfer-based evolutionary algorithm for large-scale multitasking multi-
-% objective optimization, IEEE Transactions on Evolutionary Computation,
+% objective optimization. IEEE Transactions on Evolutionary Computation,
 % 2024.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -3,11 +3,11 @@ classdef MOCell < ALGORITHM
 % Cellular genetic algorithm
 
 %------------------------------- Reference --------------------------------
-% A. J. Nebro, J. J. Durillo, F. Luna, B. Dorronsoro, and E. Alba, MOCell:
-% A cellular genetic algorithm for multiobjective optimization,
+% A. J. Nebro, J. J. Durillo, F. Luna, B. Dorronsoro, and E. Alba. MOCell:
+% A cellular genetic algorithm for multiobjective optimization.
 % International Journal of Intelligent Systems, 2009, 24(7): 726-746.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -4,11 +4,11 @@ classdef DCNSGAIII < ALGORITHM
 % cp --- 5 --- Decrease trend of the dynamic constraint boundary
 
 %------------------------------- Reference --------------------------------
-% R. Jiao, S. Zeng, C. Li, S. Yang, and Y. S. Ong, Handling constrained 
-% many-objective optimization problems via problem transformation, IEEE 
+% R. Jiao, S. Zeng, C. Li, S. Yang, and Y. S. Ong. Handling constrained 
+% many-objective optimization problems via problem transformation. IEEE 
 % Transactions on Cybernetics, 2021, 51(10): 4834-4847.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -3,12 +3,12 @@ classdef SCDAS < ALGORITHM
 % Self-controlling dominance area of solutions
 
 %------------------------------- Reference --------------------------------
-% H. Sato, H. E. Aguirre, and K. Tanaka, Self-controlling dominance area of
-% solutions in evolutionary many-objective optimization, Proceedings of the
+% H. Sato, H. E. Aguirre, and K. Tanaka. Self-controlling dominance area of
+% solutions in evolutionary many-objective optimization. Proceedings of the
 % Asia-Pacific Conference on Simulated Evolution and Learning, 2010,
 % 455-465.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

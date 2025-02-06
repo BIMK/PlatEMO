@@ -3,11 +3,11 @@ classdef VNT1 < PROBLEM
 % Benchmark MOP proposed by Viennet
 
 %------------------------------- Reference --------------------------------
-% R. Viennet, C. Fonteix, and I. Marc, Multicriteria optimization using a
-% genetic algorithm for determining a Pareto set, International Journal of
+% R. Viennet, C. Fonteix, and I. Marc. Multicriteria optimization using a
+% genetic algorithm for determining a Pareto set. International Journal of
 % Systems Science, 1996, 27(2): 255-260.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -3,11 +3,11 @@ classdef DOC3 < PROBLEM
 % Benchmark MOP with constraints in both decision and objective spaces
 
 %------------------------------- Reference --------------------------------
-% Z. Liu and Y. Wang, Handling constrained multiobjective optimization
+% Z. Liu and Y. Wang. Handling constrained multiobjective optimization
 % problems with constraints in both the decision and objective spaces. IEEE
 % Transactions on Evolutionary Computation, 2019, 23(5): 870-884.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

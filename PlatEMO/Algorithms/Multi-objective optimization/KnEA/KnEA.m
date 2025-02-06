@@ -4,11 +4,11 @@ classdef KnEA < ALGORITHM
 % rate --- 0.5 --- Rate of knee points in the population
 
 %------------------------------- Reference --------------------------------
-% X. Zhang, Y. Tian, and Y. Jin, A knee point-driven evolutionary algorithm
-% for many-objective optimization, IEEE Transactions on Evolutionary
+% X. Zhang, Y. Tian, and Y. Jin. A knee point-driven evolutionary algorithm
+% for many-objective optimization. IEEE Transactions on Evolutionary
 % Computation, 2015, 19(6): 761-776.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

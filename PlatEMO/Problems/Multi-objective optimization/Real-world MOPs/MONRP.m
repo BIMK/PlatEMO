@@ -4,11 +4,11 @@ classdef MONRP < PROBLEM
 % m --- 100 --- Number of customers
 
 %------------------------------- Reference --------------------------------
-% Y. Zhang, M. Harman, and S. A. Mansouri, The multi-objective next release
-% problem, Proceedings of the Annual Conference on Genetic and Evolutionary
+% Y. Zhang, M. Harman, and S. A. Mansouri. The multi-objective next release
+% problem. Proceedings of the Annual Conference on Genetic and Evolutionary
 % Computation, 2007, 1129-1137.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

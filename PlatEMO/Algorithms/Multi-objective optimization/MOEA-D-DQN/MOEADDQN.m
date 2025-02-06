@@ -3,12 +3,12 @@ classdef MOEADDQN < ALGORITHM
 % MOEA/D based on deep Q-network
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, X. Li, H. Ma, X. Zhang, K. C. Tan, and Y. Jin, Deep
+% Y. Tian, X. Li, H. Ma, X. Zhang, K. C. Tan, and Y. Jin. Deep
 % reinforcement learning based adaptive operator selection for evolutionary
-% multi-objective optimization, IEEE Transactions on Emerging Topics in
+% multi-objective optimization. IEEE Transactions on Emerging Topics in
 % Computational Intelligence, 2023, 7(4): 1051-1064.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

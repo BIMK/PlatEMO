@@ -5,11 +5,11 @@ classdef GFMMOEA < ALGORITHM
 % fPFE  --- 0.1 --- Frequency of employing generic front modeling
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, X. Zhang, R. Cheng, C. He, and Y. Jin, Guiding evolutionary
-% multi-objective optimization with generic front modeling, IEEE
+% Y. Tian, X. Zhang, R. Cheng, C. He, and Y. Jin. Guiding evolutionary
+% multi-objective optimization with generic front modeling. IEEE
 % Transactions on Cybernetics, 2020, 50(3): 1106-1119.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

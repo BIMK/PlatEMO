@@ -5,12 +5,12 @@ classdef DNSGAII < ALGORITHM
  % zeta --- 0.2 --- Ratio of reinitialized solutions
  
 %------------------------------- Reference --------------------------------
-% K. Deb, U. Bhaskara Rao N., and S. Karthik, Dynamic multi-objective
+% K. Deb, U. Bhaskara Rao N., and S. Karthik. Dynamic multi-objective
 % optimization and decision-making using modified NSGA-II: A case study on
-% hydro-thermal power scheduling, Proceedings of the International
+% hydro-thermal power scheduling. Proceedings of the International
 % Conference on Evolutionary Multi-Criterion Optimization, 2007, 803-817.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

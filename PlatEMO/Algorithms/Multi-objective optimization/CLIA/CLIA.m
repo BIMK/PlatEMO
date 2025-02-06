@@ -3,12 +3,12 @@ classdef CLIA < ALGORITHM
 % Evolutionary algorithm with cascade clustering and reference point incremental learning
 
 %------------------------------- Reference --------------------------------
-% H. Ge, M. Zhao, L. Sun, Z. Wang, G. Tan, Q. Zhang, and C. L. P. Chen, A
+% H. Ge, M. Zhao, L. Sun, Z. Wang, G. Tan, Q. Zhang, and C. L. P. Chen. A
 % many-objective evolutionary algorithm with two interacting processes:
-% Cascade clustering and reference point incremental learning, IEEE
+% Cascade clustering and reference point incremental learning. IEEE
 % Transactions on Evolutionary Computation, 2019, 23(4): 572-586.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

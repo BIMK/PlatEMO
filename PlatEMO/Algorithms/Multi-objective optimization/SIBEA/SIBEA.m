@@ -3,12 +3,12 @@ classdef SIBEA < ALGORITHM
 % Simple indicator-based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
-% E. Zitzler, D. Brockhoff, and L. Thiele, The hypervolume indicator
+% E. Zitzler, D. Brockhoff, and L. Thiele. The hypervolume indicator
 % revisited: On the design of Pareto-compliant indicators via weighted
-% integration, Proceedings of the International Conference on Evolutionary
+% integration. Proceedings of the International Conference on Evolutionary
 % Multi-Criterion Optimization, 2007, 862-876.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

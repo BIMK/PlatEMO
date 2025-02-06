@@ -5,11 +5,11 @@ classdef RMSProp < ALGORITHM
 % rho   --- 0.9 --- A parameter within [0 1)
 
 %------------------------------- Reference --------------------------------
-% T. Tieleman and G. Hinton, Lecture 6.5-rmsprop: Divide the gradient by a
-% running average of its recent magnitude, COURSERA: Neural networks for
+% T. Tieleman and G. Hinton. Lecture 6.5-rmsprop: Divide the gradient by a
+% running average of its recent magnitude. COURSERA: Neural networks for
 % machine learning, 2012.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

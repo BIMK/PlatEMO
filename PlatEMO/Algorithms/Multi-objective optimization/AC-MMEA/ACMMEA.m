@@ -3,12 +3,12 @@ classdef ACMMEA < ALGORITHM
 % Adaptive merging and coordinated offspring generation based multi-modal multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
-% X. Wang, T. Zheng, and Y. Jin, Adaptive merging and coordinated offspring
+% X. Wang, T. Zheng, and Y. Jin. Adaptive merging and coordinated offspring
 % generation in multi-population evolutionary multi-modal multi-objective
-% optimization, Proceedings of the International Conference on Data-driven
+% optimization. Proceedings of the International Conference on Data-driven
 % Optimization of Complex Systems, 2023.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

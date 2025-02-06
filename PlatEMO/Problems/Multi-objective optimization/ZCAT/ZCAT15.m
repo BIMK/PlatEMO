@@ -6,11 +6,11 @@ classdef ZCAT15 < PROBLEM
 % imbalance     --- 0 --- Whether imbalance is considered
 
 %------------------------------- Reference --------------------------------
-% S. Zapotecas-Martinez, C. A. Coello Coello, H. E. Aguirre, and K. Tanaka,
-% Challenging test problems for multi- and many-objective optimization,
+% S. Zapotecas-Martinez, C. A. Coello Coello, H. E. Aguirre, and K. Tanaka.
+% Challenging test problems for multi- and many-objective optimization.
 % Swarm and Evolutionary Computation, 2023, 81: 101350.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

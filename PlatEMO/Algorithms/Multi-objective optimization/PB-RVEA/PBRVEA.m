@@ -5,11 +5,11 @@ classdef PBRVEA < ALGORITHM
 % wmax  --- 15 --- Number of generations before updating Kriging models
 
 %------------------------------- Reference --------------------------------
-% Z. Song, H. Wang, and H. Xu, A framework for expensive many-objective
+% Z. Song, H. Wang, and H. Xu. A framework for expensive many-objective
 % optimization with Pareto-based bi-indicator infill sampling criterion.
 % Memetic Computing, 2022, 14: 179-191.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

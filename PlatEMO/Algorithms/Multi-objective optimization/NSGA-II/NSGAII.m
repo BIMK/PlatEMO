@@ -3,11 +3,11 @@ classdef NSGAII < ALGORITHM
 % Nondominated sorting genetic algorithm II
 
 %------------------------------- Reference --------------------------------
-% K. Deb, A. Pratap, S. Agarwal, and T. Meyarivan, A fast and elitist
-% multiobjective genetic algorithm: NSGA-II, IEEE Transactions on
+% K. Deb, A. Pratap, S. Agarwal, and T. Meyarivan. A fast and elitist
+% multiobjective genetic algorithm: NSGA-II. IEEE Transactions on
 % Evolutionary Computation, 2002, 6(2): 182-197.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

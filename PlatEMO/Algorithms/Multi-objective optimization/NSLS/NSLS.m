@@ -4,11 +4,11 @@ classdef NSLS < ALGORITHM
 % local search
 
 %------------------------------- Reference --------------------------------
-% B. Chen, W. Zeng, Y. Lin, and D. Zhang, A new local search-based
-% multiobjective optimization algorithm, IEEE Transactions on Evolutionary
+% B. Chen, W. Zeng, Y. Lin, and D. Zhang. A new local search-based
+% multiobjective optimization algorithm. IEEE Transactions on Evolutionary
 % Computation, 2015, 19(1): 50-73.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

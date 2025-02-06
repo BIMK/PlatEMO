@@ -4,12 +4,12 @@ classdef PESAII < ALGORITHM
 % div --- 10 --- The number of divisions in each objective
 
 %------------------------------- Reference --------------------------------
-% D. W. Corne, N. R. Jerram, J. D. Knowles, and M. J. Oates, PESA-II:
-% Region-based selection in evolutionary multiobjective optimization,
+% D. W. Corne, N. R. Jerram, J. D. Knowles, and M. J. Oates. PESA-II:
+% Region-based selection in evolutionary multiobjective optimization.
 % Proceedings of the Annual Conference on Genetic and Evolutionary
 % Computation, 2001, 283-290.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

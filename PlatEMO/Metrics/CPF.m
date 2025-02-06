@@ -3,11 +3,11 @@ function score = CPF(Population,optimum)
 % Coverage over Pareto front
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, R. Cheng, X. Zhang, M. Li, and Y. Jin, Diversity assessment of
+% Y. Tian, R. Cheng, X. Zhang, M. Li, and Y. Jin. Diversity assessment of
 % multi-objective evolutionary algorithms: Performance metric and benchmark
-% problems, IEEE Computational Intelligence Magazine, 2019, 14(3): 61-74.
+% problems. IEEE Computational Intelligence Magazine, 2019, 14(3): 61-74.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

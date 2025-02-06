@@ -6,8 +6,8 @@ classdef GLMO < ALGORITHM
 % numberOfGroups --- 4 --- The number of varibale Groups. Default = 4  
 
 %------------------------------- Reference --------------------------------
-% H. Zille, Large-scale Multi-objective Optimisation: New Approaches and a
-% Classification of the State-of-the-Art, PhD Thesis, Otto von Guericke
+% H. Zille. Large-scale Multi-objective Optimisation: New Approaches and a
+% Classification of the State-of-the-Art. PhD Thesis, Otto von Guericke
 % University Magdeburg, 2019.
 % ----------------------------------------------------------------------- 
 %  Copyright (C) 2020 Heiner Zille

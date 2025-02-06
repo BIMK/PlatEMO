@@ -5,10 +5,10 @@ classdef FRCG < ALGORITHM
 % sigma --- 0.4 --- A parameter within [0 0.5] for line search
 
 %------------------------------- Reference --------------------------------
-% R. Fletcher and C. M. Reeves, Function minimization by conjugate
-% gradients, The Computer Journal, 1964, 7(2): 149-154.
+% R. Fletcher and C. M. Reeves. Function minimization by conjugate
+% gradients. The Computer Journal, 1964, 7(2): 149-154.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

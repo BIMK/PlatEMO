@@ -3,12 +3,12 @@ classdef SADESammon < ALGORITHM
 % Sammon mapping assisted differential evolution
 
 %------------------------------- Reference --------------------------------
-% G. Chen, K. Zhang, X. Xue, L. Zhang, J. Yao, H. Sun, L. Fan, and Y. Yang,
+% G. Chen, K. Zhang, X. Xue, L. Zhang, J. Yao, H. Sun, L. Fan, and Y. Yang.
 % Surrogate-assisted evolutionary algorithm with dimensionality reduction
-% method for water flooding production optimization, Journal of Petroleum
+% method for water flooding production optimization. Journal of Petroleum
 % Science and Engineering, 2020, 185: 106633.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

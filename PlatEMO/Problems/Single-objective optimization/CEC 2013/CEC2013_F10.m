@@ -3,11 +3,11 @@ classdef CEC2013_F10 < PROBLEM
 % 20-nonseparable shifted and rotated Rastrigin's function
 
 %------------------------------- Reference --------------------------------
-% X. Li, K. Tang, M. N. Omidvar, Z. Yang, and K. Qin, Benchmark functions
+% X. Li, K. Tang, M. N. Omidvar, Z. Yang, and K. Qin. Benchmark functions
 % for the CEC'2013 special session and competition on large-scale global
-% optimization, RMIT University, Australia, 2013.
+% optimization. RMIT University, Australia, 2013.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

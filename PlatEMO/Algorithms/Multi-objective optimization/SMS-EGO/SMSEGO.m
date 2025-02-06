@@ -4,12 +4,12 @@ classdef SMSEGO < ALGORITHM
 % wmax --- 10000 --- The maximum number of internal evluation
 
 %------------------------------- Reference --------------------------------
-% W. Ponweiser, T. Wagner, D. Biermann, and M. Vincze, Multiobjective
+% W. Ponweiser, T. Wagner, D. Biermann, and M. Vincze. Multiobjective
 % optimization on a limited budget of evaluations using model-assisted
-% S-metric selection, Proceedings of the International Conference on
+% S-metric selection. Proceedings of the International Conference on
 % Parallel Problem Solving from Nature, 2008, 784-794.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

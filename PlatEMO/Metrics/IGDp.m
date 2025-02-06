@@ -4,11 +4,11 @@ function score = IGDp(Population,optimum)
 
 %------------------------------- Reference --------------------------------
 % H. Ishibuchi, H. Masuda, Y. Tanigaki, and Y. Nojima. Modified distance
-% calculation in generational distance and inverted generational distance,
+% calculation in generational distance and inverted generational distance.
 % Proceedings of the International Conference on Evolutionary
 % Multi-Criterion Optimization, 2015, 110-125.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

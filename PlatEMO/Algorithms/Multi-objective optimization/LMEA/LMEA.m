@@ -7,11 +7,11 @@ classdef LMEA < ALGORITHM
 % type ---  1 --- Type of operator (1. GA 2. DE)
 
 %------------------------------- Reference --------------------------------
-% X. Zhang, Y. Tian, R. Cheng, and Y. Jin, A decision variable clustering
-% based evolutionary algorithm for large-scale many-objective optimization,
+% X. Zhang, Y. Tian, R. Cheng, and Y. Jin. A decision variable clustering
+% based evolutionary algorithm for large-scale many-objective optimization.
 % IEEE Transactions on Evolutionary Computation, 2018, 22(1): 97-112.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

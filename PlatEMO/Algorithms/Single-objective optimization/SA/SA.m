@@ -3,10 +3,10 @@ classdef SA < ALGORITHM
 % Simulated annealing
 
 %------------------------------- Reference --------------------------------
-% D. Bertsimas and J. Tsitsiklis, Simulated annealing, Statistical Science,
+% D. Bertsimas and J. Tsitsiklis. Simulated annealing. Statistical Science,
 % 1993, 8(1): 10-15.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

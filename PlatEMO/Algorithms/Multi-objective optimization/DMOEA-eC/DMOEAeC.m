@@ -5,11 +5,11 @@ classdef DMOEAeC < ALGORITHM
 % INm --- 0.2 --- Iteration interval of alternating the main objective function
 
 %------------------------------- Reference --------------------------------
-% J. Chen, J. Li, and B. Xin, DMOEA-eC: Decomposition-based multiobjective
-% evolutionary algorithm with the e-constraint framework, IEEE Transactions
+% J. Chen, J. Li, and B. Xin. DMOEA-eC: Decomposition-based multiobjective
+% evolutionary algorithm with the e-constraint framework. IEEE Transactions
 % on Evolutionary Computation, 2017, 21(5): 714-730.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

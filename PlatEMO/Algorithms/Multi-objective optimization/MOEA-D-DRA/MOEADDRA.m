@@ -3,11 +3,11 @@ classdef MOEADDRA < ALGORITHM
 % MOEA/D with dynamical resource allocation
 
 %------------------------------- Reference --------------------------------
-% Q. Zhang, W. Liu, and H. Li, The performance of a new version of MOEA/D
-% on CEC09 unconstrained MOP test instances, Proceedings of the IEEE
+% Q. Zhang, W. Liu, and H. Li. The performance of a new version of MOEA/D
+% on CEC09 unconstrained MOP test instances. Proceedings of the IEEE
 % Congress on Evolutionary Computation, 2009, 203-208.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

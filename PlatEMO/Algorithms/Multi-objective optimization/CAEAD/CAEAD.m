@@ -4,11 +4,11 @@ classdef CAEAD < ALGORITHM
 % type --- 1 --- Type of operator (1. DE 2. GA)
 
 %------------------------------- Reference --------------------------------
-% J. Zou, R. Sun, S. Yang, and J. Zheng, A dual-population algorithm based
+% J. Zou, R. Sun, S. Yang, and J. Zheng. A dual-population algorithm based
 % on alternative evolution and degeneration for solving constrained multi-
-% objective optimization problems, Informaction Scinece, 2021, 239: 89-102.
+% objective optimization problems. Informaction Scinece, 2021, 239: 89-102.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform

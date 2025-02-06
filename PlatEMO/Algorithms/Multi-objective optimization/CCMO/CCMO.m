@@ -4,11 +4,11 @@ classdef CCMO < ALGORITHM
 % type --- 1 --- Type of operator (1. GA 2. DE)
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, T. Zhang, J. Xiao, X. Zhang, and Y. Jin, A coevolutionary
-% framework for constrained multi-objective optimization problems, IEEE
+% Y. Tian, T. Zhang, J. Xiao, X. Zhang, and Y. Jin. A coevolutionary
+% framework for constrained multi-objective optimization problems. IEEE
 % Transactions on Evolutionary Computation, 2021, 25(1): 102-116.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

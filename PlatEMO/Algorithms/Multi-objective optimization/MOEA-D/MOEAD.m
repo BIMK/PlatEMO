@@ -4,11 +4,11 @@ classdef MOEAD < ALGORITHM
 % type --- 1 --- The type of aggregation function
 
 %------------------------------- Reference --------------------------------
-% Q. Zhang and H. Li, MOEA/D: A multiobjective evolutionary algorithm based
-% on decomposition, IEEE Transactions on Evolutionary Computation, 2007,
+% Q. Zhang and H. Li. MOEA/D: A multiobjective evolutionary algorithm based
+% on decomposition. IEEE Transactions on Evolutionary Computation, 2007,
 % 11(6): 712-731.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

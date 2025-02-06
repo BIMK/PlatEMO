@@ -5,11 +5,11 @@ classdef MaOEACSS < ALGORITHM
 % t --- 0 --- Threshold value in environmental selection
 
 %------------------------------- Reference --------------------------------
-% Z. He and G. G. Yen, Many-objective evolutionary algorithms based on
-% coordinated selection strategy, IEEE Transactions on Evolutionary
+% Z. He and G. G. Yen. Many-objective evolutionary algorithms based on
+% coordinated selection strategy. IEEE Transactions on Evolutionary
 % Computation, 2017, 21(2): 220-233.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

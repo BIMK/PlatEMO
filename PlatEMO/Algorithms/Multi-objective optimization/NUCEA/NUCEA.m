@@ -3,12 +3,12 @@ classdef NUCEA < ALGORITHM
 % Non-uniform clustering based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
-% S. Shao, Y. Tian, and X. Zhang, A non-uniform clustering based
+% S. Shao, Y. Tian, and X. Zhang. A non-uniform clustering based
 % evolutionary algorithm for solving large-scale sparse multi-objective
-% optimization problems, Proceedings of the 18th International Conference
+% optimization problems. Proceedings of the 18th International Conference
 % on Bio-inspired Computing: Theories and Applications, 2023.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

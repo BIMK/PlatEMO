@@ -3,11 +3,11 @@ classdef MFOSPEA2 < ALGORITHM
 % Multiform optimization framework based on SPEA2
 
 %------------------------------- Reference --------------------------------
-% R. Jiao, B. Xue, and M. Zhang, A multiform optimization framework for 
-% constrained multiobjective optimization, IEEE Transactions on Cybernetics, 
-% 2023, 53(8):5165-5177.
+% R. Jiao, B. Xue, and M. Zhang. A multiform optimization framework for
+% constrained multiobjective optimization. IEEE Transactions on
+% Cybernetics, 2023, 53(8):5165-5177.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

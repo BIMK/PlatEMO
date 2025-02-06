@@ -23,7 +23,7 @@ classdef ALGORITHM < handle & matlab.mixin.Heterogeneous
 %   ParameterSet	<protected>	obtain the parameters of the algorithm
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -161,6 +161,9 @@ function DefaultOutput(Algorithm,Problem)
 
     clc; fprintf('%s on %d-objective %d-variable %s (%6.2f%%), %.2fs passed...\n',class(Algorithm),Problem.M,Problem.D,class(Problem),Problem.FE/Problem.maxFE*100,Algorithm.metric.runtime);
     if Problem.FE >= Problem.maxFE
+        if ~iscell(Algorithm.metName)
+            Algorithm.metName = {Algorithm.metName};
+        end
         if Algorithm.save < 0
             if isempty(Algorithm.metName)
                 if Problem.M == 1
@@ -170,8 +173,6 @@ function DefaultOutput(Algorithm,Problem)
                 else
                     Algorithm.metName = {'IGD','HV','GD','Feasible_rate'};
                 end
-            elseif ~iscell(Algorithm.metName)
-                Algorithm.metName = {Algorithm.metName};
             end
             value = Algorithm.CalMetric(Algorithm.metName{1});
             figure('NumberTitle','off','Name',sprintf('%s : %.4e  Runtime : %.2fs',Algorithm.metName{1},value(end),Algorithm.CalMetric('runtime')));

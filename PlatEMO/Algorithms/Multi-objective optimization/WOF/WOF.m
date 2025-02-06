@@ -12,8 +12,8 @@ classdef WOF < ALGORITHM
 % randomOptimisers --- 1 --- 1 = use random optimisers (SMPSO,MOEAD,NSGAII,NSGAIII) in first phase (defined by delta), and NSGAIII in second phase. 0 = use only specified optimiser. Default = 1 
 
 %------------------------------- Reference --------------------------------
-% H. Zille, H. Ishibuchi, S. Mostaghim, and Y. Nojima, A framework for
-% large-scale multiobjective optimization based on problem transformation,
+% H. Zille, H. Ishibuchi, S. Mostaghim, and Y. Nojima. A framework for
+% large-scale multiobjective optimization based on problem transformation.
 % IEEE Transactions on Evolutionary Computation, 2018, 22(2): 260-275.
 % ----------------------------------------------------------------------- 
 %  Copyright (C) 2020 Heiner Zille

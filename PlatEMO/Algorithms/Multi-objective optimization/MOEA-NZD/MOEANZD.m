@@ -3,11 +3,11 @@ classdef MOEANZD < ALGORITHM
 % Multi-objective evolutionary algorithm with nonzero detection
 
 %------------------------------- Reference --------------------------------
-% X. Wang, R. Cheng, and Y. Jin, Sparse large-scale multiobjective
-% optimization by identifying nonzero decision variables, IEEE Transactions
+% X. Wang, R. Cheng, and Y. Jin. Sparse large-scale multiobjective
+% optimization by identifying nonzero decision variables. IEEE Transactions
 % on Systems, Man, and Cybernetics: Systems, 2024, 54(10): 6280-6292.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

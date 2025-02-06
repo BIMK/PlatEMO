@@ -6,11 +6,11 @@ classdef MOEADUR < ALGORITHM
 % K      ---   10 --- Number of divisions of the objective space
 
 %------------------------------- Reference --------------------------------
-% L. R. de Farias, A. F. Araujo, A decomposition-based many-objective
-% evolutionary algorithm updating weights when required, Swarm and
+% L. R. de Farias and A. F. Araujo. A decomposition-based many-objective
+% evolutionary algorithm updating weights when required. Swarm and
 % Evolutionary Computation, 2022, 68: 100980.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform

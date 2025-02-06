@@ -3,12 +3,12 @@ classdef CF7 < PROBLEM
 % Constrained benchmark MOP
 
 %------------------------------- Reference --------------------------------
-% Q. Zhang, A. Zhou, S. Zhao, P. N. Suganthan, W. Liu, and S. Tiwari,
+% Q. Zhang, A. Zhou, S. Zhao, P. N. Suganthan, W. Liu, and S. Tiwari.
 % Multiobjective optimization test instances for the CEC 2009 special
-% session and competition, School of CS & EE, University of Essex, Working
+% session and competition. School of CS & EE, University of Essex, Working
 % Report CES-487, 2009.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

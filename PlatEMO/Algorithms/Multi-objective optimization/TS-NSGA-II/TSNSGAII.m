@@ -3,12 +3,12 @@ classdef TSNSGAII < ALGORITHM
 % Two stage NSGA-II
 
 %------------------------------- Reference --------------------------------
-% F. Ming, W. Gong, and L. Wang, A two-stage evolutionary algorithm with
-% balanced convergence and diversity for many-objective optimization, IEEE
+% F. Ming, W. Gong, and L. Wang. A two-stage evolutionary algorithm with
+% balanced convergence and diversity for many-objective optimization. IEEE
 % Transactions on Systems, Man, and Cybernetics: Systems, 2022, 52(10):
 % 6222-6234.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

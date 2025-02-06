@@ -5,11 +5,11 @@ classdef TSSparseEA < ALGORITHM
 % nGroup ---  50 --- The group size for the group optimization 
 
 %------------------------------- Reference --------------------------------
-% J. Jiang, F. Han, J. Wang, Q. Ling, H. Han, and Y. Wang, A two-stage
+% J. Jiang, F. Han, J. Wang, Q. Ling, H. Han, and Y. Wang. A two-stage
 % evolutionary algorithm for large-scale sparse multiobjective optimization
-% problems, Swarm and Evolutionary Computation, 2022, 72: 101093.
+% problems. Swarm and Evolutionary Computation, 2022, 72: 101093.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -4,11 +4,11 @@ classdef EGO < ALGORITHM
 % IFEs --- 10000 --- Internal GA evals per iteration
 
 %------------------------------- Reference --------------------------------
-% D. R. Jones, M. Schonlau, and W. J. Welch, Efficient global optimization
-% of expensive black-box functions, Journal of Global optimization, 1998,
+% D. R. Jones, M. Schonlau, and W. J. Welch. Efficient global optimization
+% of expensive black-box functions. Journal of Global optimization, 1998,
 % 13(4): 455-492.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

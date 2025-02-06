@@ -3,11 +3,11 @@ classdef SAMSO < ALGORITHM
 % Multiswarm-assisted expensive optimization
 
 %------------------------------- Reference --------------------------------
-% F. Li, X. Cai, L. Gao, and W. Shen, A surrogate-assisted multiswarm
+% F. Li, X. Cai, L. Gao, and W. Shen. A surrogate-assisted multiswarm
 % optimization algorithm for high-dimensional computationally expensive
-% problems, IEEE Transactions on Cybernetics, 2021, 51(3): 1390-1402.
+% problems. IEEE Transactions on Cybernetics, 2021, 51(3): 1390-1402.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

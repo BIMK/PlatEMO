@@ -8,12 +8,12 @@ classdef CNSDEDVC < ALGORITHM
 % eta    --- 0.001 --- Desired level of robustness
 
 %------------------------------- Reference --------------------------------
-% W. Du, W. Zhong, Y. Tang, W. Du, and Y. Jin, High-dimensional robust
+% W. Du, W. Zhong, Y. Tang, W. Du, and Y. Jin. High-dimensional robust
 % multi-objective optimization for order scheduling: A decision variable
-% classification approach, IEEE Transactions on Industrial Informatics,
+% classification approach. IEEE Transactions on Industrial Informatics,
 % 2019, 15(1): 293-304.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -3,11 +3,11 @@ classdef DASCMOP4 < PROBLEM
 % Difficulty-adjustable and scalable constrained benchmark MOP
 
 %------------------------------- Reference --------------------------------
-% Z. Fan, W. Li, X. Cai, H. Li, C. Wei, Q. Zhang, K. Deb, and E. Goodman,
+% Z. Fan, W. Li, X. Cai, H. Li, C. Wei, Q. Zhang, K. Deb, and E. Goodman.
 % Difficulty adjustable and scalable constrained multi-objective test
-% problem toolkit, Evolutionary Computation, 2020, 28(3): 339-378.
+% problem toolkit. Evolutionary Computation, 2020, 28(3): 339-378.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

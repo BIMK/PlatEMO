@@ -5,11 +5,11 @@ classdef MLDMP < PROBLEM
 % upper ---  100 --- Upper bound of decision variables
 
 %------------------------------- Reference --------------------------------
-% M. Li, C. Grosan, S. Yang, X. Liu, and X. Yao, Multiline distance
-% minimization: A visualized many-objective test problem suite, IEEE
+% M. Li, C. Grosan, S. Yang, X. Liu, and X. Yao. Multiline distance
+% minimization: A visualized many-objective test problem suite. IEEE
 % Transactions on Evolutionary Computation, 2018, 22(1): 61-78.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

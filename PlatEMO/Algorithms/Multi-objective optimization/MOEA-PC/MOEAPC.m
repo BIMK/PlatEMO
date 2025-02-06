@@ -5,12 +5,12 @@ classdef MOEAPC < ALGORITHM
 % T     ---  20 --- Neighborhood size 
 
 %------------------------------- Reference --------------------------------
-% R. Denysiuk, L. Costa, I. E. Santo, and J. C. Matos, MOEA/PC:
-% Multiobjective evolutionary algorithm based on polar coordinates,
+% R. Denysiuk, L. Costa, I. E. Santo, and J. C. Matos. MOEA/PC:
+% Multiobjective evolutionary algorithm based on polar coordinates.
 % Proceedings of the International Conference on Evolutionary Multi-
 % Criterion Optimization, 2015, 141-155.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

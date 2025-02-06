@@ -4,11 +4,11 @@ classdef MSCMO < ALGORITHM
 % type --- 1 --- Type of operator (1. GA 2. DE)
 
 %------------------------------- Reference --------------------------------
-% H. Ma, H. Wei, Y. Tian, R. Cheng, and X. Zhang, A multi-stage
+% H. Ma, H. Wei, Y. Tian, R. Cheng, and X. Zhang. A multi-stage
 % evolutionary algorithm for multi-objective optimization with complex
-% constraints, Information Sciences, 2021, 560: 68-91.
+% constraints. Information Sciences, 2021, 560: 68-91.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

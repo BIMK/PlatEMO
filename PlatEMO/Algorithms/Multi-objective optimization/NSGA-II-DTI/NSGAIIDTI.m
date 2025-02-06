@@ -3,10 +3,10 @@ classdef NSGAIIDTI < ALGORITHM
 % NSGA-II of Deb's type I robust version
 
 %------------------------------- Reference --------------------------------
-% K. Deb and H. Gupta, Introducing robustness in multi-objective
-% optimization, Evolutionary Computation, 2006, 14(4): 463-494.
+% K. Deb and H. Gupta. Introducing robustness in multi-objective
+% optimization. Evolutionary Computation, 2006, 14(4): 463-494.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

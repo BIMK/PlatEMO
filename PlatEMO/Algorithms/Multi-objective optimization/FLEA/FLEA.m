@@ -3,11 +3,11 @@ classdef FLEA < ALGORITHM
 % Fast sampling based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
-% L. Li, C. He, R. Cheng, H. Li, L. Pan, and Y. Jin, A fast sampling based
+% L. Li, C. He, R. Cheng, H. Li, L. Pan, and Y. Jin. A fast sampling based
 % evolutionary algorithm for million-dimensional multiobjective
-% optimization, Swarm and Evolutionary Computation, 2022, 75: 101181.
+% optimization. Swarm and Evolutionary Computation, 2022, 75: 101181.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

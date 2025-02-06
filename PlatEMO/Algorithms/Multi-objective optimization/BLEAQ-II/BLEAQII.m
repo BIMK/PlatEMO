@@ -3,11 +3,11 @@ classdef BLEAQII < ALGORITHM
 % Bilevel evolutionary algorithm based on quadratic approximations II
 
 %------------------------------- Reference --------------------------------
-% A. Sinha, Z. Lu, K. Deb, and P. Malo, Bilevel optimization based on
-% iterative approximation of mappings, Journal of Heuristics, 2020, 26:
+% A. Sinha, Z. Lu, K. Deb, and P. Malo. Bilevel optimization based on
+% iterative approximation of mappings. Journal of Heuristics, 2020, 26:
 % 151-185.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

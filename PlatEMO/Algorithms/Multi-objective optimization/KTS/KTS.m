@@ -6,12 +6,12 @@ classdef KTS < ALGORITHM
 % mu  ---  20 --- Number of elite solution in A1
 
 %------------------------------- Reference --------------------------------
-% Z. Song, H. Wang, B. Xue, M. Zhang, and Y. Jin, Balancing objective
+% Z. Song, H. Wang, B. Xue, M. Zhang, and Y. Jin. Balancing objective
 % optimization and constraint satisfaction in expensive constrained
-% evolutionary multi-objective optimization, IEEE Transactions on
+% evolutionary multi-objective optimization. IEEE Transactions on
 % Evolutionary Computation, 2024, 28(5): 1286-1300.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -4,11 +4,11 @@ classdef NMPSO < ALGORITHM
 
 %------------------------------- Reference --------------------------------
 % Q. Lin, S. Liu, Q. Zhu, C. Tang, R. Song, J. Chen, C. A. Coello Coello,
-% K. Wong, and J. Zhang, Particle swarm optimization with a balanceable
-% fitness estimation for many-objective optimization problems, IEEE
+% K. Wong, and J. Zhang. Particle swarm optimization with a balanceable
+% fitness estimation for many-objective optimization problems. IEEE
 % Transactions on Evolutionary Computation, 2018, 22(1): 32-46.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

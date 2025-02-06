@@ -5,11 +5,11 @@ classdef TP10 < PROBLEM
 % H     ---   50 --- Number of disturbances
 
 %------------------------------- Reference --------------------------------
-% A. Gaspar-Cunha, J. Ferreira, and G. Recio, Evolutionary robustness
-% analysis for multi-objective optimization: benchmark problems, Structural
+% A. Gaspar-Cunha, J. Ferreira, and G. Recio. Evolutionary robustness
+% analysis for multi-objective optimization: benchmark problems. Structural
 % and Multidisciplinary Optimization, 2014, 49: 771-793.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -4,12 +4,12 @@ classdef CMOEAMSG < ALGORITHM
 % type --- 1 --- Type of operator (1. GA 2. DE)
 
 %------------------------------- Reference --------------------------------
-% Y. Tian, J. Chen, and X. Zhang, An optimizer combining evolutionary
+% Y. Tian, J. Chen, and X. Zhang. An optimizer combining evolutionary
 % computation and gradient descent for constrained multi-objective
-% optimization, Journal of Computer Applications (Chinese), 2024, 44(05):
+% optimization. Journal of Computer Applications (Chinese), 2024, 44(05):
 % 1386-1392.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

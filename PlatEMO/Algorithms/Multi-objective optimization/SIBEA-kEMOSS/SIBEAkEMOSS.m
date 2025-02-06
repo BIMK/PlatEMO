@@ -5,11 +5,11 @@ classdef SIBEAkEMOSS < ALGORITHM
 % k --- 2 --- Size of reduced objective set
 
 %------------------------------- Reference --------------------------------
-% D. Brockhoff and E. Zitzler, Improving hypervolume-based multiobjective
-% evolutionary algorithms by using objective reduction methods, Proceedings
+% D. Brockhoff and E. Zitzler. Improving hypervolume-based multiobjective
+% evolutionary algorithms by using objective reduction methods. Proceedings
 % of the IEEE Congress on Evolutionary Computation, 2007, 2086-2093.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

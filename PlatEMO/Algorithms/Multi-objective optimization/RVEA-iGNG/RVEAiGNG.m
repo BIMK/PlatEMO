@@ -4,12 +4,12 @@ classdef RVEAiGNG < ALGORITHM
 % alpha --- 2 --- The parameter controlling the rate of change of penalty
 
 %------------------------------- Reference --------------------------------
-% Q. Liu, Y. Jin, M. Heiderich, T. Rodemann, and G. Yu, An adaptive
+% Q. Liu, Y. Jin, M. Heiderich, T. Rodemann, and G. Yu. An adaptive
 % reference vector-guided evolutionary algorithm using growing neural gas
-% for many-objective optimization of irregular problems, IEEE Transactions
+% for many-objective optimization of irregular problems. IEEE Transactions
 % on Cybernetics, 2022, 52(5): 2698-2711.
 %--------------------------------------------------------------------------
-% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
