@@ -44,12 +44,10 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 4.11
+# Release Highlights of PlatEMO 4.12
 [Release Note can be found here](./Doc/releasenote.md)
 
-* Add two multi-objective evolutionary algorithms GWASF-GA and WASF-GA, add three expensive multi-objective evolutionary algorithms NSGAIII-EHVI, PIEA, and PIMD, add two constrained multi-objective evolutionary algorithms APSEA and CMOEA-CD. There are currently 302 algorithms in the platform.
-
-* Add 24 single-objective optimization problems BBOB_F1-BBOB_F24. There are current 583 problems in the platform.
+* Add an automated evolutionary algorithm AutoV (it should be trained before used), add five single-objective evolutionary algorithms AESSPSO, DOA, KMA, MGO, and WOA, add a multi-objective evolutionary algorithm GCNMOEA, add an expensive single-objective evolutionary algorithm SADE-AMSS, add three expensive multi-objective evolutionary algorithms DISK, DISKplus, and DRL-SAEA, add a sparse multi-objective evolutionary algorithm AFSEA, add eight constrained multi-objective evolutionary algorithms CMDEIPCM, CSEMT, DBEMTO, DPCPRA, DPVAPS, DSSEA, DVECA, and EMCMMS. There are currently 322 algorithms in the platform.
 
 # Features of PlatEMO
 *  Totally Developed in MATLAB  
