@@ -890,7 +890,7 @@ classdef module_cre < handle
             if exist(obj.app.editD(4).Value,'file')
                 try
                     load(obj.app.editD(4).Value,'-mat','Population');
-                    PopDec = Population.decs;
+                    PopDec = Population(1:ceil(end/2)).decs;
                 catch
                     error(['Fail to load the variable Population from ',obj.app.editD(4).Value]);
                 end

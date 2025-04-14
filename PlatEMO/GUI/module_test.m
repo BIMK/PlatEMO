@@ -189,7 +189,7 @@ classdef module_test < handle
         %% Show the specified data
         function cb_slider(obj,~,~,ax)
             if ~isempty(obj.app.dropD(1).Items)
-                % Determine the current number of evaluationsnumber of evaluations
+                % Determine the current number of evaluations
                 ALG  = obj.data{obj.app.dropD(1).Value,1};
                 PRO  = obj.data{obj.app.dropD(1).Value,2};
                 rate = PRO.FE/max(PRO.FE,PRO.maxFE);

@@ -1,5 +1,5 @@
 classdef MTEADDN < ALGORITHM
-% <multi> <real/integer/label/binary/permutation> <constrained/none> <multitask>
+% <2023> <multi> <real/integer/label/binary/permutation> <constrained/none> <multitask>
 % Multiobjective multitask evolutionary algorithm based on decomposition with dual neighborhoods
 
 %------------------------------- Reference --------------------------------

@@ -1,0 +1,21 @@
+function vi = boundConstraint (vi, pop, lu)
+
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% research purposes. All publications which use this platform or any code
+% in the platform should acknowledge the use of "PlatEMO" and reference "Ye
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
+% Computational Intelligence Magazine, 2017, 12(4): 73-87".
+%--------------------------------------------------------------------------
+
+% This function is written by Kangjia Qiao (email: qiaokangjia@yeah.net)
+
+    NP  = size(pop,1);  
+    xl  = repmat(lu(1, :), NP, 1);
+    pos = vi < xl;
+    vi(pos) = (pop(pos) + xl(pos)) / 2;
+    xu  = repmat(lu(2, :), NP, 1);
+    pos = vi > xu;
+    vi(pos) = (pop(pos) + xu(pos)) / 2;
+end
