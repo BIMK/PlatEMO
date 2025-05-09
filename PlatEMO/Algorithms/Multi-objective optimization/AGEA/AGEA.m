@@ -3,6 +3,23 @@ classdef AGEA < ALGORITHM
 % Adaptive grid based evolutionary algorithm
 % limit --- 1 --- limit output solutions number to N (1. limit  0. no limit)
 % div --- 10 --- initial number of grid divisions
+
+%------------------------------- Reference --------------------------------
+% Z. Liu, F. Han, Q. Ling, H. Han, J. Jiang, and Q. Liu, A multi-objective
+% evolutionary algorithm based on a grid with adaptive divisions for
+% multi-objective optimization with irregular Pareto fronts, Applied Soft 
+% Computing, 2025, 176: 113106.
+%------------------------------- Copyright --------------------------------
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
+% research purposes. All publications which use this platform or any code
+% in the platform should acknowledge the use of "PlatEMO" and reference "Ye
+% Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
+% for evolutionary multi-objective optimization [educational forum], IEEE
+% Computational Intelligence Magazine, 2017, 12(4): 73-87".
+%--------------------------------------------------------------------------
+
+% This function is written by Zhe Liu
+
     methods
         function main(Algorithm,Problem)
             %% Parameter setting
