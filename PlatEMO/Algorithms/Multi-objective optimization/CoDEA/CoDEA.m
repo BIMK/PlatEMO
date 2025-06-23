@@ -31,7 +31,7 @@ classdef CoDEA < ALGORITHM
             for i = 1 : ILid
                 deta = min(W(i,:));
                 beta = (1 - max(W(i,:)));
-                r(i) = ((2*(1-deta*Problem.M)+(beta/(0.5)))/2);%Ðý×ªÏµÊý
+                r(i) = ((2*(1-deta*Problem.M)+(beta/(0.5)))/2);
             end
             
             %% Optimization
