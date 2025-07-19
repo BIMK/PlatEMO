@@ -153,10 +153,6 @@ classdef module_exp < handle
                     type = [obj.app.listB.items.type];
                     assert(any(type>0),'No algorithm is selected.');
                     assert(any(type<0),'No problem is selected.');
-                    allList  = [obj.GUI.algList;obj.GUI.proList];
-                    allLabel = any(cell2mat(allList(ismember(allList(:,2),get([obj.app.listB.items.title],'Text')),1)),1);
-                    SorM     = [allLabel(2),allLabel(3)||allLabel(4)];
-                    assert(SorM(1)~=SorM(2),'Cannot perform single- and multi-objective optimization simultaneously.');
                     % Generate the ALGORITHM and PROBLEM objects
                     for i = 1 : length(type)
                         [name,para] = GUI.GetParameterSetting(obj.app.listB.items(i));

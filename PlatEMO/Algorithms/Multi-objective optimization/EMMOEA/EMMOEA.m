@@ -16,7 +16,7 @@ classdef EMMOEA < ALGORITHM
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-% This function is written by ShufenQin
+% This function is written by Shufen Qin
 
     methods
         function main(Algorithm,Problem)

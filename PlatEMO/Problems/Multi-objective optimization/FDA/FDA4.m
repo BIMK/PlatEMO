@@ -20,7 +20,6 @@ classdef FDA4 < PROBLEM
     properties
         taut;       % Number of generations for static optimization
         nt;         % Number of distinct steps
-        Optimums;   % Point sets on all Pareto fronts
     end
     methods
         %% Default settings of the problem

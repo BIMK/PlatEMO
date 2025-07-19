@@ -107,7 +107,7 @@ classdef SADEAMSS < ALGORITHM
                     XGf = RBF_eval(XG,x_kth_train,lambda{k},gamma{k},'cubic');
                     g   = 1;
                     while g <= Gm
-                        XG_next  = NewOperatorDE(slu(:,col),XG,bestX(1,col));
+                        XG_next  = Operator(slu(:,col),XG,bestX(1,col));
                         f_next_G = RBF_eval(XG_next,x_kth_train,lambda{k},gamma{k},'cubic');
                         now_popf = [XGf;f_next_G];
                         [~,y]    = sort(now_popf);

@@ -1,8 +1,8 @@
 classdef DNSGAII < ALGORITHM
- % <2007> <multi> <real/integer/label/binary/permutation> <constrained/none> <dynamic>
- % Dynamic NSGA-II
- % type ---   1 --- 1. Mutation based reinitialization 2. Random reinitialization
- % zeta --- 0.2 --- Ratio of reinitialized solutions
+% <2007> <multi> <real/integer/label/binary/permutation> <constrained/none> <dynamic>
+% Dynamic NSGA-II
+% type ---   1 --- 1. Mutation based reinitialization 2. Random reinitialization
+% zeta --- 0.2 --- Ratio of reinitialized solutions
  
 %------------------------------- Reference --------------------------------
 % K. Deb, U. Bhaskara Rao N., and S. Karthik. Dynamic multi-objective

@@ -23,7 +23,6 @@ classdef FDA2 < PROBLEM
         Optimums;   % Point sets on all Pareto fronts
     end
     methods
-       
         %% Default settings of the problem
         function Setting(obj)
             [obj.taut,obj.nt] = obj.ParameterSet(10,10);

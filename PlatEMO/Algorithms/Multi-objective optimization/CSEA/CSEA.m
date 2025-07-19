@@ -41,7 +41,7 @@ classdef CSEA < ALGORITHM
                     sigmoidLayer
                     regressionLayer];
 
-            maxEpochs = 400;
+            maxEpochs = 100;
             miniBatchSize = 32;
             options = trainingOptions('adam', ...
                         'ExecutionEnvironment','auto', ...
@@ -49,7 +49,7 @@ classdef CSEA < ALGORITHM
                         'MiniBatchSize',miniBatchSize, ...
                         'Shuffle','every-epoch', ...
                         'Plots','none', ...
-                        'Verbose',false);%, ... Plots','none'
+                        'Verbose',false);
 
             %% Optimization
             while Algorithm.NotTerminated(Arc)

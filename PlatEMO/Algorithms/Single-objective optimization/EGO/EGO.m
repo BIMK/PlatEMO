@@ -22,32 +22,25 @@ classdef EGO < ALGORITHM
             IFEs = Algorithm.ParameterSet(10000);
             
             %% Generate the random population
-            N          = 10*Problem.D;
-            PopDec     = UniformPoint(N,Problem.D,'Latin');
-            Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,N,1).*PopDec+repmat(Problem.lower,N,1));
+            Problem.N  = 10*Problem.D;
+            PopDec     = UniformPoint(Problem.N,Problem.D,'Latin');
+            Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,Problem.N,1).*PopDec+repmat(Problem.lower,Problem.N,1));
             theta      = 10.*ones(1,Problem.D);
             
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 % Select initial population
-                [N,D] = size(Population.decs);
-                if N > 11*D-1
-                    [~,index] = sort(Population.objs);
-                    Next      = index(1:11*D-1);
-                else
-                    Next = true(N,1);
-                end
-                PDec = Population(Next).decs;
-                PObj = Population(Next).objs;
-                
+                [~,index] = sort(Population.objs);
+                Next      = index(1:min(end,11*Problem.D-1));
+                PDec      = Population(Next).decs;
+                PObj      = Population(Next).objs;
                 % Surrogate-assisted prediction
-                dmodel     = dacefit(Population.decs,Population.objs,'regpoly1','corrgauss',theta,1e-5.*ones(1,D),20.*ones(1,D));
-                theta      = dmodel.theta;
-                PopDec     = EvolEI(Problem,PDec,PObj,dmodel,IFEs);
-                
-                if checkExist(Population.decs,PopDec)
+                dmodel = dacefit(Population.decs,Population.objs,'regpoly1','corrgauss',theta,1e-5.*ones(1,Problem.D),20.*ones(1,Problem.D));
+                theta  = dmodel.theta;
+                OffDec = EvolEI(Problem,PDec,PObj,dmodel,IFEs);
+                if ~any(pdist2(Population.decs,OffDec)<1e-12)
                     % Evaluate new candidate
-                    Population = [Population,Problem.Evaluation(PopDec)];
+                    Population = [Population,Problem.Evaluation(OffDec)];
                 end
             end
         end

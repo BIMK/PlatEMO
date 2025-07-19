@@ -52,7 +52,11 @@ classdef MOL2SMEA < ALGORITHM
             NObjs        = (TArchive(:, end-Problem.M+1:end) - repmat(MinObj,size(TArchive,1),1))./repmat(MaxObj-MinObj,size(TArchive,1),1);
             [~,grp]      = min(pdist2(W, NObjs,'cosine'), [], 1);
             for k = 1 : CLTn
-                XMeanCell{k}    = mean(TArchive(grp==k,1:Problem.D),1)';
+                if any(grp==k)
+                    XMeanCell{k} = mean(TArchive(grp==k,1:Problem.D),1)';
+                else
+                    XMeanCell{k} = mean(TArchive(:,1:Problem.D),1)';
+                end
                 SigmaCell{k}    = 0.5;
                 PathConvCell{k} = zeros(Problem.D,1);
                 PathSigCell{k}  = zeros(Problem.D,1);

@@ -1,4 +1,4 @@
-function U = NewOperatorDE(lu,X,bestX)
+function U = Operator(lu,X,bestX)
 % Differential evolution
 
 %------------------------------- Copyright --------------------------------
