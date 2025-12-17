@@ -1,4 +1,4 @@
-% classdef Block_Population < BLOCK
+classdef Block_Population < BLOCK
 % A population
 
 %------------------------------- Copyright --------------------------------
@@ -9,3 +9,15 @@
 % for evolutionary multi-objective optimization [educational forum], IEEE
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
+
+    methods
+        %% Main procedure of the block
+        function Main(obj,Problem,Precursors,Ratio)
+            obj.output = obj.Gather(Problem,Precursors,Ratio,1,1);
+        end
+        %% Initialize the solutions
+        function Initialization(obj,Population)
+            [obj.output] = deal(Population);
+        end
+    end
+end

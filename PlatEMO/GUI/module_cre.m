@@ -528,11 +528,11 @@ classdef module_cre < handle
                     % Save the source code
                     try
                         [~,name] = fileparts(Name);
-                        Code = {['classdef ',name,' < GEA % < ALGORITHM']
+                        Code = {['classdef ',name,' < NeuroEA % < ALGORITHM']
                                ''
                                '    methods'
                                ['        function obj = ',name,'(varargin)']
-                               '            obj    = obj@GEA(varargin{:});'};
+                               '            obj    = obj@NeuroEA(varargin{:});'};
                         for i = 1 : numnodes(obj.Graph)
                             Parameter = obj.blockList{ismember(obj.blockList(:,1),class(obj.Graph.Nodes.block(i))),3};
                             paras     = cell(1,size(Parameter,1));
@@ -595,7 +595,7 @@ classdef module_cre < handle
                 Blocks = obj.Graph.Nodes.block;
                 Graph  = adjacency(obj.Graph,'weighted');
                 Blocks.Validity(Graph);
-                ALG = GEA('parameter',{Blocks,Graph},'outputFcn',@(~,~)[]);
+                ALG = NeuroEA('parameter',{Blocks,Graph},'outputFcn',@(~,~)[]);
                 % Generate the PROBLEM object
                 [name,para] = GUI.GetParameterSetting(obj.app.listD.items(1));
                 PRO = feval(name,'N',para{1},'M',para{2},'D',para{3},'maxFE',para{1}+1,'parameter',para(5:end));
@@ -699,7 +699,7 @@ classdef module_cre < handle
                     Blocks = obj.Graph.Nodes.block;
                     Graph  = adjacency(obj.Graph,'weighted');
                     Blocks.Validity(Graph);
-                    ALG = GEA('parameter',{Blocks,Graph},'outputFcn',@obj.outputFcnTest,'save',1);
+                    ALG = NeuroEA('parameter',{Blocks,Graph},'outputFcn',@obj.outputFcnTest,'save',1);
                 catch err
                     err = addCause(err,MException('','The algorithm is invalid'));
                     uialert(obj.GUI.app.figure,sprintf('%s, since %s',err.cause{end}.message,err.message),'Invalid algorithm');
@@ -779,7 +779,7 @@ classdef module_cre < handle
                     Blocks = obj.Graph.Nodes.block;
                     Graph  = adjacency(obj.Graph,'weighted');
                     Blocks.Validity(Graph);
-                    obj.data{1} = GEA('parameter',{Blocks,Graph},'outputFcn',@(~,~)[],'save',1);
+                    obj.data{1} = NeuroEA('parameter',{Blocks,Graph},'outputFcn',@(~,~)[],'save',1);
                 catch err
                     err = addCause(err,MException('','The algorithm is invalid'));
                     uialert(obj.GUI.app.figure,sprintf('%s, since %s',err.cause{end}.message,err.message),'Invalid algorithm');

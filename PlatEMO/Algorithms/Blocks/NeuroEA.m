@@ -1,6 +1,11 @@
-classdef GEA < ALGORITHM
-% Graph evolutionary algorithm
+classdef NeuroEA < ALGORITHM
+% Evolutionary algorithm with neural architecture
 
+%------------------------------- Reference --------------------------------
+% Y. Tian, X. Qi, S. Yang, C. He, K. C. Tan, Y. Jin, and X. Zhang. A
+% universal framework for automatically generating single- and
+% multi-objective evolutionary algorithms. IEEE Transactions on
+% Evolutionary Computation, 2025.
 %------------------------------- Copyright --------------------------------
 % Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
@@ -25,7 +30,7 @@ classdef GEA < ALGORITHM
                 while ~all(activated(isPop))
                     for i = find(~activated)
                         if all(activated(logical(Graph(:,i)))|isPop(logical(Graph(:,i))))
-                        	Blocks(i).Main(Problem,Blocks(logical(Graph(:,i))),Graph(:,i));
+                            Blocks(i).Main(Problem,Blocks(logical(Graph(:,i))),Graph(:,i));
                             activated(i) = true;
                         end
                     end
