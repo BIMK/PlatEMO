@@ -51,13 +51,8 @@ end
 function r = ParaSampling(xy,weight,fit)
 % Parameter sampling
 
-    % r    = repmat(randn(xy(1),1),1,xy(2));
-    % type = arrayfun(@(S)find(rand<=fit,1),zeros(1,numel(r)));
-	% type = reshape(type,xy);
-
-    r    = randn(xy);
+    r    = repmat(randn(xy(1),1),1,xy(2));
     type = arrayfun(@(S)find(rand<=fit,1),zeros(xy));
-
     for i = 1 : length(fit)
         index = type == i;
         r(index) = r(index)*weight(i,1);
