@@ -16,7 +16,7 @@ Developed by BIMK (Institute of Bioinspired Intelligence and Mining Knowledge) o
 </div>
 
 * 300+ open source evolutionary algorithms
-* 500+ open source benchmark problems
+* 600+ open source benchmark problems
 * Powerful GUI for performing experiments in parallel
 * Generating results in the format of Excel or LaTeX table by one-click operation
 * State-of-the-art algorithms will be included continuously
