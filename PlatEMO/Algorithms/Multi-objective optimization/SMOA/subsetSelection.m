@@ -1,7 +1,7 @@
 function Select = subsetSelection(Obj,Objhat,N)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -16,7 +16,7 @@ function Select = subsetSelection(Obj,Objhat,N)
     
     %% Select the representative objective vector set
     LpNormD = pdist2(Obj,Obj);
-    Select = false(1,size(Obj,1));
+    Select  = false(1,size(Obj,1));
     Select(1:Len) = true;
     % Greedy inclusion distance-based subset slection
     while sum(Select) < N

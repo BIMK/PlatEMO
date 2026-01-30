@@ -2,7 +2,7 @@ function Population = archive(Population,N)
 % Select feasible and non-dominated solutions by SPEA2
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -11,8 +11,8 @@ function Population = archive(Population,N)
 %--------------------------------------------------------------------------
 
     %% Select feasible solutions
-    fIndex           = all(Population.cons <= 0,2);
-    Population       = Population(fIndex);
+    fIndex     = all(Population.cons <= 0,2);
+    Population = Population(fIndex);
     if isempty(Population)
         return
     else

@@ -7,7 +7,7 @@ classdef MMEAPSL < ALGORITHM
 % surrogate-assisted Pareto set learning for multimodal multi-objective
 % optimization. Swarm and Evolutionary Computation, 2024, 87: 101541.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -20,19 +20,19 @@ classdef MMEAPSL < ALGORITHM
     methods
         function main(Algorithm,Problem)
             %% Parameters for GNG network
-            params.N = Problem.N;
-            params.MaxIt = 50;
-            params.L = 30;
+            params.N         = Problem.N;
+            params.MaxIt     = 50;
+            params.L         = 30;
             params.epsilon_b = 0.2;
             params.epsilon_n = 0.006;
-            params.alpha = 0.5;
-            params.delta = 0.995;
-            params.T = 30;
-            genFlag = [];
-            MaxGen = ceil(Problem.maxFE/Problem.N);
-            netInitialized = 0;
-            Pop1get = 0;
-            gen = 0;
+            params.alpha     = 0.5;
+            params.delta     = 0.995;
+            params.T         = 30;
+            genFlag          = [];
+            MaxGen           = ceil(Problem.maxFE/Problem.N);
+            netInitialized   = 0;
+            Pop1get          = 0;
+            gen              = 0;
             
             %% Generate random population
             Population = Problem.Initialization();
@@ -59,15 +59,15 @@ classdef MMEAPSL < ALGORITHM
                 else
                     if Pop1get == 0
                         Population1 = Population;
-                        Fitness1 = CalFitnessSup(Population1.decs,net.w);
-                        Pop1get = 1;
+                        Fitness1    = CalFitnessSup(Population1.decs,net.w);
+                        Pop1get     = 1;
                     end
                      % use the network in generating offspring
                     MatingPool1 = TournamentSelection(2,Problem.N,D_Dec,Fitness);
                     Offspring1  = OperatorGAhalf(Problem,Population(MatingPool1));
-                    V = net.w;
+                    V           = net.w;
                     MatingPool2 = randi(length(V),1,Problem.N);
-                    Offspring2 = Problem.Evaluation(OperatorGAhalf(Problem,V(MatingPool2,:)));
+                    Offspring2  = Problem.Evaluation(OperatorGAhalf(Problem,V(MatingPool2,:)));
                     
                     MatingPool1 = TournamentSelection(2,Problem.N,-Fitness1);
                     Offspring3  = OperatorGAhalf(Problem,Population1(MatingPool1));

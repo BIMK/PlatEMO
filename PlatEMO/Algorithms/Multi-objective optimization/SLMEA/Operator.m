@@ -2,7 +2,7 @@ function [OffDec,OffMask,long,numGroup] = Operator(Problem,ParentDec,ParentMask,
 % The operator of SLMEA
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -13,22 +13,16 @@ function [OffDec,OffMask,long,numGroup] = Operator(Problem,ParentDec,ParentMask,
     %% Initialization
     [N,D]        = size(ParentDec);
     ClOffMask    = [];
-    OrOffMask    = [];
     Parent1Mask  = ParentMask(1:N/2,:);
     Parent2Mask  = ParentMask(N/2+1:end,:);
     Parent11Mask = [];
     Parent12Mask = [];
-    Parent21Mask = [];
-    Parent22Mask = [];
     
     ClOffDec    = [];
-    OrOffDec    = [];
     Parent1Dec  = ParentDec(1:N/2,:);
     Parent2Dec  = ParentDec(N/2+1:end,:);
     Parent11Dec = [];
-    Parent12Dec = [];
-    Parent21Dec = [];
-    Parent22Dec = [];    
+    Parent12Dec = []; 
     
     long    = 0;
     Fitness = Fitness(Mix);
@@ -66,7 +60,7 @@ function [OffDec,OffMask,long,numGroup] = Operator(Problem,ParentDec,ParentMask,
     end
     %% Group and encoder
     location = rand(1,N/2)<P;
-    if ~isempty(find(location>0, 1))&&GlobalGen>=T
+    if ~isempty(find(location>0, 1)) && GlobalGen>=T
        [Parent11Mask]    = Encoder(Parent1Mask(location,:),Index,MAX,useGPU);
        [Parent12Mask]    = Encoder(Parent2Mask(location,:),Index,MAX,useGPU);
        Parent21Mask      = Parent1Mask(~location,:);
@@ -92,7 +86,7 @@ function [OffDec,OffMask,long,numGroup] = Operator(Problem,ParentDec,ParentMask,
         Parent22Dec = Parent2Dec;                
     end
     %% Crossover and mutation for mask
-    if ~isempty(find(location>0, 1))&&GlobalGen>=T
+    if ~isempty(find(location>0, 1)) && GlobalGen>=T
         ClOffMask = SLMEA_GAhalf([Parent11Mask;Parent12Mask],lower,upper,'binary',useGPU);
         ClOffMask = Decode(ClOffMask,Index);
         long      = length(ClOffMask(:,1));
@@ -100,7 +94,7 @@ function [OffDec,OffMask,long,numGroup] = Operator(Problem,ParentDec,ParentMask,
     OrOffMask = SLMEA_GAhalf([Parent21Mask;Parent22Mask],Lower,Upper,'binary',useGPU);
     OffMask   = [ClOffMask;OrOffMask];
     if any(Problem.encoding~=4)
-        if ~isempty(find(location>0, 1))&&GlobalGen>=T 
+        if ~isempty(find(location>0, 1)) && GlobalGen>=T 
             ClOffDec = SLMEA_GAhalf([Parent11Dec;Parent12Dec],lower,upper,'real',useGPU);
             ClOffDec = DecodeDec(ClOffDec,Index);
             ClOffDec = ClOffDec.*repmat((Upper-Lower),length(find(location==1)),1)+repmat(Lower,length(find(location==1)),1);

@@ -1,7 +1,7 @@
 function [FrontNo,MaxFNo] = GWASFGASort(Vectors, PopObj, Utop,Nadir, nsort, ro, eps)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -12,7 +12,7 @@ function [FrontNo,MaxFNo] = GWASFGASort(Vectors, PopObj, Utop,Nadir, nsort, ro, 
     [nvectors,~] = size(Vectors);
     [Loc,MaxFNo] = frontloc(Vectors, PopObj,Utop, Nadir, inf, ro, eps);
     [popsize,~]  = size(PopObj);
-    FrontNo = inf(1,size(PopObj,1));
+    FrontNo      = inf(1,size(PopObj,1));
     for i = 1 : popsize
         position = find(Loc == i);
         count = 0;

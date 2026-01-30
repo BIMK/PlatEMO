@@ -2,7 +2,7 @@ function [FrontNo,MaxFNo] = SPDSort(PopObj,d1,d2,RP,nSort)
 % SPD sorting
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -41,7 +41,7 @@ function [FrontNo,MaxFNo] = SPDSort(PopObj,d1,d2,RP,nSort)
                                 end
                             end
                         end
-                        if domi == 0 && RP(i)==RP(j)
+                        if domi==0 && RP(i)==RP(j)
                             if d1(i)+5*d2(i) < d1(j)+5*d2(j)
                             	domi = 1;
                             elseif d1(i)+5*d2(i) > d1(j)+5*d2(j)

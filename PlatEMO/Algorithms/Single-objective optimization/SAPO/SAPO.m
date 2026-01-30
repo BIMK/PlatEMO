@@ -1,19 +1,19 @@
 classdef SAPO < ALGORITHM
 % <2024> <single> <real/integer> <constrained> <expensive>
 % Surrogate-assisted partial optimization
-% N             --- 100   --- Population size of DE
-% F             --- 0.5   --- Scaling factor of DE
-% CR            --- 0.9   --- Crossover rate of DE
-% mut1          --- 1     --- Mutation strategy ID 
-% mut2          --- 3     --- Mutation strategy ID 
-% xov           --- 1     --- Crossover strategy ID
-% initsize1     --- 100   --- Initial sampling size for LHS
-% initsize2     --- 200   --- Initial sampling size for LHS
-% change_data_n --- 2     --- {0, 1, 2} : whether change datasize {0: False, 1:True-fix, 2:True-nD}
-% ch_d_n_thres  --- 100   --- Threshold to change datasize if change_data_n = 1
-% data_n        --- 100   --- The number of neighbor if change_data_n = 0
-% data_n_2      --- 200   --- The number of data size if change_data_n = 1
-% data_times    --- 5     --- Parameter to define data size if change_data_n = 2
+% N             --- 100 --- Population size of DE
+% F             --- 0.5 --- Scaling factor of DE
+% CR            --- 0.9 --- Crossover rate of DE
+% mut1          ---   1 --- Mutation strategy ID 
+% mut2          ---   3 --- Mutation strategy ID 
+% xov           ---   1 --- Crossover strategy ID
+% initsize1     --- 100 --- Initial sampling size for LHS
+% initsize2     --- 200 --- Initial sampling size for LHS
+% change_data_n ---   2 --- {0, 1, 2} : whether change datasize {0: False, 1:True-fix, 2:True-nD}
+% ch_d_n_thres  --- 100 --- Threshold to change datasize if change_data_n = 1
+% data_n        --- 100 --- The number of neighbor if change_data_n = 0
+% data_n_2      --- 200 --- The number of data size if change_data_n = 1
+% data_times    ---   5 --- Parameter to define data size if change_data_n = 2
 
 %------------------------------- Reference --------------------------------
 % K. Nishihara and M. Nakata. A surrogate-assisted partial optimization for

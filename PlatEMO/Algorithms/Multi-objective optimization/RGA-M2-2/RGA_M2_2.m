@@ -9,7 +9,7 @@ classdef RGA_M2_2 < ALGORITHM
 % metamodeling framework for evolutionary multiobjective optimization. IEEE
 % Transactons on Evolutionary Computation, 2019, 23(1): 104-116.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -20,22 +20,22 @@ classdef RGA_M2_2 < ALGORITHM
     methods
         function main(Algorithm,Problem) 
             %% Parameter settings
-            [wmax,mu]   = Algorithm.ParameterSet(20,5);
+            [wmax,mu] = Algorithm.ParameterSet(20,5);
             
             %% Generate the initial population
-            NI          = 11*Problem.D-1;
-            P           = lhsamp(NI,Problem.D);
-            Population  = Problem.Evaluation(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
-            Archive     = UpdateArchive(Population,Problem.N);
-            THETA       = 5.*ones(Problem.M+1,Problem.D);
+            NI         = 11*Problem.D-1;
+            P          = lhsamp(NI,Problem.D);
+            Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
+            Archive    = UpdateArchive(Population,Problem.N);
+            THETA      = 5.*ones(Problem.M+1,Problem.D);
             
             %% Optimization
             while Algorithm.NotTerminated(Archive)
-                PopDec  = Population.decs;
-                CV      = NormalizeCV(Population.cons);  
-                PopObj  = [Population.objs,CV];
-                M       = Problem.M+1;
-                Model   = cell(1,M);
+                PopDec = Population.decs;
+                CV     = NormalizeCV(Population.cons);  
+                PopObj = [Population.objs,CV];
+                M      = Problem.M+1;
+                Model  = cell(1,M);
                 
                 %% Construct the surrogates
                 for i = 1 : M
@@ -68,9 +68,9 @@ classdef RGA_M2_2 < ALGORITHM
                 New            = Problem.Evaluation(NewDec);
                 
                 %% Update population P and archive A
-                Population  = UpdatePopulation(Population,New,NI-mu);
-                Archive     = cat(2,Archive,New);
-                Archive     = UpdateArchive(Archive,Problem.N);
+                Population = UpdatePopulation(Population,New,NI-mu);
+                Archive    = cat(2,Archive,New);
+                Archive    = UpdateArchive(Archive,Problem.N);
             end
         end
     end

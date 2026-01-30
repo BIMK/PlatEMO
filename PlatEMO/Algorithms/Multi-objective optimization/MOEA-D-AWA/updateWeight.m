@@ -2,7 +2,7 @@ function [Population,W] = updateWeight(Population,W,Z,EP,nus)
 % Delete overcrowded subproblems and add new subproblems
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -15,7 +15,7 @@ function [Population,W] = updateWeight(Population,W,Z,EP,nus)
     %% Update the current population by EP
     % Calculate the function value of each solution in Population or EP on
     % each subproblem in W
-    Combine = [Population,EP];
+    Combine    = [Population,EP];
     CombineObj = abs(Combine.objs-repmat(Z,length(Combine),1));
     g = zeros(length(Combine),size(W,1));
     for i = 1 : size(W,1)
@@ -54,7 +54,7 @@ function [Population,W] = updateWeight(Population,W,Z,EP,nus)
     % Add new subproblems
     newObjs = EP(Selected(length(Population)+1:end)).objs;
     temp    = 1./(newObjs-repmat(Z,size(newObjs,1),1));
-    W = [W;temp./repmat(sum(temp,2),1,size(temp,2))];
+    W       = [W;temp./repmat(sum(temp,2),1,size(temp,2))];
     % Add new solutions
     Population = Combine(Selected);
 end

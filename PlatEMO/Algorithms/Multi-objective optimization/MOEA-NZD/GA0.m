@@ -1,7 +1,7 @@
 function Offspring = GA0(Parent,Non0_index,Problem,Parameter)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -19,7 +19,7 @@ function Offspring = GA0(Parent,Non0_index,Problem,Parameter)
     end
     if isa(Parent(1),'SOLUTION')
         evaluated = true;
-        Parent = Parent.decs;
+        Parent    = Parent.decs;
     else
         evaluated = false;
     end
@@ -61,15 +61,15 @@ function Offspring = GAreal(Parent1,Parent2,lower,upper,proC,disC,proM,disM, Non
                  (Parent1+Parent2)/2-beta.*(Parent1-Parent2)/2];
     % Polynomial mutation
     % only mutate in non-zero variable
-    Lower = repmat(lower,2*N,1);
-    Upper = repmat(upper,2*N,1);
-    Offspring       = min(max(Offspring,Lower),Upper);
+    Lower     = repmat(lower,2*N,1);
+    Upper     = repmat(upper,2*N,1);
+    Offspring = min(max(Offspring,Lower),Upper);
 
     % set the probability of mutation and variable to be mutated 
-    Site  = rand(2*N,D) < proM/sum(Non0_index);
-    mu    = rand(2*N,D);
+    Site = rand(2*N,D) < proM/sum(Non0_index);
+    mu   = rand(2*N,D);
 
-    temp  = Non0_index & Site & mu<=0.5;
+    temp = Non0_index & Site & mu<=0.5;
     Offspring(temp) = Offspring(temp)+(Upper(temp)-Lower(temp)).*((2.*mu(temp)+(1-2.*mu(temp)).*...
                       (1-(Offspring(temp)-Lower(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1))-1);
     % mu>0.5

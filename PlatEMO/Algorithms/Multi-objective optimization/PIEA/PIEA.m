@@ -10,7 +10,7 @@ classdef PIEA < ALGORITHM
 % evolutionary algorithm for expensive high-dimensional multi-/many-
 % objective optimization. Information Sciences, 2024: 121045.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -120,8 +120,8 @@ function Fitness = calFitness_SDE(PopObj,Lp)
     end
     Fitness = min(Dis,[],2);
     Fitness = 3/(max(Fitness)+eps-min(Fitness))*(Fitness-min(Fitness));
-    dis = pdist2(PopObj, min(PopObj), 'minkowski', Lp);
-    dis = -3/(max(dis)+eps-min(dis))*(dis-min(dis));
+    dis     = pdist2(PopObj, min(PopObj), 'minkowski', Lp);
+    dis     = -3/(max(dis)+eps-min(dis))*(dis-min(dis));
     Fitness(Fitness<10^-4) = dis(Fitness<10^-4);
     Fitness = tansig(Fitness);
 end

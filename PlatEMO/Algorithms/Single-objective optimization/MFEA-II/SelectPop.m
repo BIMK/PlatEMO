@@ -1,7 +1,7 @@
 function  SubPopulation = SelectPop(SubPopulation,Problem)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -10,7 +10,7 @@ function  SubPopulation = SelectPop(SubPopulation,Problem)
 %--------------------------------------------------------------------------
 
     for i = 1 : length(SubPopulation)
-        pop = SubPopulation{i};
+        pop      = SubPopulation{i};
         [~,rank] = sort(pop.objs);
         SubPopulation{i} = pop(rank(1:Problem.N/2));
     end

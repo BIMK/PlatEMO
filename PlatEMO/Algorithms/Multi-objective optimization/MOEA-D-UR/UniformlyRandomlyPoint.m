@@ -9,7 +9,7 @@ function [W1,N] = UniformlyRandomlyPoint(N,M)
 %       [W,N] = UniformlyRandomlyPoint(275,10)
 
 %--------------------------------------------------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
@@ -27,8 +27,8 @@ function [W1,N] = UniformlyRandomlyPoint(N,M)
 	
 	while size(W1,1) < N
 		index = find_index_with_largest_distance (W1,W2);
-		W1(size(W1,1)+1,:)=W2(index,:);
-		W2(index,:)=[];
+		W1(size(W1,1)+1,:) = W2(index,:);
+		W2(index,:) = [];
 	end	
     W1 = max(W1,1e-6);
     N  = size(W1,1);
@@ -38,5 +38,5 @@ function index = find_index_with_largest_distance (W1,W2)
     Distance = pdist2(W2,W1);
     Temp     = sort(Distance,2);
     [~,Rank] = sortrows(Temp);
-    index=Rank(length(Rank));
+    index    = Rank(length(Rank));
 end

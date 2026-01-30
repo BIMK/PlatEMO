@@ -1,7 +1,7 @@
 function [Arch] = ArchUpdate(Problem,arch,TemArch,thea,eta)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -52,8 +52,8 @@ function value = Memory(arch,pop)
     for k = 1 : size(arch,2)
         arch(k).mobj = [arch(k).mobj;pop(k,:)];
         arch(k).Gn   = arch(k).Gn + 1;
-        ob = arch(k).mobj;
-        arch(k).mr = mean(mean(abs(ob-min(ob)))./mean(ob));
+        ob           = arch(k).mobj;
+        arch(k).mr   = mean(mean(abs(ob-min(ob)))./mean(ob));
     end
     value = arch;
 end

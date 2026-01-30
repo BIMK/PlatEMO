@@ -10,7 +10,7 @@ classdef LERD < ALGORITHM
 % optimization via reformulated decision variable analysis. IEEE
 % Transactions on Evolutionary Computation, 2024, 28(1): 47-61.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -23,12 +23,12 @@ classdef LERD < ALGORITHM
     methods
         function main(Algorithm,Problem)
 	        %% Initalization of population and structure
-            [sN,N,gen]   = Algorithm.ParameterSet(3,10,20);
+            [sN,N,gen]    = Algorithm.ParameterSet(3,10,20);
 	        [W,Problem.N] = UniformPoint(Problem.N,Problem.M); 
-	        Population   = Problem.Initialization();
-            Population   = EvolveByMOEAD(Problem,Population,W,20);
-            Par          = struct('N',N,'sN',sN,'Dec',rand(N,Problem.D)>0.5,...
-                                  'fit',zeros(N,2),'gen',gen,'t',1);
+	        Population    = Problem.Initialization();
+            Population    = EvolveByMOEAD(Problem,Population,W,20);
+            Par           = struct('N',N,'sN',sN,'Dec',rand(N,Problem.D)>0.5,...
+                                   'fit',zeros(N,2),'gen',gen,'t',1);
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 t0 = Problem.FE;
@@ -72,18 +72,18 @@ end
 
 function Population = SecondOptimization(Problem,Population,PV,flag)
 % Convergence/Distribution optimization
-    N            = length(Population);
-    Range        = [min(Population.objs,[],1);max(Population.objs,[],1)];
-	MatingPool   = TournamentSelection(2,N,calCon(Range,Population.objs));
-    OffDec       = Population(MatingPool).decs;
+    N          = length(Population);
+    Range      = [min(Population.objs,[],1);max(Population.objs,[],1)];
+	MatingPool = TournamentSelection(2,N,calCon(Range,Population.objs));
+    OffDec     = Population(MatingPool).decs;
     if flag == 0
-        NewDec   = OperatorGA(Problem,Population(randi(N,1,N+1)).decs);
-        NewDec   = NewDec(1:N,:);
+        NewDec = OperatorGA(Problem,Population(randi(N,1,N+1)).decs);
+        NewDec = NewDec(1:N,:);
     else
-        next     = randi(N,1,2*N);
-        NewDec   = OperatorDE(Problem,Population.decs,Population(next(1:end/2)).decs, ...
-                    Population(next(end/2+1:end)).decs, ...
-                    {1,0.5,size(Range,2)/length(PV)/2,20});
+        next   = randi(N,1,2*N);
+        NewDec = OperatorDE(Problem,Population.decs,Population(next(1:end/2)).decs, ...
+                 Population(next(end/2+1:end)).decs, ...
+                 {1,0.5,size(Range,2)/length(PV)/2,20});
     end
     OffDec(:,PV) = NewDec(:,PV);
     Offspring    = Problem.Evaluation(OffDec);
@@ -94,8 +94,8 @@ function [Par,TEMP] = ReformulatedOptimization(Problem,Population,Par)
     [TEMP,Par.fit]       = SparseFit(Problem,Population,Par,Par.Dec>0);
     [~,FrontNo,CrowdDis] = FitnessSelection(Par.fit,Par.N);
     for i = 1 : Par.gen
-        MatingPool  = TournamentSelection(2,2*Par.N,FrontNo,-CrowdDis);    
-        OffMask     = BinaryVariation(Par.Dec(MatingPool(1:Par.N),:), ...
+        MatingPool = TournamentSelection(2,2*Par.N,FrontNo,-CrowdDis);    
+        OffMask    = BinaryVariation(Par.Dec(MatingPool(1:Par.N),:), ...
                                       Par.Dec(MatingPool(Par.N+1:end),:));
         [OffPop,MaskFit] = SparseFit(Problem,Population,Par,OffMask>0);         
         TEMP    = [TEMP,OffPop];
@@ -113,7 +113,7 @@ function Offspring = BinaryVariation(Parent1,Parent2)
 
     [proC,proM] = deal(1,1);
     [N,D] = size(Parent1);
-    k = repmat(1:D,N,1) > repmat(randi(D,N,1),1,D);
+    k     = repmat(1:D,N,1) > repmat(randi(D,N,1),1,D);
     k(repmat(rand(N,1)>proC,1,D)) = false;
     Offspring1    = Parent1;
     Offspring2    = Parent2;

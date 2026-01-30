@@ -2,7 +2,7 @@ function W = updateWeight(objs,W)
 % Update the weight vectors
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -20,7 +20,7 @@ function W = updateWeight(objs,W)
     [~,I]   = min(normP.*sqrt(1-CosineP.^2));
     p       = normP(I)*CosineP(I) / sqrt(M);
     % Distribution control of weight vector set
-    TF = W < 1.0 / M;
-    W(TF) = W(TF) * p * M;
+    TF     = W < 1.0 / M;
+    W(TF)  = W(TF) * p * M;
     W(~TF) = 1.0 - (1.0 - W(~TF)) * (1.0 - p) * M / (M - 1);
 end 

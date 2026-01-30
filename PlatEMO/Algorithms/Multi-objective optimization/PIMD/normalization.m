@@ -1,7 +1,7 @@
 function [NormPop,NormComPop] = normalization(varargin)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -14,7 +14,7 @@ function [NormPop,NormComPop] = normalization(varargin)
     flag = 0;
     if nargin == 1
         PopObj = varargin{1};
-        z = min(PopObj,[],1);
+        z      = min(PopObj,[],1);
         if flag
             k = 1.5;
             [N,M] = size(PopObj);
@@ -22,7 +22,7 @@ function [NormPop,NormComPop] = normalization(varargin)
             Q1    = temp(max(fix(N*0.25)),:);
             Q3    = temp(max(fix(N*0.75)),:);
             Max   = Q3+k*(Q3-Q1);
-            znad = zeros(1,M);
+            znad  = zeros(1,M);
             for i = 1 : M
                 znad(i) = max(temp(temp(:,i)<Max(i),i));
             end
@@ -39,13 +39,13 @@ function [NormPop,NormComPop] = normalization(varargin)
 
         z = min(CombinePop,[],1);
         if flag
-            k = 1.5;
+            k     = 1.5;
             [N,M] = size(CombinePop);
             temp  = sort(CombinePop);
             Q1    = temp(max(fix(N*0.25)),:);
             Q3    = temp(max(fix(N*0.75)),:);
             Max   = Q3+k*(Q3-Q1);
-            znad = zeros(1,M);
+            znad  = zeros(1,M);
             for i = 1 : M
                 znad(i) = max(temp(temp(:,i)<Max(i),i));
             end

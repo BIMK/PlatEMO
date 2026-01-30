@@ -1,7 +1,7 @@
 function [Population] = Final(Problem,Arch,N,W,score)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -15,10 +15,10 @@ function [Population] = Final(Problem,Arch,N,W,score)
         RF = [];
         MF = [];
         while size(W,1) > 0
-            [srch,W] = assign(Arch,W);
+            [srch,W]  = assign(Arch,W);
             [rf,mf,rch,wr] = Construction(srch,W,score);
-            RF = [rf;RF];
-            MF = [mf;MF];
+            RF        = [rf;RF];
+            MF        = [mf;MF];
             Arch(rch) = [];
             W(wr,:)   = [];
         end
@@ -38,7 +38,7 @@ function [ar,w] = assign(arch,W)
             s = sum(W(y,:).*obj,2);
             m = sqrt(sum(W(y,:).*W(y,:),2)*sum(obj.*obj,2));
             dang(1,y) = acos(s/m);
-            [~,h]    = sort(dang);
+            [~,h]     = sort(dang);
         end
         arch(x).tno = h(1);
     end

@@ -7,7 +7,7 @@ classdef ToP < ALGORITHM
 % problems with constraints in both the decision and objective spaces. IEEE
 % Transactions on Evolutionary Computation, 2019, 23(5): 870-884.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -27,41 +27,41 @@ classdef ToP < ALGORITHM
             while Algorithm.NotTerminated(Population)
                 if (Delta>=0.2 || Pf<=1/3) && Problem.FE<=0.9*Problem.maxFE
                     %% Phase I
-                    fp_transformed=sum(Population.objs,2)/Problem.M; % weighted objective of parent population
+                    fp_transformed = sum(Population.objs,2)/Problem.M; % weighted objective of parent population
                     % generate offspring
-                    Offspring=[];
+                    Offspring = [];
                     for i = 1 : Problem.N
-                        if rand<0.5                 % Perform DE/current-to-rand/1
-                            MatingPool=[i,randi(Problem.N,1,3)];
-                            Offspring_i=DE_cr(Problem,Population(MatingPool(1)),Population(MatingPool(2)),Population(MatingPool(3)),Population(MatingPool(4)));
-                            Offspring=cat(2,Offspring,Offspring_i);
+                        if rand < 0.5               % Perform DE/current-to-rand/1
+                            MatingPool  = [i,randi(Problem.N,1,3)];
+                            Offspring_i = DE_cr(Problem,Population(MatingPool(1)),Population(MatingPool(2)),Population(MatingPool(3)),Population(MatingPool(4)));
+                            Offspring   = cat(2,Offspring,Offspring_i);
                         else                        % Perform DE/rand-to-best/1/bin
-                            [~,bestindex]=min(fp_transformed);
-                            MatingPool=[bestindex,randi(Problem.N,1,3)];
-                            Offspring_i=DE_rb(Problem,Population(MatingPool(1)),Population(MatingPool(2)),Population(MatingPool(3)),Population(MatingPool(4)));
-                            Offspring=cat(2,Offspring,Offspring_i);
+                            [~,bestindex] = min(fp_transformed);
+                            MatingPool    = [bestindex,randi(Problem.N,1,3)];
+                            Offspring_i   = DE_rb(Problem,Population(MatingPool(1)),Population(MatingPool(2)),Population(MatingPool(3)),Population(MatingPool(4)));
+                            Offspring     = cat(2,Offspring,Offspring_i);
                         end
                     end
                     % environment selection based on CDP
-                    CVO=sum(max(0,Offspring.cons),2);
-                    fo_transformed=sum(Offspring.objs,2)/Problem.M; % weighete objective of offspring
+                    CVO = sum(max(0,Offspring.cons),2);
+                    fo_transformed = sum(Offspring.objs,2)/Problem.M; % weighete objective of offspring
 
-                    betterindex=find(CVO<CVP);
-                    Population(betterindex)=Offspring(betterindex);
+                    betterindex = find(CVO<CVP);
+                    Population(betterindex) = Offspring(betterindex);
 
-                    betterindex=find(CVO==CVP & fo_transformed<fp_transformed);
-                    Population(betterindex)=Offspring(betterindex);
+                    betterindex = find(CVO==CVP & fo_transformed<fp_transformed);
+                    Population(betterindex) = Offspring(betterindex);
                     % update Delta
-                    CVP=sum(max(0,Population.cons),2);
-                    Pf=sum(CVP==0)/size(Population,2);
-                    feasible_solutions=Population(CVP==0);
-                    f_max=max(feasible_solutions.objs);
-                    f_min=min(feasible_solutions.objs);
-                    f_normalized=(feasible_solutions.objs-repmat(f_min,size(feasible_solutions,2),1))./(repmat(f_max,size(feasible_solutions,2),1)-repmat(f_min,size(feasible_solutions,2),1));
-                    f=sum(f_normalized,2);
-                    f_sorted=sort(f,'ascend');
-                    if(size(f_sorted,1)>=3)
-                        Delta=f_sorted(floor(size(f_sorted,1)/3))-f_sorted(1);
+                    CVP   = sum(max(0,Population.cons),2);
+                    Pf    = sum(CVP==0)/size(Population,2);
+                    feasible_solutions = Population(CVP==0);
+                    f_max = max(feasible_solutions.objs);
+                    f_min = min(feasible_solutions.objs);
+                    f_normalized = (feasible_solutions.objs-repmat(f_min,size(feasible_solutions,2),1))./(repmat(f_max,size(feasible_solutions,2),1)-repmat(f_min,size(feasible_solutions,2),1));
+                    f = sum(f_normalized,2);
+                    f_sorted = sort(f,'ascend');
+                    if size(f_sorted,1) >= 3
+                        Delta = f_sorted(floor(size(f_sorted,1)/3))-f_sorted(1);
                     end
                 else
                     %% Phase II

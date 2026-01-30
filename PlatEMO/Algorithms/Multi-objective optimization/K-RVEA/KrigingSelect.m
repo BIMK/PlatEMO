@@ -2,7 +2,7 @@ function PopNew = KrigingSelect(PopDec,PopObj,MSE,V,V0,NumV1,delta,mu,theta)
 % Kriging selection in K-RVEA
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -47,14 +47,14 @@ function PopNew = KrigingSelect(PopDec,PopObj,MSE,V,V0,NumV1,delta,mu,theta)
         current = find(Cindex==i);
         t = unique(associate(current));
         % Calculate the APD value of each solution
-        if Flag<=delta
-            for j = 1:size(t,1)
-                currentS = find(associate==t(j));
-            [~,id] = min(APD_S(currentS,:),[],1);
-            solution_Best = [solution_Best;currentS(id)];
+        if Flag <= delta
+            for j = 1 : size(t,1)
+                currentS      = find(associate==t(j));
+                [~,id]        = min(APD_S(currentS,:),[],1);
+                solution_Best = [solution_Best;currentS(id)];
             end
             [~,best] = min(APD_S(solution_Best,:),[],1);
-            Next(i)     = solution_Best(best);
+            Next(i)  = solution_Best(best);
         else
             Uncertainty = mean(MSE(current,:),2);
             [~,best]    = max(Uncertainty);

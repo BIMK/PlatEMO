@@ -2,7 +2,7 @@ function [Population,Fitness,D_Dec,D_Pop,net,genFlag] = EnvironmentalSelectionOr
 % The environmental selection of SPEA2 based on objective space
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -13,9 +13,9 @@ function [Population,Fitness,D_Dec,D_Pop,net,genFlag] = EnvironmentalSelectionOr
 % This function is written by Fei Ming (email: 20151000334@cug.edu.cn)
 
     [FrontNo,~] = NDSort(Population.objs,N);
-    valid = FrontNo == 1;
-    NDPop = Population(valid);
-    temp1 = NDPop.decs;
+    valid  = FrontNo == 1;
+    NDPop  = Population(valid);
+    temp1  = NDPop.decs;
     gen    = ceil(Problem.FE/Problem.N);
     maxgen = ceil(Problem.maxFE/Problem.N);
     if size(temp1,1) > 2&&isempty(find(isnan(temp1)==true))&& gen <= round(1*maxgen) && isempty(genFlag)
@@ -42,9 +42,9 @@ function [Population,Fitness,D_Dec,D_Pop,net,genFlag] = EnvironmentalSelectionOr
     D_Pop      = D_Pop(Next);
     % Sort the population
     [Fitness,rank] = sort(Fitness);
-    Population = Population(rank);
-    D_Dec = D_Dec(rank);
-    D_Pop = D_Pop(rank);
+    Population     = Population(rank);
+    D_Dec          = D_Dec(rank);
+    D_Pop          = D_Pop(rank);
 end
 
 function Del = Truncation(PopObj,PopDec,K)

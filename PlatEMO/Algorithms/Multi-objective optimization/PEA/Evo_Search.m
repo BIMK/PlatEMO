@@ -1,7 +1,7 @@
 function [PopDec,PopObj,PopCon,ObjMSE,ConMSE] = Evo_Search(P,wmax,Model_obj,Model_con,Problem)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -34,7 +34,7 @@ function [PopDec,PopObj,PopCon,ObjMSE,ConMSE] = Evo_Search(P,wmax,Model_obj,Mode
         PopCon = PopCon(index,:);
         ObjMSE = ObjMSE(index,:);
         ConMSE = ConMSE(index,:);
-        w = w + 1;
+        w      = w + 1;
     end
 end
 
@@ -87,8 +87,8 @@ function Choose = Dist_Selection(PopObj1,PopObj2,mu)
     end
     
     %% Calculate D
-    Next1 = 1:N1;
-    Next2 = N1+1:N;
+    Next1 = 1 : N1;
+    Next2 = N1+1 : N;
     for i = 1 : mu
         Distance1 = sort(Distance(Next2,Next1),2);
         [~,index] = max(Distance1(:,1));

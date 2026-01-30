@@ -1,7 +1,7 @@
 function [FrontNo,MaxFNo] = WASFGASort(Vectors, PopObj, nsort, Point, ro)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -16,7 +16,7 @@ function [FrontNo,MaxFNo] = WASFGASort(Vectors, PopObj, nsort, Point, ro)
 
     for i = 1 : popsize
         Position = find(Loc == i);
-        iter = 0;
+        iter     = 0;
         while nvectors*iter < Position
             iter = iter + 1;
         end
@@ -30,8 +30,8 @@ end
 
 function [Loc, Max] = frontsclass(Vectors, PopObj, nsort, Point, ro)
     [nvectors,~] = size(Vectors);
-    [N,~]  = size(PopObj);
-    FrontG = [];
+    [N,~]        = size(PopObj);
+    FrontG       = [];
     % SolG will store the different solutions sorted by the achievement
     % scalarizing function
     SolG    = [];

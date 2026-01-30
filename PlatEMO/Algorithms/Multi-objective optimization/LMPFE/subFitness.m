@@ -2,7 +2,7 @@ function [App,Dis] = subFitness(PopObj,P,Center,R)
 % Update intersection point solution in each subregion
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -10,13 +10,13 @@ function [App,Dis] = subFitness(PopObj,P,Center,R)
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    K          = length(R);
-    [N,M]      = size(PopObj);
+    K     = length(R);
+    [N,M] = size(PopObj);
 
     % Normalize the population
-    fmin       = min(PopObj,[],1);
-    fmax       = max(PopObj,[],1);
-    Obj        = (PopObj-repmat(fmin,N,1))./repmat(fmax-fmin,N,1);
+    fmin = min(PopObj,[],1);
+    fmax = max(PopObj,[],1);
+    Obj  = (PopObj-repmat(fmin,N,1))./repmat(fmax-fmin,N,1);
     
     %% Calculate intersection point in each subregion
     if K == 1
@@ -28,7 +28,7 @@ function [App,Dis] = subFitness(PopObj,P,Center,R)
         transformation = Allocation(Obj,Center,R);
        
         for i = 1 : K
-            current     = find(transformation == i);
+            current = find(transformation == i);
             if ~isempty(current)
                 sInterPoint = interPoint(Obj(current,:),P(i,:));
                 InterPoint(current,:) = sInterPoint;
@@ -38,10 +38,8 @@ function [App,Dis] = subFitness(PopObj,P,Center,R)
     
     % Calculate the diversity and convergence of intersection points
     App = min(InterPoint-Obj,[],2);
-%     App = sqrt(sum(InterPoint.^2,2)) - sqrt(sum(Obj.^2,2));
 
     % Calculate the diversity of each solution 
-%     Dis = pdist2(InterPoint,InterPoint);
     Dis = distMax(InterPoint);
     Dis(logical(eye(length(Dis)))) = inf; 
 end
@@ -84,8 +82,8 @@ function Dis = distMax(X)
         error('X must be a non-empty matrix');
     end
 
-    [N,~] = size(X); % nx,p
-    Dis = zeros(N,N);
+    [N,~] = size(X);
+    Dis   = zeros(N,N);
     for i = 1 : N
         for j = i+1 : N
             Dis(i,j) = max(abs(X(i,:)-X(j,:)));

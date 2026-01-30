@@ -7,7 +7,7 @@ classdef BLSAEA < ALGORITHM
 % modeling method for evolutionary algorithm to solve bilevel optimization
 % problems. IEEE Transactions on Cybernetics, 2024, 54(7): 4335-4347
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

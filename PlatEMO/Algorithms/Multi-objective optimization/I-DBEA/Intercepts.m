@@ -2,7 +2,7 @@ function a = Intercepts(PopObj)
 % Calculate the intercepts used in normalization
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -27,6 +27,6 @@ function a = Intercepts(PopObj)
         a = max(PopObj,[],1);
     else
         Hyperplane = PopObj(Extreme,:)\ones(M,1);
-        a = 1./Hyperplane';
+        a          = 1./Hyperplane';
     end
 end

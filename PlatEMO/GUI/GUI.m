@@ -2,7 +2,7 @@ classdef GUI < handle
 %GUI - The class of the main figure of PlatEMO.
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -25,7 +25,7 @@ classdef GUI < handle
             obj.readList();
             
             % Create the window
-            obj.app.figure   = uifigure('Name','PlatEMO v4.13','Position',[0 0 1200 650],'Interruptible','off','icon',obj.icon.logo1,'BusyAction','cancel','Visible','off','WindowButtonMotionFcn',@(~,~)[]);
+            obj.app.figure   = uifigure('Name','PlatEMO v4.14','Position',[0 0 1200 650],'Interruptible','off','icon',obj.icon.logo1,'BusyAction','cancel','Visible',false,'WindowButtonMotionFcn',@(~,~)[]);
             obj.app.maingrid = uigridlayout(obj.app.figure,'RowHeight',{25,80,'1x'},'ColumnWidth',{'1x'},'Padding',[0 0 0 0],'RowSpacing',0);
             
             % Create the tab buttons
@@ -53,12 +53,13 @@ classdef GUI < handle
             obj.app.button(6) = GUI.APP([1 2],3,uibutton(obj.app.grid(2),'Visible',false,'Text',{'User','Manual'},'VerticalAlignment','bottom','FontSize',11,'Icon',obj.icon.help,'IconAlignment','top','ButtonpushedFcn',@(~,~)web(['file://',fullfile(fileparts(fileparts(mfilename('fullpath'))),'manual.pdf')],'-browser')));
             obj.app.tip       = GUI.APP(2,8,uiimage(obj.app.grid(2),'ImageSource',obj.icon.tip2,'ImageClickedFcn',@obj.cb_fold,'UserData',true));
             tempLine          = GUI.APP(3,[1 9],uipanel(obj.app.grid(2),'BackgroundColor',[.8 .8 .8]));
+            obj.app.hyperlink = GUI.APP([1 2],6,uihyperlink(obj.app.grid(2),'Visible',false,'Text','Introduction to creating NeuroEAs','URL','https://www.researchgate.net/publication/398681225'));
             
             % Create the modules
             movegui(obj.app.figure,'center');
             obj.app.figure.addlistener('CurrentPoint','PostSet',@obj.cb_motion);
             obj.cb_module([],[],obj.icon.GUIsetting);
-            obj.app.figure.Visible = 'on';
+            obj.app.figure.Visible = true;
             
             % Show images
             index = num2str(randi(3));
@@ -163,6 +164,7 @@ classdef GUI < handle
                     obj.app.(name{i}) = feval(name{i},obj);
                 end
             end
+            obj.app.hyperlink.Visible = GUIsetting==4;
             save(fullfile(fileparts(mfilename('fullpath')),'GUI'),'GUIsetting','-append');
         end
         %% Show the figure of about PlatEMO

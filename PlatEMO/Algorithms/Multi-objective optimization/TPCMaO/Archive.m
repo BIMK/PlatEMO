@@ -2,7 +2,7 @@ function Population = Archive(Population,N)
 % Select feasible and non-dominated solutions by using SPEA2-CDP
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -16,7 +16,7 @@ function Population = Archive(Population,N)
         return;
     elseif size(Population,2) > N
         Fitness = CalFitness(Population.objs,Population.cons);
-        Next = Fitness < 1;
+        Next    = Fitness < 1;
         if sum(Next) < N
             [~,Rank] = sort(Fitness);
             Next(Rank(1:N)) = true;

@@ -2,7 +2,7 @@ function objective_subset = kEMOSS(Population,k)
 % Calculate the objective subset with greedy k-EMOSS method
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -17,7 +17,7 @@ function objective_subset = kEMOSS(Population,k)
    while length(selected_subset) < k
        unselected_subset = setdiff(objective_set,selected_subset);
        errors = zeros(length(unselected_subset),1);
-       for i = 1:length(unselected_subset)
+       for i = 1 : length(unselected_subset)
            errors(i,1) = getDelataMinfor(Population, [selected_subset, unselected_subset(i)], objective_set);
        end
        [~, v] = min(errors);

@@ -2,7 +2,7 @@ function [Population,Dec,Mask,FitnessSpea2] = EnvironmentalSelection(Population,
 % The environmental selection of SPEA2
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -11,7 +11,7 @@ function [Population,Dec,Mask,FitnessSpea2] = EnvironmentalSelection(Population,
 %--------------------------------------------------------------------------
 
     %% Delete duplicated solutions
-    [~,uni] = unique(Population.objs,'rows');
+    [~,uni]    = unique(Population.objs,'rows');
     Population = Population(uni);
     Dec        = Dec(uni,:);
     Mask       = Mask(uni,:);
@@ -31,10 +31,10 @@ function [Population,Dec,Mask,FitnessSpea2] = EnvironmentalSelection(Population,
         Next(Temp(Del)) = false;
     end
     % Population for next generation
-    Population = Population(Next);
-    Fitness    = Fitness(Next);
-    Dec        = Dec(Next,:);
-    Mask       = Mask(Next,:);
+    Population   = Population(Next);
+    Fitness      = Fitness(Next);
+    Dec          = Dec(Next,:);
+    Mask         = Mask(Next,:);
     FitnessSpea2 = Fitness;
 end
 

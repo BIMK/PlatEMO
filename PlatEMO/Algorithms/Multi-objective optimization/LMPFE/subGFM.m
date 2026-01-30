@@ -2,7 +2,7 @@ function P = subGFM(PopObj,Center,R,FrontNo)
 % PF modeling for each subregion 
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -44,21 +44,19 @@ function P = subGFM(PopObj,Center,R,FrontNo)
         
         % GFM of each subregion
         if size(PopObj,1) > M
-           for i = 1 : K
-               current = find(FTransformation==i);
-               if ~isempty(current)
+            for i = 1 : K
+                current = find(FTransformation==i);
+                if ~isempty(current)
                     if length(current) < M+1
                         [~,sDis] = sort(pdist2(RemainObj ,Center(i,:)));
                         current  = sDis(1:M+1);
                     end
-                    p  = GFM(Obj(current,:));
+                    p      = GFM(Obj(current,:));
                     P(i,:) = p;
-               end
-           end
+                end
+            end
         end
-        
     end
-    
 end
 
 function P = GFM(X)
@@ -82,7 +80,7 @@ function P = GFM(X)
             if newMSE < MSE && all(newP>1e-3)
                 P     = newP;
                 E     = newE;
-                MSE    = newMSE;
+                MSE   = newMSE;
                 lamda = lamda/1.08;
                 break;
             elseif lamda > 1e8

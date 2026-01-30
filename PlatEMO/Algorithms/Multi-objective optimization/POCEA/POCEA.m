@@ -19,6 +19,7 @@ classdef POCEA < ALGORITHM
             [V0,Problem.N] = UniformPoint(Problem.N,Problem.M);
             [Vs0,L]        = UniformPoint(floor(Problem.N/k),Problem.M);
             [V,Vs]         = deal(V0,Vs0);
+            
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 [INDEX,THETA,DIS] = Association(Population,Vs,k);

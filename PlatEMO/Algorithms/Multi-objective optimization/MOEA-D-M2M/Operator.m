@@ -3,7 +3,7 @@ function Offspring = Operator(Problem,Parent1,Parent2)
 % proM --- 1 --- The expectation of number of bits doing mutation 
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -17,7 +17,7 @@ function Offspring = Operator(Problem,Parent1,Parent2)
     [N,D]   = size(Parent1);
 
     %% Crossover
-    rc = (2*rand(N,1)-1).*(1-rand(N,1).^(-(1-Problem.FE/Problem.maxFE).^0.7));
+    rc     = (2*rand(N,1)-1).*(1-rand(N,1).^(-(1-Problem.FE/Problem.maxFE).^0.7));
     OffDec = Parent1 + repmat(rc,1,D).*(Parent1-Parent2);
     
     %% Mutation

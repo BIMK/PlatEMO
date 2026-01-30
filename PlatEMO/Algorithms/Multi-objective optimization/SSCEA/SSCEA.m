@@ -10,7 +10,7 @@ classdef SSCEA < ALGORITHM
 % many-objective optimization. Swarm and Evolutionary Computation, 2023,
 % 83: 101410.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -22,9 +22,9 @@ classdef SSCEA < ALGORITHM
         function main(Algorithm,Problem)
             %% Parameter setting
             [nSel,nPer] = Algorithm.ParameterSet(5,50);
-            lb = Problem.N/10;
-            ub = Problem.N;
-            beta = 1;
+            lb     = Problem.N/10;
+            ub     = Problem.N;
+            beta   = 1;
             CAsize = floor(lb+(ub-lb)*Problem.FE^2*beta/Problem.maxFE^2);
 
             %% Generate random population
@@ -44,13 +44,13 @@ classdef SSCEA < ALGORITHM
                     OffDec = OffDec.decs;
                     NewDec = [OperatorGA(Problem,ParentC.decs,{1,15,0,0});OperatorGA(Problem,ParentM.decs,{0,0,D/length(CV)/2,15})];
                     OffDec(:,CV) = NewDec(:,CV);
-                    Offspring = Problem.Evaluation(OffDec);
+                    Offspring    = Problem.Evaluation(OffDec);
                 else
                     OffDec = [ParentC,ParentM];
                     OffDec = OffDec.decs;
                     NewDec = [OperatorGA(Problem,ParentC.decs,{1,15,0,0});OperatorGA(Problem,ParentM.decs,{0,0,D/length(DV)/2,15})];
                     OffDec(:,DV) = NewDec(:,DV);
-                    Offspring = Problem.Evaluation(OffDec);
+                    Offspring    = Problem.Evaluation(OffDec);
                 end
                 CAsize = floor(lb+(ub-lb)*Problem.FE^2*beta/Problem.maxFE^2);
                 CA     = UpdateCA(CA,Offspring,CAsize);

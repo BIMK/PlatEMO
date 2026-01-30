@@ -9,7 +9,7 @@ classdef PPS < ALGORITHM
 % Push and pull search for solving constrained multi-objective optimization
 % problems. Swarm and Evolutionary Computation, 2019, 44(2): 665-679.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -127,7 +127,7 @@ end
 % Calculate the Maximum Rate of Change
 function max_change = calc_maxchange(ideal_points,nadir_points,gen,last_gen)
     delta_value = 1e-6 * ones(1,size(ideal_points,2));
-    rz = abs((ideal_points(gen,:) - ideal_points(gen - last_gen + 1,:)) ./ max(ideal_points(gen - last_gen + 1,:),delta_value));
+    rz  = abs((ideal_points(gen,:) - ideal_points(gen - last_gen + 1,:)) ./ max(ideal_points(gen - last_gen + 1,:),delta_value));
     nrz = abs((nadir_points(gen,:) - nadir_points(gen - last_gen + 1,:)) ./ max(nadir_points(gen - last_gen + 1,:),delta_value));
     max_change = max([rz, nrz]);
 end

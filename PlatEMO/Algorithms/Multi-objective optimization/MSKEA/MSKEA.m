@@ -7,7 +7,7 @@ classdef MSKEA < ALGORITHM
 % evolutionary algorithm for sparse multi-objective optimization problems.
 % Swarm and Evolutionary Computation, 2022, 73: 101119.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -42,32 +42,32 @@ classdef MSKEA < ALGORITHM
             for i = 1 : Problem.N
                 Mask(i,TournamentSelection(2,ceil(rand*Problem.D),pv)) = 1;
             end
-            Population = Problem.Evaluation(Dec.*Mask);
+            Population    = Problem.Evaluation(Dec.*Mask);
             [Population,Dec,Mask,FrontNo,CrowdDis] = SPEA2_EnvironmentalSelection([Population,TempPop],[Dec;TDec],[Mask;TMask],Problem.N);
-            sv=zeros(1,Problem.D);
-            Last_temp_num=0;
+            sv            =zeros(1,Problem.D);
+            Last_temp_num = 0;
 
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,2*Problem.N,FrontNo,-CrowdDis);
                 %-------------update fv-----------%
-                delta= Problem.FE/Problem.maxFE;
-                if delta<0.618
+                delta = Problem.FE/Problem.maxFE;
+                if delta < 0.618
                     fv = std(Population(FrontNo==1).decs,0,1);
                     fv(:,Problem.encoding==4) = sum(Mask(FrontNo==1,Problem.encoding==4),1);
                 end
                 %-------------update sv-----------%
-                First_Mask=Mask(FrontNo==1,:);
-                [temp_num,~]=size(First_Mask);
-                temp_vote=sum(First_Mask,1);
-                sv(1,:)=(Last_temp_num/(Last_temp_num+temp_num))*sv(1,:)+(temp_num/(Last_temp_num+temp_num))*(temp_vote/temp_num);
-                Last_temp_num=temp_num;
+                First_Mask    = Mask(FrontNo==1,:);
+                [temp_num,~]  = size(First_Mask);
+                temp_vote     = sum(First_Mask,1);
+                sv(1,:)       = (Last_temp_num/(Last_temp_num+temp_num))*sv(1,:)+(temp_num/(Last_temp_num+temp_num))*(temp_vote/temp_num);
+                Last_temp_num = temp_num;
                 %-------------update pv by sv-----------%
-                if delta<0.618
-                    pv=pv.*(1-sv)*sqrt(delta)+pv;
+                if delta < 0.618
+                    pv = pv.*(1-sv)*sqrt(delta)+pv;
                 end
                 %--------------------------------------%
-                if  (delta/0.618) < 0.618
+                if (delta/0.618) < 0.618
                     [OffDec,OffMask] = Operator_pvfv(Problem,Dec(MatingPool,:),Mask(MatingPool,:),pv,fv,delta);
                 elseif (delta/0.618)>=0.618 && delta< 0.618
                     if rand < 0.5

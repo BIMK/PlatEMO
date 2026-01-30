@@ -2,7 +2,7 @@ function [GuidingSolution,SampleSolution ]= Convergence_DirectedSampling(Global,
 % Acquiring Guiding Solutions
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -27,11 +27,11 @@ function [GuidingSolution,SampleSolution ]= Convergence_DirectedSampling(Global,
     Direction  = [BestX - repmat(Lower,Nw,1);BestX - repmat(Upper,Nw,1)]./repmat(Directnorm,1,Global.D);
 
     %% Generate guiding solutions
-    Intervalmax     = sqrt(sum((Upper-Lower).^2,2));
-    Intervalmin     = 0;
-    Nw              = 2*Nw;
-    RandSample      = Intervalmin + rand(Ns,Nw)*(Intervalmax-Intervalmin);
-    SampleSolution  = GenerateSampleSolution(Global,RandSample,Direction);
+    Intervalmax    = sqrt(sum((Upper-Lower).^2,2));
+    Intervalmin    = 0;
+    Nw             = 2*Nw;
+    RandSample     = Intervalmin + rand(Ns,Nw)*(Intervalmax-Intervalmin);
+    SampleSolution = GenerateSampleSolution(Global,RandSample,Direction);
 
     cons = sum(max(SampleSolution.cons,0),2);
     cons(cons<VAR) = 0;
@@ -43,8 +43,8 @@ function [GuidingSolution,SampleSolution ]= Convergence_DirectedSampling(Global,
     % Find out respective solutions
 
     %% Normalization
-    np = size(Obj,1);
-    Obj = (Obj-repmat(min(Obj),np,1))./(repmat(max(Obj),np,1)-repmat(min(Obj),np,1));
+    np   = size(Obj,1);
+    Obj  = (Obj-repmat(min(Obj),np,1))./(repmat(max(Obj),np,1)-repmat(min(Obj),np,1));
     Nr   = size(RefV,1);
     Best = zeros(Nr,1);
 
@@ -54,28 +54,27 @@ function [GuidingSolution,SampleSolution ]= Convergence_DirectedSampling(Global,
 
     Indflag = zeros(np,1);
     current = cell(Nr,1);
-    for i = 1:Nr
+    for i = 1 : Nr
         current{i,1} = find(associate == i);
     end
-    for i= 1:Nr
-        if length(current{i,1})>1
+    for i = 1 : Nr
+        if length(current{i,1}) > 1
             rand_index = ceil(rand*length(current{i,1}));
             Best(i,1) = current{i,1}(rand_index);
             Indflag(current{i,1}(rand_index),1) = 1;
-        elseif length(current{i,1})==1
+        elseif length(current{i,1}) == 1
             Best(i,1) = current{i,1}(1);
             Indflag(current{i,1}(1),1) = 1;
         end
     end
 
-
-    for i = 1:Nr
+    for i = 1 : Nr
         if isempty(current{i,1})
             [~,indCon] = sort(Cosine(:,i),'descend');
             k = 1;
             if length(indCon) > Nr
                 while Indflag(indCon(k),1) == 1
-                    k=k+1;
+                    k = k + 1;
                 end
                 Best(i,1) = indCon(k);
                 Indflag(indCon(k),1) = 1;
@@ -89,15 +88,15 @@ end
 function SampleSolution = GenerateSampleSolution(Global,RandSample,Direct)
 % Generate some sample solutions along with the guiding directions
 
-    [Ns,Nw] = size(RandSample);
-    Nw = Nw/2;
+    [Ns,Nw]        = size(RandSample);
+    Nw             = Nw/2;
     SampleSolution = [];
-    for i = 1:Ns
+    for i = 1 : Ns
         PopX = [repmat(Global.lower,Nw,1) + repmat(RandSample(i,1:Nw)',1,Global.D).* Direct(1:Nw,:);...
             repmat(Global.upper,Nw,1) + repmat(RandSample(i,Nw+1:end)',1,Global.D).* Direct(Nw+1:end,:)];
 
         PopX = max(min(repmat(Global.upper,size(PopX,1),1),PopX),repmat(Global.lower,size(PopX,1),1));
         SampleSolutiontemp = Global.Evaluation(PopX);
-        SampleSolution = [SampleSolution,SampleSolutiontemp];
+        SampleSolution     = [SampleSolution,SampleSolutiontemp];
     end
 end

@@ -3,7 +3,7 @@ function [Fitness, extreme] = CalFitness(PopObj)
 % F(x) = f(x) + d(x) Algorithm 3
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -15,8 +15,7 @@ function [Fitness, extreme] = CalFitness(PopObj)
 
     [N,M]  = size(PopObj); %N  No. of solutions, M No. of Objectives
    
-   %% q
-    %Zmax = max(PopObj,[],1); % Identify the max point
+    %% q
     Zmin = min(PopObj,[],1); % Identify the ideal point
     % Identify the extreme points
     W = zeros(M) + 1e-6;
@@ -25,7 +24,7 @@ function [Fitness, extreme] = CalFitness(PopObj)
     for i = 1 : M
         ASF(:,i) = max((PopObj-repmat(Zmin,N,1))./repmat(W(i,:),N,1),[],2);
     end
-    [~,extreme] = min(ASF,[],1); %'extreme' is the extreme solutions
+    [~,extreme] = min(ASF,[],1); % 'extreme' is the extreme solutions
     % Calculate the intercepts
     Hyperplane = PopObj(extreme,:)\ones(M,1); % linear equation X=A\B???A*X=B???hyperplane is the solution of linear equation PopObj(extreme,:)x Hyperplane = ones(M,1)
     a = (1./Hyperplane)';
@@ -43,7 +42,6 @@ function [Fitness, extreme] = CalFitness(PopObj)
         ASF_q(:,i) = max((PopObj-repmat(Zmin,N,1))./repmat(w_nad,N,1),[],2);
     end
     [~,key_point] = min(ASF_q,[],1);
-    %q
     q = sqrt(sum(PopObj(key_point).^2,2)) * sqrt(M); 
     if q <= 1
         fx = sum(PopObj-repmat(Zmin,N,1),2);
@@ -55,18 +53,18 @@ function [Fitness, extreme] = CalFitness(PopObj)
     Distance = inf(N);
     for i = 1 : N
         for j = [1:i-1,i+1:N]
-            denominator = 1 + min(PopObj(i,:),PopObj(j,:)); 
-            numerator = max(PopObj(i,:),PopObj(j,:)) - min(PopObj(i,:),PopObj(j,:));  
-            dis = numerator./ denominator;
+            denominator   = 1 + min(PopObj(i,:),PopObj(j,:)); 
+            numerator     = max(PopObj(i,:),PopObj(j,:)) - min(PopObj(i,:),PopObj(j,:));  
+            dis           = numerator./ denominator;
             Distance(i,j) = sum(dis);
         end
     end
       
     %% Calculate D(i)
     Distance = sort(Distance,2);
-    k = floor(sqrt(N)); %k-NN
+    k = floor(sqrt(N)); % k-NN
     d = 1./(Distance(:,k)+2); % dimensionality margin distance
     
     %% Calculate the fitnesses
-    Fitness = fx+d;
+    Fitness = fx + d;
 end

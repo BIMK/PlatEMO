@@ -1,7 +1,7 @@
 function [P_temp, P_temp_rank] = OSP(ger_end, Pt, Pt_apt, Pt_Rank, Problem, ger_init, p)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -12,11 +12,10 @@ function [P_temp, P_temp_rank] = OSP(ger_end, Pt, Pt_apt, Pt_Rank, Problem, ger_
 % This function is written by Elaine Guerrero-Pena
 
     NP = Problem.N;
-    m = Problem.M;
+    m  = Problem.M;
 
     intv_ger = ger_end - ger_init;
 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Data pre-processing
 
     phi_data = [];
@@ -24,19 +23,17 @@ function [P_temp, P_temp_rank] = OSP(ger_end, Pt, Pt_apt, Pt_Rank, Problem, ger_
     % Current generation data
     C = ger_end;
     S = find(Pt_Rank(:,C)==1);
-    phi_apt = Pt_apt(S,:,C);
-    indiv_M = Pt(S,:,C);
+    phi_apt  = Pt_apt(S,:,C);
+    indiv_M  = Pt(S,:,C);
     sol_phiS = sum(Pt_Rank(:,ger_end)==1);
 
     [~, idx_sortmax] = sort(phi_apt(:,1));
-    phi_S = phi_apt(idx_sortmax,:);
+    phi_S   = phi_apt(idx_sortmax,:);
     indiv_S = indiv_M(idx_sortmax,:);
 
-    for j = 1:intv_ger+1
-        idx = []; idx1 = [];
-
+    for j = 1 : intv_ger+1
         ger_i = j + ger_init-1;
-        idx1 = find(Pt_Rank(:,ger_i)==1);
+        idx1  = find(Pt_Rank(:,ger_i)==1);
 
         if length(idx1) ~= sol_phiS
             [~,idx] = min(pdist2(phi_S,Pt_apt(idx1,:,ger_i)),[],2);
@@ -48,22 +45,19 @@ function [P_temp, P_temp_rank] = OSP(ger_end, Pt, Pt_apt, Pt_Rank, Problem, ger_
     end
 
     % Find the "best individual"
-    Dist_apt = pdist2(phi_data(:,:,1),phi_data(:,:,end));
-    dist_apt = Dist_apt(sub2ind(size(Dist_apt),1:size(Dist_apt,1),1:size(Dist_apt,2)));
-    idx_dif = find(sum((phi_data(:,:,end) - phi_data(:,:,1)) < 0,2)==m);
+    Dist_apt    = pdist2(phi_data(:,:,1),phi_data(:,:,end));
+    dist_apt    = Dist_apt(sub2ind(size(Dist_apt),1:size(Dist_apt,1),1:size(Dist_apt,2)));
+    idx_dif     = find(sum((phi_data(:,:,end) - phi_data(:,:,1)) < 0,2)==m);
     [~,idx_apt] = max(dist_apt(idx_dif));
-    best_indiv = idx_dif(idx_apt);
+    best_indiv  = idx_dif(idx_apt);
 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Forecasting of the front movement using ARX time series models
     phi_f = fun_ARX(phi_data,best_indiv,p);
 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Searching for the solutions in the decision space that have fitness values
     % in the objective space as close as possible to those of the predicted front
     X_f = fun_Otimiz(indiv_S,phi_S,phi_f,Problem);
 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Complementing a new population using Gaussian Mixture Model-based Local
     % Search (GMM-LS)
     ksol = NP - length(X_f);
@@ -79,7 +73,6 @@ function [P_temp, P_temp_rank] = OSP(ger_end, Pt, Pt_apt, Pt_Rank, Problem, ger_
 
 end
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Block 1: Forecast with ARX model
 function F_p = fun_ARX(indiv_m,idx_model,p)
 
@@ -96,17 +89,17 @@ function F_p = fun_ARX(indiv_m,idx_model,p)
         [~,idx_y] = unique(y2(:,1),'stable');
         y = y2(idx_y,:);
         if size(y,1) < 3
-            y=y2;
+            y = y2;
         end
 
         data = iddata(y,[],'TimeUnit', 'hours');
-        Mdl = arx(data, [na nb nk]); % Estimate ARX model parameters using the
+        Mdl  = arx(data, [na nb nk]); % Estimate ARX model parameters using the
         % best individual
 
-        for i = 1:size(indiv_m,1)
+        for i = 1 : size(indiv_m,1)
 
             y1 = reshape(indiv_m(i,:,:),size(indiv_m,2),size(indiv_m,3))';
-            y = y1(all(~isnan(y1),2),:);
+            y  = y1(all(~isnan(y1),2),:);
 
             data = iddata(y,[],'TimeUnit', 'hours');
 
@@ -118,10 +111,10 @@ function F_p = fun_ARX(indiv_m,idx_model,p)
 
     else % ARX model is built for the individuals using the movement of each
         % solution in the generations
-        for i = 1:size(indiv_m,1)
+        for i = 1 : size(indiv_m,1)
 
             y1 = reshape(indiv_m(i,:,:),size(indiv_m,2),size(indiv_m,3))';
-            y = y1(all(~isnan(y1),2),:);
+            y  = y1(all(~isnan(y1),2),:);
 
             data = iddata(y,[],'TimeUnit', 'hours');
 
@@ -137,13 +130,12 @@ function F_p = fun_ARX(indiv_m,idx_model,p)
 
 end
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Block 2: Leading solutions approximation
 function XF = fun_Otimiz(indiv_Max,apt_Max,yF,Problem)
 
-    for i=1:size(yF,1)
+    for i = 1 : size(yF,1)
 
-        x0 = indiv_Max(i,:);
+        x0   = indiv_Max(i,:);
         f_x0 = apt_Max(i,:);
 
         fun = @(x)pdist2(Problem.Evaluation(x).obj,yF(i,:));
@@ -165,7 +157,6 @@ function XF = fun_Otimiz(indiv_Max,apt_Max,yF,Problem)
 
 end
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Block 3: Complete the population using GMM-LS
 function Y_LS = fun_GMMOV(indiv, Problem, ksol)
 
@@ -193,19 +184,19 @@ end
 function [X, z] = fun_GMMRand(model,Dp,n)
     
     % GMM
-    K = size(model.mean,2);
-    w = model.weights;
-    mu = model.mean;
+    K     = size(model.mean,2);
+    w     = model.weights;
+    mu    = model.mean;
     Sigma = model.Sigma;
     
     % Generate samples from a multinomial distribution.
-    p = cumsum(w(:));
+    p     = cumsum(w(:));
     [~,z] = histc(rand(1,n),[0;p/p(end)]);
 
     % Generate samples from a Gaussian distribution.
     X = zeros(n,Dp);
     
-    for i = 1:K
+    for i = 1 : K
         [R,err] = chol(Sigma(:,:,i));
         if err ~= 0
             R = Sigma(:,:,i);
@@ -222,29 +213,29 @@ function GMModel = GMMModel_VI(indiv1,K_G)
 
     prior.alpha = 0.1;
     prior.kappa = 0.001;
-    prior.m = mean(indiv1)';
-    prior.v = d;
-    prior.M = 0.00001*eye(d);
-    prior.logW = -2*sum(log(diag(chol(prior.M))));
+    prior.m     = mean(indiv1)';
+    prior.v     = d;
+    prior.M     = 0.00001*eye(d);
+    prior.logW  = -2*sum(log(diag(chol(prior.M))));
 
-    tol = 1e-8;
+    tol     = 1e-8;
     MaxIter = 2000;
-    LB = -inf(1,MaxIter);
+    LB      = -inf(1,MaxIter);
     
-    label = ceil(K_G*rand(1,n));
+    label     = ceil(K_G*rand(1,n));
     GMModel.R = full(sparse(1:n,label,1,n,K_G,n));
-    GMModel = fun_maximize(indiv1',GMModel,prior);
+    GMModel   = fun_maximize(indiv1',GMModel,prior);
 
-    for iter = 2:MaxIter
-        GMModel = fun_expect(indiv1',GMModel);
-        GMModel = fun_maximize(indiv1',GMModel,prior);
+    for iter = 2 : MaxIter
+        GMModel  = fun_expect(indiv1',GMModel);
+        GMModel  = fun_maximize(indiv1',GMModel,prior);
         LB(iter) = fun_bound(indiv1',GMModel,prior)/n;
         if abs(LB(iter)-LB(iter-1)) < tol*abs(LB(iter))
             break;
         end
     end
 
-    for i = 1:K_G
+    for i = 1 : K_G
         [~,errm] = chol(GMModel.Sigma(:,:,i));
         if errm ~= 0
             Sigmam = (GMModel.Sigma(:,:,i) + GMModel.Sigma(:,:,i).')/2;
@@ -263,7 +254,7 @@ function GMModel = fun_maximize(X, GMModel, prior)
     k = size(m,2);
     r = sqrt(R');
 
-    for i = 1:k
+    for i = 1 : k
         X_m = bsxfun(@times,bsxfun(@minus,X,m(:,i)),r(i,:));
         p_m = prior.m-m(:,i);
         U(:,:,i) = chol(prior.M + X_m*X_m' + prior.kappa*(p_m*p_m'));
@@ -272,10 +263,10 @@ function GMModel = fun_maximize(X, GMModel, prior)
 
     GMModel.alpha = prior.alpha + sum(R,1);
     GMModel.kappa = prior.kappa + sum(R,1);
-    GMModel.mean = bsxfun(@times,m,1./GMModel.kappa);
-    GMModel.v = prior.v + sum(R,1);
+    GMModel.mean  = bsxfun(@times,m,1./GMModel.kappa);
+    GMModel.v     = prior.v + sum(R,1);
     GMModel.Sigma = U;
-    GMModel.logW = log_W;
+    GMModel.logW  = log_W;
 end
 
 %% Expectation Step
@@ -283,7 +274,7 @@ function GMModel = fun_expect(X, GMModel)
 
     [d,k] = size(GMModel.mean);
 
-    for i = 1:k
+    for i = 1 : k
         q = (GMModel.Sigma(:,:,i)'\bsxfun(@minus,X,GMModel.mean(:,i)));
         E_q(:,i) = d/GMModel.kappa(i) + GMModel.v(i)*dot(q,q,1);
     end
@@ -312,25 +303,25 @@ end
 
 %% Bound
 function LB = fun_bound(X, GMModel, prior)
-d = size(X,1);
-k = size(GMModel.R,2);
-
-Ep_z = 0;
-Eq_z = dot(GMModel.R(:),GMModel.logR(:));
-Ep_pi = gammaln(k*prior.alpha)-k*gammaln(prior.alpha);
-Eq_pi = gammaln(sum(GMModel.alpha))-sum(gammaln(GMModel.alpha));
-Ep_mu = 0.5*d*k*log(prior.kappa);
-Eq_mu = 0.5*d*sum(log(GMModel.kappa));
-Ep_L = k*(-0.5*prior.v*(prior.logW+d*log(2))-fun_logMvGamma(0.5*prior.v,d));
-Eq_L = sum(-0.5*GMModel.v.*(GMModel.logW+d*log(2))-fun_logMvGamma(0.5*GMModel.v,d));
-Ep_X = -0.5*d*size(X,2)*log(2*pi);
-LB = Ep_z-Eq_z+Ep_pi-Eq_pi+Ep_mu-Eq_mu+Ep_L-Eq_L+Ep_X;
+    d = size(X,1);
+    k = size(GMModel.R,2);
+    
+    Ep_z  = 0;
+    Eq_z  = dot(GMModel.R(:),GMModel.logR(:));
+    Ep_pi = gammaln(k*prior.alpha)-k*gammaln(prior.alpha);
+    Eq_pi = gammaln(sum(GMModel.alpha))-sum(gammaln(GMModel.alpha));
+    Ep_mu = 0.5*d*k*log(prior.kappa);
+    Eq_mu = 0.5*d*sum(log(GMModel.kappa));
+    Ep_L  = k*(-0.5*prior.v*(prior.logW+d*log(2))-fun_logMvGamma(0.5*prior.v,d));
+    Eq_L  = sum(-0.5*GMModel.v.*(GMModel.logW+d*log(2))-fun_logMvGamma(0.5*GMModel.v,d));
+    Ep_X  = -0.5*d*size(X,2)*log(2*pi);
+    LB    = Ep_z-Eq_z+Ep_pi-Eq_pi+Ep_mu-Eq_mu+Ep_L-Eq_L+Ep_X;
 end
 
 function y = fun_logMvGamma(x,d)
-dim = size(x);
-x = reshape(x,1,prod(dim));
-x = bsxfun(@plus,repmat(x,d,1),(1-(1:d)')/2);
-y = d*(d-1)/4*log(pi)+sum(gammaln(x),1);
-y = reshape(y,dim);
+    dim = size(x);
+    x   = reshape(x,1,prod(dim));
+    x   = bsxfun(@plus,repmat(x,d,1),(1-(1:d)')/2);
+    y   = d*(d-1)/4*log(pi)+sum(gammaln(x),1);
+    y   = reshape(y,dim);
 end

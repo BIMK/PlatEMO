@@ -9,7 +9,7 @@ classdef TSSparseEA < ALGORITHM
 % evolutionary algorithm for large-scale sparse multiobjective optimization
 % problems. Swarm and Evolutionary Computation, 2022, 72: 101093.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -33,14 +33,14 @@ classdef TSSparseEA < ALGORITHM
             else
                 Dec = ones(Problem.N,Problem.D);
             end
-            Mask = binornd(ones(Problem.N,Problem.D),0.5);
+            Mask       = binornd(ones(Problem.N,Problem.D),0.5);
             Population = Problem.Evaluation(Dec.*Mask);
             
             %% Optimization
             [Population,Dec,Mask]    = BinaryGroupOptimization(Problem,Population,Dec,Mask,r_eva,nGroup,REAL);
             [~,~,~,FrontNo,CrowdDis] = EnvironmentalSelection(Population,Dec,Mask,Problem.N);
             while Algorithm.NotTerminated(Population)
-                MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
+                MatingPool       = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
                 [OffDec,OffMask] = Operator(Problem,Dec(MatingPool,:),Mask(MatingPool,:),REAL);
                 if REAL
                     OffDec = Match(OffDec,OffMask,Problem);

@@ -23,8 +23,6 @@ function [Y,Error] = Sammon(X,d)
     %% Initialized by PCA, map to d dimension
     [UU,DD] = svd(X);
     Y       = UU(:,1:d)*DD(1:d,1:d);
-    %% Randomly initialize Y
-    % Y      = randn(N,d);
     
     % Obtain error
     oneMatrix = ones(N,d);
@@ -47,10 +45,10 @@ function [Y,Error] = Sammon(X,d)
         
         % Use step-halving procedure to ensure progress id made
         for j = 1 : maxHalves
-            Y(:)   = yOld(:) + s;
-            dist   = pdist2(Y,Y) + eye(N);
-            dinv   = 1./dist;
-            delta  = Dist - dist;
+            Y(:)     = yOld(:) + s;
+            dist     = pdist2(Y,Y) + eye(N);
+            dinv     = 1./dist;
+            delta    = Dist - dist;
             newError = sum(sum((delta.^2).*Dinv));
             if newError < Error
                 break;

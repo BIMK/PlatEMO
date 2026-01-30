@@ -1,7 +1,7 @@
 function [SubPopulation,SubDec,SubMask,Rank] = InitRank(SubPopulation,SubDec,SubMask,Problem)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -17,7 +17,7 @@ function [SubPopulation,SubDec,SubMask,Rank] = InitRank(SubPopulation,SubDec,Sub
     for j = 1 : size(SubPopulation,2)
         [~,FrontNo{j},CrowdDis{j}] = EnSelection(SubPopulation{j},SubPopulationCount(j));
         [FrontNo{j},I1] = sort(FrontNo{j});
-        CrowdDis{j} = CrowdDis{j}(I1);
+        CrowdDis{j}     = CrowdDis{j}(I1);
 
         SubDec{j} = SubDec{j}(I1,:);
 
@@ -55,6 +55,6 @@ function [SubPopulation,SubDec,SubMask,Rank] = InitRank(SubPopulation,SubDec,Sub
         end
     end
     for i = 1 : size(SubPopulation,2)
-        Rank{i} = 1:SubPopulationCount(i);
+        Rank{i} = 1 : SubPopulationCount(i);
     end
 end

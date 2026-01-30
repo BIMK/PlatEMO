@@ -1,13 +1,13 @@
 classdef LDSAF < ALGORITHM
-% <2024> <multi> <real/integer> <large/none> <expensive>
+% <2025> <multi> <real/integer> <large/none> <expensive>
 % Low-dimensional surrogate aggregation function
 
 %------------------------------- Reference --------------------------------
 % H. Gu, H. Wang, C. He, B. Yuan, and Y. Jin. Large-scale multiobjective
 % evolutionary algorithm guided by low-dimensional surrogates of
-% scalarization functions. Evolutionary Computation, 2024.
+% scalarization functions. Evolutionary Computation, 2025, 33(3): 309-334.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

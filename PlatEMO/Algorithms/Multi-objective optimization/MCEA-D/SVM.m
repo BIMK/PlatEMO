@@ -2,7 +2,7 @@ classdef SVM
 % Definition of SVM model and fuctions used in MCEA/D
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -28,12 +28,12 @@ classdef SVM
             if nargin == 1
                 obj(1, Problem.N) = SVM;
                 for i = 1 : length(obj)
-                    obj(i).index        = i;
-                    obj(i).Problem      = Problem;
-                    obj(i).C            = 1.0;
-                    obj(i).gamma        = 1.0;
-                    obj(i).x            = [];
-                    obj(i).label        = [];
+                    obj(i).index   = i;
+                    obj(i).Problem = Problem;
+                    obj(i).C       = 1.0;
+                    obj(i).gamma   = 1.0;
+                    obj(i).x       = [];
+                    obj(i).label   = [];
                     obj(i).mdl;
                 end
             end
@@ -52,7 +52,7 @@ classdef SVM
             C_i = [];
             for i = 1 : length(B_i)
                 % Calculate scalarization funcion values
-                g_data            = max(abs(A(indices).objs - repmat(Z, length(indices), 1)) .* W(B_i(i), :), [], 2);
+                g_data = max(abs(A(indices).objs - repmat(Z, length(indices), 1)) .* W(B_i(i), :), [], 2);
                 
                 % Get the set of current best solution avoiding duplicative selection
                 [~, sorted_index] = sort(g_data);
@@ -60,7 +60,7 @@ classdef SVM
                     if ~ismember(sorted_index(j), C_i)
                         C_i = [C_i, sorted_index(j)];
                         obj.label(sorted_index(j), 1) = 1;
-                        break
+                        break;
                     end
                 end
             end
@@ -70,8 +70,8 @@ classdef SVM
             for i = 1 : length(obj.label)
                 uniformed_xdata(i, :) = obj.UniformInput(obj.x(i, :));
             end
-            sigma           = sqrt(1 / (2 * obj.gamma));
-            obj.mdl         = fitcsvm(uniformed_xdata, obj.label, 'BoxConstraint', obj.C, 'KernelScale', sigma, 'KernelFunction', 'rbf');
+            sigma   = sqrt(1 / (2 * obj.gamma));
+            obj.mdl = fitcsvm(uniformed_xdata, obj.label, 'BoxConstraint', obj.C, 'KernelScale', sigma, 'KernelFunction', 'rbf');
         end
 
         %% Predict the class of input and get the decision score function value

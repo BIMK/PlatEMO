@@ -1,7 +1,7 @@
 function [OffDec,OffMask] = OperatorMax(Problem,winpop,windec,winmask,winrank,SubPopulation,SubDec,SubMask,Rank,Fitness,thetamid,REAL)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -35,9 +35,8 @@ function [OffDec,OffMask] = OperatorMax(Problem,winpop,windec,winmask,winrank,Su
             OffMask(i,Site) = ~OffMask(i,Site);
         else
             index1 = find(OffMask(i,:));
-            index0 = find(~OffMask(i,:));
-            maxN = floor(size(index1,2) - thetamid);
-            index = index1(TSmin(-Fitness(index1),maxN));
+            maxN   = floor(size(index1,2) - thetamid);
+            index  = index1(TSmin(-Fitness(index1),maxN));
             OffMask(i,index) = 0;
         end
     end

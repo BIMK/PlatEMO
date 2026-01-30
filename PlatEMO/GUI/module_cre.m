@@ -2,7 +2,7 @@ classdef module_cre < handle
 %module_cre - Creation module.
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -89,7 +89,7 @@ classdef module_cre < handle
             GUI.APP(2,[5 6],uilabel(obj.app.grid(4),'Text','Parallelization','Tooltip','Perform the training with multiple CPUs'));
             obj.app.checkD     = GUI.APP(2,7,uicheckbox(obj.app.grid(4),'Text','','Tooltip','Perform the training with multiple CPUs','Enable',~isempty(ver('parallel'))));
             GUI.APP(3,1,uilabel(obj.app.grid(4),'Text','File path','Tooltip','The population will be automatically loaded from file before training and saved to file after each iteration'));
-            obj.app.editD(4)   = GUI.APP(3,[3 7],uieditfield(obj.app.grid(4),'Value',fullfile(cd,'Algorithms','Blocks','myAlgorithm.mat'),'Tooltip','The population will be automatically loaded from file before training and saved to file after each iteration'));
+            obj.app.editD(4)   = GUI.APP(3,[3 7],uieditfield(obj.app.grid(4),'Value',fullfile(cd,'Algorithms','NeuroEA','myAlgorithm.mat'),'Tooltip','The population will be automatically loaded from file before training and saved to file after each iteration'));
             obj.app.buttonD(1) = GUI.APP(3,2,uibutton(obj.app.grid(4),'Text','...','BackgroundColor','w','ButtonpushedFcn',{@obj.cb_filepath,obj.app.editD(4)},'Tooltip','The population will be automatically loaded from file before training and saved to file after each iteration'));
             obj.app.axesD      = GUI.APP(4,[1 7],uiaxes(obj.app.grid(4),'BackgroundColor','w','Box','on','FontName','Times New Roman','FontSize',11));
             axtoolbar(obj.app.axesD);
@@ -120,7 +120,7 @@ classdef module_cre < handle
             
             % Read block list
             obj.blockList = {};
-            Folders = split(genpath(fullfile(fileparts(mfilename('fullpath')),'..','Algorithms','Blocks')),pathsep);
+            Folders = split(genpath(fullfile(fileparts(mfilename('fullpath')),'..','Algorithms','NeuroEA')),pathsep);
             for i = 1 : length(Folders) - 1
                 Files = what(Folders{i});
                 Files = Files.m;

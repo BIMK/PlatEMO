@@ -2,7 +2,7 @@ function Population = Associate(Population,W,S)
 % Allocation of solutions to subproblems
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -15,7 +15,7 @@ function Population = Associate(Population,W,S)
     %% Allocation of solutions to subproblems
     % Transformation
     [~,transformation] = max(1-pdist2(Population.objs,W,'cosine'),[],2);
-    partition = zeros(S,K);
+    partition          = zeros(S,K);
     % Allocation
     for i = 1 : K
         current = find(transformation==i);
@@ -26,11 +26,11 @@ function Population = Associate(Population,W,S)
             % Delete solutions from the current subproblem by non-dominated
             % sorting and crowding distance
             [FrontNo,MaxFNo] = NDSort(Population(current).objs,S);
-            Last = find(FrontNo==MaxFNo);
+            Last     = find(FrontNo==MaxFNo);
             CrowdDis = CrowdingDistance(Population(current(Last)).objs);
             [~,rank] = sort(CrowdDis);
             FrontNo(Last(rank(1:sum(FrontNo<=MaxFNo)-S))) = inf;
-            current = current(FrontNo<=MaxFNo);
+            current  = current(FrontNo<=MaxFNo);
         end
         partition(:,i) = current;
     end

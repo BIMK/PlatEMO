@@ -8,7 +8,7 @@ classdef MOEGS < ALGORITHM
 % evolutionary gradient search for multi-objective optimization.
 % Proceedings of the IEEE Congress on Evolutionary Computation, 2008.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
@@ -37,8 +37,8 @@ classdef MOEGS < ALGORITHM
                     if any(parent.con>0)   
                          gk = sum((Offspring.cons-parent.con),2);
                     elseif size(Offspring.objs-parent.obj,2) == 2 
-                        w = rand(r,1);
-                        w = [w,1-w];
+                        w  = rand(r,1);
+                        w  = [w,1-w];
                         gk = sum(w.*(Offspring.objs-parent.obj),2);  
                     elseif size(Offspring.objs-parent.obj,2) == 3
                         w  = rand(r,1);

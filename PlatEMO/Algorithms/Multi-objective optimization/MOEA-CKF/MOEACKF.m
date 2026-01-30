@@ -8,7 +8,7 @@ classdef MOEACKF < ALGORITHM
 % Transactions on Systems, Man, and Cybernetics: Systems, 2024, 54(11):
 % 6989-7001.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -22,8 +22,8 @@ classdef MOEACKF < ALGORITHM
         function main(Algorithm,Problem)
             %% Population initialization
             REAL = ~strcmp(Problem.encoding,'binary');
-            [Dec,Mask,Population,Fitness]=PriorAnalysis_initialization(Problem,REAL);
-            [Population,Dec,Mask] = EnvironmentalSelection(Population,Dec,Mask,Problem.N,0,0);
+            [Dec,Mask,Population,Fitness] = PriorAnalysis_initialization(Problem,REAL);
+            [Population,Dec,Mask]         = EnvironmentalSelection(Population,Dec,Mask,Problem.N,0,0);
             rho   = 0.5;
             GROUP = [];     % In order to prevent outliers in Kmeans algorithm
            

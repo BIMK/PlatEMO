@@ -9,7 +9,7 @@ classdef SACCEAMII < ALGORITHM
 % grouping as decomposition strategy. Proceedings of the IEEE Congress on
 % Evolutionary Computation, 2019: 689-696.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -64,15 +64,15 @@ classdef SACCEAMII < ALGORITHM
             while Algorithm.NotTerminated(Population)
                 for i = 1 : K
                     tGlobalIndi = GlobalIndi;
-                    select = Groups == i;
-                    Decs   = database{i}.decs;
-                    Objs   = database{i}.objs;
+                    select    = Groups == i;
+                    Decs      = database{i}.decs;
+                    Objs      = database{i}.objs;
                     [model,~] = rbf_build(Decs(:,select),Objs);
                     PopSize   = 10*sum(select);
                     ProposedPoint       = GAOptimize(model,PopSize,Decs(:,select),BU(select),BD(select));
                     tGlobalIndi(select) = ProposedPoint;
-                    newPropose    = Problem.Evaluation(tGlobalIndi);
-                    database{i}   = [database{i},newPropose];
+                    newPropose  = Problem.Evaluation(tGlobalIndi);
+                    database{i} = [database{i},newPropose];
                     if newPropose.objs < CandiObj
                         decs = newPropose.decs;
                         GlobalCandi(select) = decs(select);

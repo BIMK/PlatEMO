@@ -2,7 +2,7 @@ function Offspring = BinaryCrossover(Parent1,Parent2)
 % Unbalanced binary crossover
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -16,8 +16,8 @@ function Offspring = BinaryCrossover(Parent1,Parent2)
         MOne = mean(Offspring(i,diff));
         r    = min(min(0.5,2*MOne),2*(1-MOne));
         rate = zeros(1,length(diff));
-        rate(Offspring(i,diff))  = r/2/MOne;
-        rate(~Offspring(i,diff)) = r/2/(1-MOne);
+        rate(Offspring(i,diff))     = r/2/MOne;
+        rate(~Offspring(i,diff))    = r/2/(1-MOne);
         exchange                    = rand(1,length(diff)) < rate;
         Offspring(i,diff(exchange)) = ~Offspring(i,diff(exchange));
     end

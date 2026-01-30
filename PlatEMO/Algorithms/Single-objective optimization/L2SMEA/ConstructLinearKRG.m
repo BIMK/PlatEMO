@@ -1,7 +1,7 @@
 function subproblemList = ConstructLinearKRG(refPoints,Archive,nLinear)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -41,13 +41,13 @@ function subproblemList = ConstructLinearKRG(refPoints,Archive,nLinear)
         
         %% Associate points to current linear space
         % Calculate the disance between start point and candidate points
-        dist    = pdist2(Archive(:,1:D),startPoint);
+        dist = pdist2(Archive(:,1:D),startPoint);
         % Get direction vector
         vector1 = repmat(subproblem.direct,arcN,1);
         % Get vector <point,startPoint>
         vector2 = Archive(:,1:D) - repmat(startPoint,arcN,1);
         % Calculate cos<vector1,vector2>
-        MVL  = sum(vector2.^2,2);
+        MVL = sum(vector2.^2,2);
         MVL(MVL==0) = inf;
         cosV = sum(vector1.*vector2,2)./sqrt(MVL);
 

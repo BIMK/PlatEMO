@@ -8,7 +8,7 @@ classdef PRDH < ALGORITHM
 % handling. IEEE Transactions on Evolutionary Computation, 2024, 28(4):
 % 846-860.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -35,7 +35,7 @@ classdef PRDH < ALGORITHM
 end
 
 function Population = InitializePopulation(Problem)
-    T = min(Problem.D, Problem.N * 3);
+    T   = min(Problem.D, Problem.N * 3);
     Pop = zeros(Problem.N, Problem.D);
     for i = 1 : Problem.N
         k = randperm(T, 1);

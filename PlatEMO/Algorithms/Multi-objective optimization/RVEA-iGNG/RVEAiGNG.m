@@ -9,7 +9,7 @@ classdef RVEAiGNG < ALGORITHM
 % for many-objective optimization of irregular problems. IEEE Transactions
 % on Cybernetics, 2022, 52(5): 2698-2711.
 %--------------------------------------------------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -22,25 +22,25 @@ classdef RVEAiGNG < ALGORITHM
     methods
         function main(Algorithm,Problem)
             %% Parameter setting
-            params.N = Problem.N;
-            params.MaxIt = 50;
-            params.L = 50;
+            params.N         = Problem.N;
+            params.MaxIt     = 50;
+            params.L         = 50;
             params.epsilon_b = 0.2;
             params.epsilon_n = 0.006;
-            params.alpha = 0.5;
-            params.delta = 0.995;
-            params.T = 50;
-            
-            %% Parameter setting
-            alpha = Algorithm.ParameterSet(2);
+            params.alpha     = 0.5;
+            params.delta     = 0.995;
+            params.T         = 50;
+
+            alpha         = Algorithm.ParameterSet(2);
             [V,Problem.N] = UniformPoint(Problem.N,Problem.M);
             Population    = Problem.Initialization();
-            net = InitilizeGrowingGasNet(V,Population,params);
-            Archive = UpdateArchive(Population,[],Problem.N);
-            scale = ones(1,Problem.M);
-            zmin = min(Population.objs,[],1);
-            genFlag = [];
+            net           = InitilizeGrowingGasNet(V,Population,params);
+            Archive       = UpdateArchive(Population,[],Problem.N);
+            scale         = ones(1,Problem.M);
+            zmin          = min(Population.objs,[],1);
+            genFlag       = [];
 
+            %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = randi(length(Population),1,Problem.N);
                 Offspring  = OperatorGA(Problem,Population(MatingPool));

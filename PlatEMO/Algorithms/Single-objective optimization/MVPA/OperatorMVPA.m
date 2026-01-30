@@ -7,7 +7,7 @@ function Players_NEW = OperatorMVPA(Problem,Players,MVP,TEAMS,OBJS_TEAM,Franchis
 %       Players_NEW = OperatorMVPA(Problem,Players,MVP,TEAMS,OBJS_TEAM,FranchisePlayer,npt,c1,c2)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -29,7 +29,10 @@ function Players_NEW = OperatorMVPA(Problem,Players,MVP,TEAMS,OBJS_TEAM,Franchis
         % Selecting the first team
         TEAMi = nonzeros(TEAMS(i,:));
         % Selecting the second team
-        j = randi(TeamsSize); while j==i, j=randi(TeamsSize); end
+        j = randi(TeamsSize);
+        while j == i
+            j = randi(TeamsSize);
+        end
         % Competition phase
         % Update of players skills of TEAMi
         PlayersDec(TEAMi,:) = PlayersDec(TEAMi,:)+...

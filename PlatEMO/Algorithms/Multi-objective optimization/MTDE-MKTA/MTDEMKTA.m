@@ -1,13 +1,13 @@
 classdef MTDEMKTA < ALGORITHM
-% <2024> <multi> <real/integer/label/binary/permutation> <constrained/none> <multitask>
+% <2025> <multi> <real/integer/label/binary/permutation> <constrained/none> <multitask>
 % Multitasking differential evolution with multiple knowledge types and transfer adaptation
 
 %------------------------------- Reference --------------------------------
 % Y. Li and W. Gong. Multiobjective multitask optimization with multiple
 % knowledge types and transfer adaptation. IEEE Transactions on
-% Evolutionary Computation, 2024.
+% Evolutionary Computation, 2025, 29(1): 205-216.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -26,7 +26,7 @@ classdef MTDEMKTA < ALGORITHM
             %% Population initialization
             for t = 1:ProbT
                 SubPopulation{t} = [];
-                for i = 1:ProbN
+                for i = 1 : ProbN
                     Dec = [rand(1, max(Problem.SubD)),t];
                     F   = 0.2 + rand();
                     CR  = rand();

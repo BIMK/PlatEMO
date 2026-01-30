@@ -2,7 +2,7 @@ function [Population,Fitness] = Second_Stage_EnvironmentalSelection(Population,N
 % The environmental selection of SPEA2
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -13,9 +13,7 @@ function [Population,Fitness] = Second_Stage_EnvironmentalSelection(Population,N
 % This function is written by Kangjia Qiao
 
     %% Calculate the fitness of each solution
-    if isOrigin==1
-    %     con = Population.cons;
-    %     con(find(con<=0)) = 0;
+    if isOrigin == 1
         Fitness = CalFitness(Population.objs,Population.cons);
     else
         Fitness = CalFitness(Population.objs);
@@ -36,7 +34,7 @@ function [Population,Fitness] = Second_Stage_EnvironmentalSelection(Population,N
     Fitness    = Fitness(Next);
     % Sort the population
     [Fitness,rank] = sort(Fitness);
-    Population = Population(rank);
+    Population     = Population(rank);
 end
 
 function Del = Truncation(PopObj,K)

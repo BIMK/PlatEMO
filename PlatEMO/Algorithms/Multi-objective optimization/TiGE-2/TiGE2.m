@@ -7,7 +7,7 @@ classdef TiGE2 < ALGORITHM
 % framework for constrained many-objective optimization. IEEE Transactions
 % on Systems Man and Cybernetics Systems, 2020, 50(8): 3086-3099.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -38,15 +38,15 @@ classdef TiGE2 < ALGORITHM
                 [fpr,fcd]  = Estimation(Offspring.objs,1/Problem.N^(1/Problem.M));
                 fcv = Calculate_fcv(Offspring); 
                 OffObj_1   = [fpr,fcd]; 
-                [fm,~] = NDSort(OffObj_1,Problem.N);
-                OffObj = [fm' + Epsilon * fcv,fcv];
+                [fm,~]     = NDSort(OffObj_1,Problem.N);
+                OffObj     = [fm' + Epsilon * fcv,fcv];
                 [Population,fitness] = EnvironmentalSelection([Population,Offspring],PopObj,OffObj,Problem.N);
-                [fpr,fcd] = Estimation(Population.objs,1/Problem.N^(1/Problem.M));
-                fcv = Calculate_fcv(Population);
-                PopObj_1 = [fpr,fcd]; 
-                [fm,~]   = NDSort(PopObj_1,Problem.N);
-                PopObj   = [fm' + Epsilon * fcv,fcv];
-                Epsilon  = row * Epsilon;
+                [fpr,fcd]  = Estimation(Population.objs,1/Problem.N^(1/Problem.M));
+                fcv        = Calculate_fcv(Population);
+                PopObj_1   = [fpr,fcd]; 
+                [fm,~]     = NDSort(PopObj_1,Problem.N);
+                PopObj     = [fm' + Epsilon * fcv,fcv];
+                Epsilon    = row * Epsilon;
             end
         end
     end

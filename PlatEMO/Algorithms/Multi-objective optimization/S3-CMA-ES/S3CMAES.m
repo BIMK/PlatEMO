@@ -9,7 +9,7 @@ classdef S3CMAES < ALGORITHM
 % evolution strategy with scalable small subpopulations. Information
 % Sciences, 2020, 509: 457-469.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -41,8 +41,8 @@ classdef S3CMAES < ALGORITHM
 
             BigPopulation = cell(1,popN);	% initialize the big population to contain all the population
             % the diversity-related variables of all the solutions in a sub-population are the same
-            for i = 1: popN
-                tempDecs = zeros(popSize,Problem.D);
+            for i = 1 : popN
+                tempDecs         = zeros(popSize,Problem.D);
                 tempDecs(:, PV)  = repmat(V(i, :),popSize,1);
                 DVPositionM      = Problem.lower(DV) + (Problem.upper(DV)-Problem.lower(DV)).*rand(1, length(DV));
                 tempDecs(:, DV)  = repmat(DVPositionM,popSize,1);
@@ -74,7 +74,7 @@ classdef S3CMAES < ALGORITHM
                     tempDecs        = zeros(popSize,Problem.D);	% record the new population
                     tempDecs(:, PV) = PVDecs;                   % repmat(V(p, :), popSize, 1);
 
-                    for g = 1:  length(Groups) % evolute each group of convergence-related variables for a sub-population
+                    for g = 1 : length(Groups) % evolute each group of convergence-related variables for a sub-population
                         dim_index = Groups{g};
                         % employ the CMA-ES
                         [CMAParaMPopu(p,g),pop,BestVal,BestIndividual] = Operator(Problem,CMAParaMPopu(p,g),bestmem,dim_index);
@@ -97,7 +97,7 @@ classdef S3CMAES < ALGORITHM
                     firstTag = false;	% The first stage has been over
 
                     % evolute the diversity-related variables
-                    for repPV = 1: 200  % 200 denotes the repeat times for diversity-related variables
+                    for repPV = 1 : 200  % 200 denotes the repeat times for diversity-related variables
                         CR      = 0.2;
                         F       = 0.5;
                         ExiDecs = Archive.decs;
@@ -134,7 +134,7 @@ classdef S3CMAES < ALGORITHM
                 % Obtain the output solutions
                 if Problem.FE >= Problem.maxFE
                     Decs = zeros(length(BigPopulation),Problem.D);
-                    for bp = 1: length(BigPopulation)
+                    for bp = 1 : length(BigPopulation)
                         DecPop      = BigPopulation{bp};
                         Decs(bp, :) = DecPop(1,:);
                     end

@@ -1,7 +1,7 @@
 function [Parent, Non0_index]= DimJud0(Parent,Problem)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -12,7 +12,7 @@ function [Parent, Non0_index]= DimJud0(Parent,Problem)
 % This function is written by Xiangyu Wang (email: xiangyu.wang@uni-bielefeld.de)
 
     %% feature extraction
-    [~,N2] =  size(Parent);
+    [~,N2] = size(Parent);
     % density
     density = mean(Parent~=0,1);
     % calculate the statistics
@@ -40,7 +40,7 @@ function [Parent, Non0_index]= DimJud0(Parent,Problem)
     [~,a] = sort(C_point(:,1));
     Is0_index1 = C_indx == a(1);
     Is0_index2 = C_indx == a(2);
-    Is0_index = (Is0_index1 + Is0_index2) == 1;
+    Is0_index  = (Is0_index1 + Is0_index2) == 1;
     Non0_index = 1-Is0_index;
     % setting 0
     Parent(:, Is0_index) = 0;

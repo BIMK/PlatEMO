@@ -2,7 +2,7 @@ function Offspring = BinaryMutation(Offspring)
 % Unbalanced binary mutation
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -16,8 +16,8 @@ function Offspring = BinaryMutation(Offspring)
     rate1 = repmat(r./2./MOne,1,D);
     rate0 = repmat(r./2./(1-MOne),1,D);
     rate  = zeros(N,D);
-    rate(Offspring)  = rate1(Offspring);
-    rate(~Offspring) = rate0(~Offspring);
+    rate(Offspring)     = rate1(Offspring);
+    rate(~Offspring)    = rate0(~Offspring);
     exchange            = rand(N,D) < rate;
     Offspring(exchange) = ~Offspring(exchange);
 end

@@ -2,7 +2,7 @@ function CA = UpdateCA(CA,New,MaxSize)
 % Update CA
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -31,8 +31,8 @@ function CA = UpdateCA(CA,New,MaxSize)
     %% Delete part of the solutions by their fitnesses
     Choose = 1 : N;
     while length(Choose) > MaxSize
-        [~,x] = min(F(Choose));
-        F = F + exp(-I(Choose(x),:)/C(Choose(x))/0.05);
+        [~,x]     = min(F(Choose));
+        F         = F + exp(-I(Choose(x),:)/C(Choose(x))/0.05);
         Choose(x) = [];
     end
     CA = CA(Choose);

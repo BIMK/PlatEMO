@@ -2,7 +2,7 @@ function p= Shape_Estimate(Population,N)
 % Estimate the shape of PF
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -33,8 +33,8 @@ function p= Shape_Estimate(Population,N)
         Q3   = temp(max(fix(N*0.75),1));
         Max  = Q3+k*(Q3-Q1);
         Gp(Gp>Max) = []; % Gp is denoised using box plot
-        Vp(i) = std(Gp./max(Gp));
+        Vp(i)      = std(Gp./max(Gp));
     end
     [~,index] = min(Vp);
-    p = CP(index);
+    p         = CP(index);
 end

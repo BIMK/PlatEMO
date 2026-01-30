@@ -2,7 +2,7 @@ function Population = EnvironmentalSelection(Population,R,N)
 % The environmental selection of RPEA
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -20,9 +20,9 @@ function Population = EnvironmentalSelection(Population,R,N)
         if isempty(RemainR)
             RemainR = 1 : size(R,1);
         end
-        [temp,imin] = min(Distance(RemainP,RemainR),[],1);
-        [~,jmin]    = min(temp);
-        imin        = imin(jmin);
+        [temp,imin]   = min(Distance(RemainP,RemainR),[],1);
+        [~,jmin]      = min(temp);
+        imin          = imin(jmin);
         RemainP(imin) = [];
         RemainR(jmin) = [];
     end

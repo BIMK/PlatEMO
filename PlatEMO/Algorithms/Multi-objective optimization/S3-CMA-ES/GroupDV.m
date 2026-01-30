@@ -1,7 +1,7 @@
 function group = GroupDV(Problem,DV,PV,nPerGroup)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -81,7 +81,6 @@ function group = GroupDV(Problem,DV,PV,nPerGroup)
 
        muM       = eps/2;
        gamma     = @(n)((n.*muM)./(1-n.*muM));
-       errlb     = gamma(2)*Fmax_inf;
        errub     = gamma(dim^0.5)*Fmax;
        I2        = lambda >= errub;
        theta(I2) = 1;

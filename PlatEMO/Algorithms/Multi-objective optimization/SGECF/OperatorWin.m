@@ -1,7 +1,7 @@
 function [OffDec,OffMask] = OperatorWin(Problem,SubPopulation,SubDec,SubMask,Rank,Fitness,REAL)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -10,11 +10,12 @@ function [OffDec,OffMask] = OperatorWin(Problem,SubPopulation,SubDec,SubMask,Ran
 %--------------------------------------------------------------------------
 
     MatingPool = TournamentSelection(2,2*size(SubPopulation,2),Rank);
-    ParentDec = SubDec(MatingPool,:);
+    ParentDec  = SubDec(MatingPool,:);
     ParentMask = SubMask(MatingPool,:);
+    
     %% Parameter setting
     [N,D]       = size(ParentDec);
-    randN = randperm(N);
+    randN       = randperm(N);
     Parent1Dec  = ParentDec(randN(1:N/2),:);
     Parent2Dec  = ParentDec(randN(N/2+1:end),:);
     Parent1Mask = ParentMask(randN(1:N/2),:);

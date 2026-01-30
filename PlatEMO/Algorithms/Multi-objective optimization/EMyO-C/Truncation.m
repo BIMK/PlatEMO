@@ -2,7 +2,7 @@ function [index] = Truncation(F, Z, remaining)
 % Truncation of EMyO/C, based on clustering
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -12,37 +12,37 @@ function [index] = Truncation(F, Z, remaining)
 
 % This function is written by Roman Denysiuk
 
-% get size
-[n, m] = size(F);
-
-% calculate distances to reference point
-Dist = sqrt(sum((F - repmat(Z, n, 1)).^2, 2));
-
-% project to the hyperplane
-F = (F - repmat(Z, n, 1))./repmat(sum(F - repmat(Z, n, 1), 2), 1, m);
-
-% compute clusters
-[C] = Clustering(F, remaining);
-
-% find number of individuals in each cluster
-numInd = zeros(numel(C), 1);
-for i = 1 : numel(C)
-    numInd(i) = numel(C{i});
-end
-
-index = zeros(remaining,1);
-for i = 1 : remaining
+    % get size
+    [n, m] = size(F);
     
-    % get ind from cluster
-    tempInd = C{i};
+    % calculate distances to reference point
+    Dist = sqrt(sum((F - repmat(Z, n, 1)).^2, 2));
     
-    % get individuals' distances to reference point 
-    tempDist = Dist(tempInd);
+    % project to the hyperplane
+    F = (F - repmat(Z, n, 1))./repmat(sum(F - repmat(Z, n, 1), 2), 1, m);
     
-    % find cluster's representative
-    [~, idx] = min(tempDist);
-    index(i) = tempInd(idx(1));
+    % compute clusters
+    [C] = Clustering(F, remaining);
     
-end
+    % find number of individuals in each cluster
+    numInd = zeros(numel(C), 1);
+    for i = 1 : numel(C)
+        numInd(i) = numel(C{i});
+    end
+    
+    index = zeros(remaining,1);
+    for i = 1 : remaining
+        
+        % get ind from cluster
+        tempInd = C{i};
+        
+        % get individuals' distances to reference point 
+        tempDist = Dist(tempInd);
+        
+        % find cluster's representative
+        [~, idx] = min(tempDist);
+        index(i) = tempInd(idx(1));
+        
+    end
 
 end

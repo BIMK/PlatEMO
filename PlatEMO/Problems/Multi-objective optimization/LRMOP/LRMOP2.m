@@ -1,5 +1,5 @@
 classdef LRMOP2 < PROBLEM
-% <2024> <multi/many> <real> <large/none> <robust> <sparse/none>
+% <2025> <multi/many> <real> <large/none> <robust> <sparse/none>
 % Sparse robust multi-objective optimization problem
 % theta --- 0.1 --- Sparsity of the Pareto set
 % H     ---  50 --- Number of disturbances
@@ -7,9 +7,10 @@ classdef LRMOP2 < PROBLEM
 %------------------------------- Reference --------------------------------
 % S. Shao, Y. Tian, L. Zhang, K. C. Tan, and X. Zhang. An evolutionary
 % algorithm for solving large-scale robust multi-objective optimization
-% problems. IEEE Transactions on Evolutionary Computation, 2024.
+% problems. IEEE Transactions on Evolutionary Computation, 2025, 29(6):
+% 2476-2490.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -1,7 +1,7 @@
 function W = Training(Problem, W, LDis, Samples, num_nodes, eta0, sigma0, winning_weights)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -13,12 +13,12 @@ function W = Training(Problem, W, LDis, Samples, num_nodes, eta0, sigma0, winnin
 
     %% Memory-based reinitialization
 	if any(winning_weights) == true                    
-        %% If there is a node that did not win
+        % If there is a node that did not win
         if sum(winning_weights) < num_nodes   
-            %% Select indexes based on diversity criteria
+            % Select indexes based on diversity criteria
             [FrontNo,~] = NDSort(W(winning_weights,Problem.D+1:end),sum(winning_weights));
 
-			%% Calculate the crowding distance of each solution
+			% Calculate the crowding distance of each solution
             CrowdDis   = CrowdingDistance(W(winning_weights,Problem.D+1:end),FrontNo); 
             [~,p]      = sort(CrowdDis);
             factor     = 1 : length(CrowdDis);
@@ -38,10 +38,10 @@ function W = Training(Problem, W, LDis, Samples, num_nodes, eta0, sigma0, winnin
 	Samples = [Samples.decs,Samples.objs];
     Samples(:,1:Problem.D) = rescale(Samples(:,1:Problem.D),'InputMin',Problem.lower,'InputMax',Problem.upper);
 
-    % reset parameters
+    %% reset parameters
 	win_count_set = zeros(1,num_nodes);
 
-    % SOM surrogate model training
+    %% SOM surrogate model training
 	for epoch = 1 : 50
 		% shuffle the samples
 		randpos = randperm(size(Samples,1));        

@@ -2,7 +2,7 @@ classdef EnvRL < handle
 % Determine environemental selection via reinforcement learning
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -11,10 +11,10 @@ classdef EnvRL < handle
 %--------------------------------------------------------------------------
 
     properties
-        name;   % environemtal selection name
+        name;       % environemtal selection name
         problem;
-        NumEnv; % candidate environmental selection number
-        NumState; % state number
+        NumEnv;     % candidate environmental selection number
+        NumState;   % state number
         Envs;
         ppo;
 
@@ -29,7 +29,6 @@ classdef EnvRL < handle
         Center;
         CenterI;
         CenterII;
-        %CenterIII; %empty set
         CenterIV;
 
         NRI;
@@ -39,17 +38,17 @@ classdef EnvRL < handle
 
     methods
         function obj = EnvRL(problem, Archive, MaxGen)
-            obj.name    = 'EnvRL';
-            obj.problem = problem;
-            obj.NumEnv  = 3;
-            obj.NumState= 10;
-            obj.Envs    = {EnvCDP(), EnvEpsilon(), EnvMOP()};
-            obj.ppo     = PPO(obj.NumEnv, obj.NumState, MaxGen);
-            obj.ArcSize = length(Archive);
-            obj.Zmin    = min(Archive.objs, [], 1);
-            obj.Zmax    = max(Archive.objs, [], 1);
-            obj.Cmax    = max(max(Archive.cons, 0), [], 1);
-            obj.Cmax    = max(obj.Cmax, 1e-6);
+            obj.name     = 'EnvRL';
+            obj.problem  = problem;
+            obj.NumEnv   = 3;
+            obj.NumState = 10;
+            obj.Envs     = {EnvCDP(), EnvEpsilon(), EnvMOP()};
+            obj.ppo      = PPO(obj.NumEnv, obj.NumState, MaxGen);
+            obj.ArcSize  = length(Archive);
+            obj.Zmin     = min(Archive.objs, [], 1);
+            obj.Zmax     = max(Archive.objs, [], 1);
+            obj.Cmax     = max(max(Archive.cons, 0), [], 1);
+            obj.Cmax     = max(obj.Cmax, 1e-6);
 
             % Normalization
             SConsN1 = max(Archive.cons, 0) ./ repmat(obj.Cmax, obj.ArcSize, 1);
@@ -281,12 +280,12 @@ classdef EnvRL < handle
             [Sobjs, Scons] = obj.Norm(SObjsN1, SConsN1);
 
             % Reverse solutions in II Quadrant
-            IndexII = Sobjs < 0 & Scons > 0;
-            Sobjs(IndexII) = -Sobjs(IndexII);
+            IndexII         = Sobjs < 0 & Scons > 0;
+            Sobjs(IndexII)  = -Sobjs(IndexII);
             [FrontNo, MaxF] = NDSort([Sobjs, Scons], obj.ArcSize);
-            Del = find(FrontNo==MaxF);
-            IndexTotal = 1:1:obj.ArcSize;
-            PopIndex = RandDel(FrontNo, IndexTotal, obj.ArcSize/2);
+            Del             = find(FrontNo==MaxF);
+            IndexTotal      = 1 : obj.ArcSize;
+            PopIndex        = RandDel(FrontNo, IndexTotal, obj.ArcSize/2);
             if isscalar(Del)
                 PopIndex(end-numel(Del)+1:end) = Del;
             end
@@ -297,21 +296,21 @@ classdef EnvRL < handle
 end
 
 function PopIndex = RandDel(FrontNo, Index, N)
-    Total  = length(FrontNo);
-    Num = Total - N;
+    Total = length(FrontNo);
+    Num   = Total - N;
     if Total >= 2*Num
         Candiates  = randperm(Total, Num*2);
         Candiates1 = Candiates(1:Num);
         Candiates2 = Candiates(Num+1:end);
-        Select = [Candiates1(FrontNo(Candiates1)<=FrontNo(Candiates2)),Candiates2(FrontNo(Candiates2)<FrontNo(Candiates1))];
-        PopIndex = Index(Select);
+        Select     = [Candiates1(FrontNo(Candiates1)<=FrontNo(Candiates2)),Candiates2(FrontNo(Candiates2)<FrontNo(Candiates1))];
+        PopIndex   = Index(Select);
         Index(Candiates) = [];
-        PopIndex = [PopIndex;Index];
+        PopIndex   = [PopIndex;Index];
     else
         Candiates  = randperm(Total, N*2);
         Candiates1 = Candiates(1:N);
         Candiates2 = Candiates(N+1:end);
-        Select = [Candiates1(FrontNo(Candiates1)<=FrontNo(Candiates2)),Candiates2(FrontNo(Candiates2)<FrontNo(Candiates1))];
-        PopIndex = Index(Select);
+        Select     = [Candiates1(FrontNo(Candiates1)<=FrontNo(Candiates2)),Candiates2(FrontNo(Candiates2)<FrontNo(Candiates1))];
+        PopIndex   = Index(Select);
     end
 end

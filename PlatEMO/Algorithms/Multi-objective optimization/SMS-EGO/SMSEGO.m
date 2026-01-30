@@ -9,7 +9,7 @@ classdef SMSEGO < ALGORITHM
 % S-metric selection. Proceedings of the International Conference on
 % Parallel Problem Solving from Nature, 2008, 784-794.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -65,7 +65,7 @@ classdef SMSEGO < ALGORITHM
                     [~,index] = sort(fit);
                     PopDec 	  = PopDec(index(1:floor(N/2)),:);
                     fit       = fit(index(1:floor(N/2)),:);
-                    w = w + floor(N/2);
+                    w         = w + floor(N/2);
                 end
                 [~,INDEX]  = min(fit);
                 PopNew     = Problem.Evaluation(PopDec(INDEX,:));

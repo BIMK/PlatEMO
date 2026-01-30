@@ -6,7 +6,7 @@ classdef ACO < ALGORITHM
 % M. Dorigo and G. D. Caro. Ant colony optimization: a new meta-heuristic.
 % Proceedings of the IEEE Congress on Evolutionary Computation, 1999.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -18,17 +18,17 @@ classdef ACO < ALGORITHM
         function main(Algorithm,Problem)
             %% Generate random population
             Population = Problem.Initialization();
-            Tau = ones(Problem.D);
+            Tau        = ones(Problem.D);
             
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 % Move the ants
-                PopDec = zeros(Problem.N,Problem.D);
+                PopDec      = zeros(Problem.N,Problem.D);
                 PopDec(:,1) = randi(Problem.D,Problem.N,1);
                 for i = 1 : Problem.N
                     for j = 1 : Problem.D-1
                         Remain = setdiff(1:Problem.D,PopDec(i,1:j));
-                        next = RouletteWheelSelection(1,Problem.C(PopDec(i,j),Remain)./Tau(PopDec(i,j),Remain));
+                        next   = RouletteWheelSelection(1,Problem.C(PopDec(i,j),Remain)./Tau(PopDec(i,j),Remain));
                         PopDec(i,j+1) = Remain(next);
                     end
                 end

@@ -2,7 +2,7 @@ classdef PPO < handle
 % Proximal policy optimization
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -121,17 +121,17 @@ classdef PPO < handle
                 end                
             end
             %% record path
-            obj.StateBuffer(:, obj.StepStamp)  = State;
-            obj.DoneBuffer(obj.StepStamp)     = 0;
+            obj.StateBuffer(:, obj.StepStamp)   = State;
+            obj.DoneBuffer(obj.StepStamp)       = 0;
             [action, logProb, value] = obj.GetActionValue(State);
             obj.ActionBuffer(:, obj.StepStamp)  = action;
             obj.LogProbBuffer(:, obj.StepStamp) = logProb;
-            obj.ValueBuffer(obj.StepStamp)     = value;
+            obj.ValueBuffer(obj.StepStamp)      = value;
 
             %% Update generation recorder
             obj.StepStamp = obj.StepStamp + 1;
-            obj.Gen = obj.Gen + 1;
-            obj.reward = [obj.reward,Reward];
+            obj.Gen       = obj.Gen + 1;
+            obj.reward    = [obj.reward,Reward];
         end
 
         function [action, logProb, value] = GetActionValue(obj, State)
@@ -157,7 +157,7 @@ classdef PPO < handle
         function obj = UpdateModel(obj, StateNext, DoneNext)
             %% Boostrap value
             valueNext = obj.GetValue(StateNext);
-            returns = zeros(size(obj.RewardBuffer));
+            returns   = zeros(size(obj.RewardBuffer));
             for i = obj.NumSteps : -1 : 1
                 if i == obj.NumSteps
                     nextNonTerminal = 1 - DoneNext;
@@ -175,23 +175,21 @@ classdef PPO < handle
             acLearnRate = frac * obj.ActorLearnRate;
             crLearnRate = frac * obj.CriticLearnRate;
             for epoch = 1 : 1 : obj.UpdateEpochs
-                randIndex  = randperm(obj.BatchSize);
-                velActor   = [];
-                velCritic  = [];
+                randIndex = randperm(obj.BatchSize);
+                velActor  = [];
+                velCritic = [];
                 for start = 1 : obj.MiniBatchSize : obj.BatchSize
-                    trainIndex = randIndex(start:1:start-1+obj.MiniBatchSize);
+                    trainIndex      = randIndex(start:1:start-1+obj.MiniBatchSize);
                     trainAdvantages = advantages(trainIndex);
                     trainAdvantages = (trainAdvantages-mean(trainAdvantages)) ./ (std(trainAdvantages)+1e-8);
 
-                    %% Calculate gradient and loss
+                    % Calculate gradient and loss
                     [acloss, acGradients] = dlfeval(@obj.ActorLoss,obj.ActorNetwork, obj.StateBuffer(:, trainIndex), trainAdvantages, obj.LogProbBuffer(:,trainIndex));
-                    %% Optimize actor using the SGDM optimizer
+                    % Optimize actor using the SGDM optimizer
                     [obj.ActorNetwork, velActor] = sgdmupdate(obj.ActorNetwork, acGradients, velActor, acLearnRate, obj.Momentum);
-
-                    %% Calculate gradient and loss
-                    % crGradients = dlgradient(vLoss*obj.VFCoef,obj.CriticNetwork.Learnables);
+                    % Calculate gradient and loss
                     [crloss, crGradients] = dlfeval(@obj.CriticLoss,obj.CriticNetwork, obj.StateBuffer(:, trainIndex), obj.ValueBuffer(trainIndex), returns(trainIndex));
-                    %% Optimize critic using the SGDM optimizer
+                    % Optimize critic using the SGDM optimizer
                     [obj.CriticNetwork, velCritic] = sgdmupdate(obj.CriticNetwork, crGradients, velCritic, crLearnRate, obj.Momentum);
                 end
             end
@@ -205,7 +203,7 @@ classdef PPO < handle
             vLossClipped   = (vClipped-Returns).^2;
             vLossMax       = max(vLossClipped,vLossUnclipped);
             crLoss         = 0.5*mean(vLossMax);
-            crLoss = crLoss*obj.VFCoef;
+            crLoss         = crLoss*obj.VFCoef;
 
             % Calculate gradient
             crGradients = dlgradient(crLoss,CriticNet.Learnables);
@@ -218,12 +216,12 @@ classdef PPO < handle
             newLogProb = sum(newLogProb,1);
             entropy    = obj.CalEntropy(logits);
             entropy    = sum(entropy,1);
-            logRatio = newLogProb - LogProb;
-            ratio    = exp(logRatio);
+            logRatio   = newLogProb - LogProb;
+            ratio      = exp(logRatio);
 
-            acLoss1 = -Advantages .* ratio;
-            acLoss2 = -Advantages .* min(max(ratio, 1-obj.ClipCoef),1+obj.ClipCoef);
-            acLoss  = mean(max(acLoss1, acLoss2)) - obj.EntCoef*mean(entropy);
+            acLoss1     = -Advantages .* ratio;
+            acLoss2     = -Advantages .* min(max(ratio, 1-obj.ClipCoef),1+obj.ClipCoef);
+            acLoss      = mean(max(acLoss1, acLoss2)) - obj.EntCoef*mean(entropy);
             acGradients = dlgradient(acLoss, ActorNet.Learnables);
         end
 
@@ -232,12 +230,12 @@ classdef PPO < handle
         end
 
         function entropy = CalEntropy(obj, logits)
-            probs = exp(logits) ./ sum(exp(logits), 1);
-            entropy  = - sum(probs.*log(probs),1);
+            probs   = exp(logits) ./ sum(exp(logits), 1);
+            entropy = - sum(probs.*log(probs),1);
         end
 
        function action = SampleAction(obj, logits)
-           probs = extractdata(exp(logits) ./ sum(exp(logits), 1))';
+           probs      = extractdata(exp(logits) ./ sum(exp(logits), 1))';
            probs(end) = 1-sum(probs(1:end-1));
            % sample
            action  = randsrc(1,1,[1:obj.NumAction;probs]);

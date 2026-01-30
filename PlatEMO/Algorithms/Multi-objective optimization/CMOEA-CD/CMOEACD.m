@@ -8,9 +8,9 @@ classdef CMOEACD < ALGORITHM
 % Z. Liu, F. Han, Q. Ling, H. Han, and J. Jiang. Constraint-Pareto
 % dominance and diversity enhancement strategy based evolutionary algorithm
 % for solving constrained multiobjective optimization problems. IEEE
-% Transactions on Evolutionary Computation, 2025.
+% Transactions on Evolutionary Computation, 2025, 29(6): 2771-2784.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

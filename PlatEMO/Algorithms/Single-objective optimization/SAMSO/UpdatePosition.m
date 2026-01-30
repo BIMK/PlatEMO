@@ -2,7 +2,7 @@ function [Population,Position,Velocity,Gbest,Pbest] = UpdatePosition(Problem,Pop
 % Update Position for L and S swarm in SAMSO
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -20,7 +20,7 @@ function [Population,Position,Velocity,Gbest,Pbest] = UpdatePosition(Problem,Pop
     tPosition = Position;
     % S swarm
     if N1 ~= 0
-        IDX = 1:N1;
+        IDX = 1 : N1;
 
         % Standard PSO
         label = rand(N1,1) < Pr;
@@ -53,7 +53,7 @@ function [Population,Position,Velocity,Gbest,Pbest] = UpdatePosition(Problem,Pop
     learner1 = 1:1:N2;
     learner2 = randperm(N2);
     while any(learner1==learner2)
-        replace  = learner1==learner2;
+        replace = learner1==learner2;
         learner2(replace) = randperm(N2,sum(replace));
     end
     delta  = Position(N1+learner1,1:D) - Position(N1+learner2,1:D);
@@ -67,7 +67,7 @@ function [Population,Position,Velocity,Gbest,Pbest] = UpdatePosition(Problem,Pop
     dist       = min(pdist2(tPosition(:,1:D),Population.decs),[],2);
     evaluation = find(dist > eta & srgtObj < Position(:,D+1));
     if ~isempty(evaluation)
-        news   = Problem.Evaluation(tPosition(evaluation,1:D));
+        news = Problem.Evaluation(tPosition(evaluation,1:D));
         tPosition(evaluation,D+1) = news.objs;
         % Update particle
         update = tPosition(evaluation,D+1) < Position(evaluation,D+1);
@@ -82,8 +82,8 @@ function [Population,Position,Velocity,Gbest,Pbest] = UpdatePosition(Problem,Pop
         Population = [Population,news];
     else
         % No new position is exactly evaluated
-        [~,best] = min(tPosition(:,D+1));
-        new      = Problem.Evaluation(tPosition(best,1:D));
+        [~,best]   = min(tPosition(:,D+1));
+        new        = Problem.Evaluation(tPosition(best,1:D));
         Population = [Population,new];
         if new.objs < Position(best,D+1)
             Position(best,1:D) = tPosition(best,1:D);

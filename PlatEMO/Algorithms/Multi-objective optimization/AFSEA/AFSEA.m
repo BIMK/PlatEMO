@@ -1,13 +1,13 @@
 classdef AFSEA < ALGORITHM
-% <2024> <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
+% <2025> <multi> <real/integer/binary> <large/none> <constrained/none> <sparse>
 % Adjoint feature-selection-based evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
 % P. Zhang, H. Yin, Y. Tian, and X. Zhang. An adjoint feature-selection-
 % based evolutionary algorithm for sparse large-scale multiobjective
-% optimization. Complex & Intelligent Systems, 2024.
+% optimization. Complex & Intelligent Systems, 2025, 11: 127.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

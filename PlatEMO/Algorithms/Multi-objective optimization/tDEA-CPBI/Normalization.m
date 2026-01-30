@@ -2,7 +2,7 @@ function [PopObj,PopCon,z,znad,z_c,znad_c] = Normalization(PopObj,PopCon,z,znad,
 % Normalize of theta-DEA
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -16,7 +16,7 @@ function [PopObj,PopCon,z,znad,z_c,znad_c] = Normalization(PopObj,PopCon,z,znad,
 
     %% Update the ideal point
     z_c = min(z_c,min(PopCon,[],1));
-    z = min(z,min(PopObj,[],1));
+    z   = min(z,min(PopObj,[],1));
     
     %% Update the nadir point
     znad_c = max(znad_c,max(PopCon,[],1));

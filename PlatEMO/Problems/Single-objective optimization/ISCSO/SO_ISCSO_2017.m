@@ -6,7 +6,7 @@ classdef SO_ISCSO_2017 < PROBLEM
 % S. K. Azad and S. K. Azad. A standard benchmarking suite for structural
 % optimization algorithms: ISCSO 2016-2022. Structures, 2023, 58, 105409.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

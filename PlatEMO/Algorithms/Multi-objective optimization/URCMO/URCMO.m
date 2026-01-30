@@ -8,7 +8,7 @@ classdef URCMO < ALGORITHM
 % constrained multi-objective optimization. IEEE Transactions on
 % Cybernetics, 2023, 53(6): 3873-3886.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -28,11 +28,13 @@ classdef URCMO < ALGORITHM
             Fitness{1} = CalFitness(Population{1}.objs,Population{1}.cons);
             Fitness{2} = CalFitness(Population{2}.objs);
             
-            %% parameter settings
+            %% Parameter settings
             cnt       = 0;
             p         = 0.1;
             first_FES = 10000;
             beita     = 0.9;
+
+            %% Optimization
             while Algorithm.NotTerminated(Population{1})
                 cnt = cnt + 1;
                 %% learning phase
@@ -71,9 +73,8 @@ classdef URCMO < ALGORITHM
                         
                     end
                     
-                    %% Evolving phase
+                % Evolving phase
                 else
-                    
                     valOffspring{1}(1:Problem.N/2)             = GA_TournamentSelection(Problem, Population{1}, Fitness{1}, Problem.N/2);
                     valOffspring{1}(1+Problem.N/2 : Problem.N) = DE_current_to_rand_1(Problem, Population{1}, Problem.N/2);
                     

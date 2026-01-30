@@ -1,8 +1,8 @@
 classdef DQN < handle
-% DQN network with gamma being zero
+% DQN network with proper Target Network and TD-learning target: r + gamma*maxQ(s',a')
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -12,13 +12,15 @@ classdef DQN < handle
 
     properties
         % Constants
-        MEMORY_CAPACITY = 512
-        BATCH_SIZE = 8
-        LR = 0.01             	% learning rate
-        EPSILON = 0.9         	% greedy policy
-        TARGET_REPLACE_ITER = 7	% target update frequency
+        MEMORY_CAPACITY     = 512
+        BATCH_SIZE          = 16
+        LR                  = 0.01          % learning rate
+        EPSILON             = 0.9         	% greedy policy
+        GAMMA               = 0.95          % discount factor for future rewards
+        TARGET_REPLACE_ITER = 7             % target update frequency
         % Variables
-        net
+        net                     % Q-network (main network)
+        net_target              % Target Q-network (for stable training)
         n_states              	% state number
         n_actions            	% action number
         learn_step_counter      % for target updating
@@ -45,6 +47,12 @@ classdef DQN < handle
                       fullyConnectedLayer(outDim, 'Name', 'fc_6')];
             lgraph  = layerGraph(layers);
             obj.net = dlnetwork(lgraph);
+            
+            % Create target network with same architecture
+            obj.net_target = dlnetwork(lgraph);
+            % Initialize target network with same weights as main network
+            obj.net_target.Learnables = obj.net.Learnables;
+            
             % Init params
             obj.n_states           = inDim;
             obj.n_actions          = outDim;
@@ -60,8 +68,7 @@ classdef DQN < handle
         % Forward propagation, and choose action according to probability
             q_eval_raw = extractdata(predict(obj.net, dlarray(scurr, 'CB')));
             [~, idxs]  = sort(q_eval_raw);
-            idxs       = obj.n_actions + 1 - idxs;
-            % Idxs
+            idxs       = obj.n_actions + 1 - idxs;           
             prob = obj.idxs2prob(idxs);
             prob = prob ./ sum(prob);
             a    = zeros(1, size(scurr, 2));
@@ -91,25 +98,37 @@ classdef DQN < handle
         function learn(obj)
         % Train one step
             obj.learn_step_counter = obj.learn_step_counter + 1;
+            
+            % Update target network periodically
+            if mod(obj.learn_step_counter, obj.TARGET_REPLACE_ITER) == 0
+                obj.net_target.Learnables = obj.net.Learnables;
+            end
+            
             idxs        = randi(min(obj.MEMORY_CAPACITY, obj.memory_counter), 1, obj.BATCH_SIZE);
             batch_scurr = obj.memory_scurr(:, idxs);
             batch_a     = obj.memory_a(:, idxs);
             batch_r     = obj.memory_r(:, idxs);
-            [loss,grad] = dlfeval(@obj.modelLoss, obj.net, batch_scurr, batch_a, batch_r);
+            batch_snext = obj.memory_snext(:, idxs);
+            
+            [~,grad] = dlfeval(@obj.modelLoss, obj.net, obj.net_target, batch_scurr, batch_a, batch_r, batch_snext);
             obj.net     = dlupdate(@obj.sgdFunction, obj.net, grad);
         end
-        function [loss, grad] = modelLoss(obj, net, scurr, a, r)
-        % Calculate loss and gradient
+        function [loss, grad] = modelLoss(obj, net, net_target, scurr, a, r, snext)
+        % Calculate loss and gradient using TD-learning
+            % Current Q-values from main network
             q_eval_raw = predict(net, dlarray(scurr, 'CB'));
             q_eval     = dlarray(zeros(1, obj.BATCH_SIZE), 'CB');
             for i = 1 : obj.BATCH_SIZE
                 q_eval(i) = q_eval_raw(a(i), i);
-            end
-            loss = mse(q_eval, dlarray(r, 'CB'));
+            end                      
+            q_next_raw = extractdata(predict(net_target, dlarray(snext, 'CB')));
+            q_next_max = max(q_next_raw, [], 1);  % max over actions
+            q_target   = r + obj.GAMMA * q_next_max;  % TD target                       
+            loss = mse(q_eval, dlarray(q_target, 'CB'));
             grad = dlgradient(loss, net.Learnables);
         end
         function upd_param = sgdFunction(obj, param, grad)
-        % Update parameters via SGD
+        % Update parameters
             upd_param = param - obj.LR .* grad;
         end
     end

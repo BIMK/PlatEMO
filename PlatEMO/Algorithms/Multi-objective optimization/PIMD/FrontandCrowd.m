@@ -1,7 +1,7 @@
 function [FrontNo,CrowdDis] = FrontandCrowd(objs,p)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -23,23 +23,23 @@ function [FrontNo,CrowdDis] = FrontandCrowd(objs,p)
     
     CrowdDis = zeros(1,nInd);
     
-    [m,~] = size(front1);
+    [m,~]      = size(front1);
     F1CrowdDis = zeros(1,m) ;
     F1CrowdDis(Extreme) = Inf;
-    selected = false(1,m);
-    selected(Extreme) = true;
-    nn = vecnorm(front1, p, 2);
-    distances = pdist2(front1, front1, 'minkowski', p);
-    distances = distances ./ repmat(nn, 1, m);
-    neighbors = 2;
-    remaining = 1:m;
-    remaining = remaining(~selected);
+    selected   = false(1,m);
+    selected(Extreme)   = true;
+    nn         = vecnorm(front1, p, 2);
+    distances  = pdist2(front1, front1, 'minkowski', p);
+    distances  = distances ./ repmat(nn, 1, m);
+    neighbors  = 2;
+    remaining  = 1 : m;
+    remaining  = remaining(~selected);
     for i = 1 : m-sum(selected)-1
-        maxim = mink(distances(remaining, selected),neighbors,2);
+        maxim      = mink(distances(remaining, selected),neighbors,2);
         [d, index] = max(sum(maxim,2));
-        best = remaining(index);
-        remaining(index) = [];
-        selected(best)=true;
+        best       = remaining(index);
+        remaining(index)   = [];
+        selected(best)     = true;
         F1CrowdDis(1,best) = d;
     end
     CrowdDis(FrontNo==1) = F1CrowdDis;
@@ -51,4 +51,3 @@ function [FrontNo,CrowdDis] = FrontandCrowd(objs,p)
         CrowdDis(FrontNo==i) = 1./pdist2(front, IdealPoint, 'minkowski', p);
     end
 end
-

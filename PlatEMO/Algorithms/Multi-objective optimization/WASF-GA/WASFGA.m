@@ -9,7 +9,7 @@ classdef WASFGA < ALGORITHM
 % scalarizing function genetic algorithm. Journal of Global Optimization,
 % 2015, 62: 101-129.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -35,7 +35,7 @@ classdef WASFGA < ALGORITHM
             end
             FrontNo  = WASFGASort(Vectors, Population.objs, inf, Point,ro);
             CrowdDis = CrowdingDistance(Population.objs,FrontNo);
-            [v,~] = size(Vectors);
+            [v,~]    = size(Vectors);
             if v >= n
                 nsort = 2;
             else

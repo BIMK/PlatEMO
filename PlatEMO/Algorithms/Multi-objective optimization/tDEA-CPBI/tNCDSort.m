@@ -2,7 +2,7 @@ function tFrontNo = tNCDSort(PopObj,PopCon,W,fr)
 % theta-non-constrained-dominated sorting
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -15,8 +15,9 @@ function tFrontNo = tNCDSort(PopObj,PopCon,W,fr)
     N  = size(PopObj,1);
     NW = size(W,1);
     
-    [z,znad] = deal(min(PopObj),max(PopObj));
+    [z,znad]     = deal(min(PopObj),max(PopObj));
     [z_c,znad_c] = deal(min(PopCon),max(PopCon));
+
     %% Normalization
     [PopObj,PopCon] = Normalization(PopObj,PopCon,z,znad,z_c,znad_c);
 
@@ -29,6 +30,7 @@ function tFrontNo = tNCDSort(PopObj,PopCon,W,fr)
     
     %% Clustering
     [~,class] = min(d2,[],2);
+    
     %% Sort
     theta = zeros(1,NW) + 5;
     theta(sum(W>1e-4,2)==1) = 1e6;

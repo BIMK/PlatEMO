@@ -2,7 +2,7 @@ function objhat = estimatePF(obj,validator,estimator)
 % Estimate the Pareto front
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -14,8 +14,8 @@ function objhat = estimatePF(obj,validator,estimator)
 
     %% X as input, Y as output
     obj = unique(normalize(obj,'range'),'rows');
-    Y = vecnorm(obj,1,2);
-    X = obj./Y;
+    Y   = vecnorm(obj,1,2);
+    X   = obj./Y;
 
     %% Generate the input W
     W = UniformPoint(2e4,width(obj),'ILD');

@@ -2,7 +2,7 @@ function Offspring = OperatorDE_rand_1(Problem,Parent1,Parent2,Parent3)
 % The operator of DE
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -22,17 +22,17 @@ function Offspring = OperatorDE_rand_1(Problem,Parent1,Parent2,Parent3)
     else
         evaluated = false;
     end
-    [N,D]   = size(Parent1);
+    [N,D] = size(Parent1);
 
-    Fm = [0.6,0.8,1.0];
-    CRm=[0.1,0.2,1.0];
+    Fm    = [0.6,0.8,1.0];
+    CRm   = [0.1,0.2,1.0];
     index = randi([1,length(Fm)],N,1);
-    F = Fm(index);
-    F = F';
-    F = F(:, ones(1,D));
+    F     = Fm(index);
+    F     = F';
+    F     = F(:, ones(1,D));
     index = randi([1,length(CRm)],N,1);
-    CR = CRm(index);
-    CR = CR';
+    CR    = CRm(index);
+    CR    = CR';
 
     %% Differental evolution
     Site = rand(N,D) < CR;

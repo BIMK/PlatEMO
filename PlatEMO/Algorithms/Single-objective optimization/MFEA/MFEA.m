@@ -8,7 +8,7 @@ classdef MFEA < ALGORITHM
 % evolutionary multitasking. IEEE Transactions on Evolutionary Computation,
 % 2016, 20(3): 343-357.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -30,7 +30,7 @@ classdef MFEA < ALGORITHM
                 SubParent    = SelectHalf(SubPopulation);
                 SubOffspring = Child(Problem,SubParent,rmp);
                 for i = 1 : length(Problem.SubD)
-                    SubPopulation{i}= [SubPopulation{i},SubOffspring{i}];
+                    SubPopulation{i} = [SubPopulation{i},SubOffspring{i}];
                 end
                 SubPopulation = SelectPop(SubPopulation,Problem);
             end

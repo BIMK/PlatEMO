@@ -2,7 +2,7 @@ function Offspring = ARSBX(Problem,Parent,Parameter)
 % Rotation based simulated binary crossover and polynomial mutation
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -17,12 +17,12 @@ function Offspring = ARSBX(Problem,Parent,Parameter)
     %% Simulated binary crossover
     ParentDec = Parent.decs;
     [N,D]     = size(ParentDec);  
-    Norigin = round(N*pc/2)*2;
-    Neig = round(N*(1-pc)/2)*2;
+    Norigin   = round(N*pc/2)*2;
+    Neig      = round(N*(1-pc)/2)*2;
     ParentDecOrigin = ParentDec(1:Norigin,:);
-    ParentDecEig = ParentDec(end-Neig+1:end,:);
-    Parent1Dec = ParentDecOrigin(1:Norigin/2,:);
-    Parent2Dec = ParentDecOrigin(Norigin/2+1:end,:);
+    ParentDecEig    = ParentDec(end-Neig+1:end,:);
+    Parent1Dec      = ParentDecOrigin(1:Norigin/2,:);
+    Parent2Dec      = ParentDecOrigin(Norigin/2+1:end,:);
     beta = zeros(Norigin/2,D);
     mu   = rand(Norigin/2,D);
     beta(mu<=0.5) = (2*mu(mu<=0.5)).^(1/(disC+1));
@@ -35,10 +35,10 @@ function Offspring = ARSBX(Problem,Parent,Parameter)
     Flag = ones(Norigin,1);
 
     NormalParentDec = ParentDecEig - Centroid;
-    [~,D] = size(B);
-    ParentDecEig = NormalParentDec*B;
-    Parent1Dec = ParentDecEig(1:Neig/2,:);
-    Parent2Dec = ParentDecEig(Neig/2+1:end,:);
+    [~,D]           = size(B);
+    ParentDecEig    = NormalParentDec*B;
+    Parent1Dec      = ParentDecEig(1:Neig/2,:);
+    Parent2Dec      = ParentDecEig(Neig/2+1:end,:);
     beta = zeros(Neig/2,D);
     mu   = rand(Neig/2,D);
     beta(mu<=0.5) = (2*mu(mu<=0.5)).^(1/(disC+1));
@@ -49,8 +49,8 @@ function Offspring = ARSBX(Problem,Parent,Parameter)
     OffspringRDec = [(Parent1Dec+Parent2Dec)/2+beta.*(Parent1Dec-Parent2Dec)/2
                     (Parent1Dec+Parent2Dec)/2-beta.*(Parent1Dec-Parent2Dec)/2];
     OffspringRDec = OffspringRDec*B' + Centroid;
-    Flag = [Flag;2*ones(Neig,1)];       
-    OffspringDec = [OffspringDec;OffspringRDec];
+    Flag          = [Flag;2*ones(Neig,1)];       
+    OffspringDec  = [OffspringDec;OffspringRDec];
     
     %% Polynomial mutation
     [~,D] = size(ParentDec);

@@ -2,7 +2,7 @@ function PartitionSet = CalPartitionPoint(Population, FrontNo, Pset)
 % Calculate partion point between two largest nondominated soltuions
     
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -31,18 +31,18 @@ function PartitionSet = CalPartitionPoint(Population, FrontNo, Pset)
         CrowdAngle(r, c) = 0;
     else
         [r, c] = find(CrowdAngle == max(max(CrowdAngle)));
-        MidP1 = (PopObj(r,:) + PopObj(c,:))./2;
+        MidP1  = (PopObj(r,:) + PopObj(c,:))./2;
         CrowdAngle(r, c) = 0;
         [r, c] = find(CrowdAngle == max(max(CrowdAngle)));
         MidP2 = (PopObj(r,:) + PopObj(c,:))./2;
-        CrowdAngle(r, c) = 0;
-        PartitionSet = [MidP1; MidP2];
+        CrowdAngle(r,c) = 0;
+        PartitionSet    = [MidP1; MidP2];
     end
     if ismember(PartitionSet(1,:), Pset, 'rows') 
         if max(max(CrowdAngle))~=0
             [r, c] = find(CrowdAngle == max(max(CrowdAngle)));
             PartitionSet(1,:) = (PopObj(r,:) + PopObj(c,:))./2;
-            CrowdAngle(r, c) = 0;
+            CrowdAngle(r, c)  = 0;
         else
             PartitionSet(1,:) = PartitionSet(2,:);
         end

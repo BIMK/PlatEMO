@@ -7,7 +7,7 @@ classdef MMEAWI < ALGORITHM
 % evolutionary algorithm for multimodal multiobjective optimization. IEEE
 % Transactions on Evolutionary Computation, 2021, 25(6): 1064-1078.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -21,28 +21,28 @@ classdef MMEAWI < ALGORITHM
         function main(Algorithm, Problem)
             %% Parameter setting
             kappa = 0.05;
-            t_gen=ceil(Problem.maxFE*0.4);
+            t_gen = ceil(Problem.maxFE*0.4);
 
             %% Generate random population
-            Population = Problem.Initialization();
+            Population        = Problem.Initialization();
             [Population,pfit] = EnvironmentalSelection(Population,Problem.N,kappa,1);
-            [Arcd,afit] = UpdateArc(Population,Population,Problem.N);
+            [Arcd,afit]       = UpdateArc(Population,Population,Problem.N);
 
             %% Optimization
             while Algorithm.NotTerminated(Arcd)
                 if Problem.FE>=t_gen && rand>0.5 % Stage 2
-                    [~,p1]=min(afit);
-                    joint=[Arcd Population];
-                    dist=pdist2(Arcd(p1).decs,joint.decs);
-                    [~,so]=sort(dist,'ascend');
-                    MatingPool= so(randperm(round(Problem.N/5),round(Problem.N/10))+1);
-                    parents=[Arcd(p1) joint(MatingPool)];
+                    [~,p1] = min(afit);
+                    joint  = [Arcd Population];
+                    dist   = pdist2(Arcd(p1).decs,joint.decs);
+                    [~,so] = sort(dist,'ascend');
+                    MatingPool = so(randperm(round(Problem.N/5),round(Problem.N/10))+1);
+                    parents    = [Arcd(p1) joint(MatingPool)];
                     Offspring  = OperatorGA(Problem,parents);
                     [Population,pfit] = EnvironmentalSelection([Population,Offspring],Problem.N,kappa,Problem.FE/Problem.maxFE);
-                    [Arcd,afit] = UpdateArc(Arcd,Offspring,Problem.N);
+                    [Arcd,afit]       = UpdateArc(Arcd,Offspring,Problem.N);
                 else % Stage 1
-                    MatingPool = TournamentSelection(2,round(Problem.N/10),pfit);
-                    Offspring  = OperatorGA(Problem,Population(MatingPool));
+                    MatingPool  = TournamentSelection(2,round(Problem.N/10),pfit);
+                    Offspring   = OperatorGA(Problem,Population(MatingPool));
                     [Population,pfit] = EnvironmentalSelection([Population,Offspring],Problem.N,kappa,Problem.FE/Problem.maxFE);
                     [Arcd,afit] = UpdateArc(Arcd,Offspring,Problem.N);
                 end

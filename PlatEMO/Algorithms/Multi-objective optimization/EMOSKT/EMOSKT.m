@@ -1,14 +1,14 @@
 classdef EMOSKT < ALGORITHM
-% <2024> <multi> <real/binary> <large/none> <constrained/none> <sparse> <multitask>
+% <2025> <multi> <real/binary> <large/none> <constrained/none> <sparse> <multitask>
 % Evolutionary multi-objective optimization with sparsity knowledge transfer
 
 %------------------------------- Reference --------------------------------
 % C. Wu, Y. Tian, L. Zhang, X. Xiang, and X. Zhang. A sparsity knowledge
 % transfer-based evolutionary algorithm for large-scale multitasking multi-
 % objective optimization. IEEE Transactions on Evolutionary Computation,
-% 2024.
+% 2025, 29(6): 2582-2595.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -2,7 +2,7 @@ function Population = EnvironmentalSelection(Population,W,N)
 % The environmental selection of MOEA/IGD-NS
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -44,17 +44,17 @@ function Remain = LastSelection(PopObj,W,K)
         Metrics(Outliers) = METRIC - Con(Outliers);
         % Calculate the fitness of other solutions
         for p = find(Remain & ~Outliers)
-            temp = rank(1,:) == p;
-            outliers = false(1,N);
+            temp       = rank(1,:) == p;
+            outliers   = false(1,N);
             outliers(rank(2,temp)) = true;
-            outliers = outliers & Outliers;
+            outliers   = outliers & Outliers;
             Metrics(p) = METRIC - sum(dis(1,temp)) + sum(dis(2,temp)) - sum(Con(outliers));
         end
         % Delete the worst solution and update the variables
         [~,del] = min(Metrics);
-        temp = rank ~= del;
-        dis  = reshape(dis(temp),sum(Remain)-1,NW);
-        rank = reshape(rank(temp),sum(Remain)-1,NW);
+        temp    = rank ~= del;
+        dis     = reshape(dis(temp),sum(Remain)-1,NW);
+        rank    = reshape(rank(temp),sum(Remain)-1,NW);
         Remain(del) = false;
     end
 end

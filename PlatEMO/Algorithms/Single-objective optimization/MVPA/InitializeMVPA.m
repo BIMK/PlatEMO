@@ -2,7 +2,7 @@ function [MVP,TEAMS,OBJS_TEAM,FranchisePlayer,npt]=InitializeMVPA(Problem,Player
 % The extra initialization for the Most Valuable Player Algorithm
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -17,13 +17,13 @@ function [MVP,TEAMS,OBJS_TEAM,FranchisePlayer,npt]=InitializeMVPA(Problem,Player
     OBJS        = Players.objs;
 
     for i = 1 : TeamsSize
-        [~,~,nTEAM] = find(TEAMS(i,:));
-        [OBJS_TEAM(i),j] = min(OBJS(nTEAM));
+        [~,~,nTEAM]           = find(TEAMS(i,:));
+        [OBJS_TEAM(i),j]      = min(OBJS(nTEAM));
         FranchisePlayer_ID(i) = nTEAM(j);
     end
-    [~,MVP_ID] = min(OBJS);
+    [~,MVP_ID]      = min(OBJS);
     FranchisePlayer = Players(FranchisePlayer_ID);
-    MVP = Players(MVP_ID);
+    MVP             = Players(MVP_ID);
 end
 
 function [TEAMS,npt] = TeamsFormation(PlayersSize,TeamsSize)
@@ -34,8 +34,8 @@ function [TEAMS,npt] = TeamsFormation(PlayersSize,TeamsSize)
     npt = [repmat(np1,1,TeamsSize-np2) repmat(np1-1,1,np2)];
     for i = 1 : TeamsSize
         for j = 1 : npt(i)
-            a = randi(length(Players_ID));
-            TEAMS(i,j) = Players_ID(a);
+            a             = randi(length(Players_ID));
+            TEAMS(i,j)    = Players_ID(a);
             Players_ID(a) = [];
         end
         TEAMS(i,:) = sort(TEAMS(i,:));

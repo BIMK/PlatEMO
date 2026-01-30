@@ -2,7 +2,7 @@ function new_armies = BCAUpdatePop(Archive,Population,nArmies,div)
 % Update the archive
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -11,27 +11,24 @@ function new_armies = BCAUpdatePop(Archive,Population,nArmies,div)
 %--------------------------------------------------------------------------
 
     %% Find the non-dominated solutions
-    newpop=[Archive,Population];
-    ndpop=newpop(NDSort(newpop.objs,1)==1);
+    newpop = [Archive,Population];
+    ndpop  = newpop(NDSort(newpop.objs,1)==1);
     %% Grid-based retention
     if length(ndpop) > nArmies
         Del = Delete(ndpop.objs,length(ndpop)-nArmies,div);
         ndpop(Del) = [];
     end
-    if size(ndpop,2)>=nArmies
-        new_armies=ndpop(1:nArmies);
+    if size(ndpop,2) >= nArmies
+        new_armies = ndpop(1:nArmies);
     else
-%         a=[ndpop,Population];
-%         [~,loc]=unique(a.decs,"rows");
-%         new_armies=a(loc(1:nArmies));
-        replace_flag=rand(1,nArmies)<0.1;
-        replace_size=size(find(replace_flag==1),2);
-        min_size=min(size(ndpop,2),replace_size);
+        replace_flag = rand(1,nArmies)<0.1;
+        replace_size = size(find(replace_flag==1),2);
+        min_size     = min(size(ndpop,2),replace_size);
 
-        replace_index=find(replace_flag==1);
-        index_index=randperm(min_size,min_size);
-        Population(replace_index(index_index))=ndpop(1:min_size);
-        new_armies=Population;
+        replace_index = find(replace_flag==1);
+        index_index   = randperm(min_size,min_size);
+        Population(replace_index(index_index)) = ndpop(1:min_size);
+        new_armies    = Population;
     end
 end
 

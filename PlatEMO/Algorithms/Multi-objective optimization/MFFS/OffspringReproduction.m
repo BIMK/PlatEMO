@@ -1,7 +1,7 @@
 function Offspring = OffspringReproduction(Problem, Parent, Pop, Parameter)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -49,7 +49,7 @@ function Offspring = OffspringReproduction(Problem, Parent, Pop, Parameter)
         boolis = ismember(Offspring, Pop.decs, 'rows');
         normal = Offspring(boolis==0, 1:end);
         duplic = Offspring(boolis==1, 1:end);
-        for i =1:size(duplic, 1)
+        for i = 1 : size(duplic, 1)
             index1 = find( duplic(i, :));
             index2 = find(~duplic(i, :));
             if size(index1, 2) > 0

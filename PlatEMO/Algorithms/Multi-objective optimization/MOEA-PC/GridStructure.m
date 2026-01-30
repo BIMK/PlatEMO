@@ -18,7 +18,7 @@ function [G, nGrids, nDivs] = GridStructure(n, m)
 %   [G, nGrids, nDivs] = GridStructure(225,3)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -28,20 +28,20 @@ function [G, nGrids, nDivs] = GridStructure(n, m)
 
 % This function is written by Roman Denysiuk
 
-% compute number of divisions
-nDivs = ceil( power(n, 1/(m-1)) );
-
-% compute number of grids
-nGrids = power(nDivs, m-1);
-
-% initialize grids
-G = zeros(nGrids, m-1);
-
-% compute grids
-D = m-2;
-for j = 0:D
-    tmp = repmat(1:nDivs, power(nDivs, j), 1);
-    G(:,j+1) = repmat( tmp(:), power(nDivs, D-j), 1);
-end
+    % compute number of divisions
+    nDivs = ceil( power(n, 1/(m-1)) );
+    
+    % compute number of grids
+    nGrids = power(nDivs, m-1);
+    
+    % initialize grids
+    G = zeros(nGrids, m-1);
+    
+    % compute grids
+    D = m - 2;
+    for j = 0 : D
+        tmp      = repmat(1:nDivs, power(nDivs, j), 1);
+        G(:,j+1) = repmat( tmp(:), power(nDivs, D-j), 1);
+    end
 
 end

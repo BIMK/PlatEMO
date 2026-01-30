@@ -1,7 +1,7 @@
 function [return_pop,return_Fitness] = Auxiliray_task_EnvironmentalSelection(Population,N,VAR)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -15,15 +15,15 @@ function [return_pop,return_Fitness] = Auxiliray_task_EnvironmentalSelection(Pop
     input_cons(input_cons<0) = 0;
     input_cons = sum(input_cons,2);
 
-    findex = find(input_cons<=VAR);
+    findex  = find(input_cons<=VAR);
     ifindex = find(input_cons>VAR);
 
-    fPopulation = Population(findex);
+    fPopulation  = Population(findex);
     ifPopulation = Population(ifindex);
 
     if isempty(fPopulation)
         ifFitness = CalFitness(ifPopulation.objs,ifPopulation.cons); % ifPopulation.cons
-        Next2 = ifFitness < 1;
+        Next2     = ifFitness < 1;
         if sum(Next2) <= N
             [~,Rank] = sort(ifFitness);
             Next2(Rank(1:N )) = true;
@@ -37,17 +37,17 @@ function [return_pop,return_Fitness] = Auxiliray_task_EnvironmentalSelection(Pop
         ifFitness    = ifFitness(Next2);
         % Sort the population
         [ifFitness,rank] = sort(ifFitness);
-        ifPopulation = ifPopulation(rank);
+        ifPopulation     = ifPopulation(rank);
 
         fPopulation = [];
-        fFitness = [];
+        fFitness    = [];
 
     elseif length(fPopulation) <= N
-        cons = fPopulation.cons;
-        cons(cons<0)=0;
-        cons = sum(cons,2);
+        cons     = fPopulation.cons;
+        cons(cons<0) = 0;
+        cons     = sum(cons,2);
         fFitness = CalFitness([fPopulation.objs,cons]);
-        Next = fFitness < 1;
+        Next     = fFitness < 1;
 
         [~,Rank] = sort(fFitness);
         Next(Rank(1:length(fPopulation) )) = true;
@@ -56,10 +56,10 @@ function [return_pop,return_Fitness] = Auxiliray_task_EnvironmentalSelection(Pop
         fFitness    = fFitness(Next);
         % Sort the population
         [fFitness,rank] = sort(fFitness);
-        fPopulation = fPopulation(rank);
-        %
+        fPopulation     = fPopulation(rank);
+
         ifFitness = CalFitness(ifPopulation.objs,ifPopulation.cons); % ,
-        Next2 = ifFitness < 1;
+        Next2     = ifFitness < 1;
         if sum(Next2) <= N - length(fPopulation)
             [~,Rank] = sort(ifFitness);
             Next2(Rank(1:N - length(fPopulation) )) = true;
@@ -73,11 +73,11 @@ function [return_pop,return_Fitness] = Auxiliray_task_EnvironmentalSelection(Pop
         ifFitness    = ifFitness(Next2) + max(fFitness);
         % Sort the population
         [ifFitness,rank] = sort(ifFitness);
-        ifPopulation = ifPopulation(rank);
+        ifPopulation     = ifPopulation(rank);
 
     elseif length(fPopulation) > N
         cons = fPopulation.cons;
-        cons(cons<0)=0;
+        cons(cons<0) = 0;
         cons = sum(cons,2);
         fFitness = CalFitness([fPopulation.objs,cons]);
         Next = fFitness < 1;
@@ -91,16 +91,16 @@ function [return_pop,return_Fitness] = Auxiliray_task_EnvironmentalSelection(Pop
         end
 
         fPopulation = fPopulation(Next);
-        fFitness   = fFitness(Next);
+        fFitness    = fFitness(Next);
         % Sort the population
         [fFitness,rank] = sort(fFitness);
-        fPopulation = fPopulation(rank);
+        fPopulation     = fPopulation(rank);
 
         ifPopulation = [];
-        ifFitness = [];
+        ifFitness    = [];
     end
 
-    return_pop = [fPopulation,ifPopulation];
+    return_pop     = [fPopulation,ifPopulation];
     return_Fitness = [fFitness,ifFitness];
 end
 
@@ -113,9 +113,6 @@ function Del = Truncation(PopObj,K)
     Del = false(1,size(PopObj,1));
     while sum(Del) < K
         Remain   = find(~Del);
-        if isempty(Remain)
-            keyboard
-        end
         Temp     = sort(Distance(Remain,Remain),2);
         [~,Rank] = sortrows(Temp);
         Del(Remain(Rank(1))) = true;

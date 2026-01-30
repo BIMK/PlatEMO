@@ -1,7 +1,7 @@
 function [Z, Population, Archive, Sample, SVM] = initialize(Global)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -9,38 +9,37 @@ function [Z, Population, Archive, Sample, SVM] = initialize(Global)
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-global incremental_sequence stable_threshold LARGE_ARCHIVE_FLAG SVM_KERNEL SVM_KERNEL_SCALE SVM_EXIST_FLAG reserved_evaluations reference_generation_mode crowding_pick_flag lb ub reference_generation_intial_flag learning_initial_flag normalization_str status_initial_flag disable_flag hp_initial_flag;
-rng('shuffle');
-SVM_EXIST_FLAG = false; SVM_KERNEL = 'gaussian'; SVM_KERNEL_SCALE = 0.056;
-lb = zeros(1, Global.M); ub = ones(1, Global.M);
-crowding_pick_flag = false;
-learning_initial_flag = true;
-reference_generation_intial_flag = true;
-status_initial_flag = true;
-hp_initial_flag = true;
-reference_generation_mode = 'strict';
-LARGE_ARCHIVE_FLAG = false;
-reserved_evaluations = inf;
-disable_flag = false;
-SVM.a = [];
-SVM.b = [];
-SVM.g = [];
-SVM.ind = [];
-SVM.uind = [];
-SVM.X_mer = [];
-SVM.y_mer = [];
-SVM.Rs = [];
-SVM.Q = [];
-SVM.scale = 0.056; SVM.type = 5; % 5 for Gaussian!
-SVM.C = 10;
-% if Global.M > 10
-%     error('M > 10 not yet supported on PlatEMO_v2');
-% end
-problem = class(Global);
-%% hyperparameters for MaF
-% if ~regexp(problem, 'MaF')
-%     error('problems other than MaF not yet supported on PlatEMO_v2');
-% else
+    global incremental_sequence stable_threshold LARGE_ARCHIVE_FLAG SVM_KERNEL SVM_KERNEL_SCALE SVM_EXIST_FLAG reserved_evaluations reference_generation_mode crowding_pick_flag lb ub reference_generation_intial_flag learning_initial_flag normalization_str status_initial_flag disable_flag hp_initial_flag;
+    rng('shuffle');
+    SVM_EXIST_FLAG   = false;
+    SVM_KERNEL       = 'gaussian';
+    SVM_KERNEL_SCALE = 0.056;
+    lb = zeros(1, Global.M);
+    ub = ones(1, Global.M);
+    crowding_pick_flag               = false;
+    learning_initial_flag            = true;
+    reference_generation_intial_flag = true;
+    status_initial_flag              = true;
+    hp_initial_flag                  = true;
+    reference_generation_mode        = 'strict';
+    LARGE_ARCHIVE_FLAG               = false;
+    reserved_evaluations             = inf;
+    disable_flag                     = false;
+    SVM.a     = [];
+    SVM.b     = [];
+    SVM.g     = [];
+    SVM.ind   = [];
+    SVM.uind  = [];
+    SVM.X_mer = [];
+    SVM.y_mer = [];
+    SVM.Rs    = [];
+    SVM.Q     = [];
+    SVM.scale = 0.056;
+    SVM.type  = 5;
+    SVM.C     = 10;
+    problem   = class(Global);
+    
+    %% hyperparameters for MaF
     if strcmp(problem, 'MaF1')
         if norm(stable_threshold) < 1e-2
             stable_threshold = [20, 20, 15];
@@ -194,5 +193,4 @@ problem = class(Global);
     Z = generate_reference([], 0, Global, -inf, 'normal');
     reference_generation_intial_flag = true;
     Population = Global.Initialization(); Archive = Population; Sample = Population;
-% end
 end

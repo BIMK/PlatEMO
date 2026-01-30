@@ -2,7 +2,7 @@ function [Population,Groups,K] = spiltVariables(Problem,BU,BD,s)
 % Decision variable grouping with RDG2 in SACCEAMII
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -12,9 +12,9 @@ function [Population,Groups,K] = spiltVariables(Problem,BU,BD,s)
 
     %% Initialize
     D = length(BU);
-    Groups     = zeros(1,D);
-    Population = [];
-    Separable  = [];
+    Groups       = zeros(1,D);
+    Population   = [];
+    Separable    = [];
     NonSeparable = [];
     
     %% Recursive Decomposition Grouping Methods
@@ -58,7 +58,7 @@ function [Population,Groups,K] = spiltVariables(Problem,BU,BD,s)
              Groups(Separable) = K;
          else
              K = num;
-             idx = 1:1:numel(Separable);
+             idx = 1 : numel(Separable);
              for i = 1 : num-1
                  select = randperm(numel(idx),s);
                  Groups(Separable(idx(select))) = i;

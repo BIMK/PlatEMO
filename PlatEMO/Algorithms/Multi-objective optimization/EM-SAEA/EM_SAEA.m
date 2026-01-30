@@ -1,5 +1,5 @@
 classdef EM_SAEA< ALGORITHM
-% <multi/many> <real> <constrained> <expensive>
+% <2025> <multi/many> <real> <constrained> <expensive>
 % Ensemble-based surrogate model-assisted evolutionary algorithm
 % wmax   --- 20 --- Maximum number of generations before updating surrogate models
 % lc_num ---  5 --- Number of local models
@@ -9,7 +9,7 @@ classdef EM_SAEA< ALGORITHM
 % ensemble-based surrogate model for expensive constrained multiobjective
 % optimization. IEEE Transactions on Evolutionary Computation, 2025.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

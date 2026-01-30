@@ -2,7 +2,7 @@ function [Population,Fitness] = EnvironmentalSelection(Population,N,index,count,
 % Environmental selection
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -28,7 +28,7 @@ function [Population,Fitness] = EnvironmentalSelection(Population,N,index,count,
     Fitness    = Fitness(Next);
     % Sort the population
     [Fitness,rank] = sort(Fitness);
-    Population = Population(rank);
+    Population     = Population(rank);
 end
 
 function Del = Truncation(PopObj,K)

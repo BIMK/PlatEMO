@@ -1,7 +1,7 @@
 function [OffDec,OffMask] = Operator(Population,Dec,Mask,Fitness,winIndex,loseIndex1,loseIndex2,Problem,thetamid,REAL)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -10,17 +10,17 @@ function [OffDec,OffMask] = Operator(Population,Dec,Mask,Fitness,winIndex,loseIn
 %--------------------------------------------------------------------------
 
     % Divide population into three subpopulations
-    SubPopulation = {};
+    SubPopulation    = {};
     SubPopulation{1} = Population(winIndex);
     SubPopulation{2} = Population(loseIndex1);
     SubPopulation{3} = Population(loseIndex2);
 
-    SubDec = {};
+    SubDec    = {};
     SubDec{1} = Dec(winIndex,:);
     SubDec{2} = Dec(loseIndex1,:);
     SubDec{3} = Dec(loseIndex2,:);
 
-    SubMask = {};
+    SubMask    = {};
     SubMask{1} = Mask(winIndex,:);
     SubMask{2} = Mask(loseIndex1,:);
     SubMask{3} = Mask(loseIndex2,:);
@@ -32,26 +32,26 @@ function [OffDec,OffMask] = Operator(Population,Dec,Mask,Fitness,winIndex,loseIn
     if size(SubPopulation{2},2)>size(SubPopulation{3},2)&&size(SubPopulation{2},2)>floor(Problem.N/3)
         [OffDec1,OffMask1] = OperatorWin(Problem,[SubPopulation{1},SubPopulation{3}],[SubDec{1};SubDec{3}],[SubMask{1};SubMask{3}],[Rank{1},Rank{3}+max(Rank{1})],Fitness,REAL);
         [OffDec2,OffMask2] = OperatorMin(Problem,SubPopulation{1},SubDec{1},SubMask{1},Rank{1},SubPopulation{2},SubDec{2},SubMask{2},Rank{2},Fitness,thetamid,REAL);
-        OffDec3 = [];
+        OffDec3  = [];
         OffMask3 = [];
     % Generate Offspring along the direction decreasing sparsity to cosparsity
     elseif size(SubPopulation{2},2)<size(SubPopulation{3},2)&&size(SubPopulation{3},2)>floor(Problem.N/3)
         [OffDec1,OffMask1] = OperatorWin(Problem,[SubPopulation{1},SubPopulation{2}],[SubDec{1};SubDec{2}],[SubMask{1};SubMask{2}],[Rank{1},Rank{2}+max(Rank{1})],Fitness,REAL);
         [OffDec3,OffMask3] = OperatorMax(Problem,SubPopulation{1},SubDec{1},SubMask{1},Rank{1},SubPopulation{3},SubDec{3},SubMask{3},Rank{3},Fitness,thetamid,REAL);
-        OffDec2 = [];
+        OffDec2  = [];
         OffMask2 = [];
     else
         [OffDec1,OffMask1] = OperatorWin(Problem,SubPopulation{1},SubDec{1},SubMask{1},Rank{1},Fitness,REAL);
         if size(SubPopulation{2},2)>0
             [OffDec2,OffMask2] = OperatorMin(Problem,SubPopulation{1},SubDec{1},SubMask{1},Rank{1},SubPopulation{2},SubDec{2},SubMask{2},Rank{2},Fitness,thetamid,REAL);
         else
-            OffDec2 = [];
+            OffDec2  = [];
             OffMask2 = [];
         end
         if size(SubPopulation{3},2)>0
             [OffDec3,OffMask3] = OperatorMax(Problem,SubPopulation{1},SubDec{1},SubMask{1},Rank{1},SubPopulation{3},SubDec{3},SubMask{3},Rank{3},Fitness,thetamid,REAL);
         else
-            OffDec3 = [];
+            OffDec3  = [];
             OffMask3 = [];
         end
     end
@@ -61,13 +61,11 @@ end
 
 function [OffDec,OffMask] = OperatorWin(Problem,SubPopulation,SubDec,SubMask,Rank,Fitness,REAL)
     MatingPool = TournamentSelection(2,2*size(SubPopulation,2),Rank);
-    ParentDec = SubDec(MatingPool,:);
+    ParentDec  = SubDec(MatingPool,:);
     ParentMask = SubMask(MatingPool,:);
     % Parameter setting
-    [N,D]       = size(ParentDec);
+    [N,D] = size(ParentDec);
     randN = randperm(N);
-    Parent1Dec  = ParentDec(randN(1:N/2),:);
-    Parent2Dec  = ParentDec(randN(N/2+1:end),:);
     Parent1Mask = ParentMask(randN(1:N/2),:);
     Parent2Mask = ParentMask(randN(N/2+1:end),:);
     
@@ -125,8 +123,8 @@ function [OffDec,OffMask] = OperatorMin(Problem,winpop,windec,winmask,winrank,Su
         else
             index1 = find(OffMask(i,:));
             index0 = find(~OffMask(i,:));
-            minN = floor(thetamid - size(index1,2));
-            index = index0(TSmin(Fitness(index0),minN));
+            minN   = floor(thetamid - size(index1,2));
+            index  = index0(TSmin(Fitness(index0),minN));
             OffMask(i,index) = 1;
         end
     end
@@ -175,9 +173,8 @@ function [OffDec,OffMask] = OperatorMax(Problem,winpop,windec,winmask,winrank,Su
             OffMask(i,Site) = ~OffMask(i,Site);
         else
             index1 = find(OffMask(i,:));
-            index0 = find(~OffMask(i,:));
-            maxN = floor(size(index1,2) - thetamid);
-            index = index1(TSmax(-Fitness(index1),maxN));
+            maxN   = floor(size(index1,2) - thetamid);
+            index  = index1(TSmax(-Fitness(index1),maxN));
             OffMask(i,index) = 0;
         end
     end

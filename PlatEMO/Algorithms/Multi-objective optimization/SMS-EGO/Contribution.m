@@ -2,7 +2,7 @@ function fit = Contribution(nleft,PopObj,ypot)
 % Calculate the fitness of each solution
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -24,7 +24,7 @@ function fit = Contribution(nleft,PopObj,ypot)
     HVsum      = CalHV(PopObj,refPoint);
     for i = 1 : Ny
         [index(i),dindex{i}] = Dominance(ypot(i,:),Popepsilon,PopObj);
-        if index(i) ==1
+        if index(i) == 1
             if size(PopObj,2) ==2
                 NewObj   = [ypot(i,:);PopObj];
                 [~,rank] = sortrows(NewObj);
@@ -42,7 +42,7 @@ function fit = Contribution(nleft,PopObj,ypot)
             else
                 fit(i) = HVsum - CalHV([PopObj;ypot(i,:)],refPoint);
             end
-        elseif index(i)==2
+        elseif index(i) == 2
             domiNo = dindex{i};
             fit(i) = 0;
             for j = 1 : length(domiNo)
@@ -63,13 +63,13 @@ function [index,dindex] = Dominance(point,Popepsilon,PopObj)
     oobj = repmat(point,size(Popepsilon,1),1);
     domi = any(oobj<=PopObj,2) - any(oobj>=PopObj,2);
     dominated = any(domi==-1);
-    if true(dominated)
+    if any(dominated)
         index  = 2;
         dindex = find(domi==-1);
     else
         domi = any(oobj<=Popepsilon,2) - any(oobj>=Popepsilon,2);
         dominated = any(domi==-1);
-        if true(dominated)
+        if any(dominated)
             index  = 3;
             dindex = find(domi==-1);
         else

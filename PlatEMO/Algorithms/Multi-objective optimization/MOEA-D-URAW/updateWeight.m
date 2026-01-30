@@ -2,7 +2,7 @@ function [Population,W] = updateWeight(Population,W,Z,EP,nus)
 % Delete overcrowded subproblems and add new subproblems
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -20,8 +20,8 @@ function [Population,W] = updateWeight(Population,W,Z,EP,nus)
     Dis(logical(eye(length(Dis)))) = inf;
     Del = false(1,length(Population));
     while sum(Del) < min(nus,length(EP))
-        Remain = find(~Del);
-        subDis = sort(Dis(Remain,Remain),2);
+        Remain    = find(~Del);
+        subDis    = sort(Dis(Remain,Remain),2);
         [~,worst] = min(prod(subDis(:,1:min(M,length(Remain))),2));
         Del(Remain(worst)) = true;
     end
@@ -36,9 +36,9 @@ function [Population,W] = updateWeight(Population,W,Z,EP,nus)
     Dis = pdist2(Combine.objs,Combine.objs);
     Dis(logical(eye(length(Dis)))) = inf;
     while sum(Selected) < min(N,length(Selected))
-        subDis = sort(Dis(~Selected,Selected),2);
+        subDis   = sort(Dis(~Selected,Selected),2);
         [~,best] = max(prod(subDis(:,1:min(M,size(subDis,2))),2));
-        Remain = find(~Selected);
+        Remain   = find(~Selected);
         Selected(Remain(best)) = true;
     end
     % Add new subproblems

@@ -1,5 +1,5 @@
 classdef PEAplus < ALGORITHM
-% <2024> <multi/many> <real/integer> <expensive> <constrained>
+% <2025> <multi/many> <real/integer> <expensive> <constrained>
 % Pareto-based Kriging-assisted constrained multiobjective evolutionary algorithm plus
 % wmax --- 20 --- Generations of evolutionary search
 % mu   ---  5 --- Number of selected candidates
@@ -7,9 +7,9 @@ classdef PEAplus < ALGORITHM
 %------------------------------- Reference --------------------------------
 % Z. Zhang, Y. Wang, G. Sun, and K. Tang. Constrained probabilistic Pareto 
 % dominance for expensive constrained multiobjective optimization problems. 
-% IEEE Transactions on Evolutionary Computation, 2024.
+% IEEE Transactions on Evolutionary Computation, 2025, 29(4): 1138-1152.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

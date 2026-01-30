@@ -2,7 +2,7 @@ function [Population, Fitness] = EnvironmentalSelection2(Population,N,epsn)
 % The environmental selection of MSCEA
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -18,8 +18,8 @@ function [Population, Fitness] = EnvironmentalSelection2(Population,N,epsn)
         CV         = sum(max(0,Population.cons),2);        
         Fitness    = CalFitness([Population.objs,CV]);        
     else       
-        CV         = sum(max(0,Population.cons),2);
-        Fitness    = CalFitness([CalSDE(Population.objs)',CV]);        
+        CV      = sum(max(0,Population.cons),2);
+        Fitness = CalFitness([CalSDE(Population.objs)',CV]);        
     end
     Next = Fitness < 1;
     if sum(Next) < N

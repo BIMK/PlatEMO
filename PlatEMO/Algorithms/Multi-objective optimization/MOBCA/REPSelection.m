@@ -1,9 +1,8 @@
 function REP = REPSelection(PopObj,N,div)
-% Select one of the particles in REP as the global best position for each
-% particle
+% Select one of the particles in REP as the global best position for each particle
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -20,7 +19,7 @@ function REP = REPSelection(PopObj,N,div)
     fmin = repmat(fmin,NoP,1);
     d    = repmat(d,NoP,1);
     GLoc = floor((PopObj-fmin)./d);
-    GLoc(GLoc>=div) = div - 1;
+    GLoc(GLoc>=div)   = div - 1;
     GLoc(isnan(GLoc)) = 0;
     
     %% Detect the grid of each solution belongs to

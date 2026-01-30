@@ -2,7 +2,7 @@ function [tArchive,GbestRBF] = UpdateRBF(Problem,tArchive,SwarmRBF,GbestRBF)
 % Update solutions in RBF-assisted swarm
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -19,6 +19,5 @@ function [tArchive,GbestRBF] = UpdateRBF(Problem,tArchive,SwarmRBF,GbestRBF)
     if new.objs < GbestRBF(:,D+1)
         GbestRBF = SwarmRBF(best,:);
     end
-    tArchive = [tArchive,new];
-    
+    tArchive = [tArchive,new]; 
 end

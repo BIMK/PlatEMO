@@ -1,8 +1,8 @@
-function Offspring = OperatorPCX(Parent,Lower,Upper)
+function OffDec = OperatorPCX(Parent,Lower,Upper)
 % Offspring generation based on PCX and polynomial mutation
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -15,12 +15,12 @@ function Offspring = OperatorPCX(Parent,Lower,Upper)
     [N,D] = size(Parent);
 
     %% PCX
-    W         = mean(Parent,1);
-    p1        = [2:N,1];
-    p2        = [3:N,1,2];
-    Offspring = Parent + 0.1*(Parent-W) + mean(abs(Parent-W),2).*(Parent(p2,:)-Parent(p1,:))/2;
-    Site      = repmat(rand(N,1)>proC,1,D);
-    Offspring(Site) = Parent(Site);
+    W      = mean(Parent,1);
+    p1     = [2:N,1];
+    p2     = [3:N,1,2];
+    OffDec = Parent + 0.1*(Parent-W) + D./mean(abs(Parent-W),2).*(Parent(p2,:)-Parent(p1,:))/2;
+    Site   = repmat(rand(N,1)>proC,1,D);
+    OffDec(Site) = Parent(Site);
     
     %% Polynomial mutation
     Lower = repmat(Lower,N,1);
@@ -28,10 +28,10 @@ function Offspring = OperatorPCX(Parent,Lower,Upper)
     Site  = rand(N,D) < proM/D;
     mu    = rand(N,D);
     temp  = Site & mu<=0.5;
-    Offspring       = min(max(Offspring,Lower),Upper);
-    Offspring(temp) = Offspring(temp)+(Upper(temp)-Lower(temp)).*((2.*mu(temp)+(1-2.*mu(temp)).*...
-                      (1-(Offspring(temp)-Lower(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1))-1);
+    OffDec       = min(max(OffDec,Lower),Upper);
+    OffDec(temp) = OffDec(temp)+(Upper(temp)-Lower(temp)).*((2.*mu(temp)+(1-2.*mu(temp)).*...
+                   (1-(OffDec(temp)-Lower(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1))-1);
     temp = Site & mu>0.5; 
-    Offspring(temp) = Offspring(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
-                      (1-(Upper(temp)-Offspring(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
+    OffDec(temp) = OffDec(temp)+(Upper(temp)-Lower(temp)).*(1-(2.*(1-mu(temp))+2.*(mu(temp)-0.5).*...
+                   (1-(Upper(temp)-OffDec(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1)));
 end

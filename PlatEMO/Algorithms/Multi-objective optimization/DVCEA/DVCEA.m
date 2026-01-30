@@ -6,9 +6,9 @@ classdef DVCEA < ALGORITHM
 % X. Ban, J. Liang, K. Qiao, K. Yu, Y. Wang, J. Zhu, B. Qu. A decision 
 % variables classification-based evolutionary algorithm for constrained 
 % multi-objective optimization problems. IEEE/CAA Journal of Automatica 
-% Sinica, 2025.
+% Sinica, 2025, 12(9): 1830-1849.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

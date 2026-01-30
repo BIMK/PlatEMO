@@ -8,7 +8,7 @@ classdef MSCEA < ALGORITHM
 % helper-problem-assisted evolutionary algorithm for constrained 
 % multiobjective optimization. Information Sciences, 2023, 648: 119547.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -20,9 +20,11 @@ classdef MSCEA < ALGORITHM
         function main(Algorithm,Problem)
             %% Parameter setting
             cp = Algorithm.ParameterSet(5);
+
             %% Generate the random population
             Population1 = Problem.Initialization();
-            Population2 = Problem.Initialization();            
+            Population2 = Problem.Initialization();    
+
             %% Calculate the initial dynamic constraint boundary
             [~, nCon]               = size(Population1.cons);
             [initialE1, ~]          = max(max(0,Population1.cons), [], 1);
@@ -37,6 +39,7 @@ classdef MSCEA < ALGORITHM
             MaxCV2(1)               = max(CV2);
             ASC2                    = 0;
             arch                    = archive([Population1,Population2],Problem.N);
+
             %% Optimization
             while Algorithm.NotTerminated(Population1)                
                 PopCon1   = max(0,Population1.cons);
@@ -44,7 +47,7 @@ classdef MSCEA < ALGORITHM
                 if sum(sum(PopCon1<=epsn1,2)==nCon) == length(Population1)
                     epsn1 = ReduceBoundary(initialE1,ceil(Problem.FE/Problem.N),ceil(Problem.maxFE/Problem.N)-1,cp);
                 end
-                CV2       = sum(PopCon2,2);
+                CV2 = sum(PopCon2,2);
                 MaxCV2(ceil(Problem.FE/Problem.N)) = max(CV2);
                 if MaxCV2(ceil(Problem.FE/Problem.N))-MaxCV2(ceil((Problem.FE-Problem.N)/Problem.N))>0
                     ASC2  = ASC2 + 1;
@@ -61,7 +64,7 @@ classdef MSCEA < ALGORITHM
                 [Population2,Fitness2] = EnvironmentalSelection2([Population2,Offspring1,Offspring2],Problem.N,epsn2);                
                 % Output the non-dominated and feasible solutions.
                 arch = [arch,Population1,Population2];
-                 [~, Unduplicated] = unique(arch.objs,'rows');
+                [~, Unduplicated] = unique(arch.objs,'rows');
                 arch = arch(Unduplicated);
                 arch = archive(arch,Problem.N);
                 if Problem.FE >= Problem.maxFE

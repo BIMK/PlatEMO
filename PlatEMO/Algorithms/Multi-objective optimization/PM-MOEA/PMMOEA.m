@@ -8,7 +8,7 @@ classdef PMMOEA < ALGORITHM
 % optimization problems. IEEE Transactions on Cybernetics, 2022, 52(7):
 % 6784-6797.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -33,8 +33,8 @@ classdef PMMOEA < ALGORITHM
             MinP = MaxP;
             while Algorithm.NotTerminated(Population)
                 [MaxP,MinP,Nonzero] = POSMining(logical(Population(FrontNo==1).decs),MaxP,MinP,20);
-                MatingPool = TournamentSelection(2,Problem.N,FrontNo);
-                [OffDec,OffMask] = Operator(Problem,Dec(MatingPool,:),Mask(MatingPool,:),MaxP(:,Nonzero),MinP(:,Nonzero),Nonzero,Population.decs);
+                MatingPool          = TournamentSelection(2,Problem.N,FrontNo);
+                [OffDec,OffMask]    = Operator(Problem,Dec(MatingPool,:),Mask(MatingPool,:),MaxP(:,Nonzero),MinP(:,Nonzero),Nonzero,Population.decs);
                 if ~isempty(OffDec)
                     [Population,Dec,Mask,FrontNo] = EnvironmentalSelection([Population,Problem.Evaluation(OffDec.*OffMask)],[Dec;OffDec],[Mask;OffMask],Problem.N);
                 end

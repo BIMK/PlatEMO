@@ -9,7 +9,7 @@ classdef OSPNSDE < ALGORITHM
 % algorithm with prediction in the objective space. Information Sciences,
 % 2019, 501: 293-316.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -37,17 +37,17 @@ classdef OSPNSDE < ALGORITHM
 
             %% Optimization
             while Algorithm.NotTerminated(Population)
-                t = t+1;
+                t = t + 1;
                 Pt(:,:,t)     = Population.decs;
                 Pt_apt(:,:,t) = Population.objs;
                 Pt_Rank(:,t)  = FrontNo;
                 Hyp(t,1) = HV(Population(FrontNo==1),Nadyr_P);
 
-                if t==t_init
+                if t == t_init
                     Nadyr_P = max(Pt_apt(:,:,t));
                 end
 
-                if t-t_init>=3 
+                if t-t_init >= 3 
 
                     alpha = Hyp(t_init) + lambda*Hyp(t_init);
 
@@ -59,21 +59,21 @@ classdef OSPNSDE < ALGORITHM
 
                         % Update OSP criterion parameters and OSP parameter
                         t_init = t+1;
-                        p = round(p/2);
-                        if p==0
-                            p=1;
+                        p      = round(p/2);
+                        if p == 0
+                            p = 1;
                         end
 
                     else
                         MatingPool = [1:Problem.N,randi(Problem.N,1,2*Problem.N)];
-                        Offspring = OperatorDE(Problem,Population(MatingPool(1:length(MatingPool)/3)),...
+                        Offspring  = OperatorDE(Problem,Population(MatingPool(1:length(MatingPool)/3)),...
                             Population(MatingPool(length(MatingPool)/3+1:length(MatingPool)/3*2)),...
                             Population(MatingPool(length(MatingPool)/3*2+1:end)));              
                         [Population,FrontNo] = EnvironmentalSelection([Population,Offspring],Problem.N);
                     end
                 else
                     MatingPool = [1:Problem.N,randi(Problem.N,1,2*Problem.N)];
-                    Offspring = OperatorDE(Problem,Population(MatingPool(1:length(MatingPool)/3)),...
+                    Offspring  = OperatorDE(Problem,Population(MatingPool(1:length(MatingPool)/3)),...
                         Population(MatingPool(length(MatingPool)/3+1:length(MatingPool)/3*2)),...
                         Population(MatingPool(length(MatingPool)/3*2+1:end)));               
                     [Population,FrontNo] = EnvironmentalSelection([Population,Offspring],Problem.N);

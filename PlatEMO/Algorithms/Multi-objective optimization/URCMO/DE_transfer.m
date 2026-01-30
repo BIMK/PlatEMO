@@ -1,7 +1,7 @@
 function [ offspring ] = DE_transfer(Problem, Population1, Population2, popsize)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -21,17 +21,14 @@ function [ offspring ] = DE_transfer(Problem, Population1, Population2, popsize)
     CR    = CRm(index);
     CR    = CR';
 
-    index =randi(Problem.N, popsize,1);
-
+    index       = randi(Problem.N, popsize,1);
     permutation = randperm(Problem.N);
-
-    array = permutation(1:popsize);
+    array       = permutation(1:popsize);
 
     pop1 = Population1(array).decs;
     pop2 = Population2.decs;
 
     vi = pop2(index,:);
-
 
     mask  = rand(popsize, Problem.D) > CR(:, ones(1, Problem.D)); % mask is used to indicate which elements of ui comes from the parent
     rows  = (1 : popsize)'; cols = floor(rand(popsize, 1) * Problem.D)+1; % choose one position where the element of ui doesn't come from the parent

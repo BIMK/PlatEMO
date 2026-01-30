@@ -8,7 +8,7 @@ classdef MOMFEASADE < ALGORITHM
 % adaptive differential evolution. IEEE Transactions on Cybernetics, 2022,
 % 52(4): 2096-2109.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -31,7 +31,8 @@ classdef MOMFEASADE < ALGORITHM
                 SubPopulation{t} = Problem.Evaluation(Dec,[false*ones(Problem.N/2,1),0*ones(Problem.N/2,1)]);
             end
             STNum  = 3;
-            R_Used = []; R_Succ = [];
+            R_Used = [];
+            R_Succ = [];
             ProbT  = size(Problem.SubM,2);
             ProbN  = Problem.N/2;          
 
@@ -55,7 +56,7 @@ classdef MOMFEASADE < ALGORITHM
                     offspring = Generation(Problem,SubPopulation, Best, DE_Pool{t}, t,RMP,LP,F1,F2,LCR,UCR);
                     % Selection
                     SubPopulation{t} = [SubPopulation{t}, offspring];
-                    rank = NSGA2Sort(SubPopulation{t});
+                    rank             = NSGA2Sort(SubPopulation{t});
                     SubPopulation{t} = SubPopulation{t}(rank(1:ProbN));
                 end
                 % DE Strategies Probabilities Updation

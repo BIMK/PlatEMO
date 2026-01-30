@@ -10,7 +10,7 @@ classdef MOEADUR < ALGORITHM
 % evolutionary algorithm updating weights when required. Swarm and
 % Evolutionary Computation, 2022, 68: 100980.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
@@ -26,15 +26,15 @@ classdef MOEADUR < ALGORITHM
             [start, finish, K] = Algorithm.ParameterSet(0.2, 0.93, 10);
 
             %% Parameter setting
-            delta = 0.9;            % The probability of choosing parents locally
-            nr = 2;                 % Maximum number of solutions replaced by each offspring
-            T = ceil(Problem.N/10); % Size of neighborhood
-            mini_generation = 1;    % The number of generations carried out within the objective space division method
+            delta = 0.9;                % The probability of choosing parents locally
+            nr    = 2;                  % Maximum number of solutions replaced by each offspring
+            T     = ceil(Problem.N/10); % Size of neighborhood
+            mini_generation = 1;        % The number of generations carried out within the objective space division method
 
             %% Generate the weight vectors
             [W,Problem.N] = UniformlyRandomlyPoint(Problem.N,Problem.M);    
-            W = 1./W./repmat(sum(1./W,2),1,size(W,2)); % WS-Transformation on W
-            W_URP=W;
+            W     = 1./W./repmat(sum(1./W,2),1,size(W,2)); % WS-Transformation on W
+            W_URP = W;
 
             %% Detect the neighbours of each solution
             B = pdist2(W,W);
@@ -48,11 +48,12 @@ classdef MOEADUR < ALGORITHM
 
             WhenDoesItStart	= floor(start*(Problem.maxFE/Problem.N));
             whenItEnds		= floor(finish*(Problem.maxFE/Problem.N));
+
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 % For each solution	
                 Offsprings(1:Problem.N) = SOLUTION();       
-                chosenNeighborhood = rand(Problem.N,1) < delta;		
+                chosenNeighborhood      = rand(Problem.N,1) < delta;		
                 for i = 1 : Problem.N
                     % Choose the parents
                     if chosenNeighborhood(i)==1
@@ -106,22 +107,22 @@ classdef MOEADUR < ALGORITHM
                 if  Problem.FE/Problem.N >= WhenDoesItStart && Problem.FE/Problem.N <= whenItEnds           
                     if ~mod(Problem.FE/Problem.N,period)
                         % Improvement Metric
-                        I_new    = max(abs((Population.objs-repmat(Z,Problem.N,1)).*W),[],2);
+                        I_new = max(abs((Population.objs-repmat(Z,Problem.N,1)).*W),[],2);
                         improvement_Metric = mean(1-(I_new./I_old));
-                        I_old=I_new;
+                        I_old = I_new;
 
-                        if abs(improvement_Metric)<=rho   
+                        if abs(improvement_Metric) <= rho   
                             % EP update
-                            EP=unique(EP);
+                            EP = unique(EP);
                             EP = EP(NDSort(EP.objs,1)==1);    
 
                             % adaptive weight adjustment				
                             [Population,W,B] = updateWeight(Population,W,Z,T,EP,rate_update_weight);
-                            I_old    = max(abs((Population.objs-repmat(Z,Problem.N,1)).*W),[],2);
+                            I_old = max(abs((Population.objs-repmat(Z,Problem.N,1)).*W),[],2);
 
                             % division of objective space    
-                            [Population,Z]=space_divide(Problem,EP,Population,Z,W_URP,W,K,mini_generation);
-                            EP=[];
+                            [Population,Z] = space_divide(Problem,EP,Population,Z,W_URP,W,K,mini_generation);
+                            EP = [];
                         end
                     end            
                 end        

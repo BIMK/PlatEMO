@@ -6,9 +6,9 @@ classdef DSSEA < ALGORITHM
 % X. Ban, J. Liang, K. Yu, B. Qu, K. Qiao, P. N. Suganthan, and Y. Wang. A
 % subspace search-based evolutionary algorithm for large-scale constrained
 % multi-objective optimization and application. IEEE Transactions on
-% Cybernetics, 2025.
+% Cybernetics, 2025, 55(5): 2486-2499.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -2,7 +2,7 @@ function [Archive,RefPoint,Range, Ratio] = UpdateRefPoint(Archive,W,Range)
 % Reference point adaption
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -12,7 +12,7 @@ function [Archive,RefPoint,Range, Ratio] = UpdateRefPoint(Archive,W,Range)
 
 	%% Delete duplicated and dominated solutions
     Archive = unique(Archive(NDSort(Archive,1)==1,:),'rows');
-    %unique(A,'rows') gets the matrix formed by the different vectors of matrix A
+    % unique(A,'rows') gets the matrix formed by the different vectors of matrix A
     NA      = size(Archive,1);
     NW      = size(W,1);
     
@@ -26,7 +26,7 @@ function [Archive,RefPoint,Range, Ratio] = UpdateRefPoint(Archive,W,Range)
     %% Update archive and reference points
     if size(Archive,1) <= 1
         RefPoint = W;
-        Ratio=0;
+        Ratio    = 0;
     else
         %% Find contributing solutions and valid weight vectors
         tArchive = Archive - repmat(Range(1,:),NA,1);
@@ -61,6 +61,6 @@ function [Archive,RefPoint,Range, Ratio] = UpdateRefPoint(Archive,W,Range)
             Choose(Selected(x)) = true;
         end
         RefPoint = RefPoint(Choose,:);
-        Ratio=length(ValidW)/NW;
+        Ratio    = length(ValidW)/NW;
     end 
 end

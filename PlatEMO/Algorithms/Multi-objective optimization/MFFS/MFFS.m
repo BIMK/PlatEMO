@@ -7,7 +7,7 @@ classdef MFFS < ALGORITHM
 % selection to multiobjective feature selection: A multiform approach. 
 % IEEE Transactions on Cybernetics, 2023, 53(12): 7773-7786.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -20,21 +20,22 @@ classdef MFFS < ALGORITHM
     methods
         function main(Algorithm,Problem)
             % Parameter setting
-            N    = round(Problem.N*0.5);
-            N1   = round(Problem.N*0.25);
-            N2   = Problem.N - N - N1;
-            P    = InitializePopulation(Problem);
-            alphaSet = [0.01; 0.99]; %Note: We assume the first objective is the selected feature ratio, and the second objective is the classification error rate. 
+            N  = round(Problem.N*0.5);
+            N1 = round(Problem.N*0.25);
+            N2 = Problem.N - N - N1;
+            P  = InitializePopulation(Problem);
+            alphaSet     = [0.01; 0.99]; % Note: We assume the first objective is the selected feature ratio, and the second objective is the classification error rate. 
             PartitionSet = zeros(2, 2);
             [Population, FrontNo, CrowdDis] = EnvironmentalSelectionMOP(P, N);
             [SubPop1, Fitness1] = EnvironmentalSelectionSOP(P, N1, alphaSet(1,:), min(P.objs, [], 1)); % Store solutions with better classification performance 
             [SubPop2, Fitness2] = EnvironmentalSelectionSOP(P, N2, alphaSet(2,:), min(P.objs, [], 1)); % Store solutions with low selected feature ratio         
             BestFitnessSet      = [SubPop1(1).objs; SubPop2(1).objs];
+
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 % Offspring generation for multi-objective task
-                MatingPool     = TournamentSelection(2, N, FrontNo, -CrowdDis);
-                Offspring      = OffspringReproduction(Problem, Population(MatingPool), [Population, SubPop1, SubPop2]);
+                MatingPool = TournamentSelection(2, N, FrontNo, -CrowdDis);
+                Offspring  = OffspringReproduction(Problem, Population(MatingPool), [Population, SubPop1, SubPop2]);
                 % Offspring generation for single-objective task I
                 MatingPoolPop1 = TournamentSelection(2, N1, Fitness1);
                 OffPop1        = OffspringReproduction(Problem, SubPop1(MatingPoolPop1), [Population, SubPop1, SubPop2, Offspring]);
@@ -53,10 +54,9 @@ classdef MFFS < ALGORITHM
                 [flag, BestFitnessSet] = boolImprovement(BestFitnessSet, [SubPop1(1).objs; SubPop2(1).objs], 5);
                 % Calculate direction vectors
                 [alphaSet, PartitionSet] = CalWeight(PartitionSet, alphaSet, Population, FrontNo, flag, Fmin);
-                if flag==1
+                if flag == 1
                     [SubPop1, Fitness1, SubPop2, Fitness2] = ReInitialization(Problem, Population, N1, N2, alphaSet, Fmin);
                 end
-                % Population = FSTestCOP(Problem, Population); % Apply to the test set
             end
         end
     end
@@ -67,7 +67,7 @@ function [alphaSet, PartitionSet] = CalWeight(PartitionSet, alphaSet, Population
     % Calculate direction vectors based on partion point and ideal point
     if flag == 1
         PartitionSet = CalPartitionPoint(Population, FrontNo, PartitionSet);
-        alphaSet = UpdateWeight(PartitionSet, Fmin);
+        alphaSet     = UpdateWeight(PartitionSet, Fmin);
     else
         if ~isequal(alphaSet, [0.01; 0.99])
             alphaSet = UpdateWeight(PartitionSet, Fmin);
@@ -108,7 +108,7 @@ end
 function [SubPop1, Fitness1, SubPop2, Fitness2] = ReInitialization(Problem, Pop, N1, N2, alphaSet, Fmin)
     % Reinitialize subpopulations for the single-objective task
     Pop = Pop.decs;
-    for i =1:size(Pop, 1)
+    for i = 1 : size(Pop, 1)
             index1 = find( Pop(i, :));
             index2 = find(~Pop(i, :));
             if size(index1, 2) > 0

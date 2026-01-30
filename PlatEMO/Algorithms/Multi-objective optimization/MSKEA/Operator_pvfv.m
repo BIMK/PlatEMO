@@ -2,7 +2,7 @@ function [OffDec,OffMask] = Operator_pvfv(Problem,ParentDec,ParentMask,pv,fv,del
 % The operator of MSKEA guided by pv and sv
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -32,17 +32,17 @@ function [OffDec,OffMask] = Operator_pvfv(Problem,ParentDec,ParentMask,pv,fv,del
     end
     
     %% Mutation for mask
-    if rand<(1-delta)
-        f_vector=fv;
-        f_vector(fv>0)=1;
-        for i=1:N/2
-            index=find(OffMask(i,:)~=f_vector);
-            if rand<0.5
-                index=index(TS(-fv(index)));
-                OffMask(i,index)=1;
+    if rand < (1-delta)
+        f_vector       = fv;
+        f_vector(fv>0) = 1;
+        for i = 1 : N/2
+            index = find(OffMask(i,:)~=f_vector);
+            if rand < 0.5
+                index = index(TS(-fv(index)));
+                OffMask(i,index) = 1;
             else
-                index=index(TS(fv(index)));
-                OffMask(i,index)=0;
+                index = index(TS(fv(index)));
+                OffMask(i,index) = 0;
             end
         end
     else

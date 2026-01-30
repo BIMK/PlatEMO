@@ -6,9 +6,9 @@ classdef DirHVEI < ALGORITHM
 %------------------------------- Reference --------------------------------
 % L. Zhao and Q. Zhang. Hypervolume-guided decomposition for parallel
 % expensive multiobjective optimization. IEEE Transactions on Evolutionary
-% Computation, 28(2): 432-444, 2024.
+% Computation, 2024, 28(2): 432-444.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

@@ -1,7 +1,7 @@
 function [rf,mf,ar,wr] = Construction(arch,W,score)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -13,15 +13,15 @@ function [rf,mf,ar,wr] = Construction(arch,W,score)
     [N ,~] = size(W);
     if size(arch,2) > size(W,1)
         a(N+1).r = [];
-        de = arch.decs;
-        ma = arch.masks;
-        m  = arch.Gns;
-        A_sp = zeros(1,n);
-        Sp   = zeros(1,n);
+        de       = arch.decs;
+        ma       = arch.masks;
+        m        = arch.Gns;
+        A_sp     = zeros(1,n);
+        Sp       = zeros(1,n);
         for i = 1 : n
             a(arch(i).tno).r = [a(arch(i).tno).r,i];
-            sp   = sum(arch(i).mobj,2);
-            sp_b = min(sp);
+            sp        = sum(arch(i).mobj,2);
+            sp_b      = min(sp);
             A_sp(1,i) = mean(sum(abs(sp - sp_b)));
             A_sp(1,i) = 1/((sum(ma(i,:)&(score>0.5)))/size(score,2));
             Sp(1,i)   = mean(sp);
@@ -49,13 +49,13 @@ function [rf,mf,ar,wr] = Construction(arch,W,score)
                     s(1,d) = Sp(1, no)+(A_sp(1,no));
                     t(1,d) = no;
                 end
-                [~,b] = sort(s(1,:));
-                j  = j + 1;
-                tt = t(1,b(1,1));
+                [~,b]   = sort(s(1,:));
+                j       = j + 1;
+                tt      = t(1,b(1,1));
                 RF(j,:) = de(t(1,b(1,1)),:);
                 MF(j,:) = ma(t(1,b(1,1)),:);
-                rch = [rch,tt];
-                w   = [w,r];
+                rch     = [rch,tt];
+                w       = [w,r];
             end
         end
     end

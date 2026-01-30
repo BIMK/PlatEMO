@@ -1,5 +1,5 @@
 classdef DISKplus < ALGORITHM
-% <2024> <multi/many> <real/integer> <expensive> <constrained>
+% <2025> <multi/many> <real/integer> <expensive> <constrained>
 % Distribution-based Kriging-assisted constrained evolutionary algorithm 
 % wmax  --- 60 --- Generations of evolutionary search
 % alpha ---  5 --- Number of selected candidates
@@ -8,9 +8,9 @@ classdef DISKplus < ALGORITHM
 % Z. Zhang, Y. Wang, G. Sun, and T. Pang. A distribution information based 
 % Kriging-assisted evolutionary algorithm for expensive many-objective 
 % optimization problems. IEEE Transactions on Evolutionary Computation, 
-% 2024.
+% 2025, 29(6): 2656-2670.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

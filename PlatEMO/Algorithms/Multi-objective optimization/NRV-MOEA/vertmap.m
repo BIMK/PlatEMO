@@ -1,7 +1,7 @@
 function [mapPop,Hyperplane] = vertmap(ArcObj,PopObj,Hyperplane_bp,Global)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -19,13 +19,13 @@ function [mapPop,Hyperplane] = vertmap(ArcObj,PopObj,Hyperplane_bp,Global)
         k = 1;
         Extreme(j) = Rank(k,j);
         while ismember(Extreme(j),Extreme(1:j-1)) && k < size(Rank,1)
-            k = k+1;
+            k = k + 1;
             Extreme(j) = Rank(k,j);
         end
     end
     % Calculate the hyperplane
     try
-        if size(ArcObj,1)>=M
+        if size(ArcObj,1) >= M
             Hyperplane = ArcObj(Extreme,:)\ones(length(Extreme),1);
         else
             Hyperplane = PopObj(Extreme,:)\ones(length(Extreme),1);

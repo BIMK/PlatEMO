@@ -8,7 +8,7 @@ classdef MOEARE < ALGORITHM
 % with robustness enhancement. IEEE Transactions on Evolutionary
 % Computation, 2020, 24(3): 494-507.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -40,7 +40,7 @@ classdef MOEARE < ALGORITHM
                 [PopObjX,OffObjX,ArcObjX]             = Distrubance(Problem,Population.decs,Offspring.decs,Archive.decs);
                 [Population,FrontNo,CrowdDis,PopObjX] = EnvironmentalSelection([Population,Offspring],Problem.N,[PopObjX;OffObjX]);
                 % Update archive
-                [SOI,SOIObjX] = SelectSOI(Population,PopObjX,20,z);
+                [SOI,SOIObjX]        = SelectSOI(Population,PopObjX,20,z);
                 [Archive,ArcW,ArcSP] = UpdateArchive(Archive,ArcObjX,SOI,SOIObjX,alpha,z,W,ArcW,ArcSP);
                 % Final robust solution selection
                 if Problem.FE >= Problem.maxFE

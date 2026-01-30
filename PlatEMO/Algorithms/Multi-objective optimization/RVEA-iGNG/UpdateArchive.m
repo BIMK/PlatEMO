@@ -1,7 +1,7 @@
 function Archive = UpdateArchive(Population,Archive,MaxSize)
 
 %--------------------------------------------------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -11,13 +11,13 @@ function Archive = UpdateArchive(Population,Archive,MaxSize)
 
 % This function is written by Qiqi Liu
 
-    Archive = [Archive,Population];
-    o = Archive.objs;
+    Archive   = [Archive,Population];
+    o         = Archive.objs;
     [c,ia,ic] = unique(o,'rows');
-    Archive = Archive(ia);
-    ND = NDSort(Archive.objs,1);
-    Archive = Archive(ND==1);
-    N  = length(Archive);
+    Archive   = Archive(ia);
+    ND        = NDSort(Archive.objs,1);
+    Archive   = Archive(ND==1);
+    N         = length(Archive);
     if N <= MaxSize
         return;
     end
@@ -38,16 +38,16 @@ function Archive = UpdateArchive(Population,Archive,MaxSize)
     Choose = 1 : N;
     while length(Choose) > MaxSize
         [~,x] = min(F(Choose));
-        F = F + exp(-I(Choose(x),:)/C(Choose(x))/0.05);
+        F     = F + exp(-I(Choose(x),:)/C(Choose(x))/0.05);
         Choose(x) = [];
     end
     Archive = Archive(Choose);
 
     %% Delete those which are too far from the archive
-    o = Archive.objs;
-    o = o-repmat(min(o),size(o,1),1);
-    d = sqrt(sum(o.^2,2));
-    meanD = sum(d,1)/size(o,1);
+    o      = Archive.objs;
+    o      = o-repmat(min(o),size(o,1),1);
+    d      = sqrt(sum(o.^2,2));
+    meanD  = sum(d,1)/size(o,1);
     delete = find(d>10*meanD);
     Archive(delete) = [];
 end

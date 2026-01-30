@@ -1,5 +1,5 @@
 classdef NNDREASO < ALGORITHM
-% <2024> <single> <binary> <large/none> <constrained/none> <sparse/none>
+% <2025> <single> <binary> <large/none> <constrained/none> <sparse/none>
 % Evolutionary algorithm with neural network-based dimensionality reduction
 % lower ---  -1 --- Lower bound of network weights
 % upper ---   1 --- Upper bound of network weights
@@ -9,9 +9,9 @@ classdef NNDREASO < ALGORITHM
 % Y. Tian, L. Wang, S. Yang, J. Ding, Y. Jin, and X. Zhang. Neural
 % network-based dimensionality reduction for large-scale binary
 % optimization with millions of variables. IEEE Transactions on
-% Evolutionary Computation, 2024.
+% Evolutionary Computation, 2025, 29(6): 2328-2342.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

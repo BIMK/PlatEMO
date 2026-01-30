@@ -3,7 +3,7 @@ function Arc = WeightOptimization(Problem,G2,Population,wD,N)
 % bi-direction weight vectors
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -25,16 +25,16 @@ function Arc = WeightOptimization(Problem,G2,Population,wD,N)
     %% Optimize the weight variables by DE
 	w0 = rand(N,2*wD).*wmax;                                    % Initialize the population
     [fitness,PopNew] = fitfunc(Problem,w0,Direct,Reference);	% Calculate the fitness and store the solutions
-	Arc = PopNew(NDSort(PopNew.objs,1)==1);
-	pCR = 0.2;
-    beta_min=0.2;   % Lower Bound of Scaling Factor
-    beta_max=0.8;   % Upper Bound of Scaling Factor
-    empty_individual.Position=[];
-    empty_individual.Cost=[];
-    pop=repmat(empty_individual,N,1);
+	Arc      = PopNew(NDSort(PopNew.objs,1)==1);
+	pCR      = 0.2;
+    beta_min = 0.2;   % Lower Bound of Scaling Factor
+    beta_max = 0.8;   % Upper Bound of Scaling Factor
+    empty_individual.Position = [];
+    empty_individual.Cost     = [];
+    pop = repmat(empty_individual,N,1);
     for i = 1 : N
         pop(i).Position = w0(i,:);
-        pop(i).Cost = fitness(i);
+        pop(i).Cost     = fitness(i);
     end
     temp = [];
     for it = 1 : G2
@@ -42,15 +42,17 @@ function Arc = WeightOptimization(Problem,G2,Population,wD,N)
             x = pop(i).Position;
             A = randperm(N);
             A(A==i) = [];
-            a = A(1); b = A(2); c = A(3);
-            % Mutation  %beta=unifrnd(beta_min,beta_max);
+            a = A(1);
+            b = A(2);
+            c = A(3);
+            % Mutation
             beta = unifrnd(beta_min,beta_max,[1 2*wD]);
-            y = pop(a).Position + beta.*(pop(b).Position - pop(c).Position);
-            y = min(max(y,0),wmax);
+            y    = pop(a).Position + beta.*(pop(b).Position - pop(c).Position);
+            y    = min(max(y,0),wmax);
             % Crossover
-            z = zeros(size(x));
-            j0=randi([1 numel(x)]);
-            for j=1:numel(x)
+            z  = zeros(size(x));
+            j0 = randi([1 numel(x)]);
+            for j = 1 : numel(x)
                 if j==j0 || rand<=pCR
                     z(j) = y(j);
                 else
@@ -58,20 +60,20 @@ function Arc = WeightOptimization(Problem,G2,Population,wD,N)
                 end
             end
             NewSol.Position = z;
-            [fit,PopNew] = fitfunc(Problem,z,Direct,Reference);
+            [fit,PopNew]    = fitfunc(Problem,z,Direct,Reference);
             temp = [temp,PopNew];
             temp = temp(NDSort(temp.objs,1)==1);
             NewSol.Cost = fit;
             if NewSol.Cost < pop(i).Cost
-                pop(i)=NewSol;
+                pop(i) = NewSol;
             end
         end
     end
-    %Update and store the non-dominated solutions
+    % Update and store the non-dominated solutions
     Arc = [Arc,temp];
     if length(Arc) > Problem.N
         [frontNo,~] = NDSort(Arc.objs,1);
-        Arc = Arc(frontNo==1);
+        Arc         = Arc(frontNo==1);
     end
 end
 

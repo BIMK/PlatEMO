@@ -1,7 +1,7 @@
 function subproblemList = ConstructLinearKRGOS(refPoints,Archive,nLinear,MaxObj,MinObj,W)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -11,9 +11,9 @@ function subproblemList = ConstructLinearKRGOS(refPoints,Archive,nLinear,MaxObj,
 
     %% Get basic information
     % Get the number of dimension
-    [DL,D] = size(refPoints);
-    BU = ones(1,D);
-    BD = zeros(1,D);
+    [DL,D]   = size(refPoints);
+    BU       = ones(1,D);
+    BD       = zeros(1,D);
     [arcN,~] = size(Archive);
     % Check the number of reference point pairs
     if DL/2 ~= nLinear
@@ -37,7 +37,7 @@ function subproblemList = ConstructLinearKRGOS(refPoints,Archive,nLinear,MaxObj,
         % Calculate direction
         subproblem.direct = (endPoint-startPoint)./sqrt(sum((endPoint-startPoint).^2));
         % Find upper boundary and lower boundary of linear space
-        [lub,llb]  = findBoundary(subproblem.start,subproblem.direct,BU,BD);
+        [lub,llb]     = findBoundary(subproblem.start,subproblem.direct,BU,BD);
         subproblem.ub = lub;
         subproblem.lb = llb;
         

@@ -21,7 +21,7 @@ function Offspring = OperatorAESSPSO(Problem,Particle,Pbest,Gbest,Beta, Gamma)
 %       Off = OperatorAESSPSO(Problem,Population,Pbest,Gbest,Beta, Gamma)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -58,7 +58,7 @@ function w = w_adapter(n,Beta,Gamma)
     diff  = 1;
     Prec  = 0.0001;
     while diff > Prec
-        Omega = (W_min+W_max)/2;
+        Omega      = (W_min+W_max)/2;
         Omega_left = Omega-0.0000001;
         E   = ctrleigall(n,Beta,Gamma,Omega);
         Min = min(E);

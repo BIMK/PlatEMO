@@ -2,7 +2,7 @@ function [Population,FrontNo,CrowdDis] = EnvironmentalSelection(Population,N,a)
 % Environmental selection
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -16,14 +16,14 @@ function [Population,FrontNo,CrowdDis] = EnvironmentalSelection(Population,N,a)
     CrowdDis1 = CrowdingDistance(Population.objs,FrontNo1);
   
     [~,r1] = sortrows([FrontNo1',-CrowdDis1']);
-    Rc(r1) = 1 : N1;   %基于CDP获得的ranking
+    Rc(r1) = 1 : N1;
 
    [FrontNo2,~] = NDSort(Population.objs,0,inf);
     
     CrowdDis2 = CrowdingDistance(Population.objs,FrontNo2);
     
    [~,r2]  = sortrows([FrontNo2',-CrowdDis2']);
-    Rp(r2) = 1 : N1;   %基于非支配排序获得的ranking
+    Rp(r2) = 1 : N1;
     
 	R_sum = (1-a)*Rc+a*Rp;
     

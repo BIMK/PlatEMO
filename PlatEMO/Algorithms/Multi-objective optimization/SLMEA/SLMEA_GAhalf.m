@@ -2,7 +2,7 @@ function Offspring = SLMEA_GAhalf(Parent,Lower,Upper,Encoding,useGPU,Parameter)
 % Genetic operators accelerated by GPU
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -63,7 +63,7 @@ function Offspring = SLMEA_GAhalf(Parent,Lower,Upper,Encoding,useGPU,Parameter)
                 Site = gpuArray.rand(N,D) < proM/D;
                 mu   = gpuArray.rand(N,D);                
             end
-            temp  = Site & mu<=0.5;
+            temp = Site & mu<=0.5;
             Offspring       = min(max(Offspring,Lower),Upper);
             Offspring(temp) = Offspring(temp)+(Upper(temp)-Lower(temp)).*((2.*mu(temp)+(1-2.*mu(temp)).*...
                               (1-(Offspring(temp)-Lower(temp))./(Upper(temp)-Lower(temp))).^(disM+1)).^(1/(disM+1))-1);

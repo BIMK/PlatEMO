@@ -2,7 +2,7 @@ function [Population,succ1,succ2,Fitness] = First_Stage_EnvironmentalSelection(P
 % The environmental selection of SPEA2
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -13,7 +13,7 @@ function [Population,succ1,succ2,Fitness] = First_Stage_EnvironmentalSelection(P
 % This function is written by Kangjia Qiao
 
     %% Calculate the fitness of each solution
-    if isOrigin==1
+    if isOrigin == 1
         Fitness = CalFitness(Population.objs,Population.cons);
     else
         Fitness = CalFitness(Population.objs);
@@ -35,22 +35,23 @@ function [Population,succ1,succ2,Fitness] = First_Stage_EnvironmentalSelection(P
     Fitness    = Fitness(Next);
     % Sort the population
     [Fitness,rank] = sort(Fitness);
-    Population = Population(rank);
+    Population     = Population(rank);
 
     %% calculate success rate1
     off_index = Next(1+N:2*N);
     succ1 = zeros(1,length(off_index));
-    for j = 1:length(off_index)
+    for j = 1 : length(off_index)
         if off_index(j) == 1
             succ1(j)=1;
         end
     end
+
     %% calculate success rate2
     off_index = Next(1+2*N:end);
-    succ2 = zeros(1,length(off_index));
-    for j = 1:length(off_index)
+    succ2     = zeros(1,length(off_index));
+    for j = 1 : length(off_index)
         if off_index(j) == 1
-            succ2(j)=1;
+            succ2(j) = 1;
         end
     end
 end

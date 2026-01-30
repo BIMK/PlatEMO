@@ -24,10 +24,10 @@ function Population = RVEASelection(Population,V,popsize,theta)
 
     %% Select one solution for each reference vector
     Next = zeros(1,NV);
-    pf = sum(CV(randi(N,[N,1]))<1e-6)/N;
+    pf   = sum(CV(randi(N,[N,1]))<1e-6)/N;
     for i = unique(associate)'
-        cv = CV(associate==i);
-        Ns = sum(associate==i);
+        cv   = CV(associate==i);
+        Ns   = sum(associate==i);
         subN = ceil(popsize/numel(unique(associate)'));
 		% Ensure the subpopulation size
         if Ns < subN
@@ -39,7 +39,7 @@ function Population = RVEASelection(Population,V,popsize,theta)
         current2 = find(associate==i & CV>epsilon);
         if ~isempty(current1)
             % Calculate the APD value of each solution
-            APD = (1+theta*Angle(current1,i)/gamma(i)).*sqrt(sum(PopObj(current1,:).^2,2));
+            APD      = (1+theta*Angle(current1,i)/gamma(i)).*sqrt(sum(PopObj(current1,:).^2,2));
             [~,best] = min(APD);
             Next(i)  = current1(best);
         elseif ~isempty(current2)

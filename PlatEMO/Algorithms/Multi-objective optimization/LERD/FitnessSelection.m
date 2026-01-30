@@ -3,7 +3,7 @@ function [Next,FrontNo,CrowdDis] = FitnessSelection(Fitness,N)
 % fitness values
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -25,6 +25,6 @@ function [Next,FrontNo,CrowdDis] = FitnessSelection(Fitness,N)
     Next(Last(Rank(1:N-sum(Next)))) = true;
     
     %% Population for next generation
-    FrontNo    = FrontNo(Next);
-    CrowdDis   = CrowdDis(Next);
+    FrontNo  = FrontNo(Next);
+    CrowdDis = CrowdDis(Next);
 end

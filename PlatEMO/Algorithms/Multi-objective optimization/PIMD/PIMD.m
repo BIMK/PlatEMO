@@ -10,7 +10,7 @@ classdef PIMD < ALGORITHM
 % multi/many-objective optimization. Engineering Applications of Artificial
 % Intelligence, 2024, 133: 108616.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -29,11 +29,11 @@ classdef PIMD < ALGORITHM
             NI         = Problem.N;
             P          = UniformPoint(NI,Problem.D,'Latin');
             Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
-            [W,~] = UniformPoint(Problem.N,Problem.M);
-            Zmin  = min(Population.objs,[],1);
-            Arc   = Population;
-            THETA = 5.*ones(Problem.M,Problem.D);
-            Model = cell(1,Problem.M);
+            [W,~]      = UniformPoint(Problem.N,Problem.M);
+            Zmin       = min(Population.objs,[],1);
+            Arc        = Population;
+            THETA      = 5.*ones(Problem.M,Problem.D);
+            Model      = cell(1,Problem.M);
 
            %% Optimization
             while Algorithm.NotTerminated(Arc)
@@ -42,8 +42,8 @@ classdef PIMD < ALGORITHM
                 Dec     = Population.decs; Obj = Population.objs; Mse = zeros(size(Obj,1),size(Obj,2));
                 Lp      = Shape_Estimate(Population,Problem.N); % PF shape estimation 
                 
-                train_X = Arc.decs;
-                train_Y = Arc.objs;
+                train_X      = Arc.decs;
+                train_Y      = Arc.objs;
                 [~,distinct] = unique(round(train_X*1e6)/1e6,'rows');
                 train_X      = train_X(distinct,:);
                 train_Y      = train_Y(distinct,:);
@@ -74,11 +74,11 @@ classdef PIMD < ALGORITHM
                 end
                 
                 %Infill sampling
-                deleteindex = find(sum(Mse,2)<10^-15);
+                deleteindex        = find(sum(Mse,2)<10^-15);
                 Dec(deleteindex,:) = [];
                 Obj(deleteindex,:) = [];
                 Mse(deleteindex,:) = [];
-                Comobj = CompPop.objs;
+                Comobj      = CompPop.objs;
                 Pr_dominate = zeros(1,size(Obj,1));
                 for i = 1 : size(Obj,1)
                     Pr = normcdf(Comobj,repmat(Obj(i,:),size(Comobj,1),1), repmat(sqrt(max(Mse(i,:),0)),size(Comobj,1),1) );

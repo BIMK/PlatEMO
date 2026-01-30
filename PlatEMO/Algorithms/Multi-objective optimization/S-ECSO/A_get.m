@@ -2,7 +2,7 @@ function [AA,gBest] = A_get(Problem,Population,A,iter)
 % The updating strategy of archive(A) in S-ECSO
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -29,9 +29,8 @@ function [AA,gBest] = A_get(Problem,Population,A,iter)
     [FrontNo,~]   = NDSort(Compare_Obj,Inf);
     FrontNo_index = find(FrontNo == 1);
 
-    Adecs   = compare_x(FrontNo_index,:);
-    value_A = Compare_Obj(FrontNo_index,:);
-    AA      = CC(FrontNo_index);
+    Adecs = compare_x(FrontNo_index,:);
+    AA    = CC(FrontNo_index);
 
 
     [Adecs,index] = unique(Adecs,'rows');

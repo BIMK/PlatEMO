@@ -1,14 +1,15 @@
 classdef MOL2SMEA < ALGORITHM
-% <2023> <multi> <real> <expensive> <large/none>
+% <2025> <multi> <real> <expensive> <large/none>
 % Multi-objective linear subspace surrogate modeling assisted evolutionary algorithm
-% NLinear --- 8 --- Number of one-dimensional models
+% NLinear --- 8 --- Number of linear subspaces
 
 %------------------------------- Reference --------------------------------
 % L. Si, X. Zhang, Y. Tian, S. Yang, L. Zhang, and Y. Jin. Linear subspace
 % surrogate modeling for large-scale expensive single/multi-objective
-% optimization. IEEE Transactions on Evolutionary Computation, 2023.
+% optimization. IEEE Transactions on Evolutionary Computation, 2025, 29(3):
+% 697-710.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

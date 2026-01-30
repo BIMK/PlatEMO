@@ -2,7 +2,7 @@ function [Offspring,Mask] = Operator(Population,Mask,Problem)
 % The learning swarm optimizer of TELSO
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -21,7 +21,7 @@ function [Offspring,Mask] = Operator(Population,Mask,Problem)
     
     %% Refactoring the real variable    
     for i = 1 : (N-2)
-        rand_indices = randi([i+1,N],1,2);
+        rand_indices       = randi([i+1,N],1,2);
         selected_particles = Population(rand_indices); 
         r1       = repmat(rand(1,1),1,D);
         r2       = repmat(rand(1,1),1,D);
@@ -36,7 +36,7 @@ function [Offspring,Mask] = Operator(Population,Mask,Problem)
         if rand < 0.5
             same_elems = (p1_mask == p2_mask & p2_mask ==1);
         else
-             same_elems = (p1_mask == p2_mask & p2_mask ==0);
+            same_elems = (p1_mask == p2_mask & p2_mask ==0);
         end
         same_cols = find(same_elems);
         D_number  = numel(same_cols);  

@@ -2,7 +2,7 @@ function SDE = CalSDE(PopObj)
 % Calculate the value of SDE of each solution
 
 %--------------------------------------------------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
@@ -22,7 +22,7 @@ function SDE = CalSDE(PopObj)
         SPopuObj(Shifted) = Temp(Shifted);                                    
         Distance  = pdist2(real(PopObj(i,:)),real(SPopuObj));
         [~,index] = sort(Distance,2);
-        Dk = Distance(index(floor(sqrt(N))+1)); % Dk denotes the distance of solution i and its floor(sqrt(N)+1)-th nearest neighbour
-        SDE(i)=1./(Dk+2);
+        Dk        = Distance(index(floor(sqrt(N))+1)); % Dk denotes the distance of solution i and its floor(sqrt(N)+1)-th nearest neighbour
+        SDE(i)    = 1./(Dk+2);
     end
 end

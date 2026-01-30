@@ -1,7 +1,7 @@
 function [OffDec,OffMask] = OperatorMin(Problem,winpop,windec,winmask,winrank,SubPopulation,SubDec,SubMask,Rank,Fitness,thetamid,REAL)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -36,8 +36,8 @@ function [OffDec,OffMask] = OperatorMin(Problem,winpop,windec,winmask,winrank,Su
         else
             index1 = find(OffMask(i,:));
             index0 = find(~OffMask(i,:));
-            minN = floor(thetamid - size(index1,2));
-            index = index0(TSmin(Fitness(index0),minN));
+            minN   = floor(thetamid - size(index1,2));
+            index  = index0(TSmin(Fitness(index0),minN));
             OffMask(i,index) = 1;
         end
     end

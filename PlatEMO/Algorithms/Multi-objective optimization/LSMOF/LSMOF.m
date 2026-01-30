@@ -11,7 +11,7 @@ classdef LSMOF < ALGORITHM
 % reformulation. IEEE Transactions on Evolutionary Computation, 2019,
 % 23(6): 949-961.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -25,8 +25,8 @@ classdef LSMOF < ALGORITHM
         function main(Algorithm,Problem)
             %% Parameter settings
             [wD,SubN,Operator] = Algorithm.ParameterSet(10,30,2);
-            Population         = Problem.Initialization();
-            G = ceil(Problem.maxFE*0.05/(SubN*2*wD));
+            Population = Problem.Initialization();
+            G          = ceil(Problem.maxFE*0.05/(SubN*2*wD));
 
             %% Optimization
             while Algorithm.NotTerminated(Population)

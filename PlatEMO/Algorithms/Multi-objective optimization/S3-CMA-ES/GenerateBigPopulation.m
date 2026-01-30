@@ -1,7 +1,7 @@
 function [BigPopulation,tempPara] = GenerateBigPopulation(PV,groups,Archive)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -20,7 +20,7 @@ function [BigPopulation,tempPara] = GenerateBigPopulation(PV,groups,Archive)
    para.lambda = cPopSize;                                      % population size, offspring number
    tempPara    = repmat(para,size(PVDecs,1),length(groups));	% Initialize the parameters for CMA-ES
    
-   for ci = 1: size(PVDecs,1)
+   for ci = 1 : size(PVDecs,1)
        % Construct the population
        BigPopulation{ci} = repmat(cDecs(ci,:),cPopSize,1);
        

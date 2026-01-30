@@ -8,7 +8,7 @@ classdef PBNSGAIII < ALGORITHM
 % optimization with Pareto-based bi-indicator infill sampling criterion.
 % Memetic Computing, 2022, 14: 179-191.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -26,15 +26,14 @@ classdef PBNSGAIII < ALGORITHM
             
             %% Initialization of NSGAIII
             
-            NI            = Problem.N;
-            P             = UniformPoint(NI,Problem.D,'Latin');
-            Population    = Problem.Evaluation(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
-            [W,~] = UniformPoint(Problem.N,Problem.M);
-            Zmin  = min(Population.objs,[],1); 
-            A             = Population;
-            
-            THETA         = 5.*ones(Problem.M,Problem.D);
-            Model         = cell(1,Problem.M);
+            NI         = Problem.N;
+            P          = UniformPoint(NI,Problem.D,'Latin');
+            Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,NI,1).*P+repmat(Problem.lower,NI,1));
+            [W,~]      = UniformPoint(Problem.N,Problem.M);
+            Zmin       = min(Population.objs,[],1); 
+            A          = Population;
+            THETA      = 5.*ones(Problem.M,Problem.D);
+            Model      = cell(1,Problem.M);
             
             while Algorithm.NotTerminated(A)
                 Dec = Population.decs;
@@ -49,18 +48,14 @@ classdef PBNSGAIII < ALGORITHM
                     Model{i}   = dmodel;
                     THETA(i,:) = dmodel.theta;
                 end
-                if isempty(Dec)
-                    size(Dec),
-                    pause
-                end
                 w = 1;
                 while w <= wmax
                     w = w + 1;
                     OffspringDec = OperatorGA(Problem,Dec(randi(end,1,NI),:));
                     N = size(OffspringDec,1);
                     OffspringObj = zeros(N,Problem.M);
-                    for i = 1:N
-                        for j = 1:Problem.M
+                    for i = 1 : N
+                        for j = 1 : Problem.M
                             [OffspringObj(i,j),~,~] = predictor(OffspringDec(i,:),Model{j});
                         end
                     end

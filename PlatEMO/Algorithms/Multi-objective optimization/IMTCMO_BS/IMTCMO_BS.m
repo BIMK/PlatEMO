@@ -8,7 +8,7 @@ classdef  IMTCMO_BS < ALGORITHM
 % optimization with baseline results. Swarm and Evolutionary Computation,
 % 2024, 86: 101504.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -47,13 +47,13 @@ classdef  IMTCMO_BS < ALGORITHM
                 VAR0 = 1;
             end
             cnt = 0;
+
             %% Optimization
             while Algorithm.NotTerminated(Population1)
-                
-                %% Udate the epsilon value
-                cp=(-log(VAR0)-6)/log(1-0.5);
+                % Udate the epsilon value
+                cp  = (-log(VAR0)-6)/log(1-0.5);
                 VAR = VAR0*(1-X)^cp;
-                cnt= cnt+1;
+                cnt = cnt + 1;
                 if cnt==1 || mod(cnt,g)==0
                     temp_Population = Population1;
                     if rand > 0.5
@@ -64,24 +64,24 @@ classdef  IMTCMO_BS < ALGORITHM
                     [Population1,Fitness1] = Main_task_EnvironmentalSelection([Population1,samplepop],Problem.N,true);
                     [Population2,Fitness2] = Auxiliray_task_EnvironmentalSelection([Population2,samplepop], Problem.N,VAR);
                 end
-                %% Offspring generation
+                % Offspring generation
                 MatingPool = [Population1(randsample(Problem.N,Problem.N))];
-                [Mate1,Mate2,Mate3]  = Neighbor_Pairing_Strategy(MatingPool,Zmin1);
+                [Mate1,Mate2,Mate3]       = Neighbor_Pairing_Strategy(MatingPool,Zmin1);
                 Offspring1(1:Problem.N/2) = OperatorDE_rand_1(Problem,Mate1(1:Problem.N/2), Mate2(1:Problem.N/2), Mate3(1:Problem.N/2));
                 Offspring1(1+Problem.N/2:Problem.N) = OperatorDE_pbest_1_main(Population1, Problem.N/2, Problem, Fitness1, 0.1);
                 
                 MatingPool = [Population2(randsample(Problem.N,Problem.N))];
-                [Mate1,Mate2,Mate3]  = Neighbor_Pairing_Strategy(MatingPool,Zmin2);
+                [Mate1,Mate2,Mate3]       = Neighbor_Pairing_Strategy(MatingPool,Zmin2);
                 Offspring2(1:Problem.N/2) = OperatorDE_rand_1(Problem,Mate1(1:Problem.N/2),Mate2(1:Problem.N/2),Mate3(1:Problem.N/2));
                 Offspring2(1+Problem.N/2:Problem.N) = OperatorDE_pbest_1_main(Population2, Problem.N/2, Problem, Fitness2, 0.1);
                 
-                Zmin1       = min([Zmin1;Offspring1.objs],[],1);
-                Zmin2       = min([Zmin2;Offspring2.objs],[],1);
+                Zmin1 = min([Zmin1;Offspring1.objs],[],1);
+                Zmin2 = min([Zmin2;Offspring2.objs],[],1);
                 
                 [Population1,Fitness1] = Main_task_EnvironmentalSelection([Population1,Offspring1,Offspring2],Problem.N,true);
                 [Population2,Fitness2] = Auxiliray_task_EnvironmentalSelection( [Population2,Offspring2,Offspring1], Problem.N,VAR);
                 
-                X=X+1/(Problem.maxFE/Problem.N);
+                X = X + 1/(Problem.maxFE/Problem.N);
             end
         end
     end

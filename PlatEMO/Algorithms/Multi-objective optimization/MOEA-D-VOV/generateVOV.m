@@ -2,7 +2,7 @@ function VOV = generateVOV(obj,theta)
 % Generate the virtual objective vectors
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -22,10 +22,10 @@ function VOV = generateVOV(obj,theta)
     normObj = sqrt(sum(obj.^2,2));
     for i = 1 : N2
         CosineVOV = sum(obj.*repmat(W(i,:),N,1),2)./normW(i,:)./normObj;
-        d2 = normObj.*sqrt(1-CosineVOV.^2);
+        d2        = normObj.*sqrt(1-CosineVOV.^2);
         [mind2,I] = min(d2);
-        d1 = normObj(I)*CosineVOV(I);
-        r = d1/norm(W(i,:));
+        d1        = normObj(I)*CosineVOV(I);
+        r         = d1/norm(W(i,:));
 
         VOV(i,:) = W(i,:).*r;
         flag(i)  = mind2 < theta;

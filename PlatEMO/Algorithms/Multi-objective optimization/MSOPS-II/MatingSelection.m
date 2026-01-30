@@ -2,7 +2,7 @@ function Parents = MatingSelection(Population,Archive)
 % The mating selection of MSOPS-II
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -22,7 +22,7 @@ function Parents = MatingSelection(Population,Archive)
     Choose1 = true(N,1);
     Choose1(temp)  = sum((Archive(Parent1(temp)).objs-Population(temp).objs).^2,2) < sum((Archive(Parent2(temp)).objs-Population(temp).objs).^2,2);
     Choose1(~temp) = sum((Archive(Parent1(~temp)).decs-Population(~temp).decs).^2,2) < sum((Archive(Parent2(~temp)).decs-Population(~temp).decs).^2,2);
-    MatingPool = [Parent1(Choose1),Parent2(~Choose1)];
+    MatingPool     = [Parent1(Choose1),Parent2(~Choose1)];
     
     %% Use each solution in population and each solution in mating pool to generate one offspring
     Parents = [Population,Archive(MatingPool)];

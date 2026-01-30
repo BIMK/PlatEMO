@@ -2,7 +2,7 @@ function [OffDec,OffMask] = Operator(Problem,ParentDec,ParentMask,Score)
 % Operator of MP-MMEA
 
 %--------------------------------------------------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB Platform
@@ -20,10 +20,10 @@ function [OffDec,OffMask] = Operator(Problem,ParentDec,ParentMask,Score)
     for i = 1 : N/2    
         index1 = find(Parent1Mask(i,:)&~Parent2Mask(i,:));
         index2 = find(~Parent1Mask(i,:)&Parent2Mask(i,:));
-        p1 = 1./(1+exp(-Score(index1)));
-        p2 = 1./(1+exp(-Score(index2)));
-        idx1 = index1(p1<rand(size(p1)));
-        idx2 = index2(p2>rand(size(p2)));          
+        p1     = 1./(1+exp(-Score(index1)));
+        p2     = 1./(1+exp(-Score(index2)));
+        idx1   = index1(p1<rand(size(p1)));
+        idx2   = index2(p2>rand(size(p2)));          
         OffMask(i,idx1) = 0;
         OffMask(i,idx2) = 1;
     end

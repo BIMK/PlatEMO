@@ -7,7 +7,7 @@ classdef KLNSGAII < ALGORITHM
 % multiobjective optimization via learning from historical search process.
 % IEEE Transactions on Cybernetics, 2021, 52(7): 6119-6130.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -45,7 +45,7 @@ classdef KLNSGAII < ALGORITHM
                     [Population,FrontNo,CrowdDis] = Reinitialization(Problem,Population,zeta);
                 end  
                     MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
-                    j = j+1; 
+                    j = j + 1; 
                 if tau>50
                     Offspring      = OperatorGA(Problem,Population(MatingPool));
                     OffspringLearn = DA_TwoLayer(SourceTemp{end-1}.decs,SourceTemp{end}.decs,Population.decs,Problem,Problem.D);
@@ -55,7 +55,7 @@ classdef KLNSGAII < ALGORITHM
                 end 
                     [Population,FrontNo,CrowdDis] = EnvironmentalSelection([Population,Offspring],Problem.N);
                     SourceTemp{j} = Population;
-                    tau = tau+1;
+                    tau = tau + 1;
                 if Problem.FE >= Problem.maxFE
                     % Return all populations
                     Population = [AllPop,Population];

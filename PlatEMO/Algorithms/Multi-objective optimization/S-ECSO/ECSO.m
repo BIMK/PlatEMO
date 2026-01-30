@@ -2,7 +2,7 @@ function [Population,v] = ECSO(Problem,Population,v,gBest,subswarm_index)
 % The particle updating strategy of S-ECSO
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -10,28 +10,29 @@ function [Population,v] = ECSO(Problem,Population,v,gBest,subswarm_index)
 % Computational Intelligence Magazine, 2017, 12(4): 73-87".
 %--------------------------------------------------------------------------
 
-    w     = 0.7968;
-    c1    = 1.4962;
-    c2    = 1.4962;
-    x = Population.decs;
+    w  = 0.7968;
+    c1 = 1.4962;
+    c2 = 1.4962;
+    x  = Population.decs;
     Obj_fitness = Population.objs;
+
     %% subswarm
     subswarm1_x = x(subswarm_index(1):subswarm_index(2)-1,:);
     subswarm2_x = x(subswarm_index(2):subswarm_index(3)-1,:);
     subswarm3_x = x(subswarm_index(3):size(x,1),:);
 
-    [Front_rank1,~]= NDSort(Obj_fitness(subswarm_index(1):subswarm_index(2)-1,:),inf);
-    subswa = x(find(Front_rank1==1),:);
+    [Front_rank1,~] = NDSort(Obj_fitness(subswarm_index(1):subswarm_index(2)-1,:),inf);
+    subswa     = x(find(Front_rank1==1),:);
     lbest(1,:) = subswa(randi(size(subswa,1)),:);
     llBest(subswarm_index(1):subswarm_index(2)-1,:) = repmat(lbest(1,:),size(subswarm1_x,1),1);
 
-    [Front_rank2,~]= NDSort(Obj_fitness(subswarm_index(2):subswarm_index(3)-1,:),inf);
-    subswa = x(find(Front_rank2==1)+subswarm_index(2)-1,:);
+    [Front_rank2,~] = NDSort(Obj_fitness(subswarm_index(2):subswarm_index(3)-1,:),inf);
+    subswa     = x(find(Front_rank2==1)+subswarm_index(2)-1,:);
     lbest(2,:) = subswa(randi(size(subswa,1)),:);
     llBest(subswarm_index(2):subswarm_index(3)-1,:) = repmat(lbest(2,:),size(subswarm2_x,1),1);
 
-    [Front_rank3,~]= NDSort(Obj_fitness(subswarm_index(3):size(x,1),:),inf);
-    subswa = x(find(Front_rank3==1)+subswarm_index(3)-1,:);
+    [Front_rank3,~] = NDSort(Obj_fitness(subswarm_index(3):size(x,1),:),inf);
+    subswa     = x(find(Front_rank3==1)+subswarm_index(3)-1,:);
     lbest(3,:) = subswa(randi(size(subswa,1)),:);
     llBest(subswarm_index(3):size(x,1),:) = repmat(lbest(3,:),size(subswarm3_x,1),1);
 
@@ -90,7 +91,7 @@ function [Population,v] = ECSO(Problem,Population,v,gBest,subswarm_index)
             x(irange,Upper_index) = Problem.upper(Upper_index);
         end
 
-        Low_flag = Problem.lower > x(irange,:);
+        Low_flag   = Problem.lower > x(irange,:);
         Low_flag_T = sum(Low_flag);
         if Low_flag_T > 0
             Low_index = find(Low_flag == 1);

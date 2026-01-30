@@ -10,7 +10,7 @@ classdef PCSAEA < ALGORITHM
 % multi-objective optimization. Swarm and Evolutionary Computation, 2023,
 % 80: 101323.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -28,7 +28,7 @@ classdef PCSAEA < ALGORITHM
             PopDec     = UniformPoint(N,Problem.D,'Latin');
             Population = Problem.Evaluation(repmat(Problem.upper-Problem.lower,N,1).*PopDec+repmat(Problem.lower,N,1));
             Arc        = Population;
-            t = 1;
+            t          = 1;
         
             %% Optimization
             while Algorithm.NotTerminated(Arc)
@@ -52,9 +52,8 @@ classdef PCSAEA < ALGORITHM
                 if ~isempty(Next)
                     Arc = [Arc,Problem.Evaluation(Next)];
                 end
-
                 Population = EnvironmentalSelection(Arc,Problem.N);                
-                t = t+1;
+                t = t + 1;
             end
         end
     end

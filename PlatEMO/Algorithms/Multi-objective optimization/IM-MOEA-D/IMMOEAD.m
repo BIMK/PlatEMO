@@ -9,7 +9,7 @@ classdef IMMOEAD < ALGORITHM
 % Proceedings of the IEEE International Conference on Systems, Mans and
 % Cybernetics, 2021.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -40,7 +40,7 @@ classdef IMMOEAD < ALGORITHM
 			%% Optimization
 			while Algorithm.NotTerminated(Population)
 				[partition,~] = kmeans(Population.objs,K); 
-				Offsprings=[];
+				Offsprings    = [];
 				% Modeling and reproduction
 				for k = unique(partition)'
 					Offspring  = Operator(Problem,Population(partition==k));
@@ -52,10 +52,10 @@ classdef IMMOEAD < ALGORITHM
 				
 				for i = 1 : length(Offsprings)
 					% Global Replacement
-					all_g_TCH=max(abs((Offsprings(i).obj-repmat(Z,Problem.N,1)).*W),[],2);
-					best_g_TCH=min(all_g_TCH);
+					all_g_TCH  = max(abs((Offsprings(i).obj-repmat(Z,Problem.N,1)).*W),[],2);
+					best_g_TCH = min(all_g_TCH);
 					Chosen_one = find(all_g_TCH(:,1)==best_g_TCH);
-					P = B(Chosen_one(1),randperm(size(B,2)));
+					P          = B(Chosen_one(1),randperm(size(B,2)));
 					
 					% Update the solutions in P by Tchebycheff approach
 					g_old = max(abs(Population(P).objs-repmat(Z,length(P),1)).*W(P,:),[],2);

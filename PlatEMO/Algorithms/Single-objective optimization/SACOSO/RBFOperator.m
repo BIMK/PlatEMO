@@ -2,7 +2,7 @@ function [SwarmRBF,DeltaRBF] = RBFOperator(net,Demons,SwarmRBF,DeltaRBF,Gbest,Pr
 % OperatorPSO - The operator of particle swarm optimization.
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -11,11 +11,10 @@ function [SwarmRBF,DeltaRBF] = RBFOperator(net,Demons,SwarmRBF,DeltaRBF,Gbest,Pr
 %--------------------------------------------------------------------------
 
     %% Parameter setting
-    factor = 0;
-    [N,D]  = size(SwarmRBF);
-    D      = D - 1;
-    BU     = Problem.upper;
-    BD     = Problem.lower;
+    [N,D] = size(SwarmRBF);
+    D     = D - 1;
+    BU    = Problem.upper;
+    BD    = Problem.lower;
     
     %% SL-PSO
     for i = 1 : N
@@ -26,7 +25,7 @@ function [SwarmRBF,DeltaRBF] = RBFOperator(net,Demons,SwarmRBF,DeltaRBF,Gbest,Pr
             ChoseId = Demons(BetterInd(1),1:D);
         elseif length(BetterInd) == 2
             Mix = rand(1,D) > 0.5;
-            ChoseId(Mix) = Demons(BetterInd(1),Mix);
+            ChoseId(Mix)  = Demons(BetterInd(1),Mix);
             ChoseId(~Mix) = Demons(BetterInd(2),~Mix);
         elseif length(BetterInd) > 2
             for t = 1 : D
@@ -41,6 +40,7 @@ function [SwarmRBF,DeltaRBF] = RBFOperator(net,Demons,SwarmRBF,DeltaRBF,Gbest,Pr
             SwarmRBF(i,1:D) = DeltaRBF(i,1:D);
         end
     end
+    
     %% Repair
     SwarmRBF(:,1:D) = max(SwarmRBF(:,1:D),repmat(Problem.lower,N,1));
     SwarmRBF(:,1:D) = min(SwarmRBF(:,1:D),repmat(Problem.upper,N,1));

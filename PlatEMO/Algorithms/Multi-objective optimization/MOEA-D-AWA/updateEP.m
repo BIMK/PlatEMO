@@ -2,7 +2,7 @@ function EP = updateEP(EP,Offsprings,nEP)
 % Update the external population
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -11,8 +11,8 @@ function EP = updateEP(EP,Offsprings,nEP)
 %--------------------------------------------------------------------------
 
     %% Select the non-dominated solutions
-    EP = [EP,Offsprings];
-    EP = EP(NDSort(EP.objs,1)==1);
+    EP    = [EP,Offsprings];
+    EP    = EP(NDSort(EP.objs,1)==1);
     [N,M] = size(EP.objs);
     
     %% Delete the overcrowded solutions

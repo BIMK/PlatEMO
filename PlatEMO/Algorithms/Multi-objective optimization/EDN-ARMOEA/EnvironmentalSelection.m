@@ -2,7 +2,7 @@ function [Next,Range] = EnvironmentalSelection(Obj,RefPoint,Range,N)
 % The environmental selection of AR-MOEA
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -18,7 +18,6 @@ function [Next,Range] = EnvironmentalSelection(Obj,RefPoint,Range,N)
     Last   = find(FrontNo==MaxFNo);
     Choose = LastSelection(Obj(Last,:),RefPoint,Range,N-sum(Next));
     Next(Last(Choose)) = true;
-    %Population = Population(Next,:);
     % Update the range for normalization
     Range(2,:) = max(Obj,[],1);
     Range(2,Range(2,:)-Range(1,:)<1e-6) = 1;

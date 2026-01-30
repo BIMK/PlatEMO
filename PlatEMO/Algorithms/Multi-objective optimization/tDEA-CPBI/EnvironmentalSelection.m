@@ -2,7 +2,7 @@ function [Population,z,znad,z_c,znad_c] = EnvironmentalSelection(Population,W,N,
 % The environmental selection of theta-DEA
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -18,11 +18,11 @@ function [Population,z,znad,z_c,znad_c] = EnvironmentalSelection(Population,W,N,
 
     %% Normalization
     [PopObj,PopCon,z,znad,z_c,znad_c] = Normalization(Population(St).objs,Population(St).cons,z,znad,z_c,znad_c);
-    CV      = sum(max(0,PopCon),2);
-    fr      = sum(CV==0)/N;
+    CV = sum(max(0,PopCon),2);
+    fr = sum(CV==0)/N;
   
     %% theta-non-dominated sorting
-    tFrontNo = tNCDSort(PopObj,PopCon,W,fr);
+    tFrontNo  = tNCDSort(PopObj,PopCon,W,fr);
     MaxFNo    = find(cumsum(hist(tFrontNo,1:max(tFrontNo)))>=N,1);
     LastFront = find(tFrontNo==MaxFNo);
     LastFront = LastFront(randperm(length(LastFront)));

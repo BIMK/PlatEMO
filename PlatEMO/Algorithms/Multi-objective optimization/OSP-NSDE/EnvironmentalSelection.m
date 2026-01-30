@@ -2,7 +2,7 @@ function [Population,FrontNo] = EnvironmentalSelection(Population,N)
 % The environmental selection of OSP-NSDE
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -19,16 +19,16 @@ function [Population,FrontNo] = EnvironmentalSelection(Population,N)
     %% Select the solutions in the last front by truncation
     if sum(Next) < N
         Last = find(FrontNo==MaxFNo);
-        apt = Population.objs;
-        Pop = apt(Last,:);
+        apt  = Population.objs;
+        Pop  = apt(Last,:);
         Next(Last) = true;
         Temp = Last;
     elseif sum(Next) > N
-        apt = Population.objs;
-        Pop = apt(Next,:);
+        apt  = Population.objs;
+        Pop  = apt(Next,:);
         Temp = find(Next);
     end
-    Del  = Truncation(Pop,sum(Next)-N);
+    Del = Truncation(Pop,sum(Next)-N);
     Next(Temp(Del)) = false;
 
     %% Population for next generation

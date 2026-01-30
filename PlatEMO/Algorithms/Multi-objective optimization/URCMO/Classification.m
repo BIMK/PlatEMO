@@ -1,7 +1,7 @@
 function [ flag,ll] = Classification( Population1,Population2, beita)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -13,16 +13,15 @@ function [ flag,ll] = Classification( Population1,Population2, beita)
 
     ll = -1;
 
-    pop1 = Population1.decs;
+    pop1  = Population1.decs;
     conv1 = Population1.cons;
-    conv1(conv1<=0)=0;
+    conv1(conv1<=0) = 0;
     conv1 = sum(conv1,2);
-    obj1 = Population1.objs;
-    pop2 = Population2.decs;
+    obj1  = Population1.objs;
     conv2 = Population2.cons;
-    conv2(conv2<=0)=0;
+    conv2(conv2<=0) = 0;
     conv2 = sum(conv2,2);
-    obj2 = Population2.objs;
+    obj2  = Population2.objs;
 
     [FrontNo,MaxFNo] = NDSort(obj1,conv1,inf);
     x1 = find(FrontNo==1);
@@ -35,7 +34,6 @@ function [ flag,ll] = Classification( Population1,Population2, beita)
     elseif length(find(conv2(x2)>0))==0 % When all solutions of population2 are feasible, type-I.
         flag = 1;
     elseif  length(find(conv2>0))>0 && length(find(conv2>0))< size(pop1,1)  % When population2 has both feasible and infeasible solutions
-
         obj1 = obj1(x1,:);
         obj2 = obj2(x2,:);
         [FrontNo,MaxFNo] = NDSort([obj1;obj2],inf); 

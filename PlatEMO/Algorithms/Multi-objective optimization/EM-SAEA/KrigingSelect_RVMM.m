@@ -2,7 +2,7 @@ function PopNew = KrigingSelect_RVMM(PopDec,PopObj,MSE,V,V0,NumV1,delta,mu_,thet
 % Kriging selection in K-RVEA
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

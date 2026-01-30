@@ -1,13 +1,14 @@
 classdef LRMOEA < ALGORITHM
-% <2024> <multi> <real/integer/binary> <large/none> <constrained/none> <sparse> <robust>
+% <2025> <multi> <real/integer/binary> <large/none> <constrained/none> <sparse> <robust>
 % Large-scale robust multi-objective evolutionary algorithm
 
 %------------------------------- Reference --------------------------------
 % S. Shao, Y. Tian, L. Zhang, K. C. Tan, and X. Zhang. An evolutionary
 % algorithm for solving large-scale robust multi-objective optimization
-% problems. IEEE Transactions on Evolutionary Computation, 2024.
+% problems. IEEE Transactions on Evolutionary Computation, 2025, 29(6):
+% 2476-2490.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -31,10 +32,10 @@ classdef LRMOEA < ALGORITHM
             end
             Population = Problem.Evaluation(Dec.*Mask);
             [Population,Dec,Mask,FrontNo,CrowdDis] = EnvironmentalSelection(Population,Dec,Mask,Problem.N);
-            obj =Population.objs;
-            score    = ones(1,Problem.D);
-            score    = FitnessCal(Mask,FrontNo,score);
-            Arch     = archives(obj,Dec,Mask);
+            obj   = Population.objs;
+            score = ones(1,Problem.D);
+            score = FitnessCal(Mask,FrontNo,score);
+            Arch  = archives(obj,Dec,Mask);
 
             %% Optimization
             while Algorithm.NotTerminated(Population)

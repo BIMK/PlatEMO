@@ -9,7 +9,7 @@ classdef IMCMOEAD < ALGORITHM
 % Proceedings of the IEEE International Conference on Systems, Mans and
 % Cybernetics, 2024.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -60,8 +60,8 @@ classdef IMCMOEAD < ALGORITHM
                 nadirPoint = max([PopObj;OffObj],[],1);
 				
 				% Normalize objectives
-                PopObj   = (PopObj-repmat(idealPoint,size(PopObj,1),1))./repmat(nadirPoint-idealPoint,size(PopObj,1),1);
-                OffObj   = (OffObj-repmat(idealPoint,size(OffObj,1),1))./repmat(nadirPoint-idealPoint,size(OffObj,1),1);
+                PopObj = (PopObj-repmat(idealPoint,size(PopObj,1),1))./repmat(nadirPoint-idealPoint,size(PopObj,1),1);
+                OffObj = (OffObj-repmat(idealPoint,size(OffObj,1),1))./repmat(nadirPoint-idealPoint,size(OffObj,1),1);
 						
 				% Performs global replacement based on the Tchebycheff approach
 				Population = globalReplacement(Population, Offsprings, W, B, T, PopObj, OffObj);

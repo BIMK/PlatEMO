@@ -5,7 +5,7 @@ function [tArchive,SwarmFES,VelFES,PbestFES,GbestFES,notEval,notEST,PBEval] = FE
 %       [tArchive,SwarmFES,PbestFES,GbestFES,notEval] = FESPSO(SwarmFES,VelFES,PbestFES,GbestFES,GbestRBF,Problem,notEval,SwarmFESt1,SwarmFESt)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -26,10 +26,11 @@ function [tArchive,SwarmFES,VelFES,PbestFES,GbestFES,notEval,notEST,PBEval] = FE
     r2        = rand(N,D);
     r3        = rand(N,D);
     VelFES    = PHI*(VelFES+c1*r1.*(PbestFES(:,1:D)-SwarmFES(:,1:D))+c2*r2.*(GbestFES(:,1:D)-SwarmFES(:,1:D))+...
-        c3*r3.*(GbestRBF(:,1:D)-SwarmFES(:,1:D)));
-    VelFES(:,1:D) = max(VelFES(:,1:D),repmat(BD,N,1));
-    VelFES(:,1:D) = min(VelFES(:,1:D),repmat(BU,N,1));
+                c3*r3.*(GbestRBF(:,1:D)-SwarmFES(:,1:D)));
+    VelFES(:,1:D)   = max(VelFES(:,1:D),repmat(BD,N,1));
+    VelFES(:,1:D)   = min(VelFES(:,1:D),repmat(BU,N,1));
     SwarmFES(:,1:D) = SwarmFES(:,1:D) + VelFES;
+
     %% Repair
     SwarmFES(:,1:D) = max(SwarmFES(:,1:D),repmat(BD,N,1));
     SwarmFES(:,1:D) = min(SwarmFES(:,1:D),repmat(BU,N,1));
@@ -44,7 +45,7 @@ function [tArchive,SwarmFES,VelFES,PbestFES,GbestFES,notEval,notEST,PBEval] = FE
     else
         % Set label
         FitDetermine = false(N,1);
-        notEST  = true(N,1);
+        notEST       = true(N,1);
         % Approximate the fitness of each particle
         srgtObj = sim(net,SwarmFES(:,1:D)')';
         
@@ -127,9 +128,9 @@ function [tArchive,SwarmFES,VelFES,PbestFES,GbestFES,notEval,notEST,PBEval] = FE
             remain = find(SwarmFES(:,1+D) ~= srgtObj);
             
             for k = 1 : length(remain)
-                diff = abs(SwarmFES(remain,1+D)-srgtObj(remain));
-                DF   = mean(diff);
-                select    = find(diff>DF);
+                diff   = abs(SwarmFES(remain,1+D)-srgtObj(remain));
+                DF     = mean(diff);
+                select = find(diff>DF);
                 if ~isempty(select)
                     offspring = Problem.Evaluation(SwarmFES(remain(select),1:D));
                     SwarmFES(remain(select),1+D) = offspring.objs;
@@ -143,7 +144,7 @@ function [tArchive,SwarmFES,VelFES,PbestFES,GbestFES,notEval,notEST,PBEval] = FE
         % Update Personal best solution
         update = SwarmFES(:,1+D) < PbestFES(:,1+D);
         PbestFES(update,:) = SwarmFES(update,:);
-        PBEval(update) = notEval(update);
+        PBEval(update)     = notEval(update);
     end
     
     % Global best position determination
@@ -155,7 +156,7 @@ function [tArchive,SwarmFES,VelFES,PbestFES,GbestFES,notEval,notEST,PBEval] = FE
     else
         if value < GbestFES(:,1+D)
             if ~PBEval(best)
-                new  = Problem.Evaluation(PbestFES(best,1:D));
+                new = Problem.Evaluation(PbestFES(best,1:D));
                 PbestFES(best,D+1) = new.objs;
                 if new.objs < GbestFES(:,D+1)
                     GbestFES = PbestFES(best,:);

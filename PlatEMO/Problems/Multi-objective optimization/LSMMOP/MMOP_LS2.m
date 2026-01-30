@@ -1,5 +1,5 @@
 classdef MMOP_LS2 < PROBLEM
-% <2024> <multi> <real> <large/none> <multitask> <sparse/none>
+% <2025> <multi> <real> <large/none> <multitask> <sparse/none>
 % Multitasking multi-objective optimization problem (SMOP1 to SMOP8)
 % SubD     --- 1000,1000 --- Number of decision variables of each task
 % SubTheta ---   0.1,0.1 --- Number of decision variables of each task
@@ -8,9 +8,9 @@ classdef MMOP_LS2 < PROBLEM
 % C. Wu, Y. Tian, L. Zhang, X. Xiang, and X. Zhang. A sparsity knowledge
 % transfer-based evolutionary algorithm for large-scale multitasking multi-
 % objective optimization. IEEE Transactions on Evolutionary Computation,
-% 2024.
+% 2025, 29(6): 2582-2595.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

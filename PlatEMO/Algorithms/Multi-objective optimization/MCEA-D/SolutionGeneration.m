@@ -2,7 +2,7 @@ function y_i = SolutionGeneration(Problem, Population, P, c_i, R_max, i)
 % Solution-generation in MCEA/D
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -14,20 +14,20 @@ function y_i = SolutionGeneration(Problem, Population, P, c_i, R_max, i)
 
     for r = 1 : R_max 
         % Generate candidate solution
-        candidate           = OperatorDE(Problem, Population(i).dec, Population(P(1)).dec, Population(P(2)).dec);
+        candidate = OperatorDE(Problem, Population(i).dec, Population(P(1)).dec, Population(P(2)).dec);
         
         % Shuffle the parents
-        rnd                 = randperm(length(P));
-        P                   = P(rnd);
+        rnd = randperm(length(P));
+        P   = P(rnd);
         
         % Input the candidate solution to SVM
-        [c, d_i]      = c_i.PredictClass(candidate);
+        [c, d_i] = c_i.PredictClass(candidate);
   
         if c == 1
         % If predicted label of the candidate solution is positive class
             % Return the candidate solution and terminate the process 
             y_i = candidate;
-            return
+            return;
         else
         % If predicted label of the candidate solution is negative class
             % Choose the candidate solution having the best decision score function value

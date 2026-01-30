@@ -2,7 +2,7 @@ classdef EnvCDP
 % The environmental selection of SPEA2 (constraint dominance principle)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -33,14 +33,12 @@ classdef EnvCDP
             Population = Population(Next);
             Fitness    = Fitness(Next);
             % Sort the population
-            [~,rank] = sort(Fitness);
+            [~,rank]   = sort(Fitness);
             Population = Population(rank);
         end
 
         function Del = Truncation(obj, PopObj,K)
             % Select part of the solutions by truncation
-        
-            %% Truncation
             Distance = pdist2(PopObj,PopObj);
             Distance(logical(eye(length(Distance)))) = inf;
             Del = false(1,size(PopObj,1));

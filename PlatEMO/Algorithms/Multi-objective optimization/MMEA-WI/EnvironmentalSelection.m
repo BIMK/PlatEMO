@@ -2,7 +2,7 @@ function [Population,Fitness] = EnvironmentalSelection(Population,N,kappa,state)
 % The environmental selection of IBEA
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -17,22 +17,22 @@ function [Population,Fitness] = EnvironmentalSelection(Population,N,kappa,state)
 
     dist = pdist2(Population.decs,Population.decs);
 
-    var=Population.decs;
+    var = Population.decs;
 
-    sigma=prod(max(var)-min(var))^(1/size(var,2))/size(var,1);
-    sigma=sigma*(exp(-state));
+    sigma = prod(max(var)-min(var))^(1/size(var,2))/size(var,1);
+    sigma = sigma*(exp(-state));
 
-    weight=1/(sigma*(2*pi)^0.5);
-    weight=weight.*exp(-dist.^2/(2*sigma^2));
+    weight = 1/(sigma*(2*pi)^0.5);
+    weight = weight.*exp(-dist.^2/(2*sigma^2));
 
-    newfit=zeros(size(Fitness));
-    for i=1:size(var,1)
-        tmp=weight(i,:).*(Fitness);
-        newfit(i)=sum(tmp);
+    newfit = zeros(size(Fitness));
+    for i = 1 : size(var,1)
+        tmp = weight(i,:).*(Fitness);
+        newfit(i) = sum(tmp);
     end
 
-    weight=sum(weight);
-    newfit=newfit.*weight;
+    weight = sum(weight);
+    newfit = newfit.*weight;
 
     Fitness = newfit;
 
@@ -43,16 +43,16 @@ function [Population,Fitness] = EnvironmentalSelection(Population,N,kappa,state)
     end
     Population = Population(Next);
 
-    Fitness=Kdis(Population,N/2);    
+    Fitness = Kdis(Population,N/2);    
 end
 
 function fDN = Kdis(Pop,K)
-    PopObj=Pop.objs;
-    PopDec=Pop.decs;
-    Np = size(PopObj,1);
-    d_dec = pdist2(PopDec,PopDec,'euclidean');
+    PopObj = Pop.objs;
+    PopDec = Pop.decs;
+    Np     = size(PopObj,1);
+    d_dec  = pdist2(PopDec,PopDec,'euclidean');
     d_dec(logical(eye(Np))) = inf;
-    sdd = sort(d_dec);
+    sdd    = sort(d_dec);
     dn_dec = sum(sdd(1:K,:));
     avg_dn_dec = mean(dn_dec);
     if avg_dn_dec == 0

@@ -6,7 +6,7 @@ classdef WOA < ALGORITHM
 % S. Mirjalili and A. Lewis. The whale optimization algorithm. Advances in
 % Engineering Software, 2016, 95: 51-67.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -36,7 +36,7 @@ classdef WOA < ALGORITHM
                 % Search for prey
                 r = randperm(Problem.N,sum(type3));
                 PopDec(type3,:) = PopDec(r,:) - repmat(A(type3),1,Problem.D).*abs(repmat(C(type3),1,Problem.D).*PopDec(r,:)-PopDec(type3,:));
-                Population = Problem.Evaluation(PopDec);
+                Population      = Problem.Evaluation(PopDec);
             end
         end
     end

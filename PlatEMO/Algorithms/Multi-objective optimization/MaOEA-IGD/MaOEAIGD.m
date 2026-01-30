@@ -8,7 +8,7 @@ classdef MaOEAIGD < ALGORITHM
 % for many-objective optimization problems. IEEE Transactions on
 % Evolutionary Computation, 2019, 23(2): 173-187.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -57,7 +57,7 @@ function fit = Fitness(PopObj)
 % Calculate the objective value of each solution on each single-objective
 % optimization problem in nadir point estimation
 
-    fit   = zeros(size(PopObj));
+    fit = zeros(size(PopObj));
     for i = 1 : size(PopObj,2)
         fit(:,i) = abs(PopObj(:,i)) + 100*sum(PopObj(:,[1:i-1,i+1:end]).^2,2);
     end

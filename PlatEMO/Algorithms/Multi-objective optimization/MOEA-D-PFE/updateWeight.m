@@ -2,7 +2,7 @@ function [W,B] = updateWeight(obj,objhat,N)
 % Update the weight vectors
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -14,7 +14,7 @@ function [W,B] = updateWeight(obj,objhat,N)
 
     fmin = min(obj,[],1);
     fmax = max(obj,[],1);
-    obj = unique([normalize(obj,'range');objhat],'rows');
+    obj  = unique([normalize(obj,'range');objhat],'rows');
 
     %% Select the representative objective vectors
     LpNormD = pdist2(obj,obj,'minkowski',0.5);

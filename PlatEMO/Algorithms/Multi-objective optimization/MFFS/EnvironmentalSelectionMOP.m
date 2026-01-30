@@ -2,7 +2,7 @@ function [Population, FrontNo, CrowdDis] = EnvironmentalSelectionMOP(Population,
 % Environmental selection of MFFS for the multi-objective task
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -29,19 +29,19 @@ function [Population, FrontNo, CrowdDis] = EnvironmentalSelectionMOP(Population,
     NextNo  = false(1, size(PopObj, 1));
     
     % Directly save solutions in the first front
-    First     = find(FrontNo==1);
+    First         = find(FrontNo==1);
     NextNo(First) = 1;
-    NDpoints  = Population(First);
+    NDpoints      = Population(First);
     
     while sum(NextNo) < N || sum(NextNo)==size(PopObj, 1)
-        for i = 2:max(FrontNo)
+        for i = 2 : max(FrontNo)
             FrontPop = [];
             No       = find(FrontNo==i);
             No       = No(NextNo(No)==0);
             Pop      = Population(No);
             PopObj   = Pop.objs;
             [Obj, ~, c] = unique(PopObj, 'rows', 'stable');
-            for j=1:max(c)
+            for j = 1 : max(c)
                 index = find(c==j);
                 if size(index, 1) > 1
                     selectedNo = DuplicationSelection(No(index), Population, NDpoints, NextNo, aveDis);
@@ -56,11 +56,11 @@ function [Population, FrontNo, CrowdDis] = EnvironmentalSelectionMOP(Population,
             end
         end
     end
-    
     Population = Population(NextNo);
     FrontNo    = FrontNo(NextNo);
     MaxFNo     = max(FrontNo);
     Next       = FrontNo < MaxFNo;
+
     %% Calculate the crowding distance of each solution
     CrowdDis = CrowdingDistance(Population.objs, FrontNo);
     
@@ -77,29 +77,29 @@ end
     
  function selectedNo = DuplicationSelection(index, Population, NDpoints, Next, aveDis)
      % Choose one solution from many duplicated solutions (objective space)
-     NDobj = NDpoints.objs;
-     NDdec = NDpoints.decs;
+     NDobj   = NDpoints.objs;
+     NDdec   = NDpoints.decs;
      Nextobj = Population(Next).objs;
      Nextdec = Population(Next).decs;
-     Obj = Population(index).objs;
-     Dec = Population(index).decs;
-     [r, c] = ismember(Obj(1,1), Nextobj(:,1));
+     Obj     = Population(index).objs;
+     Dec     = Population(index).decs;
+     [r, c]  = ismember(Obj(1,1), Nextobj(:,1));
      if r == 1
          aDist = pdist2(Dec, Nextdec(c,:), "hamming");
          if sum(index(aDist>=aveDis)) >= 1
              selectedNo = index(aDist>=aveDis);
          else
-            [~, No] = max(sum(aDist,2), [], 1);
+            [~, No]    = max(sum(aDist,2), [], 1);
             selectedNo = index(No);
          end
      else
-         Dis = abs(repmat(Obj(1,1),size(NDobj,1),1) - NDobj(:,1));
+         Dis     = abs(repmat(Obj(1,1),size(NDobj,1),1) - NDobj(:,1));
          [~, no] = min(Dis, [], 1);
-         aDist = pdist2(Dec, NDdec(no,:), "hamming");
+         aDist   = pdist2(Dec, NDdec(no,:), "hamming");
          if sum(index(aDist>=aveDis)) >= 1
               selectedNo = index(aDist>=aveDis);
          else
-            [~, No] = max(sum(aDist,2), [], 1);
+            [~, No]    = max(sum(aDist,2), [], 1);
             selectedNo = index(No);
          end
      end

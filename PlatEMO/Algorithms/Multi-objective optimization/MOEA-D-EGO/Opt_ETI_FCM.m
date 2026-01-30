@@ -3,7 +3,7 @@ function new_x = Opt_ETI_FCM(M,D,xlower,xupper,Batch_size,train_x,train_y)
 % Expected Tchebycheff Improvement (ETI)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -22,26 +22,28 @@ function new_x = Opt_ETI_FCM(M,D,xlower,xupper,Batch_size,train_x,train_y)
     % # of weight vectors：M = 2,  3,  4,  5,  6  
     num_weights = [200,210,295,456,462]; 
     if M <= 3
-        [ref_vecs, ~]  = UniformPoint(num_weights(M-1),M); % simplex-lattice design 
+        [ref_vecs, ~] = UniformPoint(num_weights(M-1),M);       % simplex-lattice design 
     elseif M <= 6
-        [ref_vecs, ~]  = UniformPoint(num_weights(M-1),M,'ILD'); % incremental lattice design
+        [ref_vecs, ~] = UniformPoint(num_weights(M-1),M,'ILD'); % incremental lattice design
     else
-        [ref_vecs, ~]  = UniformPoint(500,M); % Two-layered SLD
+        [ref_vecs, ~] = UniformPoint(500,M);                    % Two-layered SLD
     end
   
     %% Estimate the Utopian point z
-    z       = get_estimation_z(D,xlower,xupper,GPModels,centers,ref_vecs,min(train_y,[],1)); 
-    gmin    = get_gmin(train_y,ref_vecs,z); 
+    z    = get_estimation_z(D,xlower,xupper,GPModels,centers,ref_vecs,min(train_y,[],1)); 
+    gmin = get_gmin(train_y,ref_vecs,z); 
    
     %% Using MOEA/D-DE to Maximize ETI
    [pop_ETI,candidate_x,~,~] = MOEAD_ETI(D,xlower,xupper,GPModels,centers,ref_vecs,gmin,z);
 
     %% Select the unsimilar candidate solutions and build candidate pool Q
-    Q = []; Q_ETI = [];  temp = train_x;
+    Q     = [];
+    Q_ETI = []; 
+    temp  = train_x;
     for i = 1 : size(candidate_x,1)
         if min(pdist2(real(candidate_x(i,:)),real(temp))) > 1e-5
             if pop_ETI(i) > 0
-                Q = [Q;candidate_x(i,:)]; Q_ETI = [Q_ETI;pop_ETI(i)];
+                Q    = [Q;candidate_x(i,:)]; Q_ETI = [Q_ETI;pop_ETI(i)];
                 temp = [temp;candidate_x(i,:)];
             end
         end
@@ -232,6 +234,7 @@ function  z = get_estimation_z(D, xlower,xupper,GPModels,centers,ref_vecs,z)
        end      
     end
 end
+
 function SelectDecs = K_means_Batch_Select(Q,Batch_size,candidate_x,Q_ETI) 
      batch_size = min(Batch_size,size(Q,1));% in case Q is smaller than Batch size
     
@@ -254,6 +257,7 @@ function SelectDecs = K_means_Batch_Select(Q,Batch_size,candidate_x,Q_ETI)
         SelectDecs = [SelectDecs;candidate_x(Qb,:)];
     end
 end
+
 % >>>>>>>>>>>>>>>>    functions in PlatEMO ====================
 function Offspring = operator_DE(Parent1,Parent2,Parent3, xlower,xupper)
 %OperatorDE - The operator of differential evolution.

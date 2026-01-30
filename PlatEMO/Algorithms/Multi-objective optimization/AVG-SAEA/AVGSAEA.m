@@ -1,5 +1,5 @@
 classdef AVGSAEA< ALGORITHM
-% <2024> <multi> <real/integer> <expensive> <large>
+% <2025> <multi> <real/integer> <expensive> <large>
 % Adaptive variable grouping based surrogate-assisted evolutionary algorithm
 % Numtrain --- 300 --- Number of train samples
 % wmax     ---  20 --- Number of generations before updating models
@@ -9,9 +9,10 @@ classdef AVGSAEA< ALGORITHM
 %------------------------------- Reference --------------------------------
 % Y. Li, X. Feng, and H. Yu. Solving high-dimensional expensive
 % multiobjective optimization problems by adaptive decision variable
-% grouping. IEEE Transactions on Evolutionary Computation, 2024.
+% grouping. IEEE Transactions on Evolutionary Computation, 2025, 29(4):
+% 1041-1054.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform

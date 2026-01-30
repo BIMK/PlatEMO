@@ -2,7 +2,7 @@ function [OffDec,OffMask] = Operator(Problem,ParentDec,ParentMask,REAL,Parameter
 % The Operator
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -23,9 +23,9 @@ function [OffDec,OffMask] = Operator(Problem,ParentDec,ParentMask,REAL,Parameter
     %% One point crossover and bitwise mutation for Mask
     k = repmat(1:D,N,1) > repmat(randi(D,N,1),1,D);
     k(repmat(rand(N,1)>proC,1,D)) = false;
-    OffMask    = Parent1Mask;
-    OffMask(k) = Parent2Mask(k);
-    Site       = rand(N,D) < proM/D;
+    OffMask       = Parent1Mask;
+    OffMask(k)    = Parent2Mask(k);
+    Site          = rand(N,D) < proM/D;
     OffMask(Site) = ~OffMask(Site);
     
     %% Crossover and mutation for dec

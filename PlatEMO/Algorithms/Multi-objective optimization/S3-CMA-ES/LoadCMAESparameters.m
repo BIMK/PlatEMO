@@ -1,7 +1,7 @@
 function tempPara = LoadCMAESparameters(Problem, groups, popSize)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -22,7 +22,7 @@ function tempPara = LoadCMAESparameters(Problem, groups, popSize)
        % set the CMA-ES parameters for each group
        tempPara(g).N = N;
        
-       mu = tempPara(g).lambda/2;           % number of parents/points for recombination
+       mu      = tempPara(g).lambda/2;      % number of parents/points for recombination
        weights = log(mu+1/2) - log(1:mu)';  % muXone array for weighted recombination
        tempPara(g).mu = floor(mu);
        

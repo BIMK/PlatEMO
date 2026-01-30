@@ -2,7 +2,7 @@ function tA = UpdatetA(tA,P,Offspring,z,W,avg_fit)
 % Update temparory archive
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -21,7 +21,7 @@ function tA = UpdatetA(tA,P,Offspring,z,W,avg_fit)
         if (e*g_o+(1-e)*avg_fit*sum(max(Offspring.cons,0),2))<(e*g_pi+(1-e)*avg_fit*sum(max(tA(i).cons,0),2))
             tA(i) = Offspring;
         end
-        c = c+1;
+        c = c + 1;
         P(index(1)) = [];
     end
 end

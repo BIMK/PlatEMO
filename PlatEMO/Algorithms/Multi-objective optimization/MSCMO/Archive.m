@@ -2,7 +2,7 @@ function Population = Archive(varargin)
 % Update the archive
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -33,7 +33,7 @@ function Population = Archive(varargin)
                 Del  = Truncation(Population(Next).objs,sum(Next)-N);
                 Temp = find(Next);
                 Next(Temp(Del)) = false;
-                Population     = Population(Next);      
+                Population      = Population(Next);      
             end
         end
     else                  
@@ -44,7 +44,7 @@ function Population = Archive(varargin)
         feasible_solutions = Population(1:feasible_number);
         remain_solutions   = Population(feasible_number+1:end);
         [W,~] = UniformPoint(N,size(Population.objs,2));
-        itr = 1;
+        itr   = 1;
         while size(feasible_solutions,2) < N
             for i = 1 : size(W,1)
                 if size(feasible_solutions,2) == N
@@ -59,9 +59,9 @@ function Population = Archive(varargin)
                     remain_solutions(region2(1)) = [];
                 end
             end
-            itr=itr+1;
+            itr = itr + 1;
         end
-        Population=feasible_solutions;
+        Population = feasible_solutions;
     end  
 end
 

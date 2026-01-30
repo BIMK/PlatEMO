@@ -8,7 +8,7 @@ classdef PREA < ALGORITHM
 % promising region. IEEE Transactions on Evolutionary Computation, 2021,
 % 25(1): 75-86.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -30,7 +30,7 @@ classdef PREA < ALGORITHM
 
             %% calculate the ratio based indicator matrix
             IMatrix = ones(Problem.N,Problem.N); 
-            for i=1:1:Problem.N
+            for i = 1 : Problem.N
                 Fi             = PopObj(i,:);
                 % calculate ratio based indicator value of each individual
                 Ir             = PopObj./repmat(Fi,Problem.N,1) - 1;  

@@ -2,7 +2,7 @@ function [Population,dk] = UpdateArc(Population,offspring,N)
 % Update the archive
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -12,21 +12,21 @@ function [Population,dk] = UpdateArc(Population,offspring,N)
 
 % This function is written by Wenhua Li
 
-    joint=[Population offspring];
+    joint = [Population offspring];
 
     [FrontNo,MaxFNo] = NDSort(joint.objs,N);
-    next=FrontNo==1;
-    Population=joint(next);
+    next             = FrontNo==1;
+    Population       = joint(next);
 
     [Choose,fDKN] = DoubleNearestSelection(Population,N,5);
-    Population = Population(Choose);
-    dk = fDKN(Choose);
+    Population    = Population(Choose);
+    dk            = fDKN(Choose);
 end
 
 function [Choose,fDN] = DoubleNearestSelection(Pop,N,K)
-    PopObj=Pop.objs;
-    PopDec=Pop.decs;
-    Np = size(PopObj,1);
+    PopObj = Pop.objs;
+    PopDec = Pop.decs;
+    Np     = size(PopObj,1);
     Choose = true(1,Np);
     if Np <= K
         fDN = zeros(1,Np);
@@ -37,8 +37,8 @@ function [Choose,fDN] = DoubleNearestSelection(Pop,N,K)
     d_obj(logical(eye(Np))) = inf;
     d_dec(logical(eye(Np))) = inf;
 
-    sdo = sort(d_obj);
-    sdd = sort(d_dec);
+    sdo    = sort(d_obj);
+    sdd    = sort(d_dec);
     dn_obj = sum(sdo(1:K,:));
     dn_dec = sum(sdd(1:K,:));
     avg_dn_obj = mean(dn_obj);
@@ -54,14 +54,14 @@ function [Choose,fDN] = DoubleNearestSelection(Pop,N,K)
     while sum(Choose) > N
         [~,Del] = max(fDN);
 
-        Choose(Del) = false;
+        Choose(Del)  = false;
         d_obj(Del,:) = inf;
         d_obj(:,Del) = inf;
         d_obj(Del,:) = inf;
         d_obj(:,Del) = inf;
 
-        sdo = sort(d_obj);
-        sdd = sort(d_dec);
+        sdo    = sort(d_obj);
+        sdd    = sort(d_dec);
         dn_obj = sum(sdo(1:K,:));
         dn_dec = sum(sdd(1:K,:));
         avg_dn_obj = mean(dn_obj);

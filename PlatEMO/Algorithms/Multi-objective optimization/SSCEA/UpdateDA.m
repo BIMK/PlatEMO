@@ -2,7 +2,7 @@ function DA = UpdateDA(DA,New,MaxSize)
 % Update DA
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -32,7 +32,7 @@ function DA = UpdateDA(DA,New,MaxSize)
     w       = zeros(M)+1e-6+eye(M);
     for i = 1 : M
         objmatrix = DA(~Choose).objs;
-        [~,Extreme(i)] = min(max(DA(~Choose).objs./repmat(w(i,:),sum(~Choose),1),[],2)+0.1*objmatrix(:,i)/(1e-6)); % 带惩罚的AFS函数值
+        [~,Extreme(i)]     = min(max(DA(~Choose).objs./repmat(w(i,:),sum(~Choose),1),[],2)+0.1*objmatrix(:,i)/(1e-6)); % 带惩罚的AFS函数值
         Choose(Extreme(i)) = true; 
     end    
 

@@ -11,7 +11,7 @@ classdef KTS < ALGORITHM
 % evolutionary multi-objective optimization. IEEE Transactions on
 % Evolutionary Computation, 2024, 28(5): 1286-1300.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -119,10 +119,19 @@ classdef KTS < ALGORITHM
                 end
                 
                 % Set the CCA and CDA as the current CA and DA
-                CCA.obj = CA.objs; CCA.dec = CA.decs; CCA.con = CA.cons;  CCA.MSE = zeros(size(CCA.con,1),Problem.M+size(CCA.con,2));
-                CP2.obj = P2.objs; CP2.dec = P2.decs; CP2.con = P2.cons; CP2.MSE = zeros(size(CP2.con,1),Problem.M+size(CP2.con,2));
-                CDA.obj = DA.objs; CDA.dec = DA.decs; CDA.con = DA.cons; CDA.MSE = zeros(size(CDA.con,1),Problem.M+size(CDA.con,2));
-                w = 1;
+                CCA.obj = CA.objs;
+                CCA.dec = CA.decs;
+                CCA.con = CA.cons;
+                CCA.MSE = zeros(size(CCA.con,1),Problem.M+size(CCA.con,2));
+                CP2.obj = P2.objs;
+                CP2.dec = P2.decs;
+                CP2.con = P2.cons;
+                CP2.MSE = zeros(size(CP2.con,1),Problem.M+size(CP2.con,2));
+                CDA.obj = DA.objs;
+                CDA.dec = DA.decs;
+                CDA.con = DA.cons;
+                CDA.MSE = zeros(size(CDA.con,1),Problem.M+size(CDA.con,2));
+                w       = 1;
                 while w <= wmax1
                     if search_mode == 0
                         % Solution generation in KTA2
@@ -177,9 +186,9 @@ classdef KTS < ALGORITHM
                     % KTA2
                     % remove the same solution in all_population
                     [~,ia,~] = setxor(CCA.dec,A1.decs,'rows');
-                    CCA = givevalue(CCA,ia);
+                    CCA      = givevalue(CCA,ia);
                     [~,ia,~] = setxor(CDA.dec,A1.decs,'rows');
-                    CDA = givevalue(CDA,ia);
+                    CDA      = givevalue(CDA,ia);
                     
                     Offspring01 = Adaptive_sampling(CCA.obj,CDA.obj,CCA.dec,CDA.dec,CDA.MSE,DA,P2,mu1,p,phi1);
                 else
@@ -188,13 +197,13 @@ classdef KTS < ALGORITHM
                     Offspring01 = CCA2.dec;
                 end
                 
-                [~,index] = unique(Offspring01 ,'rows');
-                PopNew = Offspring01(index,:);
+                [~,index]   = unique(Offspring01 ,'rows');
+                PopNew      = Offspring01(index,:);
                 Offspring02 = PopNew;
                 
                 if ~isempty(Offspring02)
                     Offspring = Problem.Evaluation(Offspring02);
-                    temp =  A1.decs;
+                    temp      = A1.decs;
                     for i = 1 : size(Offspring,2)
                         dist2 = pdist2(Offspring(i).decs,temp);
                         if min(dist2) > 1e-5
@@ -215,15 +224,15 @@ classdef KTS < ALGORITHM
 end
 
 function value = Cal_Q(Obj)
-    N = size(Obj,1);
+    N   = size(Obj,1);
     Obj = (Obj-repmat(min(Obj),N,1))./(repmat(max(Obj)-min(Obj),N,1));
-    I = zeros(N);
+    I   = zeros(N);
     for i = 1 : N
         for j = 1 : N
             I(i,j) = max(Obj(i,:)-Obj(j,:));
         end
     end
-    C = max(abs(I));
-    F = sum(-exp(-I./repmat(C,N,1)/0.05)) + 1;
+    C     = max(abs(I));
+    F     = sum(-exp(-I./repmat(C,N,1)/0.05)) + 1;
     value = 1./F;
 end

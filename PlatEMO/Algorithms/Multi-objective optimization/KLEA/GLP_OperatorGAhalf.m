@@ -3,7 +3,7 @@ function [Offspring,outIndexList,chosengroups] = GLP_OperatorGAhalf(Problem,Pare
 % Parent1 and Parent2 are the matrix of decision variables but not solutions
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -24,10 +24,10 @@ function [Offspring,outIndexList,chosengroups] = GLP_OperatorGAhalf(Problem,Pare
     beta(rand(N,D)<0.5) = 1;
     beta(repmat(rand(N,1)>proC,1,D)) = 1;
     Offspring = (Parent1+Parent2)/2+beta.*(Parent1-Parent2)/2;
-    Lower = repmat(Problem.lower,N,1);
-    Upper = repmat(Problem.upper,N,1);
+    Lower     = repmat(Problem.lower,N,1);
+    Upper     = repmat(Problem.upper,N,1);
     [outIndexList,~] = CreateGroups(numberOfGroups,Offspring,D); 
-    chosengroups = randi(numberOfGroups,size(outIndexList,1),1);
+    chosengroups     = randi(numberOfGroups,size(outIndexList,1),1);
     Site = outIndexList == chosengroups;
     mu   = rand(N,1);
     mu   = repmat(mu,1,D);
@@ -43,19 +43,19 @@ end
 function [outIndexArray,numberOfGroupsArray] = CreateGroups(numberOfGroups, xPrime, numberOfVariables)
 % Creat groups by ordered grouping
 
-    outIndexArray = [];
+    outIndexArray       = [];
     numberOfGroupsArray = [];
-    noOfSolutions = size(xPrime,1);
-    for sol = 1:noOfSolutions        
+    noOfSolutions       = size(xPrime,1);
+    for sol = 1 : noOfSolutions        
         varsPerGroup = floor(numberOfVariables/numberOfGroups);
-        vars = xPrime(sol,:);
-        [~,I] = sort(vars);
+        vars         = xPrime(sol,:);
+        [~,I]        = sort(vars);
         outIndexList = ones(1,numberOfVariables);
-        for i = 1:numberOfGroups-1
+        for i = 1 : numberOfGroups-1
             outIndexList(I(((i-1)*varsPerGroup)+1:i*varsPerGroup)) = i;
         end
         outIndexList(I(((numberOfGroups-1)*varsPerGroup)+1:end)) = numberOfGroups;    
-        outIndexArray = [outIndexArray;outIndexList];
+        outIndexArray       = [outIndexArray;outIndexList];
         numberOfGroupsArray = [numberOfGroupsArray;numberOfGroups];    
     end
 end

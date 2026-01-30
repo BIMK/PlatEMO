@@ -2,7 +2,7 @@ function [Population,net,V,Archive,scale,genFlag] = EnvironmentalSelection(Popul
 % The environmental selection of RVEA
 
 %--------------------------------------------------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -15,36 +15,37 @@ function [Population,net,V,Archive,scale,genFlag] = EnvironmentalSelection(Popul
     Population = Population(NDSort(Population.objs,1)==1);
     PopObj = Population.objs;
     [N,M]  = size(PopObj);
+
     %% Translate the population
     PopObj = PopObj - repmat(zmin,N,1);
+
     %% delete the outliers
-    d = sqrt(sum(PopObj.^2,2));
-    meanD = sum(d,1)/size(PopObj,1);
+    d      = sqrt(sum(PopObj.^2,2));
+    meanD  = sum(d,1)/size(PopObj,1);
     delete = find(d>10*meanD);
-    Population(delete)=[];
-    PopObj(delete,:)=[];
-    SavePopObj = Population.objs;
+    Population(delete) = [];
+    SavePopObj         = Population.objs;
 
 
     Archive = UpdateArchive(Population,Archive,2*Problem.N);
-    ArcObj = Archive.objs;
+    ArcObj  = Archive.objs;
 
-    wholeObj = [SavePopObj;ArcObj];
+    wholeObj   = [SavePopObj;ArcObj];
     Population = [Population Archive];
-    [c,ia,ic] = unique(wholeObj,'rows');
+    [c,ia,ic]  = unique(wholeObj,'rows');
     Population = Population(ia);
-    wholeObj = wholeObj(ia,:);
-    wholeObj = wholeObj - repmat(zmin,size(wholeObj,1),1);
+    wholeObj   = wholeObj(ia,:);
+    wholeObj   = wholeObj - repmat(zmin,size(wholeObj,1),1);
 
 
 
     wholeObj1 = wholeObj./scale;
-    temp1 = wholeObj1./sum(wholeObj1,2);
+    temp1     = wholeObj1./sum(wholeObj1,2);
 
 
     PopObj = wholeObj;
     [N,M]  = size(PopObj);
-    fr = 0.1;
+    fr     = 0.1;
 
     gen    = ceil(Problem.FE/Problem.N);
     maxgen = ceil(Problem.maxFE/Problem.N);
@@ -55,10 +56,9 @@ function [Population,net,V,Archive,scale,genFlag] = EnvironmentalSelection(Popul
     if size(temp1,1) > 2&&isempty(find(isnan(temp1)==true))&& gen <= round(1*maxgen) && isempty(genFlag)
         [V,net,genFlag] = TrainGrowingGasNet(V,temp1,net,scale,params,Problem,[[];ArcObj],genFlag,zmin);
     end
-    NV     = size(V,1);
+    NV = size(V,1);
 
     %% Calculate the degree of violation of each solution
-
     CV = sum(max(0,Population.cons),2);
 
     %% Calculate the smallest angle value between each vector and others
@@ -87,34 +87,31 @@ function [Population,net,V,Archive,scale,genFlag] = EnvironmentalSelection(Popul
             Next(i)  = current2(best);
         end
     end
-    % Population for next generation
-    Population1 = Population(Next(Next~=0));
-    %% select the corner solutions in each generation
 
+    %% select the corner solutions in each generation
     fm = [];
     selectedFirst = unique([Next(Next~=0) fm]);
-    Population = [Population(selectedFirst)];
+    Population    = [Population(selectedFirst)];
 
     if length(Population) > Problem.N 
         PopObj = Population.objs;
-        zmax = max(PopObj,[],1);
         PopObj = PopObj - repmat(zmin,size(PopObj,1),1);
 
         temp1 = PopObj;
 
-        Choose = false(1,size(temp1,1));
-        [~,Extreme1] = min(temp1,[],1);
-        [~,Extreme2] = max(temp1,[],1);
+        Choose           = false(1,size(temp1,1));
+        [~,Extreme1]     = min(temp1,[],1);
+        [~,Extreme2]     = max(temp1,[],1);
         Choose(Extreme1) = true;
         Choose(Extreme2) = true;  
 
         while sum(Choose) < Problem.N
-            ind = find(Choose== false);
+            ind   = find(Choose== false);
             choId = setdiff(1:size(temp1,1),ind); 
-            PopObj1temp = temp1(choId,:);     
-            WholeObjtemp = temp1(ind,:);
-            dis =  pdist2(WholeObjtemp,PopObj1temp);
-            [mindis,] = min(dis,[],2);
+            PopObj1temp   = temp1(choId,:);     
+            WholeObjtemp  = temp1(ind,:);
+            dis   = pdist2(WholeObjtemp,PopObj1temp);
+            [mindis,]     = min(dis,[],2);
             [~,associate] = max(mindis,[],1);
             Choose(ind(associate)) = true;
         end

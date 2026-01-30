@@ -2,7 +2,7 @@ function [k,d,mu,lm] = qpsubp(dfk,Bk,Ae,hk,Ai,gk)
 % Solve the quadratic programming subproblem
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -23,7 +23,6 @@ function [k,d,mu,lm] = qpsubp(dfk,Bk,Ae,hk,Ai,gk)
     lm0     = 0.05*zeros(m,1);
     u0      = [ep0;zeros(n+l+m,1)];
     z0 = [ep0;d0;mu0;lm0];
-    z  = z0;
     ep = ep0;
     d  = d0;
     mu = mu0;

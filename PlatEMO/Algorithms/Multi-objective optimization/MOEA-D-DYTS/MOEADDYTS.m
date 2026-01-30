@@ -7,7 +7,7 @@ classdef MOEADDYTS < ALGORITHM
 % sampling for MOEA/D. Proceedings of the International Conference on
 % Parallel Problem Solving from Nature, 2020, 271-284.
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -38,10 +38,10 @@ classdef MOEADDYTS < ALGORITHM
             oldObj = max(abs((Population.objs - repmat(Z, Problem.N, 1)) .* Weight), [], 2);
 
             %% Optimization
-            C = 100;
+            C   = 100;
             pds = repelem(makedist('Beta'), 5);
 
-            for i = 1:5
+            for i = 1 : 5
                 pds(i) = makedist('Beta', 'a', 1, 'b', 1);
             end
             countOps = zeros(1, 5);
@@ -50,7 +50,7 @@ classdef MOEADDYTS < ALGORITHM
                 for subgeneration = 1 : 5
                     % Choose I
                     Bounday = find(sum(Weight < 1e-3, 2) == Problem.M - 1)';
-                    I = [Bounday, TournamentSelection(10, floor(Problem.N / 5) - length(Bounday), -Pi)];
+                    I       = [Bounday, TournamentSelection(10, floor(Problem.N / 5) - length(Bounday), -Pi)];
 
                     % For each solution in I
                     for i = I
@@ -72,8 +72,8 @@ classdef MOEADDYTS < ALGORITHM
                         Z = min(Z, Offspring.obj);
 
                         % Update the solutions in P by Tchebycheff approach
-                        g_old = max(abs(Population(P).objs - repmat(Z, length(P), 1)) .* Weight(P, :), [], 2);
-                        g_new = max(repmat(abs(Offspring.obj - Z), length(P), 1) .* Weight(P, :), [], 2);
+                        g_old   = max(abs(Population(P).objs - repmat(Z, length(P), 1)) .* Weight(P, :), [], 2);
+                        g_new   = max(repmat(abs(Offspring.obj - Z), length(P), 1) .* Weight(P, :), [], 2);
                         replace = find(g_old >= g_new, nr);
                         Population(P(replace)) = Offspring;
                         r = any(replace);
@@ -91,12 +91,12 @@ classdef MOEADDYTS < ALGORITHM
                 end
                 if ~mod(ceil(Problem.FE / Problem.N), 10)
                     % Update Pi for each solution
-                    newObj = max(abs((Population.objs - repmat(Z, Problem.N, 1)) .* Weight), [], 2);
-                    DELTA = (oldObj - newObj) ./ oldObj;
-                    Temp = DELTA < 0.001;
+                    newObj    = max(abs((Population.objs - repmat(Z, Problem.N, 1)) .* Weight), [], 2);
+                    DELTA     = (oldObj - newObj) ./ oldObj;
+                    Temp      = DELTA < 0.001;
                     Pi(~Temp) = 1;
-                    Pi(Temp) = (0.95 + 0.05 * DELTA(Temp) / 0.001) .* Pi(Temp);
-                    oldObj = newObj;
+                    Pi(Temp)  = (0.95 + 0.05 * DELTA(Temp) / 0.001) .* Pi(Temp);
+                    oldObj    = newObj;
                 end
             end
         end

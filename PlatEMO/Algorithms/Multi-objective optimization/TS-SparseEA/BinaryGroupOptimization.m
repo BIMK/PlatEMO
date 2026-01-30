@@ -2,7 +2,7 @@ function [Population,Dec,Mask] = BinaryGroupOptimization(Problem,Population,Dec,
 % Binary group optimization framework
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -53,7 +53,7 @@ function [Population,Dec,Mask] = BinaryGroupOptimization(Problem,Population,Dec,
         end
         Offspring  = Problem.Evaluation(OffDec.*OffMask);
         [Population,Dec,Mask,~,~] = EnvironmentalSelection([Population,Offspring,TPop],[Dec;OffDec;TDec],[Mask;OffMask;TMask],Problem.N);
-        drawnow();
+        drawnow('limitrate');
     end
 end
 
@@ -66,8 +66,8 @@ function [Subcomponent,Pop,Dec,Mask] = Group(Problem,REAL,nGroup)
         else
             Dec = ones(Problem.D,Problem.D);
         end
-        Mask = eye(Problem.D);
-        Pop  = Problem.Evaluation(Dec.*Mask);
+        Mask    = eye(Problem.D);
+        Pop     = Problem.Evaluation(Dec.*Mask);
         Fitness = Fitness + NDSort([Pop.objs,Pop.cons],inf);
     end
     

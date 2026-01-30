@@ -2,7 +2,7 @@ function [Population,Goal] = EnvironmentSelection(Population,Goal,N)
 % The environmental selection of PICEA-g
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -41,17 +41,17 @@ function [Population,Goal] = EnvironmentSelection(Population,Goal,N)
     %% Select half of the solutions
     ND = find(NDSort(Population.objs,1)==1);
     if length(ND) < N
-        Fs(ND) = inf;
+        Fs(ND)   = inf;
         [~,Rank] = sort(Fs,'descend');
-        Next = Rank(1:N);
+        Next     = Rank(1:N);
     else
         [~,Rank] = sort(Fs(ND),'descend');
-        Next = ND(Rank(1:N));
+        Next     = ND(Rank(1:N));
     end
     Population = Population(Next);
     
     %% Select half of the goals
     [~,Rank] = sort(Fg,'descend');
-    Next = Rank(1:N);
-    Goal = Goal(Next,:);
+    Next     = Rank(1:N);
+    Goal     = Goal(Next,:);
 end

@@ -1,7 +1,7 @@
 function [FitnessInit,FitnessOpt,SparseRate,TDec,TMask,TempPop] = FitnessCal(Problem)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -18,13 +18,13 @@ function [FitnessInit,FitnessOpt,SparseRate,TDec,TMask,TempPop] = FitnessCal(Pro
         Interval = (Problem.upper-Problem.lower)./5;
         for i = 1 : 5
             for j = 1 : 2
-                Dec        = unifrnd(repmat(Problem.lower + Interval*(i-1),Problem.D,1),repmat(Problem.lower + Interval*(i),Problem.D,1));
-                Mask       = eye(Problem.D);
-                Population = Problem.Evaluation(Dec.*Mask);
-                TDec       = [TDec;Dec];
-                TMask      = [TMask;Mask];
-                TempPop    = [TempPop,Population];
-                Fitness(i,:) =    Fitness(i,:) + NDSort([Population.objs,Population.cons],inf);
+                Dec          = unifrnd(repmat(Problem.lower + Interval*(i-1),Problem.D,1),repmat(Problem.lower + Interval*(i),Problem.D,1));
+                Mask         = eye(Problem.D);
+                Population   = Problem.Evaluation(Dec.*Mask);
+                TDec         = [TDec;Dec];
+                TMask        = [TMask;Mask];
+                TempPop      = [TempPop,Population];
+                Fitness(i,:) = Fitness(i,:) + NDSort([Population.objs,Population.cons],inf);
             end        
         end
         % To reduce computation and support parallelism

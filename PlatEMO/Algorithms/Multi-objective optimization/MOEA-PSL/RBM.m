@@ -2,7 +2,7 @@ classdef RBM < handle
 % Restricted Boltzmann Machine
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -32,9 +32,9 @@ classdef RBM < handle
             obj.Penalty   = Penalty;
             obj.Momentum  = Momentum;
             obj.LearnRate = LearnRate;
-            obj.Weight = 0.1 * randn(obj.nVisible,obj.nHidden);
-            obj.vBias  = zeros(1,obj.nVisible);
-            obj.hBias  = zeros(1,obj.nHidden);
+            obj.Weight    = 0.1 * randn(obj.nVisible,obj.nHidden);
+            obj.vBias     = zeros(1,obj.nVisible);
+            obj.hBias     = zeros(1,obj.nHidden);
         end
         %% Train
         function train(obj,X)

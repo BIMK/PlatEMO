@@ -2,7 +2,7 @@ function NBA = UpdateNBA(NBA,n_NBA,PBA)
 % Update NBA
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -18,9 +18,9 @@ function NBA = UpdateNBA(NBA,n_NBA,PBA)
         else
             tempNBA = [PBA{i-1},PBA{i},PBA{i+1}];
         end
-        tempNBA = [tempNBA,NBA{i}];
+        tempNBA   = [tempNBA,NBA{i}];
         [tempNBA,FrontNo,SpCrowdDis] = non_domination_scd_sort(tempNBA,n_NBA);
         [~,index] = sortrows([FrontNo;-SpCrowdDis]');
-        NBA{i} = tempNBA(index);
+        NBA{i}    = tempNBA(index);
     end
 end

@@ -2,7 +2,7 @@ function Level = LevelSort(Population,n)
 % Ssort the level of Population
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -22,10 +22,10 @@ function Level = LevelSort(Population,n)
         leveled = 0;
         obj = objs(i,:);
         while leveled == 0
-            t = t+1;
+            t = t + 1;
             leveled = 1;
             for j = 1 : size(objs,2)
-                if obj(1,j)>Zmin(j)+(t+1)*interval(1,j)
+                if obj(1,j) > Zmin(j)+(t+1)*interval(1,j)
                     leveled = 0;
                     break;
                 end

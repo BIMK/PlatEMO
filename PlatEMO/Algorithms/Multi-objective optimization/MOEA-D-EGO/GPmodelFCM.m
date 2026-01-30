@@ -3,7 +3,7 @@ function [model,centers] = GPmodelFCM(train_x,train_y,L1,L2)
 % is the number of clusters and M the number of objectives.
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -17,12 +17,12 @@ function [model,centers] = GPmodelFCM(train_x,train_y,L1,L2)
     D     = size(train_x,2);
     if K <= L1
         % all the K evaluated points are directly used for building GP model
-        csize = 1;
+        csize       = 1;
         [centers,~] = FCM(train_x,csize,[2 NaN 0.05 false]);
-        model = cell(1,M);
-        theta = (K ^ (-1 ./ K)) .* ones(1, D);
+        model       = cell(1,M);
+        theta       = (K ^ (-1 ./ K)) .* ones(1, D);
         for j = 1 : M
-            model{1,j}= Dacefit(train_x,train_y(:,j),'regpoly0','corrgauss',theta,1e-6*ones(1,D),20*ones(1,D));
+            model{1,j} = Dacefit(train_x,train_y(:,j),'regpoly0','corrgauss',theta,1e-6*ones(1,D),20*ones(1,D));
         end 
     else
         % FuzzyCM
@@ -33,8 +33,8 @@ function [model,centers] = GPmodelFCM(train_x,train_y,L1,L2)
         theta       = (L1 ^ (-1 ./ L1)) .* ones(1, D);
 
         %% Build GP model of each objective for each cluster 
-        model   = cell(csize, M);
-        for i   = 1 : csize
+        model = cell(csize, M);
+        for i = 1 : csize
             for j = 1 :  M
                 temp_index = index(1:L1,i);
                 model{i,j} = Dacefit(train_x(temp_index,:),train_y(temp_index,j), 'regpoly0','corrgauss', theta, 1e-6.*ones(1,D), 20.*ones(1,D));
@@ -43,6 +43,7 @@ function [model,centers] = GPmodelFCM(train_x,train_y,L1,L2)
     end
 
 end
+
 % >>>>>>>>>>>>>>>>   Auxiliary functions  ==================== 
 function [center, U, obj_fcn] = FCM(data, cluster_n, options)
     %FCM Data set clustering using fuzzy c-means clustering.
@@ -170,6 +171,7 @@ function out = distfcm(center, data)
         end
     end
 end
+
 function U = initfcm(cluster_n, data_n)
     %INITFCM Generate initial fuzzy partition matrix for fuzzy c-means clustering.
     %   U = INITFCM(CLUSTER_N, DATA_N) randomly generates a fuzzy partition

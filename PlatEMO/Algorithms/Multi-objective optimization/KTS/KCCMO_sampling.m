@@ -1,7 +1,7 @@
 function [Population,Fitness1] = KCCMO_sampling(Population,CA1,N)
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2025 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2026 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -17,11 +17,11 @@ function [Population,Fitness1] = KCCMO_sampling(Population,CA1,N)
     Fitness = CalFitness_new(Population.obj,Population.con,CA);
 
     NCluster = N;
-    [IDX,~] = kmeans(Population.obj,NCluster);
-    Next = false(size(Population.obj,1),1);
-    for i = 1:NCluster
-        select = find(IDX == i);
-        Fitness1 = Fitness(select);
+    [IDX,~]  = kmeans(Population.obj,NCluster);
+    Next     = false(size(Population.obj,1),1);
+    for i = 1 : NCluster
+        select    = find(IDX == i);
+        Fitness1  = Fitness(select);
         [~,index] = min(Fitness1);
         Next(select(index)) = true;
     end
@@ -64,8 +64,8 @@ function Fitness = CalFitness_new(PopObj,PopCon,CCA)
         R(i) = sum(S(Dominate(:,i)));
     end
 
-    Distance = pdist2(PopObj,CCA);
+    Distance  = pdist2(PopObj,CCA);
     Distance1 = min(Distance,[],2);
-    D = 1./(Distance1+2);
-    Fitness = R + D';
-    end
+    D         = 1./(Distance1+2);
+    Fitness   = R + D';
+end
