@@ -44,12 +44,14 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 4.13
+# Release Highlights of PlatEMO 4.14
 [Release Note can be found here](./Doc/releasenote.md)
 
-* Add an automated evolutionary algorithm SSIO-RL (it should be trained before used), add a sparse multi-objective evolutionary algorithm KLEA, add five dynamic multi-objective evolutionary algorithms AE-NSGA-II, CGLP, DM-MOEA, KL-NSGA-II, and SVR-NSGA-II, add four expensive multi-objective evolutionary algorithms EM-SAEA, PEA, PEAplus, and TEA. There are currently 333 algorithms in the platform.
+* A detailed tutorial of using NeuroEAs is added to the user manual.
 
-* Add 12 dynamic sparse multi-objective optimization problems DSMOP1-DSMOP12. There are currently 595 problems in the platform.
+* Add an expensive single-objective evolutionary algorithm MiSACO, two expensive multi-objective evolutionary algorithms CMOEBOD and SAMOEA-TL2M, a sparse multi-objective evolutionary algorithm AMG-PSL, two constrained multi-objective evolutionary algorithms CMOBR and CMODRL, and a multi-model multi-objective evolutionary algorithm MONAS. There are currently 340 algorithms in the platform.
+
+* Add 30 expensive single-objective optimization problems EOPCCV_F1-EOPCCV_F30. There are currently 625 problems in the platform.
 
 # Features of PlatEMO
 *  Totally Developed in MATLAB  
