@@ -44,14 +44,10 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 4.14
+# Release Highlights of PlatEMO 4.15
 [Release Note can be found here](./Doc/releasenote.md)
 
-* A detailed tutorial of using NeuroEAs is added to the user manual.
-
-* Add an expensive single-objective evolutionary algorithm MiSACO, two expensive multi-objective evolutionary algorithms CMOEBOD and SAMOEA-TL2M, a sparse multi-objective evolutionary algorithm AMG-PSL, two constrained multi-objective evolutionary algorithms CMOBR and CMODRL, and a multi-model multi-objective evolutionary algorithm MONAS. There are currently 340 algorithms in the platform.
-
-* Add 30 expensive single-objective optimization problems EOPCCV_F1-EOPCCV_F30. There are currently 625 problems in the platform.
+* Add a many-objective evolutionary algorithm MaOEA-HAP, add a sparse multi-objective evolutionary algorithm SparseEMT, add two multimodal multi-objective evolutionary algorithms MMEA-ARM and MMOEABH, add two expensive multi-objective evolutionary algorithms CI-EMO and EGES, add four constrained multi-objective evolutionary algorithms CMOEA-2S, CMOEA-AOP, ILCMO, and PRCEA, and add two large-scale multi-objective evolutionary algorithms GDVTSF and MOEA-IB. There are currently 352 algorithms in the platform.
 
 # Features of PlatEMO
 *  Totally Developed in MATLAB  
