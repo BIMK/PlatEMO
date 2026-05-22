@@ -1,3 +1,6 @@
+# Release Highlights of PlatEMO 4.15 (2026-05)
+* Add a many-objective evolutionary algorithm MaOEA-HAP, add a sparse multi-objective evolutionary algorithm SparseEMT, add two multimodal multi-objective evolutionary algorithms MMEA-ARM and MMOEABH, add two expensive multi-objective evolutionary algorithms CI-EMO and EGES, add four constrained multi-objective evolutionary algorithms CMOEA-2S, CMOEA-AOP, ILCMO, and PRCEA, and add two large-scale multi-objective evolutionary algorithms GDVTSF and MOEA-IB. There are currently 352 algorithms in the platform.
+
 # Release Highlights of PlatEMO 4.14 (2026-01)
 * A detailed tutorial of using NeuroEAs is added to the user manual.
 
