@@ -45,12 +45,12 @@ following literature:
 }
 ```
 
-# Release Highlights of PlatEMO 4.16
+# Release Highlights of PlatEMO 4.17
 [Release Note can be found here](./Doc/releasenote.md)
 
-* Add a large-scale multi-objective evolutionary algorithm FDSEA, add two constrained multi-objective evolutionary algorithms CMOCEA-DDAP and CPCMO, add five expensive constrained multi-objective evolutionary algorithms CKAnD, KAnD, MaO-TSPP, MOEA/D-EGO-CEI, and TSPP. There are currently 360 algorithms in the platform.
+* Add one single-objective evolutionary algorithm MASSR-MADE, add three multi-objective evolutionary algorithms MASSR-CMODRL, MASSR-MAMOEA/D, and MASSR-MARL-AC-S, add six constrained multi-objective evolutionary algorithms CMOEA-ACRT, CMOEA-RDA, CMOFLCS, DSOCOL, UBCSO, and UICMO, add a sparse multi-objective evolutionary algorithm MOEA-SNN, add a sparse constrained multi-objective evolutionary algorithm SCMOEA, add an expensive multi-objective evolutionary algorithm SFA-MFDE, and add a multi-modal multi-objective evolutionary algorithm CMEA. There are currently 374 algorithms in the platform.
 
-* Add five multimodal multiobjective benchmark problems HYL1-HYL5. There are currently 630 problems in the platform.
+* Add eight sparse constrained multi-objective benchmark problems SCMOP1-SCMOP8, and add 22 multi-objective benchmark problems IDTLZ3-IDTLZ4, MinusDTLZ1-MinusDTLZ7, MinusIDTLZ1-MinusIDTLZ4, MinusWFG1-MinusWFG9. There are currently 660 problems in the platform.
 
 # Features of PlatEMO
 *  Totally Developed in MATLAB  
