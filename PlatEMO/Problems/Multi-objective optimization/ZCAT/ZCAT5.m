@@ -85,5 +85,5 @@ function g = g0(y,~)
 end
 
 function g = g9(y,theta)
-    g = mean(y,2)/2 - mean(abs(sin(2.5*pi*y-pi/2+theta)))/2 + 1/2;
+    g = mean(y,2)/2 - mean(abs(sin(2.5*pi*y-pi/2+theta)),2)/2 + 1/2;
 end
